@@ -1,0 +1,17 @@
+Obj Param :
+Pos : x = 5, y = 5, z = 0;
+Rot : x = 0.0, y = 0.0;
+
+Points : (relative from center)
+	x			y			z
+0 : -10			-10			0
+1 : 10			-10			0
+2 : -10			10			0
+3 : 10			10			0
+
+# PointUsed FormatOrder
+# TopLeft -> TopRight -> BottomLeft -> BottomRight
+
+Surfaces :
+	TexturesBehavior	Transparency		TextureFile			SurfaceType		PointsUsed
+0 : Repeat					0				img/Stones.bmp		Square			0,1,2,3

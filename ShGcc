@@ -1,0 +1,3 @@
+gcc -L ./SDL2.framework/Versions/Current -F . -framework SDL2 -I SDL2.framework/Headers main.c -o lenomdetonprogramme
+# Et ensuite il faut faire un joli... :
+install_name_tool -change rpath/SDL2.framework/Versions/A/SDL2 @executable_path/SDL2.framework/SDL2 lenomdetonprogramme
