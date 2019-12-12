@@ -1,5 +1,5 @@
-SRC_NAME =	$(sort main2.c raycastingPOWERED.c print_map.c \
-			parsing.c parsing2.c octant2.c utils.c Engine3D.c \
+SRC_NAME =	$(sort main.c raycastingPOWERED.c print_map.c \
+			parsing.c parsing2.c octant.c utils.c Engine3D.c \
 			readfile1.c)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
