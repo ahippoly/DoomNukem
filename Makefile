@@ -1,51 +1,60 @@
+SRC_NAME =	$(sort main.c raycastingPOWERED.c print_map.c \
+			parsing.c parsing2.c octant.c utils.c Engine3D.c \
+			readfile1.c)
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+SDL_PATH = ./SDL2/
+LIBFT_PATH = ./libft/
+INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
+OBJ_NAME = $(SRC_NAME:.c=.o)
+
+SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
+INC = $(addprefix -I,$(INC_PATH))
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 NAME = wolf3d
-
-SRC = main2.c raycastingPOWERED.c print_map.c \
-parsing.c parsing2.c octant2.c utils.c Engine3D.c \
-readfile1.c
-
-OBJ = $(SRC:.c=.o)
-
-SRC_PATH = srcs/
-
-SRC_POS = $(addprefix $(SRC_PATH),$(SRC))
-
-INC = -I includes
 
 LIBFT = libft/libft.a
 
-CC = gcc -g 
-
-MLX = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
-
-PTHREAD = -lpthread
+LDFLAGS = $(addprefix -L,$(LIBFT_PATH))
 
 SDLM = `sdl2-config --cflags --libs`
 
-#CFLAGS = -Wall -Wextra -Werror
+LIBS = -lft -lm -lSDL2 
 
-HEADER = -I .
+LDLIBS = -lft -lm
 
-SDL2 = -L lib -l SDL2
-
-SAN = -fsanitize=address
-
-MATH = -lm
+.PHONY: all clean fclean re libft
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(HEADER) $(OBJ) -o $(NAME) $(LIBFT) $(SDLM) $(MATH)
+libft:
+	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
+	@make -C $(LIBFT_PATH)
+	@printf "/---------------- library $@ created... ----------/\n"
 
-$(LIBFT):
-	make -C ./libft/
+$(NAME): libft $(OBJ)
+	@printf "%-50s" "create executable "$(notdir $@)...
+	@$(CC) $(CFLAGS) $(INC) $(OBJ) -o $(NAME) $(SDLM) $(LDFLAGS) $(LIBS)
+	@printf "\e[1;32m[OK]\e[0m\n"
+
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@printf "%-50s" "compiling "$(notdir $<)...
+	@mkdir -p $(OBJ_PATH)
+	@$(CC) $(INC) -o $@ -c $<
+	@printf "\e[1;32m[OK]\e[0m\n"
 
 clean:
-	make clean -C ./libft/
-	rm -rf $(OBJ)
+	@printf "%-50s" "deleting objects..." 
+	@$(RM) $(OBJ)
+	@$(RM) -r $(OBJ_PATH)
+	@printf "\e[1;32m[OK]\e[0m\n"
 
 fclean: clean
-	make fclean -C ./libft/
-	rm -rf $(NAME)
+	@printf "%-50s" "deleting executable..." 
+	@$(RM) $(NAME)
+	@printf "\e[1;32m[OK]\e[0m\n"
 
 re: fclean all
