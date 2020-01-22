@@ -23,6 +23,11 @@ void init_env(t_env *env)
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
     env->grid_pos = set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y);
+    env->wall_count = 0;
+    env->total_wall_created = 0;
+    env->selected_corner.x = -1;
+    if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
+        exit_with_msg("Failed to malloc");
     env->quit = 0;
 }
 
@@ -146,12 +151,17 @@ void print_env2screen(t_env *env)
     SDL_RenderPresent(env->rend);
 }
 
+void print_tile_hitbox()
+{
+    
+}
+
 SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels)
 {
     SDL_Point   rest;
     SDL_Point   adapted_point;
     SDL_Rect    box_pos;
-    SDL_Point   map_pos
+    SDL_Point   map_pos;
 
     adapted_point.x = (mouse.x + TILE_HITBOX);
     adapted_point.y = (mouse.y + TILE_HITBOX);
@@ -176,26 +186,63 @@ void reset_textures(t_env *env)
     ft_bzero(env->p_grid, GRID_SIZE_X * GRID_SIZE_Y * 4);
 }
 
+void check_click(t_env *env)
+{
+    if (env->ev.type == SDL_MOUSEBUTTONUP && env->ev.button.button == SDL_BUTTON_LEFT && env->hovered_corner.x != -1)
+    {
+        if (env->selected_corner.x == -1)
+            env->selected_corner = env->hovered_corner;
+        else
+        {
+            add_wall(env->selected_corner, env->hovered_corner, env);
+            env->selected_corner.x = -1;
+        }
+    }
+}
+
+void display_selected_point(t_env *env)
+{
+    int hitbox;
+
+    if (env->selected_corner.x != -1)
+    {
+        hitbox = TILE_HITBOX - 2;
+        draw_rectangle(env->p_grid,
+            set_sdl_rect(env->selected_corner.x * TILE_SIZE - hitbox / 2, env->selected_corner.y * TILE_SIZE - hitbox / 2, hitbox, hitbox),
+            set_size(GRID_SIZE_X, GRID_SIZE_Y),
+            0xFF0000FF);
+    }
+}
+
+void handle_mouse_event(t_env *env)
+{
+    while (SDL_PollEvent(&env->ev))
+    {
+        check_click(env);
+    }
+}
+
+
 int main(int argc, char **argv)
 {
     t_env       env;
-    Uint8       *clavier;
-    SDL_Point   mouse;
+    
     init_env(&env);
-    
-
-
-    
     while(!env.quit)
     {
         reset_textures(&env);
         create_grid(env.p_grid, 1);
-        SDL_PumpEvents();
-        clavier = SDL_GetKeyboardState(NULL);
-        SDL_GetMouseState(&mouse.x, &mouse.y);
-        if(clavier[SDL_SCANCODE_ESCAPE] || clavier[SDL_SCANCODE_RETURN])
+        
+        env.clavier = SDL_GetKeyboardState(NULL);
+        env.mouse_button = SDL_GetMouseState(&env.mouse.x, &env.mouse.y);
+        if(env.clavier[SDL_SCANCODE_ESCAPE] || env.clavier[SDL_SCANCODE_RETURN])
             env.quit = 1;
-        check_tiles_hitbox(mouse, env.p_grid);
+        env.hovered_corner = check_tiles_hitbox(env.mouse, env.p_grid);
+        
+        handle_mouse_event(&env);
+        print_walls_in_map(&env);
+        display_selected_point(&env);
+
         
         print_env2screen(&env);
     }

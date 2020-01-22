@@ -1,5 +1,5 @@
 SRC_NAME =	$(sort main_editor.c error_gesture.c image_gesture.c \
-			bresenham.c)
+			bresenham.c tool_sdlpoint_arithmetic.c editor_wall_add_del.c)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
