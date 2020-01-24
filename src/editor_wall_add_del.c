@@ -17,6 +17,7 @@ void rearange_wall_lst(t_env *env)
         if (env->wall_list[i].id != -1)
         {
             new_lst[new_wall_nb] = env->wall_list[i];
+            new_lst[new_wall_nb].id = new_wall_nb;
             new_wall_nb++;
         }
         i++;
@@ -55,14 +56,29 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
     return (success);
 }
 
+void del_wall(t_env *env, int wall_id)
+{
+    t_wall *wall;
+
+    wall = &env->wall_list[wall_id];
+    wall->id = -1;
+    wall->p1.x = -1;
+    wall->p1.y = -1;
+    wall->p2.x = -1;
+    wall->p2.y = -1;
+}
+
 void print_walls_in_map(t_env *env)
 {
     int i;
+    t_wall wall;
 
     i = 0;
     while (i < env->wall_count)
     {
-        octant(mult_sdl_point(env->wall_list[i].p1, TILE_SIZE), mult_sdl_point(env->wall_list[i].p2, TILE_SIZE), env->p_grid, 0xFF00FFFF, GRID_SIZE_X);
+        wall = env->wall_list[i];
+        if (wall.id != -1)
+            octant(mult_sdl_point(wall.p1, TILE_SIZE), mult_sdl_point(wall.p2, TILE_SIZE), env->p_grid, 0xFF00FFFF, GRID_SIZE_X);
         i++;
     }
 

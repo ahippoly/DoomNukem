@@ -9,6 +9,7 @@
 # define GRID_SIZE_Y 600
 # define TILE_SIZE 45
 # define TILE_HITBOX 10
+# define WALL_HITBOX 10
 # define NB_WALL_MAX 200
 
 
@@ -54,6 +55,9 @@ SDL_Point add_sdl_point(SDL_Point p, int add);
 SDL_Point mult_sdl_point(SDL_Point p, double mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);
+void del_wall(t_env *env, int wall_id);
 void print_walls_in_map(t_env *env);
+void check_mouse_in_walls(t_env *env);
+
 
 #endif

@@ -241,6 +241,7 @@ int main(int argc, char **argv)
         
         handle_mouse_event(&env);
         print_walls_in_map(&env);
+        check_mouse_in_walls(&env);
         display_selected_point(&env);
 
         
