@@ -4,6 +4,7 @@
 # include "SDL.h"
 # include "libft.h"
 # include "global_header.h"
+# include "text_img.h"
 
 # define GRID_SIZE_X 800
 # define GRID_SIZE_Y 600
@@ -46,6 +47,7 @@ typedef struct      s_env
     t_wall          *wall_list;
     unsigned int    *p_screen;
     unsigned int    *p_grid;
+    t_txt_img       edit;
 }                   t_env;
 
 

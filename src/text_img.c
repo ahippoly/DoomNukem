@@ -1,12 +1,133 @@
 #include "global_header.h"
 #include "editor.h"
+#include "text_img.h"
 
-char *create_text_img(char *str, int size, int color)
+/*SDL_Rect precision : x and y are beginning pos of letter. h and w are size of image */
+void charts2pixels(char letter[SIZE_Y][SIZE_X], int size, t_txt_img txt)
 {
-    static char charts[36][31];
+    int i;
+    int j;
+    int x;
+    int y;
+    int size2;
+
+    y = 0;
+    size2 = size * 2;
+    while (y < SIZE_Y)
+    {
+        x = 0;
+        while (x < SIZE_X)
+        {
+            if (letter[y][x] == 1)
+            {
+                j = -1;
+                // printf("#");
+                while (++j < size2)
+                {
+                    i = 0;
+                    while (i < size)
+                        txt.pixels[(txt.pos_size.x + (x * size) + i++) + (txt.pos_size.y + (y * size2) + j) * txt.pos_size.w] = txt.color;
+                }
+            }
+            else
+            {
+                // printf(".");
+            }
+            
+            x++;
+        }
+        // printf("\n");
+        y++;
+    }
+    // printf("\n");
+
+}
+
+void parse_letter(char charts[SIZE_Y][SIZE_X], char *letter)
+{
+    int x;
+    int y;
+    int i;
+
+    y = 0;
+    i = 0;
+    while (y < SIZE_Y)
+    {
+        x = 0;
+        while (x < SIZE_X)
+        {
+            if (letter[i++] == '#')
+            {
+                charts[y][x] = 1;
+                // printf("#");
+            }
+            else
+            {
+                charts[y][x] = 0;
+                // printf(".");
+            }
+            x++;
+        }
+        // printf("\n");
+        i++;
+        y++;
+    }
+    // printf("\n");
+
+}
+
+void read_char_table(char charts[CHAR_NB][SIZE_Y][SIZE_X])
+{
+    int fd;
+    char buf[5000];
+    int i;
+    int nb;
+
+    fd = open("src/img_char_charts", O_RDONLY);
+    read(fd, buf, 5000);
+    i = 0;
+    nb = 0;
+    // printf("buf = %s\n", buf);
+    while (nb < 36)
+    {
+        parse_letter(charts[nb], &buf[i]);
+        nb++;
+        i += 31;
+    }
+}
+
+t_txt_img set_pos_txt(t_txt_img txt, int x, int y)
+{
+    txt.pos_size.x = x;
+    txt.pos_size.y = y;
+    return (txt);
+}
+
+void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt_img txt)
+{
+    int i;
+
+    i = 0;
+    while (str[i] != '\0')
+    {
+        if (str[i] >= 'a' && str[i] <= 'z')
+            charts2pixels(charts[str[i] - 'a'], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
+        else if (str[i] >= '0' && str[i] <= '9')
+            charts2pixels(charts[str[i] - '0' + 26], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
+        else
+            //exit_with_msg("Wrong chars entered in create_text_img()");
+            exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?");
+        i++;
+    }
+    // printf("end read word\n");
+}
+
+t_txt_img create_text_img(char *str, int size, int color)
+{
+    static char charts[CHAR_NB][SIZE_Y][SIZE_X];
     static int is_init;
-    char *p_tab;
-    int bpp;
+    t_txt_img txt;
+    int x_length;
     int len;
 
     if (is_init == 0)
@@ -15,51 +136,13 @@ char *create_text_img(char *str, int size, int color)
         is_init = 1;
     }
     len = ft_strlen(str);
-    bpp = (len * 5 + len - 1) * size;
-    if (!(p_tab = (char*)malloc(sizeof(char) * bpp * 10)))
+    txt.pos_size.w = (len * SIZE_X + len - 1) * size;
+    txt.pos_size.h = SIZE_Y * size * 2;
+    txt.color = color;
+    if (!(txt.pixels = (unsigned int*)malloc(sizeof(unsigned int) * txt.pos_size.w * txt.pos_size.h)))
         exit_with_msg("Failed to malloc");
+    ft_bzero(txt.pixels, txt.pos_size.w * txt.pos_size.h);
     ft_strlower(str);
-}
-
-void charts2pixels(char letter[31], char *p_part, int size, int bpp)
-{
-    int i;
-
-    i = 0;
-    while (i < 31)
-    {
-
-    }
-
-}
-
-void read_letter(char charts[36][31], char *p_part, char c)
-{
-    if (c >= 'a' && c <= 'z')
-        charts2pixels(charts[c - 'a'], p_part);
-    else if (c >= '0' && c <= '9')
-        charts2pixels(charts[c - '0'], p_part);
-    else
-        exit_with_msg("Wrong chars entered in create_text_img()");
-    
-    
-}
-
-void read_char_table(char charts[36][31])
-{
-    int fd;
-    char buf[5000];
-    int i;
-    int nb;
-
-    fd = open("img_char_charts", O_RDONLY);
-    read(fd, buf, 5000);
-    i = 0;
-    nb = 0;
-    while (nb < 36)
-    {
-        ft_strncpy(charts[nb], buf[i], 30);
-        nb++;
-        i += 31;
-    }
+    read_words(charts, str, size, txt);
+    return (txt);
 }

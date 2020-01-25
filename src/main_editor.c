@@ -26,6 +26,9 @@ void init_env(t_env *env)
     env->wall_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
+    env->edit = create_text_img("c", 5, 0xFFFFFFFF);
+    env->edit.pos_size.x = 850;
+    env->edit.pos_size.y = 100;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -144,10 +147,16 @@ void create_grid(unsigned int *pixels, double scale)
 
 void print_env2screen(t_env *env)
 {
+    // SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
+    // SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
+    // SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);
+    // SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
+    // SDL_RenderPresent(env->rend);
+
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
+    SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
+    SDL_UpdateTexture(env->screen, &env->edit.pos_size, env->edit.pixels, env->edit.pos_size.w * 4);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
-    SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);
-    SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
     SDL_RenderPresent(env->rend);
 }
 
