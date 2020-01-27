@@ -14,7 +14,7 @@ SDL_Point mult_sdl_point(SDL_Point p, double mul)
     return(p);
 }
 
-SDL_Point swap_point(SDL_Point *p1, SDL_Point *p2)
+void swap_point(SDL_Point *p1, SDL_Point *p2)
 {
     SDL_Point tmp;
 

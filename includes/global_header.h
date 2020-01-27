@@ -23,7 +23,7 @@
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
 SDL_Rect set_sdl_rect(int x, int y, int w, int h);
-SDL_Point swap_point(SDL_Point *p1, SDL_Point *p2);
+void swap_point(SDL_Point *p1, SDL_Point *p2);
 void octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, int bpp);
 
 #endif

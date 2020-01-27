@@ -21,7 +21,6 @@ void charts2pixels(char letter[SIZE_Y][SIZE_X], int size, t_txt_img txt)
             if (letter[y][x] == 1)
             {
                 j = -1;
-                // printf("#");
                 while (++j < size2)
                 {
                     i = 0;
@@ -29,18 +28,10 @@ void charts2pixels(char letter[SIZE_Y][SIZE_X], int size, t_txt_img txt)
                         txt.pixels[(txt.pos_size.x + (x * size) + i++) + (txt.pos_size.y + (y * size2) + j) * txt.pos_size.w] = txt.color;
                 }
             }
-            else
-            {
-                // printf(".");
-            }
-            
             x++;
         }
-        // printf("\n");
         y++;
     }
-    // printf("\n");
-
 }
 
 void parse_letter(char charts[SIZE_Y][SIZE_X], char *letter)
@@ -59,21 +50,16 @@ void parse_letter(char charts[SIZE_Y][SIZE_X], char *letter)
             if (letter[i++] == '#')
             {
                 charts[y][x] = 1;
-                // printf("#");
             }
             else
             {
                 charts[y][x] = 0;
-                // printf(".");
             }
             x++;
         }
-        // printf("\n");
         i++;
         y++;
     }
-    // printf("\n");
-
 }
 
 void read_char_table(char charts[CHAR_NB][SIZE_Y][SIZE_X])
@@ -87,7 +73,6 @@ void read_char_table(char charts[CHAR_NB][SIZE_Y][SIZE_X])
     read(fd, buf, 5000);
     i = 0;
     nb = 0;
-    // printf("buf = %s\n", buf);
     while (nb < 36)
     {
         parse_letter(charts[nb], &buf[i]);
@@ -141,7 +126,7 @@ t_txt_img create_text_img(char *str, int size, int color)
     txt.color = color;
     if (!(txt.pixels = (unsigned int*)malloc(sizeof(unsigned int) * txt.pos_size.w * txt.pos_size.h)))
         exit_with_msg("Failed to malloc");
-    ft_bzero(txt.pixels, txt.pos_size.w * txt.pos_size.h);
+    ft_bzero(txt.pixels, txt.pos_size.w * txt.pos_size.h * sizeof(int));
     ft_strlower(str);
     read_words(charts, str, size, txt);
     return (txt);

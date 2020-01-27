@@ -81,7 +81,13 @@ void print_walls_in_map(t_env *env)
             octant(mult_sdl_point(wall.p1, TILE_SIZE), mult_sdl_point(wall.p2, TILE_SIZE), env->p_grid, 0xFF00FFFF, GRID_SIZE_X);
         i++;
     }
+}
 
+void print_selected_wall(t_env *env)
+{
+    t_wall wall;
 
-    
+    wall = env->wall_list[env->selected_wall_id];
+    if (wall.id != -1)
+        octant(mult_sdl_point(wall.p1, TILE_SIZE), mult_sdl_point(wall.p2, TILE_SIZE), env->p_grid, 0xFF00FF00, GRID_SIZE_X);
 }

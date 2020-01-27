@@ -26,9 +26,16 @@ void init_env(t_env *env)
     env->wall_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
-    env->edit = create_text_img("c", 5, 0xFFFFFFFF);
+    env->edit = create_text_img("edit", 5, 0xFF88FFFF);
+    env->del = create_text_img("del", 5, 0xFF8888FF);
+    env->edit_white = create_text_img("edit", 5, 0xFFFFFFFF);
+    env->del_white = create_text_img("del", 5, 0xFFFFFFFF);
     env->edit.pos_size.x = 850;
     env->edit.pos_size.y = 100;
+    env->del.pos_size.x = 850;
+    env->del.pos_size.y = 20;
+    env->hovered_wall_id = -1;
+    env->selected_wall_id = -1;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -147,6 +154,7 @@ void create_grid(unsigned int *pixels, double scale)
 
 void print_env2screen(t_env *env)
 {
+    SDL_Rect tmp;
     // SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     // SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
     // SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);
@@ -155,14 +163,10 @@ void print_env2screen(t_env *env)
 
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
-    SDL_UpdateTexture(env->screen, &env->edit.pos_size, env->edit.pixels, env->edit.pos_size.w * 4);
+    SDL_UpdateTexture(env->screen, &env->edit.pos_size, env->edit_selected, env->edit.pos_size.w * 4);
+    SDL_UpdateTexture(env->screen, &env->del.pos_size, env->del_selected, env->del.pos_size.w * 4);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
     SDL_RenderPresent(env->rend);
-}
-
-void print_tile_hitbox()
-{
-    
 }
 
 SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels)
@@ -197,15 +201,28 @@ void reset_textures(t_env *env)
 
 void check_click(t_env *env)
 {
-    if (env->ev.type == SDL_MOUSEBUTTONUP && env->ev.button.button == SDL_BUTTON_LEFT && env->hovered_corner.x != -1)
+    if (env->ev.type == SDL_MOUSEBUTTONUP && env->ev.button.button == SDL_BUTTON_LEFT)
     {
-        if (env->selected_corner.x == -1)
-            env->selected_corner = env->hovered_corner;
-        else
+        if (env->hovered_corner.x != -1)
         {
-            add_wall(env->selected_corner, env->hovered_corner, env);
-            env->selected_corner.x = -1;
+            if (env->selected_corner.x == -1)
+                env->selected_corner = env->hovered_corner;
+            else if (env->selected_corner.x != env->hovered_corner.x
+                || env->selected_corner.y != env->hovered_corner.y)
+            {
+                add_wall(env->selected_corner, env->hovered_corner, env);
+                env->selected_corner.x = -1;
+            }
         }
+        else
+            env->selected_corner.x = -1;
+        if (env->hovered_wall_id != -1)
+            env->selected_wall_id = env->hovered_wall_id;
+        else
+            env->selected_wall_id = -1;
+        //if (env->selected_button != -1)
+                                                                                                                                                                                                                              
+        //printf("selected wall = %i\n", env->selected_wall_id);
     }
 }
 
@@ -251,6 +268,8 @@ int main(int argc, char **argv)
         handle_mouse_event(&env);
         print_walls_in_map(&env);
         check_mouse_in_walls(&env);
+        check_hovered_buttons(&env);
+        print_selected_wall(&env);
         display_selected_point(&env);
 
         
