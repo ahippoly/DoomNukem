@@ -1,8 +1,6 @@
 #include "global_header.h"
 #include "editor.h"
 
-
-
 void init_sdl_ressources(t_env *env)
 {
     env->win = NULL;
@@ -22,20 +20,22 @@ void init_env(t_env *env)
     init_sdl_ressources(env);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
-    env->grid_pos = set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y);
+    env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
-    env->edit = create_text_img("edit", 5, 0xFF88FFFF);
-    env->del = create_text_img("del", 5, 0xFF8888FF);
-    env->edit_white = create_text_img("edit", 5, 0xFFFFFFFF);
-    env->del_white = create_text_img("del", 5, 0xFFFFFFFF);
-    env->edit.pos_size.x = 850;
-    env->edit.pos_size.y = 100;
-    env->del.pos_size.x = 850;
-    env->del.pos_size.y = 20;
+    env->edit = create_text_img("edit", 2, 0xFF55FFFF, create_point(850, 100));
+    env->del = create_text_img("del", 2, 0xFF8888FF, create_point(850, 20));
+    env->map_editor = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 5));
+    env->edit_white = create_text_img("edit", 2, 0xFFFFFFFF, create_point(850, 100));
+    env->del_white = create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20));
+    env->text_bricks = ft_load_bmp("img/stones.bmp");
+    printf("text_size : x = %i, y = %i\n", env->text_bricks.pos_size.w, env->text_bricks.pos_size.h);
+    env->text_bricks.pos_size.x = 200;
+    env->text_bricks.pos_size.y = 300;
     env->hovered_wall_id = -1;
     env->selected_wall_id = -1;
+    env->buttons_fct[0] = del_selected_wall;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -164,7 +164,9 @@ void print_env2screen(t_env *env)
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->edit.pos_size, env->edit_selected, env->edit.pos_size.w * 4);
+    SDL_UpdateTexture(env->screen, &env->map_editor.pos_size, env->map_editor.pixels, env->map_editor.pos_size.w * 4);
     SDL_UpdateTexture(env->screen, &env->del.pos_size, env->del_selected, env->del.pos_size.w * 4);
+    SDL_UpdateTexture(env->screen, &env->text_bricks.pos_size, env->text_bricks.pixels, env->text_bricks.pos_size.w * 4);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
     SDL_RenderPresent(env->rend);
 }
@@ -176,12 +178,15 @@ SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels)
     SDL_Rect    box_pos;
     SDL_Point   map_pos;
 
-    adapted_point.x = (mouse.x + TILE_HITBOX);
-    adapted_point.y = (mouse.y + TILE_HITBOX);
-    rest.x = adapted_point.x % TILE_SIZE;
-    rest.y = adapted_point.y % TILE_SIZE;
     map_pos.x = -1;
     map_pos.y = -1;
+    if (mouse.x < GRID_POS_X || mouse.x > GRID_POS_X + GRID_SIZE_X
+        || mouse.y < GRID_POS_Y || mouse.y > GRID_POS_Y+ GRID_SIZE_Y)
+        return (map_pos);
+    adapted_point.x = (mouse.x + TILE_HITBOX - GRID_POS_X);
+    adapted_point.y = (mouse.y + TILE_HITBOX - GRID_POS_Y);
+    rest.x = adapted_point.x % TILE_SIZE;
+    rest.y = adapted_point.y % TILE_SIZE;
     if (rest.x <= TILE_HITBOX * 2 && rest.y <= TILE_HITBOX * 2)
     {
         map_pos.x = adapted_point.x / TILE_SIZE;
@@ -203,6 +208,8 @@ void check_click(t_env *env)
 {
     if (env->ev.type == SDL_MOUSEBUTTONUP && env->ev.button.button == SDL_BUTTON_LEFT)
     {
+        if (env->selected_button != -1)
+            env->buttons_fct[env->selected_button](env);
         if (env->hovered_corner.x != -1)
         {
             if (env->selected_corner.x == -1)
@@ -220,9 +227,8 @@ void check_click(t_env *env)
             env->selected_wall_id = env->hovered_wall_id;
         else
             env->selected_wall_id = -1;
-        //if (env->selected_button != -1)
-                                                                                                                                                                                                                              
-        //printf("selected wall = %i\n", env->selected_wall_id);
+                                                                                                                                                                                                                           
+        printf("selected wall = %i\n", env->selected_wall_id);
     }
 }
 
@@ -248,7 +254,6 @@ void handle_mouse_event(t_env *env)
     }
 }
 
-
 int main(int argc, char **argv)
 {
     t_env       env;
@@ -265,10 +270,10 @@ int main(int argc, char **argv)
             env.quit = 1;
         env.hovered_corner = check_tiles_hitbox(env.mouse, env.p_grid);
         
+        check_hovered_buttons(&env);
         handle_mouse_event(&env);
         print_walls_in_map(&env);
         check_mouse_in_walls(&env);
-        check_hovered_buttons(&env);
         print_selected_wall(&env);
         display_selected_point(&env);
 

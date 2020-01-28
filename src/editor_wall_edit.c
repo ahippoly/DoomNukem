@@ -17,6 +17,8 @@ int is_cursor_in_wall(SDL_Point cursor, SDL_Point p1, SDL_Point p2)
     int wall_pos_y;
     int delta_y;
 
+    cursor.x -= GRID_POS_X;
+    cursor.y -= GRID_POS_Y;
     p1 = mult_sdl_point(p1, TILE_SIZE);
     p2 = mult_sdl_point(p2, TILE_SIZE);
     if (p1.x == p2.x)

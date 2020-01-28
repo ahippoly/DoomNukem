@@ -17,7 +17,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <math.h>
-#include "wolf.h"
+#include "img_file.h"
+#include "global_header.h"
 
 int		hex2dec(unsigned char *mem, int bytes)
 {
@@ -72,7 +73,7 @@ char	*convert2bgra(char *str, int w, int h)
 
 	end = w * h * 3;
 	if (!(new_str = (char*)malloc(w * h * 4)))
-		return (nazi_case());
+		exit_with_msg("Failed to malloc");
 	i = 0;
 	j = 0;
 	while (i < end)
@@ -86,37 +87,42 @@ char	*convert2bgra(char *str, int w, int h)
 	return (new_str);
 }
 
-char	*verif_bpp(char *head, int fd, int *width, int *height)
+t_img	verif_bpp(char *head, int fd, int width, int height)
 {
 	int		bpp;
 	char	*str;
+	t_img	img;
 
 	str = NULL;
 	bpp = hex2dec(&((unsigned char*)head)[2], 2);
 	str = read_pixels(fd, str);
 	if (bpp == 24)
-		str = convert2bgra(str, *width, *height);
-	return (str);
+		str = convert2bgra(str, width, height);
+	img.pixels = (unsigned int*)str;
+	img.pos_size.w = width;
+	img.pos_size.h = height;
+	return (img);
 }
 
-char	*ft_load_bmp(char *file, int *width, int *height)
+t_img	ft_load_bmp(char *file)
 {
 	int		fd;
 	char	head[100];
 	size_t	ret;
 	int		pix_array_pos;
+	t_img	img;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
-		return (nazi_case());
+		exit_with_msg("wrong bmp file input");
 	if (read(fd, head, 0) == -1)
-		return (nazi_case());
+		exit_with_msg("wrong bmp file input");
 	if ((ret = read(fd, head, 26)) != 26)
-		return (nazi_case());
+		exit_with_msg("wrong bmp file header");
 	pix_array_pos = hex2dec(&((unsigned char*)head)[10], 4);
-	*width = hex2dec(&((unsigned char*)head)[18], 4);
-	*height = ft_abs(hex2dec(&((unsigned char*)head)[22], 4));
+	img.pos_size.w = hex2dec(&((unsigned char*)head)[18], 4);
+	img.pos_size.h = ft_abs(hex2dec(&((unsigned char*)head)[22], 4));
 	if ((ret = read(fd, head, pix_array_pos - 26)) !=
 			(size_t)pix_array_pos - 26)
-		return (nazi_case());
-	return (verif_bpp(head, fd, width, height));
+		exit_with_msg("Failed to malloc");
+	return (verif_bpp(head, fd, img.pos_size.w, img.pos_size.h));
 }

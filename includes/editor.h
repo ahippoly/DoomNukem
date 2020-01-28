@@ -5,15 +5,19 @@
 # include "libft.h"
 # include "global_header.h"
 # include "text_img.h"
+# include "img_file.h"
 
+# define GRID_POS_X 0
+# define GRID_POS_Y 60
 # define GRID_SIZE_X 800
 # define GRID_SIZE_Y 600
-# define TILE_SIZE 45
+# define TILE_SIZE 40
 # define TILE_HITBOX 10
 # define WALL_HITBOX 10
 # define NB_WALL_MAX 200
 # define BUTTON_DEL 0
 # define BUTTON_EDIT 1
+# define NB_BUTTONS 1
 
 
 typedef struct      s_wall
@@ -28,7 +32,6 @@ typedef struct      s_size
     int             w;
     int             h;
 }                   t_size;
-
 
 typedef struct      s_env
 {
@@ -54,10 +57,13 @@ typedef struct      s_env
     unsigned int    *p_grid;
     t_txt_img       edit;
     t_txt_img       del;
+    t_txt_img       map_editor;
     t_txt_img       edit_white;
     t_txt_img       del_white;
+    t_img           text_bricks;
     unsigned int    *edit_selected;
     unsigned int    *del_selected;
+    void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
 }                   t_env;
 
 
@@ -73,6 +79,8 @@ void check_mouse_in_walls(t_env *env);
 void print_selected_wall(t_env *env);
 void del_wall(t_env *env, int wall_id);
 void check_hovered_buttons(t_env *env);
+
+void del_selected_wall(t_env *env);
 
 
 #endif

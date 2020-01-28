@@ -47,7 +47,7 @@ void parse_letter(char charts[SIZE_Y][SIZE_X], char *letter)
         x = 0;
         while (x < SIZE_X)
         {
-            if (letter[i++] == '#')
+            if (letter[i++] == PIXEL)
             {
                 charts[y][x] = 1;
             }
@@ -68,16 +68,18 @@ void read_char_table(char charts[CHAR_NB][SIZE_Y][SIZE_X])
     char buf[5000];
     int i;
     int nb;
+    int letter_size;
 
-    fd = open("src/img_char_charts", O_RDONLY);
+    fd = open(CHART_FILE, O_RDONLY);
     read(fd, buf, 5000);
     i = 0;
     nb = 0;
-    while (nb < 36)
+    letter_size = SIZE_X * (SIZE_Y + 1) + 1;
+    while (nb < CHAR_NB)
     {
         parse_letter(charts[nb], &buf[i]);
         nb++;
-        i += 31;
+        i += letter_size;
     }
 }
 
@@ -99,6 +101,10 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
             charts2pixels(charts[str[i] - 'a'], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
         else if (str[i] >= '0' && str[i] <= '9')
             charts2pixels(charts[str[i] - '0' + 26], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
+        else if (str[i] == ' ')
+            charts2pixels(charts[36], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
+        else if (str[i] == '_')
+            charts2pixels(charts[37], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
         else
             //exit_with_msg("Wrong chars entered in create_text_img()");
             exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?");
@@ -107,7 +113,7 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
     // printf("end read word\n");
 }
 
-t_txt_img create_text_img(char *str, int size, int color)
+t_txt_img create_text_img(char *str, int size, int color, SDL_Point pos)
 {
     static char charts[CHAR_NB][SIZE_Y][SIZE_X];
     static int is_init;
@@ -127,7 +133,10 @@ t_txt_img create_text_img(char *str, int size, int color)
     if (!(txt.pixels = (unsigned int*)malloc(sizeof(unsigned int) * txt.pos_size.w * txt.pos_size.h)))
         exit_with_msg("Failed to malloc");
     ft_bzero(txt.pixels, txt.pos_size.w * txt.pos_size.h * sizeof(int));
-    ft_strlower(str);
+    str = ft_strlower(ft_strdup(str));    
     read_words(charts, str, size, txt);
+    free(str);
+    txt.pos_size.x = pos.x;
+    txt.pos_size.y = pos.y;
     return (txt);
 }

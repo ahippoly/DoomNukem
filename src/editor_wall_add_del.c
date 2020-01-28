@@ -31,7 +31,7 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, t_env *env)
 {
     t_wall wall;
 
-    wall.id = env->total_wall_created++;
+    wall.id = env->wall_count;
     wall.p1 = p1;
     wall.p2 = p2;
     return(wall);
@@ -45,7 +45,8 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
     if (env->wall_count < NB_WALL_MAX)
     {
         success = 1;
-        env->wall_list[env->wall_count++] = create_wall(p1,p2, env);
+        env->wall_list[env->wall_count] = create_wall(p1,p2, env);
+        env->wall_count++;
     }
     else
     {
@@ -61,6 +62,7 @@ void del_wall(t_env *env, int wall_id)
     t_wall *wall;
 
     wall = &env->wall_list[wall_id];
+    printf("wall_id %i\n", wall->id);
     wall->id = -1;
     wall->p1.x = -1;
     wall->p1.y = -1;
