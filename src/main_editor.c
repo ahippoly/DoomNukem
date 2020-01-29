@@ -13,29 +13,55 @@ void init_sdl_ressources(t_env *env)
         exit_with_msg("Failed to create Renderer");
     env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, GRID_SIZE_X, GRID_SIZE_Y);
+    //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
+}
+
+void init_texture(t_env *env)
+{
+    int i;
+    t_img *tmp;
+
+    env->selected_texture = 0;
+    env->img_list[0] = ft_load_bmp("img/tech_skin_1.bmp");
+    env->img_list[1] = ft_load_bmp("img/stones.bmp");
+    printf("text_size : x = %i, y = %i\n", env->img_list[0].pos_size.w, env->img_list[0].pos_size.h);
+    i = 0;
+    while (i < NB_TEXTURE)
+    {
+        tmp = &env->img_list[i];
+        tmp->pos_size.x = TEXT_POS_X;
+        tmp->pos_size.y = TEXT_POS_Y;
+        env->text_list[i++] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, tmp->pos_size.w, tmp->pos_size.h);
+    }
+}
+
+void init_buttons(t_env *env)
+{
+    env->buttons_fct[0] = del_selected_wall;
+    env->buttons_fct[1] = del_selected_wall;
+    env->buttons_fct[2] = select_previous_texture;
+    env->buttons_fct[3] = select_next_texture;
+    env->edit = create_button(create_text_img("edit", 2, 0xFF55FFFF, create_point(850, 100)), create_text_img("edit", 2, 0xFFFFFFFF, create_point(850, 100)), BUTTON_EDIT);
+    env->del = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
+    env->text_select_left = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 295)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 295)), BUTTON_TEXT_LEFT);
+    env->text_select_right = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
 }
 
 void init_env(t_env *env)
 {
     init_sdl_ressources(env);
+    init_texture(env);
+    init_buttons(env);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
-    env->edit = create_text_img("edit", 2, 0xFF55FFFF, create_point(850, 100));
-    env->del = create_text_img("del", 2, 0xFF8888FF, create_point(850, 20));
-    env->map_editor = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 5));
-    env->edit_white = create_text_img("edit", 2, 0xFFFFFFFF, create_point(850, 100));
-    env->del_white = create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20));
-    env->text_bricks = ft_load_bmp("img/stones.bmp");
-    printf("text_size : x = %i, y = %i\n", env->text_bricks.pos_size.w, env->text_bricks.pos_size.h);
-    env->text_bricks.pos_size.x = 200;
-    env->text_bricks.pos_size.y = 300;
+    env->map_editor = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
+    env->text_select = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));
     env->hovered_wall_id = -1;
     env->selected_wall_id = -1;
-    env->buttons_fct[0] = del_selected_wall;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -152,6 +178,11 @@ void create_grid(unsigned int *pixels, double scale)
     }
 }
 
+void txt_img2screen(t_env *env, t_txt_img img)
+{
+    SDL_UpdateTexture(env->screen, &img.pos_size, img.pixels, img.pos_size.w * 4);
+}
+
 void print_env2screen(t_env *env)
 {
     SDL_Rect tmp;
@@ -163,11 +194,16 @@ void print_env2screen(t_env *env)
 
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
-    SDL_UpdateTexture(env->screen, &env->edit.pos_size, env->edit_selected, env->edit.pos_size.w * 4);
-    SDL_UpdateTexture(env->screen, &env->map_editor.pos_size, env->map_editor.pixels, env->map_editor.pos_size.w * 4);
-    SDL_UpdateTexture(env->screen, &env->del.pos_size, env->del_selected, env->del.pos_size.w * 4);
-    SDL_UpdateTexture(env->screen, &env->text_bricks.pos_size, env->text_bricks.pixels, env->text_bricks.pos_size.w * 4);
+    txt_img2screen(env, *env->edit.printed);
+    txt_img2screen(env, *env->del.printed);
+    txt_img2screen(env, env->map_editor);
+    txt_img2screen(env, *env->text_select_left.printed);
+    txt_img2screen(env, *env->text_select_right.printed);
+    txt_img2screen(env, env->text_select);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
+    SDL_UpdateTexture(env->text_list[env->selected_texture], NULL, env->img_list[env->selected_texture].pixels, env->img_list[0].pos_size.w * 4);
+    tmp = set_sdl_rect(TEXT_POS_X, TEXT_POS_Y, TEXT_SIZE_X, TEXT_SIZE_Y);
+    SDL_RenderCopy(env->rend, env->text_list[env->selected_texture], NULL, &tmp);
     SDL_RenderPresent(env->rend);
 }
 
@@ -227,7 +263,6 @@ void check_click(t_env *env)
             env->selected_wall_id = env->hovered_wall_id;
         else
             env->selected_wall_id = -1;
-                                                                                                                                                                                                                           
         printf("selected wall = %i\n", env->selected_wall_id);
     }
 }

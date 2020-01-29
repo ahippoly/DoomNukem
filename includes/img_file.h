@@ -2,7 +2,6 @@
 # define IMG_FILE
 # include "SDL.h"
 
-
 typedef struct      s_img
 {
     unsigned int    *pixels;

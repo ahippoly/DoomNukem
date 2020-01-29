@@ -61,13 +61,16 @@ void del_wall(t_env *env, int wall_id)
 {
     t_wall *wall;
 
-    wall = &env->wall_list[wall_id];
-    printf("wall_id %i\n", wall->id);
-    wall->id = -1;
-    wall->p1.x = -1;
-    wall->p1.y = -1;
-    wall->p2.x = -1;
-    wall->p2.y = -1;
+    if (wall_id >= 0)
+    {
+        wall = &env->wall_list[wall_id];
+        printf("wall_id %i\n", wall->id);
+        wall->id = -1;
+        wall->p1.x = -1;
+        wall->p1.y = -1;
+        wall->p2.x = -1;
+        wall->p2.y = -1;
+    }
 }
 
 void print_walls_in_map(t_env *env)

@@ -105,6 +105,10 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
             charts2pixels(charts[36], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
         else if (str[i] == '_')
             charts2pixels(charts[37], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
+        else if (str[i] == '>')
+            charts2pixels(charts[38], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
+        else if (str[i] == '<')
+            charts2pixels(charts[39], size, set_pos_txt(txt, (i * SIZE_X + i) * size, 0));
         else
             //exit_with_msg("Wrong chars entered in create_text_img()");
             exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?");
