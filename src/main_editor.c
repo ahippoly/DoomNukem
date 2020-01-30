@@ -58,6 +58,7 @@ void init_env(t_env *env)
     env->wall_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
+    env->map_move = create_point(0, 0);
     env->map_editor = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
     env->text_select = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));
     env->hovered_wall_id = -1;
@@ -99,7 +100,7 @@ void adapt_min(int *pos, int *length)
 void adapt_max(int *pos, int *length, int max)
 {
     if (*pos + *length > max)
-        *length = ft_min(0, max - *pos);
+        *length = ft_max(0, max - *pos);
 }
 
 SDL_Rect adapt_border(SDL_Rect pos_size, t_size max)
@@ -159,7 +160,7 @@ void create_straight_column(unsigned int *pixels, SDL_Rect pos_size, t_size scre
     }
 }
 
-void create_grid(unsigned int *pixels, double scale)
+void create_grid(unsigned int *pixels, double scale, t_env *env)
 {
     int i;
     int total_step;
@@ -167,13 +168,13 @@ void create_grid(unsigned int *pixels, double scale)
     i = 0;
     while (i < GRID_SIZE_X)
     {
-        draw_rectangle(pixels, set_sdl_rect(i, 0, 1, GRID_SIZE_Y), set_size(GRID_SIZE_X, GRID_SIZE_Y), 0xffaabbff);
+        draw_rectangle(pixels, set_sdl_rect(i + env->map_move.x % TILE_SIZE, 0, 1, GRID_SIZE_Y), set_size(GRID_SIZE_X, GRID_SIZE_Y), 0xffaabbff);
         i += TILE_SIZE;
     }
     i = 0;
     while (i < GRID_SIZE_Y)
     {
-        draw_rectangle(pixels, set_sdl_rect(0, i, GRID_SIZE_X, 1), set_size(GRID_SIZE_X, GRID_SIZE_Y), 0xffaabbff);
+        draw_rectangle(pixels, set_sdl_rect(0, i + env->map_move.y % TILE_SIZE, GRID_SIZE_X, 1), set_size(GRID_SIZE_X, GRID_SIZE_Y), 0xffaabbff);
         i += TILE_SIZE;
     }
 }
@@ -207,7 +208,7 @@ void print_env2screen(t_env *env)
     SDL_RenderPresent(env->rend);
 }
 
-SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels)
+SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels, t_env *env)
 {
     SDL_Point   rest;
     SDL_Point   adapted_point;
@@ -219,16 +220,16 @@ SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels)
     if (mouse.x < GRID_POS_X || mouse.x > GRID_POS_X + GRID_SIZE_X
         || mouse.y < GRID_POS_Y || mouse.y > GRID_POS_Y+ GRID_SIZE_Y)
         return (map_pos);
-    adapted_point.x = (mouse.x + TILE_HITBOX - GRID_POS_X);
-    adapted_point.y = (mouse.y + TILE_HITBOX - GRID_POS_Y);
+    adapted_point.x = (mouse.x + TILE_HITBOX - GRID_POS_X - env->map_move.x);
+    adapted_point.y = (mouse.y + TILE_HITBOX - GRID_POS_Y - env->map_move.y);
     rest.x = adapted_point.x % TILE_SIZE;
     rest.y = adapted_point.y % TILE_SIZE;
     if (rest.x <= TILE_HITBOX * 2 && rest.y <= TILE_HITBOX * 2)
     {
         map_pos.x = adapted_point.x / TILE_SIZE;
         map_pos.y = adapted_point.y / TILE_SIZE;
-        box_pos.x = map_pos.x * TILE_SIZE - TILE_HITBOX;
-        box_pos.y = map_pos.y * TILE_SIZE - TILE_HITBOX;
+        box_pos.x = map_pos.x * TILE_SIZE - TILE_HITBOX + env->map_move.x;
+        box_pos.y = map_pos.y * TILE_SIZE - TILE_HITBOX + env->map_move.y;
         draw_rectangle(pixels, set_sdl_rect(box_pos.x, box_pos.y, TILE_HITBOX * 2, TILE_HITBOX * 2), set_size(GRID_SIZE_X, GRID_SIZE_Y), 0x0000ff00);
     }
     return (map_pos);
@@ -275,7 +276,7 @@ void display_selected_point(t_env *env)
     {
         hitbox = TILE_HITBOX - 2;
         draw_rectangle(env->p_grid,
-            set_sdl_rect(env->selected_corner.x * TILE_SIZE - hitbox / 2, env->selected_corner.y * TILE_SIZE - hitbox / 2, hitbox, hitbox),
+            set_sdl_rect(env->selected_corner.x * TILE_SIZE - hitbox / 2 + env->map_move.x, env->selected_corner.y * TILE_SIZE - hitbox / 2 + env->map_move.y, hitbox, hitbox),
             set_size(GRID_SIZE_X, GRID_SIZE_Y),
             0xFF0000FF);
     }
@@ -289,6 +290,42 @@ void handle_mouse_event(t_env *env)
     }
 }
 
+void move_map_move_left(t_env *env)
+{
+    if (env->map_move.x <= -MOVE_SPEED)
+        env->map_move.x += MOVE_SPEED;
+}
+
+void move_map_move_right(t_env *env)
+{
+    env->map_move.x -= MOVE_SPEED;
+}
+
+void move_map_move_up(t_env *env)
+{
+    if (env->map_move.y <= -MOVE_SPEED)
+        env->map_move.y += MOVE_SPEED;
+}
+
+void move_map_move_down(t_env *env)
+{
+    env->map_move.y -= MOVE_SPEED;
+}
+
+void handle_keyboard_event(t_env *env)
+{
+    if(env->clavier[SDL_SCANCODE_ESCAPE] || env->clavier[SDL_SCANCODE_RETURN])
+        env->quit = 1;
+    if(env->clavier[SDL_SCANCODE_D])
+        move_map_move_right(env);
+    if(env->clavier[SDL_SCANCODE_A])
+        move_map_move_left(env);
+    if(env->clavier[SDL_SCANCODE_W])
+        move_map_move_up(env);
+    if(env->clavier[SDL_SCANCODE_S])
+        move_map_move_down(env);
+}
+
 int main(int argc, char **argv)
 {
     t_env       env;
@@ -297,14 +334,13 @@ int main(int argc, char **argv)
     while(!env.quit)
     {
         reset_textures(&env);
-        create_grid(env.p_grid, 1);
+        
         
         env.clavier = SDL_GetKeyboardState(NULL);
         env.mouse_button = SDL_GetMouseState(&env.mouse.x, &env.mouse.y);
-        if(env.clavier[SDL_SCANCODE_ESCAPE] || env.clavier[SDL_SCANCODE_RETURN])
-            env.quit = 1;
-        env.hovered_corner = check_tiles_hitbox(env.mouse, env.p_grid);
-        
+        handle_keyboard_event(&env);
+        env.hovered_corner = check_tiles_hitbox(env.mouse, env.p_grid, &env);
+        create_grid(env.p_grid, 1, &env);
         check_hovered_buttons(&env);
         handle_mouse_event(&env);
         print_walls_in_map(&env);

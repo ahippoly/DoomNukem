@@ -1,9 +1,17 @@
 #include "SDL.h"
 
-SDL_Point add_sdl_point(SDL_Point p, int add)
+SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub)
 {
-    p.x += add;
-    p.y += add;
+    if (is_sub == 1)
+    {
+        p.x -= add.x;
+        p.y -= add.y;
+    }
+    else
+    {
+        p.x += add.x;
+        p.y += add.y;
+    }
     return (p);
 }
 

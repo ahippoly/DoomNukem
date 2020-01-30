@@ -12,7 +12,7 @@
 # define GRID_SIZE_X 761
 # define GRID_SIZE_Y 561
 # define TILE_SIZE 40
-# define TILE_HITBOX 10
+# define TILE_HITBOX 7
 # define WALL_HITBOX 10
 # define NB_WALL_MAX 200
 # define BUTTON_DEL 0
@@ -25,6 +25,9 @@
 # define TEXT_POS_Y 250
 # define TEXT_SIZE_X 150
 # define TEXT_SIZE_Y 150
+# define MOVE_SPEED 5
+# define MAP_SIZE_X 30
+# define MAP_SIZE_Y 30
 
 
 
@@ -33,6 +36,7 @@ typedef struct      s_wall
     int             id;
     SDL_Point       p1;
     SDL_Point       p2;
+    int             texture_id;
 }                   t_wall;
 
 typedef struct      s_size
@@ -56,6 +60,8 @@ typedef struct      s_env
     SDL_Point       mouse;
     SDL_Point       hovered_corner;
     SDL_Point       selected_corner;
+    SDL_Point       map_move;
+    int             tile_size;
     int             quit;
     int             wall_count;
     int             total_wall_created;
@@ -80,7 +86,7 @@ typedef struct      s_env
 
 
 void exit_with_msg(char *msg);
-SDL_Point add_sdl_point(SDL_Point p, int add);
+SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub);
 SDL_Point mult_sdl_point(SDL_Point p, double mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);

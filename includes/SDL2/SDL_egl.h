@@ -978,7 +978,7 @@ EGLAPI EGLBoolean EGLAPIENTRY eglDestroyImageKHR (EGLDisplay dpy, EGLImageKHR im
 #define EGL_LOCK_USAGE_HINT_KHR           0x30C5
 #define EGL_BITMAP_POINTER_KHR            0x30C6
 #define EGL_BITMAP_PITCH_KHR              0x30C7
-#define EGL_BITMAP_ORIGIN_KHR             0x30C8
+#define EGL_BITmap_move_KHR             0x30C8
 #define EGL_BITMAP_PIXEL_RED_OFFSET_KHR   0x30C9
 #define EGL_BITMAP_PIXEL_GREEN_OFFSET_KHR 0x30CA
 #define EGL_BITMAP_PIXEL_BLUE_OFFSET_KHR  0x30CB

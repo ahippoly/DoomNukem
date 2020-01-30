@@ -83,7 +83,7 @@ void print_walls_in_map(t_env *env)
     {
         wall = env->wall_list[i];
         if (wall.id != -1)
-            octant(mult_sdl_point(wall.p1, TILE_SIZE), mult_sdl_point(wall.p2, TILE_SIZE), env->p_grid, 0xFF00FFFF, GRID_SIZE_X);
+            octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF00FFFF, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
         i++;
     }
 }
@@ -94,5 +94,5 @@ void print_selected_wall(t_env *env)
 
     wall = env->wall_list[env->selected_wall_id];
     if (wall.id != -1)
-        octant(mult_sdl_point(wall.p1, TILE_SIZE), mult_sdl_point(wall.p2, TILE_SIZE), env->p_grid, 0xFF00FF00, GRID_SIZE_X);
+        octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF00FF00, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
 }

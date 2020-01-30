@@ -51,10 +51,10 @@ void check_mouse_in_walls(t_env *env)
     while (i < env->wall_count)
     {
         wall = env->wall_list[i];
-        if (is_cursor_in_wall(env->mouse, wall.p1, wall.p2))
+        if (is_cursor_in_wall(add_sdl_point(env->mouse, env->map_move, 1), wall.p1, wall.p2))
         {
             env->hovered_wall_id = wall.id;
-            octant(mult_sdl_point(wall.p1, TILE_SIZE), mult_sdl_point(wall.p2, TILE_SIZE), env->p_grid, 0xFF0000FF, GRID_SIZE_X);
+            octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF0000FF, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
         }
         i++;
     }
