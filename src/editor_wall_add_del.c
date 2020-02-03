@@ -1,6 +1,16 @@
 #include "global_header.h"
 #include "editor.h"
 
+t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
+{
+    t_wall wall;
+
+    wall.id = id;
+    wall.p1 = p1;
+    wall.p2 = p2;
+    add_wall_ref_point(wall, env);
+    return(wall);
+}
 
 void rearange_wall_lst(t_env *env)
 {
@@ -16,8 +26,7 @@ void rearange_wall_lst(t_env *env)
     {
         if (env->wall_list[i].id != -1)
         {
-            new_lst[new_wall_nb] = env->wall_list[i];
-            new_lst[new_wall_nb].id = new_wall_nb;
+            new_lst[new_wall_nb] = create_wall(env->wall_list[i].p1, env->wall_list[i].p2, new_wall_nb, env);
             new_wall_nb++;
         }
         i++;
@@ -25,16 +34,6 @@ void rearange_wall_lst(t_env *env)
     free(env->wall_list);
     env->wall_list = new_lst;
     env->wall_count = new_wall_nb;
-}
-
-t_wall create_wall(SDL_Point p1, SDL_Point p2, t_env *env)
-{
-    t_wall wall;
-
-    wall.id = env->wall_count;
-    wall.p1 = p1;
-    wall.p2 = p2;
-    return(wall);
 }
 
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
@@ -45,14 +44,14 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
     if (env->wall_count < NB_WALL_MAX)
     {
         success = 1;
-        env->wall_list[env->wall_count] = create_wall(p1,p2, env);
+        env->wall_list[env->wall_count] = create_wall(p1, p2, env->wall_count, env);
         env->wall_count++;
     }
     else
     {
         rearange_wall_lst(env);
         if (env->wall_count < NB_WALL_MAX)
-            env->wall_list[env->wall_count++] = create_wall(p1,p2, env);
+            env->wall_list[env->wall_count++] = create_wall(p1, p2, env->wall_count, env);
     }
     return (success);
 }

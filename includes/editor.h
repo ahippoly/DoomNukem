@@ -39,11 +39,24 @@ typedef struct      s_wall
     int             texture_id;
 }                   t_wall;
 
+typedef struct      s_sector
+{
+    t_wall          wall_lst;
+    int             size;
+
+}                   t_sector;
+
 typedef struct      s_size
 {   
     int             w;
     int             h;
 }                   t_size;
+
+typedef struct          s_wall_ref
+{
+    int                 wall_id;
+    struct s_wall_ref   *next;
+}                       t_wall_ref;
 
 typedef struct      s_env
 {
@@ -70,6 +83,8 @@ typedef struct      s_env
     int             selected_button;
     int             selected_texture;
     t_wall          *wall_list;
+    t_wall_ref      ***map_wall_ref;
+    t_size          map_size;
     unsigned int    *p_screen;
     unsigned int    *p_grid;
     t_button        edit;
@@ -101,6 +116,14 @@ t_button create_button(t_txt_img normal, t_txt_img hovered, int button_id);
 void del_selected_wall(t_env *env);
 void select_previous_texture(t_env *env);
 void select_next_texture(t_env *env);
+void move_map_move_left(t_env *env);
+void move_map_move_right(t_env *env);
+void move_map_move_up(t_env *env);
+void move_map_move_down(t_env *env);
+
+void add_wall_ref_point(t_wall wall, t_env *env);
+void clear_map_ref(t_env *env);
+void print_wall_ref(t_env *env);
 
 
 #endif

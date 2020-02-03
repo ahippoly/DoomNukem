@@ -103,6 +103,7 @@ double				ft_fmax(double a, double b);
 double				ft_fmin(double a, double b);
 int					ft_range(int value, int min, int max);
 double				ft_frange(double value, double min, double max);
+void    			*p_malloc(unsigned int size);
 
 void				print_memory(const void *addr, size_t size);
 

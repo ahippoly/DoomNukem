@@ -47,11 +47,31 @@ void init_buttons(t_env *env)
     env->text_select_right = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
 }
 
+void init_wall_ref(t_env *env)
+{
+    int i;
+    int j;
+
+    env->map_size.w = MAP_SIZE_X;
+    env->map_size.h = MAP_SIZE_Y;
+    i = 0;
+    env->map_wall_ref = (t_wall_ref***)p_malloc(sizeof(t_wall_ref**) * env->map_size.h);
+    while (i < env->map_size.h)
+    {
+        env->map_wall_ref[i] = (t_wall_ref**)p_malloc(sizeof(t_wall_ref*) * env->map_size.w);
+        j = 0;
+        while (j < env->map_size.w)
+            env->map_wall_ref[i][j++] = NULL;
+        i++;
+    }
+}
+
 void init_env(t_env *env)
 {
     init_sdl_ressources(env);
     init_texture(env);
     init_buttons(env);
+    init_wall_ref(env);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
@@ -290,27 +310,7 @@ void handle_mouse_event(t_env *env)
     }
 }
 
-void move_map_move_left(t_env *env)
-{
-    if (env->map_move.x <= -MOVE_SPEED)
-        env->map_move.x += MOVE_SPEED;
-}
 
-void move_map_move_right(t_env *env)
-{
-    env->map_move.x -= MOVE_SPEED;
-}
-
-void move_map_move_up(t_env *env)
-{
-    if (env->map_move.y <= -MOVE_SPEED)
-        env->map_move.y += MOVE_SPEED;
-}
-
-void move_map_move_down(t_env *env)
-{
-    env->map_move.y -= MOVE_SPEED;
-}
 
 void handle_keyboard_event(t_env *env)
 {
@@ -324,6 +324,8 @@ void handle_keyboard_event(t_env *env)
         move_map_move_up(env);
     if(env->clavier[SDL_SCANCODE_S])
         move_map_move_down(env);
+    if(env->clavier[SDL_SCANCODE_Q])
+        print_wall_ref(env);
 }
 
 int main(int argc, char **argv)
