@@ -13,6 +13,20 @@
 #include "wolf3d.h"
 #include "libft.h"
 
+void init_sdl_ressources(t_enval *env)
+{
+	env->win = NULL;
+    if(0 != SDL_Init(SDL_INIT_VIDEO))
+        ft_error("Failed to Init SDL", env, 0);
+    if (!(env->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                              WIN_W, WIN_H, SDL_WINDOW_SHOWN)))
+        ft_error("Failed to create Window", env, 0);
+    if (!(env->rend = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_ACCELERATED)))
+        ft_error("Failed to create Renderer", env, 0);
+    env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_BGRA32, SDL_TEXTUREACCESS_STREAMING, WIN_W, WIN_H);
+    // env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, GRID_SIZE_X, GRID_SIZE_Y);
+}
+
 int		main(int argc, char **argv)
 {
 	t_enval *env;
@@ -26,6 +40,7 @@ int		main(int argc, char **argv)
 			ft_putendl("malloc failed.");
 			return (0);
 		}
+		init_sdl_ressources(env);
 		init_values(argv[1], env);
 		init_mlx(env);
 		ray_draw(env);

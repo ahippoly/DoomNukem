@@ -101,8 +101,10 @@ t_enval			*ray_draw(t_enval *env)
 	int i;
 	int texnum;
 	
-	env->mlx.pxl = (int *)mlx_get_data_addr(env->mlx.i_p, &env->mlx.bpp,
-			&env->mlx.s_line, &env->mlx.endian);
+	// env->mlx.pxl = (int *)mlx_get_data_addr(env->mlx.i_p, &env->mlx.bpp,
+	// 		&env->mlx.s_line, &env->mlx.endian);
+	if (!(env->mlx.pxl = malloc(sizeof(int)* (WIN_H * WIN_W))))
+		ft_error("mlx image init failure.", env, 2);
 	i = 0;
 	while (i < WIN_W)
 	{

@@ -120,5 +120,8 @@ void			ray_draw(t_enval *env)
 		fc_draw(env, i);
 		i++;
 	}
+	SDL_UpdateTexture(env->screen, NULL, env->mlx.pxl, WIN_W * 4);
+    SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
+    SDL_RenderPresent(env->rend);
 	mlx_put_image_to_window(env->mlx.m_p, env->mlx.w_p, env->mlx.i_p, 0, 0);
 }

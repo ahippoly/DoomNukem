@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Werror -Wextra -Iincludes -Ilibft -Iminilibx_macos
+CFLAGS = -Wall -Werror -Wextra -Iincludes -Ilibft -Iminilibx_macos -Iincludes/SDL2
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 NAME = wolf3d
@@ -20,6 +20,8 @@ LIB = libft.a
 
 MLXDIR = minilibx_macos
 MLX = libmlx.a
+
+SDLM = `sdl2-config --cflags --libs` -lSDL2
 
 _C = main.c\
 	 src/fc_draw.c\
@@ -40,7 +42,7 @@ all: $(NAME)
 $(NAME): ${_O}
 	make -C $(MLXDIR)
 	make -C $(LIBDIR)
-	gcc $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(_O) $(LIBDIR)/$(LIB) $(MLXDIR)/$(MLX)
+	gcc $(CFLAGS) $(MLXFLAGS) -o $(NAME) $(_O) $(LIBDIR)/$(LIB) $(MLXDIR)/$(MLX) $(SDLM)
 
 clean:
 	make -C $(MLXDIR) clean
