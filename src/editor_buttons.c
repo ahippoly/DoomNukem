@@ -38,6 +38,7 @@ void check_hovered_buttons(t_env *env)
     handle_hovered_button(env, &env->del);
     handle_hovered_button(env, &env->text_select_left);
     handle_hovered_button(env, &env->text_select_right);
+    handle_hovered_button(env, &env->create_room);
 }
 
 void select_previous_texture(t_env *env)

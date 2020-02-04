@@ -9,6 +9,7 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     wall.p1 = p1;
     wall.p2 = p2;
     add_wall_ref_point(wall, env);
+    find_sector(env, wall);
     return(wall);
 }
 

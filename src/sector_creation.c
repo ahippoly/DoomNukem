@@ -1,21 +1,27 @@
 #include "editor.h"
 #include "global_header.h"
 
-void reference_wall(SDL_Point pos, int wall_id, t_env *env)
+t_wall_ref *alloc_wall(int wall_id)
 {
     t_wall_ref *ref;
-    t_wall_ref *tmp;
-    // faut mettre le first maillon de la liste chainee
-    
-    ref = env->map_wall_ref[pos.y][pos.x];
-    while (ref != NULL)
-    {
-        tmp = ref;
-        ref = ref->next;
-    }
+
     ref = (t_wall_ref*)p_malloc(sizeof(t_wall_ref));
     ref->wall_id = wall_id;
     ref->next = NULL;
+    return(ref);
+}
+
+void reference_wall(SDL_Point pos, int wall_id, t_env *env)
+{
+    t_wall_ref *ref;
+    t_wall_ref *new_ref;
+    t_wall_ref *first;
+    // faut mettre le first maillon de la liste chainee
+    
+    ref = env->map_wall_ref[pos.y][pos.x];
+    new_ref = alloc_wall(wall_id);
+    new_ref->next = env->map_wall_ref[pos.y][pos.x];
+    env->map_wall_ref[pos.y][pos.x] = new_ref;
 }
 
 void add_wall_ref_point(t_wall wall, t_env *env)
@@ -88,7 +94,62 @@ void print_wall_ref(t_env *env)
     printf("\n");
 }
 
-t_sector create_sector(t_env *env)
+int find_chained_wall(t_wall actual, SDL_Point first, int is_p2_outside, t_env *env)
 {
+    t_wall_ref *ref;
+    t_wall next_wall;
+    SDL_Point outside;
 
+    if (is_p2_outside == 1)
+        outside = actual.p2;
+    else
+        outside = actual.p1;
+    printf("checked point : x = %i, y = %i, id = %i\n", outside.x, outside.y, actual.id);
+    if (outside.x == first.x && outside.y == first.y)
+        return(1);
+    ref = env->map_wall_ref[outside.y][outside.x];
+    while (ref)
+    {
+        printf("search while, wall id = %i\n", ref->wall_id);
+        if (ref->wall_id == actual.id)
+        {
+            ref = ref->next;
+            continue;
+        }
+        next_wall = env->wall_list[ref->wall_id];
+        if (next_wall.p1.x == outside.x && next_wall.p1.y == outside.y)
+            is_p2_outside = 1;
+        else
+            is_p2_outside = 0;
+        if (find_chained_wall(next_wall, first, is_p2_outside, env))
+            return (1);
+        ref = ref->next;
+    }
+    return (0);
+}
+
+void find_sector(t_env *env, t_wall wall)
+{
+    int i;
+    t_wall_ref *ref;
+    t_wall      linked_wall;
+    int         is_p1_common;
+    ref = env->map_wall_ref[wall.p2.y][wall.p2.x];
+    while (ref)
+    {
+        printf("First while\n");
+        if (ref->wall_id == wall.id)
+        {
+            ref = ref->next;
+            continue;
+        }
+        linked_wall = env->wall_list[ref->wall_id];
+        if (wall.p1.x == linked_wall.p1.x && wall.p1.y == linked_wall.p1.y)
+            is_p1_common = 1;
+        else
+            is_p1_common = 0;
+        if (find_chained_wall(linked_wall, wall.p1, is_p1_common, env))
+            printf("sector found\n");
+        ref = ref->next;
+    }
 }

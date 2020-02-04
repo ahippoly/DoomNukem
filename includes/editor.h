@@ -19,7 +19,8 @@
 # define BUTTON_EDIT 1
 # define BUTTON_TEXT_LEFT 2
 # define BUTTON_TEXT_RIGHT 3
-# define NB_BUTTONS 4
+# define BUTTON_CREATE_ROOM 4
+# define NB_BUTTONS 5
 # define NB_TEXTURE 2
 # define TEXT_POS_X 800
 # define TEXT_POS_Y 250
@@ -89,6 +90,7 @@ typedef struct      s_env
     unsigned int    *p_grid;
     t_button        edit;
     t_button        del;
+    t_button        create_room;
     t_button        text_select_left;
     t_button        text_select_right;
     t_txt_img       map_editor;
@@ -124,6 +126,7 @@ void move_map_move_down(t_env *env);
 void add_wall_ref_point(t_wall wall, t_env *env);
 void clear_map_ref(t_env *env);
 void print_wall_ref(t_env *env);
+void find_sector(t_env *env, t_wall wall);
 
 
 #endif

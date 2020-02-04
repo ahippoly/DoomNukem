@@ -41,8 +41,10 @@ void init_buttons(t_env *env)
     env->buttons_fct[1] = del_selected_wall;
     env->buttons_fct[2] = select_previous_texture;
     env->buttons_fct[3] = select_next_texture;
+    env->buttons_fct[4] = del_selected_wall;
     env->edit = create_button(create_text_img("edit", 2, 0xFF55FFFF, create_point(850, 100)), create_text_img("edit", 2, 0xFFFFFFFF, create_point(850, 100)), BUTTON_EDIT);
     env->del = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
+    env->create_room = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(795, 430)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(795, 430)), BUTTON_CREATE_ROOM);
     env->text_select_left = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 295)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 295)), BUTTON_TEXT_LEFT);
     env->text_select_right = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
 }
@@ -220,6 +222,7 @@ void print_env2screen(t_env *env)
     txt_img2screen(env, env->map_editor);
     txt_img2screen(env, *env->text_select_left.printed);
     txt_img2screen(env, *env->text_select_right.printed);
+    txt_img2screen(env, *env->create_room.printed);
     txt_img2screen(env, env->text_select);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
     SDL_UpdateTexture(env->text_list[env->selected_texture], NULL, env->img_list[env->selected_texture].pixels, env->img_list[0].pos_size.w * 4);
