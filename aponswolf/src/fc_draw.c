@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fc_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 09:53:29 by apons             #+#    #+#             */
-/*   Updated: 2019/11/07 09:53:29 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 21:02:20 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 ** Second part of raycasting functions.
@@ -38,14 +38,15 @@ static void		floor_cast(t_enval *env)
 
 static void		ft_add_pxl(t_enval *env, int j, int i, int t)
 {
-	if (t == 4 || (t == 5 && env->wtex[5]->width != env->wtex[4]->width))
-		env->wt.x = (int)(env->currentfloor.x * env->wtex[t]->width)
-			% env->wtex[t]->width;
-	if (t == 4 || (t == 5 && env->wtex[5]->height != env->wtex[4]->height))
-		env->wt.y = (int)(env->currentfloor.y * env->wtex[t]->height)
-			% env->wtex[t]->height;
-	env->mlx.pxl[WIN_W * j + i] =
-		env->wtex[t]->buffer[env->wtex[t]->width * env->wt.y + env->wt.x];
+	if (t == 4 || (t == 5 && env->wtex[5].img->w != env->wtex[4].img->w))
+		env->wt.x = (int)(env->currentfloor.x * env->wtex[t].img->w)
+			% env->wtex[t].img->w;
+	if (t == 4 || (t == 5 && env->wtex[5].img->h != env->wtex[4].img->h))
+		env->wt.y = (int)(env->currentfloor.y * env->wtex[t].img->h)
+			% env->wtex[t].img->h;
+	/*env->mlx.pxl[WIN_W * j + i] =
+		env->wtex[t]->buffer[env->wtex[t]->width * env->wt.y + env->wt.x];*/
+	put_pixel(env->sdl.screen, i, j, get_pixel(env, t, i, j));
 }
 
 static void		floor_loop(t_enval *env, int i)
@@ -68,6 +69,7 @@ static void		floor_loop(t_enval *env, int i)
 
 static void		floor_calc(t_enval *env, int i)
 {
+	/*
 	int bpp;
 	int s_line;
 	int endian;
@@ -77,7 +79,7 @@ static void		floor_calc(t_enval *env, int i)
 			&bpp, &s_line, &endian);
 	if (!env->wtex[5]->buffer)
 		env->wtex[5]->buffer = (int *)mlx_get_data_addr(env->wtex[5]->img,
-			&bpp, &s_line, &endian);
+			&bpp, &s_line, &endian);*/
 	env->distwall = env->ray.perpwalldist;
 	if (env->ray.wallbot < 0)
 		env->ray.wallbot = WIN_H;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 08:50:09 by apons             #+#    #+#             */
-/*   Updated: 2019/10/24 13:40:32 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 20:36:33 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 ** This function checks for errors in append_val.
@@ -78,6 +78,7 @@ void		ft_checkinval(char **tab, t_enval *env)
 ** This function protects the mlx's essential variables.
 */
 
+/*
 void		ft_checkmlx(t_enval *env)
 {
 	if (!(env->mlx.m_p = mlx_init()))
@@ -86,7 +87,7 @@ void		ft_checkmlx(t_enval *env)
 		ft_error("mlx window init failure.", env, 2);
 	if (!(env->mlx.i_p = mlx_new_image(env->mlx.m_p, WIN_W, WIN_H)))
 		ft_error("mlx image init failure.", env, 2);
-}
+}*/
 
 /*
 ** This function protectivelt allocates the SDL's essential parameters.

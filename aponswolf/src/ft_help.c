@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_help.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 12:10:54 by apons             #+#    #+#             */
-/*   Updated: 2019/11/15 12:10:54 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 20:19:46 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 **This function is a manual, typing ".wolf3d (h)elp" prints it on standard OP.

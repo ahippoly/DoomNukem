@@ -3,56 +3,110 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apons <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/10/18 10:56:12 by apons             #+#    #+#              #
-#    Updated: 2019/11/22 16:55:51 by apons            ###   ########.fr        #
+#    Created: 2020/02/04 18:53:52 by saneveu           #+#    #+#              #
+#    Updated: 2020/02/04 20:36:22 by saneveu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Werror -Wextra -Iincludes -Ilibft -Iminilibx_macos
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
-SDLFLAGS = `sdl2-config --cflags --libs`
+BLACK	=	\033[30m
+RED		=	\033[31m
+GREEN	=	\033[32m
+YELLOW	=	\033[33m
+BLUE	=	\033[34m
+PURPLE	=	\033[35m
+TUR		=	\033[36m
+WHITE	=	\033[37m
+END		=	\033[0m
 
-NAME = wolf3d
+UP 		=	\033[A
+CUT 	=	\033[K
 
-LIBDIR = libft
-LIB = libft.a
+# project
+NAME	=	DoomNukem
+OS		=	$(shell uname)
 
-MLXDIR = minilibx_macos
-MLX = libmlx.a
+# directories
+SRCDIR	=	./src
+INCDIR	=	./includes
+OBJDIR	=	./obj
 
-_C = main.c\
-	 src/fc_draw.c\
-	 src/ft_error.c\
-	 src/ft_freewolf.c\
-	 src/ft_help.c\
-	 src/key_handle.c\
-	 src/mlx_handle.c\
-	 src/mobility.c\
-	 src/raycasting.c\
-	 src/wall_draw.c\
-	 src/wolf_init.c
+# src / obj files
+SRC		=	main.c\
+			fc_draw.c\
+			ft_error.c\
+			ft_freewolf.c\
+			ft_help.c\
+			key_handle.c\
+			mlx_handle.c\
+			mobility.c\
+			raycasting.c\
+			wall_draw.c\
+			wolf_init.c\
+			pixel.c
 
-_O = ${_C:%.c=%.o}
+INC		=	wolf3d.h
 
-all: $(NAME)
+OBJ		=	$(addprefix $(OBJDIR)/,$(SRC:.c=.o))
+HEADER	=	$(addprefix $(INCDIR)/,$(INC))
 
-$(NAME): ${_O}
-	make -C $(MLXDIR)
-	make -C $(LIBDIR)
-	gcc $(CFLAGS) $(MLXFLAGS) $(SDLFLAGS) -o $(NAME) $(_O) $(LIBDIR)/$(LIB) $(MLXDIR)/$(MLX)
+# compiler
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -pipe -Ofast -march=native
+
+ifeq ($(OS), Linux)
+	SDL		=	-lSDL2-2.0 -lSDL2_ttf -lSDL2_mixer
+	DIRSDL	=	
+else
+	SDL		=	-F ~/Library/Frameworks -framework SDL2 -framework SDL2_ttf -framework SDL2_mixer
+	DIRSDL	=	-I ./SDL
+endif 
+
+# ft library
+FT		=	./libft/
+FT_LIB	=	$(addprefix $(FT),libft.a)
+
+all: 		obj $(FT_LIB) $(NAME)
+
+obj:
+			mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o:$(SRCDIR)/%.c $(HEADER)
+			@echo "${TUR}compiling [$@] ...${END}"
+			@$(CC) $(CFLAGS) -I $(INCDIR) -c -o $@ $< $(DIRSDL)
+			@printf "$(UP)$(CUT)"
+
+$(FT_LIB):
+			@$(MAKE) -C $(FT)
+			@echo "${GREEN}[LIBRARY COMPILED]${END}"
+
+$(NAME):	$(OBJ) $(FT_LIB)
+			@$(CC) $(CFLAGS) $(OBJ) $(FT_LIB) $(SDL) -lm -lpthread -o $@
+			@echo "${GREEN}[$@ COMPILED]${END}"
 
 clean:
-	make -C $(MLXDIR) clean
-	make -C $(LIBDIR) clean
-	/bin/rm -f $(_O)
+			@/bin/rm -rf $(OBJDIR)
+			@$(MAKE) -C $(FT) clean
+			@echo "${PURPLE}[.o deleted]${END}"
 
-fclean: clean
-	/bin/rm -f $(MLXDIR)/$(MLX)
-	make -C $(LIBDIR) fclean
-	/bin/rm -f $(NAME)
+fclean:		clean
+			@/bin/rm -rf $(NAME)
+			@$(MAKE) -C $(FT) fclean
+			@echo "${RED}[$(NAME) deleted]${END}"
+			@echo "${RED}[$(LIB) deleted]${END}"
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+SDL2:
+			brew install sdl2
+			brew link sdl2
+			brew install sdl2_ttf
+			brew link sdl2_ttf
+			brew install sdl2_mixer
+			brew link sdl2_mixer
+			cp -rf framework/SDL2_mixer.framework ~/Library/Frameworks
+			cp -rf framework/SDL2_ttf.framework ~/Library/Frameworks
+			cp -rf framework/SDL2.framework ~/Library/Frameworks
+
+.PHONY:		all clean fclean re

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   wolf_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:58:59 by apons             #+#    #+#             */
-/*   Updated: 2019/10/31 16:04:41 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 21:05:06 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 ** These functions initialize the program's values and parse the map.
@@ -58,12 +58,6 @@ static void		prep_init(t_enval *env)
 	env->keyinf.sright = 0;
 	env->keyinf.run = 1.0;
 	env->map.walls = NULL;
-	env->wtex[0] = NULL;
-	env->wtex[1] = NULL;
-	env->wtex[2] = NULL;
-	env->wtex[3] = NULL;
-	env->wtex[4] = NULL;
-	env->wtex[5] = NULL;
 	env->mlx.m_p = NULL;
 	env->mlx.w_p = NULL;
 	env->mlx.i_p = NULL;
@@ -97,6 +91,26 @@ void			init_values(char *file, t_enval *env)
 	env->ray.wallhit = 0;
 }
 
+void			init_texture(t_enval *env)
+{
+	int i;
+
+	env->wtex[0].img = SDL_LoadBMP("wall.bmp");
+	env->wtex[1].img = SDL_LoadBMP("wall.bmp");
+	env->wtex[2].img = SDL_LoadBMP("wall.bmp");
+	env->wtex[3].img = SDL_LoadBMP("wall.bmp");
+	env->wtex[4].img = SDL_LoadBMP("wall.bmp");
+	env->wtex[5].img = SDL_LoadBMP("wall.bmp");
+	i = 0;
+	while (i <= 5)
+	{
+		if (!(env->wtex[i].img))
+			ft_error("at least one texture is missing or corrupted.", env, 0);
+		i++;
+	}
+}
+
+/*
 void			init_mlx(t_enval *env)
 {
 	int width;
@@ -117,4 +131,4 @@ void			init_mlx(t_enval *env)
 			ft_error("at least one texture is missing or corrupted.", env, 0);
 		i++;
 	}
-}
+}*/

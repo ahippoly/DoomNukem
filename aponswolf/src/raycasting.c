@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 10:33:44 by apons             #+#    #+#             */
-/*   Updated: 2019/10/31 16:04:39 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 21:02:48 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 ** First part of raycasting functions. Calculations for walls are done here.
@@ -105,8 +105,8 @@ void			ray_draw(t_enval *env)
 	int i;
 	int texnum;
 
-	env->mlx.pxl = (int *)mlx_get_data_addr(env->mlx.i_p, &env->mlx.bpp,
-			&env->mlx.s_line, &env->mlx.endian);
+	// env->mlx.pxl = (int *)mlx_get_data_addr(env->mlx.i_p, &env->mlx.bpp,
+	// 		&env->mlx.s_line, &env->mlx.endian);
 	i = 0;
 	while (i < WIN_W)
 	{
@@ -124,5 +124,5 @@ void			ray_draw(t_enval *env)
 		fc_draw(env, i);
 		i++;
 	}
-	mlx_put_image_to_window(env->mlx.m_p, env->mlx.w_p, env->mlx.i_p, 0, 0);
+	// mlx_put_image_to_window(env->mlx.m_p, env->mlx.w_p, env->mlx.i_p, 0, 0);
 }

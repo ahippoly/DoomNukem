@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:58:29 by apons             #+#    #+#             */
-/*   Updated: 2019/10/31 12:03:07 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 20:57:31 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "mlx.h"
 # include "SDL2/SDL.h"
-# include "libft.h"
+# include "../Libft/libft.h"
 
 # define WIN_W 1280
 # define WIN_H 960
@@ -130,6 +130,9 @@ typedef struct	s_sdl
 	SDL_Window		*win;
 	SDL_Texture		*text;
 	SDL_Renderer	*rend;
+	SDL_Surface		*screen;
+	int				winx;
+	int				winy;
 }				t_sdl;
 
 /*
@@ -165,6 +168,11 @@ typedef struct	s_keys
 ** be used throughout the program.
 */
 
+typedef struct	s_sprite
+{
+	SDL_Surface *img;
+}				t_sprite;
+
 typedef struct	s_enval
 {
 	struct s_mlx		mlx;
@@ -173,7 +181,7 @@ typedef struct	s_enval
 	struct s_ray		ray;
 	struct s_mapinfo	map;
 	struct s_intxy		wt;
-	struct s_tex		*wtex[6];
+	t_sprite			wtex[6];
 	struct s_doublexy	floorwall;
 	struct s_doublexy	currentfloor;
 	struct s_keys		keyinf;
@@ -209,5 +217,13 @@ void			ray_draw(t_enval *env);
 void			ray_hit(t_enval *env);
 void			rotation(t_player *p, t_keys keyinf);
 void			wall_draw(t_enval *env, int i, int texnum);
+void			init_texture(t_enval *env);
+
+/*
+**	Function Color and Pixel
+*/
+
+uint32_t		get_pixel(t_enval *env, int si, float x, float y);
+void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color);
 
 #endif

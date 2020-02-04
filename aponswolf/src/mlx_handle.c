@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 09:43:41 by apons             #+#    #+#             */
-/*   Updated: 2019/10/31 16:04:35 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 20:34:31 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 ** Diverse functions to work with any mlx event that does not require the
 ** keyboard as well as to unite all mlx hooks under one bigger function.
 */
 
+/*
 static int		red_cross(t_enval *env)
 {
 	ft_freewolf(env, 0);
 	exit(0);
 	return (0);
 }
+
 
 int				ft_loop_hook(t_enval *env)
 {
@@ -40,4 +42,4 @@ void			mlx_handle_hooks(t_enval *env)
 	mlx_hook(env->mlx.w_p, KEYRELEASE, KEYRELEASEMASK, keyrelease, env);
 	mlx_loop_hook(env->mlx.m_p, ft_loop_hook, env);
 	mlx_loop(env->mlx.m_p);
-}
+}*/

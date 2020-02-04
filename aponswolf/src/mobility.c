@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mobility.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apons <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:21:35 by apons             #+#    #+#             */
-/*   Updated: 2019/11/22 17:21:35 by apons            ###   ########.fr       */
+/*   Updated: 2020/02/04 20:19:46 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include "wolf3d.h"
+#include "../includes/wolf3d.h"
 
 /*
 ** These functions change the player's position
