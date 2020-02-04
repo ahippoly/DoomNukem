@@ -89,6 +89,22 @@ void		ft_checkmlx(t_enval *env)
 }
 
 /*
+** This function protectivelt allocates the SDL's essential parameters.
+*/
+
+void		ft_checksdl(t_enval *env)
+{
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+		ft_error("SDL init failure.", env, 0);
+	if (!(env->sdl.win = SDL_CreateWindow("Doom", SDL_WINDOWPOS_UNDEFINED,
+		SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, SDL_WINDOW_RESIZABLE)))
+		ft_error("SDL window creation failure.", env, 0);
+	if (!(env->sdl.rend = SDL_CreateRenderer(env->sdl.win, -1,
+		SDL_RENDERER_SOFTWARE)))
+		ft_error("SDL renderer creation failure.", env, 0);
+}
+
+/*
 ** The function the program refers to should any error show up.
 */
 

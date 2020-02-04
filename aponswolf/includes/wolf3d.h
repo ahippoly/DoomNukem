@@ -14,6 +14,7 @@
 # define WOLF3D_H
 
 # include "mlx.h"
+# include "SDL2/SDL.h"
 # include "libft.h"
 
 # define WIN_W 1280
@@ -121,6 +122,17 @@ typedef struct	s_mlx
 }				t_mlx;
 
 /*
+** The SDL structure to handle window.
+*/
+
+typedef struct	s_sdl
+{
+	SDL_Window		*win;
+	SDL_Texture		*text;
+	SDL_Renderer	*rend;
+}				t_sdl;
+
+/*
 ** A structure to handle one texture (from .xpm files)
 ** Call 't_tex tex[x]' to have x different textures.
 */
@@ -156,6 +168,7 @@ typedef struct	s_keys
 typedef struct	s_enval
 {
 	struct s_mlx		mlx;
+	struct s_sdl		sdl;
 	struct s_player		player;
 	struct s_ray		ray;
 	struct s_mapinfo	map;
