@@ -18,7 +18,7 @@
 ** animations this will be much better.
 */
 
-t_weapon	get_fist(void)
+t_weapon	get_weapon_fist(void)
 {
 	t_weapon	fist;
 
@@ -30,14 +30,14 @@ t_weapon	get_fist(void)
 	fist.ammo.current = INFINITE;
 	fist.attack.type = WEAPON_TYPE_MELEE;
 	fist.attack.damage = 10;
-	fist.attack.range = 0.4;
-	fist.attack.speed = 10;
+	fist.attack.range = 0.5;
+	fist.attack.speed = 750;
 	fist.attack.radius.width = 0;
 	fist.attack.radius.width = 0;
 	return (fist);
 }
 
-t_weapon	get_pistol(void)
+t_weapon	get_weapon_pistol(void)
 {
 	t_weapon	pistol;
 
@@ -50,13 +50,13 @@ t_weapon	get_pistol(void)
 	pistol.attack.type = WEAPON_TYPE_SEMIAUTO;
 	pistol.attack.damage = 10;
 	pistol.attack.range = 7;
-	pistol.attack.speed = 3;
+	pistol.attack.speed = 200;
 	pistol.attack.radius.width = 0;
 	pistol.attack.radius.depth = 0;
 	return (pistol);
 }
 
-t_weapon	get_shotgun(void)
+t_weapon	get_weapon_shotgun(void)
 {
 	t_weapon	shotgun;
 
@@ -68,37 +68,37 @@ t_weapon	get_shotgun(void)
 	shotgun.ammo.current = 16;
 	shotgun.attack.type = WEAPON_TYPE_SEMIAUTO;
 	shotgun.attack.damage = 100; 
-	shotgun.attack.range = 1;
-	shotgun.attack.speed = 40;
+	shotgun.attack.range = 2.5;
+	shotgun.attack.speed = 1375;
 	shotgun.attack.radius.width = 0.5;
 	shotgun.attack.radius.depth = 0;
 	return (shotgun);
 }
 
-t_weapon	get_submachinegun(void)
+t_weapon	get_weapon_submachinegun(void)
 {
 	t_weapon	submachinegun;
 
-	submachinegun.name = "Submachine gun";
+	submachinegun.name = "SMG";
 	submachinegun.clip.size.max = 30;
 	submachinegun.clip.size.current = 30;
 	submachinegun.clip.reload = 80;
 	submachinegun.ammo.max = 300;
 	submachinegun.ammo.current = 150;
 	submachinegun.attack.type = WEAPON_TYPE_AUTOMATIC;
-	submachinegun.attack.damage = 9;
+	submachinegun.attack.damage = 8;
 	submachinegun.attack.range = 6;
-	submachinegun.attack.speed = 1;
+	submachinegun.attack.speed = 100;
 	submachinegun.attack.radius.width = 0;
 	submachinegun.attack.radius.depth = 0;
 	return (submachinegun);
 }
 
-t_weapon	get_bfg(void)
+t_weapon	get_weapon_bfg(void)
 {
 	t_weapon	bfg;
 
-	bfg.name = "bfg";
+	bfg.name = "BFG";
 	bfg.clip.size.max = 1;
 	bfg.clip.size.current = 1;
 	bfg.clip.reload = 150;
@@ -107,7 +107,7 @@ t_weapon	get_bfg(void)
 	bfg.attack.type = WEAPON_TYPE_CHARGED;
 	bfg.attack.damage = 1000;
 	bfg.attack.range = 10;
-	bfg.attack.speed = 120;
+	bfg.attack.speed = 1800;
 	bfg.attack.radius.width = 1.5;
 	bfg.attack.radius.depth = 1.5;
 	return (bfg);

@@ -18,6 +18,8 @@
 */
 
 # include <stdlib.h>
+# include <time.h>
+# include "SDL2/SDL.h"
 
 # define WEAPON_TYPE_MELEE		0
 # define WEAPON_TYPE_SEMIAUTO	1
@@ -27,14 +29,24 @@
 # define PLAYER_UNDETECTED		0
 # define PLAYER_ALERTED			1
 
-# define NPC_HOSTILE			0
-# define NPC_FRIENDLY			1
+# define PLAYER_HOSTILE			0
+# define PLAYER_FRIENDLY		1
+
+# define BUFF					0
+# define DEBUFF					1
+# define EFFECT_AMOUNT			2
+
+# define DIFFICULTY_PROJECT		0
+# define DIFFICULTY_EASY		1
+# define DIFFICULTY_MEDIUM		2
+# define DIFFICULTY_HARD		3
+# define DIFFICULTY_INSANE		4
 
 # define ZERO					0
 # define INFINITE				-1
 
 /*
-** Building block for many stats.
+** Building blocks for most other structures.
 */
 
 typedef	struct	s_stat
@@ -43,14 +55,26 @@ typedef	struct	s_stat
 	int			max;
 }				t_stat;
 
+typedef struct	s_pos
+{
+	double		x;
+	double		y;
+	double		height;
+}				t_pos;
+
 /*
-** Structure for mods
+** Structure for status effects.
+** Value represents the strength of the status effect while
+** time is the duration of said effect.
+** If a stronger status effect is applied, the stronger debuff is applied
+** but retains the duration of the weaker status effect if said status effect
+** was supposed to last longer.
 */
 
 typedef struct	s_buff
 {
-	double	value[4];
-	int		time[4];
+	double	value[2];
+	int		duration[2];
 }				t_buff;
 
 /*
@@ -85,7 +109,7 @@ typedef struct	s_attack
 	int			type;
 	int			damage;
 	double		range;
-	double		speed;
+	int			speed;
 	t_radius	radius;
 }				t_attack;
 
@@ -103,6 +127,7 @@ typedef struct	s_weapon
 
 typedef struct	s_player_character
 {
+	t_pos		pos;
 	t_stat		health;
 	t_stat		armor;
 	double		movement_speed;
@@ -113,6 +138,7 @@ typedef struct	s_player_character
 
 typedef struct	s_npc
 {
+	t_pos		pos;
 	t_stat		health;
 	t_attack	attack;
 	double		movement_speed;
@@ -138,7 +164,7 @@ typedef struct	s_game
 {
 	t_player_character	pc;
 	t_npc				npcs[20];
-	
+	Uint32				start;
 }				t_game;
 
 /*
@@ -147,12 +173,38 @@ typedef struct	s_game
 
 void		init_pc(t_player_character *pc);
 void		init_game(t_game *game);
+void		game_loop(t_game *game);
 
-t_weapon	get_fist(void);
-t_weapon	get_pistol(void);
-t_weapon	get_rifle(void);
-t_weapon	get_shotgun(void);
-t_weapon	get_bfg(void);
+/*
+** get_weapon.c functions
+*/
+
+t_weapon	get_weapon_fist(void);
+t_weapon	get_weapon_pistol(void);
+t_weapon	get_weapon_rifle(void);
+t_weapon	get_weapon_shotgun(void);
+t_weapon	get_weapon_bfg(void);
+
+/*
+** get_enemy.c functions
+*/
+
+/*
+** Other unsorted functions
+*/
 
 double		get_modifier(t_buff buff);
+void		apply_stat_eff(t_buff *effect, int id, double value, int duration);
+void		countdown_status_effect_one(t_buff *effect, int delay);
+void		countdown_status_effect_all(t_status *status, int delay);
+void		clean_status_effect(t_buff *effect);
+
+void		display_game_over(void);
+
+/*
+** shortcuts.c functions
+*/
+
+void		init_stat(t_stat *stat, int current, int max);
+
 #endif
