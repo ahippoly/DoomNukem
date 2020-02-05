@@ -156,9 +156,11 @@ typedef struct	s_keys
 
 typedef struct	s_enval
 {
-	SDL_Window		*win;
-    SDL_Renderer	*rend;
-	SDL_Texture 	*screen;
+	SDL_Window			*win;
+    SDL_Renderer		*rend;
+	SDL_Texture 		*screen;
+	SDL_KeyboardEvent 	*event;
+	const Uint8 		*state; 
 	struct s_mlx		mlx;
 	struct s_player		player;
 	struct s_ray		ray;

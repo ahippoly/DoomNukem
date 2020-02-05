@@ -16,6 +16,7 @@
 void init_sdl_ressources(t_enval *env)
 {
 	env->win = NULL;
+
     if(0 != SDL_Init(SDL_INIT_VIDEO))
         ft_error("Failed to Init SDL", env, 0);
     if (!(env->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -30,7 +31,9 @@ void init_sdl_ressources(t_enval *env)
 int		main(int argc, char **argv)
 {
 	t_enval *env;
+	int	quit;
 
+	quit = 0;
 	if (argc == 2)
 	{
 		if (ft_strcmp(argv[1], "h") == 0 || ft_strcmp(argv[1], "help") == 0)
@@ -41,10 +44,35 @@ int		main(int argc, char **argv)
 			return (0);
 		}
 		init_sdl_ressources(env);
-		init_values(argv[1], env);
-		init_mlx(env);
-		ray_draw(env);
-		mlx_handle_hooks(env);
+		// init_values(argv[1], env);
+		// init_mlx(env);
+		// ray_draw(env);
+		// mlx_handle_hooks(env);
+
+		while(!quit)
+   		{
+			// SDL_WaitEvent(env->event);
+
+			// env->state = SDL_GetKeyboardState(NULL);
+
+			// if (env->state[SDL_SCANCODE_LEFT]) 
+			// {
+    		// 	printf("Key Pressed.\n");
+			// }
+
+			while(SDL_PollEvent(env->event))
+			{
+    			/* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
+					printf("TEST 1\n");
+    			switch(env->event->type)
+				{
+      				case SDL_KEYDOWN:
+                    	printf("%u", env->event->keysym);
+    			}
+  			}
+        	SDL_Quit();
+        	exit( 0 );
+   		}
 	}
 	else
 		ft_putendl("Usage : ./wolf3d [map]. Try [(h)elp] instead for help.");
