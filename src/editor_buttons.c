@@ -33,12 +33,18 @@ t_button create_button(t_txt_img normal, t_txt_img hovered, int button_id)
 
 void check_hovered_buttons(t_env *env)
 {
+    int i;
+
+    i = 0;
     env->selected_button = -1;
-    handle_hovered_button(env, &env->edit);
-    handle_hovered_button(env, &env->del);
-    handle_hovered_button(env, &env->text_select_left);
-    handle_hovered_button(env, &env->text_select_right);
-    handle_hovered_button(env, &env->create_room);
+    while (i < NB_BUTTONS)
+        handle_hovered_button(env, &env->buttons_lst[i++]);
+}
+
+void change_selected_wall_texture(t_env *env, int texture_id)
+{
+    if (env->selected_wall_id != -1)
+        env->wall_list[env->selected_wall_id].texture_id = texture_id;
 }
 
 void select_previous_texture(t_env *env)
@@ -46,7 +52,26 @@ void select_previous_texture(t_env *env)
     if (env->selected_texture == 0)
         env->selected_texture = NB_TEXTURE - 1;
     else
-        env->selected_texture--;    
+        env->selected_texture--;
+    change_selected_wall_texture(env, env->selected_texture);
+}
+
+void change_selected_wall_transparency(t_env *env)
+{
+    if (env->selected_wall_id != -1)
+        env->wall_list[env->selected_wall_id].transparency = env->actual_transparency;
+}
+
+void incr_transparency(t_env *env)
+{
+    if (env->actual_transparency < 100)
+        env->actual_transparency++;
+}
+
+void decr_transparency(t_env *env)
+{
+    if (env->actual_transparency > 0)
+        env->actual_transparency--;
 }
 
 void select_next_texture(t_env *env)
@@ -55,6 +80,8 @@ void select_next_texture(t_env *env)
         env->selected_texture = 0;
     else
         env->selected_texture++;
+    change_selected_wall_texture(env, env->selected_texture);
+    
 }
 
 void del_selected_wall(t_env *env)

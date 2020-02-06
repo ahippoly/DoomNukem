@@ -8,4 +8,7 @@ typedef struct      s_img
     SDL_Rect        pos_size;
 }                   t_img;
 
+
+t_img create_img(unsigned int *pixels, SDL_Rect pos_size);
+
 #endif
