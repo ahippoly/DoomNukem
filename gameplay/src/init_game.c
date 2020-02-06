@@ -20,10 +20,8 @@
 
 void			init_pc(t_player_character *pc)
 {
-	pc->health.max = 100;
-	pc->health.current = 100;
-	pc->armor.max = 100;
-	pc->armor.current = 0;
+	init_stat(&pc->health, 100, 100);
+	init_stat(&pc->armor, 100, 0);
 	pc->movement_speed = 9;
 	reset_buff(pc->effects.dmg_resist);
 	reset_buff(pc->effects.att_dmg);
@@ -34,4 +32,5 @@ void			init_pc(t_player_character *pc)
 void			init_game(t_game *game)
 {
 	
+	game->diff_mod = get_diff_mod();
 }

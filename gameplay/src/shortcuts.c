@@ -12,8 +12,13 @@
 
 #include "../includes/gameplay.h"
 
-void	init_stat(t_stat *stat, int current, int max)
+void	init_stat(t_stat *stat, int max, int current)
 {
 	stat->current = current;
 	stat->max = max;
+}
+
+void	init_att_stat_basic(t_attack *att, int dmg, double spd, int range)
+{
+
 }

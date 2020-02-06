@@ -23,12 +23,10 @@ t_weapon	get_weapon_fist(void)
 	t_weapon	fist;
 
 	fist.name = "Fists";
-	fist.clip.size.max = INFINITE;
-	fist.clip.size.current = INFINITE;
+	init_stat(&fist.clip.size, INFINITE, INFINITE);
 	fist.clip.reload = 0;
-	fist.ammo.max = INFINITE;
-	fist.ammo.current = INFINITE;
-	fist.attack.type = WEAPON_TYPE_MELEE;
+	init_stat(&fist.ammo, INFINITE, INFINITE);
+	fist.attack.type = WEAPON_TYPE_AUTOMATIC;
 	fist.attack.damage = 10;
 	fist.attack.range = 0.5;
 	fist.attack.speed = 750;
@@ -42,13 +40,11 @@ t_weapon	get_weapon_pistol(void)
 	t_weapon	pistol;
 
 	pistol.name = "Pistol";
-	pistol.clip.size.max = 12;
-	pistol.clip.size.current = 12;
+	init_stat(&pistol.clip.size, 12, 12);
 	pistol.clip.reload = 60;
-	pistol.ammo.max = 120;
-	pistol.ammo.current = 60;
+	init_stat(&pistol.ammo, 120, 60);
 	pistol.attack.type = WEAPON_TYPE_SEMIAUTO;
-	pistol.attack.damage = 10;
+	pistol.attack.damage = 12;
 	pistol.attack.range = 7;
 	pistol.attack.speed = 200;
 	pistol.attack.radius.width = 0;
@@ -61,14 +57,12 @@ t_weapon	get_weapon_shotgun(void)
 	t_weapon	shotgun;
 
 	shotgun.name = "Shotgun";
-	shotgun.clip.size.max = 4;
-	shotgun.clip.size.current = 4;
+	init_stat(&shotgun.clip.size, 4, 4);
 	shotgun.clip.reload = 100;
-	shotgun.ammo.max = 32;
-	shotgun.ammo.current = 16;
+	init_stat(&shotgun.ammo, 32, 16);
 	shotgun.attack.type = WEAPON_TYPE_SEMIAUTO;
-	shotgun.attack.damage = 100; 
-	shotgun.attack.range = 2.5;
+	shotgun.attack.damage = 50; 
+	shotgun.attack.range = 3;
 	shotgun.attack.speed = 1375;
 	shotgun.attack.radius.width = 0.5;
 	shotgun.attack.radius.depth = 0;
@@ -80,13 +74,11 @@ t_weapon	get_weapon_submachinegun(void)
 	t_weapon	submachinegun;
 
 	submachinegun.name = "SMG";
-	submachinegun.clip.size.max = 30;
-	submachinegun.clip.size.current = 30;
+	init_stat(&submachinegun.clip.size, 30, 30);
 	submachinegun.clip.reload = 80;
-	submachinegun.ammo.max = 300;
-	submachinegun.ammo.current = 150;
+	init_stat(&submachinegun.ammo, 300, 150);
 	submachinegun.attack.type = WEAPON_TYPE_AUTOMATIC;
-	submachinegun.attack.damage = 8;
+	submachinegun.attack.damage = 9;
 	submachinegun.attack.range = 6;
 	submachinegun.attack.speed = 100;
 	submachinegun.attack.radius.width = 0;
@@ -99,14 +91,12 @@ t_weapon	get_weapon_bfg(void)
 	t_weapon	bfg;
 
 	bfg.name = "BFG";
-	bfg.clip.size.max = 1;
-	bfg.clip.size.current = 1;
+	init_stat(&bfg.clip.size, 1, 1);
 	bfg.clip.reload = 150;
-	bfg.ammo.max = 3;
-	bfg.ammo.current = 3;
+	init_stat(&bfg.ammo, 2, 2);
 	bfg.attack.type = WEAPON_TYPE_CHARGED;
-	bfg.attack.damage = 1000;
-	bfg.attack.range = 10;
+	bfg.attack.damage = 250;
+	bfg.attack.range = 20;
 	bfg.attack.speed = 1800;
 	bfg.attack.radius.width = 1.5;
 	bfg.attack.radius.depth = 1.5;

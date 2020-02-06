@@ -20,8 +20,9 @@
 # include <stdlib.h>
 # include <time.h>
 # include "SDL2/SDL.h"
+# include "enemy_id.h"
 
-# define WEAPON_TYPE_MELEE		0
+# define WEAPON_TYPE_ENEMY		0
 # define WEAPON_TYPE_SEMIAUTO	1
 # define WEAPON_TYPE_AUTOMATIC	2
 # define WEAPON_TYPE_CHARGED	3
@@ -113,10 +114,6 @@ typedef struct	s_attack
 	t_radius	radius;
 }				t_attack;
 
-/*
-** Bigger structures, contained in the game structure.
-*/
-
 typedef struct	s_weapon
 {
 	char		*name;
@@ -124,6 +121,10 @@ typedef struct	s_weapon
 	t_stat		ammo;
 	t_attack	attack;
 }				t_weapon;
+
+/*
+** Bigger structures, contained in the game structure.
+*/
 
 typedef struct	s_player_character
 {
@@ -164,7 +165,8 @@ typedef struct	s_game
 {
 	t_player_character	pc;
 	t_npc				npcs[20];
-	Uint32				start;
+	double				diff_mod;
+	Uint32				time_start;
 }				t_game;
 
 /*
@@ -205,6 +207,8 @@ void		display_game_over(void);
 ** shortcuts.c functions
 */
 
-void		init_stat(t_stat *stat, int current, int max);
+
+void		init_stat(t_stat *stat, int max, int current);
+void		init_att_stat_basic(t_attack *att, int dmg, double spd, int range);
 
 #endif
