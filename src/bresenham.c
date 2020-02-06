@@ -33,9 +33,9 @@ void	octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, SDL_
 		i = 0;
 		oct_ini(&oct, pos1, pos2, pos);
 		if (oct.bool == 0)
-			length = ft_min(pos_size.w, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
+			length = ft_min(pos_size.w * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
 		else
-			length = ft_min(pos_size.h, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
+			length = ft_min(pos_size.h * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
 		while (i < length)
 		{
 			if (pos[0][0] < pos_size.w && pos[0][0] > 0 && pos[1][0] > 0

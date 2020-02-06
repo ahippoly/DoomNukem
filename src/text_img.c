@@ -62,25 +62,27 @@ void parse_letter(char charts[SIZE_Y][SIZE_X], char *letter)
     }
 }
 
-void read_char_table(char charts[CHAR_NB][SIZE_Y][SIZE_X])
+char (*read_char_table(void))[SIZE_Y][SIZE_X]
 {
-    int fd;
     char buf[5000];
     int i;
-    int nb;
+    static int nb;
     int letter_size;
+    static char charts[CHAR_NB][SIZE_Y][SIZE_X];
 
-    fd = open(CHART_FILE, O_RDONLY);
-    read(fd, buf, 5000);
-    i = 0;
-    nb = 0;
-    letter_size = SIZE_X * (SIZE_Y + 1) + 1;
-    while (nb < CHAR_NB)
+    if (nb == 0)
     {
-        parse_letter(charts[nb], &buf[i]);
-        nb++;
-        i += letter_size;
+        read(open(CHART_FILE, O_RDONLY), buf, 5000);
+        i = 0;
+        letter_size = SIZE_X * (SIZE_Y + 1) + 1;
+        while (nb < CHAR_NB)
+        {
+            parse_letter(charts[nb], &buf[i]);
+            nb++;
+            i += letter_size;
+        }
     }
+    return (charts);
 }
 
 t_txt_img set_pos_txt(t_txt_img txt, int x, int y)
@@ -117,19 +119,20 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
     // printf("end read word\n");
 }
 
+void input_text_to_img(char *str, int size, int color, SDL_Point pos)
+{
+    
+}
+
 t_txt_img create_text_img(char *str, int size, int color, SDL_Point pos)
 {
-    static char charts[CHAR_NB][SIZE_Y][SIZE_X];
-    static int is_init;
+    //char charts[CHAR_NB][SIZE_Y][SIZE_X];
+    char (*charts)[SIZE_Y][SIZE_X];
     t_txt_img txt;
     int x_length;
     int len;
 
-    if (is_init == 0)
-    {
-        read_char_table(charts);
-        is_init = 1;
-    }
+    charts = read_char_table();
     len = ft_strlen(str);
     txt.pos_size.w = (len * SIZE_X + len - 1) * size;
     txt.pos_size.h = SIZE_Y * size * 2;

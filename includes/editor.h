@@ -26,11 +26,17 @@
 # define TEXT_POS_Y 250
 # define TEXT_SIZE_X 150
 # define TEXT_SIZE_Y 150
-# define MOVE_SPEED 5
+# define MOVE_SPEED 2
 # define MAP_SIZE_X 30
 # define MAP_SIZE_Y 30
+# define INTER_TOLERANCE 0.0001
 
 
+typedef struct      s_size
+{   
+    int             w;
+    int             h;
+}                   t_size;
 
 typedef struct      s_wall
 {
@@ -38,6 +44,7 @@ typedef struct      s_wall
     SDL_Point       p1;
     SDL_Point       p2;
     int             texture_id;
+    int             is_in_room;
 }                   t_wall;
 
 typedef struct      s_sector
@@ -47,11 +54,6 @@ typedef struct      s_sector
 
 }                   t_sector;
 
-typedef struct      s_size
-{   
-    int             w;
-    int             h;
-}                   t_size;
 
 typedef struct          s_wall_ref
 {

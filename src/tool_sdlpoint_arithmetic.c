@@ -31,6 +31,12 @@ void swap_point(SDL_Point *p1, SDL_Point *p2)
     *p2 = tmp;
 }
 
+void sort_point_by_x(SDL_Point *p1, SDL_Point *p2)
+{
+    if (p1->x > p2->x)
+        swap_point(p1, p2);
+}
+
 SDL_Point create_point(int x, int y)
 {
     SDL_Point p;

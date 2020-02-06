@@ -1,6 +1,48 @@
 #include "global_header.h"
 #include "editor.h"
 
+void check_intersect_with_all_wall(t_wall wall,t_env *env)
+{
+    int i;
+    t_wall checked_wall;
+    t_point inter;
+
+    i = 0;
+    while (i < env->wall_count)
+    {
+        checked_wall = env->wall_list[i];
+        if (i != wall.id && checked_wall.id != -1)
+        {
+            inter = segment_intersect(wall.p1, wall.p2, checked_wall.p1, checked_wall.p2);
+            printf("Intersect between wall nb %i and %i is x=%f, y=%f\n",wall.id, checked_wall.id, inter.x, inter.y);
+            i++;
+        }
+    }
+}
+
+int check_intersect_with_all_wall_point(SDL_Point p1, SDL_Point p2, t_env *env)
+{
+    int i;
+    t_wall checked_wall;
+    t_point inter;
+    //int found;
+
+    i = 0;
+    while (i < env->wall_count)
+    {
+        checked_wall = env->wall_list[i];
+        if (checked_wall.id != -1)
+        {
+            inter = segment_intersect(p1, p2, checked_wall.p1, checked_wall.p2);
+            printf("Intersect between wall created and wall nb %i is x=%f, y=%f\n", checked_wall.id, inter.x, inter.y);
+            if (inter.x != -42)
+                return (1);
+        }
+        i++;
+    }
+    return (0);
+}
+
 t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
 {
     t_wall wall;
@@ -9,7 +51,7 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     wall.p1 = p1;
     wall.p2 = p2;
     add_wall_ref_point(wall, env);
-    find_sector(env, wall);
+    //check_intersect_with_all_wall(wall, env);
     return(wall);
 }
 
@@ -42,6 +84,8 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
     int success;
 
     success = 0;
+    if (check_intersect_with_all_wall_point(p1, p2, env))
+        return (1);
     if (env->wall_count < NB_WALL_MAX)
     {
         success = 1;
@@ -92,7 +136,9 @@ void print_selected_wall(t_env *env)
 {
     t_wall wall;
 
-    wall = env->wall_list[env->selected_wall_id];
-    if (wall.id != -1)
+    if (env->selected_wall_id != -1)
+    {
+        wall = env->wall_list[env->selected_wall_id];
         octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF00FF00, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
+    }
 }
