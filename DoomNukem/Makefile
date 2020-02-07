@@ -6,7 +6,7 @@
 #    By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/04 18:53:52 by saneveu           #+#    #+#              #
-#    Updated: 2020/02/07 21:57:32 by saneveu          ###   ########.fr        #
+#    Updated: 2020/02/07 22:52:33 by saneveu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,10 @@ SRC		=	main.c\
 			exit.c \
 			event.c \
 			mouse_event.c \
-			display.c 
+			display.c \
+			fog.c \
+			color_tool.c \
+			event_ft.c 
 
 INC		=	wolf3d.h
 

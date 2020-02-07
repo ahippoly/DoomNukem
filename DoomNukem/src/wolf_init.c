@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:58:59 by apons             #+#    #+#             */
-/*   Updated: 2020/02/07 19:35:07 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/02/07 23:11:17 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,8 @@ static int		**append_val(char **tab, t_enval *env)
 }
 
 static void		prep_init(t_enval *env)
-{
-	env->keyinf.up = 0;
-	env->keyinf.down = 0;
-	env->keyinf.left = 0;
-	env->keyinf.right = 0;
-	env->keyinf.sleft = 0;
-	env->keyinf.sright = 0;
-	env->keyinf.run = 1.0;
+{	
+	env->user.fog = 3;
 	env->map.walls = NULL;
 	env->mlx.m_p = NULL;
 	env->mlx.w_p = NULL;

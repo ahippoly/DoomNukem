@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 19:38:22 by saneveu           #+#    #+#             */
-/*   Updated: 2020/02/07 21:55:23 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/02/07 22:25:48 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void            event(t_enval *env)
 		|| env->event.type == SDL_QUIT)
 			ft_exit(env, NULL, 1);
         else if (env->event.type == SDL_MOUSEMOTION)
-			env->sdl.key[MOUSE] = 1; 
+			env->sdl.key[MOUSE] = 1;
+        else if (env->event.type == SDL_KEYDOWN
+        && env->event.key.keysym.sym == SDLK_l)
+            switch_fog(env);
         move_events(env);
     }
     deal_event(env);

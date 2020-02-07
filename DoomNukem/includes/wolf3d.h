@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:58:29 by apons             #+#    #+#             */
-/*   Updated: 2020/02/07 21:37:38 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/02/07 22:53:21 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct	s_ray
 	struct s_doublexy	deltadist;
 	struct s_intxy		mapos;
 	struct s_intxy		step;
+	struct s_doublexy	floorwall;
+	struct s_doublexy	currentfloor;
 	double				camera;
 	double				perpwalldist;
 	double				wallwhere;
@@ -114,6 +116,9 @@ typedef struct	s_ray
 	int					height;
 	int					walltop;
 	int					wallbot;
+	double				weight;
+	double				distcurrent;
+	double				distwall;
 }				t_ray;
 
 /*
@@ -171,19 +176,13 @@ typedef struct	s_tex
 }				t_tex;
 
 /*
-** A structure that allows to better manipulate key events.
+** Structure for user gamplay varialble
 */
 
-typedef struct	s_keys
+typedef struct	s_user
 {
-	int		up;
-	int		down;
-	int		left;
-	int		right;
-	int		sleft;
-	int		sright;
-	double	run;
-}				t_keys;
+	int			fog;
+}				t_user;
 
 /*
 ** The main structure, containing most of the variables that will
@@ -199,15 +198,10 @@ typedef struct	s_enval
 	struct s_mapinfo		map;
 	struct s_intxy			wt;
 	t_sprite				wtex[6];
-	struct s_doublexy		floorwall;
-	struct s_doublexy		currentfloor;
-	struct s_keys			keyinf;
 	int						fd;
 	int						wl;
 	char					*linebuff;
-	double					weight;
-	double					distcurrent;
-	double					distwall;
+	t_user					user;
 	SDL_Event				event;
 	SDL_MouseMotionEvent	mouse;
 }				t_enval;
@@ -244,8 +238,14 @@ void			display(t_enval *env);
 **	Function Color and Pixel
 */
 
-uint32_t		get_pixel(t_enval *env, int si, float x, float y);
+uint32_t		get_pixel_wall(t_enval *env, int si, float x, float y);
+uint32_t		get_pixel_floor(t_enval *env, int si, float x, float y);
 void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color);
+Uint32			light_shade(Uint32 hexa, float distance);
+int				white_fog(Uint32 hexa, float distance);
+int				fog(t_enval *env, Uint32 hexa, float distance);
+int				rgb_to_hsv(int r, int g, int b);
+SDL_Color		fill_rgb(int c);
 
 /*
 ** SDL Event Function
@@ -253,5 +253,6 @@ void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color);
 
 void			event(t_enval *env);
 void			mouse_events(t_enval *env);
+void			switch_fog(t_enval *env);
 
 #endif
