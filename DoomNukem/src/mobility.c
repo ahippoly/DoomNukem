@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:21:35 by apons             #+#    #+#             */
-/*   Updated: 2020/02/07 18:04:12 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/02/07 21:51:15 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 ** and rotation values according to key events.
 */
 
-static t_doublexy	get_projections(t_player player, t_keys key)
+static t_doublexy	get_projections(t_enval *env, t_player player)
 {
 	double		judge_vert;
 	double		judge_horiz;
 	t_doublexy	proj;
 
-	judge_vert = (key.up + key.down) * key.run;
-	judge_horiz = (key.sleft + key.sright) * key.run;
+	judge_vert = (env->sdl.key[UP] + env->sdl.key[DOWN]) * 1 + env->sdl.key[RUN];
+	judge_horiz = (env->sdl.key[LEFT] + env->sdl.key[RIGHT]) * -1 + env->sdl.key[RUN];
 	proj.x = player.pos.x + (player.dir.x / 9) * judge_vert;
 	proj.x += player.plane.x / 9 * judge_horiz;
 	proj.y = player.pos.y + (player.dir.y / 9) * judge_vert;
@@ -40,7 +40,7 @@ void				movement(t_enval *env)
 
 	trim.pos.x = env->player.pos.x;
 	trim.pos.y = env->player.pos.y;
-	proj = get_projections(env->player, env->keyinf);
+	proj = get_projections(env, env->player);
 	if (env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y - OFF)] == 0
 		&& env->map.walls[(int)(proj.x - OFF)][(int)(trim.pos.y + OFF)] == 0
 		&& env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y + OFF)] == 0
@@ -53,14 +53,14 @@ void				movement(t_enval *env)
 		env->player.pos.y = proj.y;
 }
 
-void				rotation(t_player *p, t_keys keyinf)
+void				rotation(t_enval *env, t_player *p)
 {
 	int		judge;
 	double	angle;
 	double	dir_x_cpy;
 	double	pla_x_cpy;
 
-	judge = keyinf.left + keyinf.right;
+	judge = env->sdl.key[Q] + env->sdl.key[E];
 	dir_x_cpy = p->dir.x;
 	pla_x_cpy = p->plane.x;
 	angle = 5 * M_PI / 180 * judge;

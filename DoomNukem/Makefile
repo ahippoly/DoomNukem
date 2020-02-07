@@ -6,7 +6,7 @@
 #    By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/04 18:53:52 by saneveu           #+#    #+#              #
-#    Updated: 2020/02/07 18:06:04 by saneveu          ###   ########.fr        #
+#    Updated: 2020/02/07 21:57:32 by saneveu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,13 +38,15 @@ SRC		=	main.c\
 			ft_error.c\
 			ft_freewolf.c\
 			ft_help.c\
-			key_handle.c\
-			mlx_handle.c\
 			mobility.c\
 			raycasting.c\
 			wall_draw.c\
 			wolf_init.c\
-			pixel.c
+			pixel.c \
+			exit.c \
+			event.c \
+			mouse_event.c \
+			display.c 
 
 INC		=	wolf3d.h
 

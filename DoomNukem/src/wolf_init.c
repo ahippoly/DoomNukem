@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:58:59 by apons             #+#    #+#             */
-/*   Updated: 2020/02/07 18:50:51 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/02/07 19:35:07 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ void			init_texture(t_enval *env)
 	env->wtex[1].img = SDL_LoadBMP("img/textures/wall.bmp");
 	env->wtex[2].img = SDL_LoadBMP("img/textures/wall.bmp");
 	env->wtex[3].img = SDL_LoadBMP("img/textures/wall.bmp");
-	env->wtex[4].img = SDL_LoadBMP("img/textures/wall.bmp");
-	env->wtex[5].img = SDL_LoadBMP("img/textures/wall.bmp");
+	env->wtex[4].img = SDL_LoadBMP("img/textures/sand.bmp");
+	env->wtex[5].img = SDL_LoadBMP("img/textures/stone.bmp");
 	i = 0;
 	while (i <= 5)
 	{

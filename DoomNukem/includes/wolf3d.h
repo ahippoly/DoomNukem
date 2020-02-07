@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:58:29 by apons             #+#    #+#             */
-/*   Updated: 2020/02/07 18:08:51 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/02/07 21:37:38 by saneveu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@
 # define KEY_RIGHT 124
 # define KEY_LSHIFT 257
 
+# define NBKEY 15
+# define ECHAP 1
+# define UP 2
+# define DOWN 3
+# define LEFT 4
+# define RIGHT 5
+# define MOUSE 6
+# define E 7
+# define Q 8
+# define RUN 9
 /*
 ** Many little structures to build up a bigger, cleaner one.
 ** The first two are used in a variety of ways.
@@ -122,17 +132,29 @@ typedef struct	s_mlx
 }				t_mlx;
 
 /*
+** The Surface structure for stack the image.
+** Use Tab of t_sprite.
+*/
+
+typedef struct	s_sprite
+{
+	SDL_Surface *img;
+}				t_sprite;
+
+/*
 ** The SDL structure to handle window.
 */
 
 typedef struct	s_sdl
 {
+	int				sdl_token;
 	SDL_Window		*win;
 	SDL_Texture		*text;
 	SDL_Renderer	*rend;
 	SDL_Surface		*screen;
 	int				winx;
 	int				winy;
+	int				key[NBKEY];
 }				t_sdl;
 
 /*
@@ -168,29 +190,26 @@ typedef struct	s_keys
 ** be used throughout the program.
 */
 
-typedef struct	s_sprite
-{
-	SDL_Surface *img;
-}				t_sprite;
-
 typedef struct	s_enval
 {
-	struct s_mlx		mlx;
-	struct s_sdl		sdl;
-	struct s_player		player;
-	struct s_ray		ray;
-	struct s_mapinfo	map;
-	struct s_intxy		wt;
-	t_sprite			wtex[6];
-	struct s_doublexy	floorwall;
-	struct s_doublexy	currentfloor;
-	struct s_keys		keyinf;
-	int					fd;
-	int					wl;
-	char				*linebuff;
-	double				weight;
-	double				distcurrent;
-	double				distwall;
+	struct s_mlx			mlx;
+	struct s_sdl			sdl;
+	struct s_player			player;
+	struct s_ray			ray;
+	struct s_mapinfo		map;
+	struct s_intxy			wt;
+	t_sprite				wtex[6];
+	struct s_doublexy		floorwall;
+	struct s_doublexy		currentfloor;
+	struct s_keys			keyinf;
+	int						fd;
+	int						wl;
+	char					*linebuff;
+	double					weight;
+	double					distcurrent;
+	double					distwall;
+	SDL_Event				event;
+	SDL_MouseMotionEvent	mouse;
 }				t_enval;
 
 /*
@@ -215,9 +234,11 @@ void			movement(t_enval*env);
 void			ray_calc(t_enval *env, int i);
 void			ray_draw(t_enval *env);
 void			ray_hit(t_enval *env);
-void			rotation(t_player *p, t_keys keyinf);
+void			rotation(t_enval *env, t_player *p);
 void			wall_draw(t_enval *env, int i, int texnum);
 void			init_texture(t_enval *env);
+void			ft_exit(t_enval *env, char *s, int flag);
+void			display(t_enval *env);
 
 /*
 **	Function Color and Pixel
@@ -225,5 +246,12 @@ void			init_texture(t_enval *env);
 
 uint32_t		get_pixel(t_enval *env, int si, float x, float y);
 void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color);
+
+/*
+** SDL Event Function
+*/
+
+void			event(t_enval *env);
+void			mouse_events(t_enval *env);
 
 #endif
