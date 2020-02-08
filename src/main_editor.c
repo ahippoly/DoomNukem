@@ -42,33 +42,24 @@ void init_buttons(t_env *env)
     env->buttons_fct[BUTTON_TEXT_RIGHT] = select_next_texture;
     env->buttons_fct[BUTTON_TRANS_LEFT] = decr_transparency;
     env->buttons_fct[BUTTON_TRANS_RIGHT] = incr_transparency;
-    env->buttons_fct[BUTTON_CREATE_ROOM] = del_selected_wall;
+    env->buttons_fct[BUTTON_CREATE_ROOM] =  create_room_button;
+    env->buttons_fct[BUTTON_MAP_OUTPUT] =  map_output;
     
     env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
     env->buttons_lst[BUTTON_TRANS_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(770, 650)), create_text_img("<", 2, 0xFF88FF88, create_point(770, 650)), BUTTON_TRANS_LEFT);
     env->buttons_lst[BUTTON_TRANS_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(950, 650)), create_text_img(">", 2, 0xFF88FF88, create_point(950, 650)), BUTTON_TRANS_RIGHT);
     env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 295)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 295)), BUTTON_TEXT_LEFT);
     env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
-    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 80)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(795, 430)), BUTTON_CREATE_ROOM);
+    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 80)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 80)), BUTTON_CREATE_ROOM);
+    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(810, 800)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(810, 800)), BUTTON_MAP_OUTPUT);
 }
 
-void init_wall_ref(t_env *env)
+void init_mouse_mode(t_env *env)
 {
-    int i;
-    int j;
-
-    env->map_size.w = MAP_SIZE_X;
-    env->map_size.h = MAP_SIZE_Y;
-    i = 0;
-    env->map_wall_ref = (t_wall_ref***)p_malloc(sizeof(t_wall_ref**) * env->map_size.h);
-    while (i < env->map_size.h)
-    {
-        env->map_wall_ref[i] = (t_wall_ref**)p_malloc(sizeof(t_wall_ref*) * env->map_size.w);
-        j = 0;
-        while (j < env->map_size.w)
-            env->map_wall_ref[i][j++] = NULL;
-        i++;
-    }
+    env->selected_mouse_mode = 0;
+    env->start_room_point = create_point(-1 , -1);
+    env->mouse_click_fct[MOUSE_MODE_NEUTRAL] = neutral_mouse_mode;
+    env->mouse_click_fct[MOUSE_MODE_CREATE_ROOM] = create_room_mode;
 }
 
 void init_env(t_env *env)
@@ -77,10 +68,12 @@ void init_env(t_env *env)
     init_texture(env);
     init_buttons(env);
     init_wall_ref(env);
+    init_mouse_mode(env);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
+    env->room_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
     env->actual_transparency = 0;
@@ -93,6 +86,7 @@ void init_env(t_env *env)
     env->transparency = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
     env->hovered_wall_id = -1;
     env->selected_wall_id = -1;
+    env->room_list = NULL;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -284,36 +278,7 @@ void reset_textures(t_env *env)
     ft_bzero(env->p_grid, GRID_SIZE_X * GRID_SIZE_Y * 4);
 }
 
-void check_click(t_env *env)
-{
-    if (env->ev.type == SDL_MOUSEBUTTONUP && env->ev.button.button == SDL_BUTTON_LEFT)
-    {
-        if (env->selected_button != -1)
-            env->buttons_fct[env->selected_button](env);
-        else
-            env->selected_wall_id = -1;
-        if (env->hovered_corner.x != -1)
-        {
-            if (env->selected_corner.x == -1)
-                env->selected_corner = env->hovered_corner;
-            else if (env->selected_corner.x != env->hovered_corner.x
-                || env->selected_corner.y != env->hovered_corner.y)
-            {
-                add_wall(env->selected_corner, env->hovered_corner, env);
-                env->selected_corner.x = -1;
-            }
-        }
-        else
-            env->selected_corner.x = -1;
-        if (env->hovered_wall_id != -1)
-        {
-            env->selected_wall_id = env->hovered_wall_id;
-            env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
-            env->actual_transparency = env->wall_list[env->selected_wall_id].transparency;
-        }
-        printf("selected wall = %i\n", env->selected_wall_id);
-    }
-}
+
 
 void display_selected_point(t_env *env)
 {
@@ -329,16 +294,6 @@ void display_selected_point(t_env *env)
     }
 }
 
-void handle_mouse_event(t_env *env)
-{
-    while (SDL_PollEvent(&env->ev))
-    {
-        check_click(env);
-    }
-}
-
-
-
 void handle_keyboard_event(t_env *env)
 {
     if(env->clavier[SDL_SCANCODE_ESCAPE] || env->clavier[SDL_SCANCODE_RETURN])
@@ -353,6 +308,8 @@ void handle_keyboard_event(t_env *env)
         move_map_move_down(env);
     if(env->clavier[SDL_SCANCODE_Q])
         print_wall_ref(env);
+    if(env->clavier[SDL_SCANCODE_E])
+        print_rooms_content(env);
 }
 
 int main(int argc, char **argv)
@@ -379,4 +336,5 @@ int main(int argc, char **argv)
         
         print_env2screen(&env);
     }
+    clear_map_ref(&env);
 }

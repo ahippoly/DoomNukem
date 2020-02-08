@@ -52,6 +52,11 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     wall.p2 = p2;
     wall.texture_id = env->selected_texture;
     wall.transparency = env->actual_transparency;
+    if (env->selected_mouse_mode == MOUSE_MODE_CREATE_ROOM)
+        wall.room_id_ref = env->room_count;
+    else
+        wall.room_id_ref = -1;
+    
     add_wall_ref_point(wall, env);
     //check_intersect_with_all_wall(wall, env);
     return(wall);
@@ -87,7 +92,7 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
 
     success = 0;
     if (check_intersect_with_all_wall_point(p1, p2, env))
-        return (1);
+        return (0);
     if (env->wall_count < NB_WALL_MAX)
     {
         success = 1;
@@ -98,7 +103,10 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
     {
         rearange_wall_lst(env);
         if (env->wall_count < NB_WALL_MAX)
+        {
             env->wall_list[env->wall_count++] = create_wall(p1, p2, env->wall_count, env);
+            success = 1;
+        }
     }
     return (success);
 }
@@ -129,7 +137,13 @@ void print_walls_in_map(t_env *env)
     {
         wall = env->wall_list[i];
         if (wall.id != -1)
-            octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF00FFFF, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
+        {
+            if (wall.room_id_ref == -1)
+                octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF00FFFF, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
+            else
+                octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFFFF88CC, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));                
+            
+        }
         i++;
     }
 }

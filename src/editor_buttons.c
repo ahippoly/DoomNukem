@@ -66,12 +66,14 @@ void incr_transparency(t_env *env)
 {
     if (env->actual_transparency < 100)
         env->actual_transparency++;
+    change_selected_wall_transparency(env);    
 }
 
 void decr_transparency(t_env *env)
 {
     if (env->actual_transparency > 0)
         env->actual_transparency--;
+    change_selected_wall_transparency(env);
 }
 
 void select_next_texture(t_env *env)
@@ -81,10 +83,14 @@ void select_next_texture(t_env *env)
     else
         env->selected_texture++;
     change_selected_wall_texture(env, env->selected_texture);
-    
 }
 
 void del_selected_wall(t_env *env)
 {
     del_wall(env, env->selected_wall_id);
+}
+
+void create_room_button(t_env *env)
+{
+    env->selected_mouse_mode = 1;
 }

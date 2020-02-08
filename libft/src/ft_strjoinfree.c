@@ -34,9 +34,9 @@ char	*ft_strjoinfree(char const *s1, char const *s2, int option)
 	while (i < (len1 + len2))
 		str[i++] = s2[j++];
 	str[i] = 0;
-	if (option > 0)
+	if (option == 0 || option > 1)
 		free((void*)s1);
-	if (option > 1)
+	if (option > 0)
 		free((void*)s2);
 	return (str);
 }

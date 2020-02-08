@@ -1,6 +1,26 @@
 #include "editor.h"
 #include "global_header.h"
 
+
+void init_wall_ref(t_env *env)
+{
+    int i;
+    int j;
+
+    env->map_size.w = MAP_SIZE_X;
+    env->map_size.h = MAP_SIZE_Y;
+    i = 0;
+    env->map_wall_ref = (t_wall_ref***)p_malloc(sizeof(t_wall_ref**) * env->map_size.h);
+    while (i < env->map_size.h)
+    {
+        env->map_wall_ref[i] = (t_wall_ref**)p_malloc(sizeof(t_wall_ref*) * env->map_size.w);
+        j = 0;
+        while (j < env->map_size.w)
+            env->map_wall_ref[i][j++] = NULL;
+        i++;
+    }
+}
+
 t_wall_ref *alloc_wall(int wall_id)
 {
     t_wall_ref *ref;
@@ -9,6 +29,15 @@ t_wall_ref *alloc_wall(int wall_id)
     ref->wall_id = wall_id;
     ref->next = NULL;
     return(ref);
+}
+
+t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id)
+{
+    t_wall_ref *new;
+
+    new = alloc_wall(new_wall_id);
+    new->next = chain;
+    return (new);
 }
 
 void reference_wall(SDL_Point pos, int wall_id, t_env *env)
@@ -151,5 +180,28 @@ void find_sector(t_env *env, t_wall wall)
         if (find_chained_wall(linked_wall, wall.p1, is_p1_common, env))
             printf("sector found\n");
         ref = ref->next;
+    }
+}
+
+
+
+void create_room(t_env *env)
+{
+    if (!(env->room_list = (t_room*)malloc(sizeof(t_room))))
+        exit_with_msg("Failed to malloc");
+    env->room_list->next = NULL;
+    env->room_list->room_id = env->room_count;
+}
+
+void print_rooms_content(t_env *env)
+{
+    while (env->room_list)
+    {
+        while (env->room_list->wall_in)
+        {
+            printf("wall id %i in room %i\n", env->room_list->wall_in->wall_id, env->room_list->room_id);
+            env->room_list->wall_in = env->room_list->wall_in->next;
+        }
+        env->room_list = env->room_list->next;
     }
 }

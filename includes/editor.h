@@ -15,20 +15,23 @@
 # define TILE_HITBOX 7
 # define WALL_HITBOX 10
 # define NB_WALL_MAX 200
+
 # define BUTTON_DEL 0
 # define BUTTON_CREATE_ROOM 1
 # define BUTTON_TEXT_LEFT 2
 # define BUTTON_TEXT_RIGHT 3
-
 # define BUTTON_HEIGHT 4
 # define BUTTON_HEIGHT_INC 0.1
 # define BUTTON_HEIGHT_DEFAULT 1
-
 # define BUTTON_TRANS_LEFT 5
 # define BUTTON_TRANS_RIGHT 6
+# define BUTTON_MAP_OUTPUT 7
+# define NB_BUTTONS 8
 
+# define NB_MOUSE_MODE 2
+# define MOUSE_MODE_NEUTRAL 0
+# define MOUSE_MODE_CREATE_ROOM 1
 
-# define NB_BUTTONS 7
 # define NB_TEXTURE 2
 # define TEXT_POS_X 800
 # define TEXT_POS_Y 250
@@ -54,7 +57,7 @@ typedef struct      s_wall
     t_range         p1_height;
     t_range         p2_height;
     int             texture_id;
-    int             in_room_id;
+    int             room_id_ref;
     int             transparency;
     int             can_collide;
 }                   t_wall;
@@ -63,15 +66,20 @@ typedef struct      s_sector
 {
     t_wall          wall_lst;
     int             size;
-
 }                   t_sector;
-
 
 typedef struct          s_wall_ref
 {
     int                 wall_id;
     struct s_wall_ref   *next;
 }                       t_wall_ref;
+
+typedef struct          s_room
+{
+    int                 room_id;
+    t_wall_ref          *wall_in;
+    struct s_room       *next;
+}                       t_room;
 
 typedef struct      s_env
 {
@@ -88,17 +96,21 @@ typedef struct      s_env
     SDL_Point       mouse;
     SDL_Point       hovered_corner;
     SDL_Point       selected_corner;
+    SDL_Point       start_room_point;
     SDL_Point       map_move;
     int             tile_size;
     int             quit;
     int             wall_count;
+    int             room_count;
     int             total_wall_created;
     int             hovered_wall_id;
     int             selected_wall_id;
     int             selected_button;
+    int             selected_mouse_mode;
     int             selected_texture;
     int             actual_transparency;
     t_wall          *wall_list;
+    t_room          *room_list;
     t_wall_ref      ***map_wall_ref;
     t_size          map_size;
     unsigned int    *p_screen;
@@ -119,6 +131,7 @@ typedef struct      s_env
     // t_txt_img       *del_selected;
     t_button        buttons_lst[NB_BUTTONS];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
+    void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
 }                   t_env;
 
 
@@ -134,6 +147,7 @@ void print_selected_wall(t_env *env);
 void del_wall(t_env *env, int wall_id);
 void check_hovered_buttons(t_env *env);
 t_button create_button(t_txt_img normal, t_txt_img hovered, int button_id);
+void init_wall_ref(t_env *env);
 
 void del_selected_wall(t_env *env);
 void select_previous_texture(t_env *env);
@@ -151,5 +165,14 @@ void print_wall_ref(t_env *env);
 void find_sector(t_env *env, t_wall wall);
 void input_text_to_img(char *str, int size, int color, t_img to_fill);
 
+void create_room_mode(t_env *env);
+void neutral_mouse_mode(t_env *env);
+void handle_mouse_event(t_env *env);
+void check_click(t_env *env);
+void map_output(t_env *env);
 
+void create_room_button(t_env *env);
+void create_room(t_env *env);
+t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id);
+void print_rooms_content(t_env *env);
 #endif
