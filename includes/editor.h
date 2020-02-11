@@ -77,7 +77,8 @@ typedef struct          s_wall_ref
 typedef struct          s_room
 {
     int                 room_id;
-    t_wall_ref          *wall_in;
+    int                 nb_wall;
+    int                 *wall_ref;
     struct s_room       *next;
 }                       t_room;
 
@@ -98,10 +99,14 @@ typedef struct      s_env
     SDL_Point       selected_corner;
     SDL_Point       start_room_point;
     SDL_Point       map_move;
+    t_point         player_spawn;
+    t_range         p1_height;
+    t_range         p2_height;
     int             tile_size;
     int             quit;
     int             wall_count;
     int             room_count;
+    int             first_wall_room_id;
     int             total_wall_created;
     int             hovered_wall_id;
     int             selected_wall_id;
@@ -141,6 +146,7 @@ SDL_Point mult_sdl_point(SDL_Point p, double mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);
 void del_wall(t_env *env, int wall_id);
+void del_room(t_env *env, int room_id);
 void print_walls_in_map(t_env *env);
 void check_mouse_in_walls(t_env *env);
 void print_selected_wall(t_env *env);
@@ -172,7 +178,7 @@ void check_click(t_env *env);
 void map_output(t_env *env);
 
 void create_room_button(t_env *env);
-void create_room(t_env *env);
+void create_room(t_env *env, int begin, int end);
 t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id);
 void print_rooms_content(t_env *env);
 #endif

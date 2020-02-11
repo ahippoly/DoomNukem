@@ -52,6 +52,8 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     wall.p2 = p2;
     wall.texture_id = env->selected_texture;
     wall.transparency = env->actual_transparency;
+    wall.p1_height = env->p1_height;
+    wall.p2_height = env->p2_height;
     if (env->selected_mouse_mode == MOUSE_MODE_CREATE_ROOM)
         wall.room_id_ref = env->room_count;
     else
@@ -124,7 +126,38 @@ void del_wall(t_env *env, int wall_id)
         wall->p1.y = -1;
         wall->p2.x = -1;
         wall->p2.y = -1;
+        if (wall->room_id_ref != -1)
+            del_room(env, wall->room_id_ref);
     }
+}
+
+void del_room(t_env *env, int room_id)
+{
+    t_room *previous;
+    t_room *to_remove;
+    int i;
+
+    previous = env->room_list;
+    if (previous->room_id == room_id)
+    {
+        to_remove = previous;
+        env->room_list = env->room_list->next;
+    }
+    else
+    {   
+        while (previous->next && previous->next->room_id != room_id)
+            previous = previous->next;
+        to_remove = previous->next;
+        previous->next = to_remove->next;
+    }
+    i = 0;
+    while (i < to_remove->nb_wall)
+    {
+        env->wall_list[to_remove->wall_ref[i]].room_id_ref = -1;
+        del_wall(env, to_remove->wall_ref[i++]);
+    }
+    free(to_remove->wall_ref);
+    free(to_remove);
 }
 
 void print_walls_in_map(t_env *env)
@@ -142,7 +175,6 @@ void print_walls_in_map(t_env *env)
                 octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFF00FFFF, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));
             else
                 octant(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), env->p_grid, 0xFFFF88CC, set_sdl_rect(0, 0, GRID_SIZE_X, GRID_SIZE_Y));                
-            
         }
         i++;
     }

@@ -77,6 +77,8 @@ void init_env(t_env *env)
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
     env->actual_transparency = 0;
+    env->p1_height = create_t_range(0, 10);
+    env->p2_height = create_t_range(0, 10);
     env->map_move = create_point(0, 0);
     env->map_editor = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
     env->text_select = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));

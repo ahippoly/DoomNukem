@@ -13,16 +13,14 @@ void create_room_mode(t_env *env)
         if (env->selected_corner.x == -1)
             env->selected_corner = env->hovered_corner;
         else
-            if (add_wall(env->selected_corner, env->hovered_corner, env))
-                env->room_list->wall_in = add_wall_reference(env->room_list->wall_in, env->wall_count - 1);
-            else
+            if (!add_wall(env->selected_corner, env->hovered_corner, env))
                 return;
         printf("2selected corner : x=%i, y=%i\n", env->selected_corner.x, env->selected_corner.y);
         
         if (env->start_room_point.x < 0)
         {
             env->start_room_point = env->selected_corner;
-            create_room(env);
+            env->first_wall_room_id = env->wall_count;
         }
         else if (env->hovered_corner.x == env->start_room_point.x
         && env->hovered_corner.y == env->start_room_point.y)
@@ -30,7 +28,7 @@ void create_room_mode(t_env *env)
             env->selected_mouse_mode = 0;
             env->hovered_corner.x = -1;
             env->start_room_point = create_point(-1, -1);
-            env->room_count++;
+            create_room(env, env->first_wall_room_id, env->wall_count);
         }
         
         printf("start room point : x=%i, y=%i, hovered_corner : x=%i, y=%i\n", env->start_room_point.x, env->start_room_point.y, env->hovered_corner.x, env->hovered_corner.y);

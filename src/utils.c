@@ -10,10 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf.h"
+#include "global_header.h"
+#include "editor.h"
 
-void errorcase()
+t_point create_t_point(double x, double y)
 {
-	write(1, "Error\n", 6);
-	exit(1);
+	t_point p;
+	p.x = x;
+	p.y = y;
+	return (p);
+}
+
+t_range create_t_range(double start, double end)
+{
+	t_range range;
+
+	range.start = start;
+	range.end = end;
+	return (range);
 }

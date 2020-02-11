@@ -185,23 +185,38 @@ void find_sector(t_env *env, t_wall wall)
 
 
 
-void create_room(t_env *env)
+void create_room(t_env *env, int begin, int end)
 {
-    if (!(env->room_list = (t_room*)malloc(sizeof(t_room))))
+    t_room *new;
+    int i;
+
+    if (!(new = (t_room*)malloc(sizeof(t_room))))
         exit_with_msg("Failed to malloc");
-    env->room_list->next = NULL;
-    env->room_list->room_id = env->room_count;
+    new->nb_wall = end - begin;
+    if (!(new->wall_ref = (int*)malloc(sizeof(int) * new->nb_wall)))
+        exit_with_msg("Failed to malloc");
+    i = 0;
+    while (i < new->nb_wall)
+    {
+        new->wall_ref[i] = begin + i;
+        i++;
+    }
+    new->room_id = env->room_count++;
+    new->next = env->room_list;
+    env->room_list = new;
 }
 
 void print_rooms_content(t_env *env)
 {
-    while (env->room_list)
+    int     i;
+    t_room *room;
+
+    room = env->room_list;
+    while (room)
     {
-        while (env->room_list->wall_in)
-        {
-            printf("wall id %i in room %i\n", env->room_list->wall_in->wall_id, env->room_list->room_id);
-            env->room_list->wall_in = env->room_list->wall_in->next;
-        }
-        env->room_list = env->room_list->next;
+        i = 0;
+        while (i < room->nb_wall)
+            printf("room id %i have wall id %i\n", room->room_id, room->wall_ref[i++]);
+        room = room->next;
     }
 }

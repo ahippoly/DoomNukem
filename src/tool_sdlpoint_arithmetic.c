@@ -19,7 +19,7 @@ SDL_Point mult_sdl_point(SDL_Point p, double mul)
 {
     p.x = mul * p.x;
     p.y = mul * p.y;
-    return(p);
+    return (p);
 }
 
 void swap_point(SDL_Point *p1, SDL_Point *p2)
@@ -43,5 +43,5 @@ SDL_Point create_point(int x, int y)
 
     p.x = x;
     p.y = y;
-    return(p);
+    return (p);
 }

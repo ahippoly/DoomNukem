@@ -27,18 +27,20 @@ t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 	a2 = (p4.y - p3.y) / (p4.x - p3.x);
 	b2 = p3.y - p3.x * a2;
 	
+	if (a1 == a2 && b1 == b2 
+	&& (ft_min(p1.x, p2.x) > ft_min(p3.x, p4.x) || ft_max(p1.x, p2.x) < ft_max(p3.x, p4.x)))
+	{
+		inter = create_t_point(-41, -41);
+		return (inter);
+	}
 	inter.x = (b2 - b1) / (a1  - a2);
 	//printf("inter.x = %f, max x = %f, min x = %f\n", inter.x, ft_fmax(p2.x, p1.x), ft_fmin(p2.x, p1.x));
 	if (inter.x < ft_max(p2.x, p1.x) - INTER_TOLERANCE && inter.x > ft_min(p2.x, p1.x) + INTER_TOLERANCE
 		&& inter.x < ft_max(p4.x, p3.x) - INTER_TOLERANCE && inter.x > ft_min(p4.x, p3.x) + INTER_TOLERANCE
-		&& (a1 != a2)
-		)
+		&& (a1 != a2))
 		inter.y = a1 * inter.x + b1;
 	else
-	{
-		inter.x = - 42;
-		inter.y = - 42;
-	}
+		inter = create_t_point(-42, -42);
 	return(inter);
 }
 
