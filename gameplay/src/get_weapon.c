@@ -41,7 +41,7 @@ t_weapon	get_weapon_pistol(void)
 
 	pistol.name = "Pistol";
 	init_stat(&pistol.clip.size, 12, 12);
-	pistol.clip.reload = 60;
+	pistol.clip.reload = 1750;
 	init_stat(&pistol.ammo, 120, 60);
 	pistol.attack.type = WEAPON_TYPE_SEMIAUTO;
 	pistol.attack.damage = 12;
@@ -58,7 +58,7 @@ t_weapon	get_weapon_shotgun(void)
 
 	shotgun.name = "Shotgun";
 	init_stat(&shotgun.clip.size, 4, 4);
-	shotgun.clip.reload = 100;
+	shotgun.clip.reload = 3250;
 	init_stat(&shotgun.ammo, 32, 16);
 	shotgun.attack.type = WEAPON_TYPE_SEMIAUTO;
 	shotgun.attack.damage = 50; 
@@ -75,7 +75,7 @@ t_weapon	get_weapon_submachinegun(void)
 
 	submachinegun.name = "SMG";
 	init_stat(&submachinegun.clip.size, 30, 30);
-	submachinegun.clip.reload = 80;
+	submachinegun.clip.reload = 2250;
 	init_stat(&submachinegun.ammo, 300, 150);
 	submachinegun.attack.type = WEAPON_TYPE_AUTOMATIC;
 	submachinegun.attack.damage = 9;
@@ -92,7 +92,7 @@ t_weapon	get_weapon_bfg(void)
 
 	bfg.name = "BFG";
 	init_stat(&bfg.clip.size, 1, 1);
-	bfg.clip.reload = 150;
+	bfg.clip.reload = 3000;
 	init_stat(&bfg.ammo, 2, 2);
 	bfg.attack.type = WEAPON_TYPE_CHARGED;
 	bfg.attack.damage = 250;

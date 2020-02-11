@@ -12,6 +12,10 @@
 
 #include "../includes/gameplay.h"
 
+/*
+** Health of each and every enemy in the game.
+*/
+
 void	get_enemy_health(int *health)
 {
 	health[ENEMY_GRUNT_MELEE] = 30;
@@ -33,6 +37,10 @@ void	get_enemy_health(int *health)
 	health[ENEMY_BOSS_SECOND] = 1000;
 	health[ENEMY_BOSS_FINAL] = 1500;
 }
+
+/*
+** Attack damage of each and every enemy in the game.
+*/
 
 void	get_enemy_damage(int *damage)
 {
@@ -56,6 +64,10 @@ void	get_enemy_damage(int *damage)
 	damage[ENEMY_BOSS_FINAL] = 30;
 }
 
+/*
+** Attack range of each and every enemy in the game.
+*/
+
 void	get_enemy_range(double *ranges)
 {
 	ranges[ENEMY_GRUNT_MELEE] = 0.3;
@@ -78,6 +90,10 @@ void	get_enemy_range(double *ranges)
 	ranges[ENEMY_BOSS_FINAL] = 2.5;
 }
 
+/*
+** Attack speed of each and every enemy in the game.
+*/
+
 void	get_enemy_speeds(int *speeds)
 {
 	speeds[ENEMY_GRUNT_MELEE] = 1000;
@@ -99,6 +115,10 @@ void	get_enemy_speeds(int *speeds)
 	speeds[ENEMY_BOSS_SECOND] = 2000;
 	speeds[ENEMY_BOSS_FINAL] = 2000;
 }
+
+/*
+** Movement speed of each and every enemy in the game.
+*/
 
 void	get_enemy_mv_spd(double *mv_spd)
 {

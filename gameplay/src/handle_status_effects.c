@@ -16,18 +16,6 @@
 ** These functions handle the status effects
 */
 
-double		get_modifier(t_buff buff)
-{
-	double	amp;
-	int i;
-
-	amp = 1.0;
-	i = 0;
-	while (i++ < 2)
-		amp += buff.value[0];
-	return (amp);
-}
-
 void		apply_stat_eff(t_buff *effect, int id, double value, int duration)
 {
 	effect->value[id] = ft_max(effect->value[id], value);
