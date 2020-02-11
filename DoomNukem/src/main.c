@@ -55,6 +55,8 @@ int				main(int argc, char **argv)
 		if (!(env = (t_enval *)malloc(sizeof(t_enval))))
 			ft_exit(env, "Env malloc failed.", 0);
 		init_values(argv[1], env);
+		map_drawer(env);
+		test(env);
 		if (!init_sdl(env))
 			ft_exit(env, "SDL init failed.", 0);
 		init_texture(env);

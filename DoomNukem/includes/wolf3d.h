@@ -93,6 +93,7 @@ typedef struct	s_player
 	struct s_doublexy	pos;
 	struct s_doublexy	dir;
 	struct s_doublexy	plane;
+	double				angle;
 }				t_player;
 
 /*
@@ -108,12 +109,16 @@ typedef struct	s_ray
 	struct s_intxy		step;
 	struct s_doublexy	floorwall;
 	struct s_doublexy	currentfloor;
+	double				angle;
 	double				camera;
 	double				perpwalldist;
 	double				wallwhere;
 	int					wallhit;
 	int					wallside;
 	int					height;
+	// a effacer
+	int					htest;
+	//
 	int					walltop;
 	int					wallbot;
 	double				weight;
@@ -185,6 +190,43 @@ typedef struct	s_user
 }				t_user;
 
 /*
+** Structure made to stock the map
+*/
+
+typedef struct		s_wall_tmp
+{
+	int				a_x;
+	int				a_y;
+	int				b_x;
+	int				b_y;
+}					t_wall_tmp;
+
+typedef	struct		s_ixy
+{
+	int 	x;
+	int 	y;
+}					t_ixy;
+
+typedef struct		s_wall
+{
+	t_ixy			point_a;
+	t_ixy			point_b;
+}					t_wall;
+
+typedef struct		s_map
+{
+	t_wall			wall;
+	struct s_map	*next;
+}					t_map;
+
+typedef struct	s_save
+{
+	double		dist;
+	int			x;
+	int			y;
+}				t_save;
+
+/*
 ** The main structure, containing most of the variables that will
 ** be used throughout the program.
 */
@@ -204,7 +246,20 @@ typedef struct	s_enval
 	t_user					user;
 	SDL_Event				event;
 	SDL_MouseMotionEvent	mouse;
+	// TEST
+	int         			**tabint;
+	struct 	s_save			save;
+	struct 	s_map			*smap;
+	struct	s_wall_tmp		tmp_wall;
+
 }				t_enval;
+
+/*
+** TEST FUNCTIONS
+*/
+
+void	map_drawer(t_enval *e);
+void	test(t_enval *e);
 
 /*
 ** Function prototypes specific to this program
@@ -254,5 +309,6 @@ SDL_Color		fill_rgb(int c);
 void			event(t_enval *env);
 void			mouse_events(t_enval *env);
 void			switch_fog(t_enval *env);
+int  			raycaster(t_enval *e, t_map *map);
 
 #endif

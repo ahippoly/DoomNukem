@@ -83,6 +83,7 @@ void			init_values(char *file, t_enval *env)
 	env->player.plane.x = 0;
 	env->player.plane.y = -FOV;
 	env->ray.wallhit = 0;
+	env->smap = NULL;
 }
 
 void			init_texture(t_enval *env)

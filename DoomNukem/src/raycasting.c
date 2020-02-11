@@ -47,6 +47,8 @@ void			ray_calc(t_enval *env, int i)
 	env->ray.camera = 2 * i / (double)WIN_W - 1;
 	env->ray.dir.x = env->player.dir.x + env->player.plane.x * env->ray.camera;
 	env->ray.dir.y = env->player.dir.y + env->player.plane.y * env->ray.camera;
+	env->player.angle = atan2(env->player.dir.y, env->player.dir.x);
+	env->ray.angle = atan2(env->ray.dir.y, env->ray.dir.x);
 	env->ray.deltadist.x = sqrt(1 + (env->ray.dir.y * env->ray.dir.y)
 		/ (env->ray.dir.x * env->ray.dir.x));
 	env->ray.deltadist.y = sqrt(1 + (env->ray.dir.x * env->ray.dir.x)
@@ -65,6 +67,7 @@ static void		perp_height(t_enval *env)
 		env->ray.perpwalldist = ft_abs((env->ray.mapos.y - env->player.pos.y +
 			(1 - env->ray.step.y) / 2) / env->ray.dir.y);
 	env->ray.height = (int)(WIN_H / env->ray.perpwalldist);
+	// env->ray.htest = (int)(WIN_H / env->save.dist);
 	env->ray.wallbot = (int)env->ray.height / 2 + WIN_H / 2;
 	if (env->ray.wallbot > WIN_H)
 		env->ray.wallbot = WIN_H;
@@ -104,14 +107,26 @@ void			ray_draw(t_enval *env)
 {
 	int i;
 	int texnum;
+	t_map 	*tmp;
 
 	// env->mlx.pxl = (int *)mlx_get_data_addr(env->mlx.i_p, &env->mlx.bpp,
 	// 		&env->mlx.s_line, &env->mlx.endian);
 	i = 0;
 	while (i < WIN_W)
 	{
+		// Debut test map liste chainee
+		env->save.dist = 0;
+		tmp = env->smap;
+		while(env->smap)
+		{
+			ray_calc(env, i);
+			raycaster(env, env->smap);
+			env->smap = env->smap->next;
+		}
+		//fin du test map liste chainee
 		ray_calc(env, i);
 		ray_hit(env);
+		// printf("dist = %f\n perpwalldist = %f\n", env->save.dist, env->ray. perpwalldist);
 		if (!(env->ray.wallside) && env->ray.dir.x < 0)
 			texnum = 1;
 		else if (!(env->ray.wallside) && env->ray.dir.x >= 0)

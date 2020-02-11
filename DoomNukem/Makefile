@@ -49,7 +49,8 @@ SRC		=	main.c\
 			display.c \
 			fog.c \
 			color_tool.c \
-			event_ft.c 
+			event_ft.c \
+			test.c
 
 INC		=	wolf3d.h
 
