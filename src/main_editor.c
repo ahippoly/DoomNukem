@@ -62,11 +62,22 @@ void init_mouse_mode(t_env *env)
     env->mouse_click_fct[MOUSE_MODE_CREATE_ROOM] = create_room_mode;
 }
 
+void init_txt_img(t_env *env)
+{
+    env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
+    env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));
+    env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 2, 0xFFDDDDDD, create_point(798, 420));
+    env->txt_lst[TXT_P1] = create_text_img("P1", 1, 0xFFDDDDDD, create_point(798, 470));
+    env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(899, 470));
+    env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
+}
+
 void init_env(t_env *env)
 {
     init_sdl_ressources(env);
     init_texture(env);
     init_buttons(env);
+    init_txt_img(env);
     init_wall_ref(env);
     init_mouse_mode(env);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
@@ -80,14 +91,9 @@ void init_env(t_env *env)
     env->p1_height = create_t_range(0, 10);
     env->p2_height = create_t_range(0, 10);
     env->map_move = create_point(0, 0);
-    env->map_editor = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
-    env->text_select = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));
-    env->height = create_text_img("Height", 2, 0xFFDDDDDD, create_point(798, 420));
-    env->img_p1 = create_text_img("P1", 1, 0xFFDDDDDD, create_point(798, 470));
-    env->img_p2 = create_text_img("P2", 1, 0xFFDDDDDD, create_point(899, 470));
-    env->transparency = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
     env->hovered_wall_id = -1;
     env->selected_wall_id = -1;
+    env->selected_input = -1;
     env->room_list = NULL;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
@@ -219,6 +225,15 @@ void display_buttons(t_env *env)
         txt_img2screen(env, *env->buttons_lst[i++].printed);
 }
 
+void display_txt_img(t_env *env)
+{
+    int i;
+
+    i = 0;
+    while (i < NB_TXT)
+        txt_img2screen(env, env->txt_lst[i++]);
+}
+
 void print_env2screen(t_env *env)
 {
     SDL_Rect tmp;
@@ -233,12 +248,7 @@ void print_env2screen(t_env *env)
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
-    txt_img2screen(env, env->text_select);
-    txt_img2screen(env, env->map_editor);
-    txt_img2screen(env, env->height);
-    txt_img2screen(env, env->transparency);
-    txt_img2screen(env, env->img_p1);
-    txt_img2screen(env, env->img_p2);
+    display_txt_img(env);
     display_buttons(env);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
     SDL_UpdateTexture(env->text_list[env->selected_texture], NULL, env->img_list[env->selected_texture].pixels, env->img_list[0].pos_size.w * 4);

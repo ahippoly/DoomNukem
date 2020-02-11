@@ -22,6 +22,14 @@ typedef struct      s_button
     int             button_id;  
 }                   t_button;
 
+typedef struct		s_input
+{
+	SDL_Rect 		pos_size;
+	int				value;
+	int				max;
+	int				is_in_input_mode;
+}					t_input;
+
 t_txt_img create_text_img(char *str, int size, int color, SDL_Point pos);
 
 #endif

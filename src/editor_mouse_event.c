@@ -1,8 +1,6 @@
 #include "editor.h"
 #include "global_header.h"
 
-
-
 void create_room_mode(t_env *env)
 {
 

@@ -36,7 +36,17 @@
 # define MOUSE_MODE_NEUTRAL 0
 # define MOUSE_MODE_CREATE_ROOM 1
 
+# define NB_INPUT 1
+# define INPUT_TRANSPARENCY 0
+
 # define NB_TEXTURE 2
+# define NB_TXT 6
+# define TXT_MAP_EDITOR 0
+# define TXT_TEXT_SELECT 1
+# define TXT_HEIGHT 2
+# define TXT_TRANSPARENCY 3
+# define TXT_P1 4
+# define TXT_P2 5
 # define TEXT_POS_X 800
 # define TEXT_POS_Y 250
 # define TEXT_SIZE_X 150
@@ -113,6 +123,7 @@ typedef struct      s_env
     int             first_wall_room_id;
     int             total_wall_created;
     int             hovered_wall_id;
+    int             selected_input;
     int             selected_wall_id;
     int             selected_button;
     int             selected_mouse_mode;
@@ -136,9 +147,9 @@ typedef struct      s_env
     t_txt_img       img_p1;
     t_txt_img       img_p2;
     t_img           img_list[NB_TEXTURE];
-    // t_txt_img       *edit_selected;
-    // t_txt_img       *del_selected;
     t_button        buttons_lst[NB_BUTTONS];
+    t_txt_img       txt_lst[NB_TXT];
+    t_txt_img       input_lst[NB_INPUT];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
 }                   t_env;
@@ -185,4 +196,5 @@ void create_room_button(t_env *env);
 void create_room(t_env *env, int begin, int end);
 t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id);
 void print_rooms_content(t_env *env);
+int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size);
 #endif
