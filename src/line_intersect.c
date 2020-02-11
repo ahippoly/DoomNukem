@@ -28,15 +28,15 @@ t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 	b2 = p3.y - p3.x * a2;
 	
 	if (a1 == a2 && b1 == b2 
-	&& (ft_min(p1.x, p2.x) > ft_min(p3.x, p4.x) || ft_max(p1.x, p2.x) < ft_max(p3.x, p4.x)))
-	{
-		inter = create_t_point(-41, -41);
-		return (inter);
-	}
+	&& ((p1.x > p3.x && p1.x < p4.x)
+	|| (p2.x > p3.x && p2.x < p4.x)
+	|| (p3.x > p1.x - INTER_TOLERANCE && p3.x < p2.x - INTER_TOLERANCE))
+	)
+		return (create_t_point(-41, -41));
 	inter.x = (b2 - b1) / (a1  - a2);
 	//printf("inter.x = %f, max x = %f, min x = %f\n", inter.x, ft_fmax(p2.x, p1.x), ft_fmin(p2.x, p1.x));
-	if (inter.x < ft_max(p2.x, p1.x) - INTER_TOLERANCE && inter.x > ft_min(p2.x, p1.x) + INTER_TOLERANCE
-		&& inter.x < ft_max(p4.x, p3.x) - INTER_TOLERANCE && inter.x > ft_min(p4.x, p3.x) + INTER_TOLERANCE
+	if (inter.x < p2.x - INTER_TOLERANCE && inter.x > p1.x + INTER_TOLERANCE
+		&& inter.x < p4.x - INTER_TOLERANCE && inter.x > p3.x + INTER_TOLERANCE
 		&& (a1 != a2))
 		inter.y = a1 * inter.x + b1;
 	else
@@ -55,8 +55,8 @@ t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point 
 	inter.x = p1.x;
 	inter.y = a2 * inter.x + b2;
 	//printf("inter.y = %f, max x = %f, min x = %f\n", inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
-	if (inter.y >= ft_max(p2.y, p1.y) - INTER_TOLERANCE || inter.y <= ft_min(p2.y, p1.y) + INTER_TOLERANCE
-		|| inter.x >= ft_max(p4.x, p3.x) - INTER_TOLERANCE || inter.x <= ft_min(p4.x, p3.x) + INTER_TOLERANCE)
+	if (inter.y >= p2.y - INTER_TOLERANCE || inter.y <= p1.y + INTER_TOLERANCE
+		|| inter.x >= p4.x - INTER_TOLERANCE || inter.x <= p3.x + INTER_TOLERANCE)
 	{
 		inter.x = - 42;
 		inter.y = - 42;
@@ -81,6 +81,8 @@ t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, 
 	t_point p3;
 	t_point p4;
 
+	sort_point_by_x(&point1, &point2);
+	sort_point_by_x(&point3, &point4);
 	p1 = convert_sdlpoint2tpoint(point1);
 	p2 = convert_sdlpoint2tpoint(point2);
 	p3 = convert_sdlpoint2tpoint(point3);

@@ -28,6 +28,10 @@
 # define BUTTON_MAP_OUTPUT 7
 # define NB_BUTTONS 8
 
+#define UNIT 10
+
+#define DEFAULT_HEIGHT_START 10
+
 # define NB_MOUSE_MODE 2
 # define MOUSE_MODE_NEUTRAL 0
 # define MOUSE_MODE_CREATE_ROOM 1
