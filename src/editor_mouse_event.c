@@ -81,9 +81,9 @@ void check_click(t_env *env)
 
 void debug_print(t_env *env, SDL_Scancode key)
 {
-    if(key == SDL_SCANCODE_Q)
-        print_wall_ref(env);
-    if(key == SDL_SCANCODE_E)
+    if (key == SDL_SCANCODE_Q)
+        print_wall_ref(env, 1);
+    if (key == SDL_SCANCODE_E)
         print_rooms_content(env);
 }
 

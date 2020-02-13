@@ -89,7 +89,7 @@ void clear_map_ref(t_env *env)
     free(env->map_wall_ref);
 }
 
-void print_wall_ref(t_env *env)
+void print_wall_ref(t_env *env, int fd)
 {
     int i;
     int j;
@@ -107,20 +107,22 @@ void print_wall_ref(t_env *env)
             while (ref)
             {
                 one_at_least = 1;
-                printf("%i,", ref->wall_id);
+                ft_putstr_fd(ft_itoa(ref->wall_id), fd);
                 ref = ref->next;
+                if (ref)
+                    ft_putstr_fd(",", fd);
             }
             if (one_at_least == 0)
             {
-                printf("-1,");
+                ft_putstr_fd("-1", fd);
             }
-            printf(" ");
+            ft_putstr_fd(" ", fd);
             j++;
         }
         i++;
-        printf("\n"); 
+        ft_putstr_fd("\n", fd); 
     }
-    printf("\n");
+    ft_putstr_fd("\n", fd);
 }
 
 int find_chained_wall(t_wall actual, SDL_Point first, int is_p2_outside, t_env *env)

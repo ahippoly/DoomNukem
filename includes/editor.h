@@ -25,7 +25,6 @@
 # define BUTTON_HEIGHT_DEFAULT 1
 # define BUTTON_MAP_OUTPUT 4
 
-
 #define UNIT 10
 
 #define DEFAULT_HEIGHT_START 10
@@ -35,15 +34,18 @@
 # define MOUSE_MODE_CREATE_ROOM 1
 # define MOUSE_MODE_INPUT 2
 
-# define NB_INPUT 5
+# define NB_INPUT 7
 # define INPUT_TRANSPARENCY 0
 # define INPUT_BEGIN_P1 1
 # define INPUT_BEGIN_P2 2
 # define INPUT_END_P1 3
 # define INPUT_END_P2 4
+# define INPUT_PLAYER_X 5
+# define INPUT_PLAYER_Y 6
 
 # define NB_TEXTURE 2
-# define NB_TXT 8
+
+# define NB_TXT 12
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
@@ -52,6 +54,10 @@
 # define TXT_P2 5
 # define TXT_BEGIN 6
 # define TXT_END 7
+# define TXT_PLAYER_SPAWN 8
+# define TXT_PLAYER_X 9
+# define TXT_PLAYER_Y 10
+# define TXT_WALL_COUNT 11
 # define TEXT_POS_X 800
 # define TEXT_POS_Y 250
 # define TEXT_SIZE_X 150
@@ -126,7 +132,6 @@ typedef struct      s_env
     SDL_Point       selected_corner;
     SDL_Point       start_room_point;
     SDL_Point       map_move;
-    t_point         player_spawn;
     t_range         p1_height;
     t_range         p2_height;
     int             tile_size;
@@ -196,7 +201,7 @@ void change_selected_wall_texture(t_env *env, int texture_id);
 
 void add_wall_ref_point(t_wall wall, t_env *env);
 void clear_map_ref(t_env *env);
-void print_wall_ref(t_env *env);
+void print_wall_ref(t_env *env, int fd);
 void find_sector(t_env *env, t_wall wall);
 void input_text_to_img(char *str, int size, int color, t_img to_fill);
 

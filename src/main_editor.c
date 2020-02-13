@@ -68,6 +68,12 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(120, 730));
     env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(120, 790));
     env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
+    env->txt_lst[TXT_PLAYER_SPAWN] = create_text_img("Player_spawn", 1, 0xFFDDDDDD, create_point(500, 630));
+    env->txt_lst[TXT_PLAYER_X] = create_text_img("x", 1, 0xFFDDDDDD, create_point(520, 660));
+    env->txt_lst[TXT_PLAYER_Y] = create_text_img("y", 1, 0xFFDDDDDD, create_point(600, 660));
+    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFFDDDDDD, create_point(500, 770));
+
+
 }
 
 void init_input(t_env *env)
@@ -77,6 +83,8 @@ void init_input(t_env *env)
     env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(305, 720, 60, 40), 20, 190);
     env->input_lst[INPUT_END_P1] = create_t_input(set_sdl_rect(200, 780, 60, 40), 30, 200);
     env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(305, 780, 60, 40), 30, 200);
+    env->input_lst[INPUT_PLAYER_X] = create_t_input(set_sdl_rect(505, 690, 60, 40), 0, env->map_size.w -1);
+    env->input_lst[INPUT_PLAYER_Y] = create_t_input(set_sdl_rect(585, 690, 60, 40), 0, env->map_size.h -1);
 }
 
 void init_env(t_env *env)
@@ -250,7 +258,7 @@ void print_env2screen(t_env *env)
     // SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
     // SDL_RenderPresent(env->rend);
     print_inputs(env);
-    input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(770, 800, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 800, WIN_SIZE_X, WIN_SIZE_Y)));
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
