@@ -50,11 +50,13 @@ static int		**append_val(char **tab, t_enval *env)
 
 static void		prep_init(t_enval *env)
 {	
+	int i;
+
 	env->user.fog = 3;
 	env->map.walls = NULL;
-	env->mlx.m_p = NULL;
-	env->mlx.w_p = NULL;
-	env->mlx.i_p = NULL;
+	i = -1;
+	while (++i < NBKEY)
+		env->sdl.key[i] = 0;
 }
 
 void			init_values(char *file, t_enval *env)
@@ -104,25 +106,12 @@ void			init_texture(t_enval *env)
 	}
 }
 
-/*
-void			init_mlx(t_enval *env)
+void			init_wptext(t_enval *env)
 {
-	int width;
-	int height;
-	int i;
-
-	ft_checkmlx(env);
-	env->wtex[0] = mlx_xpm_file_to_image(env->mlx.m_p, WN, &width, &height);
-	env->wtex[1] = mlx_xpm_file_to_image(env->mlx.m_p, WS, &width, &height);
-	env->wtex[2] = mlx_xpm_file_to_image(env->mlx.m_p, WW, &width, &height);
-	env->wtex[3] = mlx_xpm_file_to_image(env->mlx.m_p, WE, &width, &height);
-	env->wtex[4] = mlx_xpm_file_to_image(env->mlx.m_p, FL, &width, &height);
-	env->wtex[5] = mlx_xpm_file_to_image(env->mlx.m_p, CL, &width, &height);
-	i = 0;
-	while (i <= 5)
-	{
-		if (!(env->wtex[i]))
-			ft_error("at least one texture is missing or corrupted.", env, 0);
-		i++;
-	}
-}*/
+	env->weapontex[0].img = SDL_LoadBMP("img/weapons/autogun1.bmp");
+	env->weapontex[1].img = SDL_LoadBMP("img/weapons/autogun2.bmp");
+	env->weapontex[2].img = SDL_LoadBMP("img/weapons/hand.bmp");
+	env->weapontex[3].img = SDL_LoadBMP("img/weapons/hand2.bmp");
+	env->weapontex[4].img = SDL_LoadBMP("img/weapons/shotgun1.bmp");
+	env->weapontex[5].img = SDL_LoadBMP("img/weapons/shotgun2.bmp");
+}

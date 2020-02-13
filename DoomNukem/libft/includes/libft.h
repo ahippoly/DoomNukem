@@ -96,5 +96,7 @@ int				ft_tablen(char **tab);
 int				ft_isbetween(double a, double low, double hight);
 double			ft_abs(double n);
 void			ft_tabfree(char **tab);
+double			ft_max(double a, double b);
+double			ft_min(double a, double b);
 
 #endif

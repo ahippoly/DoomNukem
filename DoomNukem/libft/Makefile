@@ -126,6 +126,8 @@ SRC += $(S_PATH)ft_tablen.c
 SRC += $(S_PATH)ft_isbetween.c
 SRC += $(S_PATH)ft_abs.c
 SRC += $(S_PATH)ft_tabfree.c
+SRC += $(S_PATH)ft_max.c
+SRC += $(S_PATH)ft_min.c
 
 # Objects and Headers
 

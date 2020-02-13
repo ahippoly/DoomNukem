@@ -17,7 +17,7 @@ uint32_t		get_pixel_weapon(t_enval *env, int si, float x, float y)
 	uint8_t			*p;
 	SDL_Surface		*surface;
 
-	surface = env->wptex[si].img;
+	surface = env->weapontex[si].img;
 	p = (uint8_t *)surface->pixels + (int)y * surface->pitch
 		+ (int)x * surface->format->BytesPerPixel;
 	return ((p[2] | p[1] << 8 | p[0] << 16 | 255 << 24));

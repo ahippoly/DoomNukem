@@ -30,6 +30,6 @@ void			display(t_enval *env)
 	//nmi action
 	//nmi affichage
 	//(nmi remove)
-	//weapon display -> apons' priority
+	weapon_draw(env);//weapon display -> apons' priority
 	put_texture(env);
 }

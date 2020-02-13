@@ -33,23 +33,33 @@ INCDIR	=	./includes
 OBJDIR	=	./obj
 
 # src / obj files
-SRC		=	main.c\
+SRC		=	main.c \
+			color_tool.c \
+			display.c \
+			event_ft.c \
+			event.c \
+			exit.c \
 			fc_draw.c\
+			fog.c \
+			get_enemy_sheets.c \
+			get_enemy_sheets2.c \
+			get_enemy.c \
+			get_weapon.c \
+			handle_status_effects.c \
+			init_game.c \
 			ft_error.c\
 			ft_freewolf.c\
 			ft_help.c\
 			mobility.c\
-			raycasting.c\
-			wall_draw.c\
-			wolf_init.c\
-			pixel.c \
-			exit.c \
-			event.c \
 			mouse_event.c \
-			display.c \
-			fog.c \
-			color_tool.c \
-			event_ft.c 
+			perform_attack.c \
+			pixel.c \
+			raycasting.c \
+			resolve_damage.c \
+			shortcuts.c \
+			wall_draw.c \
+			weapon_draw.c \
+			wolf_init.c \
 
 INC		=	wolf3d.h
 

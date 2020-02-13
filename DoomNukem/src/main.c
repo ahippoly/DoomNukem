@@ -58,7 +58,7 @@ int				main(int argc, char **argv)
 		if (!init_sdl(env))
 			ft_exit(env, "SDL init failed.", 0);
 		init_texture(env);
-		//init_weapon(env); /*init sprite wp*/
+		init_wptext(env); /*init sprite wp*/
 		while (1)
 		{
 			display(env);

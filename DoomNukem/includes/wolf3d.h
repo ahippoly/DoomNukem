@@ -16,6 +16,7 @@
 # include "mlx.h"
 # include "SDL2/SDL.h"
 # include "../libft/includes/libft.h"
+# include "gameplay.h"
 
 # define WIN_W 1280
 # define WIN_H 960
@@ -101,13 +102,13 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	struct s_doublexy	sidedist;
-	struct s_doublexy	dir;
-	struct s_doublexy	deltadist;
-	struct s_intxy		mapos;
-	struct s_intxy		step;
-	struct s_doublexy	floorwall;
-	struct s_doublexy	currentfloor;
+	t_doublexy			sidedist;
+	t_doublexy			dir;
+	t_doublexy			deltadist;
+	t_intxy				mapos;
+	t_intxy				step;
+	t_doublexy			floorwall;
+	t_doublexy			currentfloor;
 	double				camera;
 	double				perpwalldist;
 	double				wallwhere;
@@ -191,18 +192,19 @@ typedef struct	s_user
 
 typedef struct	s_enval
 {
-	struct s_mlx			mlx;
-	struct s_sdl			sdl;
-	struct s_player			player;
-	struct s_ray			ray;
-	struct s_mapinfo		map;
-	struct s_intxy			wt;
+	t_mlx					mlx;
+	t_sdl					sdl;
+	t_player				player;
+	t_ray					ray;
+	t_mapinfo				map;
+	t_intxy					wt;
 	t_sprite				wtex[6];
-	t_sprite				wptex[5];
+	t_sprite				weapontex[6];
 	int						fd;
 	int						wl;
 	char					*linebuff;
 	t_user					user;
+	t_game					game;
 	SDL_Event				event;
 	SDL_MouseMotionEvent	mouse;
 }				t_enval;
@@ -220,7 +222,6 @@ void			ft_checkappval(int reader, int i, t_enval *env, t_mapinfo map);
 void			ft_checkinval(char **tab, t_enval *val);
 void			ft_checkmlx(t_enval *env);
 void			if_keyvert(int **walls, t_doublexy *pos, t_doublexy *cpy);
-void			init_mlx(t_enval *env);
 void			init_values(char *file, t_enval *env);
 int				keypress(int key, t_enval *env);
 int				keyrelease(int key, t_enval *env);
@@ -231,7 +232,9 @@ void			ray_draw(t_enval *env);
 void			ray_hit(t_enval *env);
 void			rotation(t_enval *env, t_player *p);
 void			wall_draw(t_enval *env, int i, int texnum);
+void			weapon_draw(t_enval *env);
 void			init_texture(t_enval *env);
+void			init_wptext(t_enval *env);
 void			ft_exit(t_enval *env, char *s, int flag);
 void			display(t_enval *env);
 
@@ -241,6 +244,7 @@ void			display(t_enval *env);
 
 uint32_t		get_pixel_wall(t_enval *env, int si, float x, float y);
 uint32_t		get_pixel_floor(t_enval *env, int si, float x, float y);
+uint32_t		get_pixel_weapon(t_enval *env, int si, float x, float y);
 void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color);
 Uint32			light_shade(Uint32 hexa, float distance);
 int				white_fog(Uint32 hexa, float distance);
