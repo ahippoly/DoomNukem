@@ -58,21 +58,7 @@ void select_previous_texture(t_env *env)
 void change_selected_wall_transparency(t_env *env)
 {
     if (env->selected_wall_id != -1)
-        env->wall_list[env->selected_wall_id].transparency = env->actual_transparency;
-}
-
-void incr_transparency(t_env *env)
-{
-    if (env->actual_transparency < 100)
-        env->actual_transparency++;
-    change_selected_wall_transparency(env);    
-}
-
-void decr_transparency(t_env *env)
-{
-    if (env->actual_transparency > 0)
-        env->actual_transparency--;
-    change_selected_wall_transparency(env);
+        env->wall_list[env->selected_wall_id].transparency = env->input_lst[INPUT_TRANSPARENCY].value;
 }
 
 void select_next_texture(t_env *env)

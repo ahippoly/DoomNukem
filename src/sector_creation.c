@@ -212,6 +212,7 @@ void print_rooms_content(t_env *env)
     t_room *room;
 
     room = env->room_list;
+    printf("ROOM_CONTENTS :\n");
     while (room)
     {
         i = 0;

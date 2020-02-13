@@ -41,7 +41,7 @@ t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 		inter.y = a1 * inter.x + b1;
 	else
 		inter = create_t_point(-42, -42);
-	return(inter);
+	return (inter);
 }
 
 t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point p4)

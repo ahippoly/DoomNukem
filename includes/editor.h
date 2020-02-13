@@ -16,28 +16,28 @@
 # define WALL_HITBOX 10
 # define NB_WALL_MAX 200
 
+# define NB_BUTTONS 5
 # define BUTTON_DEL 0
 # define BUTTON_CREATE_ROOM 1
 # define BUTTON_TEXT_LEFT 2
 # define BUTTON_TEXT_RIGHT 3
-# define BUTTON_HEIGHT 4
 # define BUTTON_HEIGHT_INC 0.1
 # define BUTTON_HEIGHT_DEFAULT 1
-# define BUTTON_TRANS_LEFT 5
-# define BUTTON_TRANS_RIGHT 6
-# define BUTTON_MAP_OUTPUT 7
-# define NB_BUTTONS 8
+# define BUTTON_MAP_OUTPUT 4
+
 
 #define UNIT 10
 
 #define DEFAULT_HEIGHT_START 10
 
-# define NB_MOUSE_MODE 2
+# define NB_MOUSE_MODE 3
 # define MOUSE_MODE_NEUTRAL 0
 # define MOUSE_MODE_CREATE_ROOM 1
+# define MOUSE_MODE_INPUT 2
 
 # define NB_INPUT 1
 # define INPUT_TRANSPARENCY 0
+
 
 # define NB_TEXTURE 2
 # define NB_TXT 6
@@ -96,6 +96,14 @@ typedef struct          s_room
     struct s_room       *next;
 }                       t_room;
 
+typedef struct		s_input
+{
+	SDL_Rect 		pos_size;
+	int				value;
+	int				max;
+	int				is_in_input_mode;
+}					t_input;
+
 typedef struct      s_env
 {
     SDL_Renderer    *rend;
@@ -123,12 +131,12 @@ typedef struct      s_env
     int             first_wall_room_id;
     int             total_wall_created;
     int             hovered_wall_id;
+    int             hovered_input_id;
     int             selected_input;
     int             selected_wall_id;
     int             selected_button;
     int             selected_mouse_mode;
     int             selected_texture;
-    int             actual_transparency;
     t_wall          *wall_list;
     t_room          *room_list;
     t_wall_ref      ***map_wall_ref;
@@ -149,7 +157,7 @@ typedef struct      s_env
     t_img           img_list[NB_TEXTURE];
     t_button        buttons_lst[NB_BUTTONS];
     t_txt_img       txt_lst[NB_TXT];
-    t_txt_img       input_lst[NB_INPUT];
+    t_input			input_lst[NB_INPUT];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
 }                   t_env;
@@ -179,6 +187,8 @@ void move_map_move_left(t_env *env);
 void move_map_move_right(t_env *env);
 void move_map_move_up(t_env *env);
 void move_map_move_down(t_env *env);
+void change_selected_wall_transparency(t_env *env);
+void change_selected_wall_texture(t_env *env, int texture_id);
 
 void add_wall_ref_point(t_wall wall, t_env *env);
 void clear_map_ref(t_env *env);
@@ -191,10 +201,17 @@ void neutral_mouse_mode(t_env *env);
 void handle_mouse_event(t_env *env);
 void check_click(t_env *env);
 void map_output(t_env *env);
+void update_wall_param(t_env *env);
 
 void create_room_button(t_env *env);
 void create_room(t_env *env, int begin, int end);
 t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id);
 void print_rooms_content(t_env *env);
 int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size);
+
+//editor_input.c
+void check_hovered_input(t_env *env);
+void print_inputs(t_env *env);
+t_input create_t_input(SDL_Rect pos_size, int default_value, int max);
+void handle_input_mode(t_env *env, SDL_Scancode key_released);
 #endif

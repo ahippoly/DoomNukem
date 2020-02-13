@@ -40,14 +40,10 @@ void init_buttons(t_env *env)
     env->buttons_fct[BUTTON_DEL] = del_selected_wall;
     env->buttons_fct[BUTTON_TEXT_LEFT] = select_previous_texture;
     env->buttons_fct[BUTTON_TEXT_RIGHT] = select_next_texture;
-    env->buttons_fct[BUTTON_TRANS_LEFT] = decr_transparency;
-    env->buttons_fct[BUTTON_TRANS_RIGHT] = incr_transparency;
     env->buttons_fct[BUTTON_CREATE_ROOM] =  create_room_button;
     env->buttons_fct[BUTTON_MAP_OUTPUT] =  map_output;
     
     env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
-    env->buttons_lst[BUTTON_TRANS_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(770, 650)), create_text_img("<", 2, 0xFF88FF88, create_point(770, 650)), BUTTON_TRANS_LEFT);
-    env->buttons_lst[BUTTON_TRANS_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(950, 650)), create_text_img(">", 2, 0xFF88FF88, create_point(950, 650)), BUTTON_TRANS_RIGHT);
     env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 295)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 295)), BUTTON_TEXT_LEFT);
     env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
     env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 80)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 80)), BUTTON_CREATE_ROOM);
@@ -72,6 +68,11 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
 }
 
+void init_input(t_env *env)
+{
+    env->input_lst[INPUT_TRANSPARENCY] = create_t_input(set_sdl_rect(825, 650, 60, 40), 0, 100);
+}
+
 void init_env(t_env *env)
 {
     init_sdl_ressources(env);
@@ -80,6 +81,7 @@ void init_env(t_env *env)
     init_txt_img(env);
     init_wall_ref(env);
     init_mouse_mode(env);
+    init_input(env);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
@@ -87,7 +89,6 @@ void init_env(t_env *env)
     env->room_count = 0;
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
-    env->actual_transparency = 0;
     env->p1_height = create_t_range(0, 10);
     env->p2_height = create_t_range(0, 10);
     env->map_move = create_point(0, 0);
@@ -242,9 +243,8 @@ void print_env2screen(t_env *env)
     // SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);
     // SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
     // SDL_RenderPresent(env->rend);
-
+    print_inputs(env);
     input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(770, 800, WIN_SIZE_X, WIN_SIZE_Y)));
-    input_text_to_img(ft_itoa(env->actual_transparency), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(850, 650, WIN_SIZE_X, WIN_SIZE_Y)));
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
@@ -318,10 +318,7 @@ void handle_keyboard_event(t_env *env)
         move_map_move_up(env);
     if(env->clavier[SDL_SCANCODE_S])
         move_map_move_down(env);
-    if(env->clavier[SDL_SCANCODE_Q])
-        print_wall_ref(env);
-    if(env->clavier[SDL_SCANCODE_E])
-        print_rooms_content(env);
+
 }
 
 int main(int argc, char **argv)
@@ -340,6 +337,7 @@ int main(int argc, char **argv)
         env.hovered_corner = check_tiles_hitbox(env.mouse, env.p_grid, &env);
         create_grid(env.p_grid, 1, &env);
         check_hovered_buttons(&env);
+        check_hovered_input(&env);
         handle_mouse_event(&env);
         print_walls_in_map(&env);
         check_mouse_in_walls(&env);

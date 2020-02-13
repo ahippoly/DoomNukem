@@ -34,12 +34,24 @@ void create_room_mode(t_env *env)
     }
 }
 
+void update_wall_param(t_env *env)
+{
+    if (env->selected_input != 1)
+    {
+        if (env->selected_input == INPUT_TRANSPARENCY)
+            change_selected_wall_transparency(env);
+    }
+}
+
+void get_wall_param(t_env *env)
+{
+    env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
+    env->input_lst[INPUT_TRANSPARENCY].value = env->wall_list[env->selected_wall_id].transparency;
+}
+
 void neutral_mouse_mode(t_env *env)
 {
-    if (env->selected_button != -1)
-        env->buttons_fct[env->selected_button](env);
-    else
-        env->selected_wall_id = -1;
+    
     if (env->hovered_corner.x != -1)
     {
         if (env->selected_corner.x == -1)
@@ -56,8 +68,21 @@ void neutral_mouse_mode(t_env *env)
     if (env->hovered_wall_id != -1)
     {
         env->selected_wall_id = env->hovered_wall_id;
-        env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
-        env->actual_transparency = env->wall_list[env->selected_wall_id].transparency;
+        update_wall_param(env);
+        get_wall_param(env);
+    }
+    else if (env->selected_button != -1)
+        env->buttons_fct[env->selected_button](env);
+    else if (env->hovered_input_id != -1)
+    {
+        env->selected_input = env->hovered_input_id;
+        env->input_lst[env->selected_input].value = 0;
+    }
+    else
+    {
+        //update_wall_param(env);
+        env->selected_wall_id = -1;
+        env->selected_input = -1;
     }
     printf("selected wall = %i\n", env->selected_wall_id);
 }
@@ -69,10 +94,23 @@ void check_click(t_env *env)
         env->mouse_click_fct[env->selected_mouse_mode](env);
 }
 
+void debug_print(t_env *env, SDL_Scancode key)
+{
+    if(key == SDL_SCANCODE_Q)
+        print_wall_ref(env);
+    if(key == SDL_SCANCODE_E)
+        print_rooms_content(env);
+}
+
 void handle_mouse_event(t_env *env)
 {
     while (SDL_PollEvent(&env->ev))
     {
+        if (env->ev.type == SDL_KEYUP)
+        {
+            handle_input_mode(env, env->ev.key.keysym.scancode);
+            debug_print(env, env->ev.key.keysym.scancode);
+        }
         check_click(env);
     }
 }
