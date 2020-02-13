@@ -6,9 +6,9 @@ void check_hovered_input(t_env *env)
     int i;
 
     i = 0 ;
+    env->hovered_input_id = -1;
     while (i < NB_INPUT)
     {
-        env->hovered_input_id = -1;
         if (is_cursor_in_hitbox(env, env->input_lst[i].pos_size))
             env->hovered_input_id = i;
         i++;
@@ -83,4 +83,31 @@ void handle_input_mode(t_env *env, SDL_Scancode key_released)
             update_wall_param(env);
         }
     }
+}
+
+void update_wall_param(t_env *env)
+{
+    if (env->selected_input != 1 && env->selected_wall_id != -1)
+    {
+        if (env->selected_input == INPUT_TRANSPARENCY)
+            env->wall_list[env->selected_wall_id].transparency = env->input_lst[INPUT_TRANSPARENCY].value;
+        if (env->selected_input == INPUT_BEGIN_P1)
+            env->wall_list[env->selected_wall_id].p1_height.start = env->input_lst[INPUT_BEGIN_P1].value;
+        if (env->selected_input == INPUT_BEGIN_P2)
+            env->wall_list[env->selected_wall_id].p2_height.start = env->input_lst[INPUT_BEGIN_P2].value;
+        if (env->selected_input == INPUT_END_P1)
+            env->wall_list[env->selected_wall_id].p1_height.end = env->input_lst[INPUT_END_P1].value;
+        if (env->selected_input == INPUT_END_P2)
+            env->wall_list[env->selected_wall_id].p2_height.end = env->input_lst[INPUT_END_P2].value;
+    }
+}
+
+void get_wall_param(t_env *env)
+{
+    env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
+    env->input_lst[INPUT_TRANSPARENCY].value = env->wall_list[env->selected_wall_id].transparency;
+    env->input_lst[INPUT_BEGIN_P1].value = env->wall_list[env->selected_wall_id].p1_height.start;
+    env->input_lst[INPUT_BEGIN_P2].value = env->wall_list[env->selected_wall_id].p2_height.start;
+    env->input_lst[INPUT_END_P1].value = env->wall_list[env->selected_wall_id].p1_height.end;
+    env->input_lst[INPUT_END_P2].value = env->wall_list[env->selected_wall_id].p2_height.end;
 }

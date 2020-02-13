@@ -62,15 +62,21 @@ void init_txt_img(t_env *env)
 {
     env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
     env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));
-    env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 2, 0xFFDDDDDD, create_point(798, 420));
-    env->txt_lst[TXT_P1] = create_text_img("P1", 1, 0xFFDDDDDD, create_point(798, 470));
-    env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(899, 470));
+    env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 2, 0xFFDDDDDD, create_point(210, 630));
+    env->txt_lst[TXT_P1] = create_text_img("P1", 1, 0xFFDDDDDD, create_point(210, 680));
+    env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(315, 680));
+    env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(120, 730));
+    env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(120, 790));
     env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
 }
 
 void init_input(t_env *env)
 {
     env->input_lst[INPUT_TRANSPARENCY] = create_t_input(set_sdl_rect(825, 650, 60, 40), 0, 100);
+    env->input_lst[INPUT_BEGIN_P1] = create_t_input(set_sdl_rect(200, 720, 60, 40), 20, 190);
+    env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(305, 720, 60, 40), 20, 190);
+    env->input_lst[INPUT_END_P1] = create_t_input(set_sdl_rect(200, 780, 60, 40), 30, 200);
+    env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(305, 780, 60, 40), 30, 200);
 }
 
 void init_env(t_env *env)

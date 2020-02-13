@@ -34,21 +34,6 @@ void create_room_mode(t_env *env)
     }
 }
 
-void update_wall_param(t_env *env)
-{
-    if (env->selected_input != 1)
-    {
-        if (env->selected_input == INPUT_TRANSPARENCY)
-            change_selected_wall_transparency(env);
-    }
-}
-
-void get_wall_param(t_env *env)
-{
-    env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
-    env->input_lst[INPUT_TRANSPARENCY].value = env->wall_list[env->selected_wall_id].transparency;
-}
-
 void neutral_mouse_mode(t_env *env)
 {
     

@@ -52,8 +52,10 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     wall.p2 = p2;
     wall.texture_id = env->selected_texture;
     wall.transparency = env->input_lst[INPUT_TRANSPARENCY].value;
-    wall.p1_height = env->p1_height;
-    wall.p2_height = env->p2_height;
+    wall.p1_height.start = env->input_lst[INPUT_BEGIN_P1].value;
+    wall.p2_height.start = env->input_lst[INPUT_BEGIN_P2].value;
+    wall.p1_height.end = env->input_lst[INPUT_END_P1].value;
+    wall.p2_height.end = env->input_lst[INPUT_END_P2].value;
     if (env->selected_mouse_mode == MOUSE_MODE_CREATE_ROOM)
         wall.room_id_ref = env->room_count;
     else

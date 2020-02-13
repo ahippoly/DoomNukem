@@ -35,18 +35,23 @@
 # define MOUSE_MODE_CREATE_ROOM 1
 # define MOUSE_MODE_INPUT 2
 
-# define NB_INPUT 1
+# define NB_INPUT 5
 # define INPUT_TRANSPARENCY 0
-
+# define INPUT_BEGIN_P1 1
+# define INPUT_BEGIN_P2 2
+# define INPUT_END_P1 3
+# define INPUT_END_P2 4
 
 # define NB_TEXTURE 2
-# define NB_TXT 6
+# define NB_TXT 8
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
 # define TXT_TRANSPARENCY 3
 # define TXT_P1 4
 # define TXT_P2 5
+# define TXT_BEGIN 6
+# define TXT_END 7
 # define TEXT_POS_X 800
 # define TEXT_POS_Y 250
 # define TEXT_SIZE_X 150
@@ -187,7 +192,6 @@ void move_map_move_left(t_env *env);
 void move_map_move_right(t_env *env);
 void move_map_move_up(t_env *env);
 void move_map_move_down(t_env *env);
-void change_selected_wall_transparency(t_env *env);
 void change_selected_wall_texture(t_env *env, int texture_id);
 
 void add_wall_ref_point(t_wall wall, t_env *env);
@@ -201,7 +205,6 @@ void neutral_mouse_mode(t_env *env);
 void handle_mouse_event(t_env *env);
 void check_click(t_env *env);
 void map_output(t_env *env);
-void update_wall_param(t_env *env);
 
 void create_room_button(t_env *env);
 void create_room(t_env *env, int begin, int end);
@@ -214,4 +217,7 @@ void check_hovered_input(t_env *env);
 void print_inputs(t_env *env);
 t_input create_t_input(SDL_Rect pos_size, int default_value, int max);
 void handle_input_mode(t_env *env, SDL_Scancode key_released);
+void get_wall_param(t_env *env);
+void update_wall_param(t_env *env);
+
 #endif

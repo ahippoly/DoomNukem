@@ -55,12 +55,6 @@ void select_previous_texture(t_env *env)
     change_selected_wall_texture(env, env->selected_texture);
 }
 
-void change_selected_wall_transparency(t_env *env)
-{
-    if (env->selected_wall_id != -1)
-        env->wall_list[env->selected_wall_id].transparency = env->input_lst[INPUT_TRANSPARENCY].value;
-}
-
 void select_next_texture(t_env *env)
 {
     if (env->selected_texture == NB_TEXTURE -1)
