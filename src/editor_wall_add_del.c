@@ -80,7 +80,8 @@ void rearange_wall_lst(t_env *env)
     {
         if (env->wall_list[i].id != -1)
         {
-            new_lst[new_wall_nb] = create_wall(env->wall_list[i].p1, env->wall_list[i].p2, new_wall_nb, env);
+            new_lst[new_wall_nb] = env->wall_list[i];
+            new_lst[new_wall_nb].id = new_wall_nb;
             new_wall_nb++;
         }
         i++;
@@ -152,13 +153,12 @@ void del_room(t_env *env, int room_id)
         to_remove = previous->next;
         previous->next = to_remove->next;
     }
-    i = 0;
-    while (i < to_remove->nb_wall)
+    i = to_remove->wall_ref.start;
+    while (i < to_remove->wall_ref.end)
     {
-        env->wall_list[to_remove->wall_ref[i]].room_id_ref = -1;
-        del_wall(env, to_remove->wall_ref[i++]);
+        env->wall_list[i].room_id_ref = -1;
+        del_wall(env, i++);
     }
-    free(to_remove->wall_ref);
     free(to_remove);
 }
 

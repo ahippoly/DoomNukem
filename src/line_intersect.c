@@ -55,13 +55,13 @@ t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point 
 	inter.x = p1.x;
 	inter.y = a2 * inter.x + b2;
 	//printf("inter.y = %f, max x = %f, min x = %f\n", inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
-	if (inter.y >= p2.y - INTER_TOLERANCE || inter.y <= p1.y + INTER_TOLERANCE
-		|| inter.x >= p4.x - INTER_TOLERANCE || inter.x <= p3.x + INTER_TOLERANCE)
+	if (inter.y > ft_max(p2.y, p1.y) - INTER_TOLERANCE || inter.y < ft_min(p1.y, p2.y) + INTER_TOLERANCE
+		|| inter.x > p4.x - INTER_TOLERANCE || inter.x < p3.x + INTER_TOLERANCE)
 	{
 		inter.x = - 42;
 		inter.y = - 42;
 	}
-	return(inter);
+	return (inter);
 }
 
 t_point convert_sdlpoint2tpoint(SDL_Point point)

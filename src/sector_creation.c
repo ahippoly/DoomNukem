@@ -44,7 +44,6 @@ void reference_wall(SDL_Point pos, int wall_id, t_env *env)
 {
     t_wall_ref *ref;
     t_wall_ref *new_ref;
-    t_wall_ref *first;
     // faut mettre le first maillon de la liste chainee
     
     ref = env->map_wall_ref[pos.y][pos.x];
@@ -55,8 +54,11 @@ void reference_wall(SDL_Point pos, int wall_id, t_env *env)
 
 void add_wall_ref_point(t_wall wall, t_env *env)
 {
-    reference_wall(wall.p1, wall.id, env);
-    reference_wall(wall.p2, wall.id, env);
+    if (wall.id != -1)
+    {
+        reference_wall(wall.p1, wall.id, env);
+        reference_wall(wall.p2, wall.id, env);
+    }
     // c est le truc du dessus
     // la faut faire pour les 2 points du wall
 }
@@ -69,6 +71,8 @@ void clear_map_ref(t_env *env)
     t_wall_ref *tmp;
 
     i = 0;
+    if (env->map_wall_ref == NULL)
+        return;
     while (i < env->map_size.h)
     {
         j = 0;
@@ -87,6 +91,17 @@ void clear_map_ref(t_env *env)
         i++;
     }
     free(env->map_wall_ref);
+}
+
+void recreate_full_map_ref(t_env *env)
+{
+    int i;
+
+    clear_map_ref(env);
+    init_wall_ref(env);
+    i = 0;
+    while (i < env->wall_count)
+        add_wall_ref_point(env->wall_list[i++], env);
 }
 
 void print_wall_ref(t_env *env, int fd)
@@ -185,8 +200,6 @@ void find_sector(t_env *env, t_wall wall)
     }
 }
 
-
-
 void create_room(t_env *env, int begin, int end)
 {
     t_room *new;
@@ -195,14 +208,8 @@ void create_room(t_env *env, int begin, int end)
     if (!(new = (t_room*)malloc(sizeof(t_room))))
         exit_with_msg("Failed to malloc");
     new->nb_wall = end - begin;
-    if (!(new->wall_ref = (int*)malloc(sizeof(int) * new->nb_wall)))
-        exit_with_msg("Failed to malloc");
-    i = 0;
-    while (i < new->nb_wall)
-    {
-        new->wall_ref[i] = begin + i;
-        i++;
-    }
+    new->wall_ref.start = begin;
+    new->wall_ref.end = end;
     new->room_id = env->room_count++;
     new->next = env->room_list;
     env->room_list = new;
@@ -217,9 +224,7 @@ void print_rooms_content(t_env *env)
     printf("ROOM_CONTENTS :\n");
     while (room)
     {
-        i = 0;
-        while (i < room->nb_wall)
-            printf("room id %i have wall id %i\n", room->room_id, room->wall_ref[i++]);
+        printf("room id %i have wall id from %i to %i\n", room->room_id, room->wall_ref.start, room->wall_ref.end);
         room = room->next;
     }
 }

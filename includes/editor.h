@@ -103,7 +103,7 @@ typedef struct          s_room
 {
     int                 room_id;
     int                 nb_wall;
-    int                 *wall_ref;
+    t_range             wall_ref;
     struct s_room       *next;
 }                       t_room;
 
@@ -187,6 +187,7 @@ void del_wall(t_env *env, int wall_id);
 void check_hovered_buttons(t_env *env);
 t_button create_button(t_txt_img normal, t_txt_img hovered, int button_id);
 void init_wall_ref(t_env *env);
+void recreate_full_map_ref(t_env *env);
 
 void del_selected_wall(t_env *env);
 void select_previous_texture(t_env *env);
@@ -210,6 +211,7 @@ void neutral_mouse_mode(t_env *env);
 void handle_mouse_event(t_env *env);
 void check_click(t_env *env);
 void map_output(t_env *env);
+void rearange_wall_lst(t_env *env);
 
 void create_room_button(t_env *env);
 void create_room(t_env *env, int begin, int end);

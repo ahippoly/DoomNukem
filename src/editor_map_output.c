@@ -66,12 +66,9 @@ void write_rooms(int fd, t_room *room)
     while (display)
     {
         i = 1;
-        write_param(fd, "id", ft_itoa(room->room_id));
-        walls = ft_itoa(display->wall_ref[0]);
-        while (i < display->nb_wall)
-            walls = ft_strjoinfree(strcat(walls, ","), ft_itoa(display->wall_ref[i++]), 0);
+        write_param(fd, "id", ft_itoa(display->room_id));
         write_param(fd, "nb_wall", ft_itoa(display->nb_wall));
-        write_param(fd, "wall_list", walls);
+        write_param(fd, "wall_ref_range", join_int_value(display->wall_ref.start, ",", display->wall_ref.end));
         display = display->next;
         ft_putchar_fd('\n',fd);
     }
@@ -109,6 +106,8 @@ void map_output(t_env *env)
     if (fd < 0)
         return;
     printf("map output name = %s, fd = %i\n",str, fd);
+    rearange_wall_lst(env);
+    recreate_full_map_ref(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list);
     write_wall_ref(fd, env);
