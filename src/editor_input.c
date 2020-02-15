@@ -87,7 +87,7 @@ void handle_input_mode(t_env *env, SDL_Scancode key_released)
 
 void update_wall_param(t_env *env)
 {
-    if (env->selected_input != 1 && env->selected_wall_id != -1)
+    if (env->selected_input != -1 && env->selected_wall_id != -1)
     {
         if (env->selected_input == INPUT_TRANSPARENCY)
             env->wall_list[env->selected_wall_id].transparency = env->input_lst[INPUT_TRANSPARENCY].value;
