@@ -212,6 +212,7 @@ void handle_mouse_event(t_env *env);
 void check_click(t_env *env);
 void map_output(t_env *env);
 void rearange_wall_lst(t_env *env);
+void recreate_room_list(t_env *env);
 
 void create_room_button(t_env *env);
 void create_room(t_env *env, int begin, int end);

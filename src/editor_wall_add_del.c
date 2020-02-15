@@ -61,7 +61,7 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     else
         wall.room_id_ref = -1;
     
-    add_wall_ref_point(wall, env);
+    //add_wall_ref_point(wall, env);
     //check_intersect_with_all_wall(wall, env);
     return(wall);
 }

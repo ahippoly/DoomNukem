@@ -29,8 +29,8 @@ typedef struct s_point
 
 typedef struct s_range
 {
-    double      start;
-    double      end;
+    int      start;
+    int      end;
 }               t_range;
 
 void exit_with_msg(char *msg);
@@ -40,7 +40,7 @@ void swap_point(SDL_Point *p1, SDL_Point *p2);
 void	octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, SDL_Rect pos_size);
 SDL_Point create_point(int x, int y);
 t_point create_t_point(double x, double y);
-t_range create_t_range(double start, double end);
+t_range create_t_range(int start, int end);
 t_img	ft_load_bmp(char *file);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);

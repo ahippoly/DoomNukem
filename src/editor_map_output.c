@@ -108,6 +108,7 @@ void map_output(t_env *env)
     printf("map output name = %s, fd = %i\n",str, fd);
     rearange_wall_lst(env);
     recreate_full_map_ref(env);
+    recreate_room_list(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list);
     write_wall_ref(fd, env);

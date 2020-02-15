@@ -111,6 +111,7 @@ void print_wall_ref(t_env *env, int fd)
     int one_at_least;
     t_wall_ref *ref;
 
+    recreate_full_map_ref(env);
     i = 0;
     while (i < env->map_size.h)
     {
@@ -140,64 +141,17 @@ void print_wall_ref(t_env *env, int fd)
     ft_putstr_fd("\n", fd);
 }
 
-int find_chained_wall(t_wall actual, SDL_Point first, int is_p2_outside, t_env *env)
+void clear_room_list(t_env *env)
 {
-    t_wall_ref *ref;
-    t_wall next_wall;
-    SDL_Point outside;
+    t_room *next;
 
-    if (is_p2_outside == 1)
-        outside = actual.p2;
-    else
-        outside = actual.p1;
-    printf("checked point : x = %i, y = %i, id = %i\n", outside.x, outside.y, actual.id);
-    if (outside.x == first.x && outside.y == first.y)
-        return(1);
-    ref = env->map_wall_ref[outside.y][outside.x];
-    while (ref)
+    while (env->room_list)
     {
-        printf("search while, wall id = %i\n", ref->wall_id);
-        if (ref->wall_id == actual.id)
-        {
-            ref = ref->next;
-            continue;
-        }
-        next_wall = env->wall_list[ref->wall_id];
-        if (next_wall.p1.x == outside.x && next_wall.p1.y == outside.y)
-            is_p2_outside = 1;
-        else
-            is_p2_outside = 0;
-        if (find_chained_wall(next_wall, first, is_p2_outside, env))
-            return (1);
-        ref = ref->next;
+        next = env->room_list->next;
+        free(env->room_list);
+        env->room_list = next;
     }
-    return (0);
-}
-
-void find_sector(t_env *env, t_wall wall)
-{
-    int i;
-    t_wall_ref *ref;
-    t_wall      linked_wall;
-    int         is_p1_common;
-    ref = env->map_wall_ref[wall.p2.y][wall.p2.x];
-    while (ref)
-    {
-        printf("First while\n");
-        if (ref->wall_id == wall.id)
-        {
-            ref = ref->next;
-            continue;
-        }
-        linked_wall = env->wall_list[ref->wall_id];
-        if (wall.p1.x == linked_wall.p1.x && wall.p1.y == linked_wall.p1.y)
-            is_p1_common = 1;
-        else
-            is_p1_common = 0;
-        if (find_chained_wall(linked_wall, wall.p1, is_p1_common, env))
-            printf("sector found\n");
-        ref = ref->next;
-    }
+    env->room_count = 0;
 }
 
 void create_room(t_env *env, int begin, int end)
@@ -213,6 +167,34 @@ void create_room(t_env *env, int begin, int end)
     new->room_id = env->room_count++;
     new->next = env->room_list;
     env->room_list = new;
+    //printf("create room id start = %i, id end = %i\n", new->wall_ref.start, new->wall_ref.end);
+
+}
+
+void recreate_room_list(t_env *env)
+{
+    int i;
+    int new_room_nb;
+    int begin;
+    int current_room_id;
+    t_room *new_room;
+
+    new_room_nb = 0;
+    i = 0;
+    clear_room_list(env);
+    while (i < env->wall_count)
+    {
+        if (env->wall_list[i].id != -1 && env->wall_list[i].room_id_ref != -1)
+        {
+            begin = i;
+            current_room_id = env->wall_list[begin].room_id_ref;
+            while (current_room_id == env->wall_list[i].room_id_ref)
+                i++;
+            create_room(env, begin, i);
+        }
+        i++;
+
+    }
 }
 
 void print_rooms_content(t_env *env)
@@ -220,6 +202,7 @@ void print_rooms_content(t_env *env)
     int     i;
     t_room *room;
 
+    recreate_room_list(env);
     room = env->room_list;
     printf("ROOM_CONTENTS :\n");
     while (room)
