@@ -115,6 +115,16 @@ typedef struct		s_input
 	int				is_in_input_mode;
 }					t_input;
 
+typedef struct      s_map_data
+{
+    int             is_valid;
+    t_size          map_size;
+    int             wall_count;
+    t_wall          *wall_list;
+    t_room          *room_list;
+    t_wall_ref      ***map_wall_ref;
+}                   t_map_data;
+
 typedef struct      s_env
 {
     SDL_Renderer    *rend;
