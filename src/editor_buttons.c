@@ -67,6 +67,7 @@ void select_next_texture(t_env *env)
 void del_selected_wall(t_env *env)
 {
     del_wall(env, env->selected_wall_id);
+    env->selected_wall_id = -1;
 }
 
 void create_room_button(t_env *env)

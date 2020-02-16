@@ -118,7 +118,8 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
 
 void del_wall(t_env *env, int wall_id)
 {
-    t_wall *wall;
+    t_wall  *wall;
+    int     tmp_room_id;
 
     if (wall_id >= 0)
     {
@@ -129,37 +130,19 @@ void del_wall(t_env *env, int wall_id)
         wall->p1.y = -1;
         wall->p2.x = -1;
         wall->p2.y = -1;
-        if (wall->room_id_ref != -1)
-            del_room(env, wall->room_id_ref);
+        tmp_room_id = wall->room_id_ref;
+        wall->room_id_ref = -1;
+        if (tmp_room_id != -1)
+            del_room(env, wall_id, tmp_room_id);
     }
 }
 
-void del_room(t_env *env, int room_id)
+void del_room(t_env *env, int wall_id, int room_id)
 {
-    t_room *previous;
-    t_room *to_remove;
-    int i;
-
-    previous = env->room_list;
-    if (previous->room_id == room_id)
-    {
-        to_remove = previous;
-        env->room_list = env->room_list->next;
-    }
-    else
-    {   
-        while (previous->next && previous->next->room_id != room_id)
-            previous = previous->next;
-        to_remove = previous->next;
-        previous->next = to_remove->next;
-    }
-    i = to_remove->wall_ref.start;
-    while (i < to_remove->wall_ref.end)
-    {
-        env->wall_list[i].room_id_ref = -1;
-        del_wall(env, i++);
-    }
-    free(to_remove);
+    if (wall_id > 0 && env->wall_list[wall_id - 1].room_id_ref == room_id)
+        del_wall(env, wall_id - 1);
+    if (wall_id < env->wall_count - 1 && env->wall_list[wall_id + 1].room_id_ref == room_id)
+        del_wall(env, wall_id + 1);
 }
 
 void print_walls_in_map(t_env *env)

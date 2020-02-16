@@ -188,7 +188,7 @@ void recreate_room_list(t_env *env)
         {
             begin = i;
             current_room_id = env->wall_list[begin].room_id_ref;
-            while (current_room_id == env->wall_list[i].room_id_ref)
+            while (i < env->wall_count && current_room_id == env->wall_list[i].room_id_ref)
                 i++;
             create_room(env, begin, i);
         }

@@ -179,7 +179,7 @@ SDL_Point mult_sdl_point(SDL_Point p, double mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);
 void del_wall(t_env *env, int wall_id);
-void del_room(t_env *env, int room_id);
+void del_room(t_env *env,int wall_id, int room_id);
 void print_walls_in_map(t_env *env);
 void check_mouse_in_walls(t_env *env);
 void print_selected_wall(t_env *env);
