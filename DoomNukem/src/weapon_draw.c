@@ -15,12 +15,14 @@
 void		weapon_draw(t_enval *env)
 {
 	int			id;
+	t_intxy		offset;
 	t_intxy		c;
 	uint32_t	zpixel;
 	uint32_t	pixel;
 
-	//id = env->game.pc.equip.current;
-	id = 3;
+	id = env->game.pc.equip.current * 2 + env->game.pc.equip.weapon_state;
+	offset.x = env->game.pc.arsenal[id / 2].offset + env->user.bobbing.x;
+	offset.y = 20 + env->user.bobbing.y;
 	zpixel = get_pixel_weapon(env, id, 0, 0);
 	c.x = -1;
 	while (++c.x < env->weapontex[id].img->w * 3)
@@ -32,8 +34,8 @@ void		weapon_draw(t_enval *env)
 			if (pixel == zpixel)
 			 	continue;
 			put_pixel(env->sdl.screen,
-			(WIN_W / 2) - (env->weapontex[id].img->w * 3 / 2) + c.x,
-			(WIN_H - env->weapontex[id].img->h * 3) + c.y + 20, pixel);
+			(WIN_W / 2) - (env->weapontex[id].img->w * 3 / 2) + c.x + offset.x,
+			(WIN_H - env->weapontex[id].img->h * 3) + c.y + offset.y, pixel);
 		}
 	}
 }

@@ -41,6 +41,8 @@ void				movement(t_enval *env)
 	trim.pos.x = env->player.pos.x;
 	trim.pos.y = env->player.pos.y;
 	proj = get_projections(env, env->player);
+	if (env->player.pos.x != proj.x || env->player.pos.y != proj.y)
+		handle_bobbing(env);
 	if (env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y - OFF)] == 0
 		&& env->map.walls[(int)(proj.x - OFF)][(int)(trim.pos.y + OFF)] == 0
 		&& env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y + OFF)] == 0

@@ -45,7 +45,7 @@ static void      deal_event(t_enval *env)
 
 void            event(t_enval *env)
 {
-    while (SDL_PollEvent(&env->event))
+	while (SDL_PollEvent(&env->event))
     {
         if ((env->event.key.keysym.sym == SDLK_ESCAPE
 		&& env->event.type == SDL_KEYDOWN)
@@ -53,9 +53,22 @@ void            event(t_enval *env)
 			ft_exit(env, NULL, 1);
         else if (env->event.type == SDL_MOUSEMOTION)
 			env->sdl.key[MOUSE] = 1;
-        else if (env->event.type == SDL_KEYDOWN
-        && env->event.key.keysym.sym == SDLK_l)
-            switch_fog(env);
+		else if (env->event.type == SDL_MOUSEBUTTONDOWN)
+		{	
+			env->game.pc.equip.weapon_state = WEAPON_STATE_FIRING;
+			ft_putendl("Bang !");
+		}
+        else if (env->event.type == SDL_MOUSEBUTTONUP)
+		{
+			env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
+			ft_putendl("Unbang !");
+		}
+		else if (env->event.type == SDL_KEYDOWN)
+		{
+			if (env->event.key.keysym.sym == SDLK_l)
+            	switch_fog(env);
+			change_weapon(env);
+		}
         move_events(env);
     }
     deal_event(env);

@@ -27,4 +27,10 @@ void			init_pc(t_player_character *pc)
 	clean_status_effect(&pc->effects.att_dmg);
 	clean_status_effect(&pc->effects.att_spd);
 	pc->arsenal[0] = get_weapon_fist();
+	pc->arsenal[1] = get_weapon_pistol();
+	pc->arsenal[2] = get_weapon_shotgun();
+	pc->arsenal[3] = get_weapon_submachinegun();
+	pc->arsenal[4] = get_weapon_bfg();
+	pc->equip.current = 0;
+	pc->equip.weapon_state = WEAPON_STATE_READY;
 }

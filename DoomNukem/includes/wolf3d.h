@@ -183,6 +183,7 @@ typedef struct	s_tex
 typedef struct	s_user
 {
 	int			fog;
+	t_intxy		bobbing;
 }				t_user;
 
 /*
@@ -199,7 +200,7 @@ typedef struct	s_enval
 	t_mapinfo				map;
 	t_intxy					wt;
 	t_sprite				wtex[6];
-	t_sprite				weapontex[6];
+	t_sprite				weapontex[10];
 	int						fd;
 	int						wl;
 	char					*linebuff;
@@ -259,5 +260,7 @@ SDL_Color		fill_rgb(int c);
 void			event(t_enval *env);
 void			mouse_events(t_enval *env);
 void			switch_fog(t_enval *env);
+void			change_weapon(t_enval *env);
+void			handle_bobbing(t_enval *env);
 
 #endif

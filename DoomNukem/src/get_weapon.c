@@ -32,6 +32,7 @@ t_weapon	get_weapon_fist(void)
 	fist.attack.speed = 750;
 	fist.attack.radius.width = 0;
 	fist.attack.radius.width = 0;
+	fist.offset = 0;
 	return (fist);
 }
 
@@ -49,6 +50,7 @@ t_weapon	get_weapon_pistol(void)
 	pistol.attack.speed = 200;
 	pistol.attack.radius.width = 0;
 	pistol.attack.radius.depth = 0;
+	pistol.offset = 0;
 	return (pistol);
 }
 
@@ -66,6 +68,7 @@ t_weapon	get_weapon_shotgun(void)
 	shotgun.attack.speed = 1375;
 	shotgun.attack.radius.width = 0.5;
 	shotgun.attack.radius.depth = 0;
+	shotgun.offset = 100;
 	return (shotgun);
 }
 
@@ -83,6 +86,7 @@ t_weapon	get_weapon_submachinegun(void)
 	submachinegun.attack.speed = 100;
 	submachinegun.attack.radius.width = 0;
 	submachinegun.attack.radius.depth = 0;
+	submachinegun.offset = 200;
 	return (submachinegun);
 }
 
@@ -100,5 +104,6 @@ t_weapon	get_weapon_bfg(void)
 	bfg.attack.speed = 1800;
 	bfg.attack.radius.width = 1.5;
 	bfg.attack.radius.depth = 1.5;
+	bfg.offset = 100;
 	return (bfg);
 }

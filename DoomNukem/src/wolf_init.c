@@ -57,6 +57,13 @@ static void		prep_init(t_enval *env)
 	i = -1;
 	while (++i < NBKEY)
 		env->sdl.key[i] = 0;
+	i = -1;
+	while (++i < 5)
+		env->game.pc.arsenal[i].name = "Nothing.";
+	env->game.pc.equip.delay = 0;
+	init_pc(&env->game.pc);
+	env->user.bobbing.x = 0;
+	env->user.bobbing.y = 0;
 }
 
 void			init_values(char *file, t_enval *env)
@@ -108,10 +115,14 @@ void			init_texture(t_enval *env)
 
 void			init_wptext(t_enval *env)
 {
-	env->weapontex[0].img = SDL_LoadBMP("img/weapons/autogun1.bmp");
-	env->weapontex[1].img = SDL_LoadBMP("img/weapons/autogun2.bmp");
-	env->weapontex[2].img = SDL_LoadBMP("img/weapons/hand.bmp");
-	env->weapontex[3].img = SDL_LoadBMP("img/weapons/hand2.bmp");
-	env->weapontex[4].img = SDL_LoadBMP("img/weapons/shotgun1.bmp");
-	env->weapontex[5].img = SDL_LoadBMP("img/weapons/shotgun2.bmp");
+	env->weapontex[0].img = SDL_LoadBMP("img/weapons/hand.bmp");
+	env->weapontex[1].img = SDL_LoadBMP("img/weapons/hand2.bmp");
+	env->weapontex[2].img = SDL_LoadBMP("img/weapons/gun1.bmp");
+	env->weapontex[3].img = SDL_LoadBMP("img/weapons/gun2.bmp");
+	env->weapontex[4].img = SDL_LoadBMP("img/weapons/shotgun.bmp");
+	env->weapontex[5].img = SDL_LoadBMP("img/weapons/shotgunfire.bmp");
+	env->weapontex[6].img = SDL_LoadBMP("img/weapons/rafle.bmp");
+	env->weapontex[7].img = SDL_LoadBMP("img/weapons/rafle2.bmp");
+	env->weapontex[8].img = SDL_LoadBMP("img/weapons/autogun1.bmp");
+	env->weapontex[9].img = SDL_LoadBMP("img/weapons/autogun2.bmp");
 }

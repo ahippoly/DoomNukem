@@ -28,7 +28,8 @@
 # define WEAPON_TYPE_CHARGED	3
 
 # define WEAPON_STATE_READY		0
-# define WEAPON_STATE_RELOADING 1
+# define WEAPON_STATE_FIRING    1
+# define WEAPON_STATE_RELOADING 2
 
 # define PLAYER_UNDETECTED		0
 # define PLAYER_ALERTED			1
@@ -124,6 +125,7 @@ typedef struct	s_weapon
 	t_clip		clip;
 	t_stat		ammo;
 	t_attack	attack;
+	int			offset;
 }				t_weapon;
 
 typedef struct	s_equipped
@@ -195,7 +197,7 @@ void		display_game_over(void);
 
 t_weapon	get_weapon_fist(void);
 t_weapon	get_weapon_pistol(void);
-t_weapon	get_weapon_rifle(void);
+t_weapon	get_weapon_submachinegun(void);
 t_weapon	get_weapon_shotgun(void);
 t_weapon	get_weapon_bfg(void);
 
