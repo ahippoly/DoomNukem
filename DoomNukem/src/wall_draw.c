@@ -53,8 +53,8 @@ void			wall_draw(t_enval *env, int i, int t)
 		env->wt.y = ((d * env->wtex[t].img->h) / env->ray.height) / 256;
 		// env->mlx.pxl[WIN_W * j + i] =
 			// env->wtex[t]->buffer[env->wtex[t]->width * env->wt.y + env->wt.x];
-		// put_pixel(env->sdl.screen, i, j, get_pixel_wall(env, t, env->wt.x, env->wt.y));
-		put_pixel(env->sdl.screen, i, j, fog(env, 0xFFFFFFFF, env->ray.perpwalldist));
+		put_pixel(env->sdl.screen, i, j, get_pixel_wall(env, t, env->wt.x, env->wt.y));
+		// put_pixel(env->sdl.screen, i, j, fog(env, 0xFFFFFFFF, env->ray.perpwalldist));
 		j++;
 	}
 }

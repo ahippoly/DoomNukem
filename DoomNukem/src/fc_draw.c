@@ -36,16 +36,16 @@ static void		floor_cast(t_enval *env)
 	}
 }
 
-static void		ft_add_pxl(t_enval *env, int j, int i, int t)
-{
-	if (t == 4 || (t == 5 && env->wtex[5].img->w != env->wtex[4].img->w))
-		env->wt.x = (int)(env->ray.currentfloor.x * env->wtex[t].img->w)
-			% env->wtex[t].img->w;
-	if (t == 4 || (t == 5 && env->wtex[5].img->h != env->wtex[4].img->h))
-		env->wt.y = (int)(env->ray.currentfloor.y * env->wtex[t].img->h)
-			% env->wtex[t].img->h;
-	put_pixel(env->sdl.screen, i, j, get_pixel_floor(env, t, env->wt.x, env->wt.y));
-}
+// static void		ft_add_pxl(t_enval *env, int j, int i, int t)
+// {
+// 	if (t == 4 || (t == 5 && env->wtex[5].img->w != env->wtex[4].img->w))
+// 		env->wt.x = (int)(env->ray.currentfloor.x * env->wtex[t].img->w)
+// 			% env->wtex[t].img->w;
+// 	if (t == 4 || (t == 5 && env->wtex[5].img->h != env->wtex[4].img->h))
+// 		env->wt.y = (int)(env->ray.currentfloor.y * env->wtex[t].img->h)
+// 			% env->wtex[t].img->h;
+// 	put_pixel(env->sdl.screen, i, j, get_pixel_floor(env, t, env->wt.x, env->wt.y));
+// }
 
 static void		floor_loop(t_enval *env, int i)
 {
@@ -60,8 +60,10 @@ static void		floor_loop(t_enval *env, int i)
 			+ (1.0 - env->ray.weight) * env->player.pos.x;
 		env->ray.currentfloor.y = env->ray.weight * env->ray.floorwall.y
 			+ (1.0 - env->ray.weight) * env->player.pos.y;
-		ft_add_pxl(env, j, i, TEXT_FLOOR);
-		ft_add_pxl(env, WIN_H - j, i, TEXT_CEILING);
+		// ft_add_pxl(env, j, i, TEXT_FLOOR);
+		// ft_add_pxl(env, WIN_H - j, i, TEXT_CEILING);
+		put_pixel(env->sdl.screen, i, j, 0x00ff00ff);
+		put_pixel(env->sdl.screen, i, WIN_H - j, 0x00ff00ff);
 	}
 }
 
