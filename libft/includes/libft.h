@@ -106,5 +106,6 @@ double				ft_frange(double value, double min, double max);
 void    			*p_malloc(unsigned int size);
 
 void				print_memory(const void *addr, size_t size);
+int					get_next_line(const int fd, char **line);
 
 #endif

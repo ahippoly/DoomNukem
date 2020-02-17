@@ -78,14 +78,6 @@ void check_click(t_env *env)
         env->mouse_click_fct[env->selected_mouse_mode](env);
 }
 
-void debug_print(t_env *env, SDL_Scancode key)
-{
-    if (key == SDL_SCANCODE_Q)
-        print_wall_ref(env, 1);
-    if (key == SDL_SCANCODE_E)
-        print_rooms_content(env);
-}
-
 void handle_mouse_event(t_env *env)
 {
     while (SDL_PollEvent(&env->ev))

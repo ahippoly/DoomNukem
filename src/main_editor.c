@@ -72,8 +72,6 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_PLAYER_X] = create_text_img("x", 1, 0xFFDDDDDD, create_point(520, 660));
     env->txt_lst[TXT_PLAYER_Y] = create_text_img("y", 1, 0xFFDDDDDD, create_point(600, 660));
     env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFFDDDDDD, create_point(500, 770));
-
-
 }
 
 void init_input(t_env *env)

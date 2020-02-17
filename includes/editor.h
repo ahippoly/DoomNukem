@@ -67,6 +67,10 @@
 # define MAP_SIZE_Y 30
 # define INTER_TOLERANCE 0.0001
 
+# define HEAD_WALL_LIST "WALL LIST"
+# define HEAD_ROOM_LIST "ROOM LIST"
+# define HEAD_WALL_REF "WALL_REF MAP"
+
 
 typedef struct      s_size
 {   
@@ -104,7 +108,6 @@ typedef struct          s_room
     int                 room_id;
     int                 nb_wall;
     t_range             wall_ref;
-    struct s_room       *next;
 }                       t_room;
 
 typedef struct		s_input
@@ -120,6 +123,7 @@ typedef struct      s_map_data
     int             is_valid;
     t_size          map_size;
     int             wall_count;
+    int             room_count;
     t_wall          *wall_list;
     t_room          *room_list;
     t_wall_ref      ***map_wall_ref;
@@ -237,5 +241,13 @@ t_input create_t_input(SDL_Rect pos_size, int default_value, int max);
 void handle_input_mode(t_env *env, SDL_Scancode key_released);
 void get_wall_param(t_env *env);
 void update_wall_param(t_env *env);
+
+//editor_map_reader.c
+t_map_data  read_map(char *path_file);
+
+//editor_debug_utils.c
+void debug_print(t_env *env, SDL_Scancode key);
+void print_wall_content(t_wall wall);
+void print_wall_list(t_map_data *map);
 
 #endif

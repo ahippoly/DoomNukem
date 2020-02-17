@@ -168,20 +168,30 @@ void create_room(t_env *env, int begin, int end)
     new->next = env->room_list;
     env->room_list = new;
     //printf("create room id start = %i, id end = %i\n", new->wall_ref.start, new->wall_ref.end);
+}
 
+void recreate_room_list2(t_env *env)
+{
+    int i;
+
+    env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count);
+    i = 0;
+    while (i < env->room_count)
+    {
+        
+    }
 }
 
 void recreate_room_list(t_env *env)
 {
     int i;
-    int new_room_nb;
     int begin;
     int current_room_id;
-    t_room *new_room;
+    t_room *current_room;
 
-    new_room_nb = 0;
     i = 0;
-    clear_room_list(env);
+    free(env->room_list);
+    env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count);
     while (i < env->wall_count)
     {
         if (env->wall_list[i].id != -1 && env->wall_list[i].room_id_ref != -1)
@@ -190,7 +200,11 @@ void recreate_room_list(t_env *env)
             current_room_id = env->wall_list[begin].room_id_ref;
             while (i < env->wall_count && current_room_id == env->wall_list[i].room_id_ref)
                 i++;
-            create_room(env, begin, i);
+            current_room = &env->room_list[current_room_id];
+            current_room->room_id = current_room_id;
+            current_room->wall_ref.start = begin;
+            current_room->wall_ref.end = i;
+            current_room->nb_wall = i - begin;
         }
         i++;
 

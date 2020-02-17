@@ -3,7 +3,7 @@ SRC_NAME =	$(sort main_editor.c error_gesture.c image_gesture.c \
 			editor_wall_edit.c text_img.c editor_buttons.c bmp_reader.c \
 			editor_map_move.c sector_creation.c line_intersect.c \
 			editor_mouse_event.c editor_map_output.c utils.c \
-			editor_input.c)
+			editor_input.c editor_map_reader.c editor_debug_utils.c)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/

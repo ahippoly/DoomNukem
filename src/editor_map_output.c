@@ -30,6 +30,14 @@ void write_param(int fd, char *key, char *value)
     free(str);
 }
 
+void write_head_param(int fd, char *key, char *value)
+{
+    ft_putstr_fd(key, fd);
+    ft_putchar_fd(' ',fd);
+    ft_putstr_fd(value, fd);
+    ft_putchar_fd('\n',fd);
+}
+
 void write_walls(int fd, t_wall *list, int wall_count)
 {
     t_wall wall;
@@ -38,6 +46,7 @@ void write_walls(int fd, t_wall *list, int wall_count)
     i = 0;
     printf("wall count = %i\n", wall_count);
     write(fd, "WALL LIST\n", 10);
+    write_head_param(fd, "WALL_COUNT", ft_itoa(wall_count));
     while (i < wall_count)
     {
         wall = list[i];
@@ -78,12 +87,8 @@ void write_rooms(int fd, t_room *room)
 void write_wall_ref(int fd, t_env *env)
 {
     ft_putstr_fd("WALL_REF MAP\n", fd);
-    ft_putstr_fd("MAP_SIZE ",fd);
-    ft_putstr_fd(join_int_value(env->map_size.w, " ", env->map_size.h), fd);
-    ft_putchar_fd('\n',fd);
-    ft_putstr_fd("PLAYER_SPAWN ",fd);
-    ft_putstr_fd(join_int_value(env->input_lst[INPUT_PLAYER_X].value, " ", env->input_lst[INPUT_PLAYER_Y].value), fd);
-    ft_putchar_fd('\n',fd);
+    write_head_param(fd, "MAP_SIZE", join_int_value(env->map_size.w, ",", env->map_size.h));
+    write_head_param(fd, "PLAYER_SPAWN", join_int_value(env->input_lst[INPUT_PLAYER_X].value, ",", env->input_lst[INPUT_PLAYER_Y].value));
     print_wall_ref(env, fd);
     ft_putchar_fd('\n',fd);
 }

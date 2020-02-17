@@ -15,6 +15,7 @@
 #include <sys/uio.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include "libft.h"
 #include "get_next_line.h"
 #include <stdlib.h>
 
@@ -67,7 +68,7 @@ int		get_next_line(const int fd, char **line)
 	{
 		v.oct = read(fd, v.buff, BUFF_SIZE);
 		v.buff[v.oct] = '\0';
-		memory->content = ft_strjoinfree(memory->content, v.buff, 1);
+		memory->content = ft_strjoinfree(memory->content, v.buff, 0);
 	}
 	ft_endline_null_case(memory, &v);
 	*v.endline = '\0';
