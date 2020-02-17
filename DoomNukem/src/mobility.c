@@ -24,7 +24,7 @@ static t_doublexy	get_projections(t_enval *env, t_player player)
 	double		judge_horiz;
 	t_doublexy	proj;
 
-	judge_vert = (env->sdl.key[UP] + env->sdl.key[DOWN]) * 1 + env->sdl.key[RUN];
+	judge_vert = (env->sdl.key[UP] + env->sdl.key[DOWN]) * 1 + env->sdl.key[RUN] * 2;
 	judge_horiz = (env->sdl.key[LEFT] + env->sdl.key[RIGHT]) * -1 + env->sdl.key[RUN];
 	proj.x = player.pos.x + (player.dir.x / 9) * judge_vert;
 	proj.x += player.plane.x / 9 * judge_horiz;
@@ -41,15 +41,15 @@ void				movement(t_enval *env)
 	trim.pos.x = env->player.pos.x;
 	trim.pos.y = env->player.pos.y;
 	proj = get_projections(env, env->player);
-	if (env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y - OFF)] == 0
-		&& env->map.walls[(int)(proj.x - OFF)][(int)(trim.pos.y + OFF)] == 0
-		&& env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y + OFF)] == 0
-		&& env->map.walls[(int)(proj.x - OFF)][(int)(trim.pos.y - OFF)] == 0)
+	// if (env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y - OFF)] == 0
+	// 	&& env->map.walls[(int)(proj.x - OFF)][(int)(trim.pos.y + OFF)] == 0
+	// 	&& env->map.walls[(int)(proj.x + OFF)][(int)(trim.pos.y + OFF)] == 0
+	// 	&& env->map.walls[(int)(proj.x - OFF)][(int)(trim.pos.y - OFF)] == 0)
 		env->player.pos.x = proj.x;
-	if (env->map.walls[(int)(trim.pos.x + OFF)][(int)(proj.y - OFF)] == 0
-		&& env->map.walls[(int)(trim.pos.x - OFF)][(int)(proj.y + OFF)] == 0
-		&& env->map.walls[(int)(trim.pos.x + OFF)][(int)(proj.y + OFF)] == 0
-		&& env->map.walls[(int)(trim.pos.x - OFF)][(int)(proj.y - OFF)] == 0)
+	// if (env->map.walls[(int)(trim.pos.x + OFF)][(int)(proj.y - OFF)] == 0
+	// 	&& env->map.walls[(int)(trim.pos.x - OFF)][(int)(proj.y + OFF)] == 0
+	// 	&& env->map.walls[(int)(trim.pos.x + OFF)][(int)(proj.y + OFF)] == 0
+	// 	&& env->map.walls[(int)(trim.pos.x - OFF)][(int)(proj.y - OFF)] == 0)
 		env->player.pos.y = proj.y;
 }
 

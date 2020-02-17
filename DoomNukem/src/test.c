@@ -37,20 +37,20 @@ void     map_drawer(t_enval *e)
 	i = 0;
 
 	// premiere salle
-	e->tabint[0][0] = 300;
-	e->tabint[0][1] = 200;
-	e->tabint[1][0] = 400;
-	e->tabint[1][1] = 200;
-	e->tabint[2][0] = 600;
-	e->tabint[2][1] = 600;
-	e->tabint[3][0] = 200;
-	e->tabint[3][1] = 400;
-	e->tabint[4][0] = 200;
-	e->tabint[4][1] = 200;
-	e->tabint[5][0] = 200;
-	e->tabint[5][1] = 100;
-	e->tabint[6][0] = 400;
-	e->tabint[6][1] = 100;
+	e->tabint[0][0] = 30;
+	e->tabint[0][1] = 20;
+	e->tabint[1][0] = 40;
+	e->tabint[1][1] = 20;
+	e->tabint[2][0] = 60;
+	e->tabint[2][1] = 60;
+	e->tabint[3][0] = 20;
+	e->tabint[3][1] = 40;
+	e->tabint[4][0] = 20;
+	e->tabint[4][1] = 20;
+	e->tabint[5][0] = 20;
+	e->tabint[5][1] = 10;
+	e->tabint[6][0] = 40;
+	e->tabint[6][1] = 10;
 	//deuxieme salle
 	// e->tabint[4][0] = 400;
 	// e->tabint[4][1] = 200;
@@ -100,14 +100,15 @@ int  raycaster(t_enval *e, t_map *map)
 		ptx = map->wall.point_a.x + t * (map->wall.point_b.x - map->wall.point_a.x);
 		pty = map->wall.point_a.y + t * (map->wall.point_b.y - map->wall.point_a.y);
 		dist = sqrt(pow(ptx - e->player.pos.x, 2) + pow(pty - e->player.pos.y, 2));
-		if (e->save.dist == 0 || dist < e->save.dist)
+		if (e->ray.perpwalldist == 0 || dist < e->ray.perpwalldist)
 		{
-			e->save.dist = dist * cos(e->ray.angle - e->player.angle); // SAUVEGARDE DE LA DISTANCE
-			// printf("dist = %f\n", e->save.dist);
+			// e->save.dist = dist * cos(e->ray.angle - e->player.angle); // SAUVEGARDE DE LA DISTANCE
+			e->ray.perpwalldist = dist * cos(e->ray.angle - e->player.angle);
+			// printf("dist = %f\n", e->ray.perpwalldist);
 			e->save.x = ptx; // SAUVEGARDE LE POINT DE CONTACT
 			e->save.y = pty; //
 		}
 		return(1);
-  }
+  	}
 	return (0);
 }

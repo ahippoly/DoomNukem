@@ -27,8 +27,8 @@ void		ft_checkappval(int reader, int i, t_enval *env, t_mapinfo map)
 		ft_error("file reading failed.", env, 0);
 	if (i != map.height)
 		ft_error("map height is incorrect.", env, 0);
-	if (map.walls[p_x][p_y] == 1)
-		ft_error("player is in a wall.", env, 0);
+	// if (map.walls[p_x][p_y] == 1)
+	// 	ft_error("player is in a wall.", env, 0);
 	p_x = -1;
 	while (++p_x < map.height)
 	{

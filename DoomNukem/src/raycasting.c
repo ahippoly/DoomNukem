@@ -60,15 +60,17 @@ void			ray_calc(t_enval *env, int i)
 
 static void		perp_height(t_enval *env)
 {
-	if (env->ray.wallside == 0)
-		env->ray.perpwalldist = ft_abs((env->ray.mapos.x - env->player.pos.x +
-			(1 - env->ray.step.x) / 2) / env->ray.dir.x);
-	else
-		env->ray.perpwalldist = ft_abs((env->ray.mapos.y - env->player.pos.y +
-			(1 - env->ray.step.y) / 2) / env->ray.dir.y);
+	// if (env->ray.wallside == 0)
+	// 	env->ray.perpwalldist = ft_abs((env->ray.mapos.x - env->player.pos.x +
+	// 		(1 - env->ray.step.x) / 2) / env->ray.dir.x);
+	// else
+	// 	env->ray.perpwalldist = ft_abs((env->ray.mapos.y - env->player.pos.y +
+	// 		(1 - env->ray.step.y) / 2) / env->ray.dir.y);
 	env->ray.height = (int)(WIN_H / env->ray.perpwalldist);
 	// env->ray.htest = (int)(WIN_H / env->save.dist);
 	env->ray.wallbot = (int)env->ray.height / 2 + WIN_H / 2;
+	// printf("TEST1\n");
+	// printf("%d\n", env->ray.wallbot);
 	if (env->ray.wallbot > WIN_H)
 		env->ray.wallbot = WIN_H;
 	env->ray.walltop = (int)-env->ray.height / 2 + WIN_H / 2;
@@ -82,24 +84,24 @@ static void		perp_height(t_enval *env)
 
 void			ray_hit(t_enval *env)
 {
-	env->ray.wallhit = 0;
-	while (env->ray.wallhit == 0)
-	{
-		if (env->ray.sidedist.x < env->ray.sidedist.y)
-		{
-			env->ray.sidedist.x += env->ray.deltadist.x;
-			env->ray.mapos.x += env->ray.step.x;
-			env->ray.wallside = 0;
-		}
-		else
-		{
-			env->ray.sidedist.y += env->ray.deltadist.y;
-			env->ray.mapos.y += env->ray.step.y;
-			env->ray.wallside = 1;
-		}
-		if (env->map.walls[env->ray.mapos.x][env->ray.mapos.y] != 0)
-			env->ray.wallhit = 1;
-	}
+	// env->ray.wallhit = 0;
+	// while (env->ray.wallhit == 0)
+	// {
+	// 	if (env->ray.sidedist.x < env->ray.sidedist.y)
+	// 	{
+	// 		env->ray.sidedist.x += env->ray.deltadist.x;
+	// 		env->ray.mapos.x += env->ray.step.x;
+	// 		env->ray.wallside = 0;
+	// 	}
+	// 	else
+	// 	{
+	// 		env->ray.sidedist.y += env->ray.deltadist.y;
+	// 		env->ray.mapos.y += env->ray.step.y;
+	// 		env->ray.wallside = 1;
+	// 	}
+	// 	if (env->map.walls[env->ray.mapos.x][env->ray.mapos.y] != 0)
+	// 		env->ray.wallhit = 1;
+	// }
 	perp_height(env);
 }
 
@@ -115,7 +117,7 @@ void			ray_draw(t_enval *env)
 	while (i < WIN_W)
 	{
 		// Debut test map liste chainee
-		env->save.dist = 0;
+		env->ray.perpwalldist = 1000;
 		tmp = env->smap;
 		while(env->smap)
 		{
@@ -123,10 +125,10 @@ void			ray_draw(t_enval *env)
 			raycaster(env, env->smap);
 			env->smap = env->smap->next;
 		}
-		//fin du test map liste chainee
-		ray_calc(env, i);
+		// //fin du test map liste chainee
+		// ray_calc(env, i);
 		ray_hit(env);
-		// printf("dist = %f\n perpwalldist = %f\n", env->save.dist, env->ray. perpwalldist);
+		// printf("perpwalldist = %f\n", env->ray. perpwalldist);
 		if (!(env->ray.wallside) && env->ray.dir.x < 0)
 			texnum = 1;
 		else if (!(env->ray.wallside) && env->ray.dir.x >= 0)
@@ -136,8 +138,10 @@ void			ray_draw(t_enval *env)
 		else if (env->ray.wallside && env->ray.dir.y >= 0)
 			texnum = 3;
 		wall_draw(env, i, texnum);
+		env->smap = tmp;
 		fc_draw(env, i);
 		i++;
 	}
+	// put_pixel(env->sdl.screen, env->player.pos.x, env->player.pos.y, 0xDD01FE);
 	// mlx_put_image_to_window(env->mlx.m_p, env->mlx.w_p, env->mlx.i_p, 0, 0);
 }

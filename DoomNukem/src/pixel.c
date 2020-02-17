@@ -44,6 +44,7 @@ void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color)
 
 	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
 		return ;
+	// printf("TEST2\n");
 	pixels = (unsigned int *)surface->pixels;
 	pixels[x + (y * WIN_W)] = color;
 }

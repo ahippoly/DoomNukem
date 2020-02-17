@@ -46,13 +46,15 @@ void			wall_draw(t_enval *env, int i, int t)
 			|| (env->ray.wallside == 1 && env->ray.dir.y < 0))
 		env->wt.x = env->wtex[t].img->w - env->wt.x - 1;
 	j = env->ray.walltop;
+	// printf("env->ray.wallbot = %d\n\n",  env->ray.wallbot);
 	while (j < env->ray.wallbot)
 	{
 		d = j * 256 - WIN_H * 128 + env->ray.height * 128;
 		env->wt.y = ((d * env->wtex[t].img->h) / env->ray.height) / 256;
 		// env->mlx.pxl[WIN_W * j + i] =
 			// env->wtex[t]->buffer[env->wtex[t]->width * env->wt.y + env->wt.x];
-		put_pixel(env->sdl.screen, i, j, get_pixel_wall(env, t, env->wt.x, env->wt.y));
+		// put_pixel(env->sdl.screen, i, j, get_pixel_wall(env, t, env->wt.x, env->wt.y));
+		put_pixel(env->sdl.screen, i, j, fog(env, 0xFFFFFFFF, env->ray.perpwalldist));
 		j++;
 	}
 }
