@@ -66,6 +66,31 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     return(wall);
 }
 
+void rearange_room_id(t_env *env)
+{
+    t_wall wall;
+    int new_nb_room;
+    int i;
+
+    i = 0;
+    new_nb_room = 0;
+    while (i < env->wall_count)
+    {
+        wall = env->wall_list[i];
+        if (wall.room_id_ref != -1)
+        {
+            while (env->wall_list[i].room_id_ref == wall.room_id_ref && i < env->wall_count)
+            {
+                env->wall_list[i].room_id_ref = new_nb_room;
+                i++;
+            }
+            i--;
+            new_nb_room++;
+        }
+        i++;
+    }
+}
+
 void rearange_wall_lst(t_env *env)
 {
     t_wall *new_lst;
@@ -89,6 +114,8 @@ void rearange_wall_lst(t_env *env)
     free(env->wall_list);
     env->wall_list = new_lst;
     env->wall_count = new_wall_nb;
+    rearange_room_id(env);
+    recreate_room_list(env);
 }
 
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
@@ -119,7 +146,6 @@ int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
 void del_wall(t_env *env, int wall_id)
 {
     t_wall  *wall;
-    int     tmp_room_id;
 
     if (wall_id >= 0)
     {
@@ -130,20 +156,36 @@ void del_wall(t_env *env, int wall_id)
         wall->p1.y = -1;
         wall->p2.x = -1;
         wall->p2.y = -1;
-        tmp_room_id = wall->room_id_ref;
-        wall->room_id_ref = -1;
-        if (tmp_room_id != -1)
-            del_room(env, wall_id, tmp_room_id);
+        if (wall->room_id_ref != -1)
+            del_room(env, wall->room_id_ref);
     }
 }
 
-void del_room(t_env *env, int wall_id, int room_id)
+void del_room(t_env *env, int room_id)
 {
-    if (wall_id > 0 && env->wall_list[wall_id - 1].room_id_ref == room_id)
-        del_wall(env, wall_id - 1);
-    if (wall_id < env->wall_count - 1 && env->wall_list[wall_id + 1].room_id_ref == room_id)
-        del_wall(env, wall_id + 1);
+    int i;
+    t_wall wall;
+
+    i = 0;
+    while (i < env->wall_count)
+    {
+        if (env->wall_list[i].room_id_ref == room_id)
+        {
+            env->wall_list[i].room_id_ref = -1;
+            del_wall(env, i);
+        }
+        i++;
+    }
+    env->room_count--;
 }
+
+// void del_room(t_env *env, int wall_id, int room_id)
+// {
+//     if (wall_id > 0 && env->wall_list[wall_id - 1].room_id_ref == room_id)
+//         del_wall(env, wall_id - 1);
+//     if (wall_id < env->wall_count - 1 && env->wall_list[wall_id + 1].room_id_ref == room_id)
+//         del_wall(env, wall_id + 1);
+// }
 
 void print_walls_in_map(t_env *env)
 {

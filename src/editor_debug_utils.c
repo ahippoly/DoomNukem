@@ -2,12 +2,28 @@
 #include "global_header.h"
 
 
+void print_rooms_content(t_room *room_list, int room_count)
+{
+    int     i;
+    t_room room;
+
+    //rearange_wall_lst(env);
+    printf("ROOM_CONTENTS :\n");
+    i = 0;
+    while (i < room_count)
+    {
+        room = room_list[i];
+        printf("room id %i have wall id from %i to %i\n", room.room_id, room.wall_ref.start, room.wall_ref.end);
+        i++;
+    }
+}
+
 void debug_print(t_env *env, SDL_Scancode key)
 {
     if (key == SDL_SCANCODE_Q)
-        print_wall_ref(env, 1);
+        print_wall_ref(env->map_wall_ref, env->map_size, 1);
     if (key == SDL_SCANCODE_E)
-        print_rooms_content(env);
+        print_rooms_content(env->room_list, env->room_count);
     if (key == SDL_SCANCODE_Z)
         read_map("maps/editor_map_0");
 }

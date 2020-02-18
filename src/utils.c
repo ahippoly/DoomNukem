@@ -29,3 +29,12 @@ t_range create_t_range(int start, int end)
 	range.end = end;
 	return (range);
 }
+
+t_size create_t_size(int w, int h)
+{
+	t_size size;
+
+	size.w = w;
+	size.h = h;
+	return (size);
+}

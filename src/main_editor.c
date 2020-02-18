@@ -91,9 +91,10 @@ void init_env(t_env *env)
     init_texture(env);
     init_buttons(env);
     init_txt_img(env);
-    init_wall_ref(env);
     init_mouse_mode(env);
     init_input(env);
+    env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
+    env->map_wall_ref = init_wall_ref(env->map_size);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
@@ -257,6 +258,7 @@ void print_env2screen(t_env *env)
     // SDL_RenderPresent(env->rend);
     print_inputs(env);
     input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 800, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 900, WIN_SIZE_X, WIN_SIZE_Y)));
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);

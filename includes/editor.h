@@ -72,12 +72,6 @@
 # define HEAD_WALL_REF "WALL_REF MAP"
 
 
-typedef struct      s_size
-{   
-    int             w;
-    int             h;
-}                   t_size;
-
 typedef struct      s_wall
 {
     int             id;
@@ -124,6 +118,7 @@ typedef struct      s_map_data
     t_size          map_size;
     int             wall_count;
     int             room_count;
+    SDL_Point       player_spawn;
     t_wall          *wall_list;
     t_room          *room_list;
     t_wall_ref      ***map_wall_ref;
@@ -193,14 +188,14 @@ SDL_Point mult_sdl_point(SDL_Point p, double mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);
 void del_wall(t_env *env, int wall_id);
-void del_room(t_env *env,int wall_id, int room_id);
+void del_room(t_env *env, int room_id);
 void print_walls_in_map(t_env *env);
 void check_mouse_in_walls(t_env *env);
 void print_selected_wall(t_env *env);
 void del_wall(t_env *env, int wall_id);
 void check_hovered_buttons(t_env *env);
 t_button create_button(t_txt_img normal, t_txt_img hovered, int button_id);
-void init_wall_ref(t_env *env);
+t_wall_ref ***init_wall_ref(t_size map_size);
 void recreate_full_map_ref(t_env *env);
 
 void del_selected_wall(t_env *env);
@@ -216,7 +211,7 @@ void change_selected_wall_texture(t_env *env, int texture_id);
 
 void add_wall_ref_point(t_wall wall, t_env *env);
 void clear_map_ref(t_env *env);
-void print_wall_ref(t_env *env, int fd);
+void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd);
 void find_sector(t_env *env, t_wall wall);
 void input_text_to_img(char *str, int size, int color, t_img to_fill);
 
@@ -231,7 +226,7 @@ void recreate_room_list(t_env *env);
 void create_room_button(t_env *env);
 void create_room(t_env *env, int begin, int end);
 t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id);
-void print_rooms_content(t_env *env);
+void print_rooms_content(t_room *room_list, int room_count);
 int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size);
 
 //editor_input.c

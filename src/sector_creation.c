@@ -2,23 +2,23 @@
 #include "global_header.h"
 
 
-void init_wall_ref(t_env *env)
+t_wall_ref ***init_wall_ref(t_size map_size)
 {
+    t_wall_ref ***wall_ref;
     int i;
     int j;
 
-    env->map_size.w = MAP_SIZE_X;
-    env->map_size.h = MAP_SIZE_Y;
     i = 0;
-    env->map_wall_ref = (t_wall_ref***)p_malloc(sizeof(t_wall_ref**) * env->map_size.h);
-    while (i < env->map_size.h)
+    wall_ref = (t_wall_ref***)p_malloc(sizeof(t_wall_ref**) * map_size.h);
+    while (i < map_size.h)
     {
-        env->map_wall_ref[i] = (t_wall_ref**)p_malloc(sizeof(t_wall_ref*) * env->map_size.w);
+        wall_ref[i] = (t_wall_ref**)p_malloc(sizeof(t_wall_ref*) * map_size.w);
         j = 0;
-        while (j < env->map_size.w)
-            env->map_wall_ref[i][j++] = NULL;
+        while (j < map_size.w)
+            wall_ref[i][j++] = NULL;
         i++;
     }
+    return (wall_ref);
 }
 
 t_wall_ref *alloc_wall(int wall_id)
@@ -28,7 +28,7 @@ t_wall_ref *alloc_wall(int wall_id)
     ref = (t_wall_ref*)p_malloc(sizeof(t_wall_ref));
     ref->wall_id = wall_id;
     ref->next = NULL;
-    return(ref);
+    return (ref);
 }
 
 t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id)
@@ -98,27 +98,27 @@ void recreate_full_map_ref(t_env *env)
     int i;
 
     clear_map_ref(env);
-    init_wall_ref(env);
+    env->map_wall_ref = init_wall_ref(env->map_size);
     i = 0;
     while (i < env->wall_count)
         add_wall_ref_point(env->wall_list[i++], env);
 }
 
-void print_wall_ref(t_env *env, int fd)
+void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
 {
     int i;
     int j;
     int one_at_least;
     t_wall_ref *ref;
 
-    recreate_full_map_ref(env);
+    //recreate_full_map_ref(env);
     i = 0;
-    while (i < env->map_size.h)
+    while (i < map_size.h)
     {
         j = 0;
-        while (j < env->map_size.w)
+        while (j < map_size.w)
         {
-            ref = env->map_wall_ref[i][j];
+            ref = map_wall_ref[i][j];
             one_at_least = 0;
             while (ref)
             {
@@ -141,46 +141,21 @@ void print_wall_ref(t_env *env, int fd)
     ft_putstr_fd("\n", fd);
 }
 
-void clear_room_list(t_env *env)
-{
-    t_room *next;
+// void create_room(t_env *env, int begin, int end)
+// {
+//     t_room *new;
+//     int i;
 
-    while (env->room_list)
-    {
-        next = env->room_list->next;
-        free(env->room_list);
-        env->room_list = next;
-    }
-    env->room_count = 0;
-}
-
-void create_room(t_env *env, int begin, int end)
-{
-    t_room *new;
-    int i;
-
-    if (!(new = (t_room*)malloc(sizeof(t_room))))
-        exit_with_msg("Failed to malloc");
-    new->nb_wall = end - begin;
-    new->wall_ref.start = begin;
-    new->wall_ref.end = end;
-    new->room_id = env->room_count++;
-    new->next = env->room_list;
-    env->room_list = new;
-    //printf("create room id start = %i, id end = %i\n", new->wall_ref.start, new->wall_ref.end);
-}
-
-void recreate_room_list2(t_env *env)
-{
-    int i;
-
-    env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count);
-    i = 0;
-    while (i < env->room_count)
-    {
-        
-    }
-}
+//     if (!(new = (t_room*)malloc(sizeof(t_room))))
+//         exit_with_msg("Failed to malloc");
+//     new->nb_wall = end - begin;
+//     new->wall_ref.start = begin;
+//     new->wall_ref.end = end;
+//     new->room_id = env->room_count++;
+//     new->next = env->room_list;
+//     env->room_list = new;
+//     //printf("create room id start = %i, id end = %i\n", new->wall_ref.start, new->wall_ref.end);
+// }
 
 void recreate_room_list(t_env *env)
 {
@@ -207,21 +182,6 @@ void recreate_room_list(t_env *env)
             current_room->nb_wall = i - begin;
         }
         i++;
-
     }
 }
 
-void print_rooms_content(t_env *env)
-{
-    int     i;
-    t_room *room;
-
-    recreate_room_list(env);
-    room = env->room_list;
-    printf("ROOM_CONTENTS :\n");
-    while (room)
-    {
-        printf("room id %i have wall id from %i to %i\n", room->room_id, room->wall_ref.start, room->wall_ref.end);
-        room = room->next;
-    }
-}

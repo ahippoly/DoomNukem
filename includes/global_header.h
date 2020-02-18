@@ -33,6 +33,12 @@ typedef struct s_range
     int      end;
 }               t_range;
 
+typedef struct      s_size
+{   
+    int             w;
+    int             h;
+}                   t_size;
+
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
 SDL_Rect set_sdl_rect(int x, int y, int w, int h);
@@ -41,6 +47,7 @@ void	octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, SDL_
 SDL_Point create_point(int x, int y);
 t_point create_t_point(double x, double y);
 t_range create_t_range(int start, int end);
+t_size create_t_size(int w, int h);
 t_img	ft_load_bmp(char *file);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);

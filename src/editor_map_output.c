@@ -64,22 +64,23 @@ void write_walls(int fd, t_wall *list, int wall_count)
     write(fd, "\n", 1);
 }
 
-void write_rooms(int fd, t_room *room)
+void write_rooms(int fd, t_room *room, int room_count)
 {
     int i;
     char *walls;
-    t_room *display;
+    t_room display;
 
-    display = room;
     write(fd, "ROOM LIST\n", 10);
-    while (display)
+    write_head_param(fd, "ROOM_COUNT", ft_itoa(room_count));
+    i = 0;
+    while (i < room_count)
     {
-        i = 1;
-        write_param(fd, "id", ft_itoa(display->room_id));
-        write_param(fd, "nb_wall", ft_itoa(display->nb_wall));
-        write_param(fd, "wall_ref_range", join_int_value(display->wall_ref.start, ",", display->wall_ref.end));
-        display = display->next;
+        display = room[i];
+        write_param(fd, "id", ft_itoa(display.room_id));
+        write_param(fd, "nb_wall", ft_itoa(display.nb_wall));
+        write_param(fd, "wall_ref_range", join_int_value(display.wall_ref.start, ",", display.wall_ref.end));
         ft_putchar_fd('\n',fd);
+        i++;
     }
     ft_putstr_fd("\n\n", fd);
 }
@@ -89,7 +90,7 @@ void write_wall_ref(int fd, t_env *env)
     ft_putstr_fd("WALL_REF MAP\n", fd);
     write_head_param(fd, "MAP_SIZE", join_int_value(env->map_size.w, ",", env->map_size.h));
     write_head_param(fd, "PLAYER_SPAWN", join_int_value(env->input_lst[INPUT_PLAYER_X].value, ",", env->input_lst[INPUT_PLAYER_Y].value));
-    print_wall_ref(env, fd);
+    print_wall_ref(env->map_wall_ref, env->map_size, fd);
     ft_putchar_fd('\n',fd);
 }
 
@@ -113,13 +114,12 @@ void map_output(t_env *env)
     printf("map output name = %s, fd = %i\n",str, fd);
     rearange_wall_lst(env);
     recreate_full_map_ref(env);
-    recreate_room_list(env);
     write_walls(fd, env->wall_list, env->wall_count);
-    write_rooms(fd, env->room_list);
+    write_rooms(fd, env->room_list, env->room_count);
     write_wall_ref(fd, env);
     printf("map output name = %s, fd = %i\n",str, 1);
     write_walls(1, env->wall_list, env->wall_count);
-    write_rooms(1, env->room_list);
+    write_rooms(1, env->room_list, env->room_count);
     write_wall_ref(1, env);
     free(str);
     close(fd);
