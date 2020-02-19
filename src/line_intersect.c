@@ -13,6 +13,25 @@
 #include "global_header.h"
 #include "editor.h"
 
+double calc_a(t_point p1, t_point p2)
+{
+	return ((p2.y - p1.y) / (p2.x - p1.x));
+}
+
+double calc_b(t_point p1, double a)
+{
+	return (p1.y - p1.x * a);
+}
+
+t_point calc_intersect(double a1, double b1, double a2, double b2)
+{
+	t_point inter;
+
+	inter.x = (b2 - b1) / (a1  - a2);
+	inter.y = a1 * inter.x + b1;
+	return (inter);
+}
+
 t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	double a1;
@@ -101,5 +120,26 @@ t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, 
 	//printf("a1 = %f, b1 = %f\na2 = %f, b2 = %f\n",a1, b1, a2, b2);
 	//printf("sin_rot = %f, cos_rot = %f\n", sin_rot, cos_rot);
 	//printf("inter.x = %f, inter.y = %f\n", inter.x, inter.y);
+	return (inter);
+}
+
+t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2)
+{
+	double a1;
+	double b1;
+	double a2;
+	double b2;
+	t_point inter;
+
+	sort_t_point_by_x(&p1, &p2);
+	a1 = sin(rot * M_PI_2) / cos(rot * M_PI_2);
+	b2 = calc_b(pos, a1);
+	a2 = calc_a(p1, p2);
+	b2 = calc_b(p1, a2);
+	if (a1 == a2)
+		return (create_t_point(-42, -42));
+	inter = calc_intersect(a1, b1 , a2, b2);
+	if (inter.x < p1.x || inter.x > p2.x)
+		return (create_t_point(-42, -42));
 	return (inter);
 }

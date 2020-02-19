@@ -1,4 +1,5 @@
 #include "SDL.h"
+#include "global_header.h"
 
 SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub)
 {
@@ -35,6 +36,21 @@ void sort_point_by_x(SDL_Point *p1, SDL_Point *p2)
 {
     if (p1->x > p2->x)
         swap_point(p1, p2);
+}
+
+void swap_t_point(t_point *p1, t_point *p2)
+{
+    t_point tmp;
+
+    tmp = *p1;
+    *p1 = *p2;
+    *p2 = tmp;
+}
+
+void sort_t_point_by_x(t_point *p1, t_point *p2)
+{
+    if (p1->x > p2->x)
+        swap_t_point(p1, p2);
 }
 
 SDL_Point create_point(int x, int y)

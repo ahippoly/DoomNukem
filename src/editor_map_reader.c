@@ -109,13 +109,13 @@ t_wall_ref *read_wall_ref(char *chunk)
     wall_ref = NULL;
     i = 0;
     wall_ref = add_wall_reference(wall_ref, ft_atoi(chunk));
-    printf("%i ", ft_atoi(chunk));
+    //printf("%i ", ft_atoi(chunk));
     chunk = skip_until_char(chunk, ',', ' ');
     while (*chunk == ',')
     {
         chunk++;
         wall_ref = add_wall_reference(wall_ref, ft_atoi(chunk));
-        printf("%i ", ft_atoi(chunk));
+        //printf("%i ", ft_atoi(chunk));
         chunk = skip_until_char(chunk, ',', ' ');
     }
     return (wall_ref);
@@ -132,7 +132,7 @@ void read_wall_ref_list(int fd, t_map_data *map)
     else
         exit_with_msg("error while reading map");
     if (get_next_line(fd, &line) == 1)
-        read_param(line, "MAP_SIZE", &map->player_spawn.x);
+        read_param(line, "PLAYER_SPAWN", &map->player_spawn.x);
     else
         exit_with_msg("error while reading map");
     map->map_wall_ref = init_wall_ref(map->map_size);
@@ -145,8 +145,11 @@ void read_wall_ref_list(int fd, t_map_data *map)
             exit_with_msg("error while reading wall ref map");
         while (j < map->map_size.w)
         {
+            line = skip_space(line);
             map->map_wall_ref[i][j] = read_wall_ref(line);
+            //printf("i %i, j %i ", i, j);
             line = skip_until_char(line, ' ', '\0');
+            printf("line = %s\n", line);
             j++;
         }
         printf("\n");
@@ -223,10 +226,10 @@ t_map_data  read_map(char *path_file)
     // printf("line 1 = %s\n", line);
     while (get_next_line(fd, &line) == 1)
         read_head(fd, line, &map);
-
-    print_wall_list(&map);
-    print_rooms_content(map.room_list, map.room_count);
-    print_wall_ref(map.map_wall_ref, map.map_size, 1);
+    map.is_valid = 1;
+    // print_wall_list(&map);
+    // print_rooms_content(map.room_list, map.room_count);
+    // print_wall_ref(map.map_wall_ref, map.map_size, 1);
     close(fd);
     return (map);
 }

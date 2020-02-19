@@ -72,38 +72,6 @@
 # define HEAD_WALL_REF "WALL_REF MAP"
 
 
-typedef struct      s_wall
-{
-    int             id;
-    SDL_Point       p1;
-    SDL_Point       p2;
-    t_range         p1_height;
-    t_range         p2_height;
-    int             texture_id;
-    int             room_id_ref;
-    int             transparency;
-    int             can_collide;
-}                   t_wall;
-
-typedef struct      s_sector
-{
-    t_wall          wall_lst;
-    int             size;
-}                   t_sector;
-
-typedef struct          s_wall_ref
-{
-    int                 wall_id;
-    struct s_wall_ref   *next;
-}                       t_wall_ref;
-
-typedef struct          s_room
-{
-    int                 room_id;
-    int                 nb_wall;
-    t_range             wall_ref;
-}                       t_room;
-
 typedef struct		s_input
 {
 	SDL_Rect 		pos_size;
@@ -111,18 +79,6 @@ typedef struct		s_input
 	int				max;
 	int				is_in_input_mode;
 }					t_input;
-
-typedef struct      s_map_data
-{
-    int             is_valid;
-    t_size          map_size;
-    int             wall_count;
-    int             room_count;
-    SDL_Point       player_spawn;
-    t_wall          *wall_list;
-    t_room          *room_list;
-    t_wall_ref      ***map_wall_ref;
-}                   t_map_data;
 
 typedef struct      s_env
 {
@@ -236,9 +192,6 @@ t_input create_t_input(SDL_Rect pos_size, int default_value, int max);
 void handle_input_mode(t_env *env, SDL_Scancode key_released);
 void get_wall_param(t_env *env);
 void update_wall_param(t_env *env);
-
-//editor_map_reader.c
-t_map_data  read_map(char *path_file);
 
 //editor_debug_utils.c
 void debug_print(t_env *env, SDL_Scancode key);
