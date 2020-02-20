@@ -25,7 +25,7 @@ t_npc	get_enemy(t_stat_sheet *sheet, int id, t_pos start_pos)
 	enemy.attack.type = WEAPON_TYPE_ENEMY;
 	enemy.attack.damage = sheet->damage[id];
 	enemy.attack.range = sheet->ranges[id];
-	enemy.attack.speed = sheet->speeds[id];
+	init_stat(&enemy.attack.delay, sheet->delays[id], 0);
 	enemy.attack.radius.depth = ZERO;
 	enemy.attack.radius.width = ZERO;
 	enemy.movement_speed = sheet->mv_spd[id];

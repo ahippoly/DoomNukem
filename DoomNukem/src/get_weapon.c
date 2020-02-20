@@ -26,10 +26,10 @@ t_weapon	get_weapon_fist(void)
 	init_stat(&fist.clip.size, INFINITE, INFINITE);
 	fist.clip.reload = 0;
 	init_stat(&fist.ammo, INFINITE, INFINITE);
-	fist.attack.type = WEAPON_TYPE_AUTOMATIC;
+	fist.attack.type = WEAPON_TYPE_SEMIAUTO;
 	fist.attack.damage = 10;
 	fist.attack.range = 0.5;
-	fist.attack.speed = 750;
+	init_stat(&fist.attack.delay, 750, 0);
 	fist.attack.radius.width = 0;
 	fist.attack.radius.width = 0;
 	fist.offset = 0;
@@ -47,7 +47,7 @@ t_weapon	get_weapon_pistol(void)
 	pistol.attack.type = WEAPON_TYPE_SEMIAUTO;
 	pistol.attack.damage = 12;
 	pistol.attack.range = 7;
-	pistol.attack.speed = 200;
+	init_stat(&pistol.attack.delay, 200, 0);
 	pistol.attack.radius.width = 0;
 	pistol.attack.radius.depth = 0;
 	pistol.offset = 0;
@@ -65,7 +65,7 @@ t_weapon	get_weapon_shotgun(void)
 	shotgun.attack.type = WEAPON_TYPE_SEMIAUTO;
 	shotgun.attack.damage = 50; 
 	shotgun.attack.range = 3;
-	shotgun.attack.speed = 1375;
+	init_stat(&shotgun.attack.delay, 1375, 0);
 	shotgun.attack.radius.width = 0.5;
 	shotgun.attack.radius.depth = 0;
 	shotgun.offset = 100;
@@ -83,7 +83,7 @@ t_weapon	get_weapon_submachinegun(void)
 	submachinegun.attack.type = WEAPON_TYPE_AUTOMATIC;
 	submachinegun.attack.damage = 9;
 	submachinegun.attack.range = 6;
-	submachinegun.attack.speed = 100;
+	init_stat(&submachinegun.attack.delay, 100, 0);
 	submachinegun.attack.radius.width = 0;
 	submachinegun.attack.radius.depth = 0;
 	submachinegun.offset = 200;
@@ -101,7 +101,7 @@ t_weapon	get_weapon_bfg(void)
 	bfg.attack.type = WEAPON_TYPE_CHARGED;
 	bfg.attack.damage = 250;
 	bfg.attack.range = 20;
-	bfg.attack.speed = 1800;
+	init_stat(&bfg.attack.delay, 900, 0);
 	bfg.attack.radius.width = 1.5;
 	bfg.attack.radius.depth = 1.5;
 	bfg.offset = 100;

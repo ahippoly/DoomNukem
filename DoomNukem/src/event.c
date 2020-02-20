@@ -55,12 +55,17 @@ void            event(t_enval *env)
 			env->sdl.key[MOUSE] = 1;
 		else if (env->event.type == SDL_MOUSEBUTTONDOWN)
 		{	
-			env->game.pc.equip.weapon_state = WEAPON_STATE_FIRING;
-			ft_putendl("Bang !");
+			if (env->game.pc.arsenal[env->game.pc.equip.current].attack.type == WEAPON_TYPE_CHARGED
+				&& env->game.pc.equip.weapon_state != WEAPON_STATE_FIRING)
+				env->game.pc.equip.weapon_state = WEAPON_STATE_CHARGING;
+			else 
+				env->game.pc.equip.weapon_state = WEAPON_STATE_FIRING;
+			
+			//ft_putendl("Bang !");
 		}
         else if (env->event.type == SDL_MOUSEBUTTONUP)
 		{
-			env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
+			//env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
 			ft_putendl("Unbang !");
 		}
 		else if (env->event.type == SDL_KEYDOWN)
@@ -71,5 +76,8 @@ void            event(t_enval *env)
 		}
         move_events(env);
     }
-    deal_event(env);
+	handle_weapon_semiauto(env);
+	deal_event(env);
+	ft_putnbr((int)(SDL_GetTicks() - env->game.pc.equip.delay));
+	ft_putchar('\n');
 }

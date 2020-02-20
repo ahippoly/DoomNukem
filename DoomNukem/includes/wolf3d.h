@@ -200,7 +200,7 @@ typedef struct	s_enval
 	t_mapinfo				map;
 	t_intxy					wt;
 	t_sprite				wtex[6];
-	t_sprite				weapontex[10];
+	t_sprite				weapontex[11];
 	int						fd;
 	int						wl;
 	char					*linebuff;
@@ -262,5 +262,8 @@ void			mouse_events(t_enval *env);
 void			switch_fog(t_enval *env);
 void			change_weapon(t_enval *env);
 void			handle_bobbing(t_enval *env);
+void			handle_weapon_semiauto(t_enval *env);
+void			handle_weapon_automatic(t_enval *env);
+void			handle_weapon_charged(t_enval *env);
 
 #endif

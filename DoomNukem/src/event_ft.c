@@ -19,9 +19,18 @@ void		switch_fog(t_enval *env)
 		env->user.fog = 0;
 }
 
+static void	reset_weapon(t_enval *env)
+{
+	env->game.pc.equip.delay = 0;
+	env->game.pc.equip.weapon_state = WEAPON_STATE_READY; 
+}
+
 void		change_weapon(t_enval *env)
 {
-	if (env->event.key.keysym.sym == SDLK_1 
+	int id;
+
+	id = env->game.pc.equip.current;
+	if (env->event.key.keysym.sym == SDLK_1
 		&& !ft_strcmp(env->game.pc.arsenal[0].name, "Fists"))
 		env->game.pc.equip.current = 0;
 	if (env->event.key.keysym.sym == SDLK_2
@@ -36,6 +45,8 @@ void		change_weapon(t_enval *env)
 	if (env->event.key.keysym.sym == SDLK_5
 		&& !ft_strcmp(env->game.pc.arsenal[4].name, "BFG"))
 		env->game.pc.equip.current = 4;
+	if (id != env->game.pc.equip.current)
+		reset_weapon(env);
 }
 
 void		handle_bobbing(t_enval *env)

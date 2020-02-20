@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <time.h>
 # include "SDL2/SDL.h"
+# include "wolf3d.h"
 # include "enemy_id.h"
 
 # define WEAPON_TYPE_ENEMY		0
@@ -29,7 +30,8 @@
 
 # define WEAPON_STATE_READY		0
 # define WEAPON_STATE_FIRING    1
-# define WEAPON_STATE_RELOADING 2
+# define WEAPON_STATE_CHARGING	2
+# define WEAPON_STATE_RELOADING 3
 
 # define PLAYER_UNDETECTED		0
 # define PLAYER_ALERTED			1
@@ -115,7 +117,7 @@ typedef struct	s_attack
 	int			type;
 	int			damage;
 	double		range;
-	int			speed;
+	t_stat		delay;
 	t_radius	radius;
 }				t_attack;
 
@@ -217,8 +219,8 @@ void		handle_weapon(t_weapon *weapon, Uint32 delay, t_game *game);
 ** resolve_damage.c functions
 */
 
-int		get_damage_dealt(t_attack attacker, t_buff att_mod);
-void	get_damage_taken(int *health, int *armor, t_buff def_mod, int damage);
+int			get_damage_dealt(t_attack attacker, t_buff att_mod);
+void		get_damage_taken(int *health, int *armor, t_buff def_mod, int damage);
 
 /*
 ** handle_status_effects functions

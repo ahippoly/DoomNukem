@@ -64,6 +64,7 @@ static void		prep_init(t_enval *env)
 	init_pc(&env->game.pc);
 	env->user.bobbing.x = 0;
 	env->user.bobbing.y = 0;
+	env->game.pc.equip.delay = 0;
 }
 
 void			init_values(char *file, t_enval *env)
@@ -115,6 +116,8 @@ void			init_texture(t_enval *env)
 
 void			init_wptext(t_enval *env)
 {
+	int i;
+
 	env->weapontex[0].img = SDL_LoadBMP("img/weapons/hand.bmp");
 	env->weapontex[1].img = SDL_LoadBMP("img/weapons/hand2.bmp");
 	env->weapontex[2].img = SDL_LoadBMP("img/weapons/gun1.bmp");
@@ -125,4 +128,12 @@ void			init_wptext(t_enval *env)
 	env->weapontex[7].img = SDL_LoadBMP("img/weapons/rafle2.bmp");
 	env->weapontex[8].img = SDL_LoadBMP("img/weapons/autogun1.bmp");
 	env->weapontex[9].img = SDL_LoadBMP("img/weapons/autogun2.bmp");
+	env->weapontex[10].img = SDL_LoadBMP("img/weapons/gunfire.bmp");
+	i = 0;
+	while (i < 11)
+	{
+		if (!(env->weapontex[i].img))
+			ft_error("at least one weapon texture is missing or corrupted.", env, 0);
+		i++;
+	}
 }

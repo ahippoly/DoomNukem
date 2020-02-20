@@ -39,7 +39,7 @@ typedef struct	s_stat_sheet
 	int		health[ENEMY_TYPE_COUNT];
 	int		damage[ENEMY_TYPE_COUNT];
 	double	ranges[ENEMY_TYPE_COUNT];
-	int		speeds[ENEMY_TYPE_COUNT];
+	int		delays[ENEMY_TYPE_COUNT];
 	double  mv_spd[ENEMY_TYPE_COUNT];
 }				t_stat_sheet;
 

@@ -46,6 +46,7 @@ SRC		=	main.c \
 			get_enemy.c \
 			get_weapon.c \
 			handle_status_effects.c \
+			handle_weapon_fire.c \
 			init_game.c \
 			ft_error.c\
 			ft_freewolf.c\
