@@ -116,7 +116,10 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
             charts2pixels(charts[39], size, draw_letter);
         else
             //exit_with_msg("Wrong chars entered in create_text_img()");
-            exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?");
+            {
+                printf("character attemped to print = %c, the full string is %s\n", str[i], str);
+                exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?\n");
+            }
         i++;
     }
     // printf("end read word\n");

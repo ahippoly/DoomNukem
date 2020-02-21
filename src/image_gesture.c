@@ -18,3 +18,8 @@ t_img create_img(unsigned int *pixels, SDL_Rect pos_size)
     img.pos_size = pos_size;
     return (img);
 }
+
+void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color)
+{
+    pixels[p_pos.x + p_pos.y * img_size.w] = color;
+}

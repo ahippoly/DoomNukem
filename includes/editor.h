@@ -91,6 +91,8 @@ typedef struct      s_env
     SDL_Texture     *text_list[NB_TEXTURE];
     SDL_Rect        grid_pos;
     const Uint8     *clavier;
+    unsigned int    *p_screen;
+    unsigned int    *p_grid;
     Uint32          mouse_button;
     SDL_Point       mouse;
     SDL_Point       hovered_corner;
@@ -116,8 +118,6 @@ typedef struct      s_env
     t_room          *room_list;
     t_wall_ref      ***map_wall_ref;
     t_size          map_size;
-    unsigned int    *p_screen;
-    unsigned int    *p_grid;
     t_button        edit;
     t_button        del;
     t_button        create_room;

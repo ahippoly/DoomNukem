@@ -81,8 +81,8 @@ void init_input(t_env *env)
     env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(305, 720, 60, 40), 20, 190);
     env->input_lst[INPUT_END_P1] = create_t_input(set_sdl_rect(200, 780, 60, 40), 30, 200);
     env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(305, 780, 60, 40), 30, 200);
-    env->input_lst[INPUT_PLAYER_X] = create_t_input(set_sdl_rect(505, 690, 60, 40), 0, env->map_size.w -1);
-    env->input_lst[INPUT_PLAYER_Y] = create_t_input(set_sdl_rect(585, 690, 60, 40), 0, env->map_size.h -1);
+    env->input_lst[INPUT_PLAYER_X] = create_t_input(set_sdl_rect(505, 690, 60, 40), 0, env->map_size.w - 1);
+    env->input_lst[INPUT_PLAYER_Y] = create_t_input(set_sdl_rect(585, 690, 60, 40), 0, env->map_size.h - 1);
 }
 
 void init_env(t_env *env)
@@ -92,8 +92,8 @@ void init_env(t_env *env)
     init_buttons(env);
     init_txt_img(env);
     init_mouse_mode(env);
-    init_input(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
+    init_input(env);
     env->map_wall_ref = init_wall_ref(env->map_size);
     env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);

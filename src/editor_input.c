@@ -79,7 +79,9 @@ void handle_input_mode(t_env *env, SDL_Scancode key_released)
         if (added_num != -1)
         {
             input = &env->input_lst[env->selected_input];
+            // printf("selected input = %i, input val = %i\n", env->selected_input, input->value);
             input->value = ft_min(input->value * 10 + added_num, input->max);
+            // printf("input val = %i\n", input->value);
             update_wall_param(env);
         }
     }

@@ -6,7 +6,8 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			editor_input.c editor_map_reader.c editor_debug_utils.c)
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
-							error_gesture.c)
+						error_gesture.c image_gesture.c line_intersect.c \
+						tool_sdlpoint_arithmetic.c utils.c)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
