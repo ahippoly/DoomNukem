@@ -39,8 +39,8 @@
 # define PLAYER_HOSTILE			0
 # define PLAYER_FRIENDLY		1
 
-# define BUFF					0
-# define DEBUFF					1
+# define STATUS_BUFF			0
+# define STATUS_DEBUFF			1
 # define EFFECT_AMOUNT			2
 
 # define DIFFICULTY_PROJECT		0
@@ -150,6 +150,7 @@ typedef struct	s_player_character
 	t_status	effects;
 	t_weapon	arsenal[5];
 	t_equipped	equip;
+	int			trigger_held;
 }				t_player_character;
 
 typedef struct	s_npc

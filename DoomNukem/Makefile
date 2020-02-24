@@ -41,6 +41,9 @@ SRC		=	main.c \
 			exit.c \
 			fc_draw.c\
 			fog.c \
+			ft_error.c \
+			ft_freewolf.c \
+			ft_help.c \
 			get_enemy_sheets.c \
 			get_enemy_sheets2.c \
 			get_enemy.c \
@@ -48,9 +51,6 @@ SRC		=	main.c \
 			handle_status_effects.c \
 			handle_weapon_fire.c \
 			init_game.c \
-			ft_error.c\
-			ft_freewolf.c\
-			ft_help.c\
 			mobility.c\
 			mouse_event.c \
 			perform_attack.c \

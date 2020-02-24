@@ -183,6 +183,7 @@ typedef struct	s_tex
 typedef struct	s_user
 {
 	int			fog;
+	int			paused;
 	t_intxy		bobbing;
 }				t_user;
 
@@ -262,8 +263,7 @@ void			mouse_events(t_enval *env);
 void			switch_fog(t_enval *env);
 void			change_weapon(t_enval *env);
 void			handle_bobbing(t_enval *env);
-void			handle_weapon_semiauto(t_enval *env);
-void			handle_weapon_automatic(t_enval *env);
-void			handle_weapon_charged(t_enval *env);
+void			handle_weapon_fire(t_enval *env);
+void			handle_weapon_fire2(t_enval *env);
 
 #endif

@@ -53,6 +53,9 @@ static void		prep_init(t_enval *env)
 	int i;
 
 	env->user.fog = 3;
+	env->user.paused = -1;
+	env->user.bobbing.x = 0;
+	env->user.bobbing.y = 0;
 	env->map.walls = NULL;
 	i = -1;
 	while (++i < NBKEY)
@@ -62,8 +65,6 @@ static void		prep_init(t_enval *env)
 		env->game.pc.arsenal[i].name = "Nothing.";
 	env->game.pc.equip.delay = 0;
 	init_pc(&env->game.pc);
-	env->user.bobbing.x = 0;
-	env->user.bobbing.y = 0;
 	env->game.pc.equip.delay = 0;
 }
 

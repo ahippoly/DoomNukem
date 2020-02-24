@@ -61,6 +61,7 @@ int				main(int argc, char **argv)
 		init_wptext(env); /*init sprite wp*/
 		while (1)
 		{
+			env->game.pc.equip.delay = SDL_GetTicks();
 			display(env);
 			event(env);
 		}

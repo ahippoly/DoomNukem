@@ -12,6 +12,11 @@
 
 #include "../includes/wolf3d.h"
 
+/*
+** Toggles between different fog types.
+** Thin -> None -> Thick -> White -> Thin
+*/
+
 void		switch_fog(t_enval *env)
 {
 	env->user.fog++;
@@ -19,34 +24,45 @@ void		switch_fog(t_enval *env)
 		env->user.fog = 0;
 }
 
+/*
+** A weapon swap demands that the delays and states be set correctly
+*/
+
 static void	reset_weapon(t_enval *env)
 {
 	env->game.pc.equip.delay = 0;
 	env->game.pc.equip.weapon_state = WEAPON_STATE_READY; 
 }
 
+/*
+** Function allowing for weapon swap. No effect if we already have the weapon.
+*/
+
 void		change_weapon(t_enval *env)
 {
 	int id;
 
-	id = env->game.pc.equip.current;
-	if (env->event.key.keysym.sym == SDLK_1
-		&& !ft_strcmp(env->game.pc.arsenal[0].name, "Fists"))
-		env->game.pc.equip.current = 0;
-	if (env->event.key.keysym.sym == SDLK_2
-		&& !ft_strcmp(env->game.pc.arsenal[1].name, "Pistol"))
-		env->game.pc.equip.current = 1;
-	if (env->event.key.keysym.sym == SDLK_3
-		&& !ft_strcmp(env->game.pc.arsenal[2].name, "Shotgun"))
-		env->game.pc.equip.current = 2;
-	if (env->event.key.keysym.sym == SDLK_4
-		&& !ft_strcmp(env->game.pc.arsenal[3].name, "SMG"))
-		env->game.pc.equip.current = 3;
-	if (env->event.key.keysym.sym == SDLK_5
-		&& !ft_strcmp(env->game.pc.arsenal[4].name, "BFG"))
-		env->game.pc.equip.current = 4;
-	if (id != env->game.pc.equip.current)
-		reset_weapon(env);
+	if (env->game.pc.equip.weapon_state == WEAPON_STATE_READY)
+	{
+		id = env->game.pc.equip.current;
+		if (env->event.key.keysym.sym == SDLK_1
+			&& !ft_strcmp(env->game.pc.arsenal[0].name, "Fists"))
+			env->game.pc.equip.current = 0;
+		if (env->event.key.keysym.sym == SDLK_2
+			&& !ft_strcmp(env->game.pc.arsenal[1].name, "Pistol"))
+			env->game.pc.equip.current = 1;
+		if (env->event.key.keysym.sym == SDLK_3
+			&& !ft_strcmp(env->game.pc.arsenal[2].name, "Shotgun"))
+			env->game.pc.equip.current = 2;
+		if (env->event.key.keysym.sym == SDLK_4
+			&& !ft_strcmp(env->game.pc.arsenal[3].name, "SMG"))
+			env->game.pc.equip.current = 3;
+		if (env->event.key.keysym.sym == SDLK_5
+			&& !ft_strcmp(env->game.pc.arsenal[4].name, "BFG"))
+			env->game.pc.equip.current = 4;
+		if (id != env->game.pc.equip.current)
+			reset_weapon(env);
+	}
 }
 
 void		handle_bobbing(t_enval *env)

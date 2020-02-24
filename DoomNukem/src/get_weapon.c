@@ -65,7 +65,7 @@ t_weapon	get_weapon_shotgun(void)
 	shotgun.attack.type = WEAPON_TYPE_SEMIAUTO;
 	shotgun.attack.damage = 50; 
 	shotgun.attack.range = 3;
-	init_stat(&shotgun.attack.delay, 1375, 0);
+	init_stat(&shotgun.attack.delay, 1200, 0);
 	shotgun.attack.radius.width = 0.5;
 	shotgun.attack.radius.depth = 0;
 	shotgun.offset = 100;
@@ -96,12 +96,12 @@ t_weapon	get_weapon_bfg(void)
 
 	bfg.name = "BFG";
 	init_stat(&bfg.clip.size, 1, 1);
-	bfg.clip.reload = 3000;
+	bfg.clip.reload = 2500;
 	init_stat(&bfg.ammo, 2, 2);
 	bfg.attack.type = WEAPON_TYPE_CHARGED;
 	bfg.attack.damage = 250;
 	bfg.attack.range = 20;
-	init_stat(&bfg.attack.delay, 900, 0);
+	init_stat(&bfg.attack.delay, 850, 0);
 	bfg.attack.radius.width = 1.5;
 	bfg.attack.radius.depth = 1.5;
 	bfg.offset = 100;

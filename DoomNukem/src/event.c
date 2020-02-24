@@ -12,6 +12,26 @@
 
 #include "../includes/wolf3d.h"
 
+static void		mouseclick_event(t_enval *env)
+{
+	if (env->event.type == SDL_MOUSEBUTTONDOWN && env->event.button.button == SDL_BUTTON_LEFT)
+	{	
+		if (env->game.pc.arsenal[env->game.pc.equip.current].attack.type == WEAPON_TYPE_CHARGED
+			&& env->game.pc.equip.weapon_state != WEAPON_STATE_FIRING)
+			env->game.pc.equip.weapon_state = WEAPON_STATE_CHARGING;
+		else 
+			env->game.pc.equip.weapon_state = WEAPON_STATE_FIRING;
+		
+		//ft_putendl("Bang !");
+	}
+    else if (env->event.type == SDL_MOUSEBUTTONUP && env->event.button.button == SDL_BUTTON_LEFT)
+	{
+		//env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
+		env->game.pc.trigger_held = env->game.pc.equip.weapon_state != WEAPON_STATE_READY ? 1 : 0;
+		ft_putendl("Unbang !");
+	}
+}
+
 static void		move_events(t_enval *env)
 {
 	if (env->event.key.keysym.sym == SDLK_q)
@@ -34,7 +54,8 @@ static void		move_events(t_enval *env)
 
 static void      deal_event(t_enval *env)
 {
-    if (env->sdl.key[MOUSE])
+    handle_weapon_fire2(env);
+	if (env->sdl.key[MOUSE])
         mouse_events(env);
     if (env->sdl.key[UP] != 0 || env->sdl.key[DOWN] != 0 || env->sdl.key[LEFT] != 0
     || env->sdl.key[RIGHT] != 0)
@@ -45,39 +66,36 @@ static void      deal_event(t_enval *env)
 
 void            event(t_enval *env)
 {
+	//env->game.pc.equip.delay = SDL_GetTicks(); //Remove comment for 2nd handle_weapon_fire fc
 	while (SDL_PollEvent(&env->event))
     {
         if ((env->event.key.keysym.sym == SDLK_ESCAPE
 		&& env->event.type == SDL_KEYDOWN)
 		|| env->event.type == SDL_QUIT)
 			ft_exit(env, NULL, 1);
-        else if (env->event.type == SDL_MOUSEMOTION)
-			env->sdl.key[MOUSE] = 1;
-		else if (env->event.type == SDL_MOUSEBUTTONDOWN)
-		{	
-			if (env->game.pc.arsenal[env->game.pc.equip.current].attack.type == WEAPON_TYPE_CHARGED
-				&& env->game.pc.equip.weapon_state != WEAPON_STATE_FIRING)
-				env->game.pc.equip.weapon_state = WEAPON_STATE_CHARGING;
-			else 
-				env->game.pc.equip.weapon_state = WEAPON_STATE_FIRING;
-			
-			//ft_putendl("Bang !");
-		}
-        else if (env->event.type == SDL_MOUSEBUTTONUP)
+		if (env->event.type == SDL_KEYDOWN)
 		{
-			//env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
-			ft_putendl("Unbang !");
+			if (env->event.key.keysym.sym == SDLK_p)
+				env->user.paused *= -1;
 		}
-		else if (env->event.type == SDL_KEYDOWN)
+		// if ((env->user.paused) < 0)
+		// {	
+        if (env->event.type == SDL_MOUSEMOTION)
+			env->sdl.key[MOUSE] = 1;
+		mouseclick_event(env);
+		if (env->event.type == SDL_KEYDOWN) 
 		{
 			if (env->event.key.keysym.sym == SDLK_l)
             	switch_fog(env);
 			change_weapon(env);
 		}
         move_events(env);
-    }
-	handle_weapon_semiauto(env);
-	deal_event(env);
-	ft_putnbr((int)(SDL_GetTicks() - env->game.pc.equip.delay));
-	ft_putchar('\n');
+		// }
+		
+	}
+	// ft_putstr("delay is ");
+	// ft_putnbr((int)env->game.pc.arsenal[env->game.pc.equip.current].attack.delay.current);
+	// ft_putchar('\n');
+	if(env->user.paused < 0)
+		deal_event(env);
 }

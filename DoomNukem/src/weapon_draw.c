@@ -23,8 +23,8 @@ void		weapon_draw(t_enval *env)
 	uint32_t	pixel;
 
 	id = env->game.pc.equip.current * 2 + env->game.pc.equip.weapon_state;
-	ft_putnbr(id);
-	ft_putendl(" is the id.");
+	// ft_putnbr(id);
+	// ft_putendl(" is the id.");
 	offset.x = env->game.pc.arsenal[(int)ft_min(id / 2, 4)].offset + env->user.bobbing.x;
 	offset.y = 20 + env->user.bobbing.y;
 	zpixel = get_pixel_weapon(env, id, 0, 0);
