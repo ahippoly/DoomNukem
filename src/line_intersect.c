@@ -133,7 +133,7 @@ t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2)
 
 	sort_t_point_by_x(&p1, &p2);
 	a1 = sin(rot * M_PI_2) / cos(rot * M_PI_2);
-	b2 = calc_b(pos, a1);
+	b1 = calc_b(pos, a1);
 	a2 = calc_a(p1, p2);
 	b2 = calc_b(p1, a2);
 	if (a1 == a2)

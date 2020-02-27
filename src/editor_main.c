@@ -114,26 +114,6 @@ void init_env(t_env *env)
     env->quit = 0;
 }
 
-SDL_Rect set_sdl_rect(int x, int y, int w, int h)
-{
-    SDL_Rect rect;
-
-    rect.x = x;
-    rect.y = y;
-    rect.w = w;
-    rect.h = h;
-    return (rect);
-}
-
-t_size set_size(int w, int h)
-{
-    t_size size;
-
-    size.w = w;
-    size.h = h;
-    return (size);
-}
-
 void adapt_min(int *pos, int *length)
 {
     if (*pos < 0)

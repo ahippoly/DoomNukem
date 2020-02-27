@@ -17,8 +17,18 @@ void init_sdl_ressources_rend(t_data *d)
     //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
 }
 
-void init_data(t_data *d)
+void init_mini_map(t_data *d, t_map_data *map)
 {
+    d->p_mini_map = NULL;
+    create_mini_map(d, map);
+    d->p_player_pos = alloc_image(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
+    draw_rectangle(d->player_pos, set_sdl_rect(0, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), set_size(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), 0xFFFF0000);
+    d->mini_map_player_pos = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
+}
+
+void init_data(t_data *d, t_map_data *map)
+{
+    init_mini_map(d, map);
     d->rot = 1;
     d->quit = 0;
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
@@ -34,7 +44,7 @@ double check_inter_with_wall(t_wall wall, double rot, t_point pos)
     dist = 9999;
     inter = line_intersect(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
     if (inter.x != -42)
-        dist = ft_min(dist, cos(rot * M_PI_2) * inter.x + sin(rot * M_PI_2) * inter.y);
+        dist = ft_fmin(dist, cos(rot * M_PI_2) * inter.x + sin(rot * M_PI_2) * inter.y);
     return (dist);
 }
 
@@ -63,8 +73,8 @@ void draw_vertical_line(t_data *d, int x, double dist)
     int draw_end;
     int i;
 
-    draw_begin = WIN_SIZE_Y / 2 - HALF_WIN_SIZE_Y / dist;
-    draw_end = WIN_SIZE_Y / dist;
+    draw_begin = ft_max(WIN_SIZE_Y / 2 - HALF_WIN_SIZE_Y / dist, 0);
+    draw_end = ft_min(WIN_SIZE_Y / dist, WIN_SIZE_Y);
     i = 0;
     while (draw_begin < draw_end)
     {
@@ -72,15 +82,20 @@ void draw_vertical_line(t_data *d, int x, double dist)
     }
 }
 
-void raycast_all_screen(t_data *d)
+void raycast_all_screen(t_data *d, t_map_data *map)
 {
     double fov_coef = (double)FOV_ANGLE / 90;
     double start_angle = d->rot - fov_coef / 2;
     double end_angle = d->rot + fov_coef / 2;
     double step = fov_coef / WIN_SIZE_X;
-    while (start_angle < end_angle)
+    int x;
+
+    x = 0;
+    while (x < WIN_SIZE_X)
     {
+        draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle));
         start_angle += step;
+        x++;
     }
 }
 
@@ -91,6 +106,14 @@ void handle_key_event(t_data *d, t_map_data *map)
         d->rot += 0.05;
     if (d->clavier[SDL_SCANCODE_Q])
         d->rot -= 0.05;
+    if (d->clavier[SDL_SCANCODE_D])
+        d->player_pos.x += 0.05;
+    if (d->clavier[SDL_SCANCODE_A])
+        d->player_pos.x -= 0.05;
+    if (d->clavier[SDL_SCANCODE_W])
+        d->player_pos.y -= 0.05;
+    if (d->clavier[SDL_SCANCODE_S])
+        d->player_pos.y += 0.05;
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
 }
@@ -102,9 +125,9 @@ void handle_poll_event(t_data *d, t_map_data *map)
         if (d->e.type == SDL_KEYDOWN)
         {
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
-                //draw_vertical_line(d, 400, 
+                draw_vertical_line(d, 500, 
                 check_intersect_with_all_wall(d, map, d->rot)
-                //)
+                )
                 ;
         }
     }
@@ -112,8 +135,12 @@ void handle_poll_event(t_data *d, t_map_data *map)
 
 void print_data2screen(t_data *d)
 {
-    printf("before print\n");
+    SDL_Rect tmp;
+    //printf("before print\n");
     SDL_UpdateTexture(d->screen, NULL, d->p_screen, WIN_SIZE_X * 4);
+    tmp = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
+    SDL_UpdateTexture(d->screen, &tmp, d->p_mini_map, MINI_MAP_X * 4);
+    SDL_UpdateTexture(d->screen, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
     SDL_RenderPresent(d->rend);
 }
@@ -124,20 +151,21 @@ int main(void)
     t_data      d;
 
     init_sdl_ressources_rend(&d);
-    init_data(&d);
+    map = read_map("maps/editor_map_0");
+    init_data(&d, map);
     ft_putstr("Main worked");
 
-    map = read_map("maps/editor_map_0");
     d.player_pos = create_t_point(map.player_spawn.x, map.player_spawn.y);
     printf("player pos = %f, %f\n", d.player_pos.x, d.player_pos.y);
     while (!d.quit)
     {
-        //ft_bzero(d.p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+        ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
         handle_key_event(&d, &map);
         handle_poll_event(&d, &map);
-
-
+        raycast_all_screen(&d, &map);
+        //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
+        update_player_pos_mini_map(&d);
         print_data2screen(&d);
     }
 }

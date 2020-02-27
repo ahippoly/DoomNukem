@@ -198,4 +198,7 @@ void debug_print(t_env *env, SDL_Scancode key);
 void print_wall_content(t_wall wall);
 void print_wall_list(t_map_data *map);
 
+SDL_Rect set_sdl_rect(int x, int y, int w, int h);
+t_size set_size(int w, int h);
+
 #endif

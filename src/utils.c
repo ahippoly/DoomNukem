@@ -38,3 +38,23 @@ t_size create_t_size(int w, int h)
 	size.h = h;
 	return (size);
 }
+
+SDL_Rect set_sdl_rect(int x, int y, int w, int h)
+{
+    SDL_Rect rect;
+
+    rect.x = x;
+    rect.y = y;
+    rect.w = w;
+    rect.h = h;
+    return (rect);
+}
+
+t_size set_size(int w, int h)
+{
+    t_size size;
+
+    size.w = w;
+    size.h = h;
+    return (size);
+}
