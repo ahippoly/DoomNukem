@@ -198,7 +198,15 @@ void debug_print(t_env *env, SDL_Scancode key);
 void print_wall_content(t_wall wall);
 void print_wall_list(t_map_data *map);
 
+//utils.c
 SDL_Rect set_sdl_rect(int x, int y, int w, int h);
 t_size set_size(int w, int h);
+SDL_Rect adapt_border(SDL_Rect pos_size, t_size max);
+void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
+void create_straight_line(unsigned int *pixels, SDL_Rect pos_size, t_size screen_length, int color);
+void create_straight_column(unsigned int *pixels, SDL_Rect pos_size, t_size screen_length, int color);
+void adapt_min(int *pos, int *length);
+void adapt_max(int *pos, int *length, int max);
+
 
 #endif
