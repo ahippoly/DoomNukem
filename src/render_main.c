@@ -15,7 +15,7 @@ void init_sdl_ressources_rend(t_data *d)
         exit_with_msg("Failed to create Renderer");
     d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    SDL_SetTextureBlendMode(d->mini_map, SDL_BLENDMODE_BLEND);
+    //SDL_SetTextureBlendMode(d->mini_map, SDL_BLENDMODE_BLEND);
     //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
 }
 
@@ -25,8 +25,8 @@ void init_mini_map(t_data *d, t_map_data *map)
     create_mini_map(d, map);
     SDL_UpdateTexture(d->mini_map, NULL, d->p_mini_map_bg, MINI_MAP_SIZE_X * 4);
     d->p_player_pos = alloc_image(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
-    d->p_mini_map_add = alloc_image(MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    draw_rectangle(d->p_screen, set_sdl_rect(0, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), set_size(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), 0xFF0000FF);
+    d->p_mini_map = alloc_image(MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
+    draw_rectangle(d->p_player_pos, set_sdl_rect(0, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), set_size(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), 0xFF0000FF);
     d->mini_map_player_pos = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
 }
 
@@ -137,18 +137,15 @@ void handle_poll_event(t_data *d, t_map_data *map)
     }
 }
 
-void print_data2screen(t_data *d)
+void print_data2screen(t_data *d, t_map_data *map)
 {
     SDL_Rect tmp;
     //printf("before print\n");
     SDL_RenderClear(d->rend);
     SDL_UpdateTexture(d->screen, NULL, d->p_screen, WIN_SIZE_X * 4);
-    tmp = set_sdl_rect(MINI_MAP_POS_X, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    //SDL_UpdateTexture(d->screen, &tmp, d->p_mini_map_bg, MINI_MAP_SIZE_X * 4);
-
-    //SDL_UpdateTexture(d->screen, &tmp, d->p_mini_map_add, MINI_MAP_SIZE_X * 4);
-    SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4);
+    print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
+    tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
     SDL_RenderCopy(d->rend, d->mini_map, NULL, &tmp);
     SDL_RenderPresent(d->rend);
 }
@@ -175,6 +172,6 @@ int main(void)
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
         update_player_pos_mini_map(&d, &map);
         print_player_look_vector(&d, &map, d.rot);
-        print_data2screen(&d);
+        print_data2screen(&d, &map);
     }
 }

@@ -53,6 +53,20 @@ void print_player_look_vector(t_data *d, t_map_data *map, double rot)
     SDL_Point screen_player_pos;
 
     scale = calc_map_scale(map);
-    screen_player_pos = create_point(scale.x * d->player_pos.x, scale.y * d->player_pos.y);
-    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot * M_PI_2) * 5, screen_player_pos.x + sin(rot * M_PI_2) * 5), d->p_mini_map_add, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y));
+    screen_player_pos = create_point(d->mini_map_player_pos.x + MINI_MAP_PLAYER_SIZE / 2, d->mini_map_player_pos.y + MINI_MAP_PLAYER_SIZE / 2);
+    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot * M_PI_2) * 25, screen_player_pos.y + sin(rot * M_PI_2) * 25), d->p_mini_map, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
+}
+
+void print_mini_map(t_data *d, t_map_data *map)
+{
+    SDL_Rect tmp;
+    tmp = set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
+    ft_bzero(d->p_mini_map, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y * 4);
+    ft_memcpy(d->p_mini_map, d->p_mini_map_bg, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y * 4);
+    print_player_look_vector(d, map, d->rot);
+    SDL_UpdateTexture(d->mini_map, &tmp, d->p_mini_map, MINI_MAP_SIZE_X * 4);
+    SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4);
+    //SDL_UpdateTexture(d->mini_map, &tmp, d->p_mini_map, MINI_MAP_SIZE_X * 4);
+
+
 }

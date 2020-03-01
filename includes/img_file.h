@@ -8,6 +8,12 @@ typedef struct      s_img
     SDL_Rect        pos_size;
 }                   t_img;
 
+typedef struct      s_text
+{
+    t_img           img;
+    SDL_Texture     *txt;
+}                   t_text;
+
 
 t_img create_img(unsigned int *pixels, SDL_Rect pos_size);
 
