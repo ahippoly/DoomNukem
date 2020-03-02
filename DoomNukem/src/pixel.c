@@ -12,12 +12,12 @@
 
 #include "../includes/wolf3d.h"
 
-uint32_t		get_pixel_weapon(t_enval *env, int si, float x, float y)
+uint32_t		get_pixel_weapon(t_enval *env, t_intxy si, float x, float y)
 {
 	uint8_t			*p;
 	SDL_Surface		*surface;
 
-	surface = env->weapontex[si].img;
+	surface = env->wptex[si.x][si.y].img;
 	p = (uint8_t *)surface->pixels + (int)y * surface->pitch
 		+ (int)x * surface->format->BytesPerPixel;
 	return ((p[2] | p[1] << 8 | p[0] << 16 | 255 << 24));

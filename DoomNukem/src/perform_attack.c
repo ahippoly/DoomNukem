@@ -23,7 +23,7 @@ void	reload_weapon(t_weapon *weapon, t_equipped *eq, Uint32 delay_start)
 
 	delay_end = SDL_GetTicks();
 
-	if (delay_end - delay_start >= weapon->clip.reload)
+	if ((int)(delay_end - delay_start) >= weapon->clip.reload)
 	{
 		old_clip_ammo = weapon->clip.size.current;
 		weapon->clip.size.current += ft_min(weapon->clip.size.max

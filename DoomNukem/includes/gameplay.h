@@ -51,7 +51,7 @@
 # define DIFFICULTY_IMPOSSIBLE  5
 
 # define ZERO					0
-# define INFINITE				-1
+# define INFINITE				1000000
 
 /*
 ** Building blocks for most other structures.
@@ -109,7 +109,7 @@ typedef struct	s_status
 typedef struct  s_clip
 {
 	t_stat		size;
-	double		reload;
+	int			reload;
 }				t_clip;
 
 typedef struct	s_attack
@@ -133,6 +133,7 @@ typedef struct	s_weapon
 typedef struct	s_equipped
 {
 	int		current;
+	int		reload_cd;
 	int		weapon_state;
 	Uint32	delay;
 }				t_equipped;

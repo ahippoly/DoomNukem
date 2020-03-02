@@ -24,8 +24,8 @@ static t_doublexy	get_projections(t_enval *env, t_player player)
 	double		judge_horiz;
 	t_doublexy	proj;
 
-	judge_vert = (env->sdl.key[UP] + env->sdl.key[DOWN]) * 1 + env->sdl.key[RUN];
-	judge_horiz = (env->sdl.key[LEFT] + env->sdl.key[RIGHT]) * -1 + env->sdl.key[RUN];
+	judge_vert = (env->sdl.key[UP] + env->sdl.key[DOWN]) * 1 + env->sdl.key[LSHIFT];
+	judge_horiz = (env->sdl.key[LEFT] + env->sdl.key[RIGHT]) * -1 + env->sdl.key[LSHIFT];
 	proj.x = player.pos.x + (player.dir.x / 9) * judge_vert;
 	proj.x += player.plane.x / 9 * judge_horiz;
 	proj.y = player.pos.y + (player.dir.y / 9) * judge_vert;

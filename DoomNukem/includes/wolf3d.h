@@ -13,7 +13,7 @@
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-# include "mlx.h"
+// # include "mlx.h"
 # include "SDL2/SDL.h"
 # include "../libft/includes/libft.h"
 # include "gameplay.h"
@@ -27,6 +27,13 @@
 # define TEXT_CEILING 5
 # define TEXT_FLOOR 4
 
+# define WEAPON_NUMBER				6
+# define WEAPON_TEXTURES_MELEE		4
+# define WEAPON_TEXTURES_PISTOL		4
+# define WEAPON_TEXTURES_SHOTGUN	5
+# define WEAPON_TEXTURES_SMG		4
+# define WEAPON_TEXTURES_BFG		4
+
 # define WN "textures/wallnorth.xpm"
 # define WS "textures/bonuscrystal.xpm"
 # define WW "textures/wallwest.xpm"
@@ -34,37 +41,43 @@
 # define FL "textures/floor.xpm"
 # define CL "textures/ceiling.xpm"
 
-# define NOEVENTMASK 0L
-# define KEYPRESSMASK (1L << 0)
-# define KEYRELEASEMASK (1L << 1)
-# define BUTTONPRESSMASK (1L << 2)
-# define POINTERMOTIONMASK (1L << 6)
+// # define NOEVENTMASK 0L
+// # define KEYPRESSMASK (1L << 0)
+// # define KEYRELEASEMASK (1L << 1)
+// # define BUTTONPRESSMASK (1L << 2)
+// # define POINTERMOTIONMASK (1L << 6)
 
-# define KEYPRESS 2
-# define KEYRELEASE 3
-# define BUTTONPRESS 4
-# define MOTIONNOTIFY 6
-# define DESTROYNOTIFY 17
+// # define KEYPRESS 2
+// # define KEYRELEASE 3
+// # define BUTTONPRESS 4
+// # define MOTIONNOTIFY 6
+// # define DESTROYNOTIFY 17
 
 # define KEY_Q 12
 # define KEY_E 14
+# define KEY_R 15
+# define KEY_P 35
 # define KEY_ESC 53
-# define KEY_UP 126
-# define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
 # define KEY_LSHIFT 257
 
 # define NBKEY 15
-# define ECHAP 1
-# define UP 2
-# define DOWN 3
-# define LEFT 4
-# define RIGHT 5
-# define MOUSE 6
-# define E 7
-# define Q 8
-# define RUN 9
+# define LMOUSE 0
+# define Q 1
+# define E 2
+# define R 3
+# define P 4
+# define ESC 5
+# define LEFT 6
+# define RIGHT 7
+# define DOWN 8
+# define UP 9
+# define MOUSE 10
+# define LSHIFT 11
+
 /*
 ** Many little structures to build up a bigger, cleaner one.
 ** The first two are used in a variety of ways.
@@ -201,7 +214,8 @@ typedef struct	s_enval
 	t_mapinfo				map;
 	t_intxy					wt;
 	t_sprite				wtex[6];
-	t_sprite				weapontex[11];
+	// t_sprite				wptex[WEAPON_NUMBER][8];
+	t_sprite				**wptex;
 	int						fd;
 	int						wl;
 	char					*linebuff;
@@ -237,6 +251,11 @@ void			wall_draw(t_enval *env, int i, int texnum);
 void			weapon_draw(t_enval *env);
 void			init_texture(t_enval *env);
 void			init_wptext(t_enval *env);
+void			init_melee_texture(t_enval *env);
+void			init_pistol_texture(t_enval *env);
+void			init_shotgun_texture(t_enval *env);
+void			init_smg_texture(t_enval *env);
+void			init_bfg_texture(t_enval *env);
 void			ft_exit(t_enval *env, char *s, int flag);
 void			display(t_enval *env);
 
@@ -246,7 +265,7 @@ void			display(t_enval *env);
 
 uint32_t		get_pixel_wall(t_enval *env, int si, float x, float y);
 uint32_t		get_pixel_floor(t_enval *env, int si, float x, float y);
-uint32_t		get_pixel_weapon(t_enval *env, int si, float x, float y);
+uint32_t		get_pixel_weapon(t_enval *env, t_intxy si, float x, float y);
 void			put_pixel(SDL_Surface *surface, int x, int y, uint32_t color);
 Uint32			light_shade(Uint32 hexa, float distance);
 int				white_fog(Uint32 hexa, float distance);
@@ -263,7 +282,7 @@ void			mouse_events(t_enval *env);
 void			switch_fog(t_enval *env);
 void			change_weapon(t_enval *env);
 void			handle_bobbing(t_enval *env);
+void			handle_weapon_reload(t_enval *env);
 void			handle_weapon_fire(t_enval *env);
-void			handle_weapon_fire2(t_enval *env);
 
 #endif

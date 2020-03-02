@@ -17,22 +17,17 @@
 ** cancel the charge and set state to ready.
 */
 
-static void	reset_charged_state(t_enval *env)
-{
-		env->game.pc.arsenal[env->game.pc.equip.current].attack.delay.current = 0;
-		env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
-		env->game.pc.trigger_held = 0;
-}
-
-static void	reset_charged_state2(t_enval *env,int id)
+static void	reset_charged_state(t_enval *env,int id)
 {
 		env->game.pc.arsenal[id].attack.delay.current = 0;
 		env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
-		env->game.pc.trigger_held = 0;
+		env->sdl.key[LMOUSE] = 0;
 }
 
 /*
 ** Universal function to handle the way shots are fired.
+** First check if charging weapons are still charging.
+** Then, reduces the delay of the current weapon equipped, although 
 */
 
 void		handle_weapon_fire(t_enval *env)
@@ -42,58 +37,68 @@ void		handle_weapon_fire(t_enval *env)
 
 	id = env->game.pc.equip.current;
 	state = env->game.pc.equip.weapon_state;
-	if (env->game.pc.trigger_held && state == WEAPON_STATE_CHARGING)
-		reset_charged_state(env);
-	if (env->game.pc.arsenal[id].attack.delay.current == (Uint32)0 && (state == WEAPON_STATE_FIRING
-		|| state == WEAPON_STATE_CHARGING))
+	if (env->sdl.key[LMOUSE] && state == WEAPON_STATE_CHARGING)
+		reset_charged_state(env, id);
+
+	if (state == WEAPON_STATE_FIRING || state == WEAPON_STATE_CHARGING)
 	{
-		env->game.pc.arsenal[id].attack.delay.current = SDL_GetTicks();
-		state == WEAPON_STATE_FIRING ? ft_putendl("Bang for real") : 0;
-	}
-	if ((state == WEAPON_STATE_FIRING || state == WEAPON_STATE_CHARGING)
-		&& (int)(SDL_GetTicks() - env->game.pc.arsenal[id].attack.delay.current)
-		>= env->game.pc.arsenal[id].attack.delay.max * state)
-	{
-		env->game.pc.arsenal[id].attack.delay.current = 0;
-		if (env->game.pc.arsenal[id].attack.type != WEAPON_TYPE_AUTOMATIC
-			|| env->game.pc.trigger_held)
+		if (env->game.pc.arsenal[id].attack.delay.current > 0)
+		{	
+			env->game.pc.arsenal[id].attack.delay.current -= SDL_GetTicks() - env->game.pc.equip.delay;
+			ft_putnbr(env->game.pc.arsenal[id].attack.delay.current);
+			ft_putchar('\n');
+			if ((env->game.pc.arsenal[id].attack.type != WEAPON_TYPE_AUTOMATIC
+			|| env->sdl.key[LMOUSE] || !env->game.pc.arsenal[id].clip.size.current)
+				&& env->game.pc.arsenal[id].attack.delay.current <= 0)
+			{
+				env->game.pc.equip.weapon_state--;
+				env->sdl.key[LMOUSE] = 0;
+			}
+		}
+		else
 		{
-			env->game.pc.equip.weapon_state--;
-			env->game.pc.trigger_held = 0;
+			while (env->game.pc.arsenal[id].attack.delay.current <= 0
+				&& env->game.pc.arsenal[id].clip.size.current)
+			{
+				if (state == WEAPON_STATE_FIRING)
+				{	
+					env->game.pc.arsenal[id].clip.size.current--;
+					ft_putendl("Bang, because I'm a weapon !");
+				}
+				env->game.pc.arsenal[id].attack.delay.current
+				+= env->game.pc.arsenal[id].attack.delay.max * state;
+				ft_putnbr((int)env->game.pc.arsenal[id].attack.delay.current);
+				ft_putchar('\n');
+			}
 		}
 	}
 }
 
-void		handle_weapon_fire2(t_enval *env)
+void		handle_weapon_reload(t_enval *env)
 {
 	int id;
 	int state;
+	int old_clip_ammo;
 
 	id = env->game.pc.equip.current;
 	state = env->game.pc.equip.weapon_state;
-	if (env->game.pc.trigger_held && state == WEAPON_STATE_CHARGING)
-		reset_charged_state2(env, id);
-	if (env->game.pc.arsenal[id].attack.delay.current <= 0)
+	if (state == WEAPON_STATE_RELOADING)
 	{
-		if (state == WEAPON_STATE_CHARGING || state == WEAPON_STATE_FIRING)
+		if (env->game.pc.equip.reload_cd)
 		{
-			env->game.pc.arsenal[id].attack.delay.current
-			+= env->game.pc.arsenal[id].attack.delay.max;
-			ft_putnbr((int)env->game.pc.arsenal[id].attack.delay.current);
-			if (state == WEAPON_STATE_FIRING)
-				ft_putendl(" Bang, because I'm a weapon !");
+			env->game.pc.equip.reload_cd -= SDL_GetTicks() - env->game.pc.equip.delay;
+			ft_putnbr((int)env->game.pc.equip.reload_cd);
+			ft_putchar('\n');
+			if (env->game.pc.equip.reload_cd <= 0)
+			{
+				old_clip_ammo = env->game.pc.arsenal[id].clip.size.current;
+				env->game.pc.arsenal[id].clip.size.current += ft_min(env->game.pc.arsenal[id].clip.size.max - old_clip_ammo, env->game.pc.arsenal[id].ammo.current);
+				env->game.pc.arsenal[id].ammo.current -= env->game.pc.arsenal[id].clip.size.current - old_clip_ammo;
+				env->game.pc.equip.reload_cd = 0;
+				env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
+			}
 		}
-	}
-	else if (env->game.pc.arsenal[id].attack.delay.current > 0 && state != WEAPON_STATE_READY)
-	{	
-		env->game.pc.arsenal[id].attack.delay.current -= SDL_GetTicks() - env->game.pc.equip.delay;
-		ft_putnbr(env->game.pc.arsenal[id].attack.delay.current);
-		ft_putchar('\n');
-		if ((env->game.pc.arsenal[id].attack.type != WEAPON_TYPE_AUTOMATIC || env->game.pc.trigger_held)
-			&& env->game.pc.arsenal[id].attack.delay.current <= 0)
-		{
-			env->game.pc.equip.weapon_state--;
-			env->game.pc.trigger_held = 0;
-		}
+		else
+			env->game.pc.equip.reload_cd = env->game.pc.arsenal[id].clip.reload;
 	}
 }

@@ -51,6 +51,7 @@ SRC		=	main.c \
 			handle_status_effects.c \
 			handle_weapon_fire.c \
 			init_game.c \
+			init_weapon_texture.c \
 			mobility.c\
 			mouse_event.c \
 			perform_attack.c \
@@ -113,7 +114,6 @@ fclean:		clean
 			@echo "${RED}[$(LIB) deleted]${END}"
 
 re:			fclean all
-
 SDL2:
 			brew install sdl2
 			brew link sdl2

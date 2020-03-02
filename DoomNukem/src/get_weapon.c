@@ -24,7 +24,7 @@ t_weapon	get_weapon_fist(void)
 
 	fist.name = "Fists";
 	init_stat(&fist.clip.size, INFINITE, INFINITE);
-	fist.clip.reload = 0;
+	fist.clip.reload = 1;
 	init_stat(&fist.ammo, INFINITE, INFINITE);
 	fist.attack.type = WEAPON_TYPE_SEMIAUTO;
 	fist.attack.damage = 10;
@@ -47,7 +47,7 @@ t_weapon	get_weapon_pistol(void)
 	pistol.attack.type = WEAPON_TYPE_SEMIAUTO;
 	pistol.attack.damage = 12;
 	pistol.attack.range = 7;
-	init_stat(&pistol.attack.delay, 200, 0);
+	init_stat(&pistol.attack.delay, 150, 0);
 	pistol.attack.radius.width = 0;
 	pistol.attack.radius.depth = 0;
 	pistol.offset = 0;
@@ -68,7 +68,7 @@ t_weapon	get_weapon_shotgun(void)
 	init_stat(&shotgun.attack.delay, 1200, 0);
 	shotgun.attack.radius.width = 0.5;
 	shotgun.attack.radius.depth = 0;
-	shotgun.offset = 100;
+	shotgun.offset = 0;
 	return (shotgun);
 }
 

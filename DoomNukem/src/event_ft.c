@@ -25,16 +25,6 @@ void		switch_fog(t_enval *env)
 }
 
 /*
-** A weapon swap demands that the delays and states be set correctly
-*/
-
-static void	reset_weapon(t_enval *env)
-{
-	env->game.pc.equip.delay = 0;
-	env->game.pc.equip.weapon_state = WEAPON_STATE_READY; 
-}
-
-/*
 ** Function allowing for weapon swap. No effect if we already have the weapon.
 */
 
@@ -60,15 +50,18 @@ void		change_weapon(t_enval *env)
 		if (env->event.key.keysym.sym == SDLK_5
 			&& !ft_strcmp(env->game.pc.arsenal[4].name, "BFG"))
 			env->game.pc.equip.current = 4;
-		if (id != env->game.pc.equip.current)
-			reset_weapon(env);
 	}
 }
+
+/*
+** This function handles weapon bobbing
+*/
 
 void		handle_bobbing(t_enval *env)
 {
 	static double	i = 0.0;
 	static int		sign = 1;
+
 	i = i + 0.2 * sign;
 	if (i == 1.0 * sign)
 		sign *= -1;
