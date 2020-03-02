@@ -40,19 +40,19 @@ void init_data(t_data *d, t_map_data *map)
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 }
 
-double check_inter_with_wall(t_wall wall, double rot, t_point pos)
+double check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot)
 {
     t_point inter;
     double dist;
 
     dist = 9999;
-    inter = line_intersect(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
+    inter = inter_with_dir(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
     if (inter.x != -42)
-        dist = ft_fmin(dist, cos(rot * M_PI_2) * inter.x + sin(rot * M_PI_2) * inter.y);
+        dist = ft_frange(cos(look_rot * M_PI_2) * inter.x + sin(look_rot * M_PI_2) * inter.y, 0, dist);
     return (dist);
 }
 
-double check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot)
+double check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot, double look_rot)
 {
     int i;
     double dist;
@@ -64,7 +64,7 @@ double check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot)
     while (i < map->wall_count)
     {
         wall = map->wall_list[i];
-        dist = ft_fmin(dist, check_inter_with_wall(wall, rot, d->player_pos));
+        dist = ft_fmin(dist, check_inter_with_wall(wall, rot, d->player_pos, look_rot));
         i++;
     }
     printf("dist of closest wall : %f\n", dist);
@@ -97,7 +97,7 @@ void raycast_all_screen(t_data *d, t_map_data *map)
     x = 0;
     while (x < WIN_SIZE_X)
     {
-        draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle));
+        draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle, d->rot));
         start_angle += step;
         x++;
     }
@@ -107,17 +107,17 @@ void handle_key_event(t_data *d, t_map_data *map)
 {
     d->clavier = SDL_GetKeyboardState(NULL);
     if (d->clavier[SDL_SCANCODE_E])
-        d->rot += 0.05;
+        d->rot += 0.02;
     if (d->clavier[SDL_SCANCODE_Q])
-        d->rot -= 0.05;
+        d->rot -= 0.02;
     if (d->clavier[SDL_SCANCODE_D])
-        d->player_pos.x += 0.05;
+        d->player_pos.x += 0.02;
     if (d->clavier[SDL_SCANCODE_A])
-        d->player_pos.x -= 0.05;
+        d->player_pos.x -= 0.02;
     if (d->clavier[SDL_SCANCODE_W])
-        d->player_pos.y -= 0.05;
+        d->player_pos.y -= 0.02;
     if (d->clavier[SDL_SCANCODE_S])
-        d->player_pos.y += 0.05;
+        d->player_pos.y += 0.02;
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
 }
@@ -130,7 +130,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
         {
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
                 draw_vertical_line(d, 500, 
-                check_intersect_with_all_wall(d, map, d->rot)
+                check_intersect_with_all_wall(d, map, d->rot, d->rot)
                 )
                 ;
         }
@@ -168,7 +168,7 @@ int main(void)
         SDL_PumpEvents();
         handle_key_event(&d, &map);
         handle_poll_event(&d, &map);
-        raycast_all_screen(&d, &map);
+        //raycast_all_screen(&d, &map);
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
         update_player_pos_mini_map(&d, &map);
         print_player_look_vector(&d, &map, d.rot);

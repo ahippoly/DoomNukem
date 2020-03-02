@@ -92,6 +92,7 @@ t_img	ft_load_bmp(char *file);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);
 t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2);
+t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
 void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);

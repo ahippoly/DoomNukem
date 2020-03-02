@@ -92,20 +92,12 @@ t_point convert_sdlpoint2tpoint(SDL_Point point)
 	return (new_point);
 }
 
-t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, SDL_Point point4)
+t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	t_point inter;
-	t_point p1;
-	t_point p2;
-	t_point p3;
-	t_point p4;
 
-	sort_point_by_x(&point1, &point2);
-	sort_point_by_x(&point3, &point4);
-	p1 = convert_sdlpoint2tpoint(point1);
-	p2 = convert_sdlpoint2tpoint(point2);
-	p3 = convert_sdlpoint2tpoint(point3);
-	p4 = convert_sdlpoint2tpoint(point4);
+	sort_t_point_by_x(&p1, &p2);
+	sort_t_point_by_x(&p3, &p4);
 	if (p2.x - p1.x != 0 && p4.x - p3.x != 0)
 		inter = default_case(p1, p2, p3, p4);
 	else if (p4.x - p3.x != 0)
@@ -123,6 +115,30 @@ t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, 
 	return (inter);
 }
 
+t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, SDL_Point point4)
+{
+	t_point inter;
+	t_point p1;
+	t_point p2;
+	t_point p3;
+	t_point p4;
+
+	p1 = convert_sdlpoint2tpoint(point1);
+	p2 = convert_sdlpoint2tpoint(point2);
+	p3 = convert_sdlpoint2tpoint(point3);
+	p4 = convert_sdlpoint2tpoint(point4);
+	return (find_intersect(p1, p2, p3, p4));
+}
+
+t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4)
+{
+	t_point p2;
+
+	p2.x = pos.x + cos(rot * M_PI_2) * 30; 
+	p2.y = pos.y + sin(rot * M_PI_2) * 30;
+	return (find_intersect(pos, p2, p3, p4));
+}
+
 t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2)
 {
 	double a1;
@@ -133,6 +149,7 @@ t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2)
 
 	sort_t_point_by_x(&p1, &p2);
 	a1 = sin(rot * M_PI_2) / cos(rot * M_PI_2);
+	printf("a1 = %f\n",a1);
 	b1 = calc_b(pos, a1);
 	a2 = calc_a(p1, p2);
 	b2 = calc_b(p1, a2);
