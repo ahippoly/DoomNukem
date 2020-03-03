@@ -16,7 +16,7 @@
 # define WALL_HITBOX 10
 # define NB_WALL_MAX 200
 
-# define NB_BUTTONS 5
+# define NB_BUTTONS 6
 # define BUTTON_DEL 0
 # define BUTTON_CREATE_ROOM 1
 # define BUTTON_TEXT_LEFT 2
@@ -24,6 +24,7 @@
 # define BUTTON_HEIGHT_INC 0.1
 # define BUTTON_HEIGHT_DEFAULT 1
 # define BUTTON_MAP_OUTPUT 4
+# define BUTTON_SET_PLAYER_SPAWN 5
 
 #define UNIT 10
 
@@ -32,7 +33,7 @@
 # define NB_MOUSE_MODE 3
 # define MOUSE_MODE_NEUTRAL 0
 # define MOUSE_MODE_CREATE_ROOM 1
-# define MOUSE_MODE_INPUT 2
+# define MOUSE_MODE_PLACING 2
 
 # define NB_INPUT 7
 # define INPUT_TRANSPARENCY 0
@@ -43,7 +44,7 @@
 # define INPUT_PLAYER_X 5
 # define INPUT_PLAYER_Y 6
 
-# define NB_TEXTURE 2
+# define NB_TEXTURE 6
 
 # define NB_TXT 12
 # define TXT_MAP_EDITOR 0
@@ -67,6 +68,10 @@
 # define MAP_SIZE_Y 30
 # define INTER_TOLERANCE 0.0001
 
+# define NB_IMG 2
+
+# define ICON_ARRAY_SIZE 20
+
 # define HEAD_WALL_LIST "WALL LIST"
 # define HEAD_ROOM_LIST "ROOM LIST"
 # define HEAD_WALL_REF "WALL_REF MAP"
@@ -80,6 +85,13 @@ typedef struct		s_input
 	int				is_in_input_mode;
 }					t_input;
 
+typedef struct      s_icon
+{
+    t_point         pos;
+    t_size          size;
+    int             id_ref;
+}                   t_icon;
+
 typedef struct      s_env
 {
     SDL_Renderer    *rend;
@@ -87,8 +99,8 @@ typedef struct      s_env
     SDL_Window      *win;
     SDL_Texture     *screen;
     SDL_Texture     *editor_grid;
-    SDL_Texture     *stones;
     SDL_Texture     *text_list[NB_TEXTURE];
+    SDL_Texture     *img_list[NB_IMG];
     SDL_Rect        grid_pos;
     const Uint8     *clavier;
     unsigned int    *p_screen;
@@ -105,17 +117,22 @@ typedef struct      s_env
     int             quit;
     int             wall_count;
     int             room_count;
+	int				icon_count;
+	int				icon_list_size;
     int             first_wall_room_id;
     int             total_wall_created;
     int             hovered_wall_id;
     int             hovered_input_id;
+    t_icon          mouse_icon;
     int             selected_input;
     int             selected_wall_id;
     int             selected_button;
     int             selected_mouse_mode;
     int             selected_texture;
+    t_point         player_spawn;
     t_wall          *wall_list;
     t_room          *room_list;
+	t_icon			*icon_list;
     t_wall_ref      ***map_wall_ref;
     t_size          map_size;
     t_button        edit;
@@ -129,7 +146,6 @@ typedef struct      s_env
     t_txt_img       transparency;
     t_txt_img       img_p1;
     t_txt_img       img_p2;
-    t_img           img_list[NB_TEXTURE];
     t_button        buttons_lst[NB_BUTTONS];
     t_txt_img       txt_lst[NB_TXT];
     t_input			input_lst[NB_INPUT];
@@ -155,6 +171,7 @@ t_wall_ref ***init_wall_ref(t_size map_size);
 void recreate_full_map_ref(t_env *env);
 
 void del_selected_wall(t_env *env);
+void set_player_spawn_mode(t_env *env);
 void select_previous_texture(t_env *env);
 void select_next_texture(t_env *env);
 void incr_transparency(t_env *env);
@@ -173,6 +190,7 @@ void input_text_to_img(char *str, int size, int color, t_img to_fill);
 
 void create_room_mode(t_env *env);
 void neutral_mouse_mode(t_env *env);
+void on_screen_place_mode(t_env *env);
 void handle_mouse_event(t_env *env);
 void check_click(t_env *env);
 void map_output(t_env *env);
@@ -208,5 +226,8 @@ void create_straight_column(unsigned int *pixels, SDL_Rect pos_size, t_size scre
 void adapt_min(int *pos, int *length);
 void adapt_max(int *pos, int *length, int max);
 
+t_icon create_icon(t_point pos, t_size size, int id_ref);
+void print_mouse_icon(t_env *env);
+void print_player_spawn(t_env *env);
 
 #endif

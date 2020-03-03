@@ -3,7 +3,8 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			editor_wall_edit.c text_img.c editor_buttons.c bmp_reader.c \
 			editor_map_move.c editor_sector_creation.c line_intersect.c \
 			editor_mouse_event.c editor_map_output.c utils.c \
-			editor_input.c editor_map_reader.c editor_debug_utils.c)
+			editor_input.c editor_map_reader.c editor_debug_utils.c \
+			editor_icon.c)
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \

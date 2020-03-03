@@ -12,8 +12,21 @@ void init_sdl_ressources(t_env *env)
     if (!(env->rend = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_ACCELERATED)))
         exit_with_msg("Failed to create Renderer");
     env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
-    env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, GRID_SIZE_X, GRID_SIZE_Y);
+    env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, GRID_SIZE_X, GRID_SIZE_Y);
     //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
+}
+
+SDL_Texture *bmp_to_texture(char *file, SDL_Renderer *rend)
+{
+    SDL_Surface *readed_file;
+    SDL_Texture *new;
+
+    readed_file = SDL_LoadBMP(file);
+    if (readed_file == NULL)
+        exit_with_msg("failed to load texture bmp file");
+    new = SDL_CreateTextureFromSurface(rend, readed_file);
+    SDL_FreeSurface(readed_file);
+    return (new);
 }
 
 void init_texture(t_env *env)
@@ -22,17 +35,12 @@ void init_texture(t_env *env)
     t_img *tmp;
 
     env->selected_texture = 0;
-    env->img_list[0] = ft_load_bmp("img/tech_skin_1.bmp");
-    env->img_list[1] = ft_load_bmp("img/stones.bmp");
-    printf("text_size : x = %i, y = %i\n", env->img_list[0].pos_size.w, env->img_list[0].pos_size.h);
-    i = 0;
-    while (i < NB_TEXTURE)
-    {
-        tmp = &env->img_list[i];
-        tmp->pos_size.x = TEXT_POS_X;
-        tmp->pos_size.y = TEXT_POS_Y;
-        env->text_list[i++] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, tmp->pos_size.w, tmp->pos_size.h);
-    }
+    env->text_list[0] = bmp_to_texture("img/textures/tech_skin_1.bmp", env->rend);
+    env->text_list[1] = bmp_to_texture("img/textures/stones.bmp", env->rend);
+    env->text_list[2] = bmp_to_texture("img/textures/Paver300.bmp", env->rend);
+    env->text_list[3] = bmp_to_texture("img/textures/Floor_Wdn.bmp", env->rend);
+    env->text_list[4] = bmp_to_texture("img/icons/person.bmp", env->rend);
+    env->text_list[5] = bmp_to_texture("img/textures/Red_Bricks.bmp", env->rend);
 }
 
 void init_buttons(t_env *env)
@@ -40,14 +48,16 @@ void init_buttons(t_env *env)
     env->buttons_fct[BUTTON_DEL] = del_selected_wall;
     env->buttons_fct[BUTTON_TEXT_LEFT] = select_previous_texture;
     env->buttons_fct[BUTTON_TEXT_RIGHT] = select_next_texture;
-    env->buttons_fct[BUTTON_CREATE_ROOM] =  create_room_button;
-    env->buttons_fct[BUTTON_MAP_OUTPUT] =  map_output;
+    env->buttons_fct[BUTTON_CREATE_ROOM] = create_room_button;
+    env->buttons_fct[BUTTON_MAP_OUTPUT] = map_output;
+    env->buttons_fct[BUTTON_SET_PLAYER_SPAWN] = set_player_spawn_mode;
     
     env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
     env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 295)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 295)), BUTTON_TEXT_LEFT);
     env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
     env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 80)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 80)), BUTTON_CREATE_ROOM);
     env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(810, 800)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(810, 800)), BUTTON_MAP_OUTPUT);
+    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(810, 900)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(810, 900)), BUTTON_SET_PLAYER_SPAWN);
 }
 
 void init_mouse_mode(t_env *env)
@@ -56,6 +66,7 @@ void init_mouse_mode(t_env *env)
     env->start_room_point = create_point(-1 , -1);
     env->mouse_click_fct[MOUSE_MODE_NEUTRAL] = neutral_mouse_mode;
     env->mouse_click_fct[MOUSE_MODE_CREATE_ROOM] = create_room_mode;
+    env->mouse_click_fct[MOUSE_MODE_PLACING] = on_screen_place_mode;
 }
 
 void init_txt_img(t_env *env)
@@ -85,6 +96,15 @@ void init_input(t_env *env)
     env->input_lst[INPUT_PLAYER_Y] = create_t_input(set_sdl_rect(585, 690, 60, 40), 0, env->map_size.h - 1);
 }
 
+void init_img(t_env *env)
+{
+    env->icon_count = 0;
+    env->icon_list = NULL;
+    env->icon_list_size = ICON_ARRAY_SIZE;
+    env->img_list[0] = bmp_to_texture("img/icons/person.bmp", env->rend);
+    env->img_list[1] = bmp_to_texture("img/icons/monster.bmp", env->rend);
+}
+
 void init_env(t_env *env)
 {
     init_sdl_ressources(env);
@@ -92,6 +112,7 @@ void init_env(t_env *env)
     init_buttons(env);
     init_txt_img(env);
     init_mouse_mode(env);
+    init_img(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);
     env->map_wall_ref = init_wall_ref(env->map_size);
@@ -100,8 +121,11 @@ void init_env(t_env *env)
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
     env->room_count = 0;
+    env->icon_count = 0;
+    env->player_spawn = create_t_point(0, 0);
     env->total_wall_created = 0;
     env->selected_corner.x = -1;
+    env->mouse_icon.id_ref = -1;
     env->p1_height = create_t_range(0, 10);
     env->p2_height = create_t_range(0, 10);
     env->map_move = create_point(0, 0);
@@ -169,11 +193,15 @@ void print_env2screen(t_env *env)
     input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 900, WIN_SIZE_X, WIN_SIZE_Y)));
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
-    SDL_UpdateTexture(env->screen, &env->grid_pos, env->p_grid, GRID_SIZE_X * 4);
+    SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);
     display_txt_img(env);
     display_buttons(env);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
-    SDL_UpdateTexture(env->text_list[env->selected_texture], NULL, env->img_list[env->selected_texture].pixels, env->img_list[0].pos_size.w * 4);
+    print_mouse_icon(env);
+    print_player_spawn(env);
+    SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
+
+    //SDL_UpdateTexture(env->text_list[env->selected_texture], NULL, env->img_list[env->selected_texture].pixels, env->img_list[0].pos_size.w * 4);
     tmp = set_sdl_rect(TEXT_POS_X, TEXT_POS_Y, TEXT_SIZE_X, TEXT_SIZE_Y);
     SDL_RenderCopy(env->rend, env->text_list[env->selected_texture], NULL, &tmp);
     SDL_RenderPresent(env->rend);

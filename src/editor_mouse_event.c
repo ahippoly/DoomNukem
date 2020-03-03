@@ -71,6 +71,13 @@ void neutral_mouse_mode(t_env *env)
     printf("selected wall = %i\n", env->selected_wall_id);
 }
 
+void on_screen_place_mode(t_env *env)
+{
+    env->player_spawn = create_t_point((env->mouse.x - GRID_POS_X) / TILE_SIZE, (env->mouse.y - GRID_POS_Y) / TILE_SIZE);
+    env->mouse_icon.id_ref = -1;
+    env->selected_mouse_mode = MOUSE_MODE_NEUTRAL;
+}
+
 void check_click(t_env *env)
 {
     //printf("actuall mouse mode = %i\n", env->selected_mouse_mode);

@@ -64,6 +64,13 @@ void select_next_texture(t_env *env)
     change_selected_wall_texture(env, env->selected_texture);
 }
 
+void set_player_spawn_mode(t_env *env)
+{
+    env->mouse_icon = create_icon(create_t_point(0, 0), create_t_size(30, 30), 0);
+    env->player_spawn = create_t_point(0, 0);
+    env->selected_mouse_mode = MOUSE_MODE_PLACING;
+}
+
 void del_selected_wall(t_env *env)
 {
     del_wall(env, env->selected_wall_id);
@@ -72,5 +79,5 @@ void del_selected_wall(t_env *env)
 
 void create_room_button(t_env *env)
 {
-    env->selected_mouse_mode = 1;
+    env->selected_mouse_mode = MOUSE_MODE_CREATE_ROOM;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 18:17:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2019/11/13 20:43:13 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/03/03 21:06:42 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <stdlib.h>
 
 typedef struct		s_list
 {
@@ -107,5 +108,6 @@ void    			*p_malloc(unsigned int size);
 
 void				print_memory(const void *addr, size_t size);
 int					get_next_line(const int fd, char **line);
+void				*double_array_size(void *data, int unit_size, size_t array_length);
 
 #endif
