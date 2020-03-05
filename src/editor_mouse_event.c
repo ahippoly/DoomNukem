@@ -73,9 +73,11 @@ void neutral_mouse_mode(t_env *env)
 
 void on_screen_place_mode(t_env *env)
 {
-    env->player_spawn = create_t_point((env->mouse.x - GRID_POS_X) / TILE_SIZE, (env->mouse.y - GRID_POS_Y) / TILE_SIZE);
+    if (env->being_placed != NULL)
+        *env->being_placed = create_t_point(((double)env->mouse.x - GRID_POS_X - env->map_move.x) / TILE_SIZE, ((double)env->mouse.y - GRID_POS_Y - env->map_move.y) / TILE_SIZE);
     env->mouse_icon.id_ref = -1;
     env->selected_mouse_mode = MOUSE_MODE_NEUTRAL;
+    env->being_placed = NULL;
 }
 
 void check_click(t_env *env)

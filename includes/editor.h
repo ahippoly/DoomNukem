@@ -16,7 +16,7 @@
 # define WALL_HITBOX 10
 # define NB_WALL_MAX 200
 
-# define NB_BUTTONS 6
+# define NB_BUTTONS 9
 # define BUTTON_DEL 0
 # define BUTTON_CREATE_ROOM 1
 # define BUTTON_TEXT_LEFT 2
@@ -25,6 +25,9 @@
 # define BUTTON_HEIGHT_DEFAULT 1
 # define BUTTON_MAP_OUTPUT 4
 # define BUTTON_SET_PLAYER_SPAWN 5
+# define BUTTON_MOB_LEFT 6
+# define BUTTON_MOB_RIGHT 7
+# define BUTTON_MOB_PLACING 8
 
 #define UNIT 10
 
@@ -35,18 +38,16 @@
 # define MOUSE_MODE_CREATE_ROOM 1
 # define MOUSE_MODE_PLACING 2
 
-# define NB_INPUT 7
+# define NB_INPUT 5
 # define INPUT_TRANSPARENCY 0
 # define INPUT_BEGIN_P1 1
 # define INPUT_BEGIN_P2 2
 # define INPUT_END_P1 3
 # define INPUT_END_P2 4
-# define INPUT_PLAYER_X 5
-# define INPUT_PLAYER_Y 6
 
 # define NB_TEXTURE 6
 
-# define NB_TXT 12
+# define NB_TXT 10
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
@@ -55,12 +56,10 @@
 # define TXT_P2 5
 # define TXT_BEGIN 6
 # define TXT_END 7
-# define TXT_PLAYER_SPAWN 8
-# define TXT_PLAYER_X 9
-# define TXT_PLAYER_Y 10
-# define TXT_WALL_COUNT 11
+# define TXT_WALL_COUNT 8
+# define TXT_MOB 9
 # define TEXT_POS_X 800
-# define TEXT_POS_Y 250
+# define TEXT_POS_Y 150
 # define TEXT_SIZE_X 150
 # define TEXT_SIZE_Y 150
 # define MOVE_SPEED 5
@@ -68,9 +67,16 @@
 # define MAP_SIZE_Y 30
 # define INTER_TOLERANCE 0.0001
 
-# define NB_IMG 2
+# define NB_IMG 3
 
 # define ICON_ARRAY_SIZE 20
+# define ICON_PLAYER_SIZE 30
+# define ICON_MOB_RANGE_BEGIN 1
+# define ICON_MOB_RANGE_END 3
+# define ICON_MOB_POS_X 800
+# define ICON_MOB_POS_Y 400
+# define ICON_MOB_SIZE_X 150
+# define ICON_MOB_SIZE_Y 150
 
 # define HEAD_WALL_LIST "WALL LIST"
 # define HEAD_ROOM_LIST "ROOM LIST"
@@ -129,7 +135,9 @@ typedef struct      s_env
     int             selected_button;
     int             selected_mouse_mode;
     int             selected_texture;
+    int             selected_mob;
     t_point         player_spawn;
+    t_point         *being_placed;
     t_wall          *wall_list;
     t_room          *room_list;
 	t_icon			*icon_list;
@@ -174,6 +182,7 @@ void del_selected_wall(t_env *env);
 void set_player_spawn_mode(t_env *env);
 void select_previous_texture(t_env *env);
 void select_next_texture(t_env *env);
+void mob_placing_mode(t_env *env);
 void incr_transparency(t_env *env);
 void decr_transparency(t_env *env);
 void move_map_move_left(t_env *env);
@@ -226,8 +235,14 @@ void create_straight_column(unsigned int *pixels, SDL_Rect pos_size, t_size scre
 void adapt_min(int *pos, int *length);
 void adapt_max(int *pos, int *length, int max);
 
+//editor_icon.c
 t_icon create_icon(t_point pos, t_size size, int id_ref);
+void add_icon(t_env *env, t_icon new);
 void print_mouse_icon(t_env *env);
 void print_player_spawn(t_env *env);
+void print_icon_list(t_env *env);
+
+void select_previous_mob(t_env *env);
+void select_next_mob(t_env *env);
 
 #endif

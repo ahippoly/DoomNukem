@@ -39,7 +39,7 @@ void init_texture(t_env *env)
     env->text_list[1] = bmp_to_texture("img/textures/stones.bmp", env->rend);
     env->text_list[2] = bmp_to_texture("img/textures/Paver300.bmp", env->rend);
     env->text_list[3] = bmp_to_texture("img/textures/Floor_Wdn.bmp", env->rend);
-    env->text_list[4] = bmp_to_texture("img/icons/person.bmp", env->rend);
+    env->text_list[4] = bmp_to_texture("img/textures/WoodFine.bmp", env->rend);
     env->text_list[5] = bmp_to_texture("img/textures/Red_Bricks.bmp", env->rend);
 }
 
@@ -51,14 +51,21 @@ void init_buttons(t_env *env)
     env->buttons_fct[BUTTON_CREATE_ROOM] = create_room_button;
     env->buttons_fct[BUTTON_MAP_OUTPUT] = map_output;
     env->buttons_fct[BUTTON_SET_PLAYER_SPAWN] = set_player_spawn_mode;
+    env->buttons_fct[BUTTON_MOB_LEFT] = select_previous_mob;
+    env->buttons_fct[BUTTON_MOB_RIGHT] = select_next_mob;
+    env->buttons_fct[BUTTON_MOB_PLACING] = mob_placing_mode;
     
     env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
-    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 295)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 295)), BUTTON_TEXT_LEFT);
-    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 295)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 295)), BUTTON_TEXT_RIGHT);
-    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 80)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 80)), BUTTON_CREATE_ROOM);
+    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 195)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 195)), BUTTON_TEXT_LEFT);
+    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 195)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 195)), BUTTON_TEXT_RIGHT);
+    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 850)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 850)), BUTTON_CREATE_ROOM);
     env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(810, 800)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(810, 800)), BUTTON_MAP_OUTPUT);
     env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(810, 900)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(810, 900)), BUTTON_SET_PLAYER_SPAWN);
-}
+    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 445)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 445)), BUTTON_MOB_LEFT);
+    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 445)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 445)), BUTTON_MOB_RIGHT);
+    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 2, 0xFFDDDDDD, create_point(822, 555)), create_text_img("Place", 2, 0xFF88FF88, create_point(822, 555)), BUTTON_MOB_PLACING);
+  
+  }
 
 void init_mouse_mode(t_env *env)
 {
@@ -72,17 +79,15 @@ void init_mouse_mode(t_env *env)
 void init_txt_img(t_env *env)
 {
     env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
-    env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 200));
+    env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 100));
     env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 2, 0xFFDDDDDD, create_point(210, 630));
     env->txt_lst[TXT_P1] = create_text_img("P1", 1, 0xFFDDDDDD, create_point(210, 680));
     env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(315, 680));
     env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(120, 730));
     env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(120, 790));
     env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
-    env->txt_lst[TXT_PLAYER_SPAWN] = create_text_img("Player_spawn", 1, 0xFFDDDDDD, create_point(500, 630));
-    env->txt_lst[TXT_PLAYER_X] = create_text_img("x", 1, 0xFFDDDDDD, create_point(520, 660));
-    env->txt_lst[TXT_PLAYER_Y] = create_text_img("y", 1, 0xFFDDDDDD, create_point(600, 660));
     env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFFDDDDDD, create_point(500, 770));
+    env->txt_lst[TXT_MOB] = create_text_img("Mob", 2, 0xFFDDDDDD, create_point(845, 350));
 }
 
 void init_input(t_env *env)
@@ -92,17 +97,18 @@ void init_input(t_env *env)
     env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(305, 720, 60, 40), 20, 190);
     env->input_lst[INPUT_END_P1] = create_t_input(set_sdl_rect(200, 780, 60, 40), 30, 200);
     env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(305, 780, 60, 40), 30, 200);
-    env->input_lst[INPUT_PLAYER_X] = create_t_input(set_sdl_rect(505, 690, 60, 40), 0, env->map_size.w - 1);
-    env->input_lst[INPUT_PLAYER_Y] = create_t_input(set_sdl_rect(585, 690, 60, 40), 0, env->map_size.h - 1);
 }
 
 void init_img(t_env *env)
 {
     env->icon_count = 0;
-    env->icon_list = NULL;
+    env->selected_mob = 0 + ICON_MOB_RANGE_BEGIN;
+    env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE);
+    env->being_placed = NULL;
     env->icon_list_size = ICON_ARRAY_SIZE;
     env->img_list[0] = bmp_to_texture("img/icons/person.bmp", env->rend);
     env->img_list[1] = bmp_to_texture("img/icons/monster.bmp", env->rend);
+    env->img_list[2] = bmp_to_texture("img/icons/monster2.bmp", env->rend);
 }
 
 void init_env(t_env *env)
@@ -197,13 +203,16 @@ void print_env2screen(t_env *env)
     display_txt_img(env);
     display_buttons(env);
     SDL_RenderCopy(env->rend, env->screen, NULL, NULL);
-    print_mouse_icon(env);
+    print_icon_list(env);
     print_player_spawn(env);
+    print_mouse_icon(env);
     SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
 
     //SDL_UpdateTexture(env->text_list[env->selected_texture], NULL, env->img_list[env->selected_texture].pixels, env->img_list[0].pos_size.w * 4);
     tmp = set_sdl_rect(TEXT_POS_X, TEXT_POS_Y, TEXT_SIZE_X, TEXT_SIZE_Y);
     SDL_RenderCopy(env->rend, env->text_list[env->selected_texture], NULL, &tmp);
+    tmp = set_sdl_rect(ICON_MOB_POS_X, ICON_MOB_POS_Y, ICON_MOB_SIZE_X, ICON_MOB_SIZE_Y);
+    SDL_RenderCopy(env->rend, env->img_list[env->selected_mob], NULL, &tmp);
     SDL_RenderPresent(env->rend);
 }
 
