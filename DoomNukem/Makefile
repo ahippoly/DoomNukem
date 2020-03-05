@@ -47,6 +47,7 @@ SRC		=	main.c \
 			get_enemy_sheets.c \
 			get_enemy_sheets2.c \
 			get_enemy.c \
+			get_id_arsenal.c \
 			get_weapon.c \
 			handle_status_effects.c \
 			handle_weapon_fire.c \

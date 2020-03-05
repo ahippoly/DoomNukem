@@ -151,7 +151,7 @@ typedef struct	s_player_character
 	t_status	effects;
 	t_weapon	arsenal[5];
 	t_equipped	equip;
-	int			trigger_held;
+	int			fist_side;
 }				t_player_character;
 
 typedef struct	s_npc

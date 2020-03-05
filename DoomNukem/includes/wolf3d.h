@@ -28,11 +28,11 @@
 # define TEXT_FLOOR 4
 
 # define WEAPON_NUMBER				6
-# define WEAPON_TEXTURES_MELEE		4
-# define WEAPON_TEXTURES_PISTOL		4
+# define WEAPON_TEXTURES_MELEE		5
+# define WEAPON_TEXTURES_PISTOL		5
 # define WEAPON_TEXTURES_SHOTGUN	5
-# define WEAPON_TEXTURES_SMG		4
-# define WEAPON_TEXTURES_BFG		4
+# define WEAPON_TEXTURES_SMG		3
+# define WEAPON_TEXTURES_BFG		16
 
 # define WN "textures/wallnorth.xpm"
 # define WS "textures/bonuscrystal.xpm"
@@ -214,7 +214,6 @@ typedef struct	s_enval
 	t_mapinfo				map;
 	t_intxy					wt;
 	t_sprite				wtex[6];
-	// t_sprite				wptex[WEAPON_NUMBER][8];
 	t_sprite				**wptex;
 	int						fd;
 	int						wl;
@@ -229,7 +228,6 @@ typedef struct	s_enval
 ** Function prototypes specific to this program
 */
 
-void			fc_draw(t_enval *env, int i);
 void			ft_error(char *err, t_enval *env, int i);
 void			ft_freewolf(t_enval *env, int i);
 void			ft_help(void);
@@ -244,20 +242,9 @@ int				keyrelease(int key, t_enval *env);
 void			mlx_handle_hooks(t_enval *env);
 void			movement(t_enval*env);
 void			ray_calc(t_enval *env, int i);
-void			ray_draw(t_enval *env);
 void			ray_hit(t_enval *env);
 void			rotation(t_enval *env, t_player *p);
-void			wall_draw(t_enval *env, int i, int texnum);
-void			weapon_draw(t_enval *env);
-void			init_texture(t_enval *env);
-void			init_wptext(t_enval *env);
-void			init_melee_texture(t_enval *env);
-void			init_pistol_texture(t_enval *env);
-void			init_shotgun_texture(t_enval *env);
-void			init_smg_texture(t_enval *env);
-void			init_bfg_texture(t_enval *env);
 void			ft_exit(t_enval *env, char *s, int flag);
-void			display(t_enval *env);
 
 /*
 **	Function Color and Pixel
@@ -272,6 +259,28 @@ int				white_fog(Uint32 hexa, float distance);
 int				fog(t_enval *env, Uint32 hexa, float distance);
 int				rgb_to_hsv(int r, int g, int b);
 SDL_Color		fill_rgb(int c);
+
+/*
+** Graphics functions
+*/
+
+void			fc_draw(t_enval *env, int i);
+void			ray_draw(t_enval *env);
+void			wall_draw(t_enval *env, int i, int texnum);
+void			display(t_enval *env);
+void			init_wall_texture(t_enval *env);
+void			init_wptext(t_enval *env);
+void			init_melee_texture(t_enval *env);
+void			init_pistol_texture(t_enval *env);
+void			init_shotgun_texture(t_enval *env);
+void			init_smg_texture(t_enval *env);
+void			init_bfg_texture(t_enval *env);
+void			weapon_draw(t_enval *env);
+int				get_id_weapon_texture(t_enval *env, t_intxy *id);
+int				get_id_arsenal_s(int id, double cur, double max, int side);
+int				get_id_arsenal_xl(int id, double cur, double max);
+int				get_id_bfg_reloading(double cur, double max);
+int				get_id_arsenal_bfg(double cur, double max, int state);
 
 /*
 ** SDL Event Function

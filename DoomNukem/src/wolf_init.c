@@ -65,6 +65,7 @@ static void		prep_init(t_enval *env)
 		env->game.pc.arsenal[i].name = "Nothing.";
 	env->game.pc.equip.delay = 0;
 	env->game.pc.equip.reload_cd = 0;
+	env->game.pc.fist_side = 2;
 	init_pc(&env->game.pc);
 }
 
@@ -96,7 +97,7 @@ void			init_values(char *file, t_enval *env)
 	env->ray.wallhit = 0;
 }
 
-void			init_texture(t_enval *env)
+void			init_wall_texture(t_enval *env)
 {
 	int i;
 

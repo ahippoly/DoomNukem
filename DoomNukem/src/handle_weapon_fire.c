@@ -39,7 +39,6 @@ void		handle_weapon_fire(t_enval *env)
 	state = env->game.pc.equip.weapon_state;
 	if (env->sdl.key[LMOUSE] && state == WEAPON_STATE_CHARGING)
 		reset_charged_state(env, id);
-
 	if (state == WEAPON_STATE_FIRING || state == WEAPON_STATE_CHARGING)
 	{
 		if (env->game.pc.arsenal[id].attack.delay.current > 0)
@@ -63,6 +62,8 @@ void		handle_weapon_fire(t_enval *env)
 				if (state == WEAPON_STATE_FIRING)
 				{	
 					env->game.pc.arsenal[id].clip.size.current--;
+					if (id == 0)
+						env->game.pc.fist_side = env->game.pc.fist_side ? 0 : 2;
 					ft_putendl("Bang, because I'm a weapon !");
 				}
 				env->game.pc.arsenal[id].attack.delay.current
@@ -92,8 +93,11 @@ void		handle_weapon_reload(t_enval *env)
 			if (env->game.pc.equip.reload_cd <= 0)
 			{
 				old_clip_ammo = env->game.pc.arsenal[id].clip.size.current;
-				env->game.pc.arsenal[id].clip.size.current += ft_min(env->game.pc.arsenal[id].clip.size.max - old_clip_ammo, env->game.pc.arsenal[id].ammo.current);
-				env->game.pc.arsenal[id].ammo.current -= env->game.pc.arsenal[id].clip.size.current - old_clip_ammo;
+				env->game.pc.arsenal[id].clip.size.current
+				+= ft_min(env->game.pc.arsenal[id].clip.size.max - old_clip_ammo,
+				env->game.pc.arsenal[id].ammo.current);
+				env->game.pc.arsenal[id].ammo.current -=
+				env->game.pc.arsenal[id].clip.size.current - old_clip_ammo;
 				env->game.pc.equip.reload_cd = 0;
 				env->game.pc.equip.weapon_state = WEAPON_STATE_READY;
 			}

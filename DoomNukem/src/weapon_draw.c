@@ -12,42 +12,36 @@
 
 #include "../includes/wolf3d.h"
 
-static int	get_shotgun_id(double current, double max)
-{
-	if (current >= max * 0.90)
-		return (1);
-	if (current >= max * 0.70 || (current < max * 0.10))
-		return (0);
-	if (current >= max * 0.60 || (current >= max * 0.10 && current < max * 0.20))
-		return (2);
-	if (current >= max * 0.50 || (current >= max * 0.20 && current < max * 0.30))
-		return (3);
-	return (4);
-}
+/*
+** This function chooses the right weapon sprite to apply and uses
+** functions from get_id_arsenal.c if necessary.
+*/
 
-static int	get_bmp_id(t_enval *env, t_intxy *id)
+int	get_id_weapon_texture(t_enval *env, t_intxy *id)
 {
 	if (env->game.pc.equip.weapon_state == WEAPON_STATE_READY)
 		return(0);
-	if(env->game.pc.equip.weapon_state == WEAPON_STATE_CHARGING)
-		return(2);
 	if (env->game.pc.equip.weapon_state == WEAPON_STATE_RELOADING)
 	{	
 		id->x = 5;
 		return (0);
 	}
-	if (id->x == 2)
-		return (get_shotgun_id(env->game.pc.arsenal[id->x].attack.delay.current,
+	if (id->x <= 1)
+		return (get_id_arsenal_s(id->x,
+		env->game.pc.arsenal[id->x].attack.delay.current,
+		env->game.pc.arsenal[id->x].attack.delay.max, env->game.pc.fist_side));
+	if (id->x <= 3)
+		return (get_id_arsenal_xl(id->x,
+		env->game.pc.arsenal[id->x].attack.delay.current,
 		env->game.pc.arsenal[id->x].attack.delay.max));
-	if (env->game.pc.arsenal[id->x].attack.delay.current
-	>= (double)env->game.pc.arsenal[id->x].attack.delay.max * 0.75)
-		return(1);
-	if (env->game.pc.arsenal[id->x].attack.delay.current
-	>= (double)env->game.pc.arsenal[id->x].attack.delay.max * 0.50)
-		return(2);
-	return(3);
-
+	return (get_id_arsenal_bfg(env->game.pc.arsenal[4].attack.delay.current,
+	env->game.pc.arsenal[4].attack.delay.max, env->game.pc.equip.weapon_state));
 }
+
+/*
+** Draws the weapon texture, save for the pixels that have the same color
+** as the z-pixel which tells what pixel is not part of the weapon.
+*/
 
 void		weapon_draw(t_enval *env)
 {
@@ -58,10 +52,8 @@ void		weapon_draw(t_enval *env)
 	uint32_t	pixel;
 
 	id.x = env->game.pc.equip.current;
-	// ft_putnbr(id);
-	// ft_putendl(" is the id.");
 	offset.x = env->game.pc.arsenal[id.x].offset + env->user.bobbing.x;
-	id.y = get_bmp_id(env, &id);
+	id.y = get_id_weapon_texture(env, &id);
 	offset.y = 20 + env->user.bobbing.y;
 	zpixel = get_pixel_weapon(env, id, 0, 0);
 	c.x = -1;

@@ -57,7 +57,7 @@ int				main(int argc, char **argv)
 		init_values(argv[1], env);
 		if (!init_sdl(env))
 			ft_exit(env, "SDL init failed.", 0);
-		init_texture(env);
+		init_wall_texture(env);
 		init_wptext(env); /*init sprite wp*/
 		while (1)
 		{

@@ -29,7 +29,7 @@ t_weapon	get_weapon_fist(void)
 	fist.attack.type = WEAPON_TYPE_SEMIAUTO;
 	fist.attack.damage = 10;
 	fist.attack.range = 0.5;
-	init_stat(&fist.attack.delay, 750, 0);
+	init_stat(&fist.attack.delay, 500, 0);
 	fist.attack.radius.width = 0;
 	fist.attack.radius.width = 0;
 	fist.offset = 0;
@@ -50,7 +50,7 @@ t_weapon	get_weapon_pistol(void)
 	init_stat(&pistol.attack.delay, 150, 0);
 	pistol.attack.radius.width = 0;
 	pistol.attack.radius.depth = 0;
-	pistol.offset = 0;
+	pistol.offset = 50;
 	return (pistol);
 }
 
@@ -86,7 +86,7 @@ t_weapon	get_weapon_submachinegun(void)
 	init_stat(&submachinegun.attack.delay, 100, 0);
 	submachinegun.attack.radius.width = 0;
 	submachinegun.attack.radius.depth = 0;
-	submachinegun.offset = 200;
+	submachinegun.offset = 50;
 	return (submachinegun);
 }
 
@@ -104,6 +104,6 @@ t_weapon	get_weapon_bfg(void)
 	init_stat(&bfg.attack.delay, 850, 0);
 	bfg.attack.radius.width = 1.5;
 	bfg.attack.radius.depth = 1.5;
-	bfg.offset = 100;
+	bfg.offset = 0;
 	return (bfg);
 }
