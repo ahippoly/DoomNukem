@@ -34,7 +34,7 @@ void	free_texture_weapon(t_sprite **wptex, int id, int texture_number)
 	int j;
 
 	j = -1;
-	if(wptex[id])
+	if (wptex[id])
 	{
 		while (++j < texture_number)
 			SDL_FreeSurface(wptex[id][j].img);
@@ -52,7 +52,7 @@ void	free_textures(t_sprite *wtex, t_sprite **wptex)
 		if (wtex && wtex[i].img)
 			SDL_FreeSurface(wtex[i].img);
 	}
-	i = -1;	
+	i = -1;
 	if (wptex)
 	{
 		free_texture_weapon(wptex, 0, WEAPON_TEXTURES_MELEE);
@@ -65,7 +65,6 @@ void	free_textures(t_sprite *wtex, t_sprite **wptex)
 	free(wptex);
 	wptex = NULL;
 }
-
 
 /*
 ** Make sure to add "free_textures(env->wtex, env->wptex);" before "free(env);"
