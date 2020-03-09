@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 04:35:20 by ahippoly          #+#    #+#             */
-/*   Updated: 2019/09/26 04:39:25 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/03/09 21:53:39 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main()
+double	ft_fatoi(const char *str);
+
+int main(int ac, char **av)
 {
 	int value = -2147483649;
 
-	printf("abs of %i = %i\n",value, ft_abs(value));
+	printf("fatoi = %f\n", ft_fatoi(av[1]));
 }
