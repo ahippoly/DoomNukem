@@ -44,7 +44,8 @@ static void		ft_add_pxl(t_enval *env, int j, int i, int t)
 	if (t == 4 || (t == 5 && env->wtex[5].img->h != env->wtex[4].img->h))
 		env->wt.y = (int)(env->ray.currentfloor.y * env->wtex[t].img->h)
 			% env->wtex[t].img->h;
-	put_pixel(env->sdl.screen, i, j, get_pixel_floor(env, t, env->wt.x, env->wt.y));
+	put_pixel(env->sdl.screen, i, j,
+	get_pixel_floor(env, t, env->wt.x, env->wt.y));
 }
 
 static void		floor_loop(t_enval *env, int i)
@@ -67,17 +68,6 @@ static void		floor_loop(t_enval *env, int i)
 
 static void		floor_calc(t_enval *env, int i)
 {
-	/*
-	int bpp;
-	int s_line;
-	int endian;
-
-	if (!env->wtex[4]->buffer)
-		env->wtex[4]->buffer = (int *)mlx_get_data_addr(env->wtex[4]->img,
-			&bpp, &s_line, &endian);
-	if (!env->wtex[5]->buffer)
-		env->wtex[5]->buffer = (int *)mlx_get_data_addr(env->wtex[5]->img,
-			&bpp, &s_line, &endian);*/
 	env->ray.distwall = env->ray.perpwalldist;
 	if (env->ray.wallbot < 0)
 		env->ray.wallbot = WIN_H;

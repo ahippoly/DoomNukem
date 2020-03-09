@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-//#include "libft.h"
 
 SDL_Surface		*new_surface(int w, int h)
 {
@@ -53,12 +52,12 @@ int				main(int argc, char **argv)
 		if (ft_strcmp(argv[1], "h") == 0 || ft_strcmp(argv[1], "help") == 0)
 			ft_help();
 		if (!(env = (t_enval *)malloc(sizeof(t_enval))))
-			ft_exit(env, "Env malloc failed.", 0);
+			ft_exit(env, "Env malloc failed.", 0, 0);
 		init_values(argv[1], env);
 		if (!init_sdl(env))
-			ft_exit(env, "SDL init failed.", 0);
+			ft_exit(env, "SDL init failed.", 0, 0);
 		init_wall_texture(env);
-		init_wptext(env); /*init sprite wp*/
+		init_wptext(env);
 		while (1)
 		{
 			env->game.pc.equip.delay = SDL_GetTicks();

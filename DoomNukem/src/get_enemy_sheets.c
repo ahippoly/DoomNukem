@@ -132,7 +132,7 @@ void	get_enemy_mv_spd(double *mv_spd)
 	mv_spd[ENEMY_SOLDIER_RANGED_ATT] = 1.4;
 	mv_spd[ENEMY_SOLDIER_RANGED_SUP] = 1.4;
 	mv_spd[ENEMY_ELITE_MELEE_ATT] = 1.5;
-	mv_spd[ENEMY_ELITE_MELEE_SWARMER] = 1.2 ;
+	mv_spd[ENEMY_ELITE_MELEE_SWARMER] = 1.2;
 	mv_spd[ENEMY_ELITE_MELEE_SWARM] = 2;
 	mv_spd[ENEMY_ELITE_RANGED_SHORT] = 1.5;
 	mv_spd[ENEMY_ELITE_RANGED_LONG] = 1.5;

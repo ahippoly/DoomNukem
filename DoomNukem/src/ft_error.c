@@ -75,19 +75,22 @@ void		ft_checkinval(char **tab, t_enval *env)
 }
 
 /*
-** This function protects the mlx's essential variables.
+** Checks if any weapon textures' memory allocation went wrong or not
+** and stops the program if it did.
 */
 
-/*
-void		ft_checkmlx(t_enval *env)
+void		check_weapon_texture(t_enval *env, int id, int texture_number)
 {
-	if (!(env->mlx.m_p = mlx_init()))
-		ft_error("mlx init failure.", env, 0);
-	if (!(env->mlx.w_p = mlx_new_window(env->mlx.m_p, WIN_W, WIN_H, "Wolf3d")))
-		ft_error("mlx window init failure.", env, 2);
-	if (!(env->mlx.i_p = mlx_new_image(env->mlx.m_p, WIN_W, WIN_H)))
-		ft_error("mlx image init failure.", env, 2);
-}*/
+	int i;
+
+	i = 0;
+	while (i < texture_number)
+	{
+		if (!env->wptex[id][i].img)
+			ft_error("missing or corrupted weapon texture(s)", env, 0);
+		i++;
+	}
+}
 
 /*
 ** This function protectivelt allocates the SDL's essential parameters.
@@ -113,6 +116,5 @@ void		ft_error(char *err, t_enval *env, int i)
 {
 	ft_putstr("Error : ");
 	ft_putendl(err);
-	ft_freewolf(env, i);
-	exit(1);
+	ft_exit(env, "end", 1, i);
 }

@@ -25,7 +25,7 @@ void		switch_fog(t_enval *env)
 }
 
 /*
-** Function allowing for weapon swap. No effect if we already have the weapon.
+** Allows for weapon swapping. No effect if the weapon is already equipped.
 */
 
 void		change_weapon(t_enval *env)
@@ -54,7 +54,7 @@ void		change_weapon(t_enval *env)
 }
 
 /*
-** This function handles weapon bobbing
+** Handles weapon bobbing
 */
 
 void		handle_bobbing(t_enval *env)
@@ -67,4 +67,21 @@ void		handle_bobbing(t_enval *env)
 		sign *= -1;
 	env->user.bobbing.x = sin(i * M_PI_2) * 10;
 	env->user.bobbing.y = cos(i * M_PI_2) * 10;
+}
+
+/*
+** Handles all events that should be handled when the game is not paused
+*/
+
+void		event_unpaused(t_enval *env)
+{
+	mouseclick_event(env);
+	if (env->event.type == SDL_MOUSEMOTION)
+		env->sdl.key[MOUSE] = 1;
+	if (env->event.key.keysym.sym == SDLK_r)
+		env->sdl.key[R] = env->event.type == SDL_KEYDOWN ? -1 : 0;
+	if (env->event.type == SDL_KEYDOWN)
+	{
+		change_weapon(env);
+	}
 }

@@ -27,7 +27,7 @@ void			mouse(t_enval *env, Sint16 xrel, int dir)
 	oldplanex = env->player.plane.x;
 	env->player.plane.x = (oldplanex * cos(angle))
 		- (env->player.plane.y * sin(angle));
-    env->player.plane.y = (oldplanex * sin(angle))
+	env->player.plane.y = (oldplanex * sin(angle))
 		+ (env->player.plane.y * cos(angle));
 }
 
@@ -45,13 +45,7 @@ void			mouse_motion(t_enval *env)
 
 void			mouse_events(t_enval *env)
 {
-    /*
-	if (env->key[ML])
-		shoot(data);
-	if (env->key[MR])
-		change_weapon(data);
-	*/
-    if (env->sdl.key[MOUSE] == 1)
+	if (env->sdl.key[MOUSE] == 1)
 	{
 		SDL_ShowCursor(SDL_DISABLE);
 		SDL_GetGlobalMouseState(&(env->mouse.x), &(env->mouse.y));

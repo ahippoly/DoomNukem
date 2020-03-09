@@ -33,13 +33,7 @@ void			wall_draw(t_enval *env, int i, int t)
 {
 	int j;
 	int d;
-	/*int bpp;
-	int s_line;
-	int endian;
 
-	if (!env->wtex[t]->buffer)
-		env->wtex[t]->buffer = (int *)mlx_get_data_addr(env->wtex[t]->img,
-			&bpp, &s_line, &endian);*/
 	env->ray.wallwhere = get_where(env);
 	env->wt.x = (int)(env->ray.wallwhere * (double)env->wtex[t].img->w);
 	if ((env->ray.wallside == 0 && env->ray.dir.x > 0)
@@ -50,9 +44,8 @@ void			wall_draw(t_enval *env, int i, int t)
 	{
 		d = j * 256 - WIN_H * 128 + env->ray.height * 128;
 		env->wt.y = ((d * env->wtex[t].img->h) / env->ray.height) / 256;
-		// env->mlx.pxl[WIN_W * j + i] =
-			// env->wtex[t]->buffer[env->wtex[t]->width * env->wt.y + env->wt.x];
-		put_pixel(env->sdl.screen, i, j, get_pixel_wall(env, t, env->wt.x, env->wt.y));
+		put_pixel(env->sdl.screen, i, j,
+		get_pixel_wall(env, t, env->wt.x, env->wt.y));
 		j++;
 	}
 }

@@ -15,21 +15,24 @@
 void			put_texture(t_enval *env)
 {
 	SDL_LockSurface(env->sdl.screen);
-	env->sdl.text = SDL_CreateTextureFromSurface(env->sdl.rend, env->sdl.screen);
+	env->sdl.text = SDL_CreateTextureFromSurface(env->sdl.rend,
+	env->sdl.screen);
 	SDL_RenderCopy(env->sdl.rend, env->sdl.text, NULL, NULL);
 	SDL_UnlockSurface(env->sdl.screen);
-    SDL_RenderPresent(env->sdl.rend);
+	SDL_RenderPresent(env->sdl.rend);
 	SDL_DestroyTexture(env->sdl.text);
 	SDL_SetRenderDrawColor(env->sdl.rend, 0, 0, 0, 0);
 	SDL_RenderClear(env->sdl.rend);
 }
 
+/*
+** Add enemy (action ? better to put in events)/display and removal
+** after the ray_draw function.
+*/
+
 void			display(t_enval *env)
 {
 	ray_draw(env);
-	//nmi action
-	//nmi affichage
-	//(nmi remove)
-	weapon_draw(env);//weapon display -> apons' priority
+	weapon_draw(env);
 	put_texture(env);
 }

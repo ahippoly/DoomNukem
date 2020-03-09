@@ -35,5 +35,5 @@ void	get_enemy_sights(double *sights)
 	sights[ENEMY_ELITE_RANGED_SUP] = 10;
 	sights[ENEMY_BOSS_FIRST] = 20;
 	sights[ENEMY_BOSS_SECOND] = 20;
-	sights[ENEMY_BOSS_FINAL] = 20;	
+	sights[ENEMY_BOSS_FINAL] = 20;
 }

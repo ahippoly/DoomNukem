@@ -42,7 +42,7 @@ SRC		=	main.c \
 			fc_draw.c\
 			fog.c \
 			ft_error.c \
-			ft_freewolf.c \
+			free_doom.c \
 			ft_help.c \
 			get_enemy_sheets.c \
 			get_enemy_sheets2.c \
@@ -55,7 +55,6 @@ SRC		=	main.c \
 			init_weapon_texture.c \
 			mobility.c\
 			mouse_event.c \
-			perform_attack.c \
 			pixel.c \
 			raycasting.c \
 			resolve_damage.c \

@@ -17,8 +17,3 @@ void	init_stat(t_stat *stat, int max, int current)
 	stat->current = current;
 	stat->max = max;
 }
-
-// void	init_att_basic_stat(t_attack *att, int dmg, double spd, int range)
-// {
-
-// }   Might be used later, not sure

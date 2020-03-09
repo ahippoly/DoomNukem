@@ -22,16 +22,16 @@ int		get_id_arsenal_s(int id, double cur, double max, int side)
 	if (id == 0)
 	{
 		if (cur >= max * 0.95 || (cur < max * 0.15))
-			return(1 + side);
+			return (1 + side);
 		return (2 + side);
 	}
 	if (cur >= max * 0.80)
-		return(1);
+		return (1);
 	if (cur >= max * 0.60)
-		return(2);
+		return (2);
 	if (cur >= max * 0.40)
-		return(3);
-	return(4);
+		return (3);
+	return (4);
 }
 
 int		get_id_arsenal_xl(int id, double cur, double max)
@@ -81,7 +81,7 @@ int		get_id_bfg_reloading(double cur, double max)
 int		get_id_arsenal_bfg(double cur, double max, int state)
 {
 	if (state == WEAPON_STATE_CHARGING)
-		return(get_id_bfg_reloading(cur, max * 2));
+		return (get_id_bfg_reloading(cur, max * 2));
 	if (cur >= max * 0.55)
 		return (11);
 	if (cur >= max * 0.40)

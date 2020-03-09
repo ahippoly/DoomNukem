@@ -34,5 +34,5 @@ t_npc	get_enemy(t_stat_sheet *sheet, int id, t_pos start_pos)
 	clean_status_effect(&enemy.effects.att_spd);
 	enemy.player_detection = PLAYER_UNDETECTED;
 	enemy.player_allegiance = PLAYER_HOSTILE;
-	return(enemy);
+	return (enemy);
 }

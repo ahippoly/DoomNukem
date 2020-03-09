@@ -13,7 +13,6 @@
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-// # include "mlx.h"
 # include "SDL2/SDL.h"
 # include "../libft/includes/libft.h"
 # include "gameplay.h"
@@ -32,26 +31,15 @@
 # define WEAPON_TEXTURES_PISTOL		5
 # define WEAPON_TEXTURES_SHOTGUN	5
 # define WEAPON_TEXTURES_SMG		3
-# define WEAPON_TEXTURES_BFG		16
+# define WEAPON_TEXTURES_BFG		15
 
+# define WALL_TEXTURE_NUMBER 6
 # define WN "textures/wallnorth.xpm"
 # define WS "textures/bonuscrystal.xpm"
 # define WW "textures/wallwest.xpm"
 # define WE "textures/walleast.xpm"
 # define FL "textures/floor.xpm"
 # define CL "textures/ceiling.xpm"
-
-// # define NOEVENTMASK 0L
-// # define KEYPRESSMASK (1L << 0)
-// # define KEYRELEASEMASK (1L << 1)
-// # define BUTTONPRESSMASK (1L << 2)
-// # define POINTERMOTIONMASK (1L << 6)
-
-// # define KEYPRESS 2
-// # define KEYRELEASE 3
-// # define BUTTONPRESS 4
-// # define MOTIONNOTIFY 6
-// # define DESTROYNOTIFY 17
 
 # define KEY_Q 12
 # define KEY_E 14
@@ -177,19 +165,6 @@ typedef struct	s_sdl
 }				t_sdl;
 
 /*
-** A structure to handle one texture (from .xpm files)
-** Call 't_tex tex[x]' to have x different textures.
-*/
-
-typedef struct	s_tex
-{
-	int		width;
-	int		height;
-	int		*buffer;
-	void	*img;
-}				t_tex;
-
-/*
 ** Structure for user gamplay varialble
 */
 
@@ -213,7 +188,7 @@ typedef struct	s_enval
 	t_ray					ray;
 	t_mapinfo				map;
 	t_intxy					wt;
-	t_sprite				wtex[6];
+	t_sprite				wtex[WALL_TEXTURE_NUMBER];
 	t_sprite				**wptex;
 	int						fd;
 	int						wl;
@@ -228,23 +203,23 @@ typedef struct	s_enval
 ** Function prototypes specific to this program
 */
 
+void			free_doom(t_enval *env, int i);
+void			free_map(t_mapinfo *map, int wl);
+void			free_textures(t_sprite *wtex, t_sprite **wptex);
+void			free_texture_weapon(t_sprite **wptex, int id, int texture_number);
 void			ft_error(char *err, t_enval *env, int i);
-void			ft_freewolf(t_enval *env, int i);
-void			ft_help(void);
-int				ft_loop_hook(t_enval *env);
 void			ft_checkappval(int reader, int i, t_enval *env, t_mapinfo map);
 void			ft_checkinval(char **tab, t_enval *val);
+void			check_weapon_texture(t_enval *env, int id, int texture_number);
 void			ft_checkmlx(t_enval *env);
 void			if_keyvert(int **walls, t_doublexy *pos, t_doublexy *cpy);
+void			ft_help(void);
 void			init_values(char *file, t_enval *env);
-int				keypress(int key, t_enval *env);
-int				keyrelease(int key, t_enval *env);
-void			mlx_handle_hooks(t_enval *env);
 void			movement(t_enval*env);
 void			ray_calc(t_enval *env, int i);
 void			ray_hit(t_enval *env);
 void			rotation(t_enval *env, t_player *p);
-void			ft_exit(t_enval *env, char *s, int flag);
+void			ft_exit(t_enval *env, char *s, int flag, int i);
 
 /*
 **	Function Color and Pixel
@@ -287,7 +262,11 @@ int				get_id_arsenal_bfg(double cur, double max, int state);
 */
 
 void			event(t_enval *env);
+void			event_unpaused(t_enval *env);
 void			mouse_events(t_enval *env);
+void			mouseclick_event(t_enval *env);
+void			move_events(t_enval *env);
+void			deal_event(t_enval *env);
 void			switch_fog(t_enval *env);
 void			change_weapon(t_enval *env);
 void			handle_bobbing(t_enval *env);

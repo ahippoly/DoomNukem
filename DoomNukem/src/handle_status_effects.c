@@ -25,7 +25,7 @@ void		apply_stat_eff(t_buff *effect, int id, double value, int duration)
 void		countdown_status_effect_one(t_buff *effect, int delay)
 {
 	int i;
-	
+
 	i = 0;
 	while (i < EFFECT_AMOUNT)
 	{

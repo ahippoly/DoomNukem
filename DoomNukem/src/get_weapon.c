@@ -63,7 +63,7 @@ t_weapon	get_weapon_shotgun(void)
 	shotgun.clip.reload = 3250;
 	init_stat(&shotgun.ammo, 32, 16);
 	shotgun.attack.type = WEAPON_TYPE_SEMIAUTO;
-	shotgun.attack.damage = 50; 
+	shotgun.attack.damage = 50;
 	shotgun.attack.range = 3;
 	init_stat(&shotgun.attack.delay, 1200, 0);
 	shotgun.attack.radius.width = 0.5;

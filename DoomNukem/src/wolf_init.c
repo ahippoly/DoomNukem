@@ -49,7 +49,7 @@ static int		**append_val(char **tab, t_enval *env)
 }
 
 static void		prep_init(t_enval *env)
-{	
+{
 	int i;
 
 	env->user.fog = 3;
@@ -118,43 +118,14 @@ void			init_wall_texture(t_enval *env)
 
 void			init_wptext(t_enval *env)
 {
-	int i;
-	int j;
-
 	if (!(env->wptex = (t_sprite **)malloc(sizeof(t_sprite *) * WEAPON_NUMBER)))
 		ft_error("weapon initialization failure.", env, 0);
-	// env->wptex[0][0].img = SDL_LoadBMP("img/weapons/hand.bmp");
-	// env->wptex[0][1].img = SDL_LoadBMP("img/weapons/hand2.bmp");
 	init_melee_texture(env);
-	// env->wptex[1][0].img = SDL_LoadBMP("img/apons_weapons/pistol_idle.bmp");
-	// env->wptex[1][1].img = SDL_LoadBMP("img/apons_weapons/pistol_firing1.bmp");
-	// env->wptex[1][2].img = SDL_LoadBMP("img/apons_weapons/pistol_firing2.bmp");
-	// env->wptex[1][3].img = SDL_LoadBMP("img/apons_weapons/pistol_firing3.bmp");
 	init_pistol_texture(env);
-	// env->wptex[2][0].img = SDL_LoadBMP("img/weapons/shotgun.bmp");
-	// env->wptex[2][1].img = SDL_LoadBMP("img/weapons/shotgunfire.bmp");
 	init_shotgun_texture(env);
-	// env->wptex[3][0].img = SDL_LoadBMP("img/weapons/rafle.bmp");
-	// env->wptex[3][1].img = SDL_LoadBMP("img/weapons/rafle2.bmp");
 	init_smg_texture(env);
-	// env->wptex[4][0].img = SDL_LoadBMP("img/weapons/autogun1.bmp");
-	// env->wptex[4][1].img = SDL_LoadBMP("img/weapons/autogun2.bmp");
-	// env->wptex[4][2].img = SDL_LoadBMP("img/weapons/gunfire.bmp");
 	init_bfg_texture(env);
 	if (!(env->wptex[5] = (t_sprite *)malloc(sizeof(t_sprite))))
 		ft_error("Temp reload failure.", env, 0);
 	env->wptex[5][0].img = SDL_LoadBMP("img/plante.bmp");
-	
-	i = 0;
-	while (i < WEAPON_NUMBER)
-	{
-		j = 0;
-		while (j < 1)
-		{
-			if (!(env->wptex[i][j].img))
-				ft_error("at least one weapon texture is missing or corrupted.", env, 0);
-			j++;
-		}
-		i++;
-	}
 }

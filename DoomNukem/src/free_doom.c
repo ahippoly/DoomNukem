@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freewolf.c                                      :+:      :+:    :+:   */
+/*   free_doom.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@
 ** This function frees everything that is necessary to free.
 */
 
-static void	freemap(t_mapinfo *map, int wl)
+void	free_map(t_mapinfo *map, int wl)
 {
 	int i;
 
@@ -29,38 +29,56 @@ static void	freemap(t_mapinfo *map, int wl)
 	free(map->walls);
 }
 
-/*
-static void	freetextures(t_tex **wtex, t_mlx *mlx)
+void	free_texture_weapon(t_sprite **wptex, int id, int texture_number)
+{
+	int j;
+
+	j = -1;
+	if(wptex[id])
+	{
+		while (++j < texture_number)
+			SDL_FreeSurface(wptex[id][j].img);
+		free(wptex[id]);
+	}
+}
+
+void	free_textures(t_sprite *wtex, t_sprite **wptex)
 {
 	int i;
 
 	i = -1;
-	while (++i < 6)
+	while (++i < WALL_TEXTURE_NUMBER)
 	{
-		if (wtex[i] && wtex[i]->img)
-		{
-			mlx_destroy_image(mlx->m_p, wtex[i]->img);
-			free(wtex[i]);
-		}
+		if (wtex && wtex[i].img)
+			SDL_FreeSurface(wtex[i].img);
 	}
+	i = -1;	
+	if (wptex)
+	{
+		free_texture_weapon(wptex, 0, WEAPON_TEXTURES_MELEE);
+		free_texture_weapon(wptex, 1, WEAPON_TEXTURES_PISTOL);
+		free_texture_weapon(wptex, 2, WEAPON_TEXTURES_SHOTGUN);
+		free_texture_weapon(wptex, 3, WEAPON_TEXTURES_SMG);
+		free_texture_weapon(wptex, 4, WEAPON_TEXTURES_BFG);
+		free_texture_weapon(wptex, 5, 1);
+	}
+	free(wptex);
+	wptex = NULL;
 }
 
-static void	freemlx(t_mlx *mlx, int i)
-{
-	mlx->i_p ? mlx_destroy_image(mlx->m_p, mlx->i_p) : 0;
-	mlx->w_p ? mlx_destroy_window(mlx->m_p, mlx->w_p) : 0;
-	i == 2 ? mlx_del(mlx->m_p) : 0;
-}*/
 
-void		ft_freewolf(t_enval *env, int i)
+/*
+** Make sure to add "free_textures(env->wtex, env->wptex);" before "free(env);"
+*/
+
+void	free_doom(t_enval *env, int i)
 {
 	if (env)
 	{
 		if (i == 1)
 			free(env->linebuff);
-		env->map.walls ? freemap(&env->map, env->wl) : 0;
-		//freetextures(env->wtex, &env->mlx);
-		//freemlx(&env->mlx, i);
+		env->map.walls ? free_map(&env->map, env->wl) : 0;
+		free_textures(env->wtex, env->wptex);
 		free(env);
 		env = NULL;
 	}

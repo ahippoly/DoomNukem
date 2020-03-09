@@ -105,8 +105,6 @@ void			ray_draw(t_enval *env)
 	int i;
 	int texnum;
 
-	// env->mlx.pxl = (int *)mlx_get_data_addr(env->mlx.i_p, &env->mlx.bpp,
-	// 		&env->mlx.s_line, &env->mlx.endian);
 	i = 0;
 	while (i < WIN_W)
 	{
@@ -124,5 +122,4 @@ void			ray_draw(t_enval *env)
 		fc_draw(env, i);
 		i++;
 	}
-	// mlx_put_image_to_window(env->mlx.m_p, env->mlx.w_p, env->mlx.i_p, 0, 0);
 }

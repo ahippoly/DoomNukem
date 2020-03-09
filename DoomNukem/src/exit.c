@@ -12,33 +12,24 @@
 
 #include "../includes/wolf3d.h"
 
-static void        free_surface(t_sprite *tab, int nb_surface)
-{
-    int i;
+/*
+** Put these lines before SDL_Quit() :
+** if (data->sound.token == 1)
+** 		free_sound(data);
+** Mix_CloseAudio();
+*/
 
-    i = nb_surface;
-    while (i >= 0)
-    {
-        if (tab[i].img)
-            SDL_FreeSurface(tab[i].img);
-        i--;
-    }
-}
-
-void        ft_exit(t_enval *env, char *s, int flag)
+void				ft_exit(t_enval *env, char *s, int flag, int i)
 {
-    if (env)
+	if (env)
 	{
 		if (env->sdl.sdl_token)
 		{
-			free_surface(env->wtex, 5);
-            if (env->sdl.rend)
-			    SDL_DestroyRenderer(env->sdl.rend);
+			free_doom(env, i);
+			if (env->sdl.rend)
+				SDL_DestroyRenderer(env->sdl.rend);
 			if (env->sdl.win)
 				SDL_DestroyWindow(env->sdl.win);
-			//if (data->sound.token == 1)
-			//	free_sound(data);
-			//Mix_CloseAudio();
 			SDL_Quit();
 		}
 	}
