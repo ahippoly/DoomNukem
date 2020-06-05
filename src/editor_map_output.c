@@ -89,7 +89,7 @@ void write_wall_ref(int fd, t_env *env)
 {
     ft_putstr_fd("WALL_REF MAP\n", fd);
     write_head_param(fd, "MAP_SIZE", join_int_value(env->map_size.w, ",", env->map_size.h));
-    //write_head_param(fd, "PLAYER_SPAWN", join_int_value(env->input_lst[INPUT_PLAYER_X].value, ",", env->input_lst[INPUT_PLAYER_Y].value));
+    write_head_param(fd, "PLAYER_SPAWN", join_int_value((int)env->player_spawn.x, ",", (int)env->player_spawn.y));
     print_wall_ref(env->map_wall_ref, env->map_size, fd);
     ft_putchar_fd('\n',fd);
 }

@@ -14,7 +14,6 @@
 # define TILE_SIZE 40
 # define TILE_HITBOX 7
 # define WALL_HITBOX 10
-# define NB_WALL_MAX 200
 
 # define NB_BUTTONS 9
 # define BUTTON_DEL 0

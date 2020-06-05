@@ -24,3 +24,12 @@ void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color
 {
     pixels[p_pos.x + p_pos.y * img_size.w] = color;
 }
+
+void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color)
+{
+    int pixel_pos;
+
+    pixel_pos = p_pos.x + p_pos.y * img_size.w;
+    if (!pixels[pixel_pos])
+        pixels[pixel_pos] = color;
+}

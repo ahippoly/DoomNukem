@@ -62,7 +62,7 @@ int read_param(char *chunk, char *key, int *to_fill)
         while (*chunk == ',')
         {
             *(to_fill + ++i) = ft_atoi(++chunk);
-            printf("to fill + 1 = %i et chunk = %d\n", *(to_fill + 1), ft_atoi(chunk));
+            //printf("to fill + 1 = %i et chunk = %d\n", *(to_fill + 1), ft_atoi(chunk));
             chunk = skip_until_char(chunk, ',', ';');
         }
         error = 0;
@@ -83,6 +83,8 @@ void read_wall(char *line, t_wall *wall)
     error += read_param(line, "texture_id", &wall->texture_id);
     error += read_param(line, "room_id_ref", &wall->room_id_ref);
     error += read_param(line, "transparency", &wall->transparency);
+    wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
+    //printf("wall length = %f\n", wall->length);
     //printf("WALL ID READED\n");
     //printf("p1.x = %i, p1.y = %i\n", wall->p1.x, wall->p1.y);
     if (error > 0)
@@ -136,7 +138,7 @@ void read_wall_ref_list(int fd, t_map_data *map)
     else
         exit_with_msg("error while reading map");
     map->map_wall_ref = init_wall_ref(map->map_size);
-    printf("WALL REF DEBUG \n");
+    //printf("WALL REF DEBUG \n");
     i = 0;
     while (i < map->map_size.h)
     {
@@ -149,10 +151,10 @@ void read_wall_ref_list(int fd, t_map_data *map)
             map->map_wall_ref[i][j] = read_wall_ref(line);
             //printf("i %i, j %i ", i, j);
             line = skip_until_char(line, ' ', '\0');
-            printf("line = %s\n", line);
+            //printf("line = %s\n", line);
             j++;
         }
-        printf("\n");
+        //printf("\n");
         i++;
     }
 }
@@ -192,7 +194,7 @@ void read_room_list(int fd, t_map_data *map)
 
 void read_head(int fd, char *line, t_map_data *map)
 {
-    printf("line = %s\n", line);
+    //printf("line = %s\n", line);
     if (ft_strequ(line, "WALL LIST"))
     {
         printf("wALL LIST READED\n");
@@ -216,7 +218,6 @@ t_map_data  read_map(char *path_file)
     char *line;
 
     map.is_valid = 0;
-    fd = 500;
     line = NULL;
     printf("started map read\n");
     if ((fd = open(path_file, O_RDONLY)) == -1)

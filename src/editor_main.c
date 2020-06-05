@@ -60,7 +60,7 @@ void init_buttons(t_env *env)
     env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 195)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 195)), BUTTON_TEXT_RIGHT);
     env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 850)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 850)), BUTTON_CREATE_ROOM);
     env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(810, 800)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(810, 800)), BUTTON_MAP_OUTPUT);
-    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(810, 900)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(810, 900)), BUTTON_SET_PLAYER_SPAWN);
+    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(810, 750)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(810, 750)), BUTTON_SET_PLAYER_SPAWN);
     env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 445)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 445)), BUTTON_MOB_LEFT);
     env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 445)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 445)), BUTTON_MOB_RIGHT);
     env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 2, 0xFFDDDDDD, create_point(822, 555)), create_text_img("Place", 2, 0xFF88FF88, create_point(822, 555)), BUTTON_MOB_PLACING);

@@ -22,6 +22,7 @@
 # define BUFF_SIZE 1000000
 # define NAZI "Alerte nazi, Test de nazi detecte, Alerte nazi\n"
 # define MOUSE 3
+# define NB_WALL_MAX 200
 
 typedef struct s_point
 {
@@ -52,6 +53,7 @@ typedef struct      s_wall
     int             room_id_ref;
     int             transparency;
     int             can_collide;
+    double          length;
 }                   t_wall;
 
 typedef struct          s_wall_ref
@@ -96,6 +98,7 @@ t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
 void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
+void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
 
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);
