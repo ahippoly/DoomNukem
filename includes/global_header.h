@@ -42,6 +42,13 @@ typedef struct      s_size
     int             h;
 }                   t_size;
 
+typedef struct      s_dist_n_scale
+{
+                    double dist;
+                    double scale;
+                    int wall_id;
+}                   t_dist_n_scale;
+
 typedef struct      s_wall
 {
     int             id;

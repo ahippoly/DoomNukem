@@ -56,6 +56,7 @@ void init_data(t_data *d, t_map_data *map)
     d->quit = 0;
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
+    d->sorted_walls = p_malloc(sizeof(t_wall) * NB_WALL_MAX);
     d->texture = read_img_surface("img/textures/stones.bmp");
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 }
@@ -85,7 +86,7 @@ t_dist_n_scale check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
         res.scale = calc_wall_hit_scale(wall, inter);
     }
         //dist = hypot(inter.x - pos.x, inter.y - pos.y) * cos((look_rot - rot )* M_PI_2);
-    //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f\n", wall.p1.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter));
+    //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter), rot, look_rot);
     return (res);
 }
 
@@ -119,7 +120,6 @@ void draw_vertical_line(t_data *d, int x, t_dist_n_scale dist_scale, SDL_Surface
     double y_step;
     int text_pixel_color;
     int *pixels;
-    void (*pixel_put)();
 
     if (dist_scale.dist == 9999)
         return ;
@@ -131,26 +131,48 @@ void draw_vertical_line(t_data *d, int x, t_dist_n_scale dist_scale, SDL_Surface
     draw_begin = ft_max(draw_begin, 0);
     draw_end = ft_min(draw_end, WIN_SIZE_Y);
     pixels = (int*)text->pixels;
-    if (dist_scale.dist < d->nearest_dist)
-    {
-        pixel_put = put_pixel;
-        d->nearest_dist = dist_scale.dist;
-    }
-    else
-        pixel_put = put_pixel_attempt;
     while (draw_begin < draw_end)
     {
         y_scale += y_step;
         //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, y_scale);
         text_pixel_color = pixels[(int)(dist_scale.scale * text->w) + (int)(y_scale * text->h) * text->w];
         //printf("colour = %i\n", text_pixel_color);
-        pixel_put(d->p_screen, create_point(x, draw_begin++), create_t_size(WIN_SIZE_X, WIN_SIZE_Y), text_pixel_color);
+        put_pixel(d->p_screen, create_point(x, draw_begin++), create_t_size(WIN_SIZE_X, WIN_SIZE_Y), text_pixel_color);
     }
 }
 
-void attempt_to_draw_with_wall_wall(t_data *d, t_map_data *map)
+void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
 {
-    
+    int i;
+    int j;
+    int tmp;
+    t_dist_n_scale dist_scale;
+
+    d->sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, d->player_pos, d->rot);
+    i = 1;
+    while (i < map->wall_count)
+    {
+        dist_scale = check_inter_with_wall(map->wall_list[i], current_angle, d->player_pos, d->rot);
+        //printf("wall dist to player = %f\n",  dist_scale.dist);
+        j = 0;
+        while (dist_scale.dist < d->sorted_walls[j].dist && j < i)
+            j++;
+        tmp = j;
+        j = i;
+        while (j > tmp)
+        {
+            j--;
+            d->sorted_walls[j + 1] = d->sorted_walls[j];
+        }
+        d->sorted_walls[j] = dist_scale;
+        i++;
+    }
+    // i = 0;
+    // while (i < map->wall_count)
+    // {
+    //     printf("wall sorted dist = %f, i = %i, map_count = %i\n", d->sorted_walls[i].dist, i, map->wall_count);
+    //     i++;
+    // }
 }
 
 void raycast_all_screen(t_data *d, t_map_data *map)
@@ -165,9 +187,9 @@ void raycast_all_screen(t_data *d, t_map_data *map)
     while (x < WIN_SIZE_X)
     {
         i = 0;
-        d->nearest_dist = 9999;
+        sort_walls_by_dist(d, map, current_angle);
         while (i < map->wall_count)
-            draw_vertical_line(d, x, check_inter_with_wall(map->wall_list[i++], current_angle, d->player_pos, d->rot), d->texture);
+            draw_vertical_line(d, x, d->sorted_walls[i++], d->texture);
         //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture);
         current_angle += step;
         x++;
@@ -219,11 +241,17 @@ void handle_poll_event(t_data *d, t_map_data *map)
         if (d->e.type == SDL_KEYDOWN)
         {
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
-                draw_vertical_line(d, 500, 
-                check_intersect_with_all_wall(d, map, d->rot, d->rot),
-                d->texture
-                )
-                ;
+            {
+                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot), d->texture);
+                printf("dist to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).dist);
+                printf("d->rot = %f\n", d->rot);
+            }
+                
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_X)
+            {
+                printf("d->rot = %f\n", d->rot);
+                sort_walls_by_dist(d, map, d->rot);
+            }
         }
     }
 }
@@ -241,6 +269,11 @@ void print_data2screen(t_data *d, t_map_data *map)
     SDL_RenderPresent(d->rend);
 }
 
+void free_render_env(t_data *d)
+{
+    free(d->sorted_walls);
+}
+
 int main(void)
 {
     t_map_data  map;
@@ -252,7 +285,7 @@ int main(void)
     ft_putstr("Main worked");
 
     d.player_pos = create_t_point(map.player_spawn.x, map.player_spawn.y);
-    printf("player pos = %f, %f\n", d.player_pos.x, d.player_pos.y);
+    printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, map.wall_count);
     while (!d.quit)
     {
         ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
@@ -265,4 +298,5 @@ int main(void)
         print_player_look_vector(&d, &map, d.rot);
         print_data2screen(&d, &map);
     }
+    free_render_env(&d);
 }

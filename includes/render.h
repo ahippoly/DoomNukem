@@ -34,15 +34,8 @@ typedef struct      s_data
     t_point         player_pos;
     double          player_height;
     int             screen_height;
-    double          nearest_dist;
-    t_wall          sorted_wall_lst[NB_WALL_MAX];
-}              t_data;
-
-typedef struct      s_dist_n_scale
-{
-                    double dist;
-                    double scale;
-}                   t_dist_n_scale;
+    t_dist_n_scale  *sorted_walls;
+}                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
