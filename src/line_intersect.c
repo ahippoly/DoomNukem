@@ -23,6 +23,13 @@ double calc_b(t_point p1, double a)
 	return (p1.y - p1.x * a);
 }
 
+int is_equ_tolerance(double value1, double value2, double tolerance)
+{
+	if (value1 < value2 + tolerance && value1 > value2 - tolerance)
+		return (1);
+	return (0);
+}
+
 t_point calc_intersect(double a1, double b1, double a2, double b2)
 {
 	t_point inter;
@@ -91,13 +98,6 @@ t_point convert_sdlpoint2tpoint(SDL_Point point)
 	new_point.x = point.x;
 	new_point.y = point.y;
 	return (new_point);
-}
-
-int is_equ_tolerance(double value1, double value2, double tolerance)
-{
-	if (value1 < value2 + tolerance && value1 > value2 - tolerance)
-		return (1);
-	return (0);
 }
 
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
