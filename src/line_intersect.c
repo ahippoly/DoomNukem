@@ -53,7 +53,7 @@ t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 	)
 		return (create_t_point(-41, -41));
 	inter.x = (b2 - b1) / (a1  - a2);
-	//printf("inter.x = %f, max x = %f, min x = %f\n", inter.x, ft_fmax(p2.x, p1.x), ft_fmin(p2.x, p1.x));
+	// printf("inter.x = %f, max x = %f, min x = %f\n", inter.x, ft_fmax(p2.x, p1.x), ft_fmin(p2.x, p1.x));
 	if (inter.x < p2.x - INTER_TOLERANCE && inter.x > p1.x + INTER_TOLERANCE
 		&& inter.x < p4.x - INTER_TOLERANCE && inter.x > p3.x + INTER_TOLERANCE
 		&& (a1 != a2))
@@ -73,7 +73,8 @@ t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point 
 	b2 = p3.y - p3.x * a2;
 	inter.x = p1.x;
 	inter.y = a2 * inter.x + b2;
-	//printf("inter.y = %f, max x = %f, min x = %f\n", inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
+	// printf("p3: %f,%f ; p4: %f,%f ; a2 = %f, b2 = %f\n", p3.x,p3.y, p4.x,p4.y, a2, b2);
+	// printf("inter.x = %f, inter.y = %f, max x = %f, min x = %f\n", inter.x, inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
 	if (inter.y > ft_max(p2.y, p1.y) - INTER_TOLERANCE || inter.y < ft_min(p1.y, p2.y) + INTER_TOLERANCE
 		|| inter.x > p4.x - INTER_TOLERANCE || inter.x < p3.x + INTER_TOLERANCE)
 	{
@@ -92,17 +93,28 @@ t_point convert_sdlpoint2tpoint(SDL_Point point)
 	return (new_point);
 }
 
+int is_equ_tolerance(double value1, double value2, double tolerance)
+{
+	if (value1 < value2 + tolerance && value1 > value2 - tolerance)
+		return (1);
+	return (0);
+}
+
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	t_point inter;
+	double	line1_diff_x;
+	double	line2_diff_x;
 
 	sort_t_point_by_x(&p1, &p2);
 	sort_t_point_by_x(&p3, &p4);
-	if (p2.x - p1.x != 0 && p4.x - p3.x != 0)
+	line1_diff_x = p2.x - p1.x;
+	line2_diff_x = p4.x - p3.x;
+	if (!(is_equ_tolerance(line1_diff_x, 0, INTER_TOLERANCE) || is_equ_tolerance(line2_diff_x, 0, INTER_TOLERANCE)))
 		inter = default_case(p1, p2, p3, p4);
-	else if (p4.x - p3.x != 0)
+	else if (line1_diff_x < INTER_TOLERANCE && line1_diff_x > - INTER_TOLERANCE)
 		inter = first_segment_vertical_case(p1, p2, p3, p4);
-	else if (p2.x - p1.x != 0)
+	else if (line2_diff_x < INTER_TOLERANCE && line2_diff_x > - INTER_TOLERANCE)
 		inter = first_segment_vertical_case(p3, p4, p1, p2);
 	else
 	{
@@ -136,6 +148,7 @@ t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4)
 
 	p2.x = pos.x + cos(rot * M_PI_2) * 30; 
 	p2.y = pos.y + sin(rot * M_PI_2) * 30;
+	// printf("pos: %f,%f, p2: %f,%f\n", pos.x, pos.y, p2.x, p2.y);
 	return (find_intersect(pos, p2, p3, p4));
 }
 

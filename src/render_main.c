@@ -149,6 +149,7 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
     t_dist_n_scale dist_scale;
 
     d->sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, d->player_pos, d->rot);
+    d->sorted_walls[0].wall_id = 0;
     i = 1;
     while (i < map->wall_count)
     {
@@ -165,6 +166,7 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
             d->sorted_walls[j + 1] = d->sorted_walls[j];
         }
         d->sorted_walls[j] = dist_scale;
+        d->sorted_walls[j].wall_id = i;
         i++;
     }
     // i = 0;
