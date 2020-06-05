@@ -51,10 +51,16 @@ void print_player_look_vector(t_data *d, t_map_data *map, double rot)
 {
     t_point scale;
     SDL_Point screen_player_pos;
+    double      rot_pi_2;
+    double      fov_rot_pi_2;
 
+    rot_pi_2 = rot * M_PI_2;
+    fov_rot_pi_2 = M_PI_2 * FOV_ANGLE / 180;
     scale = calc_map_scale(map);
     screen_player_pos = create_point(d->mini_map_player_pos.x + MINI_MAP_PLAYER_SIZE / 2, d->mini_map_player_pos.y + MINI_MAP_PLAYER_SIZE / 2);
-    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot * M_PI_2) * 25, screen_player_pos.y + sin(rot * M_PI_2) * 25), d->p_mini_map, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
+    //look vector // octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot_pi_2) * 25, screen_player_pos.y + sin(rot_pi_2) * 25), d->p_mini_map, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
+    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot_pi_2 + fov_rot_pi_2) * 35, screen_player_pos.y + sin(rot_pi_2 + fov_rot_pi_2) * 35), d->p_mini_map, 0xFF00DDDD, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
+    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot_pi_2 - fov_rot_pi_2) * 35, screen_player_pos.y + sin(rot_pi_2 - fov_rot_pi_2) * 35), d->p_mini_map, 0xFF00DDDD, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
 }
 
 void print_mini_map(t_data *d, t_map_data *map)

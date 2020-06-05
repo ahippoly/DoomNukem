@@ -72,10 +72,10 @@ double calc_wall_hit_scale(t_wall wall, t_point inter)
     return (modf((inter.x - wall.p1.x) / (wall.p2.x - wall.p1.x) * wall.length, &tmp));
 }
 
-t_dist_n_scale check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot)
+t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot)
 {
     t_point inter;
-    t_dist_n_scale res;
+    t_calced_walls res;
 
     res.dist = 9999;
     res.scale = 0;
@@ -90,11 +90,11 @@ t_dist_n_scale check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
     return (res);
 }
 
-t_dist_n_scale check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot, double look_rot)
+t_calced_walls check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot, double look_rot)
 {
     int i;
-    t_dist_n_scale res ;
-    t_dist_n_scale tmp;
+    t_calced_walls res ;
+    t_calced_walls tmp;
     t_point inter;
     t_wall wall;
 
@@ -112,7 +112,7 @@ t_dist_n_scale check_intersect_with_all_wall(t_data *d, t_map_data *map, double 
     return (res);
 }
 
-void draw_vertical_line(t_data *d, int x, t_dist_n_scale dist_scale, SDL_Surface *text)
+void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface *text)
 {
     int draw_begin;
     int draw_end;
@@ -146,7 +146,7 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
     int i;
     int j;
     int tmp;
-    t_dist_n_scale dist_scale;
+    t_calced_walls dist_scale;
 
     d->sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, d->player_pos, d->rot);
     d->sorted_walls[0].wall_id = 0;
