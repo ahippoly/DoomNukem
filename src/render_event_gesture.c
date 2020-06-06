@@ -49,7 +49,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
         {
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
-                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot), d->texture);
+                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot), d->texture[0]);
                 printf("dist to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).dist);
                 printf("d->rot = %f\n", d->rot);
             }
@@ -58,7 +58,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
             {
                 printf("d->rot = %f\n", d->rot);
                 //sort_walls_by_dist(d, map, d->rot);
-                draw_floor(d, d->texture);
+                draw_floor(d, d->texture[1]);
             }
         }
     }

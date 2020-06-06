@@ -25,6 +25,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
 
     res.dist = 9999;
     res.scale = 0;
+    res.wall_id = wall.id;
     inter = inter_with_dir(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
     if (inter.x != -42)
     {
@@ -83,7 +84,6 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
             d->sorted_walls[j + 1] = d->sorted_walls[j];
         }
         d->sorted_walls[j] = dist_scale;
-        d->sorted_walls[j].wall_id = i;
         i++;
     }
     // i = 0;

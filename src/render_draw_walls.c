@@ -15,7 +15,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface
     if (dist_scale.dist == 9999)
         return ;
     draw_begin = d->screen_height + HALF_WIN_SIZE_Y - ((1 - d->player_height) * WIN_SIZE_Y) / dist_scale.dist;
-    draw_end = d->screen_height + (HALF_WIN_SIZE_Y + (d->player_height * WIN_SIZE_Y) / dist_scale.dist);
+    draw_end = d->screen_height + HALF_WIN_SIZE_Y + (d->player_height * WIN_SIZE_Y) / dist_scale.dist;
     y_scale = 0;
     y_step = (double)1 / (draw_end - draw_begin);
     y_scale += y_step * ft_max(- draw_begin, 0);
@@ -73,8 +73,8 @@ void draw_floor(t_data *d, SDL_Surface *text)
     // printf("raydir: 0 : %f,%f ; 1 : %f,%f\n", ray_dir_x0, ray_dir_y0, ray_dir_x1, ray_dir_y1);
     y = HALF_WIN_SIZE_Y + 1;
     pos_z = d->player_height * WIN_SIZE_Y;
-    pixels = (int*)text->pixels;
 
+    pixels = (int*)text->pixels;
     
 
     // real world coordinates of the leftmost column. This will be updated as we step to the right.

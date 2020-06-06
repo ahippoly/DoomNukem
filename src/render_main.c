@@ -3,23 +3,6 @@
 #include "editor.h"
 #include "img_file.h"
 
-SDL_Surface *read_img_surface(char *file)
-{
-    SDL_Surface *readed_file;
-    SDL_Surface *final;
-    SDL_PixelFormat *format;
-
-    readed_file = SDL_LoadBMP(file);
-    if (readed_file == NULL)
-        exit_with_msg("failed to load texture bmp file");
-    format = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA32);
-    final = SDL_ConvertSurface(readed_file, format, 0);
-    SDL_FreeFormat(format);
-    SDL_FreeSurface(readed_file);
-    //SDL_LockSurface(readed_file);
-    return (final);
-}
-
 void raycast_all_screen(t_data *d, t_map_data *map)
 {
     double fov_coef = (double)FOV_ANGLE / 90;
@@ -34,8 +17,8 @@ void raycast_all_screen(t_data *d, t_map_data *map)
         i = 0;
         sort_walls_by_dist(d, map, current_angle);
         while (i < map->wall_count)
-            draw_vertical_line(d, x, d->sorted_walls[i++], d->texture);
-        //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture);
+            draw_vertical_line(d, x, d->sorted_walls[i++], d->texture[0]);
+        //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);
         current_angle += step;
         x++;
     }
@@ -77,7 +60,7 @@ int main(void)
         SDL_PumpEvents();
         handle_key_event(&d, &map);
         handle_poll_event(&d, &map);
-        draw_floor(&d, d.texture);
+        draw_floor(&d, d.texture[1]);
         raycast_all_screen(&d, &map);
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
         update_player_pos_mini_map(&d, &map);

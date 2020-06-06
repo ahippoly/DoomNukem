@@ -35,12 +35,12 @@ void init_texture(t_env *env)
     t_img *tmp;
 
     env->selected_texture = 0;
-    env->text_list[0] = bmp_to_texture("img/textures/tech_skin_1.bmp", env->rend);
-    env->text_list[1] = bmp_to_texture("img/textures/stones.bmp", env->rend);
-    env->text_list[2] = bmp_to_texture("img/textures/Paver300.bmp", env->rend);
-    env->text_list[3] = bmp_to_texture("img/textures/Floor_Wdn.bmp", env->rend);
-    env->text_list[4] = bmp_to_texture("img/textures/WoodFine.bmp", env->rend);
-    env->text_list[5] = bmp_to_texture("img/textures/Red_Bricks.bmp", env->rend);
+    env->text_list[0] = bmp_to_texture(TEXT_PATH_0, env->rend);
+    env->text_list[1] = bmp_to_texture(TEXT_PATH_1, env->rend);
+    env->text_list[2] = bmp_to_texture(TEXT_PATH_2, env->rend);
+    env->text_list[3] = bmp_to_texture(TEXT_PATH_3, env->rend);
+    env->text_list[4] = bmp_to_texture(TEXT_PATH_4, env->rend);
+    env->text_list[5] = bmp_to_texture(TEXT_PATH_5, env->rend);
 }
 
 void init_buttons(t_env *env)

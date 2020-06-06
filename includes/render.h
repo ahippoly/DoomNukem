@@ -2,6 +2,7 @@
 # define RENDER_H
 
 # include "global_header.h"
+# include "editor.h"
 # define FOV_ANGLE 60
 # define MINI_MAP_SIZE_X 250
 # define MINI_MAP_SIZE_Y 250
@@ -23,7 +24,7 @@ typedef struct      s_data
     SDL_Texture     *t_player_pos;
     SDL_Event       e;
     SDL_Rect        mini_map_player_pos;
-    SDL_Surface     *texture;
+    SDL_Surface     *texture[NB_TEXTURE];
     const Uint8     *clavier;
     unsigned int    *p_screen;
     unsigned int    *p_mini_map_bg;
@@ -62,5 +63,8 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle);
 //render_draw_walls.c
 void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface *text);
 void draw_floor(t_data *d, SDL_Surface *text);
+
+//render_texture_loading.c
+void load_bmp_files(t_data *d);
 
 #endif
