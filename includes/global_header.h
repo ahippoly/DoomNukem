@@ -107,6 +107,7 @@ void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
 void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
 int is_equ_tolerance(double value1, double value2, double tolerance);
+double get_float_part(double value);
 
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);

@@ -33,7 +33,7 @@ void init_mini_map(t_data *d, t_map_data *map)
 void init_data(t_data *d, t_map_data *map)
 {
     init_mini_map(d, map);
-    d->rot = 1;
+    d->rot = 0.5;
     d->screen_height = 0;
     d->player_height = 0.5;
     d->quit = 0;

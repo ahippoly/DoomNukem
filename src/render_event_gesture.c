@@ -57,7 +57,8 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_X)
             {
                 printf("d->rot = %f\n", d->rot);
-                sort_walls_by_dist(d, map, d->rot);
+                //sort_walls_by_dist(d, map, d->rot);
+                draw_floor(d, d->texture);
             }
         }
     }

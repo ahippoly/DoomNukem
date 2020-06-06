@@ -77,6 +77,7 @@ int main(void)
         SDL_PumpEvents();
         handle_key_event(&d, &map);
         handle_poll_event(&d, &map);
+        draw_floor(&d, d.texture);
         raycast_all_screen(&d, &map);
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
         update_player_pos_mini_map(&d, &map);

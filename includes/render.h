@@ -61,5 +61,6 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle);
 
 //render_draw_walls.c
 void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface *text);
+void draw_floor(t_data *d, SDL_Surface *text);
 
 #endif

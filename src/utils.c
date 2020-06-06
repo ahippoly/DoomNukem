@@ -130,3 +130,11 @@ void adapt_max(int *pos, int *length, int max)
     if (*pos + *length > max)
         *length = ft_max(0, max - *pos);
 }
+
+double get_float_part(double value)
+{
+    int int_part;
+
+    int_part = (int)value;
+    return (value - int_part);
+}
