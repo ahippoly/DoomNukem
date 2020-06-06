@@ -23,6 +23,7 @@
 # define NAZI "Alerte nazi, Test de nazi detecte, Alerte nazi\n"
 # define MOUSE 3
 # define NB_WALL_MAX 200
+# define INTER_TOLERANCE 0.000000000000000000000001
 
 typedef struct s_point
 {

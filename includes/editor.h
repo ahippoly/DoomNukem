@@ -45,12 +45,12 @@
 # define INPUT_END_P2 4
 
 # define NB_TEXTURE 6
-# define TEXT_PATH_0 "img/textures/tech_skin_1.bmp"
+# define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
 # define TEXT_PATH_1 "img/textures/stones.bmp"
 # define TEXT_PATH_2 "img/textures/Paver300.bmp"
 # define TEXT_PATH_3 "img/textures/Floor_Wdn.bmp"
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
-# define TEXT_PATH_5 "img/textures/Red_Bricks.bmp"
+# define TEXT_PATH_5 "img/textures/tech_skin_1.bmp"
 
 # define NB_TXT 10
 # define TXT_MAP_EDITOR 0
@@ -70,7 +70,6 @@
 # define MOVE_SPEED 5
 # define MAP_SIZE_X 30
 # define MAP_SIZE_Y 30
-# define INTER_TOLERANCE 0.0001
 
 # define NB_IMG 3
 

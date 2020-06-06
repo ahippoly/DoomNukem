@@ -34,7 +34,7 @@ void init_data(t_data *d, t_map_data *map)
 {
     init_mini_map(d, map);
     d->rot = 0.5;
-    d->screen_height = 0;
+    d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0.5;
     d->quit = 0;
     load_bmp_files(d);
