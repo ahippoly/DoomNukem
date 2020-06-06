@@ -45,9 +45,10 @@ typedef struct      s_size
 
 typedef struct      s_calced_walls
 {
-                    double dist;
-                    double scale;
-                    int wall_id;
+                    double  dist;
+                    double  scale;
+                    int     text_id;
+                    int     wall_id;
 }                   t_calced_walls;
 
 typedef struct      s_wall

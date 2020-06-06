@@ -15,8 +15,7 @@ void init_sdl_ressources_rend(t_data *d)
         exit_with_msg("Failed to create Renderer");
     d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    //SDL_SetTextureBlendMode(d->mini_map, SDL_BLENDMODE_BLEND);
-    //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
+    //SDL_SetTextureBlendMode(d->screen, SDL_BLENDMODE_BLEND);
 }
 
 void init_mini_map(t_data *d, t_map_data *map)
@@ -36,6 +35,7 @@ void init_data(t_data *d, t_map_data *map)
     d->rot = 0.5;
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0.5;
+    d->speed_modifier = 1;
     d->quit = 0;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);

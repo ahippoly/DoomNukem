@@ -25,6 +25,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
 
     res.dist = 9999;
     res.scale = 0;
+    res.text_id = wall.texture_id;
     res.wall_id = wall.id;
     inter = inter_with_dir(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
     if (inter.x != -42)

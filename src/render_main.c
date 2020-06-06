@@ -17,7 +17,7 @@ void raycast_all_screen(t_data *d, t_map_data *map)
         i = 0;
         sort_walls_by_dist(d, map, current_angle);
         while (i < map->wall_count)
-            draw_vertical_line(d, x, d->sorted_walls[i++], d->texture[0]);
+            draw_vertical_line(d, x, d->sorted_walls[i++]);
         //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);
         current_angle += step;
         x++;
@@ -60,7 +60,7 @@ int main(void)
         SDL_PumpEvents();
         handle_key_event(&d, &map);
         handle_poll_event(&d, &map);
-        draw_floor(&d, d.texture[1]);
+        //draw_floor(&d, d.texture[1]);
         raycast_all_screen(&d, &map);
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
         update_player_pos_mini_map(&d, &map);

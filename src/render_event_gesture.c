@@ -22,13 +22,13 @@ void handle_key_event(t_data *d, t_map_data *map)
     if (d->clavier[SDL_SCANCODE_Q])
         d->rot -= ROT_STEP;
     if (d->clavier[SDL_SCANCODE_D])
-        move_attempt(&d->player_pos, - MOVE_STEP, 0, d->rot);
+        move_attempt(&d->player_pos, - MOVE_STEP * d->speed_modifier, 0, d->rot);
     if (d->clavier[SDL_SCANCODE_A])
-        move_attempt(&d->player_pos, MOVE_STEP, 0, d->rot);
+        move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, 0, d->rot);
     if (d->clavier[SDL_SCANCODE_W])
-        move_attempt(&d->player_pos, 0, - MOVE_STEP, d->rot);
+        move_attempt(&d->player_pos, 0, - MOVE_STEP * d->speed_modifier, d->rot);
     if (d->clavier[SDL_SCANCODE_S])
-        move_attempt(&d->player_pos, 0, MOVE_STEP, d->rot);
+        move_attempt(&d->player_pos, 0, MOVE_STEP * d->speed_modifier, d->rot);
     if (d->clavier[SDL_SCANCODE_SPACE])
         d->player_height += HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_LCTRL])
@@ -49,7 +49,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
         {
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
-                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot), d->texture[0]);
+                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot));
                 printf("dist to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).dist);
                 printf("d->rot = %f\n", d->rot);
             }
@@ -59,6 +59,19 @@ void handle_poll_event(t_data *d, t_map_data *map)
                 printf("d->rot = %f\n", d->rot);
                 //sort_walls_by_dist(d, map, d->rot);
                 draw_floor(d, d->texture[1]);
+            }
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_LSHIFT)
+            {
+                printf("running\n");
+                d->speed_modifier += 1;
+            }
+        }
+        if (d->e.type == SDL_KEYUP)
+        {
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_LSHIFT)
+            {
+                printf("no longer running\n");
+                d->speed_modifier -= 1;
             }
         }
     }

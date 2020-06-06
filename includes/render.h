@@ -36,6 +36,7 @@ typedef struct      s_data
     double          player_height;
     int             screen_height;
     t_calced_walls  *sorted_walls;
+    double          speed_modifier;
 }                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);
@@ -61,7 +62,7 @@ t_calced_walls check_intersect_with_all_wall(t_data *d, t_map_data *map, double 
 void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle);
 
 //render_draw_walls.c
-void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface *text);
+void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale);
 void draw_floor(t_data *d, SDL_Surface *text);
 
 //render_texture_loading.c

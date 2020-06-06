@@ -3,7 +3,7 @@
 #include "editor.h"
 #include "img_file.h"
 
-void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface *text)
+void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
 {
     int draw_begin;
     int draw_end;
@@ -12,9 +12,11 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface
     int *pixels;
     int tx;
     float ty;
+    SDL_Surface *text;
 
     if (dist_scale.dist == 9999)
         return ;
+    text = d->texture[dist_scale.text_id];
     draw_begin = d->screen_height - ((1 - d->player_height) * WIN_SIZE_Y) / dist_scale.dist;
     draw_end = d->screen_height + (d->player_height * WIN_SIZE_Y) / dist_scale.dist;
     ty_step = (float)text->h / (draw_end - draw_begin);
@@ -23,7 +25,6 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale, SDL_Surface
     tx = (int)(dist_scale.scale * text->w);
     ty = ty_step * ft_max(- draw_begin, 0);
     draw_begin = ft_max(draw_begin, 0);
-
     while (draw_begin < draw_end)
     {
         ty += ty_step;
