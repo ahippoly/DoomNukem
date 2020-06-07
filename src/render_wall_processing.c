@@ -61,6 +61,35 @@ t_calced_walls check_intersect_with_all_wall(t_data *d, t_map_data *map, double 
     return (res);
 }
 
+// t_calced_walls check_perp_wall(t_wall wall, t_point pos)
+// {
+//     t_point inter;
+//     t_point p2;
+//     t_calced_walls res;
+
+//     res.dist = 9999;
+//     res.scale = 0;
+//     res.text_id = wall.texture_id;
+//     res.wall_id = wall.id;
+//     res.alpha = (float)(100 - wall.transparency) / 100;
+//     p2.x = pos.x + cos(wall.rotation.x * M_PI_2) * 30; 
+// 	p2.y = pos.y + sin(wall.rotation.y * M_PI_2) * 30;
+//     inter = find_intersect(pos, p2, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
+//     if (inter.x != -42)
+//     {
+//         res.dist = ft_frange(cos(look_rot * M_PI_2) * (inter.x - pos.x) + sin(look_rot * M_PI_2) * (inter.y - pos.y), 0, res.dist);
+//         res.scale = calc_wall_hit_scale(wall, inter);
+//     }
+//         //dist = hypot(inter.x - pos.x, inter.y - pos.y) * cos((look_rot - rot )* M_PI_2);
+//     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter), rot, look_rot);
+//     return (res);
+// }
+
+t_calced_walls check_perp_inter_with_all_wall(t_data *d, t_map_data *map, double rot, double look_rot)
+{
+
+}
+
 void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
 {
     int i;
@@ -93,9 +122,4 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
     //     printf("wall sorted dist = %f, i = %i, map_count = %i\n", d->sorted_walls[i].dist, i, map->wall_count);
     //     i++;
     // }
-}
-
-double calc_wall_rot(t_wall wall)
-{
-    
 }

@@ -25,16 +25,20 @@
 # define NB_WALL_MAX 200
 # define INTER_TOLERANCE 0.00001
 
+# define NB_FRAME 15
+# define NB_ANIM 10
+# define NB_SPRITE 10
+
 typedef struct s_point
 {
     double x;
     double y;
 }               t_point;
 
-typedef struct s_range
+typedef struct  s_range
 {
-    int      start;
-    int      end;
+    int         start;
+    int         end;
 }               t_range;
 
 typedef struct      s_size
@@ -52,6 +56,33 @@ typedef struct      s_calced_walls
                     float   alpha;
 }                   t_calced_walls;
 
+typedef struct      s_anim
+{
+                    SDL_Point   pos[NB_FRAME];
+                    int         nb_frame;
+                    int         current_frame;
+                    double      speed;
+}                   t_anim;
+
+typedef struct      s_sprite
+{
+                    unsigned int    *pixels;
+                    t_size          total_size;
+                    t_size          frame_size;
+                    SDL_Point       nb_frame;
+                    SDL_Point       idle_frame;
+                    SDL_Point       displayed_part;
+                    t_anim          anim[NB_ANIM];
+                    int             nb_anim;
+                    int             idle_animation;
+}                   t_sprite;
+
+typedef struct      s_mob
+{
+
+                    t_sprite sprite;
+}                   t_mob;
+
 typedef struct      s_wall
 {
     int             id;
@@ -64,7 +95,7 @@ typedef struct      s_wall
     int             transparency;
     int             can_collide;
     double          length;
-    double          rotation;
+    t_point         rotation;
 }                   t_wall;
 
 typedef struct          s_wall_ref
@@ -106,6 +137,7 @@ void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);
 t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2);
 t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4);
+t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
 void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
