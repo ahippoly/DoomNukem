@@ -94,3 +94,8 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
     //     i++;
     // }
 }
+
+double calc_wall_rot(t_wall wall)
+{
+    
+}

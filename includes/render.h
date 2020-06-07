@@ -14,6 +14,7 @@
 # define ROT_STEP 0.05
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
+# define WALL_SIZE 1
 
 typedef struct      s_data
 {
@@ -53,7 +54,7 @@ void init_data(t_data *d, t_map_data *map);
 //render_event_gesture.c
 void handle_key_event(t_data *d, t_map_data *map);
 void handle_poll_event(t_data *d, t_map_data *map);
-void move_attempt(t_point *pos, double inc_x, double inc_y, double look_rot);
+void move_attempt(t_point *pos, double speed, double look_rot);
 
 //render_wall_processing.c
 double calc_wall_hit_scale(t_wall wall, t_point inter);

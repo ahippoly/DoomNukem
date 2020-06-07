@@ -84,9 +84,11 @@ void read_wall(char *line, t_wall *wall)
     error += read_param(line, "room_id_ref", &wall->room_id_ref);
     error += read_param(line, "transparency", &wall->transparency);
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
-    //printf("wall length = %f\n", wall->length);
+    wall->rotation = cos(( (double)(wall->p2.x - wall->p1.x) / wall->length) * M_PI_2); //+ sin(( (double)(wall->p2.y - wall->p1.y) / wall->length) * M_PI_2);
+    printf("wall length = %f\n", wall->length);
+    printf("wall rot = %f\n", wall->rotation);
     //printf("WALL ID READED\n");
-    //printf("p1.x = %i, p1.y = %i\n", wall->p1.x, wall->p1.y);
+    printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     if (error > 0)
         exit_with_msg("error while assigning value to wall on map reader\n");
 }

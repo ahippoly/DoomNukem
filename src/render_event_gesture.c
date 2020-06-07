@@ -3,15 +3,33 @@
 #include "editor.h"
 #include "img_file.h"
 
-void move_attempt(t_point *pos, double inc_x, double inc_y, double look_rot)
+void move_attempt(t_point *pos, double speed, double look_rot)
 {
     double cos_rot;
     double sin_rot;
 
     cos_rot = cos(look_rot * M_PI_2);
     sin_rot = sin(look_rot * M_PI_2);
-    pos->y += - inc_y * sin_rot - inc_x * cos_rot;
-    pos->x += - inc_y * cos_rot + inc_x * sin_rot;
+    pos->y += speed * sin_rot;
+    pos->x += speed * cos_rot;
+}
+
+void move_with_collide(t_data *d, t_map_data *map, t_point *pos, double rot)
+{
+    double dist;
+    double tmp;
+    int i;
+
+    i = -1;
+    dist = 9999;
+    while (i < 2)
+    {
+        tmp = check_intersect_with_all_wall(d, map, rot + i, rot + i).dist;
+        dist = tmp < dist ? tmp : dist;
+        i++;
+    }
+    if (dist > WALL_SIZE)
+        move_attempt(pos, MOVE_STEP * d->speed_modifier, rot);
 }
 
 void handle_key_event(t_data *d, t_map_data *map)
@@ -22,13 +40,14 @@ void handle_key_event(t_data *d, t_map_data *map)
     if (d->clavier[SDL_SCANCODE_Q])
         d->rot -= ROT_STEP;
     if (d->clavier[SDL_SCANCODE_D])
-        move_attempt(&d->player_pos, - MOVE_STEP * d->speed_modifier, 0, d->rot);
+        move_with_collide(d, map, &d->player_pos, d->rot + 1);
+        //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot + 1);
     if (d->clavier[SDL_SCANCODE_A])
-        move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, 0, d->rot);
+        move_with_collide(d, map, &d->player_pos, d->rot - 1);
     if (d->clavier[SDL_SCANCODE_W])
-        move_attempt(&d->player_pos, 0, - MOVE_STEP * d->speed_modifier, d->rot);
+        move_with_collide(d, map, &d->player_pos, d->rot);
     if (d->clavier[SDL_SCANCODE_S])
-        move_attempt(&d->player_pos, 0, MOVE_STEP * d->speed_modifier, d->rot);
+        move_with_collide(d, map, &d->player_pos, d->rot + 2);
     if (d->clavier[SDL_SCANCODE_SPACE])
         d->player_height += HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_LCTRL])

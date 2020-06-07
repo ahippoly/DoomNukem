@@ -64,6 +64,7 @@ typedef struct      s_wall
     int             transparency;
     int             can_collide;
     double          length;
+    double          rotation;
 }                   t_wall;
 
 typedef struct          s_wall_ref

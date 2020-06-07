@@ -33,7 +33,7 @@ void init_mini_map(t_data *d, t_map_data *map)
 void init_data(t_data *d, t_map_data *map)
 {
     init_mini_map(d, map);
-    d->rot = 0.5;
+    d->rot = 0;
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0.5;
     d->speed_modifier = 1;
