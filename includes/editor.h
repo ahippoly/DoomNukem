@@ -52,7 +52,7 @@
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
 # define TEXT_PATH_5 "img/textures/tech_skin_1.bmp"
 
-# define NB_TXT 10
+# define NB_TXT 11
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
@@ -63,6 +63,7 @@
 # define TXT_END 7
 # define TXT_WALL_COUNT 8
 # define TXT_MOB 9
+# define TXT_ROOM_COUNT 10
 # define TEXT_POS_X 800
 # define TEXT_POS_Y 150
 # define TEXT_SIZE_X 150

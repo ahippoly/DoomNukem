@@ -6,7 +6,7 @@ int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size)
     if (env->mouse.x > pos_size.x && env->mouse.x < pos_size.x + pos_size.w
         && env->mouse.y > pos_size.y && env->mouse.y < pos_size.y + pos_size.h)
         return (1);
-    return(0);
+    return (0);
 }
 
 void handle_hovered_button(t_env *env, t_button *button)

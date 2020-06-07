@@ -64,7 +64,6 @@ void init_buttons(t_env *env)
     env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 445)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 445)), BUTTON_MOB_LEFT);
     env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 445)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 445)), BUTTON_MOB_RIGHT);
     env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 2, 0xFFDDDDDD, create_point(822, 555)), create_text_img("Place", 2, 0xFF88FF88, create_point(822, 555)), BUTTON_MOB_PLACING);
-  
   }
 
 void init_mouse_mode(t_env *env)
@@ -85,9 +84,10 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(315, 680));
     env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(120, 730));
     env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(120, 790));
-    env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFFDDDDDD, create_point(795, 620));
-    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFFDDDDDD, create_point(500, 770));
-    env->txt_lst[TXT_MOB] = create_text_img("Mob", 2, 0xFFDDDDDD, create_point(845, 350));
+    env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFF00FF00, create_point(795, 620));
+    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFF0000FF, create_point(500, 770));
+    env->txt_lst[TXT_MOB] = create_text_img("Mob", 2, 0xFFFF0000, create_point(845, 350));
+    env->txt_lst[TXT_ROOM_COUNT] = create_text_img("Room_count", 1, 0xFFDDDDDD, create_point(500, 670));
 }
 
 void init_input(t_env *env)
@@ -196,7 +196,7 @@ void print_env2screen(t_env *env)
     // SDL_RenderPresent(env->rend);
     print_inputs(env);
     input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 800, WIN_SIZE_X, WIN_SIZE_Y)));
-    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 900, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 700, WIN_SIZE_X, WIN_SIZE_Y)));
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);
@@ -248,8 +248,6 @@ void reset_textures(t_env *env)
     ft_bzero(env->p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
     ft_bzero(env->p_grid, GRID_SIZE_X * GRID_SIZE_Y * 4);
 }
-
-
 
 void display_selected_point(t_env *env)
 {

@@ -16,6 +16,7 @@ void init_sdl_ressources_rend(t_data *d)
     d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
     //SDL_SetTextureBlendMode(d->screen, SDL_BLENDMODE_BLEND);
+    //SDL_SetRenderDrawBlendMode(d->rend, SDL_BLENDMODE_NONE);
 }
 
 void init_mini_map(t_data *d, t_map_data *map)

@@ -27,6 +27,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
     res.scale = 0;
     res.text_id = wall.texture_id;
     res.wall_id = wall.id;
+    res.alpha = (float)(100 - wall.transparency) / 100;
     inter = inter_with_dir(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
     if (inter.x != -42)
     {
@@ -68,7 +69,6 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
     t_calced_walls dist_scale;
 
     d->sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, d->player_pos, d->rot);
-    d->sorted_walls[0].wall_id = 0;
     i = 1;
     while (i < map->wall_count)
     {
