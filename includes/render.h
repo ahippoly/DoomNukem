@@ -41,7 +41,7 @@ typedef struct      s_data
     double          speed_modifier;
     int             framerate;
     int             timestamp;
-    t_sprite        sprite_lst[NB_SPRITE]
+    t_sprite        sprite_lst[NB_SPRITE];
 }                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);

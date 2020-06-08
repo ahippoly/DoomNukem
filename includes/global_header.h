@@ -27,8 +27,20 @@
 # define PI_X_2 6.28318530718
 
 # define NB_FRAME 15
-# define NB_ANIM 10
-# define NB_SPRITE 10
+# define NB_ANIM 20
+# define NB_SPRITE 0
+
+# define ANIM_MOB_MOVE_FRONT 0;
+# define ANIM_MOB_MOVE_BACK 1;
+# define ANIM_MOB_MOVE_LEFT 2;
+# define ANIM_MOB_MOVE_RIGHT 3;
+# define ANIM_MOB_MELEE 4;
+# define ANIM_MOB_SHOOT 5;
+# define ANIM_MOB_DEATH 6;
+
+# define ANIM_STATE_OPEN 0;
+# define ANIM_STATE_CLOSE 1;
+# define ANIM_STATE_TRIGGERED 2;
 
 typedef struct s_point
 {
@@ -152,9 +164,10 @@ double get_float_part(double value);
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);
 
-void process_all_anim(t_sprite sprite[NB_SPRITE]);
-void load_anim(t_sprite *t_sprite, int anim_id);
-void change_idle_anim(t_sprite *t_sprite, int anim_id);
+void process_all_idle_anim(t_sprite sprite[NB_SPRITE]); //prend en paramètre un tableau de sprite, et calcul frame par frame leur animation par défaut
+void process_idle_anim(t_sprite *sprite); //calcul l'animation par défaut d'un sprite
+void load_anim(t_sprite *t_sprite, int anim_id); //calcul une animation du sprite puis reviens a l'animation par défaut
+void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par défaut du sprite
 
 
 
