@@ -71,9 +71,9 @@ typedef struct      s_sprite
                     unsigned int    *pixels;
                     t_size          total_size;
                     t_size          frame_size;
+                    SDL_Rect        displayed_frame;
                     SDL_Point       nb_frame;
                     SDL_Point       idle_frame;
-                    SDL_Point       displayed_part;
                     t_anim          anim[NB_ANIM];
                     int             nb_anim;
                     int             idle_animation;
@@ -130,7 +130,7 @@ void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
 SDL_Rect set_sdl_rect(int x, int y, int w, int h);
 void swap_point(SDL_Point *p1, SDL_Point *p2);
-void	octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, SDL_Rect pos_size);
+void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color);
 SDL_Point create_point(int x, int y);
 t_point create_t_point(double x, double y);
 t_range create_t_range(int start, int end);
@@ -152,7 +152,9 @@ double get_float_part(double value);
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);
 
-
+void process_all_anim(t_sprite sprite[NB_SPRITE]);
+void load_anim(t_sprite *t_sprite, int anim_id);
+void change_idle_anim(t_sprite *t_sprite, int anim_id);
 
 
 

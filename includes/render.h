@@ -3,7 +3,7 @@
 
 # include "global_header.h"
 # include "editor.h"
-# define FOV_ANGLE 90
+# define FOV_ANGLE 60
 # define MINI_MAP_SIZE_X 250
 # define MINI_MAP_SIZE_Y 250
 # define MINI_MAP_POS_X WIN_SIZE_X - MINI_MAP_SIZE_X
@@ -41,6 +41,7 @@ typedef struct      s_data
     double          speed_modifier;
     int             framerate;
     int             timestamp;
+    t_sprite        sprite_lst[NB_SPRITE]
 }                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);

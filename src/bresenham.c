@@ -19,7 +19,7 @@ void	oct_ini(t_oct *oct, SDL_Point pos1, SDL_Point pos2, int pos[2][2])
 }
 
 
-void	octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, SDL_Rect pos_size)
+void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color)
 {
 	t_oct			oct;
 	int				pos[2][2];
@@ -29,18 +29,18 @@ void	octant(SDL_Point pos1, SDL_Point pos2, unsigned int *pixel, int color, SDL_
 
 	if (pos1.x != -42 && pos2.x != -42)
 	{
-		p_tab = pixel;
+		p_tab = img.pixels;
 		i = 0;
 		oct_ini(&oct, pos1, pos2, pos);
 		if (oct.bool == 0)
-			length = ft_min(pos_size.w * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
+			length = ft_min(img.pos_size.w * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
 		else
-			length = ft_min(pos_size.h * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
+			length = ft_min(img.pos_size.h * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
 		while (i < length)
 		{
-			if (pos[0][0] < pos_size.w && pos[0][0] > 0 && pos[1][0] > 0
-				&& pos[1][0] < pos_size.h)
-			p_tab[pos[0][0] + pos[1][0] * pos_size.w] = color;
+			if (pos[0][0] < img.pos_size.w && pos[0][0] > 0 && pos[1][0] > 0
+				&& pos[1][0] < img.pos_size.h)
+			p_tab[pos[0][0] + pos[1][0] * img.pos_size.w] = color;
 			oct.e -= oct.d[oct.bool];
 			while (oct.e <= 0)
 			{
