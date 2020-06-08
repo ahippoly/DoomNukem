@@ -8,28 +8,61 @@ void move_attempt(t_point *pos, double speed, double look_rot)
     double cos_rot;
     double sin_rot;
 
-    cos_rot = cos(look_rot * M_PI_2);
-    sin_rot = sin(look_rot * M_PI_2);
+    cos_rot = cos(look_rot);
+    sin_rot = sin(look_rot);
     pos->y += speed * sin_rot;
     pos->x += speed * cos_rot;
 }
 
-void move_with_collide(t_data *d, t_map_data *map, t_point *pos, double rot)
+double mod_pi(double rot)
 {
-    double dist;
-    double tmp;
-    int i;
+	if (rot < 0)
+		rot = M_2_PI + rot;
+	return(fmod(rot, M_2_PI));
+}
 
-    i = -1;
-    dist = 9999;
-    while (i < 2)
-    {
-        tmp = check_intersect_with_all_wall(d, map, rot + i, rot + i).dist;
-        dist = tmp < dist ? tmp : dist;
-        i++;
-    }
-    if (dist > WALL_SIZE)
-        move_attempt(pos, MOVE_STEP * d->speed_modifier, rot);
+int is_angle_in_range(double rot, double min, double max)
+{
+	printf("rot = %f, min = %f, max = %f\n", rot, min, max);
+	if (min > max && (rot > min || rot < max))
+		return (1);
+	else if (rot > min && rot < max)
+		return (1);
+	return (0);
+}
+
+void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
+{
+    t_calced_walls res;
+	double min_rot;
+	double max_rot;
+	double tmp;
+	double cos_rot;
+	double sin_rot;
+
+    res = check_perp_all_wall(d, &d->map, d->player_pos);
+
+    t_point move_dir;
+
+    move_dir.x = cos(rot) * speed;
+    move_dir.y = sin(rot) * speed;
+	
+	min_rot = mod_pi(res.wall_rot - M_PI);
+	max_rot = mod_pi(res.wall_rot);
+	if (is_angle_in_range(mod_pi(rot), min_rot, max_rot) )//&& res.dist < WALL_SIZE)
+	{
+		printf("recalc needed\n");
+		// cos_rot = cos(res.wall_rot);
+		// sin_rot = sin(res.wall_rot);
+		// pos->x += move_dir.x * cos_rot + move_dir.y * cos_rot * sin_rot;
+		// pos->y += move_dir.x * cos_rot * sin_rot - move_dir.y * sin_rot;
+	}
+	else
+	{
+	}
+		move_attempt(pos, speed, rot);
+
+	
 }
 
 void handle_key_event(t_data *d, t_map_data *map)
@@ -40,14 +73,14 @@ void handle_key_event(t_data *d, t_map_data *map)
     if (d->clavier[SDL_SCANCODE_Q])
         d->rot -= ROT_STEP;
     if (d->clavier[SDL_SCANCODE_D])
-        move_with_collide(d, map, &d->player_pos, d->rot + 1);
+        move_with_collide(d, &d->player_pos, d->rot + M_PI_2, MOVE_STEP * d->speed_modifier);
         //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot + 1);
     if (d->clavier[SDL_SCANCODE_A])
-        move_with_collide(d, map, &d->player_pos, d->rot - 1);
+        move_with_collide(d, &d->player_pos, d->rot - M_PI_2, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_W])
-        move_with_collide(d, map, &d->player_pos, d->rot);
+        move_with_collide(d, &d->player_pos, d->rot, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_S])
-        move_with_collide(d, map, &d->player_pos, d->rot + 2);
+        move_with_collide(d, &d->player_pos, d->rot + M_PI, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_SPACE])
         d->player_height += HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_LCTRL])
@@ -58,6 +91,8 @@ void handle_key_event(t_data *d, t_map_data *map)
         d->screen_height -= SCREEN_HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
+	//printf("player rot = %f\n", fabs(fmod(d->rot, 4)));
+	
 }
 
 void handle_poll_event(t_data *d, t_map_data *map)
@@ -66,19 +101,6 @@ void handle_poll_event(t_data *d, t_map_data *map)
     {
         if (d->e.type == SDL_KEYDOWN)
         {
-            if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
-            {
-                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot));
-                printf("dist to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).dist);
-                printf("d->rot = %f\n", d->rot);
-            }
-                
-            if (d->e.key.keysym.scancode == SDL_SCANCODE_X)
-            {
-                printf("d->rot = %f\n", d->rot);
-                //sort_walls_by_dist(d, map, d->rot);
-                draw_floor(d, d->texture[1]);
-            }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_LSHIFT)
             {
                 printf("running\n");
@@ -91,6 +113,17 @@ void handle_poll_event(t_data *d, t_map_data *map)
             {
                 printf("no longer running\n");
                 d->speed_modifier -= 1;
+            }
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
+            {
+                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot));
+                printf("dist to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).dist);
+                printf("d->rot = %f\n", d->rot);
+            }
+                
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_X)
+            {
+                printf("dist = %f\n", check_perp_wall(map->wall_list[0], d->player_pos).dist);
             }
         }
     }

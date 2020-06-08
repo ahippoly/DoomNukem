@@ -54,6 +54,7 @@ typedef struct      s_calced_walls
                     int     text_id;
                     int     wall_id;
                     float   alpha;
+                    double  wall_rot;
 }                   t_calced_walls;
 
 typedef struct      s_anim
@@ -79,8 +80,9 @@ typedef struct      s_sprite
 
 typedef struct      s_mob
 {
-
                     t_sprite sprite;
+                    t_point pos;
+                    double  agro_range;
 }                   t_mob;
 
 typedef struct      s_wall
@@ -95,7 +97,7 @@ typedef struct      s_wall
     int             transparency;
     int             can_collide;
     double          length;
-    t_point         rotation;
+    double          rotation;
 }                   t_wall;
 
 typedef struct          s_wall_ref
@@ -140,8 +142,8 @@ t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4);
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
 void sort_t_point_by_x(t_point *p1, t_point *p2);
-void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
-void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color);
+void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color);
+void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color);
 void put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size, unsigned int color, float alpha);
 int is_equ_tolerance(double value1, double value2, double tolerance);
 double get_float_part(double value);

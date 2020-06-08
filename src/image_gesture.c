@@ -20,7 +20,7 @@ t_img create_img(unsigned int *pixels, SDL_Rect pos_size)
     return (img);
 }
 
-void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color)
+void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color)
 {
     pixels[p_pos.x + p_pos.y * img_size.w] = color;
 }
@@ -52,7 +52,7 @@ void put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size, unsigned in
     pixels[pixel_pos] = color;
 }
 
-void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, int color)
+void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color)
 {
     int pixel_pos;
 

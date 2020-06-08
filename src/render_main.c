@@ -44,28 +44,24 @@ void free_render_env(t_data *d)
 
 int main(void)
 {
-    t_map_data  map;
     t_data      d;
 
-    init_sdl_ressources_rend(&d);
-    map = read_map("maps/editor_map_0");
-    init_data(&d, &map);
+    
+    init_data(&d);
     ft_putstr("Main worked");
-
-    d.player_pos = create_t_point(map.player_spawn.x, map.player_spawn.y);
-    printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, map.wall_count);
+    printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
     while (!d.quit)
     {
         ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
-        handle_key_event(&d, &map);
-        handle_poll_event(&d, &map);
+        handle_key_event(&d, &d.map);
+        handle_poll_event(&d, &d.map);
         //draw_floor(&d, d.texture[1]);
-        raycast_all_screen(&d, &map);
-        //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &map, d.rot));
-        update_player_pos_mini_map(&d, &map);
-        print_player_look_vector(&d, &map, d.rot);
-        print_data2screen(&d, &map);
+        raycast_all_screen(&d, &d.map);
+        //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &d.map, d.rot));
+        update_player_pos_mini_map(&d, &d.map);
+        print_player_look_vector(&d, &d.map, d.rot);
+        print_data2screen(&d, &d.map);
     }
     free_render_env(&d);
 }

@@ -8,7 +8,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     int draw_begin;
     int draw_end;
     float ty_step;
-    int text_pixel_color;
+    unsigned int text_pixel_color;
     int *pixels;
     int tx;
     float ty;
@@ -49,7 +49,6 @@ void draw_floor(t_data *d, SDL_Surface *text)
     double ray_dir_x1;
     double ray_dir_y1;
 
-    double rot_pi_2;
 
     double pos_z;
 
@@ -68,11 +67,10 @@ void draw_floor(t_data *d, SDL_Surface *text)
 
     int *pixels;
 
-    rot_pi_2 = d->rot * M_PI_2;
-    ray_dir_x0 = cos(rot_pi_2) + fov_coef * sin(rot_pi_2);
-    ray_dir_x1 = cos(rot_pi_2) - fov_coef * sin(rot_pi_2);
-    ray_dir_y0 = sin(rot_pi_2) - fov_coef * cos(rot_pi_2);
-    ray_dir_y1 = sin(rot_pi_2) + fov_coef * cos(rot_pi_2);
+    ray_dir_x0 = cos(d->rot) + fov_coef * sin(d->rot);
+    ray_dir_x1 = cos(d->rot) - fov_coef * sin(d->rot);
+    ray_dir_y0 = sin(d->rot) - fov_coef * cos(d->rot);
+    ray_dir_y1 = sin(d->rot) + fov_coef * cos(d->rot);
     // printf("raydir: 0 : %f,%f ; 1 : %f,%f\n", ray_dir_x0, ray_dir_y0, ray_dir_x1, ray_dir_y1);
     y = d->screen_height + 1;
     pos_z = d->player_height * WIN_SIZE_Y;
