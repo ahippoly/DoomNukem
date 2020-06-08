@@ -17,8 +17,8 @@ void move_attempt(t_point *pos, double speed, double look_rot)
 double mod_pi(double rot)
 {
 	if (rot < 0)
-		rot = M_2_PI + rot;
-	return(fmod(rot, M_2_PI));
+		rot = PI_X_2 + rot;
+	return(fmod(rot, PI_X_2));
 }
 
 int is_angle_in_range(double rot, double min, double max)
@@ -45,22 +45,21 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
     t_point move_dir;
 
     move_dir.x = cos(rot) * speed;
-    move_dir.y = sin(rot) * speed;
+    move_dir.y = sin(rot + M_PI_2) * speed;
 	
-	min_rot = mod_pi(res.wall_rot - M_PI);
-	max_rot = mod_pi(res.wall_rot);
-	if (is_angle_in_range(mod_pi(rot), min_rot, max_rot) )//&& res.dist < WALL_SIZE)
+    printf("unchanged wall rot = %f\n", res.wall_rot);
+	if (res.dist < WALL_SIZE && check_inter_with_wall(d->map.wall_list[res.wall_id], rot, *pos, rot).dist != 9999)
 	{
 		printf("recalc needed\n");
-		// cos_rot = cos(res.wall_rot);
-		// sin_rot = sin(res.wall_rot);
-		// pos->x += move_dir.x * cos_rot + move_dir.y * cos_rot * sin_rot;
-		// pos->y += move_dir.x * cos_rot * sin_rot - move_dir.y * sin_rot;
+		cos_rot = cos(res.wall_rot);
+		sin_rot = sin(res.wall_rot);
+		pos->x += move_dir.x * cos_rot + move_dir.y * cos_rot * sin_rot;
+		pos->y += move_dir.x * cos_rot * sin_rot + move_dir.y * sin_rot;
 	}
 	else
 	{
-	}
 		move_attempt(pos, speed, rot);
+	}
 
 	
 }

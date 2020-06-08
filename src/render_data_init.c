@@ -36,7 +36,7 @@ void init_data(t_data *d)
     d->map = read_map("maps/editor_map_0");
     init_mini_map(d, &d->map);
     d->player_pos = create_t_point(d->map.player_spawn.x, d->map.player_spawn.y);
-    d->rot = 0 * M_PI_2;
+    d->rot = -1 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0.5;
     d->speed_modifier = 1;
