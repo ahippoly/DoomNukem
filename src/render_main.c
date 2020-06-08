@@ -42,10 +42,27 @@ void free_render_env(t_data *d)
     free(d->sorted_walls);
 }
 
+void calc_n_disp_framerate(t_data *d)
+{
+    static int  last_time;
+    static int  framerate;
+    static int  last_framerate;
+    int time;
+
+    time = SDL_GetTicks();
+    if (time > last_time + 1000)
+    {
+        last_framerate = framerate;
+        framerate = 0;
+        last_time = time;
+    }
+    framerate += 1;
+    input_text_to_img(ft_itoa(last_framerate), 2, 0xFFFFFFFF, create_img(d->p_screen, set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
+}
+
 int main(void)
 {
     t_data      d;
-
     
     init_data(&d);
     ft_putstr("Main worked");
@@ -61,6 +78,7 @@ int main(void)
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &d.map, d.rot));
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
+        calc_n_disp_framerate(&d);
         print_data2screen(&d, &d.map);
     }
     free_render_env(&d);

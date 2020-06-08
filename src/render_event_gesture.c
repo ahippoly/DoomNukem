@@ -44,17 +44,20 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 
     t_point move_dir;
 
-    move_dir.x = cos(rot) * speed;
-    move_dir.y = sin(rot + M_PI_2) * speed;
+    move_dir.x = cos(rot - M_PI_4 * 0 + M_PI_4 * 0) * speed;
+    move_dir.y = sin(rot + M_PI_4 * 0 + M_PI_4 * 0) * speed;
 	
-    printf("unchanged wall rot = %f\n", res.wall_rot);
+    printf("rot = %f\n", rot / M_PI_2);
 	if (res.dist < WALL_SIZE && check_inter_with_wall(d->map.wall_list[res.wall_id], rot, *pos, rot).dist != 9999)
 	{
-		printf("recalc needed\n");
-		cos_rot = cos(res.wall_rot);
-		sin_rot = sin(res.wall_rot);
-		pos->x += move_dir.x * cos_rot + move_dir.y * cos_rot * sin_rot;
-		pos->y += move_dir.x * cos_rot * sin_rot + move_dir.y * sin_rot;
+		printf("recalc needed, wall rot = %f\n", res.wall_rot / M_PI_2);
+		// cos_rot = cos(res.wall_rot);
+		// sin_rot = sin(res.wall_rot);
+        // printf("move_dir: %f,%f, sin:%f, cos:%f\n", move_dir.x,move_dir.y, sin_rot, cos_rot);
+		// // pos->x += move_dir.x * cos_rot - move_dir.y * cos_rot;
+		// // pos->y += move_dir.x * sin_rot - move_dir.y * sin_rot;
+        // pos->x += (move_dir.x - move_dir.y) * cos_rot + move_dir.x * cos_rot;
+		// pos->y += (move_dir.x - move_dir.y) * sin_rot + move_dir.y * sin_rot;
 	}
 	else
 	{

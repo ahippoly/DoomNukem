@@ -39,6 +39,8 @@ typedef struct      s_data
     int             screen_height;
     t_calced_walls  *sorted_walls;
     double          speed_modifier;
+    int             framerate;
+    int             timestamp;
 }                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);

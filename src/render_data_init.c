@@ -40,6 +40,7 @@ void init_data(t_data *d)
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0.5;
     d->speed_modifier = 1;
+    d->framerate = 0;
     d->quit = 0;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
