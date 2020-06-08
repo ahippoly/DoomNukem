@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:58:29 by apons             #+#    #+#             */
-/*   Updated: 2020/02/07 22:53:21 by saneveu          ###   ########.fr       */
+/*   Updated: 2020/06/08 09:55:43 by apons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ typedef struct	s_user
 	int			fog;
 	int			paused;
 	t_intxy		bobbing;
+	SDL_Rect	black_box;
 }				t_user;
 
 /*
@@ -215,6 +216,7 @@ void			ft_checkmlx(t_enval *env);
 void			if_keyvert(int **walls, t_doublexy *pos, t_doublexy *cpy);
 void			ft_help(void);
 void			init_values(char *file, t_enval *env);
+SDL_Rect		sdl_set_rect(int x, int y, int w, int h);
 void			movement(t_enval*env);
 void			ray_calc(t_enval *env, int i);
 void			ray_hit(t_enval *env);
@@ -251,11 +253,11 @@ void			init_shotgun_texture(t_enval *env);
 void			init_smg_texture(t_enval *env);
 void			init_bfg_texture(t_enval *env);
 void			weapon_draw(t_enval *env);
-int				get_id_weapon_texture(t_enval *env, t_intxy *id);
 int				get_id_arsenal_s(int id, double cur, double max, int side);
 int				get_id_arsenal_xl(int id, double cur, double max);
-int				get_id_bfg_reloading(double cur, double max);
+int				get_id_bfg_charging(double cur, double max);
 int				get_id_arsenal_bfg(double cur, double max, int state);
+void			hud_draw(t_enval *env);
 
 /*
 ** SDL Event Function

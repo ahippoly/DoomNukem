@@ -20,7 +20,7 @@ void	init_melee_texture(t_enval *env)
 {
 	if (!(env->wptex[0] = (t_sprite *)malloc(sizeof(t_sprite)
 	* WEAPON_TEXTURES_MELEE)))
-		ft_error("melee texture loading error", env, 0);
+		ft_exit(env, "Melee texture loading error.", 1, 0);
 	env->wptex[0][0].img = SDL_LoadBMP("img/apons_weapons/melee_idle.bmp");
 	env->wptex[0][1].img = SDL_LoadBMP("img/apons_weapons/melee_punch1a.bmp");
 	env->wptex[0][2].img = SDL_LoadBMP("img/apons_weapons/melee_punch2a.bmp");
@@ -33,7 +33,7 @@ void	init_pistol_texture(t_enval *env)
 {
 	if (!(env->wptex[1] = (t_sprite *)malloc(sizeof(t_sprite)
 	* WEAPON_TEXTURES_PISTOL)))
-		ft_error("pistol texture loading", env, 0);
+		ft_exit(env, "Pistol texture loading error.", 1, 0);
 	env->wptex[1][0].img = SDL_LoadBMP("img/apons_weapons/pistol_idle.bmp");
 	env->wptex[1][1].img = SDL_LoadBMP("img/apons_weapons/pistol_firing1.bmp");
 	env->wptex[1][2].img = SDL_LoadBMP("img/apons_weapons/pistol_firing2.bmp");
@@ -46,7 +46,7 @@ void	init_shotgun_texture(t_enval *env)
 {
 	if (!(env->wptex[2] = (t_sprite *)malloc(sizeof(t_sprite)
 	* WEAPON_TEXTURES_SHOTGUN)))
-		ft_error(" texture loading error", env, 0);
+		ft_exit(env, "Shotgun texture loading error.", 1, 0);
 	env->wptex[2][0].img = SDL_LoadBMP("img/apons_weapons/shotgun_idle.bmp");
 	env->wptex[2][1].img = SDL_LoadBMP("img/apons_weapons/shotgun_firing1.bmp");
 	env->wptex[2][2].img = SDL_LoadBMP("img/apons_weapons/shotgun_firing2.bmp");
@@ -59,7 +59,7 @@ void	init_smg_texture(t_enval *env)
 {
 	if (!(env->wptex[3] = (t_sprite *)malloc(sizeof(t_sprite)
 	* WEAPON_TEXTURES_SMG)))
-		ft_error(" texture loading error", env, 0);
+		ft_exit(env, "SMG texture loading error.", 1, 0);
 	env->wptex[3][0].img = SDL_LoadBMP("img/apons_weapons/smg_idle.bmp");
 	env->wptex[3][1].img = SDL_LoadBMP("img/apons_weapons/smg_firing1.bmp");
 	env->wptex[3][2].img = SDL_LoadBMP("img/apons_weapons/smg_firing2.bmp");
@@ -70,7 +70,7 @@ void	init_bfg_texture(t_enval *env)
 {
 	if (!(env->wptex[4] = (t_sprite *)malloc(sizeof(t_sprite)
 	* WEAPON_TEXTURES_BFG)))
-		ft_error(" texture loading error", env, 0);
+		ft_exit(env, "BFG texture loading error.", 1, 0);
 	env->wptex[4][0].img = SDL_LoadBMP("img/apons_weapons/bfg_idle.bmp");
 	env->wptex[4][1].img = SDL_LoadBMP("img/apons_weapons/bfg_charging1.bmp");
 	env->wptex[4][2].img = SDL_LoadBMP("img/apons_weapons/bfg_charging2.bmp");

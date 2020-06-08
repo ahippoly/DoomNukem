@@ -29,19 +29,19 @@ static int		**append_val(char **tab, t_enval *env)
 	while ((reader = get_next_line(env->fd, &env->linebuff)) >= 1)
 	{
 		env->wl
-			== env->map.height ? ft_error("map height incorrect.", env, 0) : 0;
+			== env->map.height ? ft_exit(env, "map height incorrect.", 1, 0) : 0;
 		if (!(tab = ft_strsplit(env->linebuff, ' ')))
-			ft_error("map parsing failed.", env, 1);
+			ft_exit(env, "map parsing failed.", 1, 1);
 		free(env->linebuff);
 		len = ft_tablen(tab);
-		len != env->map.width ? ft_error("a line has bad width.", env, 0) : 0;
+		len != env->map.width ? ft_exit(env, "a line has bad width.", 1, 0) : 0;
 		if (!(env->map.walls[env->wl] = (int *)malloc(sizeof(int) * len)))
-			ft_error("map wall section malloc failure.", env, 0);
+			ft_exit(env, "map wall section malloc failure.", 1, 0);
 		j = -1;
 		while (tab[++j])
 			env->map.walls[env->wl][j] = ft_atoi(tab[j]);
 		ft_tabfree(tab);
-		(j < 3) ? ft_error("incorrect map format.", env, 0) : 0;
+		(j < 3) ? ft_exit(env, "incorrect map format.", 1, 0) : 0;
 		env->wl += 1;
 	}
 	ft_checkappval(reader, env->wl, env, env->map);
@@ -56,6 +56,7 @@ static void		prep_init(t_enval *env)
 	env->user.paused = -1;
 	env->user.bobbing.x = 0;
 	env->user.bobbing.y = 0;
+	env->user.black_box = sdl_set_rect(50, 50, 300, 200);
 	env->map.walls = NULL;
 	i = -1;
 	while (++i < NBKEY)
@@ -65,6 +66,7 @@ static void		prep_init(t_enval *env)
 		env->game.pc.arsenal[i].name = "Nothing.";
 	env->game.pc.equip.delay = 0;
 	env->game.pc.equip.reload_cd = 0;
+	init_stat(&env->game.pc.equip.off_vert, 100, 0);
 	env->game.pc.fist_side = 2;
 	init_pc(&env->game.pc);
 }
@@ -76,9 +78,9 @@ void			init_values(char *file, t_enval *env)
 	prep_init(env);
 	env->fd = open(file, O_RDONLY);
 	if (get_next_line(env->fd, &env->linebuff) == -1)
-		ft_error("file reading failed.", env, 0);
+		ft_exit(env, "file reading failed.", 1, 0);
 	if (!(tab = ft_strsplit(env->linebuff, ' ')))
-		ft_error("first line parsing failed.", env, 1);
+		ft_exit(env, "first line parsing failed.", 1, 1);
 	free(env->linebuff);
 	ft_checkinval(tab, env);
 	env->map.width = ft_atoi(tab[0]);
@@ -87,7 +89,7 @@ void			init_values(char *file, t_enval *env)
 	env->player.pos.y = ft_atoi(tab[2]) - 0.5;
 	ft_tabfree(tab);
 	if (!(env->map.walls = (int **)malloc(sizeof(int *) * env->map.height)))
-		ft_error("map walls malloc failed.", env, 0);
+		ft_exit(env, "map walls malloc failed.", 1, 0);
 	env->map.walls = append_val(tab, env);
 	close(env->fd);
 	env->player.dir.x = 1;
@@ -111,7 +113,7 @@ void			init_wall_texture(t_enval *env)
 	while (i <= 5)
 	{
 		if (!(env->wtex[i].img))
-			ft_error("at least one texture is missing or corrupted.", env, 0);
+			ft_exit(env, "at least one texture is missing or corrupted.", 1, 0);
 		i++;
 	}
 }
@@ -119,13 +121,13 @@ void			init_wall_texture(t_enval *env)
 void			init_wptext(t_enval *env)
 {
 	if (!(env->wptex = (t_sprite **)malloc(sizeof(t_sprite *) * WEAPON_NUMBER)))
-		ft_error("weapon initialization failure.", env, 0);
+		ft_exit(env, "weapon initialization failure.", 1, 0);
 	init_melee_texture(env);
 	init_pistol_texture(env);
 	init_shotgun_texture(env);
 	init_smg_texture(env);
 	init_bfg_texture(env);
 	if (!(env->wptex[5] = (t_sprite *)malloc(sizeof(t_sprite))))
-		ft_error("Temp reload failure.", env, 0);
+		ft_exit(env, "Temp reload failure.", 1, 0);
 	env->wptex[5][0].img = SDL_LoadBMP("img/plante.bmp");
 }

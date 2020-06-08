@@ -19,21 +19,32 @@
 ** Mix_CloseAudio();
 */
 
-void				ft_exit(t_enval *env, char *s, int flag, int i)
+void				ft_exit(t_enval *env, char *s, int flag, int free_buff)
 {
 	if (env)
 	{
 		if (env->sdl.sdl_token)
 		{
-			free_doom(env, i);
+			free_textures(env->wtex, env->wptex);
+			//while (1){}
+			SDL_FreeSurface(env->sdl.screen);
+			//while (1){}
+			if(env->sdl.text)
+				SDL_DestroyTexture(env->sdl.text);
+			//while (1){}
 			if (env->sdl.rend)
 				SDL_DestroyRenderer(env->sdl.rend);
+			//while (1){}
 			if (env->sdl.win)
 				SDL_DestroyWindow(env->sdl.win);
+			ft_putendl("Faulty Part !");
+			//while(1){}
 			SDL_Quit();
 		}
+		free_doom(env, free_buff);
 	}
+	//while (1){}
 	if (s)
 		ft_putendl_fd(s, 2);
-	exit(flag ? EXIT_SUCCESS : EXIT_FAILURE);
+	exit(flag ? EXIT_FAILURE : EXIT_SUCCESS);
 }

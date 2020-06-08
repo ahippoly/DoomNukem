@@ -20,8 +20,11 @@ void			put_texture(t_enval *env)
 	SDL_RenderCopy(env->sdl.rend, env->sdl.text, NULL, NULL);
 	SDL_UnlockSurface(env->sdl.screen);
 	SDL_RenderPresent(env->sdl.rend);
+	// ft_putendl("Faulty Segment !");
+	//ft_exit(env, "Success !", 0, 0);
 	SDL_DestroyTexture(env->sdl.text);
-	SDL_SetRenderDrawColor(env->sdl.rend, 0, 0, 0, 0);
+	//ft_exit(env, "Success !", 0, 0);
+	//SDL_SetRenderDrawColor(env->sdl.rend, 0, 0, 0, 0);
 	SDL_RenderClear(env->sdl.rend);
 }
 
@@ -34,5 +37,6 @@ void			display(t_enval *env)
 {
 	ray_draw(env);
 	weapon_draw(env);
+	hud_draw(env);
 	put_texture(env);
 }

@@ -71,8 +71,8 @@ void	deal_event(t_enval *env)
 		&& env->game.pc.arsenal[id].ammo.current
 		&& env->game.pc.equip.weapon_state == WEAPON_STATE_READY)
 		env->game.pc.equip.weapon_state = WEAPON_STATE_RELOADING;
-	handle_weapon_reload(env);
-	handle_weapon_fire(env);
+ 	handle_weapon_reload(env);
+ 	handle_weapon_fire(env);
 }
 
 void	event(t_enval *env)
@@ -82,7 +82,7 @@ void	event(t_enval *env)
 		if ((env->event.key.keysym.sym == SDLK_ESCAPE
 		&& env->event.type == SDL_KEYDOWN)
 		|| env->event.type == SDL_QUIT)
-			ft_exit(env, NULL, 1, 0);
+			ft_exit(env, NULL, 0, 0);
 		if (env->event.type == SDL_KEYDOWN)
 		{
 			if (env->event.key.keysym.sym == SDLK_p)

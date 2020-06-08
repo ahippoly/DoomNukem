@@ -6,7 +6,7 @@
 /*   By: saneveu <saneveu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 09:48:11 by apons             #+#    #+#             */
-/*   Updated: 2020/02/19 09:48:11 by apons            ###   ########.fr       */
+/*   Updated: 2020/06/08 10:56:41 by apons            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ void		handle_weapon_reload(t_enval *env)
 	int id;
 	int state;
 
-	id = env->game.pc.equip.current;
 	state = env->game.pc.equip.weapon_state;
 	if (state == WEAPON_STATE_RELOADING)
 	{
+		id = env->game.pc.equip.current;
 		if (env->game.pc.equip.reload_cd)
 		{
 			env->game.pc.equip.reload_cd -=

@@ -36,8 +36,8 @@ static int		init_sdl(t_enval *env)
 		return (0);
 	SDL_GetWindowPosition(env->sdl.win, &env->sdl.winx, &env->sdl.winy);
 	if (!(env->sdl.rend = SDL_CreateRenderer(env->sdl.win, -1,
-			SDL_RENDERER_ACCELERATED)))
-		return (0);
+			SDL_RENDERER_SOFTWARE)))
+		return (0);	
 	if (!(env->sdl.screen = new_surface(WIN_W, WIN_H)))
 		return (0);
 	return (1);

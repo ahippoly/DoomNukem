@@ -24,9 +24,13 @@ void	free_map(t_mapinfo *map, int wl)
 	while (++i < wl)
 	{
 		if (map->walls[i])
+		{
 			free(map->walls[i]);
+			map->walls[i] = NULL;
+		}
 	}
 	free(map->walls);
+	map->walls = NULL;
 }
 
 void	free_texture_weapon(t_sprite **wptex, int id, int texture_number)
@@ -47,12 +51,14 @@ void	free_textures(t_sprite *wtex, t_sprite **wptex)
 	int i;
 
 	i = -1;
+	ft_putendl("Faulty one's walls !");
 	while (++i < WALL_TEXTURE_NUMBER)
 	{
 		if (wtex && wtex[i].img)
 			SDL_FreeSurface(wtex[i].img);
 	}
 	i = -1;
+	ft_putendl("Faulty one's weapons !");
 	if (wptex)
 	{
 		free_texture_weapon(wptex, 0, WEAPON_TEXTURES_MELEE);
@@ -72,13 +78,9 @@ void	free_textures(t_sprite *wtex, t_sprite **wptex)
 
 void	free_doom(t_enval *env, int i)
 {
-	if (env)
-	{
-		if (i == 1)
-			free(env->linebuff);
-		env->map.walls ? free_map(&env->map, env->wl) : 0;
-		free_textures(env->wtex, env->wptex);
-		free(env);
-		env = NULL;
-	}
+	if (i == 1)
+		free(env->linebuff);
+	env->map.walls ? free_map(&env->map, env->wl) : 0;
+	free(env);
+	env = NULL;
 }

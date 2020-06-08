@@ -24,11 +24,11 @@ void		ft_checkappval(int reader, int i, t_enval *env, t_mapinfo map)
 	p_x = (int)env->player.pos.x + i - i;
 	p_y = (int)env->player.pos.y;
 	if (reader == -1)
-		ft_error("file reading failed.", env, 0);
+		ft_exit(env, "File reading failed.", 1, 0);
 	if (i != map.height)
-		ft_error("map height is incorrect.", env, 0);
+		ft_exit(env, "Map height is incorrect.", 1, 0);
 	if (map.walls[p_x][p_y] == 1)
-		ft_error("player is in a wall.", env, 0);
+		ft_exit(env, "Player is in a wall.", 1, 0);
 	p_x = -1;
 	while (++p_x < map.height)
 	{
@@ -37,9 +37,9 @@ void		ft_checkappval(int reader, int i, t_enval *env, t_mapinfo map)
 		{
 			if ((p_x == 0 || p_x == map.height - 1 || p_y == map.width - 1
 				|| p_y == 0) && map.walls[p_x][p_y] != 1)
-				ft_error("Surrounding numbers are not all 1s.", env, 0);
+				ft_exit(env, "Surrounding numbers are not all 1s.", 1, 0);
 			else if (map.walls[p_x][p_y] != 1 && map.walls[p_x][p_y] != 0)
-				ft_error("All numbers are not 1s or 0s.", env, 0);
+				ft_exit(env, "All numbers are not 1s or 0s.", 1, 0);
 		}
 	}
 }
@@ -57,7 +57,7 @@ void		ft_checkinval(char **tab, t_enval *env)
 
 	tlen = ft_tablen(tab);
 	if ((err = tlen == 4 ? 0 : 1))
-		ft_error("first line arguments are incorrect.", env, 0);
+		ft_exit(env, "first line arguments are incorrect.", 1, 0);
 	i = -1;
 	while (++i < tlen)
 	{
@@ -71,7 +71,7 @@ void		ft_checkinval(char **tab, t_enval *env)
 			err = 1;
 	}
 	if (err)
-		ft_error("first line arguments are incorrect.", env, 0);
+		ft_exit(env, "first line arguments are incorrect.", 1, 0);
 }
 
 /*
@@ -87,7 +87,7 @@ void		check_weapon_texture(t_enval *env, int id, int texture_number)
 	while (i < texture_number)
 	{
 		if (!env->wptex[id][i].img)
-			ft_error("missing or corrupted weapon texture(s)", env, 0);
+			ft_exit(env, "missing or corrupted weapon texture(s)", 1, 0);
 		i++;
 	}
 }
@@ -99,13 +99,13 @@ void		check_weapon_texture(t_enval *env, int id, int texture_number)
 void		ft_checksdl(t_enval *env)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
-		ft_error("SDL init failure.", env, 0);
+		ft_exit(env, "SDL init failure.", 1, 0);
 	if (!(env->sdl.win = SDL_CreateWindow("Doom", SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED, WIN_W, WIN_H, SDL_WINDOW_RESIZABLE)))
-		ft_error("SDL window creation failure.", env, 0);
+		ft_exit(env, "SDL window creation failure.", 1, 0);
 	if (!(env->sdl.rend = SDL_CreateRenderer(env->sdl.win, -1,
 		SDL_RENDERER_SOFTWARE)))
-		ft_error("SDL renderer creation failure.", env, 0);
+		ft_exit(env, "SDL renderer creation failure.", 1, 0);
 }
 
 /*

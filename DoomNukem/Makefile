@@ -24,7 +24,7 @@ UP 		=	\033[A
 CUT 	=	\033[K
 
 # project
-NAME	=	DoomNukem
+NAME	=	doom-nukem
 OS		=	$(shell uname)
 
 # directories
@@ -51,6 +51,7 @@ SRC		=	main.c \
 			get_weapon.c \
 			handle_status_effects.c \
 			handle_weapon_fire.c \
+			hud_draw.c \
 			init_game.c \
 			init_weapon_texture.c \
 			mobility.c\

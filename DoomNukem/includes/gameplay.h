@@ -134,6 +134,7 @@ typedef struct	s_equipped
 {
 	int		current;
 	int		reload_cd;
+	t_stat	off_vert;
 	int		weapon_state;
 	Uint32	delay;
 }				t_equipped;
