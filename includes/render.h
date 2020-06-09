@@ -12,6 +12,8 @@
 
 # define MOVE_STEP 0.08
 # define ROT_STEP 0.05 * M_PI_2
+# define MOUSE_SENS 0.004
+# define Y_VIEW_RANGE 1.5
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 1

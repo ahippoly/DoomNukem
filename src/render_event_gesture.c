@@ -34,6 +34,17 @@ void handle_poll_event(t_data *d, t_map_data *map)
 {
     while (SDL_PollEvent(&d->e))
     {
+        if (d->e.type == SDL_WINDOWEVENT)
+        {
+            if (d->e.window.event == SDL_WINDOWEVENT_CLOSE)
+                d->quit = 1;
+        }
+        if (d->e.type == SDL_MOUSEMOTION)
+        {
+            //printf("mouse x,y = %i,%i, mouse rel = %i,%i\n", d->e.motion.x, d->e.motion.y, d->e.motion.xrel, d->e.motion.yrel);
+            d->rot += MOUSE_SENS * d->e.motion.xrel * M_PI_2;
+            d->screen_height = HALF_WIN_SIZE_Y + (HALF_WIN_SIZE_Y - d->e.motion.y) * Y_VIEW_RANGE;
+        }
         if (d->e.type == SDL_KEYDOWN)
         {
             if (d->e.key.keysym.scancode == SDL_SCANCODE_LSHIFT)

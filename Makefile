@@ -42,7 +42,7 @@ LDLIBS = -lft -lm
 
 .PHONY: all clean fclean re libft
 
-all: $(NAME)
+all: $(NAME) $(RENDER_NAME)
 
 libft:
 	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
