@@ -15,6 +15,8 @@
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 1
+# define GRAVITY_FORCE 0.000001
+# define PLAYER_HEIGHT 0.5
 
 typedef struct      s_data
 {
@@ -36,11 +38,14 @@ typedef struct      s_data
     double          rot;
     t_point         player_pos;
     double          player_height;
+    double          z_force;
     int             screen_height;
     t_calced_walls  *sorted_walls;
     double          speed_modifier;
     int             framerate;
-    int             timestamp;
+    int             time_last_frame;
+    int             time;
+    int             air_time;
     t_sprite        sprite_lst[NB_SPRITE];
 }                   t_data;
 
@@ -58,7 +63,11 @@ void init_data(t_data *d);
 //render_event_gesture.c
 void handle_key_event(t_data *d, t_map_data *map);
 void handle_poll_event(t_data *d, t_map_data *map);
+
+//render_movement.c
 void move_attempt(t_point *pos, double speed, double look_rot);
+void move_with_collide(t_data *d, t_point *pos, double rot, double speed);
+void gravity(t_data *d);
 
 //render_wall_processing.c
 double calc_wall_hit_scale(t_wall wall, t_point inter);

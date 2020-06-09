@@ -39,8 +39,11 @@ void init_data(t_data *d)
     d->rot = -0.3 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0.5;
+    d->z_force = 0;
+    d->air_time = 0;
     d->speed_modifier = 1;
     d->framerate = 0;
+    d->time = 0;
     d->quit = 0;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);

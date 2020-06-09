@@ -11,7 +11,7 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_data_init.c render_event_gesture.c \
 						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
-						text_img.c)
+						text_img.c render_movement.c)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
