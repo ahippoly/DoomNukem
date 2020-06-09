@@ -164,6 +164,7 @@ typedef struct      s_env
     t_input			input_lst[NB_INPUT];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
+    t_sprite        sprite_lst[NB_SPRITE];
 }                   t_env;
 
 

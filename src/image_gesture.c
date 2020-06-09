@@ -31,10 +31,10 @@ void calc_transparency(int *int1, int *int2, float alpha)
     unsigned char *nb;
     unsigned char *nb2;
 
-    i = 1;
+    i = 0;
     nb = (unsigned char*)int1;
     nb2 = (unsigned char*)int2;
-    while (i < 4)
+    while (i < 3)
     {
         nb[i] = alpha * nb[i] +  (1 - alpha) * nb2[i];
         i++;

@@ -56,7 +56,7 @@ $(NAME): libft $(OBJ)
 
 $(RENDER_NAME): libft $(OBJ_REND)
 	@printf "%-50s" "create executable "$(notdir $@)...
-	@$(CC) $(CFLAGS) $(INC) $(OBJ_REND) -o $(RENDER_NAME) -g $(SDLM) $(LDFLAGS) $(LIBS)
+	@$(CC) -g $(CFLAGS) $(INC) $(OBJ_REND) -o $(RENDER_NAME) $(SDLM) $(LDFLAGS) $(LIBS)
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c

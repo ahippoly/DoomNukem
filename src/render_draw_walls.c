@@ -27,9 +27,9 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     draw_begin = ft_max(draw_begin, 0);
     while (draw_begin < draw_end)
     {
-        ty += ty_step;
-        //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, y_scale);
+        //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, ty);
         text_pixel_color = pixels[text->w * (int)ty + tx];
+        ty += ty_step;
         //printf("colour = %i\n", text_pixel_color);
         put_pixel_transparency(d->p_screen, (SDL_Rect){x, draw_begin++, WIN_SIZE_X, WIN_SIZE_Y}, text_pixel_color, dist_scale.alpha);
     }
