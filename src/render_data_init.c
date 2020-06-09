@@ -38,9 +38,12 @@ void init_data(t_data *d)
     d->player_pos = create_t_point(d->map.player_spawn.x, d->map.player_spawn.y);
     d->rot = -0.3 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;
-    d->player_height = 0.5;
+    d->player_height = 0;
     d->z_force = 0;
     d->air_time = 0;
+    d->z_ground = 0;
+    d->z_pos = 0;
+    d->z_offset = PLAYER_HEIGHT;
     d->speed_modifier = 1;
     d->framerate = 0;
     d->time = 0;

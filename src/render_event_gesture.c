@@ -20,8 +20,6 @@ void handle_key_event(t_data *d, t_map_data *map)
         move_with_collide(d, &d->player_pos, d->rot, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_S])
         move_with_collide(d, &d->player_pos, d->rot + M_PI, MOVE_STEP * d->speed_modifier);
-    if (d->clavier[SDL_SCANCODE_LCTRL])
-        d->player_height -= HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_R])
         d->screen_height += SCREEN_HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_F])
@@ -43,6 +41,11 @@ void handle_poll_event(t_data *d, t_map_data *map)
                 printf("running\n");
                 d->speed_modifier += 1;
             }
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_LCTRL)
+            {
+                printf("crouch\n");
+                d->z_offset = PLAYER_HEIGHT / 2;
+            }
             if (d->clavier[SDL_SCANCODE_SPACE])
             {
                 d->z_force = 0.1;
@@ -54,6 +57,11 @@ void handle_poll_event(t_data *d, t_map_data *map)
             {
                 printf("no longer running\n");
                 d->speed_modifier -= 1;
+            }
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_LCTRL)
+            {
+                printf("no longer crouch\n");
+                d->z_offset = PLAYER_HEIGHT;
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {

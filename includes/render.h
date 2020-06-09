@@ -38,7 +38,10 @@ typedef struct      s_data
     double          rot;
     t_point         player_pos;
     double          player_height;
+    double          z_pos;
+    double          z_offset;
     double          z_force;
+    double          z_ground;
     int             screen_height;
     t_calced_walls  *sorted_walls;
     double          speed_modifier;

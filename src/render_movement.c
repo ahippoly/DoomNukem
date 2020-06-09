@@ -68,17 +68,17 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 
 void gravity(t_data *d)
 {
-    d->player_height += d->z_force;
-  
-    if (d->player_height > PLAYER_HEIGHT)
+    d->z_pos += d->z_force;
+    d->player_height = d->z_pos + d->z_offset;
+    if (d->z_pos > d->z_ground)
     {
-        d->player_height -=  GRAVITY_FORCE * d->air_time * d->air_time ;
+        d->z_pos -=  GRAVITY_FORCE * d->air_time * d->air_time ;
         d->air_time += d->time - d->time_last_frame;
         //printf("air_time = %d\n", d->air_time);
     }
-    if (d->player_height < PLAYER_HEIGHT)
+    if (d->z_pos < d->z_ground)
     {
-        d->player_height = PLAYER_HEIGHT;
+        d->z_pos = d->z_ground;
         d->z_force = 0;
         d->air_time = 0;
     }
