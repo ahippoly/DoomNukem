@@ -17,7 +17,7 @@ SDL_Surface *read_img_surface(char *file)
     SDL_FreeFormat(format);
     SDL_FreeSurface(readed_file);
     //SDL_LockSurface(readed_file);
-    printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
+    //printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
     return (converted);
 }
 

@@ -5,7 +5,7 @@
 
 void raycast_all_screen(t_data *d, t_map_data *map)
 {
-    double fov_coef = (double)FOV_ANGLE / 90;
+    double fov_coef = ((double)FOV_ANGLE / 90) * M_PI_2;
     double current_angle = d->rot - fov_coef / 2;
     double step = fov_coef / WIN_SIZE_X;
     int x;
@@ -76,7 +76,7 @@ int main(void)
         handle_key_event(&d, &d.map);
         handle_poll_event(&d, &d.map);
         gravity(&d);
-        //draw_floor(&d, d.texture[1]);
+        draw_floor(&d, d.texture[1]);
         raycast_all_screen(&d, &d.map);
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &d.map, d.rot));
         update_player_pos_mini_map(&d, &d.map);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bresenham.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/10 05:25:25 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/06/10 05:36:05 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "global_header.h"
 #include "bresenham.h"
 
@@ -18,6 +30,19 @@ void	oct_ini(t_oct *oct, SDL_Point pos1, SDL_Point pos2, int pos[2][2])
 		* oct->inc[oct->boolxy];
 }
 
+void	process_line(t_img img, int pos[2][2], t_oct *oct, int color)
+{
+	if (pos[0][0] < img.pos_size.w && pos[0][0] > 0 && pos[1][0] > 0
+		&& pos[1][0] < img.pos_size.h)
+		img.pixels[pos[0][0] + pos[1][0] * img.pos_size.w] = color;
+	oct->e -= oct->d[oct->bool];
+	while (oct->e <= 0)
+	{
+		pos[oct->bool][0] += oct->inc[oct->bool];
+		oct->e += oct->d[oct->boolxy];
+	}
+	pos[oct->boolxy][0] += oct->inc[oct->boolxy];
+}
 
 void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color)
 {
@@ -25,7 +50,7 @@ void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color)
 	int				pos[2][2];
 	int				i;
 	unsigned int	*p_tab;
-	int 			length;
+	int				length;
 
 	if (pos1.x != -42 && pos2.x != -42)
 	{
@@ -33,22 +58,15 @@ void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color)
 		i = 0;
 		oct_ini(&oct, pos1, pos2, pos);
 		if (oct.bool == 0)
-			length = ft_min(img.pos_size.w * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
+			length = ft_min(img.pos_size.w * 100,
+				ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
 		else
-			length = ft_min(img.pos_size.h * 100, ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
+			length = ft_min(img.pos_size.h * 100,
+				ft_abs(pos[oct.boolxy][0] - pos[oct.boolxy][1]));
 		while (i < length)
 		{
-			if (pos[0][0] < img.pos_size.w && pos[0][0] > 0 && pos[1][0] > 0
-				&& pos[1][0] < img.pos_size.h)
-			p_tab[pos[0][0] + pos[1][0] * img.pos_size.w] = color;
-			oct.e -= oct.d[oct.bool];
-			while (oct.e <= 0)
-			{
-				pos[oct.bool][0] += oct.inc[oct.bool];
-				oct.e += oct.d[oct.boolxy];
-			}
+			process_line(img, pos, &oct, color);
 			i++;
-			pos[oct.boolxy][0] += oct.inc[oct.boolxy];
 		}
 	}
 }

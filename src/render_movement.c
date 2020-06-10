@@ -54,8 +54,8 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
         move_dir.x = cos(rot) * speed;
         move_dir.y = sin(rot) * speed;
         printf("move_dir: %f,%f, sin:%f, cos:%f\n", move_dir.x,move_dir.y, sin_rot, cos_rot);
-		// pos->x += move_dir.x * cos_rot - move_dir.y * cos_rot;
-		// pos->y += move_dir.x * sin_rot - move_dir.y * sin_rot;
+		// pos->x += move_dir.x * cos_rot + move_dir.y * cos_rot;
+		// pos->y += move_dir.x * sin_rot + move_dir.y * sin_rot;
         // pos->x += cos(proj_rot + res.wall_rot) * speed;
 		// pos->y += sin(proj_rot + res.wall_rot) * speed;
         move_attempt(pos, speed, rot);

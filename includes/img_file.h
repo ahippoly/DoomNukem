@@ -16,5 +16,6 @@ typedef struct      s_text
 
 
 t_img create_img(unsigned int *pixels, SDL_Rect pos_size);
+SDL_Texture *bmp_to_texture(char *file, SDL_Renderer *rend);
 
 #endif

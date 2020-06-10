@@ -74,7 +74,10 @@ double calc_line_angle(SDL_Point p1, SDL_Point p2)
 {
     double a;
 
-    a = (double)(p2.y - p1.y) / (p2.x - p1.x);
+    if (p2.x - p1.x < INTER_TOLERANCE)
+        a = 2147483647;
+    else
+        a = (double)(p2.y - p1.y) / (p2.x - p1.x);
     return (atan(a));
 }
 

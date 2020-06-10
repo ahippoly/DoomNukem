@@ -4,14 +4,15 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			editor_map_move.c editor_sector_creation.c line_intersect.c \
 			editor_mouse_event.c editor_map_output.c utils.c \
 			editor_input.c editor_map_reader.c editor_debug_utils.c \
-			editor_icon.c)
+			editor_icon.c editor_init_data.c editor_init_data2.c image_gesture2.c \
+			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c)
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_data_init.c render_event_gesture.c \
 						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
-						text_img.c render_movement.c)
+						text_img.c render_movement.c image_gesture2.c)
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
