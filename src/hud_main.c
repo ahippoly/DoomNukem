@@ -3,9 +3,12 @@
 void			init_hud(t_data *d, t_hud *hud)
 {
 	ft_bzero(hud, sizeof(hud));
+	hud->current_weap_id = 1; //initialisation de l'arme, a enlever si on commence à 0
+	hud->current_perso_id = 1; // recuperer dynamiquement les perso !
 	ft_putendl("initing weapons...");
 	init_weapons(d, hud);
-	hud->current_weap_id = 1;
+	ft_putendl("initing perso...");
+	init_perso(d, hud);
 }
 
 /* print items transparent background*/
@@ -35,21 +38,6 @@ int				put_lifebar(t_data *d)
 	/* Remplissage de la jauge de vie */
 	draw_rectangle(d->p_screen, set_sdl_rect(100, 70, 200, 30), set_size(WIN_SIZE_X, WIN_SIZE_Y), HEALTH);
 	SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
-	return (0);
-}
-
-/* Récupérer personnage */
-int				put_perso(t_data *d, t_hud *hud)
-{
-	SDL_Rect	size;
-
-	size = set_sdl_rect(10, 20, 80, 80);
-	if (!(hud->s_perso_w = SDL_LoadBMP("/img/hud/perso_w.bmp")))
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-	if (!(hud->t_perso_w = SDL_CreateTextureFromSurface(d->rend, hud->s_perso_w)))
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-    SDL_FreeSurface(hud->s_perso_w);
-	SDL_RenderCopy(d->rend, hud->t_perso_w, NULL, &size);
 	return (0);
 }
 
@@ -89,10 +77,10 @@ int 			main(void)
 		handle_key_event(&d, &map);
 		handle_poll_event(&d, &map);
 		// put_lifebar(&d);
-		// put_perso(&d, &hud);
 		// put_background(&d);
 		// put_ammunition(&d, &hud);
 		put_weapon(&d, &hud);
+		put_perso(&d, &hud);
 		// display_text(&d, &hud, "100", set_sdl_rect(150, WIN_SIZE_Y - 200, 30, 20));
 
 		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
