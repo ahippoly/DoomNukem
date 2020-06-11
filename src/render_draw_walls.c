@@ -3,6 +3,11 @@
 #include "editor.h"
 #include "img_file.h"
 
+double ft_interpolate(double val1, double val2, double scale)
+{
+	return(val1 * scale + val2 * (1 - scale));
+}
+
 void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
 {
     int draw_begin;
@@ -12,14 +17,20 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     int *pixels;
     int tx;
     float ty;
+	double	wall_size;
+	double	wall_start;
     SDL_Surface *text;
 
     if (dist_scale.dist == 9999)
         return ;
     text = d->texture[dist_scale.wall.texture_id];
-    draw_begin = d->screen_height - ((1 - d->player_height) * WIN_SIZE_Y) / dist_scale.dist;
-    draw_end = d->screen_height + (d->player_height * WIN_SIZE_Y) / dist_scale.dist;
-    ty_step = (float)text->h / (draw_end - draw_begin);
+    // draw_begin = d->screen_height - ((1 - d->player_height + 0.5) * WIN_SIZE_Y) / dist_scale.dist;
+    // draw_end = d->screen_height + ((d->player_height + 0.5) * WIN_SIZE_Y) / dist_scale.dist;
+	wall_start = ft_interpolate(dist_scale.wall.p1_z_start + dist_scale.wall.p1_z_size, dist_scale.wall.p2_z_start + dist_scale.wall.p2_z_size, dist_scale.scale);
+	draw_begin = d->screen_height - ((wall_start - d->player_height) * WIN_SIZE_Y) / dist_scale.dist;
+    draw_end = d->screen_height + ((d->player_height - ft_interpolate(dist_scale.wall.p1_z_start, dist_scale.wall.p2_z_start, dist_scale.scale)) * WIN_SIZE_Y) / dist_scale.dist;
+	wall_size = ft_interpolate(dist_scale.wall.p1_z_size, dist_scale.wall.p2_z_size, dist_scale.scale);
+    ty_step = ((float)text->h * wall_size) / (draw_end - draw_begin);
     draw_end = ft_min(draw_end, WIN_SIZE_Y);
     pixels = (int*)text->pixels;
     tx = (int)(dist_scale.scale * text->w);
@@ -28,6 +39,8 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     while (draw_begin < draw_end)
     {
         //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, ty);
+		if (ty > text->h)
+			ty = fmod(ty, text->h);
         text_pixel_color = pixels[text->w * (int)ty + tx];
         ty += ty_step;
         //printf("colour = %i\n", text_pixel_color);

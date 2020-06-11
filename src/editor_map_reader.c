@@ -97,6 +97,10 @@ void read_wall(char *line, t_wall *wall)
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);
     wall->alpha = (float)(100 - wall->transparency) / 100;
+	wall->p1_z_start = (float)wall->p1_height.start / UNIT;
+	wall->p1_z_size = (float)(wall->p1_height.end - wall->p1_height.start) / UNIT;
+	wall->p2_z_start = (float)wall->p2_height.start / UNIT;
+	wall->p2_z_size = (float)(wall->p2_height.end - wall->p2_height.start) / UNIT;
     printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     printf("wall length = %f\n", wall->length);
     printf("wall rot = %f\n", wall->rotation);

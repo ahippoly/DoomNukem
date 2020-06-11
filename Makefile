@@ -10,7 +10,7 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
-						bresenham.c render_data_init.c render_event_gesture.c \
+						bresenham.c render_init_data.c render_event_gesture.c \
 						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
 						text_img.c render_movement.c image_gesture2.c render_raycast.c)
 SRC_PATH = ./src/
@@ -30,7 +30,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = editor
 RENDER_NAME = doom-nukem
-OPTI = -O3
+OPTI = -Ofast
 PTHREAD = -lpthread
 
 LIBFT = libft/libft.a
@@ -59,13 +59,13 @@ $(NAME): libft $(OBJ)
 
 $(RENDER_NAME): libft $(OBJ_REND)
 	@printf "%-50s" "create executable "$(notdir $@)...
-	@$(CC) -g $(CFLAGS) $(INC) $(OBJ_REND) -o $(RENDER_NAME) $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
+	@$(CC) $(OPTI) $(CFLAGS) $(INC) $(OBJ_REND) -o $(RENDER_NAME) $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(INC) -o $@ -c $<
+	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 clean:

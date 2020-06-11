@@ -39,6 +39,7 @@ void calc_n_disp_framerate(t_data *d)
     input_text_to_img(ft_itoa(last_framerate), 2, 0xFFFFFFFF, create_img(d->p_screen, set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
 }
 
+
 int main(void)
 {
     t_data      d;

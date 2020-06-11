@@ -63,14 +63,10 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 	}
 	// printf("inter : %f,%f, diff : %f,%f, dir : %f,%f\n", inter.x, inter.y, inter.x - pos->x, inter.y - pos->y, cos(rot), + sin(rot));
 	if (will_collide == 1)
-	{
-		printf("recalc needed, wall rot = %f\n", res.wall.rotation / M_PI_2);
+		//printf("recalc needed, wall rot = %f\n", res.wall.rotation / M_PI_2);
         move_attempt(pos, cos(rot - res.wall.rotation) * speed, res.wall.rotation);
-	}
 	else if (will_collide < 1)
-	{
 		move_attempt(pos, speed, rot);
-	}
 }
 
 void gravity(t_data *d)

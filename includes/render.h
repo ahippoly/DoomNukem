@@ -17,7 +17,7 @@
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 0.5
-# define GRAVITY_FORCE 0.000001
+# define GRAVITY_FORCE 0.0000005
 # define PLAYER_HEIGHT 0.5
 # define THREAD_NB 4
 

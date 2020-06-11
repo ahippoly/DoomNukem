@@ -108,7 +108,7 @@ void map_output(t_env *env)
     //     free(str);
     //     i++;
     // }
-    fd = open(str = ft_strjoinfree("maps/editor_map_", ft_itoa(i), 1), O_WRONLY | O_CREAT | O_TRUNC);
+    fd = open(str = ft_strjoinfree("maps/editor_map_", ft_itoa(i), 1), O_WRONLY | O_TRUNC | O_CREAT, 0600);
     if (fd < 0)
         return;
     printf("map output name = %s, fd = %i\n",str, fd);

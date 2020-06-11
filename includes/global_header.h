@@ -49,17 +49,17 @@
 # define ANIM_WEAPON_SHOOT 1;
 
 
-typedef struct s_point
+typedef struct		s_point
 {
-    double x;
-    double y;
-}               t_point;
+    double			x;
+    double			y;
+}              		t_point;
 
-typedef struct  s_range
+typedef struct		s_range
 {
-    int         start;
-    int         end;
-}               t_range;
+    int				start;
+    int				end;
+}               	t_range;
 
 typedef struct      s_size
 {   
@@ -70,6 +70,7 @@ typedef struct      s_size
 typedef struct      s_anim
 {
                     SDL_Point   pos[NB_FRAME];
+                    SDL_Point   offset[NB_FRAME];
                     int         nb_frame;
                     int         current_frame;
                     double      speed;
@@ -109,6 +110,10 @@ typedef struct      s_wall
     double          length;
     double          rotation;
 	float			alpha;
+	float			p1_z_start;
+	float			p1_z_size;
+	float			p2_z_start;
+	float			p2_z_size;
 }                   t_wall;
 
 typedef struct      s_calced_walls

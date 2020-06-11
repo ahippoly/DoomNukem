@@ -42,8 +42,8 @@ void update_player_pos_mini_map(t_data *d, t_map_data *map)
     scale.x = (double)MINI_MAP_SIZE_X / map->map_size.w;
     scale.y = (double)MINI_MAP_SIZE_Y / map->map_size.h;
 
-    d->mini_map_player_pos.x = scale.x * d->player_pos.x;
-    d->mini_map_player_pos.y = scale.y * d->player_pos.y;
+    d->mini_map_player_pos.x = ft_range(scale.x * d->player_pos.x, 0, MINI_MAP_SIZE_X);
+    d->mini_map_player_pos.y = ft_range(scale.y * d->player_pos.y, 0, MINI_MAP_SIZE_Y);
 }
 
 void print_player_look_vector(t_data *d, t_map_data *map, double rot)

@@ -42,8 +42,8 @@ void init_data(t_data *d)
     d->player_height = 0;
     d->z_force = 0;
     d->air_time = 0;
-    d->z_ground = 0;
-    d->z_pos = 0;
+    d->z_ground = 2;
+    d->z_pos = 10;
     d->z_offset = PLAYER_HEIGHT;
     d->speed_modifier = 1;
     d->framerate = 0;
