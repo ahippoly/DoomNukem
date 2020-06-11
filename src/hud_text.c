@@ -24,13 +24,12 @@ int				quit_ttf(t_hud *hud)
 void			display_text(t_data *d, t_hud *hud, char *message, SDL_Rect message_pos)
 {
 	SDL_Rect	tmp;
-	SDL_Texture	*message_texture;
 
-	if(!(hud->ammo_text = TTF_RenderText_Solid(hud->font, message, hud->color)))
+	if(!(hud->message_surface = TTF_RenderText_Solid(hud->font, message, hud->color)))
 		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
-	if (!(message_texture = SDL_CreateTextureFromSurface(d->rend, hud->ammo_text)))
+	if (!(hud->message_texture = SDL_CreateTextureFromSurface(d->rend, hud->message_surface)))
 		printf("OULA Erreur de converstion de la surface : %s\n", SDL_GetError());
-    SDL_FreeSurface(hud->ammo_text);
+    SDL_FreeSurface(hud->message_surface);
 	tmp = message_pos;
-	SDL_RenderCopy(d->rend, message_texture, NULL, &tmp);
+	SDL_RenderCopy(d->rend, hud->message_texture, NULL, &tmp);
 }
