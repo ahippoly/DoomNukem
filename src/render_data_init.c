@@ -52,6 +52,5 @@ void init_data(t_data *d)
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
-    d->sorted_walls = p_malloc(sizeof(t_wall) * NB_WALL_MAX);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 }

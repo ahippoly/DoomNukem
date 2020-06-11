@@ -7,6 +7,7 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 # include <unistd.h>
+# include <pthread.h>
 # include "libft.h"
 # include "img_file.h"
 
@@ -44,8 +45,8 @@
 # define ANIM_STATE_CLOSE 1;
 # define ANIM_STATE_TRIGGERED 2;
 
-# define ANIM_WEAPIN_RELOAD 0;
-# define ANIM_WEAPIN_SHOOT 1;
+# define ANIM_WEAPON_RELOAD 0;
+# define ANIM_WEAPON_SHOOT 1;
 
 
 typedef struct s_point

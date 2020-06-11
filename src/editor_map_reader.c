@@ -74,7 +74,7 @@ double calc_line_angle(SDL_Point p1, SDL_Point p2)
 {
     double a;
 
-    if (p2.x - p1.x < INTER_TOLERANCE)
+    if (p2.x - p1.x < INTER_TOLERANCE && p2.x - p1.x > - INTER_TOLERANCE)
         a = 2147483647;
     else
         a = (double)(p2.y - p1.y) / (p2.x - p1.x);

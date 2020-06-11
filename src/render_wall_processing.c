@@ -116,30 +116,30 @@ t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos)
     return (res);
 }
 
-void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle)
+void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle, t_calced_walls *sorted_walls)
 {
     int i;
     int j;
     int tmp;
     t_calced_walls dist_scale;
 
-    d->sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, d->player_pos, d->rot);
+    sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, d->player_pos, d->rot);
     i = 1;
     while (i < map->wall_count)
     {
         dist_scale = check_inter_with_wall(map->wall_list[i], current_angle, d->player_pos, d->rot);
         //printf("wall dist to player = %f\n",  dist_scale.dist);
         j = 0;
-        while (dist_scale.dist < d->sorted_walls[j].dist && j < i)
+        while (dist_scale.dist < sorted_walls[j].dist && j < i)
             j++;
         tmp = j;
         j = i;
         while (j > tmp)
         {
             j--;
-            d->sorted_walls[j + 1] = d->sorted_walls[j];
+            sorted_walls[j + 1] = sorted_walls[j];
         }
-        d->sorted_walls[j] = dist_scale;
+        sorted_walls[j] = dist_scale;
         i++;
     }
     // i = 0;

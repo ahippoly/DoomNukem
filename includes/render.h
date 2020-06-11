@@ -19,6 +19,7 @@
 # define WALL_SIZE 1
 # define GRAVITY_FORCE 0.000001
 # define PLAYER_HEIGHT 0.5
+# define THREAD_NB 4
 
 typedef struct      s_data
 {
@@ -45,7 +46,6 @@ typedef struct      s_data
     double          z_force;
     double          z_ground;
     int             screen_height;
-    t_calced_walls  *sorted_walls;
     double          speed_modifier;
     int             framerate;
     int             time_last_frame;
@@ -53,6 +53,15 @@ typedef struct      s_data
     int             air_time;
     t_sprite        sprite_lst[NB_SPRITE];
 }                   t_data;
+
+typedef	struct		s_thread
+{
+	double			start_angle;
+	double			step;
+	t_range			screen_x;
+	t_data			*d;
+}					t_thread;
+
 
 void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
@@ -78,7 +87,7 @@ void gravity(t_data *d);
 double calc_wall_hit_scale(t_wall wall, t_point inter);
 t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot);
 t_calced_walls check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot, double look_rot);
-void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle);
+void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle, t_calced_walls *sorted_walls);
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
 
@@ -88,5 +97,14 @@ void draw_floor(t_data *d, SDL_Surface *text);
 
 //render_texture_loading.c
 void load_bmp_files(t_data *d);
+
+//render_raycast.C
+void	raycast_screen(t_data *d, t_range screen_x, double start_angle, double step);
+void	*raycast_thread(void *data);
+void	raycast_thread_init(t_data *d);
+void	raycast_all_screen(t_data *d, t_map_data *map);
+
+
+
 
 #endif

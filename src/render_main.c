@@ -3,27 +3,6 @@
 #include "editor.h"
 #include "img_file.h"
 
-void raycast_all_screen(t_data *d, t_map_data *map)
-{
-    double fov_coef = ((double)FOV_ANGLE / 90) * M_PI_2;
-    double current_angle = d->rot - fov_coef / 2;
-    double step = fov_coef / WIN_SIZE_X;
-    int x;
-    int i;
-
-    x = 0;
-    while (x < WIN_SIZE_X)
-    {
-        i = 0;
-        sort_walls_by_dist(d, map, current_angle);
-        while (i < map->wall_count)
-            draw_vertical_line(d, x, d->sorted_walls[i++]);
-        //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);
-        current_angle += step;
-        x++;
-    }
-}
-
 void print_data2screen(t_data *d, t_map_data *map)
 {
     SDL_Rect tmp;
@@ -39,7 +18,7 @@ void print_data2screen(t_data *d, t_map_data *map)
 
 void free_render_env(t_data *d)
 {
-    free(d->sorted_walls);
+
 }
 
 void calc_n_disp_framerate(t_data *d)
@@ -76,8 +55,9 @@ int main(void)
         handle_key_event(&d, &d.map);
         handle_poll_event(&d, &d.map);
         gravity(&d);
-        draw_floor(&d, d.texture[1]);
-        raycast_all_screen(&d, &d.map);
+        //draw_floor(&d, d.texture[1]);
+        //raycast_all_screen(&d, &d.map);
+		raycast_thread_init(&d);
         //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &d.map, d.rot));
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
