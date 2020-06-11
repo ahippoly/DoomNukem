@@ -96,6 +96,7 @@ void			init_weapon_4(t_data *d, t_hud *hud);
 
 /* hud_perso.c */
 
+void			init_perso(t_data *d, t_hud *hud);
 int				put_perso(t_data *d, t_hud *hud);
 
 #endif
