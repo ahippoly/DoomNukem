@@ -14,7 +14,7 @@
 
 /* weapons */
 
-# define WEAPON_NB		6
+# define WEAPON_NB		5
 # define WEAPON_PATH_0	"/img/hud/handgun.bmp"
 # define WEAPON_PATH_1	"/img/hud/goldengun.bmp"
 # define WEAPON_PATH_2	"/img/hud/handgun.bmp"
@@ -56,6 +56,11 @@ typedef struct	s_perso
 	SDL_Texture	*texture;
 }				t_perso;
 
+typedef struct	s_hud_text
+{
+	SDL_Texture	*message_texture;
+}				t_hud_text;
+
 typedef struct	s_hud
 {
 	int			current_weap_id;
@@ -66,6 +71,9 @@ typedef struct	s_hud
 	SDL_Texture *t_perso_w;
 	TTF_Font	*font;
 	SDL_Color	color;
+	// t_text		*hud_text;
+	SDL_Surface	*message_surface;
+	SDL_Texture	*message_texture;
 }				t_hud;
 
 

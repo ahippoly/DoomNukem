@@ -24,17 +24,15 @@ static int		update_perso(t_data *d, t_hud *hud)
 		if (!(hud->perso->surface = SDL_LoadBMP(PERSO_PATH_1)))
 			printf("Erreur de chargement de l'image : %s", SDL_GetError());
 	}
-	// else return error ?
+	else
+		return (-1);
 	return (0);
 }
 
 void			init_perso(t_data *d, t_hud *hud)
 {
-	ft_putendl("malloc perso...");
 	malloc_perso(hud);
-	ft_putstr("init perso ");
 	ft_putnbr(hud->current_perso_id);
-	ft_putendl("...");
 	update_perso(d, hud);
 	if (!(hud->perso->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso->surface)))
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());

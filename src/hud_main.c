@@ -4,7 +4,7 @@ void			init_hud(t_data *d, t_hud *hud)
 {
 	ft_bzero(hud, sizeof(hud));
 	hud->current_weap_id = 1; //initialisation de l'arme, a enlever si on commence à 0
-	hud->current_perso_id = 1; // recuperer dynamiquement les perso !
+	hud->current_perso_id = 1; // recuperer dynamiquement les perso 
 	ft_putendl("initing weapons...");
 	init_weapons(d, hud);
 	ft_putendl("initing perso...");
@@ -72,15 +72,15 @@ int 			main(void)
 	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4) - 10, 400, 100);
 	while (!d.quit)
 	{
-		ft_bzero(d.p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4); //?
+		ft_bzero(d.p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
 		SDL_PumpEvents();
 		handle_key_event(&d, &map);
 		handle_poll_event(&d, &map);
 		// put_lifebar(&d);
 		// put_background(&d);
 		// put_ammunition(&d, &hud);
-		put_weapon(&d, &hud);
 		put_perso(&d, &hud);
+		put_weapon(&d, &hud);
 		// display_text(&d, &hud, "100", set_sdl_rect(150, WIN_SIZE_Y - 200, 30, 20));
 
 		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
