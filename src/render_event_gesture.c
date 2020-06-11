@@ -84,7 +84,12 @@ void handle_key_event(t_data *d, t_map_data *map)
     if (d->clavier[SDL_SCANCODE_S])
         move_with_collide(d, &d->player_pos, d->rot + M_PI, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_SPACE])
+	{
         d->player_height += HEIGHT_STEP;
+		d->bullet++;
+		// ft_putnbr(d->bullet);
+		// ft_putchar('\n');
+	}
     if (d->clavier[SDL_SCANCODE_LCTRL])
         d->player_height -= HEIGHT_STEP;
     if (d->clavier[SDL_SCANCODE_R])
@@ -94,7 +99,6 @@ void handle_key_event(t_data *d, t_map_data *map)
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
 	//printf("player rot = %f\n", fabs(fmod(d->rot, 4)));
-	
 }
 
 void handle_poll_event(t_data *d, t_map_data *map)

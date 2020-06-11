@@ -42,6 +42,7 @@ typedef struct      s_data
     int             framerate;
     int             timestamp;
     t_sprite        sprite_lst[NB_SPRITE];
+	int				bullet;
 }                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);
