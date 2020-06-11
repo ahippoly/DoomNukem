@@ -33,8 +33,8 @@ void print_env2screen(t_env *env)
     // SDL_RenderCopy(env->rend, env->editor_grid, NULL, &env->grid_pos);
     // SDL_RenderPresent(env->rend);
     print_inputs(env);
-    input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 800, WIN_SIZE_X, WIN_SIZE_Y)));
-    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(530, 700, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
     //input_text_to_img("test", 1, 0xFF00FF00, create_img(env->buttons_lst[1].normal.pixels, set_sdl_rect(0,0,env->buttons_lst[1].normal.pos_size.w, env->buttons_lst[1].normal.pos_size.h)));
     SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4);
     SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4);

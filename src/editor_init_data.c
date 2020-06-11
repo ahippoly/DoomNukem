@@ -42,15 +42,15 @@ void init_buttons(t_env *env)
     env->buttons_fct[BUTTON_MOB_RIGHT] = select_next_mob;
     env->buttons_fct[BUTTON_MOB_PLACING] = mob_placing_mode;
     
-    env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(850, 20)), create_text_img("del", 2, 0xFFFFFFFF, create_point(850, 20)), BUTTON_DEL);
-    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 195)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 195)), BUTTON_TEXT_LEFT);
-    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 195)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 195)), BUTTON_TEXT_RIGHT);
-    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(810, 850)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(810, 850)), BUTTON_CREATE_ROOM);
-    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(810, 800)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(810, 800)), BUTTON_MAP_OUTPUT);
-    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(810, 750)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(810, 750)), BUTTON_SET_PLAYER_SPAWN);
-    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 3, 0xFFDDDDDD, create_point(762, 445)), create_text_img("<", 3, 0xFF88FF88, create_point(762, 445)), BUTTON_MOB_LEFT);
-    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 3, 0xFFDDDDDD, create_point(958, 445)), create_text_img(">", 3, 0xFF88FF88, create_point(958, 445)), BUTTON_MOB_RIGHT);
-    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 2, 0xFFDDDDDD, create_point(822, 555)), create_text_img("Place", 2, 0xFF88FF88, create_point(822, 555)), BUTTON_MOB_PLACING);
+    env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(0.85 * WIN_SIZE_X, 0.020 * WIN_SIZE_Y)), create_text_img("del", 2, 0xFFFFFFFF, create_point(0.85 * WIN_SIZE_X, 0.02 * WIN_SIZE_Y)), BUTTON_DEL);
+    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_LEFT);
+    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_RIGHT);
+    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), BUTTON_CREATE_ROOM);
+    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), BUTTON_MAP_OUTPUT);
+    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), BUTTON_SET_PLAYER_SPAWN);
+    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_LEFT);
+    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_RIGHT);
+    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 1, 0xFFDDDDDD, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), create_text_img("Place", 1, 0xFF88FF88, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), BUTTON_MOB_PLACING);
   }
 
 void init_mouse_mode(t_env *env)
@@ -64,15 +64,15 @@ void init_mouse_mode(t_env *env)
 
 void init_txt_img(t_env *env)
 {
-    env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(5, 12));
-    env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 2, 0xFFDDDDDD, create_point(798, 100));
-    env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 2, 0xFFDDDDDD, create_point(210, 630));
-    env->txt_lst[TXT_P1] = create_text_img("P1", 1, 0xFFDDDDDD, create_point(210, 680));
-    env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(315, 680));
-    env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(120, 730));
-    env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(120, 790));
-    env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFF00FF00, create_point(795, 620));
-    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFF0000FF, create_point(500, 770));
-    env->txt_lst[TXT_MOB] = create_text_img("Mob", 2, 0xFFFF0000, create_point(845, 350));
-    env->txt_lst[TXT_ROOM_COUNT] = create_text_img("Room_count", 1, 0xFFDDDDDD, create_point(500, 670));
+    env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(0.005 * WIN_SIZE_X, 0.012 * WIN_SIZE_Y));
+    env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 1, 0xFFDDDDDD, create_point(0.798 * WIN_SIZE_X, 0.100 * WIN_SIZE_Y));
+    env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 1, 0xFFDDDDDD, create_point(0.235 * WIN_SIZE_X, 0.640 * WIN_SIZE_Y));
+    env->txt_lst[TXT_P1] = create_text_img("P1", 1, 0xFFDDDDDD, create_point(0.210 * WIN_SIZE_X, 0.680 * WIN_SIZE_Y));
+    env->txt_lst[TXT_P2] = create_text_img("P2", 1, 0xFFDDDDDD, create_point(0.315 * WIN_SIZE_X, 0.680 * WIN_SIZE_Y));
+    env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.730 * WIN_SIZE_Y));
+    env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.790 * WIN_SIZE_Y));
+    env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFF00FF00, create_point(0.795 * WIN_SIZE_X, 0.620 * WIN_SIZE_Y));
+    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFF0000FF, create_point(0.500 * WIN_SIZE_X, 0.770 * WIN_SIZE_Y));
+    env->txt_lst[TXT_MOB] = create_text_img("Mob", 1, 0xFFFF0000, create_point(0.845 * WIN_SIZE_X, 0.350 * WIN_SIZE_Y));
+    env->txt_lst[TXT_ROOM_COUNT] = create_text_img("Room_count", 1, 0xFFDDDDDD, create_point(0.500 * WIN_SIZE_X, 0.670 * WIN_SIZE_Y));
 }

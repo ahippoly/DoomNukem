@@ -9,8 +9,8 @@
 
 # define GRID_POS_X 0
 # define GRID_POS_Y 60
-# define GRID_SIZE_X 761
-# define GRID_SIZE_Y 561
+# define GRID_SIZE_X 561
+# define GRID_SIZE_Y 441
 # define TILE_SIZE 40
 # define TILE_HITBOX 7
 # define WALL_HITBOX 10
@@ -64,10 +64,10 @@
 # define TXT_WALL_COUNT 8
 # define TXT_MOB 9
 # define TXT_ROOM_COUNT 10
-# define TEXT_POS_X 800
-# define TEXT_POS_Y 150
-# define TEXT_SIZE_X 150
-# define TEXT_SIZE_Y 150
+# define TEXT_POS_X 0.800 * WIN_SIZE_X
+# define TEXT_POS_Y 0.150 * WIN_SIZE_Y
+# define TEXT_SIZE_X 0.150 * WIN_SIZE_X
+# define TEXT_SIZE_Y 0.150 * WIN_SIZE_Y
 # define MOVE_SPEED 5
 # define MAP_SIZE_X 30
 # define MAP_SIZE_Y 30
@@ -78,10 +78,10 @@
 # define ICON_PLAYER_SIZE 30
 # define ICON_MOB_RANGE_BEGIN 1
 # define ICON_MOB_RANGE_END 3
-# define ICON_MOB_POS_X 800
-# define ICON_MOB_POS_Y 400
-# define ICON_MOB_SIZE_X 150
-# define ICON_MOB_SIZE_Y 150
+# define ICON_MOB_POS_X 0.800 * WIN_SIZE_X
+# define ICON_MOB_POS_Y 0.400 * WIN_SIZE_Y
+# define ICON_MOB_SIZE_X 0.150 * WIN_SIZE_X
+# define ICON_MOB_SIZE_Y 0.150 * WIN_SIZE_Y
 
 # define HEAD_WALL_LIST "WALL LIST"
 # define HEAD_ROOM_LIST "ROOM LIST"

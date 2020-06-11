@@ -11,8 +11,8 @@
 # include "libft.h"
 # include "img_file.h"
 
-# define WIN_SIZE_X 1000
-# define WIN_SIZE_Y 1000
+# define WIN_SIZE_X 800
+# define WIN_SIZE_Y 800
 # define HALF_WIN_SIZE_X WIN_SIZE_X / 2
 # define HALF_WIN_SIZE_Y WIN_SIZE_Y / 2
 # define MINI_MAP_X 650
