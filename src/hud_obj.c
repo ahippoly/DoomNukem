@@ -1,27 +1,32 @@
 #include <hud.h>
 
-/*
-int				put_obj(t_data *d, t_hud *hud, SDL_Rect size)
+//SG HERE
+static void		**malloc_tab_weapons(t_hud *hud)
 {
-	if (!(hud->s_ammo = SDL_LoadBMP("/img/hud/handgun.bmp")))
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-	if (!(hud->t_ammo = SDL_CreateTextureFromSurface(d->rend, hud->s_ammo)))
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-}
-*/
-
-void			init_weapon(t_weapon *weapon)
-{
+	int			i;
 	
-}
-
-t_weapon		**init_weapon()
-{
-	t_weapon	**weapon;
-	
-	weapon = NULL;
-	if (!(weapon = (t_weapon**)ft_memalloc(sizeof(t_weapon*) * 3)))
+	i = 0;
+	hud->perso_weapon = NULL;
+	if (!(hud->perso_weapon = (t_weapon**)ft_memalloc(sizeof(t_weapon *) * WEAPON_NB)))
 		return (NULL);
-	
-	return (weapon);
+	while (i < WEAPON_NB)
+	{
+		if (!(hud->perso_weapon[i] = (t_weapon *)malloc(sizeof(t_weapon))))
+			return (NULL);
+		ft_bzero(hud->perso_weapon[i], sizeof(t_weapon));
+		i++;
+	}
+	hud->perso_weapon[WEAPON_NB] = NULL;
+}
+
+void			init_weapons(t_hud *hud, t_data *d)
+{
+	ft_putendl("malloc weapons...");
+	malloc_tab_weapons(hud);
+	ft_putendl("init weapons...");
+	init_weapon_0(hud, d);
+	init_weapon_1(hud, d);
+	init_weapon_2(hud, d);
+	init_weapon_3(hud, d);
+	init_weapon_4(hud, d);
 }

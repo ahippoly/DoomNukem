@@ -3,16 +3,9 @@
 void			init_hud(t_data *d, t_hud *hud)
 {
 	ft_bzero(hud, sizeof(hud));
-}
-
-void			free_hud(t_hud *hud)
-{
-	ft_putendl("free texture...");
-	if (hud->t_ammo)
-		SDL_DestroyTexture(hud->t_ammo);
-	if (hud->t_perso_w)
-		SDL_DestroyTexture(hud->t_perso_w);
-	ft_putendl("free texture done.");
+	ft_putendl("initing weapons...");
+	init_weapons(hud, d);
+	hud->current_weap_id = 1;
 }
 
 /* print items transparent background*/
@@ -41,6 +34,7 @@ int				put_lifebar(t_data *d)
 	/* Remplissage de la jauge de vie */
 	draw_rectangle(d->p_screen, set_sdl_rect(100, 70, 200, 30), set_size(WIN_SIZE_X, WIN_SIZE_Y), HEALTH);
 	SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
+	return (0);
 }
 
 /* Récupérer personnage */
@@ -55,9 +49,11 @@ int				put_perso(t_data *d, t_hud *hud)
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
     SDL_FreeSurface(hud->s_perso_w);
 	SDL_RenderCopy(d->rend, hud->t_perso_w, NULL, &size);
+	return (0);
 }
 
 /* Récupérer les paramètre des munitions */
+/*
 int				put_ammunition(t_data *d, t_hud *hud)
 {
 	SDL_Rect	size;
@@ -71,18 +67,14 @@ int				put_ammunition(t_data *d, t_hud *hud)
 	SDL_RenderCopy(d->rend, hud->t_ammo, NULL, &size);
 	return (0);
 }
+*/
 
-int				put_arm(t_data *d, t_hud *hud)
+int				put_weapon(t_data *d, t_hud *hud)
 {
 	SDL_Rect	size;
 	
-	size = set_sdl_rect(300, WIN_SIZE_Y - (WIN_SIZE_Y / 4), 80, 80);
-	if (!(hud->s_ammo = SDL_LoadBMP("/img/hud/handgun.bmp")))
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-	if (!(hud->t_ammo = SDL_CreateTextureFromSurface(d->rend, hud->s_ammo)))
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-    SDL_FreeSurface(hud->s_ammo);
-	SDL_RenderCopy(d->rend, hud->t_ammo, NULL, &size);
+	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4), 80, 80);
+	SDL_RenderCopy(d->rend, hud->perso_weapon[hud->current_weap_id]->texture, NULL, &size);
 	return (0);
 }
 
@@ -97,7 +89,6 @@ int 			main(void)
 	init_data(&d);
 	init_hud(&d, &hud);
 	init_ttf(&hud);
-
 	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4) - 10, 400, 100);
 	while (!d.quit)
 	{
@@ -105,19 +96,17 @@ int 			main(void)
 		SDL_PumpEvents();
 		handle_key_event(&d, &map);
 		handle_poll_event(&d, &map);
-		put_lifebar(&d);
-		put_perso(&d, &hud);
-		put_background(&d);
-		
-		put_ammunition(&d, &hud);
-		put_arm(&d, &hud);
+		// put_lifebar(&d);
+		// put_perso(&d, &hud);
+		// put_background(&d);
+		// put_ammunition(&d, &hud);
+		put_weapon(&d, &hud);
 
-		display_text(&d, &hud, "100", set_sdl_rect(150, WIN_SIZE_Y - 200, 30, 20));
+		// display_text(&d, &hud, "100", set_sdl_rect(150, WIN_SIZE_Y - 200, 30, 20));
 
 		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
 		SDL_RenderFillRect(d.rend, &size);
 
-		
 		SDL_UpdateTexture(d.screen, NULL, d.p_screen, WIN_SIZE_X * 4);
  		SDL_RenderPresent(d.rend);
     }
