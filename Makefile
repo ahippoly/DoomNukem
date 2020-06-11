@@ -4,15 +4,21 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			editor_map_move.c editor_sector_creation.c line_intersect.c \
 			editor_mouse_event.c editor_map_output.c utils.c \
 			editor_input.c editor_map_reader.c editor_debug_utils.c \
-			editor_icon.c editor_init_data.c editor_init_data2.c image_gesture2.c \
-			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c)
+			editor_icon.c)
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_data_init.c render_event_gesture.c \
+						render_wall_processing.c render_draw_walls.c render_texture_loading.c)
+
+DLC_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
+						error_gesture.c image_gesture.c line_intersect.c \
+						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
+						bresenham.c render_data_init.c render_event_gesture.c \
 						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
-						text_img.c render_movement.c image_gesture2.c)
+						 sprite_main.c init_sprite_gun.c init_sprite_mob.c) ##
+
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
@@ -20,16 +26,19 @@ LIBFT_PATH = ./libft/
 INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_REND_NAME = $(RENDER_SRC_NAME:.c=.o)
+OBJ_DLC_NAME = $(DLC_SRC_NAME:.c=.o) ##
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 OBJ_REND = $(addprefix $(OBJ_PATH),$(OBJ_REND_NAME))
+OBJ_DLC = $(addprefix $(OBJ_PATH),$(OBJ_DLC_NAME)) ##
 INC = $(addprefix -I,$(INC_PATH))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = editor
 RENDER_NAME = doom-nukem
+DLC = sprite ##
 
 LIBFT = libft/libft.a
 
@@ -37,13 +46,13 @@ LDFLAGS = $(addprefix -L,$(LIBFT_PATH))
 
 SDLM = `sdl2-config --cflags --libs`
 
-LIBS = -lft -lm -lSDL2 
+LIBS = -lft -lm -lSDL2
 
 LDLIBS = -lft -lm
 
 .PHONY: all clean fclean re libft
 
-all: $(NAME) $(RENDER_NAME)
+all: $(NAME)
 
 libft:
 	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
@@ -57,7 +66,12 @@ $(NAME): libft $(OBJ)
 
 $(RENDER_NAME): libft $(OBJ_REND)
 	@printf "%-50s" "create executable "$(notdir $@)...
-	@$(CC) -g $(CFLAGS) $(INC) $(OBJ_REND) -o $(RENDER_NAME) $(SDLM) $(LDFLAGS) $(LIBS)
+	@$(CC) $(CFLAGS) $(INC) $(OBJ_REND) -o $(RENDER_NAME) -g $(SDLM) $(LDFLAGS) $(LIBS)
+	@printf "\e[1;32m[OK]\e[0m\n"
+
+$(DLC): libft $(OBJ_DLC) ##
+	@printf "%-50s" "create executable "$(notdir $@)... 
+	@$(CC) $(CFLAGS) $(INC) $(OBJ_DLC) -o $(DLC) -g $(SDLM) $(LDFLAGS) $(LIBS) 
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c

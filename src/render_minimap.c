@@ -27,10 +27,11 @@ void create_mini_map(t_data *d, t_map_data *map)
     while (i < map->wall_count)
     {
         wall = map->wall_list[i];
-        draw_line(create_point(scale.x * wall.p1.x, scale.y * wall.p1.y), 
+        octant(create_point(scale.x * wall.p1.x, scale.y * wall.p1.y), 
             create_point(scale.x * wall.p2.x, scale.y * wall.p2.y), 
-            (t_img){d->p_mini_map_bg, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}},
-            0xFFFFBB88);
+            d->p_mini_map_bg,
+            0xFFFFBB88,
+            set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y));
         i++;
     }
 }
@@ -50,14 +51,16 @@ void print_player_look_vector(t_data *d, t_map_data *map, double rot)
 {
     t_point scale;
     SDL_Point screen_player_pos;
-    double      fov;
+    double      rot_pi_2;
+    double      fov_rot_pi_2;
 
-    fov =  (double)FOV_ANGLE / 180;
+    rot_pi_2 = rot * M_PI_2;
+    fov_rot_pi_2 = M_PI_2 * FOV_ANGLE / 180;
     scale = calc_map_scale(map);
     screen_player_pos = create_point(d->mini_map_player_pos.x + MINI_MAP_PLAYER_SIZE / 2, d->mini_map_player_pos.y + MINI_MAP_PLAYER_SIZE / 2);
-    //look vector // draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot) * 25, screen_player_pos.y + sin(rot) * 25), d->p_mini_map, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
-    draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot + fov) * 35, screen_player_pos.y + sin(rot + fov) * 35), (t_img){d->p_mini_map, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
-    draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot - fov) * 35, screen_player_pos.y + sin(rot - fov) * 35), (t_img){d->p_mini_map, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
+    //look vector // octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot_pi_2) * 25, screen_player_pos.y + sin(rot_pi_2) * 25), d->p_mini_map, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
+    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot_pi_2 + fov_rot_pi_2) * 35, screen_player_pos.y + sin(rot_pi_2 + fov_rot_pi_2) * 35), d->p_mini_map, 0xFF00DDDD, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
+    octant(screen_player_pos, create_point(screen_player_pos.x + cos(rot_pi_2 - fov_rot_pi_2) * 35, screen_player_pos.y + sin(rot_pi_2 - fov_rot_pi_2) * 35), d->p_mini_map, 0xFF00DDDD, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
 }
 
 void print_mini_map(t_data *d, t_map_data *map)

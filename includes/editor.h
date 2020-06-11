@@ -46,7 +46,7 @@
 
 # define NB_TEXTURE 6
 # define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
-# define TEXT_PATH_1 "img/textures/debug_text.bmp"
+# define TEXT_PATH_1 "img/textures/stones.bmp"
 # define TEXT_PATH_2 "img/textures/Paver300.bmp"
 # define TEXT_PATH_3 "img/textures/Floor_Wdn.bmp"
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
@@ -164,7 +164,6 @@ typedef struct      s_env
     t_input			input_lst[NB_INPUT];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
-    t_sprite        sprite_lst[NB_SPRITE];
 }                   t_env;
 
 
@@ -250,39 +249,5 @@ void print_icon_list(t_env *env);
 
 void select_previous_mob(t_env *env);
 void select_next_mob(t_env *env);
-
-//editor_init_data.c
-void init_sdl_ressources(t_env *env);
-void init_texture(t_env *env);
-void init_buttons(t_env *env);
-void init_mouse_mode(t_env *env);
-void init_txt_img(t_env *env);
-void init_input(t_env *env);
-void init_img(t_env *env);
-void init_env(t_env *env);
-void init_env2(t_env *env);
-
-//editor_grid.c
-void create_grid(unsigned int *pixels, double scale, t_env *env);
-SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels, t_env *env);
-void display_selected_point(t_env *env);
-
-//editor_display_data.c
-void txt_img2screen(t_env *env, t_txt_img img);
-void display_buttons(t_env *env);
-void display_txt_img(t_env *env);
-void print_env2screen(t_env *env);
-
-//editor_button_fct.c
-void	select_next_texture(t_env *env);
-void	set_player_spawn_mode(t_env *env);
-void	mob_placing_mode(t_env *env);
-void	del_selected_wall(t_env *env);
-
-//editor_button_fct2.c
-void change_selected_wall_texture(t_env *env, int texture_id);
-void select_previous_mob(t_env *env);
-void select_next_mob(t_env *env);
-void select_previous_texture(t_env *env);
 
 #endif

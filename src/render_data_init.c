@@ -15,7 +15,6 @@ void init_sdl_ressources_rend(t_data *d)
         exit_with_msg("Failed to create Renderer");
     d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    //SDL_SetRelativeMouseMode(SDL_TRUE);
     //SDL_SetTextureBlendMode(d->screen, SDL_BLENDMODE_BLEND);
     //SDL_SetRenderDrawBlendMode(d->rend, SDL_BLENDMODE_NONE);
 }
@@ -31,23 +30,13 @@ void init_mini_map(t_data *d, t_map_data *map)
     d->mini_map_player_pos = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
 }
 
-void init_data(t_data *d)
+void init_data(t_data *d, t_map_data *map)
 {
-    init_sdl_ressources_rend(d);
-    d->map = read_map("maps/editor_map_0");
-    init_mini_map(d, &d->map);
-    d->player_pos = create_t_point(d->map.player_spawn.x, d->map.player_spawn.y);
-    d->rot = -0.3 * M_PI_2;
+    init_mini_map(d, map);
+    d->rot = 0;
     d->screen_height = HALF_WIN_SIZE_Y;
-    d->player_height = 0;
-    d->z_force = 0;
-    d->air_time = 0;
-    d->z_ground = 0;
-    d->z_pos = 0;
-    d->z_offset = PLAYER_HEIGHT;
+    d->player_height = 0.5;
     d->speed_modifier = 1;
-    d->framerate = 0;
-    d->time = 0;
     d->quit = 0;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);

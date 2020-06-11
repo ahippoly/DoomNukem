@@ -8,7 +8,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     int draw_begin;
     int draw_end;
     float ty_step;
-    unsigned int text_pixel_color;
+    int text_pixel_color;
     int *pixels;
     int tx;
     float ty;
@@ -27,9 +27,9 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     draw_begin = ft_max(draw_begin, 0);
     while (draw_begin < draw_end)
     {
-        //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, ty);
-        text_pixel_color = pixels[text->w * (int)ty + tx];
         ty += ty_step;
+        //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, y_scale);
+        text_pixel_color = pixels[text->w * (int)ty + tx];
         //printf("colour = %i\n", text_pixel_color);
         put_pixel_transparency(d->p_screen, (SDL_Rect){x, draw_begin++, WIN_SIZE_X, WIN_SIZE_Y}, text_pixel_color, dist_scale.alpha);
     }
@@ -49,6 +49,7 @@ void draw_floor(t_data *d, SDL_Surface *text)
     double ray_dir_x1;
     double ray_dir_y1;
 
+    double rot_pi_2;
 
     double pos_z;
 
@@ -67,10 +68,11 @@ void draw_floor(t_data *d, SDL_Surface *text)
 
     int *pixels;
 
-    ray_dir_x0 = cos(d->rot) + fov_coef * sin(d->rot);
-    ray_dir_x1 = cos(d->rot) - fov_coef * sin(d->rot);
-    ray_dir_y0 = sin(d->rot) - fov_coef * cos(d->rot);
-    ray_dir_y1 = sin(d->rot) + fov_coef * cos(d->rot);
+    rot_pi_2 = d->rot * M_PI_2;
+    ray_dir_x0 = cos(rot_pi_2) + fov_coef * sin(rot_pi_2);
+    ray_dir_x1 = cos(rot_pi_2) - fov_coef * sin(rot_pi_2);
+    ray_dir_y0 = sin(rot_pi_2) - fov_coef * cos(rot_pi_2);
+    ray_dir_y1 = sin(rot_pi_2) + fov_coef * cos(rot_pi_2);
     // printf("raydir: 0 : %f,%f ; 1 : %f,%f\n", ray_dir_x0, ray_dir_y0, ray_dir_x1, ray_dir_y1);
     y = d->screen_height + 1;
     pos_z = d->player_height * WIN_SIZE_Y;

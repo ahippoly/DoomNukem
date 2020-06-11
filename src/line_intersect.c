@@ -146,8 +146,8 @@ t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4)
 {
 	t_point p2;
 
-	p2.x = pos.x + cos(rot) * 30; 
-	p2.y = pos.y + sin(rot) * 30;
+	p2.x = pos.x + cos(rot * M_PI_2) * 30; 
+	p2.y = pos.y + sin(rot * M_PI_2) * 30;
 	// printf("pos: %f,%f, p2: %f,%f\n", pos.x, pos.y, p2.x, p2.y);
 	return (find_intersect(pos, p2, p3, p4));
 }
@@ -161,7 +161,7 @@ t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2)
 	t_point inter;
 
 	sort_t_point_by_x(&p1, &p2);
-	a1 = sin(rot) / cos(rot);
+	a1 = sin(rot * M_PI_2) / cos(rot * M_PI_2);
 	printf("a1 = %f\n",a1);
 	b1 = calc_b(pos, a1);
 	a2 = calc_a(p1, p2);
