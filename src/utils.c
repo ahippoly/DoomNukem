@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2019/03/26 15:43:06 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/11 08:29:50 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,13 @@ double get_float_part(double value)
 
     int_part = (int)value;
     return (value - int_part);
+}
+
+t_point sdl_p_to_t_p(SDL_Point p)
+{
+	t_point new;
+
+	new.x = p.x;
+	new.y = p.y;
+	return (new);
 }

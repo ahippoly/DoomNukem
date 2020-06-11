@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line_intersect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2019/10/15 16:44:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/11 09:29:02 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,36 @@ t_point calc_intersect(double a1, double b1, double a2, double b2)
 
 	inter.x = (b2 - b1) / (a1  - a2);
 	inter.y = a1 * inter.x + b1;
+	return (inter);
+}
+
+t_point calc_intersect_point(t_point p1, t_point p2, t_point p3, t_point p4)
+{
+	t_point inter;
+	double a1;
+	double b1;
+	double a2;
+	double b2;
+
+	a1 = calc_a(p1, p2);
+	a2 = calc_a(p3, p4);
+	b1 = calc_b(p1, a1);
+	b2 = calc_b(p3, a2);
+	inter.x = (b2 - b1) / (a1  - a2);
+	inter.y = a1 * inter.x + b1;
+	return (inter);
+}
+
+t_point calc_inter_first_vertical(t_point p1, t_point p2, t_point p3, t_point p4)
+{
+	t_point inter;
+	double a2;
+	double b2;
+
+	a2 = calc_a(p3, p4);
+	b2 = calc_b(p3, a2);
+	inter.x = p1.x;
+	inter.y = a2 * inter.x + b2;
 	return (inter);
 }
 
@@ -121,6 +151,30 @@ t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 		inter.x = - 42;
 		inter.y = - 42;
 	}
+	//printf("a1 = %f, b1 = %f\na2 = %f, b2 = %f\n",a1, b1, a2, b2);
+	//printf("sin_rot = %f, cos_rot = %f\n", sin_rot, cos_rot);
+	//printf("inter.x = %f, inter.y = %f\n", inter.x, inter.y);
+	return (inter);
+}
+
+t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4)
+{
+	t_point inter;
+	double	line1_diff_x;
+	double	line2_diff_x;
+
+	sort_t_point_by_x(&p1, &p2);
+	sort_t_point_by_x(&p3, &p4);
+	line1_diff_x = p2.x - p1.x;
+	line2_diff_x = p4.x - p3.x;
+	if (!(is_equ_tolerance(line1_diff_x, 0, INTER_TOLERANCE) || is_equ_tolerance(line2_diff_x, 0, INTER_TOLERANCE)))
+		inter = calc_intersect_point(p1, p2, p3, p4);
+	else if (line1_diff_x < INTER_TOLERANCE && line1_diff_x > - INTER_TOLERANCE)
+		inter = calc_inter_first_vertical(p1, p2, p3, p4);
+	else if (line2_diff_x < INTER_TOLERANCE && line2_diff_x > - INTER_TOLERANCE)
+		inter = calc_inter_first_vertical(p3, p4, p1, p2);
+	else
+		inter = (t_point){-42, -42};
 	//printf("a1 = %f, b1 = %f\na2 = %f, b2 = %f\n",a1, b1, a2, b2);
 	//printf("sin_rot = %f, cos_rot = %f\n", sin_rot, cos_rot);
 	//printf("inter.x = %f, inter.y = %f\n", inter.x, inter.y);

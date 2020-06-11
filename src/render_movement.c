@@ -34,103 +34,40 @@ int is_angle_in_range(double rot, double min, double max)
 
 void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 {
-    t_calced_walls res;
-	double cos_rot;
-	double sin_rot;
-    double new_rot;
-	t_point inc;
+    t_calced_walls sorted[NB_WALL_MAX];
+	t_point inter;
+	double	diff_x;
+	int		will_collide;
+	int		i;
+	t_calced_walls res;
 
-    res = check_perp_all_wall(d, &d->map, d->player_pos);
-
-    t_point move_dir;
-
-    printf("rot = %f\n", rot / M_PI_2);
-	if (res.dist < WALL_SIZE && check_inter_with_wall(d->map.wall_list[res.wall_id], rot, *pos, rot).dist != 9999)
+    sort_perp_walls_dist(d, &d->map, d->player_pos, sorted);
+    // printf("rot = %f, wall rot = %f\n", rot / M_PI_2, res.wall.rotation);
+	// printf("diff mod pi = %f\n", mod_pi(rot - res.wall.rotation) / M_PI_2);
+	i = 0;
+	will_collide = 0;
+	while (i < d->map.wall_count)
 	{
-		printf("recalc needed, wall rot = %f\n", res.wall_rot / M_PI_2);
-		cos_rot = cos(res.wall_rot);
-		sin_rot = sin(res.wall_rot);
-
-        move_dir.x = cos(rot) * speed;
-        move_dir.y = sin(rot) * speed;
-		new_rot = mod_pi(rot - res.wall_rot);
-
-        printf("move_dir: %f,%f, sin:%f, cos:%f\n", move_dir.x,move_dir.y, sin_rot, cos_rot);
-		printf("new_rot = %f\n", new_rot / M_PI_2);
-		if (new_rot < M_PI_4)
+		if (sorted[i].dist < WALL_SIZE)
 		{
-			pos->x += cos(new_rot) * move_dir.x;
-			pos->y += sin(new_rot) * move_dir.y;
+			inter = find_intersect_no_bound(*pos, (t_point){pos->x + cos(rot), pos->y + sin(rot)}, sdl_p_to_t_p(sorted[i].wall.p1), sdl_p_to_t_p(sorted[i].wall.p2));
+			diff_x = inter.x - pos->x;
+			if ( (diff_x > 0 && cos(rot) > 0) || (diff_x < 0 && cos(rot) < 0) )
+			{
+				res = sorted[i];
+				if (++will_collide > 1)
+					break;
+			}
 		}
-		else if (new_rot < M_PI_4 * 2)
-		{
-			pos->x += sin(new_rot) * move_dir.x;
-			pos->y += cos(new_rot) * move_dir.y;
-		}
-		else if (new_rot < M_PI_4 * 3)
-		{
-			pos->x += -sin(new_rot) * move_dir.x;
-			pos->y += cos(new_rot) * move_dir.y;
-		}
-		else if (new_rot < M_PI_4 * 4)
-		{
-			pos->x += -cos(new_rot) * move_dir.x;
-			pos->y += sin(new_rot) * move_dir.y;
-		}
-		else if (new_rot < M_PI_4 * 5)
-		{
-			pos->x += -cos(new_rot) * move_dir.x;
-			pos->y += -sin(new_rot) * move_dir.y;
-		}
-		else if (new_rot < M_PI_4 * 6)
-		{
-			pos->x += -sin(new_rot) * move_dir.x;
-			pos->y += -cos(new_rot) * move_dir.y;
-		}
-		else if (new_rot < M_PI_4 * 7)
-		{
-			pos->x += sin(new_rot) * move_dir.x;
-			pos->y += -cos(new_rot) * move_dir.y;
-		}
-		else
-		{
-			pos->x += cos(new_rot) * move_dir.x;
-			pos->y += -sin(new_rot) * move_dir.y;
-		}
-		
-		// if (new_rot < M_PI)
-		// {
-		// 	if (fmod(new_rot, 1) < 0.5) //theta calcul
-		// 	{
-		// 		pos->x += cos(new_rot);
-		// 		pos->y += sin(new_rot); 
-		// 	}
-		// 	else //alpha calc
-		// 	{
-				
-		// 	}
-			
-		// }
-		// else
-		// {
-		// 	if (fmod(new_rot, 1) > 0.5) //alpha calcul
-		// 	{
-
-		// 	}
-		// 	else //tetha calcul
-		// 	{
-				
-		// 	}
-			
-		// }
-		
-		// pos->x += move_dir.x * cos_rot * cos(M_PI_4) + move_dir.y * cos_rot * sin_rot;
-		// pos->y += move_dir.y * sin_rot * cos(M_PI_4) + move_dir.x * sin_rot * cos_rot;
-        // pos->x += cos(proj_rot + res.wall_rot) * speed;
-		// pos->y += sin(proj_rot + res.wall_rot) * speed;
-        //move_attempt(pos, speed, rot);
+		i++;
 	}
-	else
+	// printf("inter : %f,%f, diff : %f,%f, dir : %f,%f\n", inter.x, inter.y, inter.x - pos->x, inter.y - pos->y, cos(rot), + sin(rot));
+	if (will_collide == 1)
+	{
+		printf("recalc needed, wall rot = %f\n", res.wall.rotation / M_PI_2);
+        move_attempt(pos, cos(rot - res.wall.rotation) * speed, res.wall.rotation);
+	}
+	else if (will_collide < 1)
 	{
 		move_attempt(pos, speed, rot);
 	}

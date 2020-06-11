@@ -67,16 +67,6 @@ typedef struct      s_size
     int             h;
 }                   t_size;
 
-typedef struct      s_calced_walls
-{
-                    double  dist;
-                    double  scale;
-                    int     text_id;
-                    int     wall_id;
-                    float   alpha;
-                    double  wall_rot;
-}                   t_calced_walls;
-
 typedef struct      s_anim
 {
                     SDL_Point   pos[NB_FRAME];
@@ -118,7 +108,15 @@ typedef struct      s_wall
     int             can_collide;
     double          length;
     double          rotation;
+	float			alpha;
 }                   t_wall;
+
+typedef struct      s_calced_walls
+{
+	double  		dist;
+	double  		scale;
+	t_wall			wall;
+}                   t_calced_walls;
 
 typedef struct			s_move_wall
 {
@@ -168,6 +166,7 @@ t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4
 t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2);
 t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4);
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
+t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
 void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color);
@@ -175,6 +174,7 @@ void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, u
 void put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size, unsigned int color, float alpha);
 int is_equ_tolerance(double value1, double value2, double tolerance);
 double get_float_part(double value);
+t_point sdl_p_to_t_p(SDL_Point p);
 
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);

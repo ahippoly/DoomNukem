@@ -16,7 +16,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
 
     if (dist_scale.dist == 9999)
         return ;
-    text = d->texture[dist_scale.text_id];
+    text = d->texture[dist_scale.wall.texture_id];
     draw_begin = d->screen_height - ((1 - d->player_height) * WIN_SIZE_Y) / dist_scale.dist;
     draw_end = d->screen_height + (d->player_height * WIN_SIZE_Y) / dist_scale.dist;
     ty_step = (float)text->h / (draw_end - draw_begin);
@@ -31,7 +31,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
         text_pixel_color = pixels[text->w * (int)ty + tx];
         ty += ty_step;
         //printf("colour = %i\n", text_pixel_color);
-        put_pixel_transparency(d->p_screen, (SDL_Rect){x, draw_begin++, WIN_SIZE_X, WIN_SIZE_Y}, text_pixel_color, dist_scale.alpha);
+        put_pixel_transparency(d->p_screen, (SDL_Rect){x, draw_begin++, WIN_SIZE_X, WIN_SIZE_Y}, text_pixel_color, dist_scale.wall.alpha);
     }
 }
 

@@ -16,7 +16,7 @@
 # define Y_VIEW_RANGE 1.5
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
-# define WALL_SIZE 1
+# define WALL_SIZE 0.5
 # define GRAVITY_FORCE 0.000001
 # define PLAYER_HEIGHT 0.5
 # define THREAD_NB 4
@@ -90,6 +90,7 @@ t_calced_walls check_intersect_with_all_wall(t_data *d, t_map_data *map, double 
 void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle, t_calced_walls *sorted_walls);
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
+void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
 
 //render_draw_walls.c
 void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale);

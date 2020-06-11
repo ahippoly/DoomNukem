@@ -25,10 +25,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
 
     res.dist = 9999;
     res.scale = 0;
-    res.text_id = wall.texture_id;
-    res.wall_id = wall.id;
-    res.wall_rot = wall.rotation;
-    res.alpha = (float)(100 - wall.transparency) / 100;
+	res.wall = wall;
     inter = inter_with_dir(pos, rot, create_t_point(wall.p1.x, wall.p1.y), create_t_point(wall.p2.x, wall.p2.y));
     if (inter.x != -42)
     {
@@ -71,10 +68,7 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
 
     res.dist = 9999;
     res.scale = 0;
-    res.text_id = wall.texture_id;
-    res.wall_id = wall.id;
-    res.wall_rot = wall.rotation;
-    res.alpha = (float)(100 - wall.transparency) / 100;
+	res.wall = wall;
     p1.x = pos.x + cos(wall.rotation - M_PI_2) * 30;
     p1.y = pos.y + sin(wall.rotation - M_PI_2) * 30;
     p2.x = pos.x + cos(wall.rotation + M_PI_2) * 30; 
@@ -146,6 +140,40 @@ void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle, t_calc
     // while (i < map->wall_count)
     // {
     //     printf("wall sorted dist = %f, i = %i, map_count = %i\n", d->sorted_walls[i].dist, i, map->wall_count);
+    //     i++;
+    // }
+}
+
+void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls)
+{
+    int i;
+    int j;
+    int tmp;
+    t_calced_walls dist_scale;
+
+    sorted_walls[0] = check_perp_wall(map->wall_list[0], pos);
+    i = 1;
+    while (i < map->wall_count)
+    {
+        dist_scale = check_perp_wall(map->wall_list[i], pos);
+        //printf("wall dist to player = %f\n",  dist_scale.dist);
+        j = 0;
+        while (dist_scale.dist < sorted_walls[j].dist && j < i)
+            j++;
+        tmp = j;
+        j = i;
+        while (j > tmp)
+        {
+            j--;
+            sorted_walls[j + 1] = sorted_walls[j];
+        }
+        sorted_walls[j] = dist_scale;
+        i++;
+    }
+    // i = 0;
+    // while (i < map->wall_count)
+    // {
+    //     printf("wall sorted dist = %f, i = %i, map_count = %i\n", sorted_walls[i].dist, i, map->wall_count);
     //     i++;
     // }
 }

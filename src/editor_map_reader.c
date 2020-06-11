@@ -96,6 +96,7 @@ void read_wall(char *line, t_wall *wall)
     error += read_param(line, "transparency", &wall->transparency);
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);
+    wall->alpha = (float)(100 - wall->transparency) / 100;
     printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     printf("wall length = %f\n", wall->length);
     printf("wall rot = %f\n", wall->rotation);
