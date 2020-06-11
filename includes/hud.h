@@ -71,16 +71,17 @@ void			display_text(t_data *d, t_hud *hud, char *message, SDL_Rect message_pos);
 void			free_hud(t_hud *hud);
 void			free_hud_weapon(t_hud *hud);
 
-/* hud_obj.c */
+/* hud_weapons.c */
 
-void			init_weapons(t_hud *hud, t_data *d);
+void			init_weapons(t_data *d, t_hud *hud);
+int				put_weapon(t_data *d, t_hud *hud);
 
 /* hud_weapons_init.c */
 
-void			init_weapon_0(t_hud *hud, t_data *d);
-void			init_weapon_1(t_hud *hud, t_data *d);
-void			init_weapon_2(t_hud *hud, t_data *d);
-void			init_weapon_3(t_hud *hud, t_data *d);
-void			init_weapon_4(t_hud *hud, t_data *d);
+void			init_weapon_0(t_data *d, t_hud *hud);
+void			init_weapon_1(t_data *d, t_hud *hud);
+void			init_weapon_2(t_data *d, t_hud *hud);
+void			init_weapon_3(t_data *d, t_hud *hud);
+void			init_weapon_4(t_data *d, t_hud *hud);
 
 #endif

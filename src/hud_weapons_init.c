@@ -1,6 +1,6 @@
 #include <hud.h>
 
-void			init_weapon_0(t_hud *hud, t_data *d)
+void			init_weapon_0(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[0]->id = 0;
 	hud->perso_weapon[0]->name = WEAPON_NAME_0;
@@ -15,7 +15,7 @@ void			init_weapon_0(t_hud *hud, t_data *d)
 	SDL_FreeSurface(hud->perso_weapon[0]->surface);
 }
 
-void			init_weapon_1(t_hud *hud, t_data *d)
+void			init_weapon_1(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[1]->id = 0;
 	hud->perso_weapon[1]->name = WEAPON_NAME_1;
@@ -30,7 +30,7 @@ void			init_weapon_1(t_hud *hud, t_data *d)
 	SDL_FreeSurface(hud->perso_weapon[1]->surface);
 }
 
-void			init_weapon_2(t_hud *hud, t_data *d)
+void			init_weapon_2(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[2]->id = 0;
 	hud->perso_weapon[2]->name = WEAPON_NAME_2;
@@ -45,7 +45,7 @@ void			init_weapon_2(t_hud *hud, t_data *d)
 	SDL_FreeSurface(hud->perso_weapon[2]->surface);
 }
 
-void			init_weapon_3(t_hud *hud, t_data *d)
+void			init_weapon_3(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[3]->id = 0;
 	hud->perso_weapon[3]->name = WEAPON_NAME_3;
@@ -60,7 +60,7 @@ void			init_weapon_3(t_hud *hud, t_data *d)
 	SDL_FreeSurface(hud->perso_weapon[3]->surface);
 }
 
-void			init_weapon_4(t_hud *hud, t_data *d)
+void			init_weapon_4(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[4]->id = 0;
 	hud->perso_weapon[4]->name = WEAPON_NAME_4;

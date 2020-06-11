@@ -4,7 +4,7 @@ void			init_hud(t_data *d, t_hud *hud)
 {
 	ft_bzero(hud, sizeof(hud));
 	ft_putendl("initing weapons...");
-	init_weapons(hud, d);
+	init_weapons(d, hud);
 	hud->current_weap_id = 1;
 }
 
@@ -15,6 +15,7 @@ int				put_background(t_data *d)
 
 	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4) - 10, 400, 100);
 	SDL_SetRenderDrawColor(d->rend, 255, 255, 255, 50);
+	return (0);
 }
 
 
@@ -69,15 +70,6 @@ int				put_ammunition(t_data *d, t_hud *hud)
 }
 */
 
-int				put_weapon(t_data *d, t_hud *hud)
-{
-	SDL_Rect	size;
-	
-	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4), 80, 80);
-	SDL_RenderCopy(d->rend, hud->perso_weapon[hud->current_weap_id]->texture, NULL, &size);
-	return (0);
-}
-
 int 			main(void)
 {
     t_map_data  map;
@@ -101,7 +93,6 @@ int 			main(void)
 		// put_background(&d);
 		// put_ammunition(&d, &hud);
 		put_weapon(&d, &hud);
-
 		// display_text(&d, &hud, "100", set_sdl_rect(150, WIN_SIZE_Y - 200, 30, 20));
 
 		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
