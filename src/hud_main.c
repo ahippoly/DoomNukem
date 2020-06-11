@@ -3,10 +3,11 @@
 void			init_hud(t_data *d, t_hud *hud)
 {
 	ft_bzero(hud, sizeof(hud));
-	hud->current_weap_id = 1; //initialisation de l'arme, a enlever si on commence à 0
+	hud->current_weap_id = 0; //initialisation de l'arme, a enlever si on commence à 0
 	hud->current_perso_id = 1; // recuperer dynamiquement les perso 
 	ft_putendl("initing weapons...");
 	init_weapons(d, hud);
+	hud->perso_weapon[hud->current_weap_id]->ammo_left = hud->perso_weapon[hud->current_weap_id]->capacity;
 	ft_putendl("initing perso...");
 	init_perso(d, hud);
 }
@@ -64,14 +65,17 @@ int 			main(void)
     t_data      d;
 	t_hud		hud;
 	SDL_Rect	size;
+	int			tmp;
 
 	map = read_map("maps/editor_map_0");
 	init_data(&d);
 	init_hud(&d, &hud);
 	init_ttf(&hud);
+	d.bullet = 0;
 	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4) - 10, 400, 100);
 	while (!d.quit)
 	{
+		tmp = d.bullet;
 		ft_bzero(d.p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
 		SDL_PumpEvents();
 		handle_key_event(&d, &map);
@@ -79,9 +83,18 @@ int 			main(void)
 		// put_lifebar(&d);
 		// put_background(&d);
 		// put_ammunition(&d, &hud);
+		
+		/* test affreux pour render les munitions en catchant la touche espace */
+		if (d.bullet > tmp)
+			SDL_RenderClear(d.rend);
+		else
+		{
+			hud.perso_weapon[hud.current_weap_id]->ammo_left = hud.perso_weapon[hud.current_weap_id]->capacity - d.bullet;
+			put_text(&d, &hud, hud.perso_weapon[hud.current_weap_id]->ammo_left, set_sdl_rect(150, WIN_SIZE_Y - 500, 300, 300));
+		}
+		
 		put_perso(&d, &hud);
 		put_weapon(&d, &hud);
-		// display_text(&d, &hud, "100", set_sdl_rect(150, WIN_SIZE_Y - 200, 30, 20));
 
 		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
 		SDL_RenderFillRect(d.rend, &size);

@@ -5,7 +5,7 @@ void			init_weapon_0(t_data *d, t_hud *hud)
 	hud->perso_weapon[0]->id = 0;
 	hud->perso_weapon[0]->name = WEAPON_NAME_0;
 	hud->perso_weapon[0]->ammo_left = 0;
-	hud->perso_weapon[0]->capacity = 0;
+	hud->perso_weapon[0]->capacity = 50;
 	hud->perso_weapon[0]->dammage = 0;
 	hud->perso_weapon[0]->range = 0;
 	if (!(hud->perso_weapon[0]->surface = SDL_LoadBMP(WEAPON_PATH_0)))
@@ -20,7 +20,7 @@ void			init_weapon_1(t_data *d, t_hud *hud)
 	hud->perso_weapon[1]->id = 0;
 	hud->perso_weapon[1]->name = WEAPON_NAME_1;
 	hud->perso_weapon[1]->ammo_left = 0;
-	hud->perso_weapon[1]->capacity = 0;
+	hud->perso_weapon[1]->capacity = 70;
 	hud->perso_weapon[1]->dammage = 0;
 	hud->perso_weapon[1]->range = 0;
 	if (!(hud->perso_weapon[1]->surface = SDL_LoadBMP(WEAPON_PATH_1)))

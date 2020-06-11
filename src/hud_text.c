@@ -21,15 +21,21 @@ int				quit_ttf(t_hud *hud)
 	TTF_Quit();		
 }
 
-void			display_text(t_data *d, t_hud *hud, char *message, SDL_Rect message_pos)
+void			put_text(t_data *d, t_hud *hud, int nb, SDL_Rect message_pos)
 {
 	SDL_Rect	tmp;
+	char		*text;
+	SDL_Texture	*t_cpy;
+	SDL_Surface	*s_cpy;
 
-	if(!(hud->message_surface = TTF_RenderText_Solid(hud->font, message, hud->color)))
-		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
-	if (!(hud->message_texture = SDL_CreateTextureFromSurface(d->rend, hud->message_surface)))
-		printf("OULA Erreur de converstion de la surface : %s\n", SDL_GetError());
-    SDL_FreeSurface(hud->message_surface);
 	tmp = message_pos;
-	SDL_RenderCopy(d->rend, hud->message_texture, NULL, &tmp);
+	
+	text = ft_itoa(hud->perso_weapon[hud->current_weap_id]->ammo_left);
+	if(!(s_cpy = TTF_RenderText_Solid(hud->font, text, hud->color)))
+		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
+	if (!(t_cpy = SDL_CreateTextureFromSurface(d->rend, s_cpy)))
+		printf("OULA Erreur de converstion de la surface : %s\n", SDL_GetError());
+    SDL_FreeSurface(s_cpy);
+	SDL_RenderCopy(d->rend, t_cpy, NULL, &tmp);
+	SDL_DestroyTexture(t_cpy);
 }

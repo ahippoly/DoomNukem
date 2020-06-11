@@ -32,7 +32,6 @@ static int		update_perso(t_data *d, t_hud *hud)
 void			init_perso(t_data *d, t_hud *hud)
 {
 	malloc_perso(hud);
-	ft_putnbr(hud->current_perso_id);
 	update_perso(d, hud);
 	if (!(hud->perso->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso->surface)))
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());

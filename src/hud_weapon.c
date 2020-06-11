@@ -22,7 +22,6 @@ static int		malloc_tab_weapons(t_hud *hud)
 void			init_weapons(t_data *d, t_hud *hud)
 {
 	malloc_tab_weapons(hud);
-	/* SG here */
 	init_weapon_0(d, hud);
 	init_weapon_1(d, hud);
 	init_weapon_2(d, hud);
