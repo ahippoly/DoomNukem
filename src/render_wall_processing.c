@@ -6,16 +6,20 @@
 
 double calc_wall_hit_scale(t_wall wall, t_point inter)
 {
-    int     x_min;
-    int     x_max;
-    double  inter_diff_x;
     double  tmp;
 
     sort_point_by_x(&wall.p1, &wall.p2);
     if (is_equ_tolerance(wall.p2.x - wall.p1.x, 0, INTER_TOLERANCE))
         return (modf((inter.y - wall.p1.y) / (wall.p2.y - wall.p1.y) * wall.length, &tmp));
     return (modf((inter.x - wall.p1.x) / (wall.p2.x - wall.p1.x) * wall.length, &tmp));
-    
+}
+
+double calc_wall_hit_scale_z(t_wall wall, t_point inter)
+{
+    sort_point_by_x(&wall.p1, &wall.p2);
+    if (is_equ_tolerance(wall.p2.x - wall.p1.x, 0, INTER_TOLERANCE))
+        return ( (inter.y - wall.p1.y) / (wall.p2.y - wall.p1.y) );
+    return ( (inter.x - wall.p1.x) / (wall.p2.x - wall.p1.x) );
 }
 
 t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot)
@@ -31,6 +35,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
     {
         res.dist = ft_frange(cos(look_rot) * (inter.x - pos.x) + sin(look_rot) * (inter.y - pos.y), 0, res.dist);
         res.scale = calc_wall_hit_scale(wall, inter);
+		res.scale_z = calc_wall_hit_scale_z(wall, inter);
     }
         //dist = hypot(inter.x - pos.x, inter.y - pos.y) * cos((look_rot - rot ));
     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter), rot, look_rot);
@@ -82,6 +87,7 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
         //res.dist = ft_frange(cos(wall.rotation + M_PI_2) * (inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (inter.y - pos.y), 0, res.dist);
         res.dist = fabs(cos(wall.rotation + M_PI_2) * (inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (inter.y - pos.y));
         res.scale = calc_wall_hit_scale(wall, inter);
+		res.scale_z = calc_wall_hit_scale_z(wall, inter);
     }
         //dist = hypot(inter.x - pos.x, inter.y - pos.y) * cos((look_rot - rot ));
     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter), rot, look_rot);

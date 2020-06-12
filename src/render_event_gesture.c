@@ -26,6 +26,10 @@ void handle_key_event(t_data *d, t_map_data *map)
         d->z_offset -= 0.05;
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
+
+	//debug
+		if (d->clavier[SDL_SCANCODE_C])
+			raycast_thread_init(d);
 	//printf("player rot = %f\n", fabs(fmod(d->rot, 4)));
 	
 }
@@ -58,9 +62,16 @@ void handle_poll_event(t_data *d, t_map_data *map)
                 d->z_offset -= PLAYER_HEIGHT / 2;
             }
             if (d->clavier[SDL_SCANCODE_SPACE])
-            {
                 d->z_force = 0.07;
-            }
+			//debug
+			if (d->clavier[SDL_SCANCODE_G])
+               	d->map.wall_list[0].p1_z_start += 0.05;
+			if (d->clavier[SDL_SCANCODE_H])
+               	d->map.wall_list[0].p1_z_size += 0.05;
+			if (d->clavier[SDL_SCANCODE_J])
+               	d->map.wall_list[0].p2_z_start += 0.05;
+			if (d->clavier[SDL_SCANCODE_K])
+               	d->map.wall_list[0].p2_z_size += 0.05;
         }
         if (d->e.type == SDL_KEYUP)
         {
@@ -77,7 +88,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
                 draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot));
-                printf("dist to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).dist);
+                printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).scale_z);
                 printf("d->rot = %f\n", d->rot);
             }
                 

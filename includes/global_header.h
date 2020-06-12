@@ -120,6 +120,7 @@ typedef struct      s_calced_walls
 {
 	double  		dist;
 	double  		scale;
+	double			scale_z;
 	t_wall			wall;
 }                   t_calced_walls;
 
