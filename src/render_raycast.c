@@ -12,7 +12,7 @@ void	raycast_screen(t_data *d, t_range screen_x, double start_angle, double step
 	while (screen_x.start < screen_x.end)
     {
         i = 0;
-        sort_walls_by_dist(d, &d->map, start_angle, sorted_walls);
+        sort_walls_by_dist_player(d, d->player_pos ,start_angle, sorted_walls);
         while (i < d->map.wall_count)
             draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
         //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle, d->rot), d->texture[0]);
@@ -67,7 +67,7 @@ void raycast_all_screen(t_data *d, t_map_data *map)
     while (x < WIN_SIZE_X)
     {
         i = 0;
-        sort_walls_by_dist(d, map, current_angle, sorted_walls);
+        sort_walls_by_dist_player(d, d->player_pos, current_angle, sorted_walls);
         while (i < map->wall_count)
             draw_vertical_line(d, x, sorted_walls[i++]);
         //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);

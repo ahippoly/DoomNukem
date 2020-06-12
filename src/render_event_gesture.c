@@ -88,9 +88,12 @@ void handle_poll_event(t_data *d, t_map_data *map)
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
-                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));
-                printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot).scale_z);
-                printf("d->rot = %f\n", d->rot);
+				printf("checking room\n");
+				if (check_in_room(d, d->player_pos) > -1)
+					printf("Is in room\n");
+                // draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));
+                // printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot).scale_z);
+                // printf("d->rot = %f\n", d->rot);
             }
                 
             if (d->e.key.keysym.scancode == SDL_SCANCODE_X)

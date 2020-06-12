@@ -124,6 +124,7 @@ typedef struct      s_calced_walls
 	double  		dist;
 	double  		scale;
 	double			scale_z;
+	t_point			inter;
 	t_wall			wall;
 }                   t_calced_walls;
 
@@ -145,6 +146,8 @@ typedef struct          s_room
 {
     int                 room_id;
     int                 nb_wall;
+	float				z_ground;
+	float				z_ceil;
     t_range             wall_ref;
 }                       t_room;
 

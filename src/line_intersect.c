@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/11 09:29:02 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/12 18:17:54 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 	sort_t_point_by_x(&p3, &p4);
 	line1_diff_x = p2.x - p1.x;
 	line2_diff_x = p4.x - p3.x;
+	// printf("p1 : %f,%f ; p2 : %f,%f ; p3 : %f,%f ; p4 : %f,%f\n", p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
 	if (!(is_equ_tolerance(line1_diff_x, 0, INTER_TOLERANCE) || is_equ_tolerance(line2_diff_x, 0, INTER_TOLERANCE)))
 		inter = default_case(p1, p2, p3, p4);
 	else if (line1_diff_x < INTER_TOLERANCE && line1_diff_x > - INTER_TOLERANCE)

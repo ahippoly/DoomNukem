@@ -82,6 +82,8 @@ void gravity(t_data *d)
 {
     d->z_pos += d->z_force;
     d->player_height = d->z_pos + d->z_offset;
+	//if (check_in_room(d, d->player_pos) > -1)
+	//	printf("is in room\n");
     if (d->z_pos > d->z_ground)
     {
         d->z_pos -=  GRAVITY_FORCE * d->air_time * d->air_time ;

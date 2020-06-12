@@ -92,7 +92,8 @@ void gravity(t_data *d);
 double calc_wall_hit_scale(t_wall wall, t_point inter);
 t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot);
 t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, double rot, double look_rot);
-void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle, t_calced_walls *sorted_walls);
+void sort_walls_by_dist(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls);
+void sort_walls_by_dist_player(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls);
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
 void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
@@ -117,5 +118,7 @@ void	move_grabbed_wall(t_data *d, double look_rot, double speed);
 void	move_z_grabbed_wall(t_data *d, double z_diff);
 void	rot_wall(t_wall *wall, double rot, int pivot_point);
 void	rot_grabbed_wall(t_data *d, double rot, int pivot_point);
+
+int		check_in_room(t_data *d, t_point pos);
 
 #endif
