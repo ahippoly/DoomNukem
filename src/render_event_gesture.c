@@ -48,6 +48,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
             //printf("mouse x,y = %i,%i, mouse rel = %i,%i\n", d->e.motion.x, d->e.motion.y, d->e.motion.xrel, d->e.motion.yrel);
             d->rot += MOUSE_SENS * d->e.motion.xrel * M_PI_2;
             d->screen_height = HALF_WIN_SIZE_Y + (HALF_WIN_SIZE_Y - d->e.motion.y) * Y_VIEW_RANGE;
+			move_z_grabbed_wall(d, - (double)d->e.motion.yrel * MOVE_WALL_Z_SPEED / WIN_SIZE_Y);
         }
         if (d->e.type == SDL_KEYDOWN)
         {
@@ -87,14 +88,23 @@ void handle_poll_event(t_data *d, t_map_data *map)
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
-                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, map, d->rot, d->rot));
-                printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, map, d->rot, d->rot).scale_z);
+                draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));
+                printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot).scale_z);
                 printf("d->rot = %f\n", d->rot);
             }
                 
             if (d->e.key.keysym.scancode == SDL_SCANCODE_X)
             {
-                printf("dist = %f\n", check_perp_wall(map->wall_list[0], d->player_pos).dist);
+				if (d->grabbed_wall == NULL)
+                	if (grab_wall(d, d->player_pos, d->rot))
+						printf("grabbed wall\n");
+					else
+						printf("attempt grab fail\n");
+				else
+				{
+					d->grabbed_wall = NULL;
+					printf("no longer grab wall\n");
+				}
             }
         }
     }

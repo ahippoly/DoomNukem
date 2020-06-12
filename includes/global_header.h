@@ -110,6 +110,8 @@ typedef struct      s_wall
     double          length;
     double          rotation;
 	float			alpha;
+	t_point			p1_f;
+    t_point			p2_f;
 	float			p1_z_start;
 	float			p1_z_size;
 	float			p2_z_start;

@@ -20,6 +20,7 @@
 # define GRAVITY_FORCE 0.0000005
 # define PLAYER_HEIGHT 0.5
 # define THREAD_NB 4
+# define MOVE_WALL_Z_SPEED 4
 
 typedef struct      s_data
 {
@@ -52,6 +53,10 @@ typedef struct      s_data
     int             time;
     int             air_time;
     t_sprite        sprite_lst[NB_SPRITE];
+	/* world edit*/
+	t_wall			*grabbed_wall;
+	t_point			grab_pos;
+	double			grab_z;
 }                   t_data;
 
 typedef	struct		s_thread
@@ -86,7 +91,7 @@ void gravity(t_data *d);
 //render_wall_processing.c
 double calc_wall_hit_scale(t_wall wall, t_point inter);
 t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot);
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_map_data *map, double rot, double look_rot);
+t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, double rot, double look_rot);
 void sort_walls_by_dist(t_data *d, t_map_data *map, double current_angle, t_calced_walls *sorted_walls);
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
@@ -105,7 +110,11 @@ void	*raycast_thread(void *data);
 void	raycast_thread_init(t_data *d);
 void	raycast_all_screen(t_data *d, t_map_data *map);
 
-
+//render_world_edit.c
+int		grab_wall(t_data *d, t_point pos, double look_rot);
+void	move_wall(t_wall *wall, double look_rot, double speed);
+void	move_grabbed_wall(t_data *d, double look_rot, double speed);
+void	move_z_grabbed_wall(t_data *d, double z_diff);
 
 
 #endif

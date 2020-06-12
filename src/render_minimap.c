@@ -27,8 +27,8 @@ void create_mini_map(t_data *d, t_map_data *map)
     while (i < map->wall_count)
     {
         wall = map->wall_list[i];
-        draw_line(create_point(scale.x * wall.p1.x, scale.y * wall.p1.y), 
-            create_point(scale.x * wall.p2.x, scale.y * wall.p2.y), 
+        draw_line(create_point(scale.x * wall.p1_f.x, scale.y * wall.p1_f.y), 
+            create_point(scale.x * wall.p2_f.x, scale.y * wall.p2_f.y), 
             (t_img){d->p_mini_map_bg, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}},
             0xFFFFBB88);
         i++;

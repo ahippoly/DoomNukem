@@ -59,7 +59,6 @@ int main(void)
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
-        //draw_vertical_line(&d, 500, check_intersect_with_all_wall(&d, &d.map, d.rot));
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);

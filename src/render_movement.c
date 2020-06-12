@@ -50,7 +50,7 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 	{
 		if (sorted[i].dist < WALL_SIZE)
 		{
-			inter = find_intersect_no_bound(*pos, (t_point){pos->x + cos(rot), pos->y + sin(rot)}, sdl_p_to_t_p(sorted[i].wall.p1), sdl_p_to_t_p(sorted[i].wall.p2));
+			inter = find_intersect_no_bound(*pos, (t_point){pos->x + cos(rot), pos->y + sin(rot)}, (sorted[i].wall.p1_f), (sorted[i].wall.p2_f));
 			diff_x = inter.x - pos->x;
 			if ( (diff_x > 0 && cos(rot) > 0) || (diff_x < 0 && cos(rot) < 0) )
 			{
@@ -63,10 +63,16 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 	}
 	// printf("inter : %f,%f, diff : %f,%f, dir : %f,%f\n", inter.x, inter.y, inter.x - pos->x, inter.y - pos->y, cos(rot), + sin(rot));
 	if (will_collide == 1)
+	{
 		//printf("recalc needed, wall rot = %f\n", res.wall.rotation / M_PI_2);
-        move_attempt(pos, cos(rot - res.wall.rotation) * speed, res.wall.rotation);
+		move_attempt(pos, cos(rot - res.wall.rotation) * speed, res.wall.rotation);
+		move_grabbed_wall(d, res.wall.rotation, cos(rot - res.wall.rotation) * speed);
+	}
 	else if (will_collide < 1)
+	{
 		move_attempt(pos, speed, rot);
+		move_grabbed_wall(d, rot, speed);
+	}
 }
 
 void gravity(t_data *d)
