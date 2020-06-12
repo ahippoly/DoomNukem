@@ -56,11 +56,10 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 			{
 				res = sorted[i];
 				//printf("wall z = %f, z_pos = %f\n", ft_interpolate(res.wall.p1_z_start + res.wall.p1_z_size, res.wall.p2_z_start + res.wall.p2_z_size, res.scale_z), d->z_pos);
-				if (ft_interpolate(res.wall.p1_z_start + res.wall.p1_z_size, res.wall.p2_z_start + res.wall.p2_z_size, res.scale_z) > d->z_pos)
-				{
+				if (ft_interpolate(res.wall.p1_z_start + res.wall.p1_z_size, res.wall.p2_z_start + res.wall.p2_z_size, res.scale_z) > d->z_pos
+				&& ft_interpolate(res.wall.p1_z_start, res.wall.p2_z_start, res.scale_z) - d->z_offset < d->z_pos)
 					if (++will_collide > 1)
 						break;
-				}
 			}
 		}
 		i++;
