@@ -184,6 +184,8 @@ void put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size, unsigned in
 int is_equ_tolerance(double value1, double value2, double tolerance);
 double get_float_part(double value);
 t_point sdl_p_to_t_p(SDL_Point p);
+double ft_interpolate(double val1, double val2, double scale);
+
 
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);

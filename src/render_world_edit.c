@@ -40,3 +40,16 @@ void	move_z_grabbed_wall(t_data *d, double z_diff)
 		d->grabbed_wall->z_text_offset += z_diff;
 	}
 }
+
+void	rot_wall(t_wall *wall, double rot, int pivot_point)
+{
+	wall->rotation += rot;
+	if (pivot_point == 0)
+		wall->p2_f = (t_point){wall->p1_f.x + wall->length * cos(wall->rotation), wall->p1_f.y + wall->length * sin(wall->rotation)};
+}
+
+void	rot_grabbed_wall(t_data *d, double rot, int pivot_point)
+{
+	if (d->grabbed_wall)
+		rot_wall(d->grabbed_wall, rot, pivot_point);
+}

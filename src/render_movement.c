@@ -55,8 +55,12 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 			if ( (diff_x > 0 && cos(rot) > 0) || (diff_x < 0 && cos(rot) < 0) )
 			{
 				res = sorted[i];
-				if (++will_collide > 1)
-					break;
+				//printf("wall z = %f, z_pos = %f\n", ft_interpolate(res.wall.p1_z_start + res.wall.p1_z_size, res.wall.p2_z_start + res.wall.p2_z_size, res.scale_z), d->z_pos);
+				if (ft_interpolate(res.wall.p1_z_start + res.wall.p1_z_size, res.wall.p2_z_start + res.wall.p2_z_size, res.scale_z) > d->z_pos)
+				{
+					if (++will_collide > 1)
+						break;
+				}
 			}
 		}
 		i++;

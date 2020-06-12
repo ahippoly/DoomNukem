@@ -115,6 +115,7 @@ int		grab_wall(t_data *d, t_point pos, double look_rot);
 void	move_wall(t_wall *wall, double look_rot, double speed);
 void	move_grabbed_wall(t_data *d, double look_rot, double speed);
 void	move_z_grabbed_wall(t_data *d, double z_diff);
-
+void	rot_wall(t_wall *wall, double rot, int pivot_point);
+void	rot_grabbed_wall(t_data *d, double rot, int pivot_point);
 
 #endif

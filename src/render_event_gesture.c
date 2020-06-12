@@ -66,9 +66,9 @@ void handle_poll_event(t_data *d, t_map_data *map)
                 d->z_force = 0.07;
 			//debug
 			if (d->clavier[SDL_SCANCODE_G])
-               	d->map.wall_list[0].p1_z_start += 0.05;
+               	rot_grabbed_wall(d, 0.05 * M_PI_2, 0);
 			if (d->clavier[SDL_SCANCODE_H])
-               	d->map.wall_list[0].p1_z_size += 0.05;
+               	rot_grabbed_wall(d, -0.05 * M_PI_2, 0);
 			if (d->clavier[SDL_SCANCODE_J])
                	d->map.wall_list[0].p2_z_start += 0.05;
 			if (d->clavier[SDL_SCANCODE_K])
