@@ -39,7 +39,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     pixels = (int*)text->pixels;
     tx = (int)(dist_scale.scale * text->w);
 	// printf("wall begin = %f, wall start = %f, draw_length = %i\n", wall_begin, wall_start, draw_length);
-    ty =  get_float_part(1 - wall_start) * (float)text->h
+    ty =  get_float_part(1 - wall_start + dist_scale.wall.z_text_offset) * (float)text->h
 		+ ty_step * ft_max(- draw_begin, 0);
 	while (ty < 0)
 			ty = text->h + ty;

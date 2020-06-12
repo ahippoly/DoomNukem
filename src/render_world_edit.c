@@ -37,5 +37,6 @@ void	move_z_grabbed_wall(t_data *d, double z_diff)
 	{
 		d->grabbed_wall->p1_z_start += z_diff;
 		d->grabbed_wall->p2_z_start += z_diff;
+		d->grabbed_wall->z_text_offset += z_diff;
 	}
 }

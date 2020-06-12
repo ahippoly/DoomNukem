@@ -6,12 +6,10 @@
 
 double calc_wall_hit_scale(t_wall wall, t_point inter)
 {
-    double  tmp;
-
     sort_t_point_by_x(&wall.p1_f, &wall.p2_f);
     if (is_equ_tolerance(wall.p2_f.x - wall.p1_f.x, 0, INTER_TOLERANCE))
-        return (modf((inter.y - wall.p1_f.y) / (wall.p2_f.y - wall.p1_f.y) * wall.length, &tmp));
-    return (modf((inter.x - wall.p1_f.x) / (wall.p2_f.x - wall.p1_f.x) * wall.length, &tmp));
+        return (get_float_part((inter.y - wall.p1_f.y) / (wall.p2_f.y - wall.p1_f.y) * wall.length));
+    return (get_float_part((inter.x - wall.p1_f.x) / (wall.p2_f.x - wall.p1_f.x) * wall.length));
 }
 
 double calc_wall_hit_scale_z(t_wall wall, t_point inter)
@@ -20,6 +18,11 @@ double calc_wall_hit_scale_z(t_wall wall, t_point inter)
     if (is_equ_tolerance(wall.p2_f.x - wall.p1_f.x, 0, INTER_TOLERANCE))
         return ( (inter.y - wall.p1_f.y) / (wall.p2_f.y - wall.p1_f.y) );
     return ( (inter.x - wall.p1_f.x) / (wall.p2_f.x - wall.p1_f.x) );
+}
+
+double calc_wall_hit_scale_x(t_wall wall, double scale_z)
+{
+    return (get_float_part(scale_z * wall.length));
 }
 
 t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot)
@@ -34,8 +37,8 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
     if (inter.x != -42)
     {
         res.dist = ft_frange(cos(look_rot) * (inter.x - pos.x) + sin(look_rot) * (inter.y - pos.y), 0, res.dist);
-        res.scale = calc_wall_hit_scale(wall, inter);
 		res.scale_z = calc_wall_hit_scale_z(wall, inter);
+        res.scale = calc_wall_hit_scale_x(wall, res.scale_z);
     }
         //dist = hypot(inter.x - pos.x, inter.y - pos.y) * cos((look_rot - rot ));
     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1_f.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter), rot, look_rot);
@@ -78,16 +81,16 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
     p1.y = pos.y + sin(wall.rotation - M_PI_2) * 30;
     p2.x = pos.x + cos(wall.rotation + M_PI_2) * 30; 
 	p2.y = pos.y + sin(wall.rotation + M_PI_2) * 30;
-    printf("p2 = %f,%f\n", p2.x, p2.y);
-    printf("cos = %f, sin = %f\n", cos(wall.rotation + M_PI_2), sin(wall.rotation + M_PI_2));
+    // printf("p2 = %f,%f\n", p2.x, p2.y);
+    // printf("cos = %f, sin = %f\n", cos(wall.rotation + M_PI_2), sin(wall.rotation + M_PI_2));
     inter = find_intersect(p1, p2, wall.p1_f, wall.p2_f);
-    printf("Inter = %f,%f\n", inter.x, inter.y);
+    // printf("Inter = %f,%f\n", inter.x, inter.y);
     if (inter.x != -42)
     {
         //res.dist = ft_frange(cos(wall.rotation + M_PI_2) * (inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (inter.y - pos.y), 0, res.dist);
         res.dist = fabs(cos(wall.rotation + M_PI_2) * (inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (inter.y - pos.y));
-        res.scale = calc_wall_hit_scale(wall, inter);
 		res.scale_z = calc_wall_hit_scale_z(wall, inter);
+        res.scale = calc_wall_hit_scale_x(wall, res.scale_z);
     }
         //dist = hypot(inter.x - pos.x, inter.y - pos.y) * cos((look_rot - rot ));
     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, inter.x, calc_wall_hit_scale(wall, inter), rot, look_rot);

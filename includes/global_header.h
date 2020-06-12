@@ -116,6 +116,7 @@ typedef struct      s_wall
 	float			p1_z_size;
 	float			p2_z_start;
 	float			p2_z_size;
+	float			z_text_offset;
 }                   t_wall;
 
 typedef struct      s_calced_walls
