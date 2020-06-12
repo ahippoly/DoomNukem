@@ -52,7 +52,7 @@ void handle_input_mode(t_env *env, SDL_Scancode key_released)
     t_input *input;
     int     added_num;
 
-    if (env->selected_input != -1)
+    if (env->selected_input != -1 && env->selected_mouse_mode != MOUSE_MODE_CREATE_ROOM)
     {
         added_num = -1;
         if (key_released == SDL_SCANCODE_0)
