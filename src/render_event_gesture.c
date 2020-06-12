@@ -87,8 +87,8 @@ void handle_key_event(t_data *d, t_map_data *map)
 	{
         d->player_height += HEIGHT_STEP;
 		d->bullet++;
-		// ft_putnbr(d->bullet);
-		// ft_putchar('\n');
+		ft_putnbr(d->bullet);
+		ft_putchar('\n');
 	}
     if (d->clavier[SDL_SCANCODE_LCTRL])
         d->player_height -= HEIGHT_STEP;

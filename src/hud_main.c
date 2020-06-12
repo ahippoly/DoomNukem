@@ -22,26 +22,6 @@ int				put_background(t_data *d)
 	return (0);
 }
 
-
-/* Récupérer les paramètre les PV */
-int				put_lifebar(t_data *d)
-{
-	SDL_Rect	hp_outline; //health point
-
-	hp_outline = set_sdl_rect(100, 70, 300, 30);
-	/* Contour de la jauge en transparence */
-	SDL_SetRenderDrawColor(d->rend, 255, 255, 255, 128);
-	// SDL_SetRenderDrawBlendMode(d->rend, SDL_BLENDMODE_BLEND);
-	SDL_RenderDrawRect(d->rend, &hp_outline);
- 	SDL_RenderPresent(d->rend);
-	/* remplissage de l'arrière plan de la jauge */
-    draw_rectangle(d->p_screen, set_sdl_rect(100, 70, 300, 30), set_size(WIN_SIZE_X, WIN_SIZE_Y), HEALTH_BG);
-	/* Remplissage de la jauge de vie */
-	draw_rectangle(d->p_screen, set_sdl_rect(100, 70, 200, 30), set_size(WIN_SIZE_X, WIN_SIZE_Y), HEALTH);
-	SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
-	return (0);
-}
-
 /* Récupérer les paramètre des munitions */
 /*
 int				put_ammunition(t_data *d, t_hud *hud)
@@ -66,6 +46,7 @@ int 			main(void)
 	t_hud		hud;
 	SDL_Rect	size;
 	int			tmp;
+	int			i;
 
 	map = read_map("maps/editor_map_0");
 	init_data(&d);
@@ -73,6 +54,7 @@ int 			main(void)
 	init_ttf(&hud);
 	d.bullet = 0;
 	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4) - 10, 400, 100);
+	i = 0;
 	while (!d.quit)
 	{
 		tmp = d.bullet;
@@ -83,16 +65,26 @@ int 			main(void)
 		// put_lifebar(&d);
 		// put_background(&d);
 		// put_ammunition(&d, &hud);
-		
-		/* test affreux pour render les munitions en catchant la touche espace */
-		if (d.bullet > tmp)
-			SDL_RenderClear(d.rend);
-		else
+
+		/* affichage du text a refactor */		
+		if (i == 0)
 		{
-			hud.perso_weapon[hud.current_weap_id]->ammo_left = hud.perso_weapon[hud.current_weap_id]->capacity - d.bullet;
-			put_text(&d, &hud, hud.perso_weapon[hud.current_weap_id]->ammo_left, set_sdl_rect(150, WIN_SIZE_Y - 500, 300, 300));
+			set_text(&d, &hud, hud.perso_weapon[hud.current_weap_id]->ammo_left);
+			render_text(&d, &hud, set_sdl_rect(500, 500, 50, 50));
 		}
-		
+		else if (d.bullet > tmp)
+		{
+			if (hud.perso_weapon[hud.current_weap_id]->ammo_left > 0)
+				hud.perso_weapon[hud.current_weap_id]->ammo_left = hud.perso_weapon[hud.current_weap_id]->capacity - d.bullet;
+			else if (hud.perso_weapon[hud.current_weap_id]->ammo_left <= 0)
+				hud.perso_weapon[hud.current_weap_id]->ammo_left = 0;
+			set_text(&d, &hud, hud.perso_weapon[hud.current_weap_id]->ammo_left);
+			SDL_RenderClear(d.rend);
+			render_text(&d, &hud, set_sdl_rect(500, 500, 50, 50));
+		}
+		else
+			render_text(&d, &hud, set_sdl_rect(500, 500, 50, 50));
+		/* fin affichage du text */
 		put_perso(&d, &hud);
 		put_weapon(&d, &hud);
 
@@ -101,6 +93,7 @@ int 			main(void)
 
 		SDL_UpdateTexture(d.screen, NULL, d.p_screen, WIN_SIZE_X * 4);
  		SDL_RenderPresent(d.rend);
+		i++;
     }
 	quit_ttf(&hud);
 	free_hud(&hud);

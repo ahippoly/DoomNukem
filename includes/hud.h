@@ -81,9 +81,9 @@ typedef struct		s_hud
 
 int					init_ttf(t_hud *hud);
 int					quit_ttf(t_hud *hud);
-void				put_text(t_data *d, t_hud *hud, int nb, SDL_Rect message_pos);
 void				init_ammo_text(t_data *d, t_hud *hud);
-void				destroy_text(t_data *d, t_hud *hud);
+void				set_text(t_data *d, t_hud *hud, unsigned int nb);
+void				render_text(t_data *d, t_hud *hud, SDL_Rect pos);
 
 /* hud_clean.c */
 
@@ -107,5 +107,9 @@ void				init_weapon_4(t_data *d, t_hud *hud);
 
 void				init_perso(t_data *d, t_hud *hud);
 int					put_perso(t_data *d, t_hud *hud);
+
+/* hud_health.c */
+
+int					put_lifebar(t_data *d);
 
 #endif

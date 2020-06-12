@@ -13,6 +13,8 @@ static void	free_texture(t_hud *hud)
 	}
 	if (hud->perso->texture)
 		SDL_DestroyTexture(hud->perso->texture);
+	if (hud->message_texture)
+		SDL_DestroyTexture(hud->message_texture);
 }
 
 void		free_hud(t_hud *hud)
