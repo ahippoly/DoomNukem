@@ -17,7 +17,7 @@ DLC_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_data_init.c render_event_gesture.c \
 						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
-						 sprite_main.c init_sprite_gun.c init_sprite_mob.c) ##
+						 sprite_main.c sprite_init_gun.c sprite_init_mob.c) ##
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/

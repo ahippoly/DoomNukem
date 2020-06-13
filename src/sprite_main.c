@@ -9,75 +9,67 @@ void free_render_env(t_data *d)
     free(d->sorted_walls);
 }
 
-
-
-SDL_Rect    get_sprite_pos(SDL_Rect srcdim, t_sprite *sprite, SDL_Point pos)
+SDL_Rect    get_sprite_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos)
 {
-    srcdim.x = sprite->frame_size.w * pos.x;
-    srcdim.y = sprite->frame_size.h * pos.y;
-    srcdim.w = sprite->frame_size.w;
-    srcdim.h = sprite->frame_size.h;
+    srcdim.x = d->sprite[d->sprite_ind].frame_size.w * pos.x;
+    srcdim.y = d->sprite[d->sprite_ind].frame_size.h * pos.y;
+    srcdim.w = d->sprite[d->sprite_ind].frame_size.w - d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].offset.x;
+    srcdim.h = d->sprite[d->sprite_ind].frame_size.h - d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].offset.y;
     return (srcdim);
 }
-
-// void    sprite_anim(t_data *d)
-// {
-//     SDL_Rect srcdim;
-//     SDL_Point pos;
-//     int i;
-
-//     i = 0;
-//     pos.x = d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->x;
-//     pos.y = d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->y;
-//     while (pos.y < d->sprite[d->sprite_ind].nb_frame.y && i < d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].nb_frame)
-//     {
-//         while (pos.x < d->sprite[d->sprite_ind].nb_frame.x && i < d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].nb_frame)
-//         {
-//               // printf("x = %d\n", pos.x);
-//             srcdim = get_sprite_pos(srcdim, &d->sprite[d->sprite_ind], pos);
-//             SDL_RenderClear(d->rend);
-//             SDL_RenderCopy(d->rend, d->sprite[d->sprite_ind].text, &srcdim, NULL);
-//             SDL_RenderPresent(d->rend);
-//            // wait_time(0.1);
-//             pos.x++;
-//             i++;
-//         }
-//         pos.x = 0;
-//         pos.y++;
-//     }
-// }
 
 void    idle_anim(t_data *d)
 {
     SDL_Rect srcdim;
     SDL_Point pos;
 
-    pos.x = d->sprite[d->sprite_ind].anim[1].pos->x;
-    pos.y = d->sprite[d->sprite_ind].anim[1].pos->y;
-
-    srcdim = get_sprite_pos(srcdim, &d->sprite[d->sprite_ind], pos);
+    if (d->sprite[d->sprite_ind].aim_on == 0)  //Arme au repos
+    {
+    pos.x = d->sprite[d->sprite_ind].anim[IDLE].pos->x;
+    pos.y = d->sprite[d->sprite_ind].anim[IDLE].pos->y;
+    }
+    else if (d->sprite[d->sprite_ind].aim_on == 1) //Arme avec visée
+    {
+            pos.x = d->sprite[d->sprite_ind].anim[AIM].pos->x;
+            pos.y = d->sprite[d->sprite_ind].anim[AIM].pos->y;
+            d->sprite[d->sprite_ind].index = AIM;
+    }
+    srcdim = get_sprite_pos(srcdim, d, pos);
     SDL_RenderClear(d->rend);
     SDL_RenderCopy(d->rend, d->sprite[d->sprite_ind].text, &srcdim, NULL);
     SDL_RenderPresent(d->rend);
 }
 
-void    sprite_anim(t_data *d, Uint32 time)
+void    sprite_anim(t_data *d)
 {
     SDL_Rect srcdim;
     SDL_Point pos;
+    Uint32 currTime;
+    int diff;
 
-    pos.x = (d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->x + time) % d->sprite[d->sprite_ind].nb_frame.x;
-    pos.y = d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->y + (d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->x + time) / d->sprite[d->sprite_ind].nb_frame.x;
-    printf("time = %d\n", time);
-    if (time < d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].nb_frame)
-        {
-        srcdim = get_sprite_pos(srcdim, &d->sprite[d->sprite_ind], pos);
+    diff = 0;
+    if (d->sprite[d->sprite_ind].on >= 0)
+    {
+        currTime = SDL_GetTicks();
+        diff = (currTime - d->sprite[d->sprite_ind].time) / 100;
+    }
+    pos.x = (d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->x + diff) % d->sprite[d->sprite_ind].nb_frame.x;
+    pos.y = d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->y + (d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].pos->x + diff) / d->sprite[d->sprite_ind].nb_frame.x;
+    if (diff < d->sprite[d->sprite_ind].anim[d->sprite[d->sprite_ind].index].nb_frame && d->sprite[d->sprite_ind].on == 0)
+    {
+        srcdim = get_sprite_pos(srcdim, d, pos);
         SDL_RenderClear(d->rend);
         SDL_RenderCopy(d->rend, d->sprite[d->sprite_ind].text, &srcdim, NULL);
         SDL_RenderPresent(d->rend);
-        }
+    }
+    else if ((d->sprite[d->sprite_ind].index == FIRE || d->sprite[d->sprite_ind].index == AIMFIRE) && (d->sprite[d->sprite_ind].on == 0) && d->sprite[d->sprite_ind].anim_end == 0)
+        d->sprite[d->sprite_ind].time = SDL_GetTicks();
     else
-         idle_anim(d);
+    {
+        d->sprite[d->sprite_ind].index = IDLE;
+        d->sprite[d->sprite_ind].on = -1;
+        idle_anim(d);
+    }
 }
 
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
@@ -95,50 +87,104 @@ SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
     return (texture);
 }
 
-void    load_sprite_gun(t_data *d)
+void handle_key_event_sprite(t_data *d, t_map_data *map)
 {
-    SDL_Texture *texture;
-    t_sprite commando;
-
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/AssaultRifle.bmp", d);
-    d->sprite[0] = init_sprite_AR(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/DeathDealer.bmp", d);
-    d->sprite[1] = init_sprite_DD(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/lmg.bmp", d);
-    d->sprite[2] = init_sprite_LMG(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/Revolver.bmp", d);
-    d->sprite[3] = init_sprite_Revolver(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/SuperShotgun.bmp", d);
-    d->sprite[4] = init_sprite_SSG(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/Melee.bmp", d);
-    d->sprite[5] = init_sprite_Melee(texture);
+    d->clavier = SDL_GetKeyboardState(NULL);
+    if (d->clavier[SDL_SCANCODE_R])
+    {
+            d->sprite[d->sprite_ind].time = SDL_GetTicks();
+            d->sprite[d->sprite_ind].index = RELOAD;
+            d->sprite[d->sprite_ind].on = 0;
+            d->sprite[d->sprite_ind].aim_on = 0;
+            d->sprite[d->sprite_ind].anim_end = 0;
+    }
+      if (d->clavier[SDL_SCANCODE_1])
+    {
+            d->sprite_ind = 0;
+            d->sprite[d->sprite_ind].on = -1;
+            d->sprite[d->sprite_ind].aim_on = 0;
+    }
+          if (d->clavier[SDL_SCANCODE_2])
+    {
+            d->sprite_ind = 1;
+            d->sprite[d->sprite_ind].on = -1;
+            d->sprite[d->sprite_ind].aim_on = 0;
+    }
+              if (d->clavier[SDL_SCANCODE_3])
+    {
+            d->sprite_ind = 2;
+            d->sprite[d->sprite_ind].on = -1;
+            d->sprite[d->sprite_ind].aim_on = 0;
+    }
+                if (d->clavier[SDL_SCANCODE_4])
+    {
+            d->sprite_ind = 3;
+            d->sprite[d->sprite_ind].on = -1;
+            d->sprite[d->sprite_ind].aim_on = 0;
+    }
+                   if (d->clavier[SDL_SCANCODE_5])
+    {
+            d->sprite_ind = 4;
+            d->sprite[d->sprite_ind].on = -1;
+            d->sprite[d->sprite_ind].aim_on = 0;
+    }
+                      if (d->clavier[SDL_SCANCODE_6])
+    {
+            d->sprite_ind = 5;
+            d->sprite[d->sprite_ind].on = -1;
+            d->sprite[d->sprite_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_ESCAPE])
+        d->quit = 1;
 }
 
-void    load_sprite_mob(t_data *d)
+void handle_mouse_event_gun(t_data *d, t_map_data *map)
 {
-    SDL_Texture *texture;
-    t_sprite commando;
+    SDL_Event event;
 
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Mobs/ZombieScientist.bmp", d);
-    d->sprite[10] = init_sprite_Zombie(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Mobs/ZombieScientist.bmp", d);
-    d->sprite[10] = init_sprite_Zombie(texture);
+    while (SDL_PollEvent(&event))
+    {
+        if  (event.type == SDL_MOUSEBUTTONDOWN)
+            {
+            if (event.button.button == SDL_BUTTON_LEFT)
+                {
+                d->sprite[d->sprite_ind].time = SDL_GetTicks();
+                if (d->sprite[d->sprite_ind].aim_on == 0)
+                    d->sprite[d->sprite_ind].index = FIRE;
+                else if (d->sprite_ind == 3 || d->sprite_ind == 4)
+                    d->sprite[d->sprite_ind].index = AIMFIRE;
+                d->sprite[d->sprite_ind].on = 0;
+                d->sprite[d->sprite_ind].anim_end = 0;
+                }
+            else if (event.button.button == SDL_BUTTON_RIGHT)
+                {
+                d->sprite[d->sprite_ind].time = SDL_GetTicks();
+                d->sprite[d->sprite_ind].index = AIM;
+                d->sprite[d->sprite_ind].on = 0;
+                if (d->sprite[d->sprite_ind].aim_on == 0)
+                    d->sprite[d->sprite_ind].aim_on = 1;
+                else
+                    d->sprite[d->sprite_ind].aim_on = 0;
+                }
+            }
+            else if (event.type == SDL_MOUSEBUTTONUP)
+           {
+            if (event.button.button == SDL_BUTTON_LEFT)
+                {
+                d->sprite[d->sprite_ind].anim_end = -1;
+                }
+            else if (event.button.button == SDL_BUTTON_RIGHT)
+                {
+                d->sprite[d->sprite_ind].on = -1;
+                }
+            }
+    }  
 }
 
 int main(void)
 {
     t_map_data  map;
     t_data      d;
-    Uint32      currTime;
-    Uint32      lastTime;
 
     init_sdl_ressources_rend(&d);
     map = read_map("maps/editor_map_0");
@@ -147,18 +193,16 @@ int main(void)
     load_sprite_mob(&d);
     ft_putstr("Main worked");
 
-    d.sprite_ind = 4;   //Le sprite a afficher
-    d.sprite[d.sprite_ind].index = 4;   //L'animation du sprite a afficher
-    lastTime = SDL_GetTicks();
+    d.sprite_ind = 0;   //Le sprite a afficher
+    d.sprite[d.sprite_ind].index = 0;   //L'animation du sprite a afficher
     while (!d.quit)
     {
         ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
-        handle_key_event(&d, &map);
+        handle_key_event_sprite(&d, &map);
+        handle_mouse_event_gun(&d, &map);
         handle_poll_event(&d, &map);
-        currTime = SDL_GetTicks();
-        sprite_anim(&d, (currTime - lastTime) / 100);
+        sprite_anim(&d);
     }
-    printf("sprite %d\n", d.sprite[0].anim[0].nb_frame);
     free_render_env(&d);
 }

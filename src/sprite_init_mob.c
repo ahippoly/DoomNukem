@@ -34,7 +34,7 @@ void      init_anim_Zombie(t_sprite *Zombie)
     Zombie->anim[7].nb_frame = 4;
 }
 
-t_sprite    init_sprite_Zombie(SDL_Texture *text)
+t_sprite    sprite_init_Zombie(SDL_Texture *text)
 {
     t_sprite Zombie;
 
@@ -62,4 +62,17 @@ t_sprite    init_sprite_Zombie(SDL_Texture *text)
     Zombie.text = text;
     init_anim_Zombie(&Zombie);
     return (Zombie);
+}
+
+void    load_sprite_mob(t_data *d)
+{
+    SDL_Texture *texture;
+    t_sprite commando;
+
+    texture = NULL;
+    texture = load_sprite_bmp("Sprites/Mobs/ZombieScientist.bmp", d);
+    d->sprite[10] = sprite_init_Zombie(texture);
+    texture = NULL;
+    texture = load_sprite_bmp("Sprites/Mobs/ZombieScientist.bmp", d);
+    d->sprite[10] = sprite_init_Zombie(texture);
 }

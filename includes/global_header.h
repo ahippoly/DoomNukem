@@ -58,6 +58,7 @@ typedef struct      s_calced_walls
 
 typedef struct      s_anim
 {
+                    SDL_Point       offset;
                     SDL_Point   pos[NB_FRAME];
                     int         nb_frame;
                     int         current_frame;
@@ -65,7 +66,11 @@ typedef struct      s_anim
 }                   t_anim;
 
 typedef struct      s_sprite
-{
+{  
+                    int             aim_on;
+                    int             anim_end;
+                    Uint32          time;
+                    int             on;
                     int             index;
                     unsigned int    *pixels;
                     t_size          total_size;
