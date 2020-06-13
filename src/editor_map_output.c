@@ -79,6 +79,7 @@ void write_rooms(int fd, t_room *room, int room_count)
         write_param(fd, "id", ft_itoa(display.room_id));
         write_param(fd, "nb_wall", ft_itoa(display.nb_wall));
         write_param(fd, "wall_ref_range", join_int_value(display.wall_ref.start, ",", display.wall_ref.end));
+        write_param(fd, "height", join_int_value(display.height.start, ",", display.height.end));
         ft_putchar_fd('\n',fd);
         i++;
     }

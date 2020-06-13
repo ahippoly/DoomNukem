@@ -37,12 +37,14 @@
 # define MOUSE_MODE_CREATE_ROOM 1
 # define MOUSE_MODE_PLACING 2
 
-# define NB_INPUT 5
+# define NB_INPUT 7
 # define INPUT_TRANSPARENCY 0
 # define INPUT_BEGIN_P1 1
 # define INPUT_BEGIN_P2 2
 # define INPUT_END_P1 3
 # define INPUT_END_P2 4
+# define INPUT_ROOM_GROUND 5
+# define INPUT_ROOM_CEIL 6
 
 # define NB_TEXTURE 6
 # define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
@@ -52,7 +54,7 @@
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
 # define TEXT_PATH_5 "img/textures/tech_skin_1.bmp"
 
-# define NB_TXT 11
+# define NB_TXT 14
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
@@ -64,6 +66,10 @@
 # define TXT_WALL_COUNT 8
 # define TXT_MOB 9
 # define TXT_ROOM_COUNT 10
+# define TXT_ROOM_HEIGHT 11
+# define TXT_ROOM_BOT 12
+# define TXT_ROOM_TOP 13
+
 # define TEXT_POS_X 0.800 * WIN_SIZE_X
 # define TEXT_POS_Y 0.150 * WIN_SIZE_Y
 # define TEXT_SIZE_X 0.150 * WIN_SIZE_X
@@ -145,6 +151,7 @@ typedef struct      s_env
     t_point         *being_placed;
     t_wall          *wall_list;
     t_room          *room_list;
+	t_range			room_height[NB_WALL_MAX];
 	t_icon			*icon_list;
     t_wall_ref      ***map_wall_ref;
     t_size          map_size;

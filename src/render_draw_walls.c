@@ -49,7 +49,7 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     {
         //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, ty);
 		
-		if (ty > text->h)
+		if (ty >= text->h)
 			ty -= text->h;
         text_pixel_color = pixels[text->w * (int)ty + tx];
         ty += ty_step;

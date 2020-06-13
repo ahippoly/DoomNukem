@@ -69,5 +69,5 @@ void set_room_ground(t_data *d, t_point pos)
 		d->z_ground = d->map.room_list[room_id].z_ground;
 	else
 		d->z_ground = DEFAULT_Z_GROUND;
-	printf("z_ground = %f\n", d->z_ground);
+	//printf("z_ground = %f\n", d->z_ground);
 }

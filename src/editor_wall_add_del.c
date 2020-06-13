@@ -63,7 +63,7 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     
     //add_wall_ref_point(wall, env);
     //check_intersect_with_all_wall(wall, env);
-    return(wall);
+    return (wall);
 }
 
 void rearange_room_id(t_env *env)
@@ -176,6 +176,7 @@ void del_room(t_env *env, int room_id)
         }
         i++;
     }
+	env->room_height[room_id].start = -42;
     env->room_count--;
 }
 

@@ -75,4 +75,7 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFF0000FF, create_point(0.500 * WIN_SIZE_X, 0.770 * WIN_SIZE_Y));
     env->txt_lst[TXT_MOB] = create_text_img("Mob", 1, 0xFFFF0000, create_point(0.845 * WIN_SIZE_X, 0.350 * WIN_SIZE_Y));
     env->txt_lst[TXT_ROOM_COUNT] = create_text_img("Room_count", 1, 0xFFDDDDDD, create_point(0.500 * WIN_SIZE_X, 0.670 * WIN_SIZE_Y));
+    env->txt_lst[TXT_ROOM_HEIGHT] = create_text_img("Room", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y));
+    env->txt_lst[TXT_ROOM_BOT] = create_text_img("Bot", 1, 0xFFDDDDDD, create_point(0.207 * WIN_SIZE_X, 0.855 * WIN_SIZE_Y));
+    env->txt_lst[TXT_ROOM_TOP] = create_text_img("Top", 1, 0xFFDDDDDD, create_point(0.315 * WIN_SIZE_X, 0.855 * WIN_SIZE_Y));
 }

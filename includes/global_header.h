@@ -146,6 +146,7 @@ typedef struct          s_room
 {
     int                 room_id;
     int                 nb_wall;
+	t_range				height;
 	float				z_ground;
 	float				z_ceil;
     t_range             wall_ref;

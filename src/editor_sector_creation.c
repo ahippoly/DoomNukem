@@ -157,6 +157,22 @@ void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
 //     //printf("create room id start = %i, id end = %i\n", new->wall_ref.start, new->wall_ref.end);
 // }
 
+void recreate_room_height(t_env *env)
+{
+	int nb_deleted;
+	int i;
+
+	i = 0;
+	nb_deleted = 0;
+	while (i < env->room_count)
+	{
+		while (env->room_height[i + nb_deleted].start == -42)
+			nb_deleted++;
+		env->room_height[i] = env->room_height[i + nb_deleted];
+		i++;
+	}
+}
+
 void recreate_room_list(t_env *env)
 {
     int i;
@@ -167,6 +183,7 @@ void recreate_room_list(t_env *env)
     i = 0;
     free(env->room_list);
     env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count);
+	recreate_room_height(env);
     while (i < env->wall_count)
     {
         if (env->wall_list[i].id != -1 && env->wall_list[i].room_id_ref != -1)
@@ -180,6 +197,7 @@ void recreate_room_list(t_env *env)
             current_room->wall_ref.start = begin;
             current_room->wall_ref.end = i;
             current_room->nb_wall = i - begin;
+			current_room->height = env->room_height[current_room_id];
         }
         i++;
     }

@@ -89,6 +89,8 @@ void handle_input_mode(t_env *env, SDL_Scancode key_released)
 
 void update_wall_param(t_env *env)
 {
+	int tmp;
+
     if (env->selected_input != -1 && env->selected_wall_id != -1)
     {
         if (env->selected_input == INPUT_TRANSPARENCY)
@@ -101,15 +103,28 @@ void update_wall_param(t_env *env)
             env->wall_list[env->selected_wall_id].p1_height.end = env->input_lst[INPUT_END_P1].value;
         if (env->selected_input == INPUT_END_P2)
             env->wall_list[env->selected_wall_id].p2_height.end = env->input_lst[INPUT_END_P2].value;
+		if (env->selected_input == INPUT_ROOM_GROUND)
+            if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) > -1)
+				env->room_height[tmp].start = env->input_lst[INPUT_ROOM_GROUND].value;
+		if (env->selected_input == INPUT_ROOM_CEIL)
+			if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) > -1)
+				env->room_height[tmp].end = env->input_lst[INPUT_ROOM_CEIL].value;
     }
 }
 
 void get_wall_param(t_env *env)
 {
+	int tmp;
+
     env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
     env->input_lst[INPUT_TRANSPARENCY].value = env->wall_list[env->selected_wall_id].transparency;
     env->input_lst[INPUT_BEGIN_P1].value = env->wall_list[env->selected_wall_id].p1_height.start;
     env->input_lst[INPUT_BEGIN_P2].value = env->wall_list[env->selected_wall_id].p2_height.start;
     env->input_lst[INPUT_END_P1].value = env->wall_list[env->selected_wall_id].p1_height.end;
     env->input_lst[INPUT_END_P2].value = env->wall_list[env->selected_wall_id].p2_height.end;
+	if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) > -1)
+	{
+			env->input_lst[INPUT_ROOM_GROUND].value = env->room_height[tmp].start;
+			env->input_lst[INPUT_ROOM_CEIL].value = env->room_height[tmp].end;
+	}
 }
