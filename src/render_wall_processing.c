@@ -148,12 +148,12 @@ void sort_walls_by_dist(t_data *d, t_point pos, double current_angle, t_calced_w
         sorted_walls[j] = dist_scale;
         i++;
     }
-    i = 0;
-    while (i < map->wall_count)
-    {
-        printf("wall sorted dist = %f, inter : %f,%f, i = %i, map_count = %i\n", sorted_walls[i].dist, sorted_walls[i].inter.x, sorted_walls[i].inter.y, i, map->wall_count);
-        i++;
-    }
+    // i = 0;
+    // while (i < map->wall_count)
+    // {
+    //     printf("wall sorted dist = %f, inter : %f,%f, i = %i, map_count = %i\n", sorted_walls[i].dist, sorted_walls[i].inter.x, sorted_walls[i].inter.y, i, map->wall_count);
+    //     i++;
+    // }
 }
 
 void sort_walls_by_dist_player(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls)

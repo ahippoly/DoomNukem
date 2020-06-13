@@ -18,6 +18,7 @@
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 0.5
 # define GRAVITY_FORCE 0.0000005
+# define DEFAULT_Z_GROUND 2
 # define PLAYER_HEIGHT 0.5
 # define THREAD_NB 4
 # define MOVE_WALL_Z_SPEED 4
@@ -119,6 +120,7 @@ void	move_z_grabbed_wall(t_data *d, double z_diff);
 void	rot_wall(t_wall *wall, double rot, int pivot_point);
 void	rot_grabbed_wall(t_data *d, double rot, int pivot_point);
 
-int		check_in_room(t_data *d, t_point pos);
+int	check_player_room(t_data *d, t_point pos);
+void set_room_ground(t_data *d, t_point pos);
 
 #endif

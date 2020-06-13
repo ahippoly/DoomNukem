@@ -41,7 +41,7 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 	int		i;
 	t_calced_walls res;
 
-    sort_perp_walls_dist(d, &d->map, d->player_pos, sorted);
+    sort_perp_walls_dist(d, &d->map, *pos, sorted);
     // printf("rot = %f, wall rot = %f\n", rot / M_PI_2, res.wall.rotation);
 	// printf("diff mod pi = %f\n", mod_pi(rot - res.wall.rotation) / M_PI_2);
 	i = 0;
@@ -76,6 +76,7 @@ void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
 		move_attempt(pos, speed, rot);
 		move_grabbed_wall(d, rot, speed);
 	}
+	set_room_ground(d, *pos);
 }
 
 void gravity(t_data *d)

@@ -113,7 +113,7 @@ void read_wall(char *line, t_wall *wall)
         exit_with_msg("error while assigning value to wall on map reader\n");
 }
 
-void read_room(char *line, t_room *room)
+void read_room(char *line, t_room *room, t_map_data *map)
 {
     int error;
 
@@ -123,6 +123,8 @@ void read_room(char *line, t_room *room)
     error += read_param(line, "wall_ref_range", &room->wall_ref.start);
     if (error > 0)
         exit_with_msg("error while assigning value to room on map reader\n");
+	room->z_ground = map->wall_list[room->wall_ref.start].p1_z_start;
+	room->z_ceil = (float)map->wall_list[room->wall_ref.start].p1_height.end / UNIT;
 }
 
 t_wall_ref *read_wall_ref(char *chunk)
@@ -211,7 +213,7 @@ void read_room_list(int fd, t_map_data *map)
         exit_with_msg("Failed to malloc");
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->room_count)
-        read_room(line, &map->room_list[i++]);
+        read_room(line, &map->room_list[i++], map);
 }
 
 void read_head(int fd, char *line, t_map_data *map)
