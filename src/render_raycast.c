@@ -34,9 +34,8 @@ void raycast_thread_init(t_data *d)
 {
 	pthread_t thread[THREAD_NB];
 	t_thread	param[THREAD_NB];
-    float fov_coef = ((float)FOV_ANGLE / 90) * M_PI_2;
-    float start = d->rot - fov_coef / 2;
-    float step = fov_coef / WIN_SIZE_X;
+    float start = d->rot - d->fov / 2;
+    float step = d->fov / WIN_SIZE_X;
     int i;
 
     i = 0;
@@ -56,9 +55,8 @@ void raycast_thread_init(t_data *d)
 
 void raycast_all_screen(t_data *d, t_map_data *map)
 {
-    float fov_coef = ((float)FOV_ANGLE / 90) * M_PI_2;
-    float current_angle = d->rot - fov_coef / 2;
-    float step = fov_coef / WIN_SIZE_X;
+    float current_angle = d->rot - d->fov / 2;
+    float step = d->fov / WIN_SIZE_X;
     int x;
     int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];

@@ -62,9 +62,9 @@ void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed)
 	// printf("inter : %f,%f, diff : %f,%f, dir : %f,%f\n", inter.x, inter.y, inter.x - pos->x, inter.y - pos->y, cos(rot), + sin(rot));
 	if (will_collide == 1)
 	{
-		//printf("recalc needed, wall rot = %f\n", res.wall.rotation / M_PI_2);
-		move_attempt(pos, cos(rot.rot - res.wall.rotation) * speed, (t_rot){res.wall.rotation});
-		move_grabbed_wall(d, (t_rot){res.wall.rotation}, cos(rot.rot - res.wall.rotation) * speed);
+		// printf("recalc needed, wall rot = %f, rot = %f\n", res.wall.rotation / M_PI_2, rot.rot / M_PI_2);
+		move_attempt(pos, cos(rot.rot - res.wall.rotation) * speed, (t_rot){res.wall.rotation, cos(res.wall.rotation), sin(res.wall.rotation)});
+		move_grabbed_wall(d, (t_rot){res.wall.rotation, cos(res.wall.rotation), sin(res.wall.rotation)}, cos(rot.rot - res.wall.rotation) * speed);
 	}
 	else if (will_collide < 1)
 	{
