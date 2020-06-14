@@ -11,15 +11,16 @@ void handle_key_event(t_data *d, t_map_data *map)
         d->rot += ROT_STEP;
     if (d->clavier[SDL_SCANCODE_Q])
         d->rot -= ROT_STEP;
+	d->rot_calc = calc_sin_cos_rot(d->rot);
     if (d->clavier[SDL_SCANCODE_D])
-        move_with_collide(d, &d->player_pos, d->rot + M_PI_2, MOVE_STEP * d->speed_modifier);
-        //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot + 1);
+        move_with_collide(d, &d->player_pos, (t_rot){d->rot + M_PI_2, cos(d->rot + M_PI_2), sin(d->rot + M_PI_2)}, MOVE_STEP * d->speed_modifier);
+        //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot_calc + 1);
     if (d->clavier[SDL_SCANCODE_A])
-        move_with_collide(d, &d->player_pos, d->rot - M_PI_2, MOVE_STEP * d->speed_modifier);
+        move_with_collide(d, &d->player_pos, (t_rot){d->rot - M_PI_2, cos(d->rot - M_PI_2), sin(d->rot - M_PI_2)}, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_W])
-        move_with_collide(d, &d->player_pos, d->rot, MOVE_STEP * d->speed_modifier);
+        move_with_collide(d, &d->player_pos, d->rot_calc, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_S])
-        move_with_collide(d, &d->player_pos, d->rot + M_PI, MOVE_STEP * d->speed_modifier);
+        move_with_collide(d, &d->player_pos, (t_rot){d->rot + M_PI, cos(d->rot + M_PI), sin(d->rot + M_PI)}, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_R])
         d->z_offset += 0.05;
     if (d->clavier[SDL_SCANCODE_F])
@@ -31,6 +32,7 @@ void handle_key_event(t_data *d, t_map_data *map)
 		if (d->clavier[SDL_SCANCODE_C])
 			raycast_thread_init(d);
 	//printf("player rot = %f\n", fabs(fmod(d->rot, 4)));
+
 	
 }
 
@@ -100,7 +102,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_X)
             {
 				if (d->grabbed_wall == NULL)
-                	if (grab_wall(d, d->player_pos, d->rot))
+                	if (grab_wall(d, d->player_pos, d->rot_calc))
 						printf("grabbed wall\n");
 					else
 						printf("attempt grab fail\n");

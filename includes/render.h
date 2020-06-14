@@ -49,7 +49,8 @@ typedef struct      s_data
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
     int             quit;
-    float          rot;
+    float			rot;
+	t_rot			rot_calc;
 	float			fov;
     t_point         player_pos;
     float          player_height;
@@ -95,16 +96,16 @@ void handle_key_event(t_data *d, t_map_data *map);
 void handle_poll_event(t_data *d, t_map_data *map);
 
 //render_movement.c
-void move_attempt(t_point *pos, float speed, float look_rot);
-void move_with_collide(t_data *d, t_point *pos, float rot, float speed);
+void move_attempt(t_point *pos, float speed, t_rot look_rot);
+void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed);
 void gravity(t_data *d);
 
 //render_wall_processing.c
 float calc_wall_hit_scale(t_wall wall, t_point inter);
-t_calced_walls check_inter_with_wall(t_wall wall, float rot, t_point pos, float look_rot);
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, float rot, float look_rot);
-void sort_walls_by_dist(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls);
-void sort_walls_by_dist_player(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls);
+t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot look_rot);
+t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
+void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
+void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
 void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
@@ -123,9 +124,9 @@ void	raycast_thread_init(t_data *d);
 void	raycast_all_screen(t_data *d, t_map_data *map);
 
 //render_world_edit.c
-int		grab_wall(t_data *d, t_point pos, float look_rot);
-void	move_wall(t_wall *wall, float look_rot, float speed);
-void	move_grabbed_wall(t_data *d, float look_rot, float speed);
+int		grab_wall(t_data *d, t_point pos, t_rot look_rot);
+void	move_wall(t_wall *wall, t_rot look_rot, float speed);
+void	move_grabbed_wall(t_data *d, t_rot look_rot, float speed);
 void	move_z_grabbed_wall(t_data *d, float z_diff);
 void	rot_wall(t_wall *wall, float rot, int pivot_point);
 void	rot_grabbed_wall(t_data *d, float rot, int pivot_point);

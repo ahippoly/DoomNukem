@@ -39,7 +39,7 @@ int	check_player_room(t_data *d, t_point pos)
 	int room_ref;
 	t_calced_walls sorted[NB_WALL_MAX];
 
-	sort_walls_by_dist(d, (t_point){pos.x, 0}, M_PI_2, sorted);
+	sort_walls_by_dist(d, (t_point){pos.x, 0}, (t_rot){M_PI_2, cos(M_PI_2), sin(M_PI_2)}, sorted);
 	i = 0;
 	while (i < d->map.room_count)
 		wall_hits[i++] = 0;

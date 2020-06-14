@@ -39,7 +39,6 @@ void calc_n_disp_framerate(t_data *d)
     input_text_to_img(ft_itoa(last_framerate), 2, 0xFFFFFFFF, create_img(d->p_screen, set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
 }
 
-
 int main(void)
 {
     t_data      d;
@@ -54,8 +53,8 @@ int main(void)
         d.time = SDL_GetTicks();
         ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
-        handle_key_event(&d, &d.map);
         handle_poll_event(&d, &d.map);
+        handle_key_event(&d, &d.map);
         gravity(&d);
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);

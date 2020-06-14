@@ -25,7 +25,7 @@ float calc_wall_hit_scale_x(t_wall wall, float scale_z)
     return (get_float_part(scale_z * wall.length));
 }
 
-t_calced_walls check_inter_with_wall(t_wall wall, float rot, t_point pos, float look_rot)
+t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot look_rot)
 {
     t_point inter;
     t_calced_walls res;
@@ -38,7 +38,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, float rot, t_point pos, float 
     {
 		// printf("res.inter : %f,%f\n", res.inter.x, res.inter.y);
 		// printf("look_rot = %f, pos : %f,%f\n", look_rot, pos.x, pos.y);
-        res.dist = ft_frange(cos(look_rot) * (res.inter.x - pos.x) + sin(look_rot) * (res.inter.y - pos.y), 0.0042, res.dist);
+        res.dist = ft_frange((look_rot.cos_rot) * (res.inter.x - pos.x) + (look_rot.sin_rot) * (res.inter.y - pos.y), 0.0042, res.dist);
 		res.scale_z = calc_wall_hit_scale_z(wall, res.inter);
         res.scale = calc_wall_hit_scale_x(wall, res.scale_z);
     }
@@ -47,7 +47,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, float rot, t_point pos, float 
     return (res);
 }
 
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, float rot, float look_rot)
+t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, t_rot look_rot)
 {
     int i;
     t_calced_walls res ;
@@ -74,14 +74,17 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
     t_point p1;
     t_point p2;
     t_calced_walls res;
+	t_rot			wall_rot;
 
     res.dist = 9999;
     res.scale = 0;
 	res.wall = wall;
+	wall_rot.cos_rot = cos(wall.rotation + M_PI_2);
+	wall_rot.sin_rot = sin(wall.rotation + M_PI_2);
     p1.x = pos.x + cos(wall.rotation - M_PI_2) * 30;
     p1.y = pos.y + sin(wall.rotation - M_PI_2) * 30;
-    p2.x = pos.x + cos(wall.rotation + M_PI_2) * 30; 
-	p2.y = pos.y + sin(wall.rotation + M_PI_2) * 30;
+    p2.x = pos.x + wall_rot.cos_rot * 30; 
+	p2.y = pos.y + wall_rot.sin_rot * 30;
     // printf("p2 = %f,%f\n", p2.x, p2.y);
     // printf("cos = %f, sin = %f\n", cos(wall.rotation + M_PI_2), sin(wall.rotation + M_PI_2));
     res.inter = find_intersect(p1, p2, wall.p1_f, wall.p2_f);
@@ -89,7 +92,7 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
     if (res.inter.x != -42)
     {
         //res.dist = ft_frange(cos(wall.rotation + M_PI_2) * (res.inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (res.inter.y - pos.y), 0, res.dist);
-        res.dist = fabs(cos(wall.rotation + M_PI_2) * (res.inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (res.inter.y - pos.y));
+        res.dist = fabs(wall_rot.cos_rot * (res.inter.x - pos.x) + wall_rot.sin_rot * (res.inter.y - pos.y));
 		res.scale_z = calc_wall_hit_scale_z(wall, res.inter);
         res.scale = calc_wall_hit_scale_x(wall, res.scale_z);
     }
@@ -120,7 +123,7 @@ t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos)
     return (res);
 }
 
-void sort_walls_by_dist(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls)
+void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls)
 {
     int i;
     int j;
@@ -156,7 +159,7 @@ void sort_walls_by_dist(t_data *d, t_point pos, float current_angle, t_calced_wa
     // }
 }
 
-void sort_walls_by_dist_player(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls)
+void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls)
 {
     int i;
     int j;
@@ -165,11 +168,11 @@ void sort_walls_by_dist_player(t_data *d, t_point pos, float current_angle, t_ca
 	t_map_data *map;
 
 	map = &d->map;
-    sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, pos, d->rot);
+    sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, pos, d->rot_calc);
     i = 1;
     while (i < map->wall_count)
     {
-        dist_scale = check_inter_with_wall(map->wall_list[i], current_angle, pos, d->rot);
+        dist_scale = check_inter_with_wall(map->wall_list[i], current_angle, pos, d->rot_calc);
         //printf("wall dist to player = %f\n",  dist_scale.dist);
         j = 0;
         while (dist_scale.dist < sorted_walls[j].dist && j < i)

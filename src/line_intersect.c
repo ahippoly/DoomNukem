@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/14 01:54:03 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 04:49:03 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,12 +197,12 @@ t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, 
 	return (find_intersect(p1, p2, p3, p4));
 }
 
-t_point inter_with_dir(t_point pos, float rot, t_point p3, t_point p4)
+t_point inter_with_dir(t_point pos, t_rot rot, t_point p3, t_point p4)
 {
 	t_point p2;
 
-	p2.x = pos.x + cos(rot) * 30; 
-	p2.y = pos.y + sin(rot) * 30;
+	p2.x = pos.x + (rot.cos_rot) * 30; 
+	p2.y = pos.y + (rot.sin_rot) * 30;
 	// printf("pos: %f,%f, p2: %f,%f\n", pos.x, pos.y, p2.x, p2.y);
 	return (find_intersect(pos, p2, p3, p4));
 }

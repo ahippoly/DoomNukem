@@ -191,7 +191,7 @@ t_img	ft_load_bmp(char *file);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);
 t_point	line_intersect(t_point pos, float rot, t_point p1, t_point p2);
-t_point inter_with_dir(t_point pos, float rot, t_point p3, t_point p4);
+t_point inter_with_dir(t_point pos, t_rot rot, t_point p3, t_point p4);
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
 t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
@@ -212,6 +212,8 @@ void process_all_idle_anim(t_sprite sprite[NB_SPRITE]); //prend en paramètre un
 void process_idle_anim(t_sprite *sprite); //calcul l'animation par défaut d'un sprite
 void load_anim(t_sprite *t_sprite, int anim_id); //calcul une animation du sprite puis reviens a l'animation par défaut
 void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par défaut du sprite
+
+t_rot calc_sin_cos_rot(float rot);
 
 
 

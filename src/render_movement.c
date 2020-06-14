@@ -4,15 +4,10 @@
 #include "img_file.h"
 
 
-void move_attempt(t_point *pos, float speed, float look_rot)
+void move_attempt(t_point *pos, float speed, t_rot look_rot)
 {
-    float cos_rot;
-    float sin_rot;
-
-    cos_rot = cos(look_rot);
-    sin_rot = sin(look_rot);
-    pos->y += speed * sin_rot;
-    pos->x += speed * cos_rot;
+    pos->y += speed * look_rot.sin_rot;
+    pos->x += speed * look_rot.cos_rot;
 }
 
 float mod_pi(float rot)
@@ -32,7 +27,7 @@ int is_angle_in_range(float rot, float min, float max)
 	return (0);
 }
 
-void move_with_collide(t_data *d, t_point *pos, float rot, float speed)
+void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed)
 {
     t_calced_walls sorted[NB_WALL_MAX];
 	t_point inter;
@@ -50,9 +45,9 @@ void move_with_collide(t_data *d, t_point *pos, float rot, float speed)
 	{
 		if (sorted[i].dist < WALL_SIZE)
 		{
-			inter = find_intersect_no_bound(*pos, (t_point){pos->x + cos(rot), pos->y + sin(rot)}, (sorted[i].wall.p1_f), (sorted[i].wall.p2_f));
+			inter = find_intersect_no_bound(*pos, (t_point){pos->x + (rot.cos_rot), pos->y + (rot.sin_rot)}, (sorted[i].wall.p1_f), (sorted[i].wall.p2_f));
 			diff_x = inter.x - pos->x;
-			if ( (diff_x > 0 && cos(rot) > 0) || (diff_x < 0 && cos(rot) < 0) )
+			if ( (diff_x > 0 && (rot.cos_rot) > 0) || (diff_x < 0 && (rot.cos_rot) < 0) )
 			{
 				res = sorted[i];
 				//printf("wall z = %f, z_pos = %f\n", ft_interpolate(res.wall.p1_z_start + res.wall.p1_z_size, res.wall.p2_z_start + res.wall.p2_z_size, res.scale_z), d->z_pos);
@@ -68,8 +63,8 @@ void move_with_collide(t_data *d, t_point *pos, float rot, float speed)
 	if (will_collide == 1)
 	{
 		//printf("recalc needed, wall rot = %f\n", res.wall.rotation / M_PI_2);
-		move_attempt(pos, cos(rot - res.wall.rotation) * speed, res.wall.rotation);
-		move_grabbed_wall(d, res.wall.rotation, cos(rot - res.wall.rotation) * speed);
+		move_attempt(pos, cos(rot.rot - res.wall.rotation) * speed, (t_rot){res.wall.rotation});
+		move_grabbed_wall(d, (t_rot){res.wall.rotation}, cos(rot.rot - res.wall.rotation) * speed);
 	}
 	else if (will_collide < 1)
 	{

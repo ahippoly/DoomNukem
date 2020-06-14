@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/14 01:54:34 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 04:58:51 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,15 @@ t_point sdl_p_to_t_p(SDL_Point p)
 
 	new.x = p.x;
 	new.y = p.y;
+	return (new);
+}
+
+t_rot calc_sin_cos_rot(float rot)
+{
+	t_rot new;
+
+	new.rot = rot;
+	new.cos_rot = cos(rot);
+	new.sin_rot = sin(rot);
 	return (new);
 }
