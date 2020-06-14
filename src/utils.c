@@ -6,14 +6,14 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/11 08:29:50 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 01:54:34 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "global_header.h"
 #include "editor.h"
 
-t_point create_t_point(double x, double y)
+t_point create_t_point(float x, float y)
 {
 	t_point p;
 	p.x = x;
@@ -131,12 +131,12 @@ void adapt_max(int *pos, int *length, int max)
         *length = ft_max(0, max - *pos);
 }
 
-double get_float_part(double value)
+float get_float_part(float value)
 {
     int int_part;
 
     int_part = (int)value;
-    return (value - int_part);
+    return (value - int_part - INTER_TOLERANCE);
 }
 
 t_point sdl_p_to_t_p(SDL_Point p)

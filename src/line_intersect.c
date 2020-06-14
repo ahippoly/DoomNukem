@@ -6,31 +6,31 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/12 18:17:54 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 01:54:03 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "global_header.h"
 #include "editor.h"
 
-double calc_a(t_point p1, t_point p2)
+float calc_a(t_point p1, t_point p2)
 {
 	return ((p2.y - p1.y) / (p2.x - p1.x));
 }
 
-double calc_b(t_point p1, double a)
+float calc_b(t_point p1, float a)
 {
 	return (p1.y - p1.x * a);
 }
 
-int is_equ_tolerance(double value1, double value2, double tolerance)
+int is_equ_tolerance(float value1, float value2, float tolerance)
 {
 	if (value1 < value2 + tolerance && value1 > value2 - tolerance)
 		return (1);
 	return (0);
 }
 
-t_point calc_intersect(double a1, double b1, double a2, double b2)
+t_point calc_intersect(float a1, float b1, float a2, float b2)
 {
 	t_point inter;
 
@@ -42,10 +42,10 @@ t_point calc_intersect(double a1, double b1, double a2, double b2)
 t_point calc_intersect_point(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	t_point inter;
-	double a1;
-	double b1;
-	double a2;
-	double b2;
+	float a1;
+	float b1;
+	float a2;
+	float b2;
 
 	a1 = calc_a(p1, p2);
 	a2 = calc_a(p3, p4);
@@ -59,8 +59,8 @@ t_point calc_intersect_point(t_point p1, t_point p2, t_point p3, t_point p4)
 t_point calc_inter_first_vertical(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	t_point inter;
-	double a2;
-	double b2;
+	float a2;
+	float b2;
 
 	a2 = calc_a(p3, p4);
 	b2 = calc_b(p3, a2);
@@ -71,10 +71,10 @@ t_point calc_inter_first_vertical(t_point p1, t_point p2, t_point p3, t_point p4
 
 t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 {
-	double a1;
-	double a2;
-	double b1;
-	double b2;
+	float a1;
+	float a2;
+	float b1;
+	float b2;
 	t_point inter;
 
 	a1 = (p2.y - p1.y) / (p2.x - p1.x);
@@ -102,8 +102,8 @@ t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 
 t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point p4)
 {
-	double a2;
-	double b2;
+	float a2;
+	float b2;
 	t_point inter;
 
 	a2 = (p4.y - p3.y) / (p4.x - p3.x);
@@ -133,8 +133,8 @@ t_point convert_sdlpoint2tpoint(SDL_Point point)
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	t_point inter;
-	double	line1_diff_x;
-	double	line2_diff_x;
+	float	line1_diff_x;
+	float	line2_diff_x;
 
 	sort_t_point_by_x(&p1, &p2);
 	sort_t_point_by_x(&p3, &p4);
@@ -161,8 +161,8 @@ t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4)
 {
 	t_point inter;
-	double	line1_diff_x;
-	double	line2_diff_x;
+	float	line1_diff_x;
+	float	line2_diff_x;
 
 	sort_t_point_by_x(&p1, &p2);
 	sort_t_point_by_x(&p3, &p4);
@@ -197,7 +197,7 @@ t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, 
 	return (find_intersect(p1, p2, p3, p4));
 }
 
-t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4)
+t_point inter_with_dir(t_point pos, float rot, t_point p3, t_point p4)
 {
 	t_point p2;
 
@@ -207,12 +207,12 @@ t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4)
 	return (find_intersect(pos, p2, p3, p4));
 }
 
-t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2)
+t_point	line_intersect(t_point pos, float rot, t_point p1, t_point p2)
 {
-	double a1;
-	double b1;
-	double a2;
-	double b2;
+	float a1;
+	float b1;
+	float a2;
+	float b2;
 	t_point inter;
 
 	sort_t_point_by_x(&p1, &p2);

@@ -177,7 +177,7 @@ typedef struct      s_env
 
 void exit_with_msg(char *msg);
 SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub);
-SDL_Point mult_sdl_point(SDL_Point p, double mul);
+SDL_Point mult_sdl_point(SDL_Point p, float mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
 int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);
 void del_wall(t_env *env, int wall_id);
@@ -270,7 +270,7 @@ void init_env(t_env *env);
 void init_env2(t_env *env);
 
 //editor_grid.c
-void create_grid(unsigned int *pixels, double scale, t_env *env);
+void create_grid(unsigned int *pixels, float scale, t_env *env);
 SDL_Point check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels, t_env *env);
 void display_selected_point(t_env *env);
 

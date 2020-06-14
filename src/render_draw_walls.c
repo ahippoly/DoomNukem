@@ -3,7 +3,7 @@
 #include "editor.h"
 #include "img_file.h"
 
-double ft_interpolate(double val1, double val2, double scale)
+float ft_interpolate(float val1, float val2, float scale)
 {
 	return(val1 * (1 - scale) + val2 * (scale));
 }
@@ -17,9 +17,9 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     int *pixels;
     int tx;
     float ty;
-	double	wall_size;
-	double	wall_start;
-	double	wall_begin;
+	float	wall_size;
+	float	wall_start;
+	float	wall_begin;
 	int		draw_length;
     SDL_Surface *text;
 
@@ -48,9 +48,10 @@ void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale)
     while (draw_begin < draw_end)
     {
         //printf("text w = %i, h = %i, pitch = %i, scale : x = %f, y = %f\n", text->w, text->h, text->pitch, dist_scale.scale, ty);
-		
-		if (ty >= text->h)
+		while (ty >= text->h)
 			ty -= text->h;
+		// if (text->w * (int)ty + tx >= text->w * text->h)
+		// 	printf("ty = %f\n", ty);
         text_pixel_color = pixels[text->w * (int)ty + tx];
         ty += ty_step;
         //printf("colour = %i\n", text_pixel_color);
@@ -64,24 +65,24 @@ void draw_floor(t_data *d, SDL_Surface *text)
     int y;
     int p;
 
-    double fov_coef = (double)FOV_ANGLE / 90;
+    float fov_coef = (float)FOV_ANGLE / 90;
     
 
-    double ray_dir_x0;
-    double ray_dir_y0;
-    double ray_dir_x1;
-    double ray_dir_y1;
+    float ray_dir_x0;
+    float ray_dir_y0;
+    float ray_dir_x1;
+    float ray_dir_y1;
 
 
-    double pos_z;
+    float pos_z;
 
-    double rowDistance;
+    float rowDistance;
 
-    double floorStepX;
-    double floorStepY;
+    float floorStepX;
+    float floorStepY;
 
-    double floorX;
-    double floorY;
+    float floorX;
+    float floorY;
 
     int tx;
     int ty;
@@ -96,7 +97,7 @@ void draw_floor(t_data *d, SDL_Surface *text)
     ray_dir_y1 = sin(d->rot) + fov_coef * cos(d->rot);
     // printf("raydir: 0 : %f,%f ; 1 : %f,%f\n", ray_dir_x0, ray_dir_y0, ray_dir_x1, ray_dir_y1);
     y = d->screen_height + 1;
-    pos_z = d->player_height * WIN_SIZE_Y;
+    pos_z = (d->player_height + d->z_offset) * WIN_SIZE_Y;
 
     pixels = (int*)text->pixels;
     

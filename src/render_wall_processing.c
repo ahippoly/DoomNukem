@@ -4,7 +4,7 @@
 #include "img_file.h"
 
 
-double calc_wall_hit_scale(t_wall wall, t_point inter)
+float calc_wall_hit_scale(t_wall wall, t_point inter)
 {
     sort_t_point_by_x(&wall.p1_f, &wall.p2_f);
     if (is_equ_tolerance(wall.p2_f.x - wall.p1_f.x, 0, INTER_TOLERANCE))
@@ -12,7 +12,7 @@ double calc_wall_hit_scale(t_wall wall, t_point inter)
     return (get_float_part((inter.x - wall.p1_f.x) / (wall.p2_f.x - wall.p1_f.x) * wall.length));
 }
 
-double calc_wall_hit_scale_z(t_wall wall, t_point inter)
+float calc_wall_hit_scale_z(t_wall wall, t_point inter)
 {
     sort_t_point_by_x(&wall.p1_f, &wall.p2_f);
     if (is_equ_tolerance(wall.p2_f.x - wall.p1_f.x, 0, INTER_TOLERANCE))
@@ -20,12 +20,12 @@ double calc_wall_hit_scale_z(t_wall wall, t_point inter)
     return ( (inter.x - wall.p1_f.x) / (wall.p2_f.x - wall.p1_f.x) );
 }
 
-double calc_wall_hit_scale_x(t_wall wall, double scale_z)
+float calc_wall_hit_scale_x(t_wall wall, float scale_z)
 {
     return (get_float_part(scale_z * wall.length));
 }
 
-t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot)
+t_calced_walls check_inter_with_wall(t_wall wall, float rot, t_point pos, float look_rot)
 {
     t_point inter;
     t_calced_walls res;
@@ -47,7 +47,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, doubl
     return (res);
 }
 
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, double rot, double look_rot)
+t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, float rot, float look_rot)
 {
     int i;
     t_calced_walls res ;
@@ -120,7 +120,7 @@ t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos)
     return (res);
 }
 
-void sort_walls_by_dist(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls)
+void sort_walls_by_dist(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls)
 {
     int i;
     int j;
@@ -156,7 +156,7 @@ void sort_walls_by_dist(t_data *d, t_point pos, double current_angle, t_calced_w
     // }
 }
 
-void sort_walls_by_dist_player(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls)
+void sort_walls_by_dist_player(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls)
 {
     int i;
     int j;

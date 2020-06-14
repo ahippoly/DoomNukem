@@ -23,6 +23,15 @@
 # define THREAD_NB 4
 # define MOVE_WALL_Z_SPEED 4
 
+typedef struct	s_proj_point
+{
+	int			screen_x;
+	float		dist;
+	float		scale_z;
+	int			on_screen;
+}				t_proj_point;
+
+
 typedef struct      s_data
 {
     SDL_Renderer    *rend;
@@ -40,15 +49,16 @@ typedef struct      s_data
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
     int             quit;
-    double          rot;
+    float          rot;
+	float			fov;
     t_point         player_pos;
-    double          player_height;
-    double          z_pos;
-    double          z_offset;
-    double          z_force;
-    double          z_ground;
+    float          player_height;
+    float          z_pos;
+    float          z_offset;
+    float          z_force;
+    float          z_ground;
     int             screen_height;
-    double          speed_modifier;
+    float          speed_modifier;
     int             framerate;
     int             time_last_frame;
     int             time;
@@ -57,13 +67,13 @@ typedef struct      s_data
 	/* world edit*/
 	t_wall			*grabbed_wall;
 	t_point			grab_pos;
-	double			grab_z;
+	float			grab_z;
 }                   t_data;
 
 typedef	struct		s_thread
 {
-	double			start_angle;
-	double			step;
+	float			start_angle;
+	float			step;
 	t_range			screen_x;
 	t_data			*d;
 }					t_thread;
@@ -71,7 +81,7 @@ typedef	struct		s_thread
 
 void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
-void print_player_look_vector(t_data *d, t_map_data *map, double rot);
+void print_player_look_vector(t_data *d, t_map_data *map, float rot);
 void print_mini_map(t_data *d, t_map_data *map);
 SDL_Surface *read_img_surface(char *file);
 
@@ -85,16 +95,16 @@ void handle_key_event(t_data *d, t_map_data *map);
 void handle_poll_event(t_data *d, t_map_data *map);
 
 //render_movement.c
-void move_attempt(t_point *pos, double speed, double look_rot);
-void move_with_collide(t_data *d, t_point *pos, double rot, double speed);
+void move_attempt(t_point *pos, float speed, float look_rot);
+void move_with_collide(t_data *d, t_point *pos, float rot, float speed);
 void gravity(t_data *d);
 
 //render_wall_processing.c
-double calc_wall_hit_scale(t_wall wall, t_point inter);
-t_calced_walls check_inter_with_wall(t_wall wall, double rot, t_point pos, double look_rot);
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, double rot, double look_rot);
-void sort_walls_by_dist(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls);
-void sort_walls_by_dist_player(t_data *d, t_point pos, double current_angle, t_calced_walls *sorted_walls);
+float calc_wall_hit_scale(t_wall wall, t_point inter);
+t_calced_walls check_inter_with_wall(t_wall wall, float rot, t_point pos, float look_rot);
+t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, float rot, float look_rot);
+void sort_walls_by_dist(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls);
+void sort_walls_by_dist_player(t_data *d, t_point pos, float current_angle, t_calced_walls *sorted_walls);
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
 void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
@@ -107,20 +117,24 @@ void draw_floor(t_data *d, SDL_Surface *text);
 void load_bmp_files(t_data *d);
 
 //render_raycast.C
-void	raycast_screen(t_data *d, t_range screen_x, double start_angle, double step);
+void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step);
 void	*raycast_thread(void *data);
 void	raycast_thread_init(t_data *d);
 void	raycast_all_screen(t_data *d, t_map_data *map);
 
 //render_world_edit.c
-int		grab_wall(t_data *d, t_point pos, double look_rot);
-void	move_wall(t_wall *wall, double look_rot, double speed);
-void	move_grabbed_wall(t_data *d, double look_rot, double speed);
-void	move_z_grabbed_wall(t_data *d, double z_diff);
-void	rot_wall(t_wall *wall, double rot, int pivot_point);
-void	rot_grabbed_wall(t_data *d, double rot, int pivot_point);
+int		grab_wall(t_data *d, t_point pos, float look_rot);
+void	move_wall(t_wall *wall, float look_rot, float speed);
+void	move_grabbed_wall(t_data *d, float look_rot, float speed);
+void	move_z_grabbed_wall(t_data *d, float z_diff);
+void	rot_wall(t_wall *wall, float rot, int pivot_point);
+void	rot_grabbed_wall(t_data *d, float rot, int pivot_point);
 
 int	check_player_room(t_data *d, t_point pos);
 void set_room_ground(t_data *d, t_point pos);
+
+//render_wall_proj.c
+void print_wall(t_data *d, t_wall wall);
+t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos);
 
 #endif

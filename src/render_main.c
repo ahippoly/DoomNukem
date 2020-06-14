@@ -47,6 +47,7 @@ int main(void)
     init_data(&d);
     ft_putstr("Main worked");
     printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
+	printf("test = %i\n", -5 % 2);
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -59,6 +60,7 @@ int main(void)
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
+		//print_wall(&d, d.map.wall_list[0]);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);

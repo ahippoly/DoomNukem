@@ -13,8 +13,8 @@
 
 # define WIN_SIZE_X 800
 # define WIN_SIZE_Y 800
-# define HALF_WIN_SIZE_X WIN_SIZE_X / 2
-# define HALF_WIN_SIZE_Y WIN_SIZE_Y / 2
+# define HALF_WIN_SIZE_X 400
+# define HALF_WIN_SIZE_Y 400
 # define MINI_MAP_X 650
 # define MINI_MAP_Y 50
 # define MINI_MAP_W 100
@@ -51,8 +51,8 @@
 
 typedef struct		s_point
 {
-    double			x;
-    double			y;
+    float			x;
+    float			y;
 }              		t_point;
 
 typedef struct		s_range
@@ -61,11 +61,25 @@ typedef struct		s_range
     int				end;
 }               	t_range;
 
+typedef struct		s_frange
+{
+    float			start;
+    float			end;
+}               	t_frange;
+
 typedef struct      s_size
 {   
     int             w;
     int             h;
 }                   t_size;
+
+typedef	struct 		s_rot
+{
+	float			rot;
+	float			cos_rot;
+	float			sin_rot;
+}					t_rot;
+
 
 typedef struct      s_anim
 {
@@ -73,7 +87,7 @@ typedef struct      s_anim
                     SDL_Point   offset[NB_FRAME];
                     int         nb_frame;
                     int         current_frame;
-                    double      speed;
+                    float      speed;
 }                   t_anim;
 
 typedef struct      s_sprite
@@ -93,7 +107,7 @@ typedef struct      s_mob
 {
                     t_sprite sprite;
                     t_point pos;
-                    double  agro_range;
+                    float  agro_range;
 }                   t_mob;
 
 typedef struct      s_wall
@@ -107,8 +121,8 @@ typedef struct      s_wall
     int             room_id_ref;
     int             transparency;
     int             can_collide;
-    double          length;
-    double          rotation;
+    float          length;
+    float          rotation;
 	float			alpha;
 	t_point			p1_f;
     t_point			p2_f;
@@ -121,9 +135,9 @@ typedef struct      s_wall
 
 typedef struct      s_calced_walls
 {
-	double  		dist;
-	double  		scale;
-	double			scale_z;
+	float  			dist;
+	float  			scale;
+	float			scale_z;
 	t_point			inter;
 	t_wall			wall;
 }                   t_calced_walls;
@@ -170,14 +184,14 @@ SDL_Rect set_sdl_rect(int x, int y, int w, int h);
 void swap_point(SDL_Point *p1, SDL_Point *p2);
 void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color);
 SDL_Point create_point(int x, int y);
-t_point create_t_point(double x, double y);
+t_point create_t_point(float x, float y);
 t_range create_t_range(int start, int end);
 t_size create_t_size(int w, int h);
 t_img	ft_load_bmp(char *file);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);
-t_point	line_intersect(t_point pos, double rot, t_point p1, t_point p2);
-t_point inter_with_dir(t_point pos, double rot, t_point p3, t_point p4);
+t_point	line_intersect(t_point pos, float rot, t_point p1, t_point p2);
+t_point inter_with_dir(t_point pos, float rot, t_point p3, t_point p4);
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
 t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
@@ -185,10 +199,10 @@ void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color);
 void put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color);
 void put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size, unsigned int color, float alpha);
-int is_equ_tolerance(double value1, double value2, double tolerance);
-double get_float_part(double value);
+int is_equ_tolerance(float value1, float value2, float tolerance);
+float get_float_part(float value);
 t_point sdl_p_to_t_p(SDL_Point p);
-double ft_interpolate(double val1, double val2, double scale);
+float ft_interpolate(float val1, float val2, float scale);
 
 
 //editor_map_reader.c

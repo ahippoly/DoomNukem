@@ -70,14 +70,14 @@ int read_param(char *chunk, char *key, int *to_fill)
     return (error);
 }
 
-double calc_line_angle(SDL_Point p1, SDL_Point p2)
+float calc_line_angle(SDL_Point p1, SDL_Point p2)
 {
-    double a;
+    float a;
 
     if (p2.x - p1.x < INTER_TOLERANCE && p2.x - p1.x > - INTER_TOLERANCE)
         a = 2147483647;
     else
-        a = (double)(p2.y - p1.y) / (p2.x - p1.x);
+        a = (float)(p2.y - p1.y) / (p2.x - p1.x);
     return (atan(a));
 }
 
@@ -104,10 +104,10 @@ void read_wall(char *line, t_wall *wall)
 	wall->p1_f = (t_point){wall->p1.x, wall->p1.y};
 	wall->p2_f = (t_point){wall->p2.x, wall->p2.y};
 	wall->z_text_offset = 0;
-    printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
+    // printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     // printf("wall length = %f\n", wall->length);
     // printf("wall rot = %f\n", wall->rotation);
-	printf("p1_z : %f,%f,  p2_z : %f,%f\n", wall->p1_z_start, wall->p1_z_size, wall->p2_z_start, wall->p2_z_size);
+	// printf("p1_z : %f,%f,  p2_z : %f,%f\n", wall->p1_z_start, wall->p1_z_size, wall->p2_z_start, wall->p2_z_size);
     //printf("WALL ID READED\n");
     if (error > 0)
         exit_with_msg("error while assigning value to wall on map reader\n");

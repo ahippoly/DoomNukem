@@ -6,14 +6,14 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 04:55:20 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/10 04:59:13 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 01:52:07 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "global_header.h"
 #include "editor.h"
 
-void			create_grid(unsigned int *pixels, double scale, t_env *env)
+void			create_grid(unsigned int *pixels, float scale, t_env *env)
 {
 	int			i;
 	int			total_step;

@@ -3,7 +3,7 @@
 #include "editor.h"
 #include "img_file.h"
 
-int	grab_wall(t_data *d, t_point pos, double look_rot)
+int	grab_wall(t_data *d, t_point pos, float look_rot)
 {
 	t_calced_walls res;
 	int success;
@@ -19,19 +19,19 @@ int	grab_wall(t_data *d, t_point pos, double look_rot)
 	return (success);
 }
 
-void	move_wall(t_wall *wall, double look_rot, double speed)
+void	move_wall(t_wall *wall, float look_rot, float speed)
 {
 	move_attempt(&wall->p1_f, speed, look_rot);
 	move_attempt(&wall->p2_f, speed, look_rot);
 }
 
-void	move_grabbed_wall(t_data *d, double look_rot, double speed)
+void	move_grabbed_wall(t_data *d, float look_rot, float speed)
 {
 	if (d->grabbed_wall)
 		move_wall(d->grabbed_wall, look_rot, speed);
 }
 
-void	move_z_grabbed_wall(t_data *d, double z_diff)
+void	move_z_grabbed_wall(t_data *d, float z_diff)
 {
 	if (d->grabbed_wall)
 	{
@@ -41,14 +41,14 @@ void	move_z_grabbed_wall(t_data *d, double z_diff)
 	}
 }
 
-void	rot_wall(t_wall *wall, double rot, int pivot_point)
+void	rot_wall(t_wall *wall, float rot, int pivot_point)
 {
 	wall->rotation += rot;
 	if (pivot_point == 0)
 		wall->p2_f = (t_point){wall->p1_f.x + wall->length * cos(wall->rotation), wall->p1_f.y + wall->length * sin(wall->rotation)};
 }
 
-void	rot_grabbed_wall(t_data *d, double rot, int pivot_point)
+void	rot_grabbed_wall(t_data *d, float rot, int pivot_point)
 {
 	if (d->grabbed_wall)
 		rot_wall(d->grabbed_wall, rot, pivot_point);

@@ -50,6 +50,7 @@ void init_data(t_data *d)
     d->time = 0;
     d->quit = 0;
 	d->grabbed_wall = NULL;
+	d->fov = ((float)FOV_ANGLE * M_PI_2) / 90;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);

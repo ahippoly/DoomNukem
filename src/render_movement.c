@@ -4,10 +4,10 @@
 #include "img_file.h"
 
 
-void move_attempt(t_point *pos, double speed, double look_rot)
+void move_attempt(t_point *pos, float speed, float look_rot)
 {
-    double cos_rot;
-    double sin_rot;
+    float cos_rot;
+    float sin_rot;
 
     cos_rot = cos(look_rot);
     sin_rot = sin(look_rot);
@@ -15,14 +15,14 @@ void move_attempt(t_point *pos, double speed, double look_rot)
     pos->x += speed * cos_rot;
 }
 
-double mod_pi(double rot)
+float mod_pi(float rot)
 {
 	if (rot < 0)
 		rot = PI_X_2 + rot;
 	return(fmod(rot, PI_X_2));
 }
 
-int is_angle_in_range(double rot, double min, double max)
+int is_angle_in_range(float rot, float min, float max)
 {
 	printf("rot = %f, min = %f, max = %f\n", rot, min, max);
 	if (min > max && (rot > min || rot < max))
@@ -32,11 +32,11 @@ int is_angle_in_range(double rot, double min, double max)
 	return (0);
 }
 
-void move_with_collide(t_data *d, t_point *pos, double rot, double speed)
+void move_with_collide(t_data *d, t_point *pos, float rot, float speed)
 {
     t_calced_walls sorted[NB_WALL_MAX];
 	t_point inter;
-	double	diff_x;
+	float	diff_x;
 	int		will_collide;
 	int		i;
 	t_calced_walls res;

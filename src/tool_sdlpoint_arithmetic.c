@@ -16,7 +16,7 @@ SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub)
     return (p);
 }
 
-SDL_Point mult_sdl_point(SDL_Point p, double mul)
+SDL_Point mult_sdl_point(SDL_Point p, float mul)
 {
     p.x = mul * p.x;
     p.y = mul * p.y;

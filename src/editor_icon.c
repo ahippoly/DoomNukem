@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 19:08:25 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/03/03 23:09:11 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 03:25:49 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void print_mouse_icon(t_env *env)
 	if (env->mouse_icon.id_ref != -1)
 	{
 		SDL_SetRenderTarget(env->rend, env->editor_grid);
-		env->mouse_icon.pos.x = (double)(env->mouse.x - GRID_POS_X - env->map_move.x) / TILE_SIZE;
-		env->mouse_icon.pos.y = (double)(env->mouse.y - GRID_POS_Y - env->map_move.y) / TILE_SIZE;
+		env->mouse_icon.pos.x = (float)(env->mouse.x - GRID_POS_X - env->map_move.x) / TILE_SIZE;
+		env->mouse_icon.pos.y = (float)(env->mouse.y - GRID_POS_Y - env->map_move.y) / TILE_SIZE;
 		print_icon(env, env->mouse_icon);
 		SDL_SetRenderTarget(env->rend, NULL);
 	}

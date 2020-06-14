@@ -1,19 +1,19 @@
 #include "editor.h"
 #include "global_header.h"
 
-double calc_coef_dir(SDL_Point p1, SDL_Point p2)
+float calc_coef_dir(SDL_Point p1, SDL_Point p2)
 {
     int delta_x;
     int delta_y;
 
     delta_x = p2.x - p1.x;
     delta_y = p2.y - p1.y;
-    return ((double)delta_y / delta_x);
+    return ((float)delta_y / delta_x);
 }
 
 int is_cursor_in_wall(SDL_Point cursor, SDL_Point p1, SDL_Point p2)
 {
-    double wall_pos_ratio;
+    float wall_pos_ratio;
     int wall_pos_y;
     int delta_y;
 
@@ -31,7 +31,7 @@ int is_cursor_in_wall(SDL_Point cursor, SDL_Point p1, SDL_Point p2)
     }
     if (p2.x < p1.x)
         swap_point(&p1, &p2);
-    wall_pos_ratio = (double)(cursor.x - p1.x) / (p2.x - p1.x);
+    wall_pos_ratio = (float)(cursor.x - p1.x) / (p2.x - p1.x);
     delta_y = p2.y - p1.y;
     if (wall_pos_ratio < 0 || wall_pos_ratio > 1)
         return (0);

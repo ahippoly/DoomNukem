@@ -3,7 +3,7 @@
 #include "editor.h"
 #include "img_file.h"
 
-void	raycast_screen(t_data *d, t_range screen_x, double start_angle, double step)
+void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
 {
 	int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];
@@ -34,9 +34,9 @@ void raycast_thread_init(t_data *d)
 {
 	pthread_t thread[THREAD_NB];
 	t_thread	param[THREAD_NB];
-    double fov_coef = ((double)FOV_ANGLE / 90) * M_PI_2;
-    double start = d->rot - fov_coef / 2;
-    double step = fov_coef / WIN_SIZE_X;
+    float fov_coef = ((float)FOV_ANGLE / 90) * M_PI_2;
+    float start = d->rot - fov_coef / 2;
+    float step = fov_coef / WIN_SIZE_X;
     int i;
 
     i = 0;
@@ -56,9 +56,9 @@ void raycast_thread_init(t_data *d)
 
 void raycast_all_screen(t_data *d, t_map_data *map)
 {
-    double fov_coef = ((double)FOV_ANGLE / 90) * M_PI_2;
-    double current_angle = d->rot - fov_coef / 2;
-    double step = fov_coef / WIN_SIZE_X;
+    float fov_coef = ((float)FOV_ANGLE / 90) * M_PI_2;
+    float current_angle = d->rot - fov_coef / 2;
+    float step = fov_coef / WIN_SIZE_X;
     int x;
     int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];
