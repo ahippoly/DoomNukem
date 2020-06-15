@@ -64,8 +64,8 @@ void print_mini_map(t_data *d, t_map_data *map)
 {
     SDL_Rect tmp;
     tmp = set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    ft_bzero(d->p_mini_map, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y * 4);
-    ft_memcpy(d->p_mini_map, d->p_mini_map_bg, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y * 4);
+    //ft_bzero(d->p_mini_map, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y * 4);
+    ft_memcpy_int(d->p_mini_map, d->p_mini_map_bg, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y);
     print_player_look_vector(d, map, d->rot);
     SDL_UpdateTexture(d->mini_map, &tmp, d->p_mini_map, MINI_MAP_SIZE_X * 4);
     SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4);

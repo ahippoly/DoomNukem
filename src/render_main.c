@@ -61,8 +61,8 @@ int main(void)
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
 		//print_walls(&d);
-        // update_player_pos_mini_map(&d, &d.map);
-        // print_player_look_vector(&d, &d.map, d.rot);
+        update_player_pos_mini_map(&d, &d.map);
+        print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);
         print_data2screen(&d, &d.map);
     }

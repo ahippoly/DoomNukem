@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/14 21:52:25 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/15 05:55:08 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,4 +168,17 @@ void sort_int(int *a, int *b)
 		a = b;
 		b = tmp;
 	}
+}
+
+void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	while (i < n)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst);
 }

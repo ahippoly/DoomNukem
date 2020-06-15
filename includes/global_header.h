@@ -215,6 +215,8 @@ void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par
 
 t_rot calc_sin_cos_rot(float rot);
 void sort_int(int *a, int *b);
+void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n);
+
 
 
 
