@@ -53,8 +53,6 @@ int main(void)
         d.time_last_frame = d.time;
         d.time = SDL_GetTicks();
         //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
-		// free(d.p_screen);
-		// d.p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
         SDL_PumpEvents();
         handle_poll_event(&d, &d.map);
         handle_key_event(&d, &d.map);
