@@ -36,6 +36,13 @@ void handle_key_event(t_data *d, t_map_data *map)
 	
 }
 
+void inc_fov(t_data *d, float inc)
+{
+	d->fov_rad += inc * M_PI_2;
+	d->fov += inc;
+	printf("fov = %f\n", d->fov);
+}
+
 void handle_poll_event(t_data *d, t_map_data *map)
 {
     while (SDL_PollEvent(&d->e))
@@ -62,6 +69,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_LCTRL)
             {
                 printf("crouch\n");
+                d->speed_modifier -= 0.5;
                 d->z_offset -= PLAYER_HEIGHT / 2;
             }
             if (d->clavier[SDL_SCANCODE_SPACE])
@@ -72,10 +80,9 @@ void handle_poll_event(t_data *d, t_map_data *map)
 			if (d->clavier[SDL_SCANCODE_H])
                	rot_grabbed_wall(d, -0.05 * M_PI_2, 0);
 			if (d->clavier[SDL_SCANCODE_J])
-               	d->fov += 0.05 * M_PI_2;
+               	inc_fov(d, 0.05);
 			if (d->clavier[SDL_SCANCODE_K])
-               	d->fov -= 0.05 * M_PI_2;
-			printf("fov = %f\n", d->fov / M_PI_2);
+               	inc_fov(d, -0.05);
         }
         if (d->e.type == SDL_KEYUP)
         {
@@ -87,13 +94,16 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_LCTRL)
             {
                 printf("no longer crouch\n");
+				d->speed_modifier += 0.5;
                 d->z_offset += PLAYER_HEIGHT / 2;
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
-				printf("checking room\n");
-				if (check_player_room(d, d->player_pos) > -1)
-					printf("Is in room\n");
+				// printf("checking room\n");
+				// if (check_player_room(d, d->player_pos) > -1)
+				// 	printf("Is in room\n");
+				print_wall(d, d->map.wall_list[0]);
+				
                 // draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));
                 // printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot).scale_z);
                 // printf("d->rot = %f\n", d->rot);

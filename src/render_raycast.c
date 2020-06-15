@@ -3,12 +3,33 @@
 #include "editor.h"
 #include "img_file.h"
 
+void	clear_p_tab(t_data *d, t_range screen_x)
+{
+	int i;
+	unsigned int *pixels;
+	int end_y;
+
+	pixels = d->p_screen;
+	end_y = WIN_SIZE_Y * WIN_SIZE_X;
+	while (screen_x.start < screen_x.end)
+	{
+		i = 0;
+		while (i < end_y)
+		{
+			pixels[screen_x.start + i] = 0x00000000;
+			i += WIN_SIZE_X;
+		}
+		screen_x.start++;
+	}
+}
+
 void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
 {
 	int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];
 
 	start_angle += step * screen_x.start;
+	clear_p_tab(d, screen_x);
 	while (screen_x.start < screen_x.end)
     {
         i = 0;
@@ -34,8 +55,8 @@ void raycast_thread_init(t_data *d)
 {
 	pthread_t thread[THREAD_NB];
 	t_thread	param[THREAD_NB];
-    float start = d->rot - d->fov / 2;
-    float step = d->fov / WIN_SIZE_X;
+    float start = d->rot - d->fov_rad / 2;
+    float step = d->fov_rad / WIN_SIZE_X;
     int i;
 
     i = 0;
@@ -55,8 +76,8 @@ void raycast_thread_init(t_data *d)
 
 void raycast_all_screen(t_data *d, t_map_data *map)
 {
-    float current_angle = d->rot - d->fov / 2;
-    float step = d->fov / WIN_SIZE_X;
+    float current_angle = d->rot - d->fov_rad / 2;
+    float step = d->fov_rad / WIN_SIZE_X;
     int x;
     int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];

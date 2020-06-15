@@ -121,8 +121,8 @@ typedef struct      s_wall
     int             room_id_ref;
     int             transparency;
     int             can_collide;
-    float          length;
-    float          rotation;
+    float			length;
+    float			rotation;
 	float			alpha;
 	t_point			p1_f;
     t_point			p2_f;
@@ -214,6 +214,7 @@ void load_anim(t_sprite *t_sprite, int anim_id); //calcul une animation du sprit
 void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par défaut du sprite
 
 t_rot calc_sin_cos_rot(float rot);
+void sort_int(int *a, int *b);
 
 
 

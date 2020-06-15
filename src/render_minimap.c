@@ -52,12 +52,12 @@ void print_player_look_vector(t_data *d, t_map_data *map, float rot)
     SDL_Point screen_player_pos;
     float      fov;
 
-    fov =  ((float)FOV_ANGLE * M_PI_2) / 180;
+    fov =  d->fov_rad / 2;
     scale = calc_map_scale(map);
     screen_player_pos = create_point(d->mini_map_player_pos.x + MINI_MAP_PLAYER_SIZE / 2, d->mini_map_player_pos.y + MINI_MAP_PLAYER_SIZE / 2);
     //look vector // draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot) * 25, screen_player_pos.y + sin(rot) * 25), d->p_mini_map, 0xFF8888FF, set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_X));
-    draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot + fov) * 35, screen_player_pos.y + sin(rot + fov) * 35), (t_img){d->p_mini_map, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
-    draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot - fov) * 35, screen_player_pos.y + sin(rot - fov) * 35), (t_img){d->p_mini_map, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
+    draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot + fov) * 45, screen_player_pos.y + sin(rot + fov) * 45), (t_img){d->p_mini_map, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
+    draw_line(screen_player_pos, create_point(screen_player_pos.x + cos(rot - fov) * 45, screen_player_pos.y + sin(rot - fov) * 45), (t_img){d->p_mini_map, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
 }
 
 void print_mini_map(t_data *d, t_map_data *map)

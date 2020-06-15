@@ -7,7 +7,7 @@ void print_data2screen(t_data *d, t_map_data *map)
 {
     SDL_Rect tmp;
     //printf("before print\n");
-    SDL_RenderClear(d->rend);
+    //SDL_RenderClear(d->rend);
     SDL_UpdateTexture(d->screen, NULL, d->p_screen, WIN_SIZE_X * 4);
     print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
@@ -32,6 +32,7 @@ void calc_n_disp_framerate(t_data *d)
     if (time > last_time + 1000)
     {
         last_framerate = framerate;
+		printf("framerate = %i\n", last_framerate);
         framerate = 0;
         last_time = time;
     }
@@ -51,17 +52,19 @@ int main(void)
     {
         d.time_last_frame = d.time;
         d.time = SDL_GetTicks();
-        ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
+        //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
+		// free(d.p_screen);
+		// d.p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
         SDL_PumpEvents();
         handle_poll_event(&d, &d.map);
         handle_key_event(&d, &d.map);
         gravity(&d);
-        //draw_floor(&d, d.texture[1]);
+        // draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
-		//print_wall(&d, d.map.wall_list[0]);
-        update_player_pos_mini_map(&d, &d.map);
-        print_player_look_vector(&d, &d.map, d.rot);
+		//print_walls(&d);
+        // update_player_pos_mini_map(&d, &d.map);
+        // print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);
         print_data2screen(&d, &d.map);
     }

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/14 04:58:51 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/14 21:52:25 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,4 +156,16 @@ t_rot calc_sin_cos_rot(float rot)
 	new.cos_rot = cos(rot);
 	new.sin_rot = sin(rot);
 	return (new);
+}
+
+void sort_int(int *a, int *b)
+{
+	int *tmp;
+
+	if (*a > *b)
+	{
+		tmp = a;
+		a = b;
+		b = tmp;
+	}
 }

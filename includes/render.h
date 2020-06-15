@@ -3,7 +3,7 @@
 
 # include "global_header.h"
 # include "editor.h"
-# define FOV_ANGLE 60
+# define FOV_ANGLE 90
 # define MINI_MAP_SIZE_X 250
 # define MINI_MAP_SIZE_Y 250
 # define MINI_MAP_POS_X WIN_SIZE_X - MINI_MAP_SIZE_X
@@ -27,9 +27,32 @@ typedef struct	s_proj_point
 {
 	int			screen_x;
 	float		dist;
-	float		scale_z;
+	float		wall_start;
+	float		wall_size;
+	float		scale_x;
+	float		scale_len;
 	int			on_screen;
 }				t_proj_point;
+
+typedef	struct	s_proj_wall
+{
+	t_proj_point	p1;
+	t_proj_point	p2;
+	t_wall			wall;
+}				t_proj_wall;
+
+typedef	struct	s_draw_line
+{
+	t_frange	draw_y;
+	int			x;
+	float		scale_x;
+	float		scale_z;
+	float		scale_z_step;
+	unsigned int	*text;
+	int			tw;
+	int			th;
+}				t_draw_line;
+
 
 
 typedef struct      s_data
@@ -52,6 +75,7 @@ typedef struct      s_data
     float			rot;
 	t_rot			rot_calc;
 	float			fov;
+	float			fov_rad;
     t_point         player_pos;
     float          player_height;
     float          z_pos;
@@ -136,6 +160,10 @@ void set_room_ground(t_data *d, t_point pos);
 
 //render_wall_proj.c
 void print_wall(t_data *d, t_wall wall);
+void print_walls(t_data *d);
 t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos);
+
+//render_draw_floor.c
+void draw_floor(t_data *d, SDL_Surface *text);
 
 #endif

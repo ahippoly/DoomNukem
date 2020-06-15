@@ -37,7 +37,7 @@ void init_data(t_data *d)
     d->map = read_map("maps/editor_map_0");
     init_mini_map(d, &d->map);
     d->player_pos = create_t_point(d->map.player_spawn.x, d->map.player_spawn.y);
-    d->rot = -0.3 * M_PI_2;
+    d->rot = -1 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0;
     d->z_force = 0;
@@ -50,7 +50,8 @@ void init_data(t_data *d)
     d->time = 0;
     d->quit = 0;
 	d->grabbed_wall = NULL;
-	d->fov = ((float)FOV_ANGLE * M_PI_2) / 90;
+	d->fov = (float)FOV_ANGLE / 90;
+	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
