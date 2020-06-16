@@ -32,11 +32,11 @@
 /* weapons */
 
 # define WEAPON_NB		5
-# define WEAPON_PATH_0	"/img/hud/handgun.bmp"
-# define WEAPON_PATH_1	"/img/hud/goldengun.bmp"
-# define WEAPON_PATH_2	"/img/hud/handgun.bmp"
-# define WEAPON_PATH_3	"/img/hud/handgun.bmp"
-# define WEAPON_PATH_4	"/img/hud/handgun.bmp"
+# define WEAPON_PATH_0	"/img/hud/ssg.bmp"
+# define WEAPON_PATH_1	"/img/hud/ar.bmp"
+# define WEAPON_PATH_2	"/img/hud/dd.bmp"
+# define WEAPON_PATH_3	"/img/hud/revolver.bmp"
+# define WEAPON_PATH_4	"/img/hud/lmg.bmp"
 
 # define WEAPON_NAME_0	"LMG"
 # define WEAPON_NAME_1	"AR"
