@@ -73,11 +73,15 @@ void	draw_floor_lines(t_data *d, int x, int i, t_calced_walls *sorted)
 
 void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls checked, int x)
 {
+	int room_id;
+
 	if (*nb > -1)
 	{
+		room_id = queue[*nb].wall.room_id_ref;
 		if (checked.wall.room_id_ref == queue[*nb].wall.room_id_ref)
 		{
-			draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
+			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, room_id);
+			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  queue[*nb].wall.texture_id);
 			(*nb)--;
 			if (*nb > -1)
 				queue[*nb].dist = checked.dist;
@@ -85,7 +89,8 @@ void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls 
 		}
 		else
 		{
-			draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
+			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  queue[*nb].wall.texture_id);
+			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
 			queue[*nb].dist = checked.dist;
 		}
 	}
@@ -148,6 +153,7 @@ void raycast_thread_init(t_data *d)
     int i;
 
     i = 0;
+	init_floors(d);
 	while (i < THREAD_NB)
 	{
 		param[i].d = d;
@@ -174,6 +180,7 @@ void raycast_all_screen(t_data *d, t_map_data *map)
     x = 0;
 	screen_x.start = 0;
 	screen_x.end = WIN_SIZE_Y;
+	init_floors(d);
 	raycast_screen(d, screen_x, current_angle, step);
     // while (x < WIN_SIZE_X)
     // {

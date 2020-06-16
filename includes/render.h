@@ -53,7 +53,18 @@ typedef	struct	s_draw_line
 	int			th;
 }				t_draw_line;
 
+typedef	struct		s_floor
+{
+	t_point			floor;
+	t_point			floor_step;
+}					t_floor;
 
+typedef	struct		s_look_rot
+{
+	float			angle;
+	float			step;
+	float			rev;
+}					t_look_rot;
 
 typedef struct      s_data
 {
@@ -93,6 +104,8 @@ typedef struct      s_data
 	t_wall			*grabbed_wall;
 	t_point			grab_pos;
 	float			grab_z;
+	/* floor drawing */
+	t_floor			fl[NB_WALL_MAX][WIN_SIZE_Y];
 }                   t_data;
 
 typedef	struct		s_thread
@@ -102,6 +115,8 @@ typedef	struct		s_thread
 	t_range			screen_x;
 	t_data			*d;
 }					t_thread;
+
+
 
 
 void create_mini_map(t_data *d, t_map_data *map);
@@ -169,6 +184,9 @@ void draw_floor(t_data *d, SDL_Surface *text);
 t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls next);
 t_range calc_floor_draw_range_end(t_data *d, t_calced_walls origin);
 void draw_floor_line(t_data *d, t_range draw, int x, int room_id);
+void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id);
+void init_floor(t_data *d, t_floor *fl, t_room *room);
+void	init_floors(t_data *d);
 
 
 #endif

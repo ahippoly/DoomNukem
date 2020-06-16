@@ -32,7 +32,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = editor
 RENDER_NAME = doom-nukem
-OPTI =  -O3
+OPTI =  -g3
 PTHREAD = -lpthread
 
 LIBFT = libft/libft.a
