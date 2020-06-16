@@ -109,10 +109,11 @@ void create_straight_column(unsigned int *pixels, SDL_Rect pos_size, t_size scre
 
     pos_size = adapt_border(pos_size, screen_length);
     i = pos_size.y;
-    end = pos_size.x + pos_size.w;
+    end = pos_size.y + pos_size.h;
     while (i < end)
     {
         pixels[pos_size.x + i * screen_length.w] = color;
+		i++; //rajout alex car boucle inf
     }
 }
 

@@ -1,20 +1,71 @@
 #include <hud.h>
 
-/* Récupérer les paramètre les PV */
-int				put_lifebar(t_data *d)
-{
-	SDL_Rect	hp_outline; //health point
+/* initialise et creation de la texture pour l'icone de HP  */
 
-	hp_outline = set_sdl_rect(100, 70, 300, 30);
-	/* Contour de la jauge en transparence */
-	SDL_SetRenderDrawColor(d->rend, 255, 255, 255, 128);
-	// SDL_SetRenderDrawBlendMode(d->rend, SDL_BLENDMODE_BLEND);
-	SDL_RenderDrawRect(d->rend, &hp_outline);
- 	SDL_RenderPresent(d->rend);
-	/* remplissage de l'arrière plan de la jauge */
-    draw_rectangle(d->p_screen, set_sdl_rect(100, 70, 300, 30), set_size(WIN_SIZE_X, WIN_SIZE_Y), HEALTH_BG);
-	/* Remplissage de la jauge de vie */
-	draw_rectangle(d->p_screen, set_sdl_rect(100, 70, 200, 30), set_size(WIN_SIZE_X, WIN_SIZE_Y), HEALTH);
-	SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
+int					init_health_icon(t_data *d, t_hud *hud)
+{
+	SDL_Surface		*surface;
+
+	if (!(surface = SDL_LoadBMP(HEALTH_ICON_PATH)))
+	{
+		printf("Erreur de chargement de l'image : %s", SDL_GetError());
+		return (error(hud));
+	}
+	if (!(hud->health_texture = SDL_CreateTextureFromSurface(d->rend, surface)))
+	{
+		printf("Erreur de conversion de la surface : %s", SDL_GetError());
+		return (error(hud));
+	}
+	SDL_FreeSurface(surface);
+	return (0);
+}
+
+int				put_health_icon(t_data *d, t_hud *hud, SDL_Rect pos)
+{	
+	if (SDL_RenderCopy(d->rend, hud->health_texture, NULL, &pos))
+	{
+		printf("Erreur de conversion de la surface : %s", SDL_GetError());
+		return (error(hud));
+	}
+	return (0);
+}
+
+/* initialise et creation de la texture pour afficher le texte de HP  */
+
+int					set_health_info(t_data *d, t_hud *hud, int nb)
+{
+	SDL_Texture		*t_cpy;
+	SDL_Surface		*s_cpy;	
+	char			*text;
+
+	if (nb <= 0)
+		nb = 0;
+	else if (nb > 100)
+		nb = 100;
+	if (!(text = ft_itoa(nb)))
+		return (error(hud));
+	if(!(s_cpy = TTF_RenderText_Blended(hud->font_nb, text, hud->color)))
+	{
+		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
+		return (error(hud));
+	}
+	if (!(hud->message_health_s = copy_surface(d, s_cpy, hud)))
+		return (error(hud));
+	SDL_FreeSurface(s_cpy);
+	return (0);
+}
+
+int				render_health_info(t_data *d, t_hud *hud, SDL_Rect pos)
+{
+	if (!(hud->message_health_t = SDL_CreateTextureFromSurface(d->rend, hud->message_health_s)))
+	{
+		printf("Erreur de conversion de la surface : %s", SDL_GetError());
+		return (error(hud));
+	}
+	if (SDL_RenderCopy(d->rend, hud->message_health_t, NULL, &pos))
+	{
+		printf("Erreur Render Copy : %s", SDL_GetError());
+		return (error(hud));
+	}
 	return (0);
 }
