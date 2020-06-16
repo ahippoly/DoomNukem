@@ -12,6 +12,15 @@ t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls n
 	return (draw);
 }
 
+t_range calc_floor_draw_range_end(t_data *d, t_calced_walls origin)
+{
+	t_range	draw;
+
+	draw.start = ft_max(d->screen_height + ((d->player_height - d->map.room_list[origin.wall.room_id_ref].z_ground) * WIN_SIZE_Y) / origin.dist, 0);
+	draw.end = WIN_SIZE_Y;
+	return (draw);
+}
+
 void draw_floor_line(t_data *d, t_range draw, int x, int room_id)
 {
 	int color;

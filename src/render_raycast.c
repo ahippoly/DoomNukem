@@ -71,10 +71,37 @@ void	draw_floor_lines(t_data *d, int x, int i, t_calced_walls *sorted)
 	
 }
 
+void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls checked, int x)
+{
+	if (*nb > -1)
+	{
+		if (checked.wall.room_id_ref == queue[*nb].wall.room_id_ref)
+		{
+			draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
+			(*nb)--;
+			if (*nb > -1)
+				queue[*nb].dist = checked.dist;
+			return ;
+		}
+		else
+		{
+			draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
+			queue[*nb].dist = checked.dist;
+		}
+	}
+	if (checked.wall.room_id_ref != -1)
+	{
+		(*nb)++;
+		queue[*nb] = checked;
+	}
+}
+
 void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
 {
 	int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];
+	t_calced_walls queue[NB_WALL_MAX];
+	int nb;
 
 	start_angle += step * screen_x.start;
 	clear_p_tab(d, screen_x);
@@ -82,14 +109,21 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
     {
         i = 0;
         sort_walls_by_dist_player(d, d->player_pos , (t_rot){start_angle, cos(start_angle), sin(start_angle)}, sorted_walls);
-		
-        while (i < d->map.wall_count)
-            draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
-			i = 0;
-			while (i < d->map.wall_count && sorted_walls[i].dist > 9998)
+		while (i < d->map.wall_count && sorted_walls[i].dist > 9998)
 			i++;
+		nb = -1;
+        while (i < d->map.wall_count)
+		{
+			draw_floor_slice(d, queue, &nb, sorted_walls[i], screen_x.start);
+            draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
+		}
+		if (nb > -1)
+			draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
+		// i = 0;
+		// while (i < d->map.wall_count && sorted_walls[i].dist > 9998)
+		// 	i++;
+		//draw_floor_lines(d, screen_x.start, i, sorted_walls);
 		//printf("segfault, i = %i\n", i);
-		draw_floor_lines(d, screen_x.start, i, sorted_walls);
         //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle, d->rot), d->texture[0]);
         start_angle += step;
         screen_x.start++;
