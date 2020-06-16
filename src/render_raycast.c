@@ -23,6 +23,54 @@ void	clear_p_tab(t_data *d, t_range screen_x)
 	}
 }
 
+void	find_next_room_wall(t_data *d, int x, int *i, t_calced_walls *sorted)
+{
+	t_calced_walls origin;
+	t_range draw;
+
+	origin = sorted[*i];
+	(*i)++;
+	// printf("entered find room, wall count = %i, i = %i, origin_room_id = %i, wall_test_room = %i\n", d->map.wall_count, *i, origin.wall.room_id_ref, sorted[*i].wall.room_id_ref);
+	//printf("2i = %i, wall_count = %i\n", *i, d->map.wall_count);
+	while (*i < d->map.wall_count)
+	{
+		// printf("wall count = %i, i = %i, origin_room_id = %i, wall_test_room = %i\n", d->map.wall_count, *i, origin.wall.room_id_ref, sorted[*i].wall.room_id_ref);
+		if (sorted[*i].wall.room_id_ref == origin.wall.room_id_ref)
+			break ;
+		if (sorted[*i].wall.room_id_ref != -1)
+		{
+			draw_floor_line(d, calc_floor_draw_range(d, origin, sorted[*i]), x, origin.wall.room_id_ref);
+			find_next_room_wall(d, x, i, sorted);
+			origin.dist = sorted[*i].dist;
+		}
+		(*i)++;
+	}
+	if (*i < d->map.wall_count)
+		draw_floor_line(d, calc_floor_draw_range(d, origin, sorted[*i]), x, origin.wall.room_id_ref);
+	if (*i == d->map.wall_count)
+	{
+		draw = calc_floor_draw_range(d, origin, origin);
+		draw.end = WIN_SIZE_Y;
+		draw_floor_line(d, draw, x, origin.wall.room_id_ref);
+		(*i)++;
+	}
+}
+
+void	draw_floor_lines(t_data *d, int x, int i, t_calced_walls *sorted)
+{
+	i--;
+	// printf("entered once\n");
+	while (++i < d->map.wall_count)
+	{
+		// printf("i = %i, wall_count = %i\n", i, d->map.wall_count);
+		if (sorted[i].wall.room_id_ref == -1)
+			continue ;
+		// printf("enter find room, i = %i\n", i);
+		find_next_room_wall(d, x, &i, sorted);
+	}
+	
+}
+
 void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
 {
 	int i;
@@ -34,8 +82,14 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
     {
         i = 0;
         sort_walls_by_dist_player(d, d->player_pos , (t_rot){start_angle, cos(start_angle), sin(start_angle)}, sorted_walls);
+		
         while (i < d->map.wall_count)
             draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
+			i = 0;
+			while (i < d->map.wall_count && sorted_walls[i].dist > 9998)
+			i++;
+		//printf("segfault, i = %i\n", i);
+		draw_floor_lines(d, screen_x.start, i, sorted_walls);
         //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle, d->rot), d->texture[0]);
         start_angle += step;
         screen_x.start++;
@@ -81,16 +135,20 @@ void raycast_all_screen(t_data *d, t_map_data *map)
     int x;
     int i;
 	t_calced_walls sorted_walls[NB_WALL_MAX];
+	t_range screen_x;
 
     x = 0;
-    while (x < WIN_SIZE_X)
-    {
-        i = 0;
-        sort_walls_by_dist_player(d, d->player_pos, (t_rot){current_angle, cos(current_angle), sin(current_angle)}, sorted_walls);
-        while (i < map->wall_count)
-            draw_vertical_line(d, x, sorted_walls[i++]);
-        //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);
-        current_angle += step;
-        x++;
-    }
+	screen_x.start = 0;
+	screen_x.end = WIN_SIZE_Y;
+	raycast_screen(d, screen_x, current_angle, step);
+    // while (x < WIN_SIZE_X)
+    // {
+    //     i = 0;
+    //     sort_walls_by_dist_player(d, d->player_pos, (t_rot){current_angle, cos(current_angle), sin(current_angle)}, sorted_walls);
+    //     while (i < map->wall_count)
+    //         draw_vertical_line(d, x, sorted_walls[i++]);
+    //     //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);
+    //     current_angle += step;
+    //     x++;
+    // }
 }

@@ -3,6 +3,33 @@
 #include "editor.h"
 #include "img_file.h"
 
+t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls next)
+{
+	t_range	draw;
+
+	draw.start = ft_max(d->screen_height + ((d->player_height - d->map.room_list[origin.wall.room_id_ref].z_ground) * WIN_SIZE_Y) / origin.dist, 0);
+	draw.end = ft_min(d->screen_height + ((d->player_height - d->map.room_list[origin.wall.room_id_ref].z_ground) * WIN_SIZE_Y) / next.dist, WIN_SIZE_Y);
+	return (draw);
+}
+
+void draw_floor_line(t_data *d, t_range draw, int x, int room_id)
+{
+	int color;
+
+	if (room_id == 0)
+		color = 0xFF0000FF;
+	if (room_id == 1)
+		color = 0xFFF00FFF;
+	if (room_id == 2)
+		color = 0x00FFFFFF;
+	if (room_id == 3)
+		color = 0x0000FFFF;
+	while (draw.start < draw.end)
+	{
+		d->p_screen[x + draw.start++ * WIN_SIZE_X] = color;
+	}
+}
+
 void draw_floor(t_data *d, SDL_Surface *text)
 {
     int x;

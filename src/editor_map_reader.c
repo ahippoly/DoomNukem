@@ -10,7 +10,7 @@ char *skip_space(char *str)
 
 char *skip_until_num(char *str, char limit)
 {
-    while ((*str < '0' || *str > '9') && *str != '\0' && *str != limit)
+    while ((*str < '0' || *str > '9') && *str != '-' && *str != '\0' && *str != limit)
         str++;
     return (str);
 }

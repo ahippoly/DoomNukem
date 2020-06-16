@@ -3,7 +3,7 @@
 
 # include "global_header.h"
 # include "editor.h"
-# define FOV_ANGLE 90
+# define FOV_ANGLE 60
 # define MINI_MAP_SIZE_X 250
 # define MINI_MAP_SIZE_Y 250
 # define MINI_MAP_POS_X WIN_SIZE_X - MINI_MAP_SIZE_X
@@ -113,7 +113,8 @@ SDL_Surface *read_img_surface(char *file);
 //render_init_data.c
 void init_sdl_ressources_rend(t_data *d);
 void init_mini_map(t_data *d, t_map_data *map);
-void init_data(t_data *d);
+void init_data(t_data *d, int ac, char **av);
+
 
 //render_event_gesture.c
 void handle_key_event(t_data *d, t_map_data *map);
@@ -165,5 +166,8 @@ t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos
 
 //render_draw_floor.c
 void draw_floor(t_data *d, SDL_Surface *text);
+t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls next);
+void draw_floor_line(t_data *d, t_range draw, int x, int room_id);
+
 
 #endif

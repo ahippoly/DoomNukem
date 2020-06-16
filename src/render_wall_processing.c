@@ -190,7 +190,7 @@ void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ca
     // i = 0;
     // while (i < map->wall_count)
     // {
-    //     printf("wall sorted dist = %f, i = %i, map_count = %i\n", sorted_walls[i].dist, i, map->wall_count);
+    //     printf("wall sorted dist = %f, i = %i, map_count = %i, room_id = %i\n", sorted_walls[i].dist, i, map->wall_count, sorted_walls[i].wall.room_id_ref);
     //     i++;
     // }
 }
