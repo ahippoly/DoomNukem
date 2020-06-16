@@ -37,7 +37,7 @@ void			render_hud_icons(t_data *d, t_hud *hud)
 	put_perso_icon(d, hud, set_sdl_rect(10, 700, 50, 50));
 	put_health_icon(d, hud, set_sdl_rect(80, 720, 30, 30));
 	put_ammo_icon(d, hud, set_sdl_rect(190, 720, 30, 30));
-	put_weapon_icon(d, hud, set_sdl_rect(290, 720, 40, 40));
+	put_weapon_icon(d, hud, set_sdl_rect(290, 720, 100, 30));
 	put_healthpack_icon(d, hud, set_sdl_rect(700, 720, 30, 30));
 	put_key_icon(d, hud, set_sdl_rect(700, 670, 30, 30));
 }
