@@ -56,6 +56,15 @@ t_frange	calc_wall_draw_range(t_data *d, float dist, t_frange wall_height)
 	return (res);
 }
 
+t_frange	calc_prop_draw_range(t_data *d, float dist, float height, float size)
+{
+	t_frange	res;
+
+	res.start = d->screen_height - ((height - d->player_height + size) * WIN_SIZE_Y) / dist;
+	res.end = d->screen_height + ((d->player_height - height + size)  * WIN_SIZE_Y) / dist;
+	return (res);
+}
+
 void sort_proj_point_x(t_proj_point *p1, t_proj_point *p2)
 {
 	t_proj_point *tmp;
@@ -203,4 +212,20 @@ void print_walls(t_data *d)
 	i = 0;
 	while (i < d->map.wall_count)
 		print_wall(d, d->map.wall_list[i++]);
+}
+
+void print_prop(t_data *d, t_props *prop)
+{
+	t_proj_point proj;
+	t_frange		draw_y;
+
+	proj = point_x_on_screen(d, prop->pos, d->rot, d->player_pos);
+	if (proj.on_screen == 1)
+	{
+		draw_y = calc_prop_draw_range(d, proj.dist, 0, 1);
+		while (draw_y.start < draw_y.end)
+		{
+			put_pixel(d->p_screen, (SDL_Point){proj.screen_x, draw_y.start}, (t_size){WIN_SIZE_X,WIN_SIZE_Y}, 0xAA88BBFF);
+		}
+	}
 }

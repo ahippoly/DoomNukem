@@ -52,7 +52,8 @@ int main(int ac, char **av)
     {
         d.time_last_frame = d.time;
         d.time = SDL_GetTicks();
-        //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
+		//d.diff_time = (d.time - d.time_last_frame) / 1000;
+        ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
         handle_poll_event(&d, &d.map);
         handle_key_event(&d, &d.map);
@@ -61,8 +62,9 @@ int main(int ac, char **av)
 
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
-		raycast_thread_init(&d);
-		//print_walls(&d);
+		//raycast_thread_init(&d);
+		//print_prop(&d, &d.props[0]);
+		print_walls(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);

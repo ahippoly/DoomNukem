@@ -4,10 +4,10 @@
 #include "img_file.h"
 
 
-void move_attempt(t_point *pos, float speed, t_rot look_rot)
+void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot)
 {
-    pos->y += speed * look_rot.sin_rot;
-    pos->x += speed * look_rot.cos_rot;
+    pos->y += speed * look_rot.sin_rot ;//* d->diff_time;
+    pos->x += speed * look_rot.cos_rot ;//* d->diff_time;
 }
 
 float mod_pi(float rot)
@@ -63,12 +63,12 @@ void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed)
 	if (will_collide == 1)
 	{
 		// printf("recalc needed, wall rot = %f, rot = %f\n", res.wall.rotation / M_PI_2, rot.rot / M_PI_2);
-		move_attempt(pos, cos(rot.rot - res.wall.rotation) * speed, (t_rot){res.wall.rotation, cos(res.wall.rotation), sin(res.wall.rotation)});
+		move_attempt(d, pos, cos(rot.rot - res.wall.rotation) * speed, (t_rot){res.wall.rotation, cos(res.wall.rotation), sin(res.wall.rotation)});
 		move_grabbed_wall(d, (t_rot){res.wall.rotation, cos(res.wall.rotation), sin(res.wall.rotation)}, cos(rot.rot - res.wall.rotation) * speed);
 	}
 	else if (will_collide < 1)
 	{
-		move_attempt(pos, speed, rot);
+		move_attempt(d, pos, speed, rot);
 		move_grabbed_wall(d, rot, speed);
 	}
 	set_room_ground(d, *pos);

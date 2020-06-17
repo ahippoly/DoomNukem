@@ -19,16 +19,16 @@ int	grab_wall(t_data *d, t_point pos, t_rot look_rot)
 	return (success);
 }
 
-void	move_wall(t_wall *wall, t_rot look_rot, float speed)
+void	move_wall(t_data *d, t_wall *wall, t_rot look_rot, float speed)
 {
-	move_attempt(&wall->p1_f, speed, look_rot);
-	move_attempt(&wall->p2_f, speed, look_rot);
+	move_attempt(d, &wall->p1_f, speed, look_rot);
+	move_attempt(d, &wall->p2_f, speed, look_rot);
 }
 
 void	move_grabbed_wall(t_data *d, t_rot look_rot, float speed)
 {
 	if (d->grabbed_wall)
-		move_wall(d->grabbed_wall, look_rot, speed);
+		move_wall(d, d->grabbed_wall, look_rot, speed);
 }
 
 void	move_z_grabbed_wall(t_data *d, float z_diff)

@@ -12,7 +12,7 @@ SDL_Surface *read_img_surface(char *file)
     readed_file = SDL_LoadBMP(file);
     if (readed_file == NULL)
         exit_with_msg("failed to load texture bmp file");
-    format = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA32);
+    format = SDL_AllocFormat(SDL_PIXELFORMAT_ARGB32);
     converted = SDL_ConvertSurface(readed_file, format, 0);
     SDL_FreeFormat(format);
     SDL_FreeSurface(readed_file);

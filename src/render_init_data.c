@@ -13,7 +13,7 @@ void init_sdl_ressources_rend(t_data *d)
         exit_with_msg("Failed to create Window");
     if (!(d->rend = SDL_CreateRenderer(d->win, -1, SDL_RENDERER_ACCELERATED)))
         exit_with_msg("Failed to create Renderer");
-    d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
+    d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
     //SDL_SetRelativeMouseMode(SDL_TRUE);
     //SDL_SetTextureBlendMode(d->screen, SDL_BLENDMODE_BLEND);
@@ -57,6 +57,8 @@ void init_data(t_data *d, int ac, char **av)
 	d->grabbed_wall = NULL;
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
+	d->props[0].pos = (t_point){3,3};
+	d->props[0].size = 1;
     load_bmp_files(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);

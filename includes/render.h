@@ -22,6 +22,7 @@
 # define PLAYER_HEIGHT 0.5
 # define THREAD_NB 4
 # define MOVE_WALL_Z_SPEED 4
+# define NB_MAX_PROPS 10
 
 typedef struct	s_proj_point
 {
@@ -66,6 +67,14 @@ typedef	struct		s_look_rot
 	float			rev;
 }					t_look_rot;
 
+typedef	struct	s_props
+{
+				t_point		pos;
+				int			size;
+				SDL_Surface	*text;
+}				t_props;
+
+
 typedef struct      s_data
 {
     SDL_Renderer    *rend;
@@ -98,6 +107,7 @@ typedef struct      s_data
     int             framerate;
     int             time_last_frame;
     int             time;
+	int				diff_time;
     int             air_time;
     t_sprite        sprite_lst[NB_SPRITE];
 	/* world edit*/
@@ -106,6 +116,7 @@ typedef struct      s_data
 	float			grab_z;
 	/* floor drawing */
 	t_floor			fl[NB_WALL_MAX][WIN_SIZE_Y];
+	t_props			props[NB_MAX_PROPS];
 }                   t_data;
 
 typedef	struct		s_thread
@@ -136,7 +147,7 @@ void handle_key_event(t_data *d, t_map_data *map);
 void handle_poll_event(t_data *d, t_map_data *map);
 
 //render_movement.c
-void move_attempt(t_point *pos, float speed, t_rot look_rot);
+void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot);
 void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed);
 void gravity(t_data *d);
 
@@ -165,7 +176,7 @@ void	raycast_all_screen(t_data *d, t_map_data *map);
 
 //render_world_edit.c
 int		grab_wall(t_data *d, t_point pos, t_rot look_rot);
-void	move_wall(t_wall *wall, t_rot look_rot, float speed);
+void	move_wall(t_data *d, t_wall *wall, t_rot look_rot, float speed);
 void	move_grabbed_wall(t_data *d, t_rot look_rot, float speed);
 void	move_z_grabbed_wall(t_data *d, float z_diff);
 void	rot_wall(t_wall *wall, float rot, int pivot_point);
@@ -191,5 +202,7 @@ void print_floor(t_data *d);
 void draw_all_floor_slice(t_data *d);
 void draw_floor2(t_data *d, t_floor *fl, double height);
 
+//render_props.c
+void print_prop(t_data *d, t_props *prop);
 
 #endif

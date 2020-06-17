@@ -12,13 +12,15 @@ void calc_transparency(int *int1, int *int2, float alpha)
     int i;
     unsigned char *nb;
     unsigned char *nb2;
+	float rev_alp;
 
-    i = 0;
+    i = 1;
     nb = (unsigned char*)int1;
     nb2 = (unsigned char*)int2;
-    while (i < 3)
+	rev_alp = 1 - alpha;
+    while (i < 4)
     {
-        nb[i] = alpha * nb[i] +  (1 - alpha) * nb2[i];
+        nb[i] = alpha * nb[i] + rev_alp * nb2[i];
         i++;
     }
 }
