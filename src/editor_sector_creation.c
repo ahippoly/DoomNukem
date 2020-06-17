@@ -173,6 +173,22 @@ void recreate_room_height(t_env *env)
 	}
 }
 
+void recreate_floor_text(t_env *env)
+{
+	int nb_deleted;
+	int i;
+
+	i = 0;
+	nb_deleted = 0;
+	while (i < env->room_count)
+	{
+		while (env->room_text[i + nb_deleted] == -42)
+			nb_deleted++;
+		env->room_text[i] = env->room_text[i + nb_deleted];
+		i++;
+	}
+}
+
 void recreate_room_list(t_env *env)
 {
     int i;
@@ -184,6 +200,7 @@ void recreate_room_list(t_env *env)
     free(env->room_list);
     env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count);
 	recreate_room_height(env);
+	recreate_floor_text(env);
     while (i < env->wall_count)
     {
         if (env->wall_list[i].id != -1 && env->wall_list[i].room_id_ref != -1)
@@ -198,6 +215,7 @@ void recreate_room_list(t_env *env)
             current_room->wall_ref.end = i;
             current_room->nb_wall = i - begin;
 			current_room->height = env->room_height[current_room_id];
+			current_room->floor_text = env->room_text[current_room_id];
         }
         i++;
     }

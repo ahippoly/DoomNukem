@@ -122,6 +122,7 @@ void read_room(char *line, t_room *room, t_map_data *map)
     error += read_param(line, "nb_wall", &room->nb_wall);
     error += read_param(line, "wall_ref_range", &room->wall_ref.start);
 	error += read_param(line, "height", &room->height.start);
+	error += read_param(line, "floor_text", &room->floor_text);
     if (error > 0)
         exit_with_msg("error while assigning value to room on map reader\n");
 	room->z_ground = (float)room->height.start / UNIT;

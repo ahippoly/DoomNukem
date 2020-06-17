@@ -15,7 +15,7 @@
 # define TILE_HITBOX 7
 # define WALL_HITBOX 10
 
-# define NB_BUTTONS 9
+# define NB_BUTTONS 10
 # define BUTTON_DEL 0
 # define BUTTON_CREATE_ROOM 1
 # define BUTTON_TEXT_LEFT 2
@@ -27,6 +27,7 @@
 # define BUTTON_MOB_LEFT 6
 # define BUTTON_MOB_RIGHT 7
 # define BUTTON_MOB_PLACING 8
+# define BUTTON_FLOOR_TEXT 9
 
 #define UNIT 10
 
@@ -152,6 +153,7 @@ typedef struct      s_env
     t_wall          *wall_list;
     t_room          *room_list;
 	t_range			room_height[NB_WALL_MAX];
+	int				room_text[NB_WALL_MAX];
 	t_icon			*icon_list;
     t_wall_ref      ***map_wall_ref;
     t_size          map_size;
@@ -291,5 +293,6 @@ void change_selected_wall_texture(t_env *env, int texture_id);
 void select_previous_mob(t_env *env);
 void select_next_mob(t_env *env);
 void select_previous_texture(t_env *env);
+void	set_room_text(t_env *env);
 
 #endif

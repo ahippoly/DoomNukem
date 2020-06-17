@@ -71,6 +71,12 @@ void	draw_floor_lines(t_data *d, int x, int i, t_calced_walls *sorted)
 	
 }
 
+t_room	*get_room_by_id(t_data *d, t_wall *wall)
+{
+	if (wall->room_id_ref > -1)
+		return (&d->map.room_list[wall->room_id_ref]);
+}
+
 void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls checked, int x)
 {
 	int room_id;
@@ -81,7 +87,7 @@ void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls 
 		if (checked.wall.room_id_ref == queue[*nb].wall.room_id_ref)
 		{
 			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, room_id);
-			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  queue[*nb].wall.texture_id);
+			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  get_room_by_id(d, &queue[*nb].wall)->floor_text);
 			(*nb)--;
 			if (*nb > -1)
 				queue[*nb].dist = checked.dist;
@@ -89,7 +95,7 @@ void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls 
 		}
 		else
 		{
-			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  queue[*nb].wall.texture_id);
+			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  get_room_by_id(d, &queue[*nb].wall)->floor_text);
 			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
 			queue[*nb].dist = checked.dist;
 		}
@@ -123,7 +129,7 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
             draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
 		}
 		if (nb > -1)
-			print_floor_slice(d, d->fl[queue[nb].wall.room_id_ref], screen_x.start, calc_floor_draw_range_end(d, queue[nb]),  queue[nb].wall.texture_id);
+			print_floor_slice(d, d->fl[queue[nb].wall.room_id_ref], screen_x.start, calc_floor_draw_range_end(d, queue[nb]), get_room_by_id(d, &queue[nb].wall)->floor_text);
 			//draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
 		// i = 0;
 		// while (i < d->map.wall_count && sorted_walls[i].dist > 9998)

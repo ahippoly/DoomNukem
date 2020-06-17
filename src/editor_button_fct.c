@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 05:08:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/10 05:29:54 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/17 04:44:16 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ void	del_selected_wall(t_env *env)
 {
 	del_wall(env, env->selected_wall_id);
 	env->selected_wall_id = -1;
+}
+
+void	set_room_text(t_env *env)
+{
+	int tmp;
+	
+	if (env->selected_wall_id > -1)
+		if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) != -1)
+			env->room_text[tmp] = env->selected_texture;
 }
 
 void	create_room_button(t_env *env)

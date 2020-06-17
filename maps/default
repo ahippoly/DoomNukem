@@ -26,10 +26,10 @@ id : 22 ; p1 : 9,5 ; p2 : 9,7 ; p1_height : 33,45 ; p2_height : 33,45 ; texture_
 
 ROOM LIST
 ROOM_COUNT 4
-id : 0 ; nb_wall : 5 ; wall_ref_range : 0,5 ; height : 20,30 ; 
-id : 1 ; nb_wall : 3 ; wall_ref_range : 6,9 ; height : 25,35 ; 
-id : 2 ; nb_wall : 3 ; wall_ref_range : 10,13 ; height : 30,35 ; 
-id : 3 ; nb_wall : 3 ; wall_ref_range : 18,21 ; height : 30,35 ; 
+id : 0 ; nb_wall : 5 ; wall_ref_range : 0,5 ; height : 20,30 ; floor_text : 1 ; 
+id : 1 ; nb_wall : 3 ; wall_ref_range : 6,9 ; height : 25,35 ; floor_text : 2 ; 
+id : 2 ; nb_wall : 3 ; wall_ref_range : 10,13 ; height : 30,35 ; floor_text : 3 ; 
+id : 3 ; nb_wall : 3 ; wall_ref_range : 18,21 ; height : 30,35 ; floor_text : 0 ; 
 
 
 WALL_REF MAP

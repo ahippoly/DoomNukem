@@ -28,6 +28,7 @@ void create_room_mode(t_env *env)
             env->start_room_point = create_point(-1, -1);
 			env->room_height[env->room_count].start = env->input_lst[INPUT_ROOM_GROUND].value;
 			env->room_height[env->room_count].end = env->input_lst[INPUT_ROOM_CEIL].value;
+			env->room_text[env->room_count] = 0;
             env->room_count++;
         }
         printf("start room point : x=%i, y=%i, hovered_corner : x=%i, y=%i\n", env->start_room_point.x, env->start_room_point.y, env->hovered_corner.x, env->hovered_corner.y);

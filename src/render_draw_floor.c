@@ -247,7 +247,7 @@ void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id)
 	SDL_Surface *text;
 	unsigned int	*pixels;
 
-	text = d->texture[1];
+	text = d->texture[text_id];
 	t_max.w = text->w - 1;
 	t_max.h = text->h - 1;
 	draw_y.start = y.start * WIN_SIZE_X;

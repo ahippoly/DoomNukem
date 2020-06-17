@@ -177,6 +177,7 @@ void del_room(t_env *env, int room_id)
         i++;
     }
 	env->room_height[room_id].start = -42;
+	env->room_text[room_id] = -42;
     env->room_count--;
 }
 
