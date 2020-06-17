@@ -32,8 +32,6 @@ void handle_key_event(t_data *d, t_map_data *map)
 		if (d->clavier[SDL_SCANCODE_C])
 			raycast_thread_init(d);
 	//printf("player rot = %f\n", fabs(fmod(d->rot, 4)));
-
-	
 }
 
 void inc_fov(t_data *d, float inc)

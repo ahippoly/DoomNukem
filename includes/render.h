@@ -117,6 +117,7 @@ typedef struct      s_data
 	/* floor drawing */
 	t_floor			fl[NB_WALL_MAX][WIN_SIZE_Y];
 	t_props			props[NB_MAX_PROPS];
+	int				bullet;
 }                   t_data;
 
 typedef	struct		s_thread
