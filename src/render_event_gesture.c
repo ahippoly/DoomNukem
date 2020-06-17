@@ -83,6 +83,9 @@ void handle_poll_event(t_data *d, t_map_data *map)
                	inc_fov(d, 0.05);
 			if (d->clavier[SDL_SCANCODE_K])
                	inc_fov(d, -0.05);
+			if (d->clavier[SDL_SCANCODE_V])
+				print_floor(d);
+
         }
         if (d->e.type == SDL_KEYUP)
         {
@@ -103,6 +106,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
 				// if (check_player_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
+				init_floors(d);
 				raycast_screen(d, (t_range){400, 401}, d->rot, 0);
                 // draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));
                 // printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot).scale_z);

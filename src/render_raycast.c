@@ -123,7 +123,8 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
             draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
 		}
 		if (nb > -1)
-			draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
+			print_floor_slice(d, d->fl[queue[nb].wall.room_id_ref], screen_x.start, calc_floor_draw_range_end(d, queue[nb]),  queue[nb].wall.texture_id);
+			//draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
 		// i = 0;
 		// while (i < d->map.wall_count && sorted_walls[i].dist > 9998)
 		// 	i++;

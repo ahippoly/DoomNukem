@@ -13,7 +13,7 @@
 # define MOVE_STEP 0.08
 # define ROT_STEP 0.05 * M_PI_2
 # define MOUSE_SENS 0.004
-# define Y_VIEW_RANGE 1.5
+# define Y_VIEW_RANGE 1
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 0.5
@@ -185,8 +185,11 @@ t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls n
 t_range calc_floor_draw_range_end(t_data *d, t_calced_walls origin);
 void draw_floor_line(t_data *d, t_range draw, int x, int room_id);
 void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id);
-void init_floor(t_data *d, t_floor *fl, t_room *room);
+void init_floor(t_data *d, t_floor *fl);
 void	init_floors(t_data *d);
+void print_floor(t_data *d);
+void draw_all_floor_slice(t_data *d);
+void draw_floor2(t_data *d, t_floor *fl, double height);
 
 
 #endif

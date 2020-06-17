@@ -57,9 +57,11 @@ int main(int ac, char **av)
         handle_poll_event(&d, &d.map);
         handle_key_event(&d, &d.map);
         gravity(&d);
-        draw_floor(&d, d.texture[1]);
+		//draw_all_floor_slice(&d);
+
+        //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
-		//raycast_thread_init(&d);
+		raycast_thread_init(&d);
 		//print_walls(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
