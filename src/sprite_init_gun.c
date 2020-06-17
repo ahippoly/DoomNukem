@@ -285,31 +285,21 @@ static void      init_anim_SSG(t_sprite *SSG)
     int i;
 
 
-    SSG->anim[IDLE].pos->x = 1;
+    SSG->anim[IDLE].pos->x = 0;
     SSG->anim[IDLE].pos->y = 0;
     SSG->anim[IDLE].nb_frame = 1;
     SSG->anim[IDLE].offset.x = 0;
     SSG->anim[IDLE].offset.y = 0;
-    SSG->anim[FIRE].pos->x = 2;
+    SSG->anim[FIRE].pos->x = 1;
     SSG->anim[FIRE].pos->y = 0; 
     SSG->anim[FIRE].nb_frame = 3;
     SSG->anim[FIRE].offset.x = 0;
     SSG->anim[FIRE].offset.y = 0;
-    SSG->anim[RELOAD].pos->x = 2;
-    SSG->anim[RELOAD].pos->y = 3; 
-    SSG->anim[RELOAD].nb_frame = 21;
+    SSG->anim[RELOAD].pos->x = 4;
+    SSG->anim[RELOAD].pos->y = 0; 
+    SSG->anim[RELOAD].nb_frame = 18;
     SSG->anim[RELOAD].offset.x = 0;
     SSG->anim[RELOAD].offset.y = 0;
-    SSG->anim[ICON].pos->x = 0;
-    SSG->anim[ICON].pos->y = 0;
-    SSG->anim[ICON].nb_frame = 1;
-    SSG->anim[ICON].offset.x = 0;
-    SSG->anim[ICON].offset.y = 0;
-    SSG->anim[ALTFIRE].pos->x = 2;
-    SSG->anim[ALTFIRE].pos->y = 1; 
-    SSG->anim[ALTFIRE].nb_frame = 6;
-    SSG->anim[ALTFIRE].offset.x = 0;
-    SSG->anim[ALTFIRE].offset.y = 0;
 }
 
 t_sprite    sprite_init_SSG(SDL_Texture *text)
@@ -325,11 +315,11 @@ t_sprite    sprite_init_SSG(SDL_Texture *text)
 
     SSG.index = 3;
 
-    SSG.total_size.w = 459;
-    SSG.total_size.h = 1023;
+    SSG.total_size.w = 1836;
+    SSG.total_size.h = 186;
 
-    SSG.nb_frame.x = 3;    
-    SSG.nb_frame.y = 11;  
+    SSG.nb_frame.x = 12;    
+    SSG.nb_frame.y = 2;  
 
     SSG.frame_size.w = SSG.total_size.w / SSG.nb_frame.x;
     SSG.frame_size.h = SSG.total_size.h / SSG.nb_frame.y;
@@ -363,6 +353,11 @@ static void      init_anim_Melee(t_sprite *Melee)
     Melee->anim[FIRE].nb_frame = 10;
     Melee->anim[FIRE].offset.x = 0;
     Melee->anim[FIRE].offset.y = 5;
+    Melee->anim[RELOAD].pos->x = 0;
+    Melee->anim[RELOAD].pos->y = 0;
+    Melee->anim[RELOAD].nb_frame = 0;
+    Melee->anim[RELOAD].offset.x = 0;
+    Melee->anim[RELOAD].offset.y = 5;
 }
 
 t_sprite    sprite_init_Melee(SDL_Texture *text)
