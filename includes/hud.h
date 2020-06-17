@@ -1,9 +1,9 @@
 #ifndef HUD_H
 # define HUD_H
 
+# include "global_header.h"
 # include "render.h"
 # include "img_file.h"
-# include "global_header.h"
 # include "editor.h"
 # include "SDL_ttf.h"
 

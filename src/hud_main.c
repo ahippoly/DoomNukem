@@ -3,7 +3,7 @@
 int				init_hud(t_data *d, t_hud *hud)
 {
 	ft_bzero(hud, sizeof(hud));
-	hud->current_weap_id = 5; // initialisation de l'arme, a enlever si on commence à 0
+	hud->current_weap_id = 1; // initialisation de l'arme, a enlever si on commence à 0
 	if (hud->current_weap_id < 0 || hud->current_weap_id >= 5)
 		hud->current_weap_id = 0;
 	hud->current_perso_id = 7; // recuperer dynamiquement les perso 
@@ -58,7 +58,7 @@ void			update_hud_info(t_data *d, t_hud *hud)
 	set_key_info(d, hud, hud->inv.key);
 }
 
-int 			main(void)
+int 			main(int ac, char **av)
 {
     t_map_data  map;
     t_data      d;
@@ -67,7 +67,7 @@ int 			main(void)
 	int			i;
 
 	map = read_map("maps/editor_map_0");
-	init_data(&d);
+	init_data(&d, ac, av);
 	init_hud(&d, &hud);
 	init_ttf(&hud);
 	d.bullet = 0;
