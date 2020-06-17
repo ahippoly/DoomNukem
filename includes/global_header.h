@@ -29,6 +29,13 @@
 # define NB_ANIM 10
 # define NB_SPRITE 10
 
+typedef struct  s_coord
+{
+    int x;
+    int y;
+    int z;
+}               t_coord;
+
 typedef struct s_point
 {
     double x;
@@ -86,8 +93,9 @@ typedef struct      s_sprite
 
 typedef struct      s_mob
 {
-
-                    t_sprite sprite;
+                    int         life;
+                    t_coord     pos;
+                    t_sprite    sprite;
 }                   t_mob;
 
 typedef struct      s_wall

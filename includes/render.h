@@ -40,8 +40,11 @@ typedef struct      s_data
     double          speed_modifier;
 
 
-    t_sprite        sprite[30];
-    int             sprite_ind;
+    t_sprite        sprite[15];
+    t_mob           mob[20];
+    int             gun_ind;
+    int             mob_ind;
+    int             mobs_on_screen;
 }                   t_data;
 
 void create_mini_map(t_data *d, t_map_data *map);

@@ -4,7 +4,7 @@
 #include "img_file.h"
 #include "sprite.h"
 
-void      init_anim_AR(t_sprite *AR)
+static void      init_anim_AR(t_sprite *AR)
 {
     int i;
 
@@ -75,7 +75,7 @@ t_sprite    sprite_init_AR(SDL_Texture *text)
     return (AR);
 }
 
-void      init_anim_DD(t_sprite *DD)
+static void      init_anim_DD(t_sprite *DD)
 {
     int i;
     
@@ -138,7 +138,7 @@ t_sprite    sprite_init_DD(SDL_Texture *text)
     return (DD);
 }
 
-void      init_anim_LMG(t_sprite *LMG)
+static void      init_anim_LMG(t_sprite *LMG)
 {
     int i;
 
@@ -212,8 +212,7 @@ t_sprite    sprite_init_LMG(SDL_Texture *text)
     return (LMG);
 }
 
-
-void      init_anim_Rev(t_sprite *Rev)
+static void      init_anim_Rev(t_sprite *Rev)
 {
     int i;
  
@@ -281,7 +280,7 @@ t_sprite    sprite_init_Revolver(SDL_Texture *text)
     return (Rev);
 }
 
-void      init_anim_SSG(t_sprite *SSG)
+static void      init_anim_SSG(t_sprite *SSG)
 {
     int i;
 
@@ -350,7 +349,7 @@ t_sprite    sprite_init_SSG(SDL_Texture *text)
     return (SSG);
 }
 
-void      init_anim_Melee(t_sprite *Melee)
+static void      init_anim_Melee(t_sprite *Melee)
 {
     int i;
 
