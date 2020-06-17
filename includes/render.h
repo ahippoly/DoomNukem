@@ -118,6 +118,11 @@ typedef struct      s_data
 	t_floor			fl[NB_WALL_MAX][WIN_SIZE_Y];
 	t_props			props[NB_MAX_PROPS];
 	int				bullet;
+	t_sprite        sprite[15];
+    t_mob           mob[20];
+    int             gun_ind;
+    int             mob_ind;
+    int             mobs_on_screen;
 }                   t_data;
 
 typedef	struct		s_thread

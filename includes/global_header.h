@@ -48,6 +48,12 @@
 # define ANIM_WEAPON_RELOAD 0;
 # define ANIM_WEAPON_SHOOT 1;
 
+typedef struct  s_coord
+{
+    int x;
+    int y;
+    int z;
+}               t_coord;
 
 typedef struct		s_point
 {
@@ -83,31 +89,37 @@ typedef	struct 		s_rot
 
 typedef struct      s_anim
 {
+                    SDL_Point   offset;
                     SDL_Point   pos[NB_FRAME];
-                    SDL_Point   offset[NB_FRAME];
                     int         nb_frame;
                     int         current_frame;
-                    float      speed;
+                    float		speed;
 }                   t_anim;
 
 typedef struct      s_sprite
-{
+{  
+                    int             aim_on;
+                    int             anim_end;
+                    Uint32          time;
+                    int             on;
+                    int             index;
                     unsigned int    *pixels;
                     t_size          total_size;
                     t_size          frame_size;
-                    SDL_Rect        displayed_frame;
                     SDL_Point       nb_frame;
                     SDL_Point       idle_frame;
+                    SDL_Point       displayed_part;
                     t_anim          anim[NB_ANIM];
                     int             nb_anim;
                     int             idle_animation;
+                    SDL_Texture     *text;
 }                   t_sprite;
 
 typedef struct      s_mob
 {
-                    t_sprite sprite;
-                    t_point pos;
-                    float  agro_range;
+                    int         life;
+                    t_coord     pos;
+                    t_sprite    sprite;
 }                   t_mob;
 
 typedef struct      s_wall
