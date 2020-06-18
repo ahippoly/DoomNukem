@@ -3,6 +3,28 @@
 #include "editor.h"
 #include "img_file.h"
 
+t_proj_point clip_point(t_data *d, t_line points, t_point p, t_point pos)
+{
+	t_point	new;
+	t_proj_point res;
+	float angle;
+
+	res = point_x_on_screen(d, p, d->rot, pos);
+	if (res.on_screen == 0)
+	{
+		if (res.screen_x < 0)
+			angle = d->rot - d->fov_rad / 2;
+		else if (res.screen_x > WIN_SIZE_X)
+			angle = d->rot + d->fov_rad / 2;
+		new = inter_with_dir(pos, (t_rot){angle, cos(angle), sin(angle)}, points.p1, points.p2);
+		if (new.x != -42)
+			return (point_x_on_screen(d, new, d->rot, pos));
+		else
+			res.on_screen = 0;
+	}
+	return (res);
+}
+
 t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos)
 {
 	t_point	diff;
@@ -10,7 +32,7 @@ t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos
 	float	sin_rot;
 	t_proj_point res;
 
-	// printf("point :%f,%f ; pos:%f,%f\n", point.x, point.y, pos.x, pos.y);
+	 //printf("point :%f,%f ; pos:%f,%f\n", point.x, point.y, pos.x, pos.y);
 	diff.x = point.x - pos.x;
 	diff.y = point.y - pos.y;
 	cos_rot = cos(rot);
@@ -18,14 +40,33 @@ t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos
 	res.dist = (diff.x * cos_rot + diff.y * sin_rot) * d->fov;
 	res.scale_len = (diff.y * cos_rot - diff.x * sin_rot + res.dist) / (res.dist * 2);
 	res.screen_x = res.scale_len * WIN_SIZE_X;
+	// if (res.screen_x >= 0 && res.screen_x < WIN_SIZE_X)
+	// 	res.on_screen = 1;
+	// else
+	// 	res.on_screen = 0;
 	if (res.dist >= 0 )
 		res.on_screen = 1;
 	else
 		res.on_screen = 0;
+	// if (res.screen_x >= WIN_SIZE_X)
+	// 	return (clip_point(d, point, pos, 1));
+	// if (res.screen_x < 0)
+	// 	return (clip_point(d, point, pos, 0));
+	// else
+	// 	res.on_screen = 1;
 	//printf("scale_len = %f\n", res.scale_len);
-	// printf("dist = %f\n", res.dist);
-	// printf("screen_x = %i\n", res.screen_x);
+	//  printf("dist = %f\n", res.dist);
+	//  printf("screen_x = %i\n", res.screen_x);
 	return (res);
+}
+
+void	proj_wall(t_data *d, t_wall *wall)
+{
+	t_line	points;
+
+	points.p1 = wall->p1_f;
+	points.p2 = wall->p2_f;
+
 }
 
 void draw_point(t_data *d, t_proj_point point)
@@ -56,9 +97,10 @@ t_frange	calc_wall_draw_range(t_data *d, float dist, t_frange wall_height)
 	return (res);
 }
 
-t_frange	calc_prop_draw_range(t_data *d, float dist, float height, float size)
+
+t_range	calc_prop_draw_range(t_data *d, float dist, float height, float size)
 {
-	t_frange	res;
+	t_range	res;
 
 	res.start = d->screen_height - ((height - d->player_height + size) * WIN_SIZE_Y) / dist;
 	res.end = d->screen_height + ((d->player_height - height + size)  * WIN_SIZE_Y) / dist;
@@ -107,6 +149,7 @@ void	draw_vert_line(t_data *d, t_draw_line line)
 		line.scale_z += line.scale_z_step;
 	}
 }
+
 
 void draw_wall_lines(t_data *d, t_proj_wall wall)
 {
@@ -167,16 +210,20 @@ void print_wall(t_data *d, t_wall wall)
 {
 	t_proj_point point1;
 	t_proj_point point2;
+	t_line		points;
 	int i;
 	t_frange	draw_y;
 	t_frange	step_y;
 	int diff_x;
 
 
-	point1 = point_x_on_screen(d, wall.p1_f, d->rot, d->player_pos);
-	point2 = point_x_on_screen(d, wall.p2_f, d->rot, d->player_pos);
-	point1.scale_x = 0;
-	point2.scale_x = wall.length;
+	// point1 = point_x_on_screen(d, wall.p1_f, d->rot, d->player_pos);
+	// point2 = point_x_on_screen(d, wall.p2_f, d->rot, d->player_pos);
+	points = (t_line){wall.p1_f, wall.p2_f};
+	point1 = clip_point(d, points, points.p1, d->player_pos);
+	point2 = clip_point(d, points, points.p2, d->player_pos);
+	point1.scale_x = wall.length;
+	point2.scale_x = 0;
 	if (point1.on_screen && point2.on_screen)
 		draw_wall_lines(d, (t_proj_wall){point1, point2, wall});
 	//sort_proj_point_x(&point1, &point2);
@@ -214,18 +261,85 @@ void print_walls(t_data *d)
 		print_wall(d, d->map.wall_list[i++]);
 }
 
+void print_text_screen(unsigned int *p_tab, SDL_Surface *text, SDL_Rect draw)
+{
+	SDL_Point	end;
+	t_point		t_scale;
+	t_point		t_step;
+	int ty;
+	float tx_start;
+	int x_start;
+	unsigned int *pixels;
+
+	t_step.x = (float)text->w / draw.w;
+	t_step.y = (float)text->h / draw.h;
+	end.x = ft_min(draw.x + draw.w, WIN_SIZE_X);
+	end.y = ft_min(draw.y + draw.h, WIN_SIZE_Y) * WIN_SIZE_Y;
+	tx_start = 0;
+	if (draw.x < 0)
+		tx_start = t_step.x * -draw.x;
+	if (draw.y < 0)
+		t_scale.y = t_step.y * -draw.y;
+	draw.y = ft_max(draw.y, 0) * WIN_SIZE_Y;
+	x_start = ft_max(draw.x, 0);
+	pixels = (unsigned int*)text->pixels;
+	while (draw.y < end.y)
+	{
+		t_scale.x = tx_start;
+		ty = (int)t_scale.y * text->w;
+		draw.x = x_start;
+		while (draw.x < end.x)
+		{
+			//printf("draw : %d,%d, t_scale : %f,%f\n", draw.x, draw.y, t_scale.x, t_scale.y);
+			p_tab[draw.x + draw.y] = pixels[(int)t_scale.x + ty];
+			t_scale.x += t_step.x;
+			draw.x++;
+		}
+		t_scale.y += t_step.y;
+		draw.y += WIN_SIZE_Y;
+	}
+
+}
+
+void print_prop_screen(t_data *d, t_props *prop, t_proj_point proj)
+{
+	SDL_Rect		draw;
+	t_point			t_scale;
+	t_point			t_step;
+	int size_2;
+
+	size_2 = prop->size * WIN_SIZE_X / proj.dist;
+	draw.x = proj.screen_x - size_2;
+	draw.w = size_2 * 2;
+	draw.y = d->screen_height - ((prop->z_pos - d->player_height + prop->size) * WIN_SIZE_Y) / proj.dist;
+	draw.h = ((2 * prop->size) * WIN_SIZE_Y) / proj.dist;
+	//printf("draw : %d,%d, h,w : %d,%d, prop_size : %f, dist = %f\n", draw.x, draw.y, draw.w, draw.h, prop->size, proj.dist);
+	print_text_screen(d->p_screen, prop->text, draw);
+}
+
+t_range	cut_border(t_range draw_y)
+{
+	draw_y.start = ft_fmax(draw_y.start, 0);
+	draw_y.end = ft_fmin(draw_y.end, WIN_SIZE_Y);
+	return (draw_y);
+}
+
 void print_prop(t_data *d, t_props *prop)
 {
 	t_proj_point proj;
-	t_frange		draw_y;
+	t_range		draw_y;
 
 	proj = point_x_on_screen(d, prop->pos, d->rot, d->player_pos);
 	if (proj.on_screen == 1)
 	{
-		draw_y = calc_prop_draw_range(d, proj.dist, 0, 1);
-		while (draw_y.start < draw_y.end)
-		{
-			put_pixel(d->p_screen, (SDL_Point){proj.screen_x, draw_y.start}, (t_size){WIN_SIZE_X,WIN_SIZE_Y}, 0xAA88BBFF);
-		}
+		print_prop_screen(d, prop, proj);
+		// draw_y = calc_prop_draw_range(d, proj.dist, 2.5, prop->size);
+		// draw_y = cut_border(draw_y);
+		// while (draw_y.start < draw_y.end)
+		// {
+		// 	put_pixel(d->p_screen, (SDL_Point){proj.screen_x, draw_y.start++}, (t_size){WIN_SIZE_X, WIN_SIZE_Y}, 0xAA88BBFF);
+
+		// 	//put_pixel(proj.screen_x, draw_y.start++, d->p_screen, 0xAA88BBFF);
+		// }
 	}
 }

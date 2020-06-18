@@ -70,7 +70,8 @@ typedef	struct		s_look_rot
 typedef	struct	s_props
 {
 				t_point		pos;
-				int			size;
+				float		size;
+				float		z_pos;
 				SDL_Surface	*text;
 }				t_props;
 

@@ -63,7 +63,8 @@ int main(int ac, char **av)
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
-		//print_prop(&d, &d.props[0]);
+		//print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
+		print_prop(&d, &d.props[0]);
 		//print_walls(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);

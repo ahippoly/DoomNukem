@@ -61,6 +61,20 @@ typedef struct		s_point
     float			y;
 }              		t_point;
 
+typedef	struct		s_line
+{
+	t_point			p1;
+	t_point			p2;
+}					t_line;
+
+typedef struct		s_draw
+{
+    int				start_x;
+    int				end_x;
+	int				start_y;
+    int				end_y;
+}               	t_draw;
+
 typedef struct		s_range
 {
     int				start;
@@ -229,6 +243,9 @@ void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par
 t_rot calc_sin_cos_rot(float rot);
 void sort_int(int *a, int *b);
 void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n);
+
+
+void print_text_screen(unsigned int *p_tab, SDL_Surface *text, SDL_Rect draw);
 
 
 
