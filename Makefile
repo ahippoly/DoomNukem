@@ -4,7 +4,8 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			editor_map_move.c editor_sector_creation.c line_intersect.c \
 			editor_mouse_event.c editor_map_output.c utils.c \
 			editor_input.c editor_map_reader.c editor_debug_utils.c \
-			editor_icon.c)
+			editor_icon.c editor_init_data.c editor_init_data2.c image_gesture2.c \
+			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c)
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
