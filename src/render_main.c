@@ -65,9 +65,10 @@ int main(int ac, char **av)
 		raycast_thread_init(&d);
 		//print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		print_prop(&d, &d.props[0]);
+		//move_with_collide(&d, &d.props[0].pos, get_angle(d.props[0].pos, d.player_pos), 0.01);
 		//print_walls(&d);
-		//printf("angle = %f, cos = %f, sin = %f\n", get_angle(d.player_pos, d.props[0].pos).rot, get_angle(d.player_pos, d.props[0].pos).cos_rot, get_angle(d.player_pos, d.props[0].pos).sin_rot);
-        //printf("dist = %f\n", get_dist(d.player_pos, d.props[0].pos));
+		// printf("angle = %f, cos = %f, sin = %f\n", get_angle(d.player_pos, d.props[0].pos).rot, get_angle(d.player_pos, d.props[0].pos).cos_rot, get_angle(d.player_pos, d.props[0].pos).sin_rot);
+        // printf("dist = %f\n", get_dist(d.player_pos, d.props[0].pos));
 		update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);

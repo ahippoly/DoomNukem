@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/20 17:14:57 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/20 18:28:20 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,10 +198,18 @@ t_rot	get_angle(t_point pos1, t_point pos2)
 	t_point diff;
 	t_rot rot;
 
-	diff.x = - fabs(pos2.x - pos1.x);
+	diff.x = (pos2.x - pos1.x);
 	diff.y = (pos2.y - pos1.y);
-	rot.rot = atan(diff.y / diff.x);
-	rot.cos_rot = cos(rot.rot);
+	if (diff.x > 0)
+	{
+		rot.rot = atan(diff.y / diff.x);
+		rot.cos_rot = cos(rot.rot);
+	}
+	else
+	{
+		rot.rot = -atan(diff.y / diff.x);
+		rot.cos_rot = -cos(rot.rot);
+	}
 	rot.sin_rot = sin(rot.rot);
 	return (rot);
 }
