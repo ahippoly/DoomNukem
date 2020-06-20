@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/15 05:55:08 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/20 17:14:57 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,4 +182,26 @@ void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n)
 		i++;
 	}
 	return (dst);
+}
+
+float	get_dist(t_point pos1, t_point pos2)
+{
+	t_point diff;
+
+	diff.x = pos2.x - pos1.x;
+	diff.y = pos2.y - pos1.y;
+	return (hypot(diff.x, diff.y));
+}
+
+t_rot	get_angle(t_point pos1, t_point pos2)
+{
+	t_point diff;
+	t_rot rot;
+
+	diff.x = - fabs(pos2.x - pos1.x);
+	diff.y = (pos2.y - pos1.y);
+	rot.rot = atan(diff.y / diff.x);
+	rot.cos_rot = cos(rot.rot);
+	rot.sin_rot = sin(rot.rot);
+	return (rot);
 }

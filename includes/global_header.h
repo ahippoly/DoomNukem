@@ -246,6 +246,8 @@ void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n);
 
 
 void print_text_screen(unsigned int *p_tab, SDL_Surface *text, SDL_Rect draw);
+float	get_dist(t_point pos1, t_point pos2);
+t_rot	get_angle(t_point pos1, t_point pos2);
 
 
 
