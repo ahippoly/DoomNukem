@@ -109,17 +109,16 @@ void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
     {
         i = 0;
         sort_ray_by_dist_player(d, d->player_pos , (t_rot){start_angle, cos(start_angle), sin(start_angle)}, sorted);
-		while (i < d->nb_obj && sorted[i].dist > 9998)
+		while (i < d->nb_obj && sorted[i].dist < 9999)
 			i++;
 		nb = -1;
 		// if (sorted[i].dist < 9999)
 		// 	d->p_screen[screen_x.start + 400 * WIN_SIZE_X] = 0xFFDDAADD;
-        while (i < d->nb_obj)
+        while (i-- > 0)
 		{
 			draw_floor_slice(d, queue, &nb, sorted[i], screen_x.start);
 			if (sorted[i].dist < 9998)
 				draw_text_slice(d->p_screen, calc_ray_draw_range(d, sorted[i], screen_x.start, sorted[i].obj_ref), *sorted[i].obj_ref, sorted[i]);
-			i++;
 		}
 		//printf("nb = %i\n", nb);
 		if (nb > -1)

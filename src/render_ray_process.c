@@ -58,7 +58,7 @@ void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray 
         ray = check_inter_with_obj(&d->obj_list[i], current_angle, pos, d->rot_calc);
         //printf("wall dist to player = %f\n",  ray.dist);
         j = 0;
-        while (ray.dist < sorted[j].dist && j < i)
+        while (ray.dist > sorted[j].dist && j < i)
             j++;
         tmp = j;
         j = i;

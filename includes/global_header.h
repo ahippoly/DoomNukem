@@ -107,6 +107,25 @@ typedef	struct 		s_rot
 	float			sin_rot;
 }					t_rot;
 
+typedef	struct					s_obj
+{
+				t_point			p1;
+				t_point			p2;
+				t_p_size		z_height;
+				t_p_size		z_step;
+				float			z_text_offset;
+				float			z_ground;
+				float			length;
+				unsigned int	*pixels;
+				int				w;
+				int				h;
+				t_point			pos;
+				float			size;
+				float			alpha;
+				int				room_id;
+				char			can_collide;
+				void			*origin;
+}								t_obj;
 
 typedef struct      s_anim
 {
@@ -138,34 +157,21 @@ typedef struct      s_sprite
 }                   t_sprite;
 
 
-typedef struct      s_mob
+typedef struct					s_mob
 {
                     int         life;
+					int			damage;
+					float		attack_speed;
+					float		aggro_range;
+					float		range;
                     t_point		pos;
+					t_rot		rot;
 					float		z_pos;
 					float		z_size;
 					float		size;
                     t_sprite    sprite;
-}                   t_mob;
-
-typedef	struct	s_obj
-{
-				t_point		p1;
-				t_point		p2;
-				t_p_size	z_height;
-				t_p_size	z_step;
-				float		z_text_offset;
-				float		z_ground;
-				float		length;
-				unsigned int	*pixels;
-				int			w;
-				int			h;
-				t_point		pos;
-				float		size;
-				float		alpha;
-				int			room_id;
-				void		*origin;
-}				t_obj;
+					t_obj		*obj_ref;
+}								t_mob;
 
 typedef struct      s_wall
 {

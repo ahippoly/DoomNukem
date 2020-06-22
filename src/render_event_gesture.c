@@ -104,13 +104,18 @@ void handle_poll_event(t_data *d, t_map_data *map)
 				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
-				// t_ray sorted[200];
+				t_ray sorted[200];
 
-				// sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
-				// t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);
-				// print_ray(ray);
-				printf("obj deleted, nb_obj = %i\n", d->nb_obj);
-				del_obj(d->obj_list, &d->nb_obj, &d->obj_list[1]);
+				sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
+				move_with_collide(d, &sorted[0].obj_ref->pos, get_angle(d->player_pos, sorted[0].obj_ref->pos), 10);
+				//t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);
+				//print_ray(ray);
+
+				// printf("obj deleted, nb_obj = %i\n", d->nb_obj);
+				// del_obj(d->obj_list, &d->nb_obj, &d->obj_list[1]);
+
+
+
 				// init_floors(d);
 				// raycast_screen(d, (t_range){400, 401}, d->rot, 0);
                 // draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));

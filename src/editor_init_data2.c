@@ -19,9 +19,9 @@ void init_img(t_env *env)
     env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE);
     env->being_placed = NULL;
     env->icon_list_size = ICON_ARRAY_SIZE;
-    env->img_list[0] = bmp_to_texture("img/icons/person.bmp", env->rend);
-    env->img_list[1] = bmp_to_texture("img/icons/monster.bmp", env->rend);
-    env->img_list[2] = bmp_to_texture("img/icons/monster2.bmp", env->rend);
+    env->img_list[0] = bmp_to_texture(IMG_PATH_0, env->rend);
+    env->img_list[1] = bmp_to_texture(IMG_PATH_1, env->rend);
+    env->img_list[2] = bmp_to_texture(IMG_PATH_2, env->rend);
 }
 
 void init_env2(t_env *env)

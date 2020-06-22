@@ -40,12 +40,7 @@ void init_props(t_data *d)
 	d->nb_props = 1;
 }
 
-void init_rend_img(t_data *d)
-{
-	d->i_screen.pixels = d->p_screen;
-	d->i_screen.w = WIN_SIZE_X;
-	d->i_screen.h = WIN_SIZE_Y;
-}
+
 
 void init_data(t_data *d, int ac, char **av)
 {

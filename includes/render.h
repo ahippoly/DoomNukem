@@ -24,8 +24,9 @@
 # define MOVE_WALL_Z_SPEED 4
 # define NB_MAX_PROPS 10
 # define NB_MAX_OBJ 230
-# define TYPE_WALL 0
+# define TYPE_WALL -1
 # define TYPE_PROP -2
+# define TYPE_MOB -3
 
 typedef struct	s_proj_point
 {
@@ -99,13 +100,13 @@ typedef struct      s_data
     SDL_Event       e;
     SDL_Rect        mini_map_player_pos;
     SDL_Surface     *texture[NB_TEXTURE];
+	t_img			img[NB_IMG];
     t_map_data      map;
     const Uint8     *clavier;
     unsigned int    *p_screen;
     unsigned int    *p_mini_map_bg;
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
-    t_img		    i_screen;
     int             quit;
     float			rot;
 	t_rot			rot_calc;

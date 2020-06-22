@@ -81,6 +81,10 @@
 
 # define NB_IMG 3
 
+# define IMG_PATH_0 "img/icons/person.bmp"
+# define IMG_PATH_1 "img/icons/monster.bmp"
+# define IMG_PATH_2 "img/icons/monster2.bmp"
+
 # define ICON_ARRAY_SIZE 20
 # define ICON_PLAYER_SIZE 30
 # define ICON_MOB_RANGE_BEGIN 1
