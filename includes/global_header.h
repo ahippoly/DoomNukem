@@ -148,6 +148,25 @@ typedef struct      s_mob
                     t_sprite    sprite;
 }                   t_mob;
 
+typedef	struct	s_obj
+{
+				t_point		p1;
+				t_point		p2;
+				t_p_size	z_height;
+				t_p_size	z_step;
+				float		z_text_offset;
+				float		z_ground;
+				float		length;
+				unsigned int	*pixels;
+				int			w;
+				int			h;
+				t_point		pos;
+				float		size;
+				float		alpha;
+				int			type;
+				int			room_id;
+}				t_obj;
+
 typedef struct      s_wall
 {
     int             id;
@@ -169,27 +188,9 @@ typedef struct      s_wall
 	float			p2_z_start;
 	float			p2_z_size;
 	float			z_text_offset;
-	t_p_size		z_height;
+	t_obj			*obj_ref;
 }                   t_wall;
 
-typedef	struct	s_obj
-{
-				t_point		p1;
-				t_point		p2;
-				t_p_size	z_height;
-				t_p_size	z_step;
-				float		z_text_offset;
-				float		length;
-				unsigned int	*pixels;
-				int			w;
-				int			h;
-				t_point		pos;
-				float		size;
-				float		alpha;
-				int			type;
-				int			alive;
-				int			room_id;
-}				t_obj;
 
 typedef	struct				s_ray
 {

@@ -32,7 +32,7 @@
 // 	return (- 1);
 // }
 
-int	check_player_room(t_data *d, t_point pos)
+int	check_obj_room(t_data *d, t_point pos)
 {
 	int wall_hits[NB_WALL_MAX];
 	int i;
@@ -65,7 +65,7 @@ void set_room_ground(t_data *d, t_point pos)
 {
 	int room_id;
 
-	if ((room_id = check_player_room(d, pos)) > -1)
+	if ((room_id = check_obj_room(d, pos)) > -1)
 		d->z_ground = d->map.room_list[room_id].z_ground;
 	else
 		d->z_ground = DEFAULT_Z_GROUND;

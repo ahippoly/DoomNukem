@@ -101,7 +101,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
 				// printf("checking room\n");
-				// if (check_player_room(d, d->player_pos) > -1)
+				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
 				t_ray sorted[200];

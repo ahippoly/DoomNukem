@@ -33,6 +33,8 @@ unsigned int calc_transparency2(unsigned int color_dst, unsigned int color2, flo
     nb = (unsigned char*)&color_dst;
     nb2 = (unsigned char*)&color2;
 	rev_alp = 1 - alpha;
+	if (!nb2[i])
+		return (color_dst);
     while (i++ < 3)
         nb[i] = rev_alp * nb[i] + alpha * nb2[i];
 	return (color_dst);

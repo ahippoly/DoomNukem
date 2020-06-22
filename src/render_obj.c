@@ -21,10 +21,9 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	obj.z_step = (t_p_size){wall->p2_z_start - wall->p1_z_start, wall->p2_z_size - wall->p1_z_size};
 	obj.z_text_offset = 0;
 	obj.alpha = wall->alpha;
-	printf("wall z_height : pos = %f, size = %f\n", obj.z_height.pos, obj.z_height.size);
-	printf("wall z_step : pos = %f, size = %f\n", obj.z_step.pos, obj.z_step.size);
+	// printf("wall z_height : pos = %f, size = %f\n", obj.z_height.pos, obj.z_height.size);
+	// printf("wall z_step : pos = %f, size = %f\n", obj.z_step.pos, obj.z_step.size);
 	obj.z_text_offset = 0;
-	obj.alive = 1;
 	obj.type = TYPE_WALL;
 	obj.room_id = wall->room_id_ref;
 	return (obj);
@@ -68,7 +67,6 @@ t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 	obj.length = 1;
 	obj.alpha = 1;
 	obj.type = TYPE_PROP;
-	obj.alive = 1;
 	obj.room_id = -1;
 	// obj.text = (t_img){props->text->pixels, (SDL_Rect){0, 0, 0, 0}, props->text->w, props->text->h};
 	obj.pixels = props->text->pixels;
@@ -96,4 +94,9 @@ void init_obj_list(t_data *d)
 		d->obj_list[j] = convert_prop_to_obj(d, &d->props[i]);
 		d->props[i++].obj_ref = &d->obj_list[j++];
 	}
+}
+
+void del_obj()
+{
+	
 }

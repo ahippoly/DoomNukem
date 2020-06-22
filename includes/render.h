@@ -10,7 +10,7 @@
 # define MINI_MAP_POS_Y 0
 # define MINI_MAP_PLAYER_SIZE 5
 
-# define MOVE_STEP 2
+# define MOVE_STEP 3
 # define ROT_STEP 0.05 * M_PI_2
 # define MOUSE_SENS 0.004
 # define Y_VIEW_RANGE 1
@@ -210,7 +210,7 @@ void	move_z_grabbed_wall(t_data *d, float z_diff);
 void	rot_wall(t_wall *wall, float rot, int pivot_point);
 void	rot_grabbed_wall(t_data *d, float rot, int pivot_point);
 
-int	check_player_room(t_data *d, t_point pos);
+int	check_obj_room(t_data *d, t_point pos);
 void set_room_ground(t_data *d, t_point pos);
 
 //render_wall_proj.c

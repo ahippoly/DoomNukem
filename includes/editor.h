@@ -49,7 +49,7 @@
 
 # define NB_TEXTURE 6
 # define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
-# define TEXT_PATH_1 "img/textures/debug2.bmp"
+# define TEXT_PATH_1 "img/hud/key.bmp"
 # define TEXT_PATH_2 "img/textures/Paver300.bmp"
 # define TEXT_PATH_3 "img/textures/Floor_Wdn.bmp"
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
