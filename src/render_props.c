@@ -3,25 +3,6 @@
 #include "editor.h"
 #include "img_file.h"
 
-// void create_raybox(t_data *d, t_props *prop, t_rot rot_calc)
-// {
-// 	prop->p1.x = prop->pos.x - prop->size * rot_calc.sin_rot;
-// 	prop->p1.y = prop->pos.y - prop->size * rot_calc.cos_rot;
-// 	prop->p2.x = prop->pos.x + prop->size * rot_calc.sin_rot;
-// 	prop->p2.y = prop->pos.y + prop->size * rot_calc.cos_rot;
-// }
-
-// void create_props_raybox(t_data *d)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < d->nb_props)
-// 	{
-// 		create_raybox(d, &d->props[i++], d->rot_calc);
-// 	}
-// }
-
 t_range	calc_prop_draw_range(t_data *d, float dist, float height, float size)
 {
 	t_range	res;
@@ -56,9 +37,4 @@ void draw_prop_slice(t_data *d, t_props *prop, t_ray ray, int x)
 		th += th_step;
 		draw_y.start++;
 	}
-}
-
-void cast_prop(t_data *d, t_props *prop)
-{
-
 }

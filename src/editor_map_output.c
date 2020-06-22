@@ -96,6 +96,25 @@ void write_wall_ref(int fd, t_env *env)
     ft_putchar_fd('\n',fd);
 }
 
+void	write_icon_list(int fd, t_icon *icon_list, int nb_icon)
+{
+	int		i;
+	t_icon	*current;
+
+	ft_putstr_fd("ICON LIST\n", fd);
+    write_head_param(fd, "ICON_COUNT", ft_itoa(nb_icon));
+	i = 0;
+    while (i < nb_icon)
+    {
+        current = &icon_list[i];
+        write_param(fd, "id", ft_itoa(current->id_ref));
+        write_param(fd, "pos", join_int_value((int)(current->pos.x * 10), ",", (int)(current->pos.y * 10)));
+        ft_putchar_fd('\n',fd);
+        i++;
+    }
+    ft_putstr_fd("\n\n", fd);
+}
+
 void map_output(t_env *env)
 {
     int fd;
@@ -118,6 +137,7 @@ void map_output(t_env *env)
     recreate_full_map_ref(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list, env->room_count);
+	write_icon_list(fd, env->icon_list, env->icon_count);
     write_wall_ref(fd, env);
     printf("map output name = %s, fd = %i\n",str, 1);
     write_walls(1, env->wall_list, env->wall_count);

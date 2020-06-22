@@ -36,7 +36,7 @@ void init_props(t_data *d)
 	d->props[0].pos = (t_point){5,5};
 	d->props[0].size = 0.2;
 	d->props[0].z_pos = 2.2;
-	d->props[0].text = d->texture[1];
+	d->props[0].text = &d->img[2];
 	d->nb_props = 1;
 }
 
@@ -52,7 +52,6 @@ void init_data(t_data *d, int ac, char **av)
 	if (d->map.is_valid == 0)
 		exit_with_msg("error : wrong map file\n");
     init_mini_map(d, &d->map);
-    load_bmp_files(d);
     d->player_pos = create_t_point(d->map.player_spawn.x, d->map.player_spawn.y);
     d->rot = -1 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;
@@ -71,8 +70,10 @@ void init_data(t_data *d, int ac, char **av)
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+    load_bmp_files(d);
 	init_rend_img(d);
-	init_props(d);
+	load_icons(d, &d->map);
+	//init_props(d);
 	init_obj_list(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
 }

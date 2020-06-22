@@ -248,10 +248,10 @@ void	print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id)
 	t_size t_max;
 	t_range y;
 	t_floor current;
-	SDL_Surface *text;
+	t_img *text;
 	unsigned int	*pixels;
 
-	text = d->texture[text_id];
+	text = &d->texture[text_id];
 	t_max.w = text->w - 1;
 	t_max.h = text->h - 1;
 	y.start = draw.start_y;

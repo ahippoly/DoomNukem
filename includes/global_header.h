@@ -1,5 +1,5 @@
-#ifndef WOLF_H
-# define WOLF_H
+#ifndef GLOABAL_HEADER_H
+# define GLOABAL_HEADER_H
 
 # include <math.h>
 # include "SDL.h"
@@ -164,6 +164,7 @@ typedef struct					s_mob
 					float		attack_speed;
 					float		aggro_range;
 					float		range;
+					float		speed;
                     t_point		pos;
 					t_rot		rot;
 					float		z_pos;
@@ -242,15 +243,25 @@ typedef struct          s_room
     t_range             wall_ref;
 }                       t_room;
 
+typedef struct      s_icon
+{
+    t_point         pos;
+	SDL_Point		pos_i;
+    t_size          size;
+    int             id_ref;
+}                   t_icon;
+
 typedef struct      s_map_data
 {
     int             is_valid;
     t_size          map_size;
     int             wall_count;
     int             room_count;
+	int				icon_count;
     SDL_Point       player_spawn;
     t_wall          *wall_list;
     t_room          *room_list;
+	t_icon			*icon_list;
     t_wall_ref      ***map_wall_ref;
 }                   t_map_data;
 
@@ -294,7 +305,7 @@ void sort_int(int *a, int *b);
 void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n);
 
 
-void print_text_screen(unsigned int *p_tab, SDL_Surface *text, SDL_Rect draw);
+void print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw);
 void calc_transparency(unsigned int *color_dst, unsigned int *color2, float alpha);
 unsigned int calc_transparency2(unsigned int color_dst, unsigned int color2, float alpha);
 

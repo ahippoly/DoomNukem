@@ -73,15 +73,15 @@ void handle_poll_event(t_data *d, t_map_data *map)
             if (d->clavier[SDL_SCANCODE_SPACE])
                 d->z_force = 0.07;
 			//debug
-			if (d->clavier[SDL_SCANCODE_G])
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_G)
                	rot_grabbed_wall(d, 0.05 * M_PI_2, 0);
-			if (d->clavier[SDL_SCANCODE_H])
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_H)
                	rot_grabbed_wall(d, -0.05 * M_PI_2, 0);
-			if (d->clavier[SDL_SCANCODE_J])
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_J)
                	inc_fov(d, 0.05);
-			if (d->clavier[SDL_SCANCODE_K])
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_K)
                	inc_fov(d, -0.05);
-			if (d->clavier[SDL_SCANCODE_V])
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_V)
 				print_floor(d);
 
         }

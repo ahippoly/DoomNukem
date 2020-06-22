@@ -3,11 +3,12 @@
 #include "editor.h"
 #include "img_file.h"
 
-SDL_Surface *read_img_surface(char *file)
+t_img read_img_surface(char *file)
 {
-    SDL_Surface *readed_file;
-    SDL_Surface *converted;
+    SDL_Surface		*readed_file;
+    SDL_Surface		*converted;
     SDL_PixelFormat *format;
+	t_img			img;
 
     readed_file = SDL_LoadBMP(file);
     if (readed_file == NULL)
@@ -16,9 +17,15 @@ SDL_Surface *read_img_surface(char *file)
     converted = SDL_ConvertSurface(readed_file, format, 0);
     SDL_FreeFormat(format);
     SDL_FreeSurface(readed_file);
+	img.pixels = alloc_image(converted->w, converted->h);
+	ft_memcpy_int(img.pixels, converted->pixels, converted->w * converted->h);
+	//img.pixels = converted->pixels;
+	img.w = converted->w;
+	img.h = converted->h;
     //SDL_LockSurface(readed_file);
     printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
-    return (converted);
+    SDL_FreeSurface(converted);
+    return (img);
 }
 
 void load_bmp_files(t_data *d)

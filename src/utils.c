@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/22 07:48:15 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/22 11:09:46 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,4 +212,9 @@ t_rot	get_angle(t_point pos1, t_point pos2)
 	}
 	rot.sin_rot = sin(rot.rot);
 	return (rot);
+}
+
+float ft_interpolate(float val1, float val2, float scale)
+{
+	return(val1 * (1 - scale) + val2 * (scale));
 }

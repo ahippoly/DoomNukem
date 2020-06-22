@@ -3,6 +3,8 @@
 
 # include "global_header.h"
 # include "editor.h"
+# include "mobs.h"
+
 # define FOV_ANGLE 60
 # define MINI_MAP_SIZE_X 250
 # define MINI_MAP_SIZE_Y 250
@@ -23,6 +25,7 @@
 # define THREAD_NB 4
 # define MOVE_WALL_Z_SPEED 4
 # define NB_MAX_PROPS 10
+# define NB_MAX_MOBS 10
 # define NB_MAX_OBJ 230
 # define TYPE_WALL -1
 # define TYPE_PROP -2
@@ -64,23 +67,24 @@ typedef	struct		s_floor
 	t_point			floor_step;
 }					t_floor;
 
-typedef	struct		s_look_rot
+typedef	struct				s_look_rot
 {
-	float			angle;
-	float			step;
-	float			rev;
-}					t_look_rot;
+	float					angle;
+	float					step;
+	float					rev;
+}							t_look_rot;
 
-typedef	struct	s_props
+typedef	struct				s_props
 {
 				t_point		pos;
 				float		size;
 				float		z_pos;
-				SDL_Surface	*text;
-				t_point		p1;
-				t_point		p2;
+				char		collectable;
+				char		can_collide;
+				char		id;
+				t_img		*text;
 				t_obj		*obj_ref;
-}				t_props;
+}							t_props;
 
 
 
@@ -99,7 +103,7 @@ typedef struct      s_data
     SDL_Texture     *t_player_pos;
     SDL_Event       e;
     SDL_Rect        mini_map_player_pos;
-    SDL_Surface     *texture[NB_TEXTURE];
+    t_img			texture[NB_TEXTURE];
 	t_img			img[NB_IMG];
     t_map_data      map;
     const Uint8     *clavier;
@@ -113,17 +117,17 @@ typedef struct      s_data
 	float			fov;
 	float			fov_rad;
     t_point         player_pos;
-    float          player_height;
-    float          z_pos;
-    float          z_offset;
-    float          z_force;
-    float          z_ground;
+    float			player_height;
+    float			z_pos;
+    float			z_offset;
+    float			z_force;
+    float			z_ground;
     int             screen_height;
-    float          speed_modifier;
+    float			speed_modifier;
     int             framerate;
     int             time_last_frame;
     int             time;
-	float				diff_time;
+	float			diff_time;
     int             air_time;
     t_sprite        sprite_lst[NB_SPRITE];
 	/* world edit*/
@@ -131,14 +135,15 @@ typedef struct      s_data
 	t_point			grab_pos;
 	float			grab_z;
 	/* floor drawing */
-	t_floor			fl[NB_WALL_MAX][WIN_SIZE_Y];
+	t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
 	t_props			props[NB_MAX_PROPS];
 	int				nb_props;
+	t_mob			mobs[NB_MAX_MOBS];
+	int				nb_mob;
 	t_obj			obj_list[NB_MAX_OBJ];
 	int				nb_obj;
 	int				bullet;
 	t_sprite        sprite[15];
-    t_mob           mob[20];
     int             gun_ind;
     int             mob_ind;
     int             mobs_on_screen;
@@ -159,7 +164,7 @@ void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
 void print_player_look_vector(t_data *d, t_map_data *map, float rot);
 void print_mini_map(t_data *d, t_map_data *map);
-SDL_Surface *read_img_surface(char *file);
+t_img read_img_surface(char *file);
 
 //render_init_data.c
 void init_sdl_ressources_rend(t_data *d);
@@ -196,6 +201,7 @@ void draw_floor(t_data *d, SDL_Surface *text);
 
 //render_texture_loading.c
 void load_bmp_files(t_data *d);
+void init_rend_img(t_data *d);
 
 //render_raycast.C
 void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step);
@@ -259,6 +265,9 @@ void put_pix_alpha(unsigned int *pixels, t_draw p_pos, unsigned int color, float
 void put_pix(unsigned int *pixels, t_draw p_pos, t_img text, SDL_Point t_cord);
 
 t_room	*get_room_by_id(t_data *d, int room_id);
+
+//render_load_icons.c
+void load_icons(t_data *d, t_map_data *map);
 
 
 #endif

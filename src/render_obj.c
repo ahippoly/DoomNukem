@@ -7,12 +7,12 @@
 t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 {
 	t_obj obj;
-	SDL_Surface *text;
+	t_img *text;
 
 	obj.p1 = wall->p1_f;
 	obj.p2 = wall->p2_f;
 	obj.length = wall->length;
-	text = d->texture[wall->texture_id];
+	text = &d->texture[wall->texture_id];
 	// obj.text = (t_img){text->pixels, (SDL_Rect){0, 0, 0, 0}, text->w, text->h};
 	obj.pixels = text->pixels;
 	obj.w = text->w;
@@ -54,6 +54,29 @@ void create_obj_raybox(t_data *d)
 	}
 }
 
+t_obj	convert_mob_to_obj(t_data	*d,	t_mob *mob)
+{
+	t_obj	obj;
+
+	obj.pos = mob->pos;
+	obj.size = mob->size;
+	obj.z_height.pos = mob->z_pos;
+	obj.z_height.size = mob->z_size;
+	obj.z_step.pos = 0;
+	obj.z_step.size = 0;
+	obj.z_text_offset = get_float_part(obj.z_height.pos);
+	obj.length = 1;
+	obj.alpha = 1;
+	obj.room_id = TYPE_MOB;
+	// obj.text = (t_img){mob->text->pixels, (SDL_Rect){0, 0, 0, 0}, mob->text->w, mob->text->h};
+	obj.pixels = d->img[1].pixels;
+	obj.w = d->img[1].w;
+	obj.h = d->img[1].h;
+	obj.can_collide = 0;
+	obj.origin = mob;
+	return (obj);
+}
+
 t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 {
 	t_obj	obj;
@@ -82,7 +105,7 @@ void init_obj_list(t_data *d)
 	int i;
 	int j;
 
-	d->nb_obj = d->map.wall_count + d->nb_props;
+	d->nb_obj = d->map.wall_count + d->nb_props + d->nb_mob;
 	i = 0;
 	j = 0;
 	while (i < d->map.wall_count)
@@ -95,6 +118,12 @@ void init_obj_list(t_data *d)
 	{
 		d->obj_list[j] = convert_prop_to_obj(d, &d->props[i]);
 		d->props[i++].obj_ref = &d->obj_list[j++];
+	}
+	i = 0;
+	while (i < d->nb_mob)
+	{
+		d->obj_list[j] = convert_mob_to_obj(d, &d->mobs[i]);
+		d->mobs[i++].obj_ref = &d->obj_list[j++];
 	}
 }
 

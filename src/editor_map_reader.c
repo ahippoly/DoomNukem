@@ -185,6 +185,17 @@ void read_wall_ref_list(int fd, t_map_data *map)
     }
 }
 
+void read_icon(char *line, t_icon *icon, t_map_data *map)
+{
+    int error;
+
+    error = 0;
+    error += read_param(line, "id", &icon->id_ref);
+    error += read_param(line, "pos", &icon->pos_i.x);
+    if (error > 0)
+        exit_with_msg("error while assigning value to icon on map reader\n");
+}
+
 void read_wall_list(int fd, t_map_data *map)
 {
     char    *line;
@@ -218,6 +229,29 @@ void read_room_list(int fd, t_map_data *map)
         read_room(line, &map->room_list[i++], map);
 }
 
+void read_icon_list(int fd, t_map_data *map)
+{
+    char *line;
+    int i;
+
+    if (get_next_line(fd, &line) == 1)
+        read_param(line, "ICON_COUNT", &map->icon_count);
+    else
+        exit_with_msg("error while reading map");
+    if (!(map->icon_list = (t_icon*)malloc(sizeof(t_icon) * map->icon_count)))
+        exit_with_msg("Failed to malloc");
+    i = 0;
+    while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->icon_count)
+        read_icon(line, &map->icon_list[i++], map);
+
+	i = 0;
+	while (i < map->icon_count)
+	{
+		printf("i = %i, id_ref = %i, pos :%i,%i\n", i, map->icon_list[i].id_ref, map->icon_list[i].pos_i.x, map->icon_list[i].pos_i.y);
+		i++;
+	}
+}
+
 void read_head(int fd, char *line, t_map_data *map)
 {
     //printf("line = %s\n", line);
@@ -229,6 +263,10 @@ void read_head(int fd, char *line, t_map_data *map)
     if (ft_strequ(line, "ROOM LIST"))
     {
         read_room_list(fd, map);
+    }
+	if (ft_strequ(line, "ICON LIST"))
+    {
+        read_icon_list(fd, map);
     }
     if (ft_strequ(line, "WALL_REF MAP"))
     {
