@@ -44,6 +44,8 @@ t_sprite    sprite_init_AR(SDL_Texture *text)
 {
     t_sprite AR;
 
+    AR.size.x = 400;
+    AR.size.y = 400;
     AR.aim_on = 0;
     AR.anim_end = 0;
     AR.time = 0;
@@ -104,6 +106,9 @@ static void      init_anim_DD(t_sprite *DD)
 t_sprite    sprite_init_DD(SDL_Texture *text)
 {
     t_sprite DD;
+
+    DD.size.x = 250;
+    DD.size.y = 0;
 
     DD.aim_on = 0;
 
@@ -179,6 +184,8 @@ t_sprite    sprite_init_LMG(SDL_Texture *text)
 {
     t_sprite LMG;
 
+  LMG.size.x = 400;
+    LMG.size.y = 400;
     LMG.aim_on = 0;
 
     LMG.anim_end = 0;
@@ -247,6 +254,9 @@ t_sprite    sprite_init_Revolver(SDL_Texture *text)
 {
     t_sprite Rev;
 
+    Rev.size.x = 400;
+    Rev.size.y = 300;
+
     Rev.aim_on = 0;
 
     Rev.anim_end = 0;
@@ -288,23 +298,26 @@ static void      init_anim_SSG(t_sprite *SSG)
     SSG->anim[IDLE].pos->x = 0;
     SSG->anim[IDLE].pos->y = 0;
     SSG->anim[IDLE].nb_frame = 1;
-    SSG->anim[IDLE].offset.x = 0;
+    SSG->anim[IDLE].offset.x = -10;
     SSG->anim[IDLE].offset.y = 0;
     SSG->anim[FIRE].pos->x = 1;
     SSG->anim[FIRE].pos->y = 0; 
     SSG->anim[FIRE].nb_frame = 3;
-    SSG->anim[FIRE].offset.x = 0;
+    SSG->anim[FIRE].offset.x = -10;
     SSG->anim[FIRE].offset.y = 0;
     SSG->anim[RELOAD].pos->x = 4;
     SSG->anim[RELOAD].pos->y = 0; 
     SSG->anim[RELOAD].nb_frame = 18;
-    SSG->anim[RELOAD].offset.x = 0;
+    SSG->anim[RELOAD].offset.x = -10;
     SSG->anim[RELOAD].offset.y = 0;
 }
 
 t_sprite    sprite_init_SSG(SDL_Texture *text)
 {
     t_sprite SSG;
+
+    SSG.size.x = 300;
+    SSG.size.y = 0;
 
     SSG.aim_on = 0;
 
@@ -364,6 +377,8 @@ t_sprite    sprite_init_Melee(SDL_Texture *text)
 {
     t_sprite Melee;
 
+    Melee.size.x = 300;
+    Melee.size.y = 100;
     Melee.aim_on = 0;
 
     Melee.anim_end = 0;

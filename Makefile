@@ -37,7 +37,9 @@ SPRITE_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c image_ges
 						 sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c \
 						 text_img.c render_movement.c  render_raycast.c \
 						render_world_edit.c render_collide_z.c \
-						render_draw_floor.c) ##
+						render_draw_floor.c render_props.c render_obj.c render_draw_slice.c \
+						render_debug_ray.c render_ray_process.c render_pixel_put.c \
+						render_icon2obj.c sound.c) ##
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
@@ -60,7 +62,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = editor
 RENDER_NAME = doom-nukem
-OPTI =  -g3
+OPTI =  -Ofast
 PTHREAD = -lpthread
 HUD = hud ##
 SPRITE = sprite ##

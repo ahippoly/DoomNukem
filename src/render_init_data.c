@@ -72,7 +72,7 @@ void init_data(t_data *d, int ac, char **av)
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
 	init_rend_img(d);
-	load_icons(d, &d->map);
+	//load_icons(d, &d->map);
 	//init_props(d);
 	init_obj_list(d);
   //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);

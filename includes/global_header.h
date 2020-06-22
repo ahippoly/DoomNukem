@@ -138,13 +138,14 @@ typedef struct      s_anim
 
 typedef struct      s_sprite
 {  
+                    SDL_Point       size;
                     int             aim_on;
                     int             anim_end;
                     Uint32          time;
                     int             on;
                     int             index;
                     unsigned int    *pixels;
-                    unsigned int    *displayed;
+                    unsigned int    *pixels_dst;
                     t_size          total_size;
                     t_size          frame_size;
                     SDL_Point       nb_frame;
@@ -160,10 +161,10 @@ typedef struct      s_sprite
 typedef struct					s_mob
 {
                     int         life;
-					int			damage;
+					int			dmg_per_hit;
 					float		attack_speed;
 					float		aggro_range;
-					float		range;
+					float		attack_dist;
 					float		speed;
                     t_point		pos;
 					t_rot		rot;

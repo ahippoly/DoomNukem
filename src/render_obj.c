@@ -105,7 +105,7 @@ void init_obj_list(t_data *d)
 	int i;
 	int j;
 
-	d->nb_obj = d->map.wall_count + d->nb_props + d->nb_mob;
+	d->nb_obj = d->map.wall_count ;//+ d->nb_props + d->nb_mob;
 	i = 0;
 	j = 0;
 	while (i < d->map.wall_count)
@@ -113,18 +113,18 @@ void init_obj_list(t_data *d)
 		d->obj_list[j++] = convert_wall_to_obj(d, &d->map.wall_list[i++]);
 		printf("wall obj created , i = %i\n", i);
 	}
-	i = 0;
-	while (i < d->nb_props)
-	{
-		d->obj_list[j] = convert_prop_to_obj(d, &d->props[i]);
-		d->props[i++].obj_ref = &d->obj_list[j++];
-	}
-	i = 0;
-	while (i < d->nb_mob)
-	{
-		d->obj_list[j] = convert_mob_to_obj(d, &d->mobs[i]);
-		d->mobs[i++].obj_ref = &d->obj_list[j++];
-	}
+	// i = 0;
+	// while (i < d->nb_props)
+	// {
+	// 	d->obj_list[j] = convert_prop_to_obj(d, &d->props[i]);
+	// 	d->props[i++].obj_ref = &d->obj_list[j++];
+	// }
+	// i = 0;
+	// while (i < d->nb_mob)
+	// {
+	// 	d->obj_list[j] = convert_mob_to_obj(d, &d->mobs[i]);
+	// 	d->mobs[i++].obj_ref = &d->obj_list[j++];
+	// }
 }
 
 void del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj)

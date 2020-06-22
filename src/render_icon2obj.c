@@ -8,9 +8,9 @@ t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 	t_mob mob;
 
 	mob.life = DEMON_PV;
-	mob.damage = DEMON_ATTACK;
+	mob.dmg_per_hit = DEMON_ATTACK;
 	mob.attack_speed = DEMON_ATTACK_SPEED;
-	mob.range = DEMON_ATTACK_RANGE;
+	mob.attack_dist = DEMON_ATTACK_RANGE;
 	mob.speed = DEMON_MOVE_SPEED;
 	mob.aggro_range = DEMON_AGGRO_RANGE;
 	mob.size = DEMON_SIZE;

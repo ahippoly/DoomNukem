@@ -1,6 +1,10 @@
 #ifndef SPRITE_H
 # define SPRITE_H
 
+# include "render.h"
+# include "sound.h"
+
+
 # define IDLE 0
 # define FIRE 1
 # define AIM 2
@@ -9,8 +13,12 @@
 # define ICON 5
 # define ALTFIRE 6
 
-# define ZOMBIE 10
+# define ATTACK 1
+# define DEATH 2
+# define PROJECTILE 3
 
+# define PYRO 10
+# define AFRIT 11
 
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d);
 
@@ -33,7 +41,7 @@ void        gun_idle_anim(t_data *d);
 SDL_Rect    get_gun_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos);
 
 //mob_anim.c
-SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos);
+SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int mob_ind);
 SDL_Rect    print_mob(SDL_Rect dstdim, int x, int y, int z);
 void        mob_idle_anim(t_data *d);
 void        mob_anim(t_data *d);

@@ -31,6 +31,13 @@
 # define TYPE_PROP -2
 # define TYPE_MOB -3
 
+typedef struct      s_sound
+{
+    Uint32 wav_length; // length of our sample
+	Uint8 *wav_buffer; // buffer containing our audio file
+	SDL_AudioSpec wav_spec; // the specs of our piece of music
+}                   t_sound;
+
 typedef struct	s_proj_point
 {
 	int			screen_x;
@@ -86,14 +93,6 @@ typedef	struct				s_props
 				t_obj		*obj_ref;
 }							t_props;
 
-
-
-typedef	struct	s_calc_prop
-{
-	/* data */
-}				t_calc_prop;
-
-
 typedef struct      s_data
 {
     SDL_Renderer    *rend;
@@ -147,6 +146,8 @@ typedef struct      s_data
     int             gun_ind;
     int             mob_ind;
     int             mobs_on_screen;
+	t_sound			sound[30];
+
 }                   t_data;
 
 typedef	struct		s_thread

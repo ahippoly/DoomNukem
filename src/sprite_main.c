@@ -4,10 +4,6 @@
 #include "img_file.h"
 #include "sprite.h"
 
-void free_render_env(t_data *d)
-{
-
-}
 
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
 {
@@ -34,49 +30,62 @@ void handle_key_event_sprite(t_data *d, t_map_data *map)
             d->sprite[d->gun_ind].on = 0;
             d->sprite[d->gun_ind].aim_on = 0;
             d->sprite[d->gun_ind].anim_end = 0;
+            if (d->gun_ind > 0 && d->gun_ind < 5)
+            play_sound(d, d->gun_ind + 5);
     }
-      if (d->clavier[SDL_SCANCODE_1])
+    if (d->clavier[SDL_SCANCODE_1])
     {
             d->gun_ind = 0;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
     }
-          if (d->clavier[SDL_SCANCODE_2])
+    if (d->clavier[SDL_SCANCODE_2])
     {
             d->gun_ind = 1;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
     }
-              if (d->clavier[SDL_SCANCODE_3])
+    if (d->clavier[SDL_SCANCODE_3])
     {
             d->gun_ind = 2;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
     }
-                if (d->clavier[SDL_SCANCODE_4])
+    if (d->clavier[SDL_SCANCODE_4])
     {
             d->gun_ind = 3;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
     }
-                   if (d->clavier[SDL_SCANCODE_5])
+    if (d->clavier[SDL_SCANCODE_5])
     {
             d->gun_ind = 4;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
     }
-                      if (d->clavier[SDL_SCANCODE_6])
+    if (d->clavier[SDL_SCANCODE_6])
     {
             d->gun_ind = 5;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
     }
-                        if (d->clavier[SDL_SCANCODE_8]) //Test mob animation
+    if (d->clavier[SDL_SCANCODE_8]) //Test mob animation
     {
             d->sprite[d->mob_ind].time = SDL_GetTicks();
             d->sprite[d->mob_ind].on = 0;
-            d->sprite[d->mob_ind].index = 5;
-            d->mob_ind = 10;
+            d->sprite[d->mob_ind].index = IDLE;
+    }
+    if (d->clavier[SDL_SCANCODE_9]) //Test mob animation
+    {
+            d->sprite[d->mob_ind].time = SDL_GetTicks();
+            d->sprite[d->mob_ind].on = 0;
+            d->sprite[d->mob_ind].index = DEATH;
+    }
+    if (d->clavier[SDL_SCANCODE_0]) //Test mob animation
+    {
+            d->sprite[d->mob_ind].time = SDL_GetTicks();
+            d->sprite[d->mob_ind].on = 0;
+            d->sprite[d->mob_ind].index = ATTACK;
     }
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
@@ -99,6 +108,7 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
                     d->sprite[d->gun_ind].index = AIMFIRE;
                 d->sprite[d->gun_ind].on = 0;
                 d->sprite[d->gun_ind].anim_end = 0;
+                play_sound(d, d->gun_ind);
                 }
             else if (event.button.button == SDL_BUTTON_RIGHT)
                 {
@@ -119,6 +129,8 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
             if (event.button.button == SDL_BUTTON_LEFT)
                 {
                 d->sprite[d->gun_ind].anim_end = -1;
+                if (d->gun_ind > 2 && d->gun_ind < 6)
+                play_sound(d, d->gun_ind + 10);
                 }
             else if (event.button.button == SDL_BUTTON_RIGHT)
                 {
@@ -136,7 +148,7 @@ void    init_sprite(t_data *d)
     d->gun_ind = 0;   //Le sprite a afficher
     d->sprite[d->gun_ind].index = 0;   //L'animation du sprite a afficher
     
-    d->mob_ind = ZOMBIE;
+    d->mob_ind = AFRIT;
     d->sprite[d->mob_ind].index = 0;
     d->sprite[d->mob_ind].on = 0;
     d->mobs_on_screen = 2;
@@ -150,6 +162,7 @@ int main(int ac, char **av)
     map = read_map("maps/editor_map_0");
     init_data(&d, ac, av);
     init_sprite(&d);
+    init_sound(&d);
     while (!d.quit)
     {
         SDL_RenderClear(d.rend);
@@ -161,7 +174,6 @@ int main(int ac, char **av)
         mob_anim(&d);
         sprite_anim_gun(&d);
         SDL_RenderPresent(d.rend);
-
     }
-    free_render_env(&d);
+	SDL_CloseAudio();
 }
