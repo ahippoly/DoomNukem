@@ -289,6 +289,9 @@ t_map_data  read_map(char *path_file)
     printf("ca merde, fd = %i\n", fd);
     // get_next_line(fd, &line);
     // printf("line 1 = %s\n", line);
+	map.icon_count = 0;
+	map.wall_count = 0;
+	map.room_count = 0;
     while (get_next_line(fd, &line) == 1)
         read_head(fd, line, &map);
     map.is_valid = 1;
