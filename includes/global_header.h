@@ -163,8 +163,8 @@ typedef	struct	s_obj
 				t_point		pos;
 				float		size;
 				float		alpha;
-				int			type;
 				int			room_id;
+				void		*origin;
 }				t_obj;
 
 typedef struct      s_wall

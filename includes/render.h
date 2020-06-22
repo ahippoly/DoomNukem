@@ -25,7 +25,7 @@
 # define NB_MAX_PROPS 10
 # define NB_MAX_OBJ 230
 # define TYPE_WALL 0
-# define TYPE_PROP 1
+# define TYPE_PROP -2
 
 typedef struct	s_proj_point
 {
@@ -242,6 +242,7 @@ void create_obj_raybox(t_data *d);
 //render_obj.c
 void init_obj_list(t_data *d);
 void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
+void del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj);
 
 //render_draw_slice.c
 void draw_ray_obj(t_data *d, t_ray ray, t_obj *obj, int x);

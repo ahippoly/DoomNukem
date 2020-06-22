@@ -25,6 +25,7 @@ t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot)
 	//printf("obj p1 : %f,%f, p2 : %f,%f\n", obj->p1.x, obj->p1.y, obj->p2.x,  obj->p2.y);
     res.inter = inter_with_dir(pos, rot, obj->p1, obj->p2);
 	res.obj_ref = obj;
+	res.room_id = obj->room_id;
     if (res.inter.x != -42)
     {
 		// printf("res.inter : %f,%f\n", res.inter.x, res.inter.y);
@@ -34,10 +35,6 @@ t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot)
 		res.mod_scale = calc_ray_mod_scale(res.scale, obj->length);
 		res.z_height.pos = obj->z_height.pos + obj->z_step.pos * res.scale;
 		res.z_height.size = obj->z_height.size + obj->z_step.size * res.scale;
-		if (obj->type == TYPE_WALL)
-			res.room_id = obj->room_id;
-		else
-			res.room_id = -1;
     }
 	//print_ray(res);
         //dist = hypot(obj->inter.x - pos.x, obj->inter.y - pos.y) * cos((look_rot - rot ));

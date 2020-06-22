@@ -54,7 +54,7 @@ void draw_floor_slice(t_data *d, t_ray *queue, int *nb, t_ray checked, int x)
 			queue[*nb].dist = checked.dist;
 		}
 	}
-	if (checked.room_id != -1)
+	if (checked.room_id > -1)
 	{
 		(*nb)++;
 		queue[*nb] = checked;

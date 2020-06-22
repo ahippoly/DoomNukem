@@ -24,14 +24,13 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	// printf("wall z_height : pos = %f, size = %f\n", obj.z_height.pos, obj.z_height.size);
 	// printf("wall z_step : pos = %f, size = %f\n", obj.z_step.pos, obj.z_step.size);
 	obj.z_text_offset = 0;
-	obj.type = TYPE_WALL;
 	obj.room_id = wall->room_id_ref;
 	return (obj);
 }
 
 void create_raybox(t_data *d, t_obj *obj, t_rot rot_calc)
 {
-	if (obj->type > 0)
+	if (obj->room_id < -1)
 	{
 		obj->p1.x = obj->pos.x - obj->size * rot_calc.sin_rot;
 		obj->p1.y = obj->pos.y + obj->size * rot_calc.cos_rot;
@@ -66,8 +65,7 @@ t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 	obj.z_text_offset = get_float_part(obj.z_height.pos);
 	obj.length = 1;
 	obj.alpha = 1;
-	obj.type = TYPE_PROP;
-	obj.room_id = -1;
+	obj.room_id = TYPE_PROP;
 	// obj.text = (t_img){props->text->pixels, (SDL_Rect){0, 0, 0, 0}, props->text->w, props->text->h};
 	obj.pixels = props->text->pixels;
 	obj.w = props->text->w;
@@ -96,7 +94,16 @@ void init_obj_list(t_data *d)
 	}
 }
 
-void del_obj()
+void del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj)
 {
-	
+	int i;
+
+	i = 0;
+	while (i < *nb_obj)
+		if (&obj_list[i++] == obj)
+			break;
+	i--;
+	while (++i < *nb_obj)
+		obj_list[i - 1] = obj_list[i];
+	(*nb_obj)--;
 }
