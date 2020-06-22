@@ -70,7 +70,7 @@ void handle_poll_event(t_data *d, t_map_data *map)
                 d->speed_modifier -= 0.5;
                 d->z_offset -= PLAYER_HEIGHT / 2;
             }
-            if (d->clavier[SDL_SCANCODE_SPACE])
+            if (d->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
                 d->z_force = 0.07;
 			//debug
 			if (d->e.key.keysym.scancode == SDL_SCANCODE_G)
