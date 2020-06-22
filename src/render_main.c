@@ -33,6 +33,7 @@ void calc_n_disp_framerate(t_data *d)
     {
         last_framerate = framerate;
 		printf("framerate = %i\n", last_framerate);
+		printf("diff_time = %f\n", d->diff_time);
         framerate = 0;
         last_time = time;
     }
@@ -52,24 +53,23 @@ int main(int ac, char **av)
     {
         d.time_last_frame = d.time;
         d.time = SDL_GetTicks();
-		//d.diff_time = (d.time - d.time_last_frame) / 1000;
+		d.diff_time = (float)(d.time - d.time_last_frame) / 1000;
         //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
         handle_poll_event(&d, &d.map);
         handle_key_event(&d, &d.map);
         gravity(&d);
+		create_obj_raybox(&d);
+
 		//draw_all_floor_slice(&d);
 
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
 		//print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
-		print_prop(&d, &d.props[0]);
-		//move_with_collide(&d, &d.props[0].pos, get_angle(d.props[0].pos, d.player_pos), 0.01);
+		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
-		// printf("angle = %f, cos = %f, sin = %f\n", get_angle(d.player_pos, d.props[0].pos).rot, get_angle(d.player_pos, d.props[0].pos).cos_rot, get_angle(d.player_pos, d.props[0].pos).sin_rot);
-        // printf("dist = %f\n", get_dist(d.player_pos, d.props[0].pos));
-		update_player_pos_mini_map(&d, &d.map);
+        update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);
         print_data2screen(&d, &d.map);

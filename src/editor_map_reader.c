@@ -107,7 +107,7 @@ void read_wall(char *line, t_wall *wall)
     // printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     // printf("wall length = %f\n", wall->length);
     // printf("wall rot = %f\n", wall->rotation);
-	// printf("p1_z : %f,%f,  p2_z : %f,%f\n", wall->p1_z_start, wall->p1_z_size, wall->p2_z_start, wall->p2_z_size);
+	printf("p1_z : %f,%f,  p2_z : %f,%f\n", wall->p1_z_start, wall->p1_z_size, wall->p2_z_start, wall->p2_z_size);
     //printf("WALL ID READED\n");
     if (error > 0)
         exit_with_msg("error while assigning value to wall on map reader\n");

@@ -10,7 +10,7 @@
 # define MINI_MAP_POS_Y 0
 # define MINI_MAP_PLAYER_SIZE 5
 
-# define MOVE_STEP 0.08
+# define MOVE_STEP 2
 # define ROT_STEP 0.05 * M_PI_2
 # define MOUSE_SENS 0.004
 # define Y_VIEW_RANGE 1
@@ -23,6 +23,9 @@
 # define THREAD_NB 4
 # define MOVE_WALL_Z_SPEED 4
 # define NB_MAX_PROPS 10
+# define NB_MAX_OBJ 230
+# define TYPE_WALL 0
+# define TYPE_PROP 1
 
 typedef struct	s_proj_point
 {
@@ -73,7 +76,17 @@ typedef	struct	s_props
 				float		size;
 				float		z_pos;
 				SDL_Surface	*text;
+				t_point		p1;
+				t_point		p2;
+				t_obj		*obj_ref;
 }				t_props;
+
+
+
+typedef	struct	s_calc_prop
+{
+	/* data */
+}				t_calc_prop;
 
 
 typedef struct      s_data
@@ -92,6 +105,7 @@ typedef struct      s_data
     unsigned int    *p_mini_map_bg;
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
+    t_img		    i_screen;
     int             quit;
     float			rot;
 	t_rot			rot_calc;
@@ -108,7 +122,7 @@ typedef struct      s_data
     int             framerate;
     int             time_last_frame;
     int             time;
-	int				diff_time;
+	float				diff_time;
     int             air_time;
     t_sprite        sprite_lst[NB_SPRITE];
 	/* world edit*/
@@ -118,6 +132,9 @@ typedef struct      s_data
 	/* floor drawing */
 	t_floor			fl[NB_WALL_MAX][WIN_SIZE_Y];
 	t_props			props[NB_MAX_PROPS];
+	int				nb_props;
+	t_obj			obj_list[NB_MAX_OBJ];
+	int				nb_obj;
 	int				bullet;
 	t_sprite        sprite[15];
     t_mob           mob[20];
@@ -164,9 +181,13 @@ t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot 
 t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
 void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
+void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
+
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
 void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
+t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot);
+
 
 //render_draw_walls.c
 void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale);
@@ -199,10 +220,14 @@ t_proj_point		point_x_on_screen(t_data *d, t_point point, float rot, t_point pos
 
 //render_draw_floor.c
 void draw_floor(t_data *d, SDL_Surface *text);
-t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls next);
-t_range calc_floor_draw_range_end(t_data *d, t_calced_walls origin);
+t_draw calc_floor_draw_range(t_data *d, t_ray ray1, float dist2, int x);
+t_draw calc_floor_draw_range_end(t_data *d, float dist1, t_room *room, int x);
+
+
+
 void draw_floor_line(t_data *d, t_range draw, int x, int room_id);
-void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id);
+// void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id);
+void	print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id);
 void init_floor(t_data *d, t_floor *fl);
 void	init_floors(t_data *d);
 void print_floor(t_data *d);
@@ -211,5 +236,27 @@ void draw_floor2(t_data *d, t_floor *fl, double height);
 
 //render_props.c
 void print_prop(t_data *d, t_props *prop);
+t_range	calc_prop_draw_range(t_data *d, float dist, float height, float size);
+void create_obj_raybox(t_data *d);
+
+//render_obj.c
+void init_obj_list(t_data *d);
+void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
+
+//render_draw_slice.c
+void draw_ray_obj(t_data *d, t_ray ray, t_obj *obj, int x);
+t_draw	calc_ray_draw_range(t_data *d, t_ray ray, int x, t_obj *obj);
+void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray);
+void draw_ray_simple(t_data *d, t_ray ray, t_draw draw, t_obj *obj);
+
+//render_debug_print.c
+void print_ray(t_ray ray);
+
+//render_pixel_put.c
+void put_pix_alpha(unsigned int *pixels, t_draw p_pos, unsigned int color, float alpha);
+void put_pix(unsigned int *pixels, t_draw p_pos, t_img text, SDL_Point t_cord);
+
+t_room	*get_room_by_id(t_data *d, int room_id);
+
 
 #endif

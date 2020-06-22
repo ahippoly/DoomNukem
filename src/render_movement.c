@@ -6,8 +6,8 @@
 
 void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot)
 {
-    pos->y += speed * look_rot.sin_rot ;//* d->diff_time;
-    pos->x += speed * look_rot.cos_rot ;//* d->diff_time;
+    pos->y += speed * look_rot.sin_rot * d->diff_time;
+    pos->x += speed * look_rot.cos_rot * d->diff_time;
 }
 
 float mod_pi(float rot)

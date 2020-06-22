@@ -23,71 +23,25 @@ void	clear_p_tab(t_data *d, t_range screen_x)
 	}
 }
 
-void	find_next_room_wall(t_data *d, int x, int *i, t_calced_walls *sorted)
+t_room	*get_room_by_id(t_data *d, int room_id)
 {
-	t_calced_walls origin;
-	t_range draw;
-
-	origin = sorted[*i];
-	(*i)++;
-	// printf("entered find room, wall count = %i, i = %i, origin_room_id = %i, wall_test_room = %i\n", d->map.wall_count, *i, origin.wall.room_id_ref, sorted[*i].wall.room_id_ref);
-	//printf("2i = %i, wall_count = %i\n", *i, d->map.wall_count);
-	while (*i < d->map.wall_count)
-	{
-		// printf("wall count = %i, i = %i, origin_room_id = %i, wall_test_room = %i\n", d->map.wall_count, *i, origin.wall.room_id_ref, sorted[*i].wall.room_id_ref);
-		if (sorted[*i].wall.room_id_ref == origin.wall.room_id_ref)
-			break ;
-		if (sorted[*i].wall.room_id_ref != -1)
-		{
-			draw_floor_line(d, calc_floor_draw_range(d, origin, sorted[*i]), x, origin.wall.room_id_ref);
-			find_next_room_wall(d, x, i, sorted);
-			origin.dist = sorted[*i].dist;
-		}
-		(*i)++;
-	}
-	if (*i < d->map.wall_count)
-		draw_floor_line(d, calc_floor_draw_range(d, origin, sorted[*i]), x, origin.wall.room_id_ref);
-	if (*i == d->map.wall_count)
-	{
-		draw = calc_floor_draw_range(d, origin, origin);
-		draw.end = WIN_SIZE_Y;
-		draw_floor_line(d, draw, x, origin.wall.room_id_ref);
-		(*i)++;
-	}
+	if (room_id > -1)
+		return (&d->map.room_list[room_id]);
 }
 
-void	draw_floor_lines(t_data *d, int x, int i, t_calced_walls *sorted)
+void draw_floor_slice(t_data *d, t_ray *queue, int *nb, t_ray checked, int x)
 {
-	i--;
-	// printf("entered once\n");
-	while (++i < d->map.wall_count)
-	{
-		// printf("i = %i, wall_count = %i\n", i, d->map.wall_count);
-		if (sorted[i].wall.room_id_ref == -1)
-			continue ;
-		// printf("enter find room, i = %i\n", i);
-		find_next_room_wall(d, x, &i, sorted);
-	}
-	
-}
-
-t_room	*get_room_by_id(t_data *d, t_wall *wall)
-{
-	if (wall->room_id_ref > -1)
-		return (&d->map.room_list[wall->room_id_ref]);
-}
-
-void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls checked, int x)
-{
-	int room_id;
+	int queue_room;
+	int check_room;
 
 	if (*nb > -1)
 	{
-		room_id = queue[*nb].wall.room_id_ref;
-		if (checked.wall.room_id_ref == queue[*nb].wall.room_id_ref)
+		queue_room = queue[*nb].room_id;
+		check_room = checked.room_id;
+		if (check_room == queue_room)
 		{
-			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, room_id);
-			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  get_room_by_id(d, &queue[*nb].wall)->floor_text);
+			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue_room);
+			print_floor_slice(d, d->fl[queue_room], calc_floor_draw_range(d, queue[*nb], checked.dist, x),  get_room_by_id(d, queue[*nb].room_id)->floor_text);
 			(*nb)--;
 			if (*nb > -1)
 				queue[*nb].dist = checked.dist;
@@ -95,12 +49,12 @@ void draw_floor_slice(t_data *d, t_calced_walls *queue, int *nb, t_calced_walls 
 		}
 		else
 		{
-			print_floor_slice(d, d->fl[room_id], x, calc_floor_draw_range(d, queue[*nb], checked),  get_room_by_id(d, &queue[*nb].wall)->floor_text);
-			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].wall.room_id_ref);
+			print_floor_slice(d, d->fl[queue_room], calc_floor_draw_range(d, queue[*nb], checked.dist, x),  get_room_by_id(d, queue[*nb].room_id)->floor_text);
+			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].obj_ref->wall_ref->room_id_ref);
 			queue[*nb].dist = checked.dist;
 		}
 	}
-	if (checked.wall.room_id_ref != -1)
+	if (checked.room_id != -1)
 	{
 		(*nb)++;
 		queue[*nb] = checked;
@@ -125,11 +79,11 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
 		nb = -1;
         while (i < d->map.wall_count)
 		{
-			draw_floor_slice(d, queue, &nb, sorted_walls[i], screen_x.start);
+			//draw_floor_slice(d, queue, &nb, sorted_walls[i], screen_x.start);
             draw_vertical_line(d, screen_x.start, sorted_walls[i++]);
 		}
-		if (nb > -1)
-			print_floor_slice(d, d->fl[queue[nb].wall.room_id_ref], screen_x.start, calc_floor_draw_range_end(d, queue[nb]), get_room_by_id(d, &queue[nb].wall)->floor_text);
+		//if (nb > -1)
+			//print_floor_slice(d, d->fl[queue[nb].wall.room_id_ref], screen_x.start, calc_floor_draw_range_end(d, queue[nb]), get_room_by_id(d, &queue[nb].wall)->floor_text);
 			//draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
 		// i = 0;
 		// while (i < d->map.wall_count && sorted_walls[i].dist > 9998)
@@ -142,12 +96,52 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step)
     }
 }
 
+void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
+{
+	int i;
+	t_ray sorted[NB_WALL_MAX];
+	t_ray queue[NB_WALL_MAX];
+	int nb;
+
+	start_angle += step * screen_x.start;
+	clear_p_tab(d, screen_x);
+	while (screen_x.start < screen_x.end)
+    {
+        i = 0;
+        sort_ray_by_dist_player(d, d->player_pos , (t_rot){start_angle, cos(start_angle), sin(start_angle)}, sorted);
+		while (i < d->nb_obj && sorted[i].dist > 9998)
+			i++;
+		nb = -1;
+		// if (sorted[i].dist < 9999)
+		// 	d->p_screen[screen_x.start + 400 * WIN_SIZE_X] = 0xFFDDAADD;
+        while (i < d->nb_obj)
+		{
+			draw_floor_slice(d, queue, &nb, sorted[i], screen_x.start);
+			if (sorted[i].dist < 9998)
+				draw_text_slice(d->p_screen, calc_ray_draw_range(d, sorted[i], screen_x.start, sorted[i].obj_ref), *sorted[i].obj_ref, sorted[i]);
+			i++;
+		}
+		//printf("nb = %i\n", nb);
+		if (nb > -1)
+			print_floor_slice(d, d->fl[queue[nb].room_id], calc_floor_draw_range_end(d, queue[nb].dist, get_room_by_id(d, queue[nb].room_id), screen_x.start), get_room_by_id(d, queue[nb].room_id)->floor_text);
+			//draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
+		// i = 0;
+		// while (i < d->map.wall_count && sorted[i].dist > 9998)
+		// 	i++;
+		//draw_floor_lines(d, screen_x.start, i, sorted);
+		//printf("segfault, i = %i\n", i);
+        //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle, d->rot), d->texture[0]);
+        start_angle += step;
+        screen_x.start++;
+    }
+}
+
 void	*raycast_thread(void *data)
 {
 	t_thread	*param;
 
 	param = (t_thread*)data;
-	raycast_screen(param->d, param->screen_x, param->start_angle, param->step);
+	raycast_screen2(param->d, param->screen_x, param->start_angle, param->step);
 	return (NULL);
 }
 
@@ -188,6 +182,7 @@ void raycast_all_screen(t_data *d, t_map_data *map)
 	screen_x.start = 0;
 	screen_x.end = WIN_SIZE_Y;
 	init_floors(d);
+	create_obj_raybox(d);
 	raycast_screen(d, screen_x, current_angle, step);
     // while (x < WIN_SIZE_X)
     // {

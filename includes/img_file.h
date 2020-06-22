@@ -6,6 +6,8 @@ typedef struct      s_img
 {
     unsigned int    *pixels;
     SDL_Rect        pos_size;
+	int				w;
+	int				h;
 }                   t_img;
 
 typedef struct      s_text

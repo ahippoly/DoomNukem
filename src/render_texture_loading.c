@@ -24,9 +24,9 @@ SDL_Surface *read_img_surface(char *file)
 void load_bmp_files(t_data *d)
 {
     d->texture[0] = read_img_surface(TEXT_PATH_0);
-    d->texture[1] = read_img_surface(TEXT_PATH_1);
-    d->texture[2] = read_img_surface(TEXT_PATH_2);
-    d->texture[3] = read_img_surface(TEXT_PATH_3);
-    d->texture[4] = read_img_surface(TEXT_PATH_4);
-    d->texture[5] = read_img_surface(TEXT_PATH_5);
+    d->texture[1] = read_img_surface(TEXT_PATH_1);;
+    d->texture[2] = read_img_surface(TEXT_PATH_2);;
+    d->texture[3] = read_img_surface(TEXT_PATH_3);;
+    d->texture[4] = read_img_surface(TEXT_PATH_4);;
+    d->texture[5] = read_img_surface(TEXT_PATH_5);;
 }

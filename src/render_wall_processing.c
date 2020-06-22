@@ -12,6 +12,8 @@ float calc_wall_hit_scale(t_wall wall, t_point inter)
     return (get_float_part((inter.x - wall.p1_f.x) / (wall.p2_f.x - wall.p1_f.x) * wall.length));
 }
 
+
+
 float calc_wall_hit_scale_z(t_wall wall, t_point inter)
 {
     sort_t_point_by_x(&wall.p1_f, &wall.p2_f);
@@ -24,6 +26,8 @@ float calc_wall_hit_scale_x(t_wall wall, float scale_z)
 {
     return (get_float_part(scale_z * wall.length));
 }
+
+
 
 t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot look_rot)
 {
@@ -46,6 +50,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot 
     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1_f.x, wall.p2.x, res.inter.x, calc_wall_hit_scale(wall, res.inter), rot, look_rot);
     return (res);
 }
+
 
 t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, t_rot look_rot)
 {
@@ -160,6 +165,42 @@ void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_wa
 }
 
 void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls)
+{
+    int i;
+    int j;
+    int tmp;
+    t_calced_walls dist_scale;
+	t_map_data *map;
+
+	map = &d->map;
+    sorted_walls[0] = check_inter_with_wall(map->wall_list[0], current_angle, pos, d->rot_calc);
+    i = 1;
+    while (i < map->wall_count)
+    {
+        dist_scale = check_inter_with_wall(map->wall_list[i], current_angle, pos, d->rot_calc);
+        //printf("wall dist to player = %f\n",  dist_scale.dist);
+        j = 0;
+        while (dist_scale.dist < sorted_walls[j].dist && j < i)
+            j++;
+        tmp = j;
+        j = i;
+        while (j > tmp)
+        {
+            j--;
+            sorted_walls[j + 1] = sorted_walls[j];
+        }
+        sorted_walls[j] = dist_scale;
+        i++;
+    }
+    // i = 0;
+    // while (i < map->wall_count)
+    // {
+    //     printf("wall sorted dist = %f, i = %i, map_count = %i, room_id = %i\n", sorted_walls[i].dist, i, map->wall_count, sorted_walls[i].wall.room_id_ref);
+    //     i++;
+    // }
+}
+
+void sort_props_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls)
 {
     int i;
     int j;

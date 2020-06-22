@@ -31,6 +31,22 @@ void init_mini_map(t_data *d, t_map_data *map)
     d->mini_map_player_pos = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
 }
 
+void init_props(t_data *d)
+{
+	d->props[0].pos = (t_point){5,5};
+	d->props[0].size = 0.2;
+	d->props[0].z_pos = 2.2;
+	d->props[0].text = d->texture[1];
+	d->nb_props = 1;
+}
+
+void init_rend_img(t_data *d)
+{
+	d->i_screen.pixels = d->p_screen;
+	d->i_screen.w = WIN_SIZE_X;
+	d->i_screen.h = WIN_SIZE_Y;
+}
+
 void init_data(t_data *d, int ac, char **av)
 {
     init_sdl_ressources_rend(d);
@@ -58,11 +74,10 @@ void init_data(t_data *d, int ac, char **av)
 	d->grabbed_wall = NULL;
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
-	d->props[0].pos = (t_point){5,5};
-	d->props[0].size = 0.2;
-	d->props[0].z_pos = 2.5;
-	d->props[0].text = d->texture[1];
-  //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+	init_rend_img(d);
+	init_props(d);
+	init_obj_list(d);
+  //  d->p_screen = (unsigned int *)p_malloc(sizeof(int) * MAP_SIZE_X * MAP_SIZE_Y);
 }

@@ -3,21 +3,25 @@
 #include "editor.h"
 #include "img_file.h"
 
-t_range calc_floor_draw_range(t_data *d, t_calced_walls origin, t_calced_walls next)
+t_draw calc_floor_draw_range(t_data *d, t_ray ray1, float dist2, int x)
 {
-	t_range	draw;
+	t_draw	draw;
+	t_room	*room;
 
-	draw.start = ft_max(d->screen_height + ((d->player_height - d->map.room_list[origin.wall.room_id_ref].z_ground) * WIN_SIZE_Y) / origin.dist, 0);
-	draw.end = ft_min(d->screen_height + ((d->player_height - d->map.room_list[origin.wall.room_id_ref].z_ground) * WIN_SIZE_Y) / next.dist, WIN_SIZE_Y);
+	room = get_room_by_id(d, ray1.room_id);
+	draw.start_y = ft_max(d->screen_height + ((d->player_height - room->z_ground) * WIN_SIZE_Y) / ray1.dist, 0);
+	draw.end_y = ft_min(d->screen_height + ((d->player_height - room->z_ground) * WIN_SIZE_Y) / dist2, WIN_SIZE_Y);
+	draw.start_x = x;
 	return (draw);
 }
 
-t_range calc_floor_draw_range_end(t_data *d, t_calced_walls origin)
+t_draw calc_floor_draw_range_end(t_data *d, float dist1, t_room *room, int x)
 {
-	t_range	draw;
+	t_draw	draw;
 
-	draw.start = ft_max(d->screen_height + ((d->player_height - d->map.room_list[origin.wall.room_id_ref].z_ground) * WIN_SIZE_Y) / origin.dist, 0);
-	draw.end = WIN_SIZE_Y;
+	draw.start_y = ft_max(d->screen_height + ((d->player_height - room->z_ground) * WIN_SIZE_Y) / dist1, 0);
+	draw.end_y = WIN_SIZE_Y;
+	draw.start_x = x;
 	return (draw);
 }
 
@@ -239,10 +243,10 @@ void print_floor(t_data *d)
 	}
 }
 
-void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id)
+void	print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id)
 {
 	t_size t_max;
-	t_range draw_y;
+	t_range y;
 	t_floor current;
 	SDL_Surface *text;
 	unsigned int	*pixels;
@@ -250,31 +254,33 @@ void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id)
 	text = d->texture[text_id];
 	t_max.w = text->w - 1;
 	t_max.h = text->h - 1;
-	draw_y.start = y.start * WIN_SIZE_X;
-	draw_y.end = y.end * WIN_SIZE_X;
+	y.start = draw.start_y;
+	y.end = draw.end_y;
+	draw.start_y *= WIN_SIZE_X;
+	draw.end_y *= WIN_SIZE_X;
 	pixels = (unsigned int*)text->pixels;
 	//printf("y = %i, floor_step : %f,%f, floor : %f,%f\n", y.start, fl[y.start].floor_step.x, fl[y.start].floor_step.y, fl[y.start].floor.x, fl[y.start].floor.y);
-	while (draw_y.start < draw_y.end)
+	while (draw.start_y < draw.end_y)
 	{
 		current = fl[y.start];
-		d->p_screen[x + draw_y.start] = pixels[((int)(get_float_part(current.floor.x + current.floor_step.x * x) * text->w) & t_max.w) + ((int)(get_float_part(current.floor.y + current.floor_step.y * x) * text->h) & t_max.h) * text->w];
+		d->p_screen[draw.start_x + draw.start_y] = pixels[((int)(get_float_part(current.floor.x + current.floor_step.x * draw.start_x) * text->w) & t_max.w) + ((int)(get_float_part(current.floor.y + current.floor_step.y * draw.start_x) * text->h) & t_max.h) * text->w];
 		//d->p_screen[x + draw_y.start] = pixels[((int)(get_float_part(current.floor.x) * text->w) & t_max.w) + ((int)(get_float_part(current.floor.y) * text->h) & t_max.h) * text->w];
 		//d->p_screen[x + draw_y.start] = 0xDD88CCFF;
-		draw_y.start += WIN_SIZE_X;
+		draw.start_y += WIN_SIZE_X;
 		y.start++;
 	}
 }
 
-void draw_all_floor_slice(t_data *d)
-{
-	int x;
-	int y;
+// void draw_all_floor_slice(t_data *d)
+// {
+// 	int x;
+// 	int y;
 
-	init_floors(d);
-	x = 0;
-		while (x < WIN_SIZE_X)
-		{
-			print_floor_slice(d, d->fl[0], x, (t_range){d->screen_height - 1, WIN_SIZE_Y}, 0);
-			x++;
-		}
-}
+// 	init_floors(d);
+// 	x = 0;
+// 		while (x < WIN_SIZE_X)
+// 		{
+// 			print_floor_slice(d, d->fl[0], x, (t_range){d->screen_height - 1, WIN_SIZE_Y}, 0);
+// 			x++;
+// 		}
+// }

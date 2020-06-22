@@ -73,6 +73,7 @@ typedef struct		s_draw
     int				end_x;
 	int				start_y;
     int				end_y;
+	int				step_y;
 }               	t_draw;
 
 typedef struct		s_range
@@ -86,6 +87,12 @@ typedef struct		s_frange
     float			start;
     float			end;
 }               	t_frange;
+
+typedef struct      s_p_size
+{   
+    float           pos;
+    float           size;
+}                   t_p_size;
 
 typedef struct      s_size
 {   
@@ -118,6 +125,7 @@ typedef struct      s_sprite
                     int             on;
                     int             index;
                     unsigned int    *pixels;
+                    unsigned int    *displayed;
                     t_size          total_size;
                     t_size          frame_size;
                     SDL_Point       nb_frame;
@@ -129,10 +137,14 @@ typedef struct      s_sprite
                     SDL_Texture     *text;
 }                   t_sprite;
 
+
 typedef struct      s_mob
 {
                     int         life;
-                    t_coord     pos;
+                    t_point		pos;
+					float		z_pos;
+					float		z_size;
+					float		size;
                     t_sprite    sprite;
 }                   t_mob;
 
@@ -157,7 +169,38 @@ typedef struct      s_wall
 	float			p2_z_start;
 	float			p2_z_size;
 	float			z_text_offset;
+	t_p_size		z_height;
 }                   t_wall;
+
+typedef	struct	s_obj
+{
+				t_point		p1;
+				t_point		p2;
+				t_p_size	z_height;
+				t_p_size	z_step;
+				float		z_text_offset;
+				float		length;
+				unsigned int	*pixels;
+				int			w;
+				int			h;
+				t_point		pos;
+				float		size;
+				float		alpha;
+				int			type;
+				int			alive;
+				int			room_id;
+}				t_obj;
+
+typedef	struct				s_ray
+{
+				float		dist;
+				float		scale;
+				float		mod_scale;
+				t_p_size	z_height;
+				t_point		inter;
+				int			room_id;
+				t_obj		*obj_ref;
+}							t_ray;
 
 typedef struct      s_calced_walls
 {
@@ -174,7 +217,6 @@ typedef struct			s_move_wall
     t_point 			p2;
 	int					travel_time;
 }						t_move_wall;
-
 
 typedef struct          s_wall_ref
 {
@@ -246,6 +288,9 @@ void	*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n);
 
 
 void print_text_screen(unsigned int *p_tab, SDL_Surface *text, SDL_Rect draw);
+void calc_transparency(unsigned int *color_dst, unsigned int *color2, float alpha);
+unsigned int calc_transparency2(unsigned int color_dst, unsigned int color2, float alpha);
+
 float	get_dist(t_point pos1, t_point pos2);
 t_rot	get_angle(t_point pos1, t_point pos2);
 

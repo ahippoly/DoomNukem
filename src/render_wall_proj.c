@@ -66,7 +66,6 @@ void	proj_wall(t_data *d, t_wall *wall)
 
 	points.p1 = wall->p1_f;
 	points.p2 = wall->p2_f;
-
 }
 
 void draw_point(t_data *d, t_proj_point point)
@@ -94,16 +93,6 @@ t_frange	calc_wall_draw_range(t_data *d, float dist, t_frange wall_height)
 
 	res.start = d->screen_height - ((wall_height.end - d->player_height) * WIN_SIZE_Y) / dist;
 	res.end = d->screen_height + ((d->player_height - wall_height.start)  * WIN_SIZE_Y) / dist;
-	return (res);
-}
-
-
-t_range	calc_prop_draw_range(t_data *d, float dist, float height, float size)
-{
-	t_range	res;
-
-	res.start = d->screen_height - ((height - d->player_height + size) * WIN_SIZE_Y) / dist;
-	res.end = d->screen_height + ((d->player_height - height + size)  * WIN_SIZE_Y) / dist;
 	return (res);
 }
 

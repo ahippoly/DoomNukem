@@ -14,7 +14,8 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
 						text_img.c render_movement.c image_gesture2.c render_raycast.c \
 						render_world_edit.c render_collide_z.c render_wall_proj.c \
-						render_draw_floor.c)
+						render_draw_floor.c render_props.c render_obj.c render_draw_slice.c \
+						render_debug_ray.c render_ray_process.c render_pixel_put.c)
 
 HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
@@ -58,7 +59,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = editor
 RENDER_NAME = doom-nukem
-OPTI =  -g3
+OPTI =  -Ofast
 PTHREAD = -lpthread
 HUD = hud ##
 SPRITE = sprite ##
