@@ -113,7 +113,7 @@ void read_wall(char *line, t_wall *wall)
         exit_with_msg("error while assigning value to wall on map reader\n");
 }
 
-void read_room(char *line, t_room *room, t_map_data *map)
+void read_room(char *line, t_room *room)
 {
     int error;
 
@@ -124,7 +124,7 @@ void read_room(char *line, t_room *room, t_map_data *map)
 	error += read_param(line, "height", &room->height.start);
 	error += read_param(line, "floor_text", &room->floor_text);
     if (error > 0)
-        exit_with_msg("error while assigning value to room on map reader\n");
+		exit_with_msg("error while assigning value to room on map reader\n");
 	room->z_ground = (float)room->height.start / UNIT;
 	room->z_ceil = (float)room->height.end / UNIT;
 }
@@ -132,10 +132,8 @@ void read_room(char *line, t_room *room, t_map_data *map)
 t_wall_ref *read_wall_ref(char *chunk)
 {
     t_wall_ref *wall_ref;
-    int i;
 
     wall_ref = NULL;
-    i = 0;
     wall_ref = add_wall_reference(wall_ref, ft_atoi(chunk));
     //printf("%i ", ft_atoi(chunk));
     chunk = skip_until_char(chunk, ',', ' ');
@@ -185,7 +183,7 @@ void read_wall_ref_list(int fd, t_map_data *map)
     }
 }
 
-void read_icon(char *line, t_icon *icon, t_map_data *map)
+void read_icon(char *line, t_icon *icon)
 {
     int error;
 
@@ -226,7 +224,7 @@ void read_room_list(int fd, t_map_data *map)
         exit_with_msg("Failed to malloc");
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->room_count)
-        read_room(line, &map->room_list[i++], map);
+        read_room(line, &map->room_list[i++]);
 }
 
 void read_icon_list(int fd, t_map_data *map)
@@ -242,7 +240,7 @@ void read_icon_list(int fd, t_map_data *map)
         exit_with_msg("Failed to malloc");
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->icon_count)
-        read_icon(line, &map->icon_list[i++], map);
+		read_icon(line, &map->icon_list[i++]);
 
 	i = 0;
 	while (i < map->icon_count)
@@ -277,7 +275,6 @@ void read_head(int fd, char *line, t_map_data *map)
 t_map_data  read_map(char *path_file)
 {
     int         fd;
-    char        buf[BUFF_SIZE];
     t_map_data  map;
     char *line;
 

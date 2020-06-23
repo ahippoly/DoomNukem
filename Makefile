@@ -65,7 +65,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = editor
 RENDER_NAME = doom-nukem
-OPTI =  -g3
+OPTI =  
 PTHREAD = -lpthread
 HUD = hud ##
 SPRITE = sprite ##
@@ -112,7 +112,7 @@ $(SPRITE): libft $(OBJ_SPRITE) ##
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(OPTI) $(INC) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 clean:

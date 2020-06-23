@@ -155,32 +155,32 @@ int					put_perso_icon(t_data *d, t_hud *hud, SDL_Rect pos);
 
 int					init_health_icon(t_data *d, t_hud *hud);
 int					put_health_icon(t_data *d, t_hud *hud, SDL_Rect pos);
-int					set_health_info(t_data *d, t_hud *hud, int nb);
+int					set_health_info(t_hud *hud, int nb);
 int					render_health_info(t_data *d, t_hud *hud, SDL_Rect pos);
 
 /* hud_ammo.c */
 
 int					init_ammo_icon(t_data *d, t_hud *hud);
 int					put_ammo_icon(t_data *d, t_hud *hud, SDL_Rect pos);
-int					set_ammo_info(t_data *d, t_hud *hud, int nb);
+int					set_ammo_info(t_hud *hud, int nb);
 int					render_ammo_info(t_data *d, t_hud *hud, SDL_Rect pos);
 
 /*  hud utils */
 
-SDL_Surface			*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud);
+SDL_Surface			*copy_surface(SDL_Surface *src, t_hud *hud);
 
 /* hud_inv.c */
 
 int					init_health_pack(t_data *d, t_hud *hud);
 int					put_healthpack_icon(t_data *d, t_hud *hud, SDL_Rect pos);
 int					render_healthpack_info(t_data *d, t_hud *hud, SDL_Rect pos);
-int					set_healthpack_info(t_data *d, t_hud *hud, int nb);
+int					set_healthpack_info(t_hud *hud, int nb);
 
 /* hud_inv1.c */
 
 int					init_key_icon(t_data *d, t_hud *hud);
 int					put_key_icon(t_data *d, t_hud *hud, SDL_Rect pos);
-int					set_key_info(t_data *d, t_hud *hud, int nb);
+int					set_key_info(t_hud *hud, int nb);
 int					render_key_info(t_data *d, t_hud *hud, SDL_Rect pos);
 
 
@@ -188,7 +188,7 @@ int				init_hud(t_data *d, t_hud *hud);
 int				put_background(t_data *d);
 void			render_hud_icons(t_data *d, t_hud *hud);
 void			render_hud_info(t_data *d, t_hud *hud);
-void			update_hud_info(t_data *d, t_hud *hud);
+void			update_hud_info(t_hud *hud);
 
 void check_props_collect(t_data *d, t_props *props, t_hud *hud);
 

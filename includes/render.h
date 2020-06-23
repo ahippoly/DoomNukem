@@ -175,12 +175,13 @@ void init_data(t_data *d, int ac, char **av);
 
 
 //render_event_gesture.c
-void handle_key_event(t_data *d, t_map_data *map);
-void handle_poll_event(t_data *d, t_map_data *map);
+void handle_key_event(t_data *d);
+void handle_poll_event(t_data *d);
 
 //render_movement.c
 void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot);
 void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed);
+void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed);
 void gravity(t_data *d);
 
 //render_wall_processing.c
@@ -190,11 +191,14 @@ t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, 
 void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
+void sort_ray_by_dist(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
 
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
 t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
 void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
 t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot);
+t_ray check_perp_obj(t_obj *obj, t_point pos);
+void sort_perp_ray(t_data *d, t_point pos, t_ray *sorted);
 
 
 //render_draw_walls.c
@@ -220,7 +224,7 @@ void	rot_wall(t_wall *wall, float rot, int pivot_point);
 void	rot_grabbed_wall(t_data *d, float rot, int pivot_point);
 
 int	check_obj_room(t_data *d, t_point pos);
-void set_room_ground(t_data *d, t_point pos);
+float set_room_ground(t_data *d, t_point pos);
 
 //render_wall_proj.c
 void print_wall(t_data *d, t_wall wall);
@@ -255,7 +259,7 @@ void del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj);
 
 //render_draw_slice.c
 void draw_ray_obj(t_data *d, t_ray ray, t_obj *obj, int x);
-t_draw	calc_ray_draw_range(t_data *d, t_ray ray, int x, t_obj *obj);
+t_draw	calc_ray_draw_range(t_data *d, t_ray ray, int x);
 void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray);
 void draw_ray_simple(t_data *d, t_ray ray, t_draw draw, t_obj *obj);
 

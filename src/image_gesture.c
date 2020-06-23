@@ -36,14 +36,14 @@ unsigned int calc_transparency2(unsigned int color_dst, unsigned int color2, flo
 	if (!nb2[i])
 		return (color_dst);
     while (i++ < 3)
-        nb[i] = rev_alp * nb[i] + alpha * nb2[i];
+		nb[i] = rev_alp * nb[i] + alpha * nb2[i];
 	return (color_dst);
 }
 
 void put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size, unsigned int color, float alpha)
 {
-    int pixel_pos;
-    int dst_color;
+    unsigned int pixel_pos;
+    unsigned int dst_color;
 
     pixel_pos = pos_size.x + pos_size.y * pos_size.w;
     dst_color = pixels[pixel_pos];

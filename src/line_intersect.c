@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/23 15:04:22 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/23 22:32:57 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_point calc_intersect_point(t_point p1, t_point p2, t_point p3, t_point p4)
 	return (inter);
 }
 
-t_point calc_inter_first_vertical(t_point p1, t_point p2, t_point p3, t_point p4)
+t_point calc_inter_first_vertical(t_point p1, t_point p3, t_point p4)
 {
 	t_point inter;
 	float a2;
@@ -90,7 +90,7 @@ t_point default_case(t_point p1, t_point p2, t_point p3, t_point p4)
 	)
 		return (create_t_point(-41, -41));
 	inter.x = (b2 - b1) / (a1  - a2);
-	// printf("inter.x = %f, max x = %f, min x = %f\n", inter.x, ft_fmax(p2.x, p1.x), ft_fmin(p2.x, p1.x));
+	//printf("default : inter.x = %f, max x = %f, min x = %f\n", inter.x, ft_fmax(p2.x, p1.x), ft_fmin(p2.x, p1.x));
 	if (inter.x < p2.x - INTER_TOLERANCE && inter.x > p1.x + INTER_TOLERANCE
 		&& inter.x < p4.x - INTER_TOLERANCE && inter.x > p3.x + INTER_TOLERANCE
 		&& (a1 != a2))
@@ -110,14 +110,14 @@ t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point 
 	b2 = p3.y - p3.x * a2;
 	inter.x = p1.x;
 	inter.y = a2 * inter.x + b2;
-	// printf("p3: %f,%f ; p4: %f,%f ; a2 = %f, b2 = %f\n", p3.x,p3.y, p4.x,p4.y, a2, b2);
-	// printf("inter.x = %f, inter.y = %f, max x = %f, min x = %f\n", inter.x, inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
-	if (inter.y > ft_max(p2.y, p1.y) - INTER_TOLERANCE || inter.y < ft_min(p1.y, p2.y) + INTER_TOLERANCE
+	printf("p3: %f,%f ; p4: %f,%f ; a2 = %f, b2 = %f\n", p3.x,p3.y, p4.x,p4.y, a2, b2);
+	if (inter.y > ft_fmax(p2.y, p1.y) - INTER_TOLERANCE || inter.y < ft_fmin(p1.y, p2.y) + INTER_TOLERANCE
 		|| inter.x > p4.x - INTER_TOLERANCE || inter.x < p3.x + INTER_TOLERANCE)
 	{
 		inter.x = - 42;
 		inter.y = - 42;
 	}
+	printf("vertical : inter.x = %f, inter.y = %f, max x = %f, min x = %f\n", inter.x, inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
 	return (inter);
 }
 
@@ -154,7 +154,8 @@ t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4)
 	}
 	//printf("a1 = %f, b1 = %f\na2 = %f, b2 = %f\n",a1, b1, a2, b2);
 	//printf("sin_rot = %f, cos_rot = %f\n", sin_rot, cos_rot);
-	//printf("inter.x = %f, inter.y = %f\n", inter.x, inter.y);
+	// if (inter.y < 0.0001 && inter.y > -1)
+	// 	printf("line inter.x = %f, inter.y = %f\n", inter.x, inter.y);
 	return (inter);
 }
 
@@ -171,9 +172,9 @@ t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4)
 	if (!(is_equ_tolerance(line1_diff_x, 0, INTER_TOLERANCE) || is_equ_tolerance(line2_diff_x, 0, INTER_TOLERANCE)))
 		inter = calc_intersect_point(p1, p2, p3, p4);
 	else if (line1_diff_x < INTER_TOLERANCE && line1_diff_x > - INTER_TOLERANCE)
-		inter = calc_inter_first_vertical(p1, p2, p3, p4);
+		inter = calc_inter_first_vertical(p1, p3, p4);
 	else if (line2_diff_x < INTER_TOLERANCE && line2_diff_x > - INTER_TOLERANCE)
-		inter = calc_inter_first_vertical(p3, p4, p1, p2);
+		inter = calc_inter_first_vertical(p3, p1, p2);
 	else
 		inter = (t_point){-42, -42};
 	//printf("a1 = %f, b1 = %f\na2 = %f, b2 = %f\n",a1, b1, a2, b2);
@@ -184,7 +185,6 @@ t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4)
 
 t_point segment_intersect(SDL_Point point1, SDL_Point point2, SDL_Point point3, SDL_Point point4)
 {
-	t_point inter;
 	t_point p1;
 	t_point p2;
 	t_point p3;

@@ -35,7 +35,7 @@ void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray)
 	}
 }
 
-t_draw	calc_ray_draw_range(t_data *d, t_ray ray, int x, t_obj *obj)
+t_draw	calc_ray_draw_range(t_data *d, t_ray ray, int x)
 {
 	t_draw	draw;
 
@@ -76,9 +76,3 @@ t_draw	calc_ray_draw_range(t_data *d, t_ray ray, int x, t_obj *obj)
 // 		draw.start_y += 1;
 // 	}
 // }
-
-void draw_ray_wall(t_data *d, t_ray *ray, t_img text)
-{
-
-}
-

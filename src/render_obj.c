@@ -26,6 +26,7 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	obj.z_text_offset = 0;
 	obj.can_collide = wall->can_collide;
 	obj.room_id = wall->room_id_ref;
+	obj.rotation = calc_sin_cos_rot(wall->rotation);
 	obj.origin = wall;
 	return (obj);
 }
@@ -34,6 +35,7 @@ void create_raybox(t_data *d, t_obj *obj, t_rot rot_calc)
 {
 	if (obj->room_id < -1)
 	{
+		obj->rotation = calc_sin_cos_rot(rot_calc.rot - M_PI_2);
 		obj->p1.x = obj->pos.x - obj->size * rot_calc.sin_rot;
 		obj->p1.y = obj->pos.y + obj->size * rot_calc.cos_rot;
 		obj->p2.x = obj->pos.x + obj->size * rot_calc.sin_rot;

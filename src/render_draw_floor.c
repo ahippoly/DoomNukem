@@ -52,7 +52,6 @@ void draw_floor(t_data *d, SDL_Surface *text)
     int y;
     int p;
 
-    float fov_coef = (float)FOV_ANGLE / 90;
     
 
     float ray_dir_x0;
@@ -72,8 +71,7 @@ void draw_floor(t_data *d, SDL_Surface *text)
     float floorY;
 	t_point floor;
 
-    int tx;
-    int ty;
+ 
 
     int text_acces_pos;
 
@@ -164,28 +162,6 @@ void draw_floor2(t_data *d, t_floor *fl, double height)
 		
       y++;
     }
-}
-
-void print_floor_slice2(t_data *d, int x, t_range y, float current_angle)
-{
-	t_point ray_dir;
-	float	row_dist;
-	float	pos_z;
-
-	pos_z = d->z_pos;
-	ray_dir.x = cos(d->rot) + current_angle * sin(d->rot);
-    ray_dir.y = sin(d->rot) - current_angle * cos(d->rot);
-	while (y.start < WIN_SIZE_Y)
-    {
-        row_dist = pos_z / (y.start - d->screen_height);
-        // printf("Pos_z = %f, p = %d, rowDistance = %f\n", pos_z, p, rowDistance);
-
-		// floor.x = (d->player_pos.x + rowDistance * ray_dir_x0);
-        // floor.y = (d->player_pos.y + rowDistance * ray_dir_y0);
-        x = 0;
-        // printf("floor: %f,%f\n", floorX, floorY);
-        // printf("floorSTEP : %f,%f\n", floorStepX, floorStepY);
-	}
 }
 
 void init_floor(t_data *d, t_floor *fl)

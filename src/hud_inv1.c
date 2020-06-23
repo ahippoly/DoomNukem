@@ -28,9 +28,8 @@ int					put_key_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 	return (0);
 }
 
-int					set_key_info(t_data *d, t_hud *hud, int nb)
+int					set_key_info(t_hud *hud, int nb)
 {
-	SDL_Texture		*t_cpy;
 	SDL_Surface		*s_cpy;	
 	char			*text;
 
@@ -40,7 +39,7 @@ int					set_key_info(t_data *d, t_hud *hud, int nb)
 		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
 		return (error(hud));
 	}
-	if (!(hud->inv.key_info_s = copy_surface(d, s_cpy, hud)))
+	if (!(hud->inv.key_info_s = copy_surface(s_cpy, hud)))
 		return (error(hud));
 	SDL_FreeSurface(s_cpy);
 	return (0);

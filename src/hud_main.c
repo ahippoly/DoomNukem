@@ -25,9 +25,7 @@ int				init_hud(t_data *d, t_hud *hud)
 /* print items transparent background*/
 int				put_background(t_data *d)
 {
-	SDL_Rect	size;
 
-	size = set_sdl_rect(50, WIN_SIZE_Y - (WIN_SIZE_Y / 4) - 10, 400, 100);
 	SDL_SetRenderDrawColor(d->rend, 255, 255, 255, 50);
 	return (0);
 }
@@ -50,12 +48,12 @@ void			render_hud_info(t_data *d, t_hud *hud)
 	render_key_info(d, hud, set_sdl_rect(740, 665, 50, 50));
 }
 
-void			update_hud_info(t_data *d, t_hud *hud)
+void			update_hud_info(t_hud *hud)
 {
-	set_ammo_info(d, hud, hud->perso_weapon[hud->current_weap_id]->ammo_left);
-	set_health_info(d, hud, hud->hp);
-	set_healthpack_info(d, hud, hud->inv.health_pack);
-	set_key_info(d, hud, hud->inv.key);
+	set_ammo_info(hud, hud->perso_weapon[hud->current_weap_id]->ammo_left);
+	set_health_info(hud, hud->hp);
+	set_healthpack_info(hud, hud->inv.health_pack);
+	set_key_info(hud, hud->inv.key);
 }
 
 // int 			main(int ac, char **av)

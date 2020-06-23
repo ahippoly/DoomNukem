@@ -90,10 +90,10 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
     p1.y = pos.y + sin(wall.rotation - M_PI_2) * 30;
     p2.x = pos.x + wall_rot.cos_rot * 30; 
 	p2.y = pos.y + wall_rot.sin_rot * 30;
-    // printf("p2 = %f,%f\n", p2.x, p2.y);
-    // printf("cos = %f, sin = %f\n", cos(wall.rotation + M_PI_2), sin(wall.rotation + M_PI_2));
+    //printf("p2 = %f,%f\n", p2.x, p2.y);
+    //printf("cos = %f, sin = %f\n", cos(wall.rotation + M_PI_2), sin(wall.rotation + M_PI_2));
     res.inter = find_intersect(p1, p2, wall.p1_f, wall.p2_f);
-    // printf("res.inter = %f,%f\n", res.inter.x, res.inter.y);
+    //printf("res.inter = %f,%f\n", res.inter.x, res.inter.y);
     if (res.inter.x != -42)
     {
         //res.dist = ft_frange(cos(wall.rotation + M_PI_2) * (res.inter.x - pos.x) + sin(wall.rotation + M_PI_2) * (res.inter.y - pos.y), 0, res.dist);

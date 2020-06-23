@@ -123,6 +123,7 @@ typedef	struct					s_obj
 				float			size;
 				float			alpha;
 				int				room_id;
+				t_rot			rotation;
 				char			can_collide;
 				void			*origin;
 }								t_obj;
@@ -283,6 +284,7 @@ t_point	line_intersect(t_point pos, float rot, t_point p1, t_point p2);
 t_point inter_with_dir(t_point pos, t_rot rot, t_point p3, t_point p4);
 t_point find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
 t_point find_intersect_no_bound(t_point p1, t_point p2, t_point p3, t_point p4);
+t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point p4);
 void swap_t_point(t_point *p1, t_point *p2);
 void sort_t_point_by_x(t_point *p1, t_point *p2);
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color);

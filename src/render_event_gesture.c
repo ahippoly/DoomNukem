@@ -4,23 +4,23 @@
 #include "img_file.h"
 
 
-void handle_key_event(t_data *d, t_map_data *map)
+void handle_key_event(t_data *d)
 {
     d->clavier = SDL_GetKeyboardState(NULL);
     if (d->clavier[SDL_SCANCODE_E])
-        d->rot += ROT_STEP;
+		d->rot += ROT_STEP;
     if (d->clavier[SDL_SCANCODE_Q])
-        d->rot -= ROT_STEP;
+		d->rot -= ROT_STEP;
 	d->rot_calc = calc_sin_cos_rot(d->rot);
     if (d->clavier[SDL_SCANCODE_D])
-        move_with_collide(d, &d->player_pos, (t_rot){d->rot + M_PI_2, cos(d->rot + M_PI_2), sin(d->rot + M_PI_2)}, MOVE_STEP * d->speed_modifier);
+        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot + M_PI_2, cos(d->rot + M_PI_2), sin(d->rot + M_PI_2)}, MOVE_STEP * d->speed_modifier);
         //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot_calc + 1);
     if (d->clavier[SDL_SCANCODE_A])
-        move_with_collide(d, &d->player_pos, (t_rot){d->rot - M_PI_2, cos(d->rot - M_PI_2), sin(d->rot - M_PI_2)}, MOVE_STEP * d->speed_modifier);
+        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot - M_PI_2, cos(d->rot - M_PI_2), sin(d->rot - M_PI_2)}, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_W])
-        move_with_collide(d, &d->player_pos, d->rot_calc, MOVE_STEP * d->speed_modifier);
+        move_with_collide_player(d, &d->player_pos, d->rot_calc, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_S])
-        move_with_collide(d, &d->player_pos, (t_rot){d->rot + M_PI, cos(d->rot + M_PI), sin(d->rot + M_PI)}, MOVE_STEP * d->speed_modifier);
+        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot + M_PI, cos(d->rot + M_PI), sin(d->rot + M_PI)}, MOVE_STEP * d->speed_modifier);
     if (d->clavier[SDL_SCANCODE_R])
         d->z_offset += 0.05;
     if (d->clavier[SDL_SCANCODE_F])
@@ -41,7 +41,7 @@ void inc_fov(t_data *d, float inc)
 	printf("fov = %f\n", d->fov);
 }
 
-void handle_poll_event(t_data *d, t_map_data *map)
+void handle_poll_event(t_data *d)
 {
     while (SDL_PollEvent(&d->e))
     {
@@ -104,12 +104,14 @@ void handle_poll_event(t_data *d, t_map_data *map)
 				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
-				t_ray sorted[200];
+				// t_ray sorted[200];
 
-				sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
-				move_with_collide(d, &sorted[0].obj_ref->pos, get_angle(d->player_pos, sorted[0].obj_ref->pos), 10);
-				//t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);
-				//print_ray(ray);
+				// sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
+				// move_with_collide(d, &sorted[0].obj_ref->pos, get_angle(d->player_pos, sorted[0].obj_ref->pos), 10);
+
+				// t_ray  ray = check_perp_obj(&d->obj_list[0], d->player_pos);
+				// t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);
+				// print_ray(ray);
 
 				// printf("obj deleted, nb_obj = %i\n", d->nb_obj);
 				// del_obj(d->obj_list, &d->nb_obj, &d->obj_list[1]);

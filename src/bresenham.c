@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 05:25:25 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/10 05:36:05 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/23 22:25:39 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ void	draw_line(SDL_Point pos1, SDL_Point pos2, t_img img, int color)
 	t_oct			oct;
 	int				pos[2][2];
 	int				i;
-	unsigned int	*p_tab;
 	int				length;
 
 	if (pos1.x != -42 && pos2.x != -42)
 	{
-		p_tab = img.pixels;
 		i = 0;
 		oct_ini(&oct, pos1, pos2, pos);
 		if (oct.bool == 0)

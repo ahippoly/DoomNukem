@@ -1,6 +1,6 @@
 #include "hud.h"
 
-static int		update_perso(t_data *d, t_hud *hud)
+static int		update_perso(t_hud *hud)
 {
 	ft_bzero(&hud->perso, sizeof(hud->perso));
 	if (hud->current_perso_id == PERSO_F)
@@ -26,7 +26,7 @@ static int		update_perso(t_data *d, t_hud *hud)
 
 int				init_perso(t_data *d, t_hud *hud)
 {
-	update_perso(d, hud);
+	update_perso(hud);
 	if (!(hud->perso.texture = SDL_CreateTextureFromSurface(d->rend, hud->perso.surface)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
