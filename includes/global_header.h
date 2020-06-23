@@ -24,7 +24,7 @@
 # define NAZI "Alerte nazi, Test de nazi detecte, Alerte nazi\n"
 # define MOUSE 3
 # define NB_WALL_MAX 200
-# define INTER_TOLERANCE 0.00001
+# define INTER_TOLERANCE 0.000000001
 # define PI_X_2 6.28318530718
 
 # define NB_FRAME 15

@@ -42,7 +42,7 @@ void init_data(t_data *d, int ac, char **av)
 		exit_with_msg("error : wrong map file\n");
     init_mini_map(d, &d->map);
     d->player_pos = create_t_point(d->map.player_spawn.x, d->map.player_spawn.y);
-    d->rot = -1 * M_PI_2;
+    d->rot = -1.00015592 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0;
     d->z_force = 0;

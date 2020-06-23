@@ -40,6 +40,11 @@ t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot)
 		else
 			res.z_text = res.z_height.size;
     }
+	else
+	{
+		//printf("Not work, p1 : %f,%f, p2 : %f,%f, rot = %f\n", obj->p1.x, obj->p1.y, obj->p2.x, obj->p2.y, rot.rot);
+	}
+	
 	//print_ray(res);
         //dist = hypot(obj->inter.x - pos.x, obj->inter.y - pos.y) * cos((look_rot - rot ));
     //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1_f.x, wall.p2.x, obj->inter.x, calc_wall_hit_scale(wall, obj->inter), rot, look_rot);
