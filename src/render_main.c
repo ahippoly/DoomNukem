@@ -2,8 +2,10 @@
 #include "render.h"
 #include "editor.h"
 #include "img_file.h"
+#include "hud.h"
 
-void print_data2screen(t_data *d, t_map_data *map)
+
+void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
 {
     SDL_Rect tmp;
     //printf("before print\n");
@@ -12,6 +14,9 @@ void print_data2screen(t_data *d, t_map_data *map)
     print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
     tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
+	update_hud_info(d, hud);
+	render_hud_info(d, hud);
+	render_hud_icons(d, hud);
     SDL_RenderCopy(d->rend, d->mini_map, NULL, &tmp);
     SDL_RenderPresent(d->rend);
 }
@@ -44,11 +49,15 @@ void calc_n_disp_framerate(t_data *d)
 int main(int ac, char **av)
 {
     t_data      d;
+	t_hud		hud;
     
     init_data(&d, ac, av);
     ft_putstr("Main worked");
     printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
 	printf("test = %i\n", -5 % 2);
+
+	init_hud(&d, &hud);
+	init_ttf(&hud);
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -60,6 +69,7 @@ int main(int ac, char **av)
         handle_key_event(&d, &d.map);
         gravity(&d);
 		create_obj_raybox(&d);
+		check_props_collect(&d, d.props, &hud);
 
 		//draw_all_floor_slice(&d);
 
@@ -72,7 +82,7 @@ int main(int ac, char **av)
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);
-        print_data2screen(&d, &d.map);
+        print_data2screen(&d, &d.map, &hud);
     }
     free_render_env(&d);
 }

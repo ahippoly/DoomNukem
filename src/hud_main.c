@@ -58,42 +58,42 @@ void			update_hud_info(t_data *d, t_hud *hud)
 	set_key_info(d, hud, hud->inv.key);
 }
 
-int 			main(int ac, char **av)
-{
-    t_map_data  map;
-    t_data      d;
-	t_hud		hud;
-	int			tmp;
-	int			i;
+// int 			main(int ac, char **av)
+// {
+//     t_map_data  map;
+//     t_data      d;
+// 	t_hud		hud;
+// 	int			tmp;
+// 	int			i;
 
-	map = read_map("maps/editor_map_0");
-	init_data(&d, ac, av);
-	init_hud(&d, &hud);
-	init_ttf(&hud);
-	d.bullet = 0;
-	i = 0;
-		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
-	while (!d.quit)
-	{
-		tmp = d.bullet;
-		ft_bzero(d.p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
-		SDL_PumpEvents();
-		handle_key_event(&d, &map);
-		handle_poll_event(&d, &map);
+// 	map = read_map("maps/editor_map_0");
+// 	init_data(&d, ac, av);
+// 	init_hud(&d, &hud);
+// 	init_ttf(&hud);
+// 	d.bullet = 0;
+// 	i = 0;
+// 		SDL_SetRenderDrawBlendMode(d.rend, SDL_BLENDMODE_BLEND);
+// 	while (!d.quit)
+// 	{
+// 		tmp = d.bullet;
+// 		ft_bzero(d.p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
+// 		SDL_PumpEvents();
+// 		handle_key_event(&d, &map);
+// 		handle_poll_event(&d, &map);
 
-		if (d.bullet > tmp) // met à jour HP et AMMO lorsqu'un evenement (ici touche espace) est reçu (temporaire)
-		{
-			hud.perso_weapon[hud.current_weap_id]->ammo_left = hud.perso_weapon[hud.current_weap_id]->capacity - d.bullet;
-			hud.hp -= d.bullet;
-		}
-		update_hud_info(&d, &hud);
-		render_hud_info(&d, &hud);
-		render_hud_icons(&d, &hud);
-		// SDL_UpdateTexture(d.screen, NULL, d.p_screen, WIN_SIZE_X * 4);
- 		SDL_RenderPresent(d.rend);
-    }
-	quit_ttf(&hud);
-	free_hud(&hud);
-	SDL_Quit();
-	return (0);
-}
+// 		if (d.bullet > tmp) // met à jour HP et AMMO lorsqu'un evenement (ici touche espace) est reçu (temporaire)
+// 		{
+// 			hud.perso_weapon[hud.current_weap_id]->ammo_left = hud.perso_weapon[hud.current_weap_id]->capacity - d.bullet;
+// 			hud.hp -= d.bullet;
+// 		}
+// 		update_hud_info(&d, &hud);
+// 		render_hud_info(&d, &hud);
+// 		render_hud_icons(&d, &hud);
+// 		// SDL_UpdateTexture(d.screen, NULL, d.p_screen, WIN_SIZE_X * 4);
+//  		SDL_RenderPresent(d.rend);
+//     }
+// 	quit_ttf(&hud);
+// 	free_hud(&hud);
+// 	SDL_Quit();
+// 	return (0);
+// }

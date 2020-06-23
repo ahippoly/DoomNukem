@@ -58,6 +58,7 @@ void init_data(t_data *d, int ac, char **av)
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
+	d->bullet = 0;
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
 	init_rend_img(d);

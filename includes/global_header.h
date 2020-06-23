@@ -313,7 +313,8 @@ unsigned int calc_transparency2(unsigned int color_dst, unsigned int color2, flo
 
 float	get_dist(t_point pos1, t_point pos2);
 t_rot	get_angle(t_point pos1, t_point pos2);
-
+void del_from_array(void *list, int *size, void *to_remove, int obj_size);
+void	*ft_memmove2(void *dst, const void *src, size_t len);
 
 
 

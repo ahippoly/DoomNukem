@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/22 11:09:46 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/23 12:13:03 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,4 +217,48 @@ t_rot	get_angle(t_point pos1, t_point pos2)
 float ft_interpolate(float val1, float val2, float scale)
 {
 	return(val1 * (1 - scale) + val2 * (scale));
+}
+
+void	*ft_memmove2(void *dst, const void *src, size_t len)
+{
+	char	*csrc;
+	char	*cdst;
+	size_t	i;
+
+	if (src == dst)
+		return (dst);
+	csrc = (char *)src;
+	cdst = (char *)dst;
+	if (src < dst)
+	{
+		i = len;
+		while (i-- > 0)
+			cdst[i] = csrc[i];
+	}
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			cdst[i] = csrc[i];
+			i++;
+		}
+	}
+	return (dst);
+}
+
+void del_from_array(void *list, int *size, void *to_remove, int obj_size)
+{
+	int i;
+
+	i = 0;
+	while (i < *size)
+	{
+		printf("i = %i, size = %i\n", i, *size);
+		if ((list + obj_size * i) == to_remove)
+			break;
+		i++;
+	}
+	(*size)--;
+	ft_memmove2(list + obj_size * i, list + obj_size * (i + 1), (*size - i) * obj_size);
 }

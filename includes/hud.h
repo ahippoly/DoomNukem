@@ -32,11 +32,11 @@
 /* weapons */
 
 # define WEAPON_NB		5
-# define WEAPON_PATH_0	"/img/hud/ssg.bmp"
-# define WEAPON_PATH_1	"/img/hud/ar.bmp"
-# define WEAPON_PATH_2	"/img/hud/dd.bmp"
-# define WEAPON_PATH_3	"/img/hud/revolver.bmp"
-# define WEAPON_PATH_4	"/img/hud/lmg.bmp"
+# define WEAPON_PATH_0	"img/hud/ssg.bmp"
+# define WEAPON_PATH_1	"img/hud/ar.bmp"
+# define WEAPON_PATH_2	"img/hud/dd.bmp"
+# define WEAPON_PATH_3	"img/hud/revolver.bmp"
+# define WEAPON_PATH_4	"img/hud/lmg.bmp"
 
 # define WEAPON_NAME_0	"LMG"
 # define WEAPON_NAME_1	"AR"
@@ -52,18 +52,18 @@
 # define PERSO_F 0
 # define PERSO_M 1
 
-# define PERSO_PATH_0 "/img/hud/perso_w.bmp"
-# define PERSO_PATH_1 "/img/hud/perso_m.bmp"
+# define PERSO_PATH_0 "img/hud/perso_w.bmp"
+# define PERSO_PATH_1 "img/hud/perso_m.bmp"
 
 /* other hud icons */
 
-# define HEALTH_ICON_PATH "/img/hud/health.bmp"
-# define AMMO_ICON_PATH "/img/hud/bullet.bmp"
+# define HEALTH_ICON_PATH "img/hud/health.bmp"
+# define AMMO_ICON_PATH "img/hud/bullet.bmp"
 
 /* inventory */
 
-# define HEALTHPACK_PATH "/img/hud/doctor.bmp"
-# define KEY_PATH "/img/hud/key.bmp"
+# define HEALTHPACK_PATH "img/hud/doctor.bmp"
+# define KEY_PATH "img/hud/key.bmp"
 
 typedef struct		s_weapon
 {
@@ -182,5 +182,14 @@ int					init_key_icon(t_data *d, t_hud *hud);
 int					put_key_icon(t_data *d, t_hud *hud, SDL_Rect pos);
 int					set_key_info(t_data *d, t_hud *hud, int nb);
 int					render_key_info(t_data *d, t_hud *hud, SDL_Rect pos);
+
+
+int				init_hud(t_data *d, t_hud *hud);
+int				put_background(t_data *d);
+void			render_hud_icons(t_data *d, t_hud *hud);
+void			render_hud_info(t_data *d, t_hud *hud);
+void			update_hud_info(t_data *d, t_hud *hud);
+
+void check_props_collect(t_data *d, t_props *props, t_hud *hud);
 
 #endif
