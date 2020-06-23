@@ -160,11 +160,11 @@ void draw_floor2(t_data *d, t_floor *fl, double height)
 		fl[y].floor.x = (d->player_pos.x + row_dist * ray_dir0.x);
 		fl[y].floor.y = (d->player_pos.y + row_dist * ray_dir0.y);
 		
-      y++;
+    	y++;
     }
 }
 
-void init_floor(t_data *d, t_floor *fl)
+void init_floor(t_data *d, t_floor *fl, double height)
 {
     int y;
     float pos_z;
@@ -177,7 +177,7 @@ void init_floor(t_data *d, t_floor *fl)
     ray_dir1.x = cos(d->rot) - d->fov * sin(d->rot);
     ray_dir0.y = sin(d->rot) - d->fov * cos(d->rot);
     ray_dir1.y = sin(d->rot) + d->fov * cos(d->rot);
-    pos_z = (d->player_height - DEFAULT_Z_GROUND) * WIN_SIZE_Y;
+    pos_z = (d->player_height - height) * WIN_SIZE_Y;
 	ray_diff.x = ray_dir1.x - ray_dir0.x;
 	ray_diff.y = ray_dir1.y - ray_dir0.y;
     y = d->screen_height + 1;
@@ -186,10 +186,11 @@ void init_floor(t_data *d, t_floor *fl)
 		row_dist = pos_z / (y - d->screen_height);
 
 		fl[y].floor_step.x = row_dist * ray_diff.x / WIN_SIZE_X;
-		fl[y].floor_step.x = row_dist * ray_diff.y / WIN_SIZE_X;
+		fl[y].floor_step.y = row_dist * ray_diff.y / WIN_SIZE_X;
 
         fl[y].floor.x = (d->player_pos.x + row_dist * ray_dir0.x);
         fl[y].floor.y = (d->player_pos.y + row_dist * ray_dir0.y);
+		
     	y++;
     }
 }
@@ -201,7 +202,7 @@ void	init_floors(t_data *d)
 	i = 0;
 	while (i < d->map.room_count)
 	{
-		draw_floor2(d, d->fl[i], d->map.room_list[i].z_ground);
+		init_floor(d, d->fl[i], d->map.room_list[i].z_ground);
 		//init_floor(d, d->fl[i]);
 		i++;
 	}

@@ -27,6 +27,7 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	obj.can_collide = wall->can_collide;
 	obj.room_id = wall->room_id_ref;
 	obj.rotation = calc_sin_cos_rot(wall->rotation);
+	printf("wall rot = %.10f, rot = %.10f\n", wall->rotation, obj.rotation.rot);
 	obj.origin = wall;
 	return (obj);
 }

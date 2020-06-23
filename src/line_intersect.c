@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/23 22:32:57 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/23 23:57:49 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,14 @@ t_point first_segment_vertical_case(t_point p1, t_point p2, t_point p3, t_point 
 	b2 = p3.y - p3.x * a2;
 	inter.x = p1.x;
 	inter.y = a2 * inter.x + b2;
-	printf("p3: %f,%f ; p4: %f,%f ; a2 = %f, b2 = %f\n", p3.x,p3.y, p4.x,p4.y, a2, b2);
+	// printf("p3: %f,%f ; p4: %f,%f ; a2 = %f, b2 = %f\n", p3.x,p3.y, p4.x,p4.y, a2, b2);
 	if (inter.y > ft_fmax(p2.y, p1.y) - INTER_TOLERANCE || inter.y < ft_fmin(p1.y, p2.y) + INTER_TOLERANCE
 		|| inter.x > p4.x - INTER_TOLERANCE || inter.x < p3.x + INTER_TOLERANCE)
 	{
 		inter.x = - 42;
 		inter.y = - 42;
 	}
-	printf("vertical : inter.x = %f, inter.y = %f, max x = %f, min x = %f\n", inter.x, inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
+	// printf("vertical : inter.x = %f, inter.y = %f, max x = %f, min x = %f\n", inter.x, inter.y, ft_fmax(p2.y, p1.y), ft_fmin(p2.y, p1.y));
 	return (inter);
 }
 

@@ -180,7 +180,7 @@ void handle_poll_event(t_data *d);
 
 //render_movement.c
 void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot);
-void move_with_collide(t_data *d, t_point *pos, t_rot rot, float speed);
+void move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed);
 void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed);
 void gravity(t_data *d);
 
@@ -241,7 +241,7 @@ t_draw calc_floor_draw_range_end(t_data *d, float dist1, t_room *room, int x);
 void draw_floor_line(t_data *d, t_range draw, int x, int room_id);
 // void	print_floor_slice(t_data *d, t_floor *fl, int x, t_range y, int text_id);
 void	print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id);
-void init_floor(t_data *d, t_floor *fl);
+void init_floor(t_data *d, t_floor *fl, double height);
 void	init_floors(t_data *d);
 void print_floor(t_data *d);
 void draw_all_floor_slice(t_data *d);
