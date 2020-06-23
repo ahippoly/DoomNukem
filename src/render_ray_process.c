@@ -35,6 +35,10 @@ t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot)
 		res.mod_scale = calc_ray_mod_scale(res.scale, obj->length);
 		res.z_height.pos = obj->z_height.pos + obj->z_step.pos * res.scale;
 		res.z_height.size = obj->z_height.size + obj->z_step.size * res.scale;
+		if (res.room_id < -1)
+			res.z_text = 1;
+		else
+			res.z_text = res.z_height.size;
     }
 	//print_ray(res);
         //dist = hypot(obj->inter.x - pos.x, obj->inter.y - pos.y) * cos((look_rot - rot ));

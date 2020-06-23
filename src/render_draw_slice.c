@@ -11,7 +11,7 @@ void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray)
 	int		p_cord;
 
 	tx = ray.mod_scale * obj.w;
-	ty_step = (float)obj.h * (ray.z_height.size) / (range.end_y - range.start_y);
+	ty_step = (float)obj.h * (ray.z_text) / (range.end_y - range.start_y);
 	ty = (1 - get_float_part(ray.z_height.pos + ray.z_height.size - obj.z_text_offset)) * obj.h;
 	if (range.start_y < 0)
 	{

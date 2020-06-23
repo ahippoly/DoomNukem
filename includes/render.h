@@ -4,6 +4,7 @@
 # include "global_header.h"
 # include "editor.h"
 # include "mobs.h"
+# include "props.h"
 
 # define FOV_ANGLE 60
 # define MINI_MAP_SIZE_X 250

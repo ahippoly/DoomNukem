@@ -206,6 +206,7 @@ typedef	struct				s_ray
 				float		scale;
 				float		mod_scale;
 				t_p_size	z_height;
+				float		z_text;
 				t_point		inter;
 				int			room_id;
 				t_obj		*obj_ref;

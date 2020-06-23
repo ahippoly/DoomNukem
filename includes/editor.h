@@ -79,16 +79,22 @@
 # define MAP_SIZE_X 30
 # define MAP_SIZE_Y 30
 
-# define NB_IMG 3
+# define NB_IMG 4
+
+# define IMG_PLAYER 0
+# define IMG_DEMON 1
+# define IMG_ORC 2
+# define IMG_KEY 3
 
 # define IMG_PATH_0 "img/icons/person.bmp"
 # define IMG_PATH_1 "img/icons/monster.bmp"
 # define IMG_PATH_2 "img/icons/monster2.bmp"
+# define IMG_PATH_3 "img/hud/key.bmp"
 
 # define ICON_ARRAY_SIZE 20
 # define ICON_PLAYER_SIZE 30
 # define ICON_MOB_RANGE_BEGIN 1
-# define ICON_MOB_RANGE_END 3
+# define ICON_MOB_RANGE_END 4
 # define ICON_MOB_POS_X 0.800 * WIN_SIZE_X
 # define ICON_MOB_POS_Y 0.400 * WIN_SIZE_Y
 # define ICON_MOB_SIZE_X 0.150 * WIN_SIZE_X

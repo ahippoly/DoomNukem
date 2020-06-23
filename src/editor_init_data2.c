@@ -22,6 +22,7 @@ void init_img(t_env *env)
     env->img_list[0] = bmp_to_texture(IMG_PATH_0, env->rend);
     env->img_list[1] = bmp_to_texture(IMG_PATH_1, env->rend);
     env->img_list[2] = bmp_to_texture(IMG_PATH_2, env->rend);
+    env->img_list[3] = bmp_to_texture(IMG_PATH_3, env->rend);
 }
 
 void init_env2(t_env *env)

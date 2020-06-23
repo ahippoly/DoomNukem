@@ -21,6 +21,21 @@ t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 	return (mob);
 }
 
+t_props	add_prop_key(t_data *d, SDL_Point pos)
+{
+	t_props prop;
+
+	prop.pos.x = (float)pos.x / UNIT;
+	prop.pos.y = (float)pos.y / UNIT;
+	prop.size = KEY_SIZE;
+	prop.collectable = KEY_COLLECTABLE;
+	prop.can_collide = 0;
+	prop.id = KEY_ITEM_ID;
+	prop.text = &d->img[IMG_KEY];
+	prop.z_pos = 2;
+	return (prop);
+}
+
 void load_icons(t_data *d, t_map_data *map)
 {
 	int i;
@@ -36,6 +51,8 @@ void load_icons(t_data *d, t_map_data *map)
 		current = &map->icon_list[i];
 		if (current->id_ref == DEMON_ICON_ID)
 			d->mobs[nb_mob++] = add_mob_demon(d, current->pos_i);
+		if (current->id_ref == KEY_ICON_ID)
+			d->props[nb_prop++] = add_prop_key(d, current->pos_i);
 		i++;
 	}
 	d->nb_mob = nb_mob;

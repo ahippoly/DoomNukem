@@ -82,12 +82,12 @@ t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 	t_obj	obj;
 
 	obj.pos = props->pos;
-	obj.size = 0.5;
+	obj.size = props->size / 2;
 	obj.z_height.pos = props->z_pos;
-	obj.z_height.size = 1;
+	obj.z_height.size = props->size;
 	obj.z_step.pos = 0;
 	obj.z_step.size = 0;
-	obj.z_text_offset = get_float_part(obj.z_height.pos);
+	obj.z_text_offset = get_float_part(obj.z_height.pos + obj.z_height.size);
 	obj.length = 1;
 	obj.alpha = 1;
 	obj.room_id = TYPE_PROP;

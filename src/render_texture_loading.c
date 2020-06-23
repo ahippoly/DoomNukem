@@ -40,7 +40,8 @@ void load_bmp_files(t_data *d)
 
 void init_rend_img(t_data *d)
 {
-	d->img[0] = read_img_surface(IMG_PATH_0);
-	d->img[1] = read_img_surface(IMG_PATH_1);
-	d->img[2] = read_img_surface(IMG_PATH_2);
+	d->img[IMG_PLAYER] = read_img_surface(IMG_PATH_0);
+	d->img[IMG_DEMON] = read_img_surface(IMG_PATH_1);
+	d->img[IMG_ORC] = read_img_surface(IMG_PATH_2);
+	d->img[IMG_KEY] = read_img_surface(IMG_PATH_3);
 }
