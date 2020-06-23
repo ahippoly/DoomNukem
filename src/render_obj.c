@@ -98,7 +98,7 @@ t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 	obj.pixels = props->text->pixels;
 	obj.w = props->text->w;
 	obj.h = props->text->h;
-	obj.can_collide = 0;
+	obj.can_collide = props->can_collide;
 	obj.origin = props;
 	return (obj);
 }
