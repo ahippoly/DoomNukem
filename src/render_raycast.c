@@ -83,7 +83,7 @@ void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
 		{
 			draw_floor_slice(d, queue, &nb, sorted[i], screen_x.start);
 			if (sorted[i].dist < 9998)
-				draw_text_slice(d->p_screen, calc_ray_draw_range(d, sorted[i], screen_x.start, sorted[i].obj_ref), *sorted[i].obj_ref, sorted[i]);
+				draw_text_slice(d->p_screen, calc_ray_draw_range(d, sorted[i], screen_x.start), *sorted[i].obj_ref, sorted[i]);
 		}
 		//printf("nb = %i\n", nb);
 		if (nb > -1)

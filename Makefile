@@ -112,7 +112,7 @@ $(SPRITE): libft $(OBJ_SPRITE) ##
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(OPTI) $(INC) -o $@ -c $<
+	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 clean:

@@ -66,8 +66,8 @@ int main(int ac, char **av)
 		d.diff_time = (float)(d.time - d.time_last_frame) / 1000;
         //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
         SDL_PumpEvents();
-        handle_poll_event(&d, &d.map);
-        handle_key_event(&d, &d.map);
+        handle_poll_event(&d);
+        handle_key_event(&d);
         gravity(&d);
 		create_obj_raybox(&d);
 		// check_props_collect(&d, d.props, &hud);
