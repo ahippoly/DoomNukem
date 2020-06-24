@@ -19,7 +19,8 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						render_icon2obj.c \
 						hud_text.c hud_clean.c hud_weapon.c hud_init_weapons.c hud_perso.c \
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_main.c \
-						gameplay_mobs.c)
+						hud_init.c \
+						gameplay_mobs.c )
 
 HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
