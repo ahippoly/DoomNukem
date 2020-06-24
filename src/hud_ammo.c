@@ -34,10 +34,12 @@ int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 	SDL_Surface		*s_cpy;	
 	char			*text;
 	
+	ft_putendl("set text ...");
 	if (nb <= 0)
 		nb = 0;
 	if (!(text = ft_itoa(nb)))
 		return (error(hud));
+	
 	if(!(s_cpy = TTF_RenderText_Blended(d->font_nb, text, hud->color)))
 	{
 		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
