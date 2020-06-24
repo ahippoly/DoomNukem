@@ -61,7 +61,7 @@ int	check_obj_room(t_data *d, t_point pos)
 			break ;
 		if ((room_ref = sorted[i].room_id) > -1)
 		{
-			printf("room ref = %i\n", room_ref);
+			//printf("room ref = %i\n", room_ref);
 			if (sorted[i].inter.y > pos.y)
 			{
 				if (wall_hits[room_ref] % 2 == 1)

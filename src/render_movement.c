@@ -116,6 +116,7 @@ void move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed)
 		move_attempt(d, pos, cos(rot.rot - res.obj_ref->rotation.rot) * speed, res.obj_ref->rotation);
 	else if (will_collide < 1)
 		move_attempt(d, pos, speed, rot);
+	obj->z_ground = set_room_ground(d, obj->pos);
 }
 
 void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed)
