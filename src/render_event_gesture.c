@@ -1,9 +1,9 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
-#include "sound.h"
-#include "sprite.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 
 void event_gun_mouse(t_data *d)

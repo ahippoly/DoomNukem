@@ -1,7 +1,7 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 {

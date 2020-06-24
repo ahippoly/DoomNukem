@@ -1,5 +1,5 @@
-#include "editor.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 void move_map_move_left(t_env *env)
 {

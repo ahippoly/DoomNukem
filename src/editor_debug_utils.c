@@ -1,5 +1,5 @@
-#include "editor.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 
 void print_rooms_content(t_room *room_list, int room_count)

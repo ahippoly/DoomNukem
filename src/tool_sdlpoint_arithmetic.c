@@ -1,5 +1,5 @@
-#include "SDL.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub)
 {

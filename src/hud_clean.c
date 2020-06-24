@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 static void	free_texture(t_hud *hud)
 {

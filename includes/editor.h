@@ -1,9 +1,9 @@
 #ifndef EDITOR_H
 # define EDITOR_H
 
+# include "global_header.h"
 # include "SDL.h"
 # include "libft.h"
-# include "global_header.h"
 # include "text_img.h"
 # include "img_file.h"
 
@@ -87,8 +87,8 @@
 # define IMG_KEY 3
 
 # define IMG_PATH_0 "img/icons/person.bmp"
-# define IMG_PATH_1 "img/icons/monster.bmp"
-# define IMG_PATH_2 "img/icons/monster2.bmp"
+# define IMG_PATH_1 "img/icons/monster2.bmp"
+# define IMG_PATH_2 "img/icons/monster.bmp"
 # define IMG_PATH_3 "img/hud/key.bmp"
 
 # define ICON_ARRAY_SIZE 20

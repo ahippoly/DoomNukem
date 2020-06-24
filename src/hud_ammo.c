@@ -1,4 +1,4 @@
-#include <hud.h>
+#include "proto_global.h"
 
 int					init_ammo_icon(t_data *d, t_hud *hud)
 {

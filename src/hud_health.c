@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 /* initialise et creation de la texture pour l'icone de HP  */
 

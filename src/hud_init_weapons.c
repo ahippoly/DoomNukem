@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 int				init_weapon_0(t_data *d, t_hud *hud)
 {

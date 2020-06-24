@@ -6,12 +6,12 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 05:08:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/17 04:44:16 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "editor.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 void	select_next_texture(t_env *env)
 {

@@ -1,5 +1,5 @@
-#include "editor.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 void create_room_mode(t_env *env)
 {

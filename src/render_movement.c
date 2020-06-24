@@ -1,7 +1,7 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 
 void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot)

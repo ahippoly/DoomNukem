@@ -1,6 +1,6 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 t_point calc_map_scale(t_map_data *map)
 {

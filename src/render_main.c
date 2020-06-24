@@ -1,9 +1,9 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
-#include "hud.h"
-#include "sprite.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
 {
@@ -82,7 +82,7 @@ int main(int ac, char **av)
         //raycast_all_screen(&d, &d.map);
 		move_mobs_in_range(&d, d.mobs, d.nb_mob);
 		raycast_thread_init(&d);
-		//print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
+		// print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
 		sprite_anim_gun(&d);

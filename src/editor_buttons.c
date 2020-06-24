@@ -1,5 +1,5 @@
-#include "editor.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size)
 {

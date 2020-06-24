@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 static int		malloc_tab_weapons(t_hud *hud)
 {

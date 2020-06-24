@@ -38,7 +38,5 @@
 
 # define MUS1 16
 
-void    my_audio_callback(void *userdata, Uint8 *stream, int len);
-void    init_sound(t_data *d);
-int     play_sound(t_data *d, int index);
+
 #endif

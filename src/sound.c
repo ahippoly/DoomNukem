@@ -1,8 +1,8 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
-#include "sprite.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 int    play_sound(t_data *d, int index)
 {

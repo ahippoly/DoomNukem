@@ -1,5 +1,5 @@
-#include "global_header.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 unsigned int *alloc_image(int width, int height)
 {

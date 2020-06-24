@@ -6,12 +6,12 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/23 23:57:49 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global_header.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 float calc_a(t_point p1, t_point p2)
 {

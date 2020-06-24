@@ -1,7 +1,7 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 // int	is_in_room(int current_room, t_point pos, int i, t_calced_walls sorted[NB_WALL_MAX])
 // {

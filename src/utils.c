@@ -6,12 +6,12 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/24 05:04:08 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global_header.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 t_point create_t_point(float x, float y)
 {

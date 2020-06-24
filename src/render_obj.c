@@ -1,7 +1,7 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 
 t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)

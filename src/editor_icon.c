@@ -6,12 +6,12 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 19:08:25 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/14 03:25:49 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global_header.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 t_icon create_icon(t_point pos, t_size size, int id_ref)
 {

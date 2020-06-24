@@ -1,5 +1,5 @@
-#include "editor.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 float calc_coef_dir(SDL_Point p1, SDL_Point p2)
 {

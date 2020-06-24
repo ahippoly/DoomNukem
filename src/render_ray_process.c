@@ -1,7 +1,7 @@
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 float calc_ray_hit_scale(t_point p1, t_point p2, t_point inter)
 {

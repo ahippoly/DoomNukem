@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 void			render_hud_icons(t_data *d)
 {

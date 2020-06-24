@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 int				init_ttf(t_data *d)
 {

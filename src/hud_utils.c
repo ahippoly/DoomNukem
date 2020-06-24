@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 SDL_Surface		*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud)
 {

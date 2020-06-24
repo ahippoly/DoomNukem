@@ -1,5 +1,5 @@
-#include "global_header.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 char *join_int_value(int val1, char *separator, int val2)
 {

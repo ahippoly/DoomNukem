@@ -1,5 +1,5 @@
-#include "global_header.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 void txt_img2screen(t_env *env, t_txt_img img)
 {

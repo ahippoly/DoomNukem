@@ -6,14 +6,14 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 04:43:06 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/19 04:48:36 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global_header.h"
-#include "render.h"
-#include "editor.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 // void print_text_test(t_img dst, t_img text, float dist, float height)
 // {

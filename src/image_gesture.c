@@ -1,5 +1,5 @@
-#include "global_header.h"
-#include "img_file.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 
 void put_pixel(unsigned int *pixels, SDL_Point p_pos, t_size img_size, unsigned int color)

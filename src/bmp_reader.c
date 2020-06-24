@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Parsing.c                                          :+:      :+:    :+:   */
+/*   bmp_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2019/08/29 04:03:54 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "proto_global.h"
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <math.h>
-#include "img_file.h"
-#include "global_header.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 int		hex2dec(unsigned char *mem, int bytes)
 {

@@ -1,5 +1,5 @@
-#include "global_header.h"
-#include "editor.h"
+#include "proto_global.h"
+#include "proto_global.h"
 
 char *skip_space(char *str)
 {

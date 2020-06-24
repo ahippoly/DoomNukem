@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 int				init_hud_data(t_data *d)
 {

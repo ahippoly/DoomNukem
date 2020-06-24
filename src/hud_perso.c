@@ -1,4 +1,4 @@
-#include "hud.h"
+#include "proto_global.h"
 
 static int		update_perso(t_hud *hud)
 {

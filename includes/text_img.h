@@ -1,6 +1,8 @@
 #ifndef TEXT_IMG
 # define TEXT_IMG
+
 # include "SDL.h"
+
 # define CHAR_NB 40
 # define SIZE_X 10
 # define SIZE_Y 10
