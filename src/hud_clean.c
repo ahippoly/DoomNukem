@@ -31,11 +31,10 @@ void		free_hud(t_hud *hud)
 	ft_putendl("destroy texture done.");
 }
 
-int			error(t_hud *hud)
+int			exit_hud(t_hud *hud)
 {
-	ft_putendl("traiting error...");
 	free_hud(hud);
 	SDL_Quit();
-	ft_putendl("quit!");
+	ft_putendl("bye!");
 	exit(-1);
 }

@@ -7,12 +7,12 @@ SDL_Surface		*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud)
 	if (!(dest = SDL_CreateRGBSurface(0, 30, 30, 32, 0, 0, 0, 0)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		error(hud);
+		exit_hud(hud);
 	}
 	if (dest != NULL)
 	{
 		if (SDL_BlitSurface(src, NULL, dest, NULL))
-			error(hud);
+			exit_hud(hud);
 	}
 	return (dest);
 }
