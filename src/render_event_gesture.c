@@ -6,27 +6,54 @@
 #include "sprite.h"
 
 
-void handle_key_event(t_data *d)
+void event_gun_mouse(t_data *d)
 {
-    d->clavier = SDL_GetKeyboardState(NULL);
-    if (d->clavier[SDL_SCANCODE_E])
-		d->rot += ROT_STEP;
-    if (d->clavier[SDL_SCANCODE_Q])
-		d->rot -= ROT_STEP;
-	d->rot_calc = calc_sin_cos_rot(d->rot);
-    if (d->clavier[SDL_SCANCODE_D])
-        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot + M_PI_2, cos(d->rot + M_PI_2), sin(d->rot + M_PI_2)}, MOVE_STEP * d->speed_modifier);
-        //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot_calc + 1);
-    if (d->clavier[SDL_SCANCODE_A])
-        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot - M_PI_2, cos(d->rot - M_PI_2), sin(d->rot - M_PI_2)}, MOVE_STEP * d->speed_modifier);
-    if (d->clavier[SDL_SCANCODE_W])
-        move_with_collide_player(d, &d->player_pos, d->rot_calc, MOVE_STEP * d->speed_modifier);
-    if (d->clavier[SDL_SCANCODE_S])
-        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot + M_PI, cos(d->rot + M_PI), sin(d->rot + M_PI)}, MOVE_STEP * d->speed_modifier);
-    if (d->clavier[SDL_SCANCODE_R])
-        d->z_offset += 0.05;
-    if (d->clavier[SDL_SCANCODE_F])
-        d->z_offset -= 0.05;
+	if  (d->e.type == SDL_MOUSEBUTTONDOWN)
+            {
+        		if (d->e.button.button == SDL_BUTTON_LEFT)
+                {
+					shoot_gun(d);
+					d->sprite[d->gun_ind].time = SDL_GetTicks();
+					if (d->sprite[d->gun_ind].aim_on == 0)
+						d->sprite[d->gun_ind].index = FIRE;
+					else if (d->gun_ind == 3 || d->gun_ind == 4)
+						d->sprite[d->gun_ind].index = AIMFIRE;
+					d->sprite[d->gun_ind].on = 0;
+					d->sprite[d->gun_ind].anim_end = 0;
+					printf("sound played\n");
+					play_sound(d, d->gun_ind);
+                }
+           		else if (d->e.button.button == SDL_BUTTON_RIGHT)
+                {
+                if (d->gun_ind == 3 || d->gun_ind == 4)
+                {
+                d->sprite[d->gun_ind].time = SDL_GetTicks();
+                d->sprite[d->gun_ind].index = AIM;
+                d->sprite[d->gun_ind].on = 0;
+                if (d->sprite[d->gun_ind].aim_on == 0)
+                    d->sprite[d->gun_ind].aim_on = 1;
+                else
+                    d->sprite[d->gun_ind].aim_on = 0;
+                }
+                }
+            }
+            else if (d->e.type == SDL_MOUSEBUTTONUP)
+           {
+            if (d->e.button.button == SDL_BUTTON_LEFT)
+                {
+                d->sprite[d->gun_ind].anim_end = -1;
+                if (d->gun_ind > 2 && d->gun_ind < 6)
+                play_sound(d, d->gun_ind + 10);
+                }
+            else if (d->e.button.button == SDL_BUTTON_RIGHT)
+                {
+                d->sprite[d->gun_ind].on = -1;
+                }
+            }
+}
+
+void event_change_weapon(t_data *d)
+{
 	if (d->clavier[SDL_SCANCODE_R])
     {
             d->sprite[d->gun_ind].time = SDL_GetTicks();
@@ -37,7 +64,7 @@ void handle_key_event(t_data *d)
             if (d->gun_ind > 0 && d->gun_ind < 5)
             play_sound(d, d->gun_ind + 5);
     }
-    if (d->clavier[SDL_SCANCODE_1])
+	if (d->clavier[SDL_SCANCODE_1])
     {
             d->gun_ind = 0;
             d->sprite[d->gun_ind].on = -1;
@@ -91,6 +118,31 @@ void handle_key_event(t_data *d)
             d->sprite[d->mob_ind].on = 0;
             d->sprite[d->mob_ind].index = ATTACK;
     }
+}
+
+void handle_key_event(t_data *d)
+{
+    d->clavier = SDL_GetKeyboardState(NULL);
+    if (d->clavier[SDL_SCANCODE_E])
+		d->rot += ROT_STEP;
+    if (d->clavier[SDL_SCANCODE_Q])
+		d->rot -= ROT_STEP;
+	d->rot_calc = calc_sin_cos_rot(d->rot);
+    if (d->clavier[SDL_SCANCODE_D])
+        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot + M_PI_2, cos(d->rot + M_PI_2), sin(d->rot + M_PI_2)}, MOVE_STEP * d->speed_modifier);
+        //move_attempt(&d->player_pos, MOVE_STEP * d->speed_modifier, d->rot_calc + 1);
+    if (d->clavier[SDL_SCANCODE_A])
+        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot - M_PI_2, cos(d->rot - M_PI_2), sin(d->rot - M_PI_2)}, MOVE_STEP * d->speed_modifier);
+    if (d->clavier[SDL_SCANCODE_W])
+        move_with_collide_player(d, &d->player_pos, d->rot_calc, MOVE_STEP * d->speed_modifier);
+    if (d->clavier[SDL_SCANCODE_S])
+        move_with_collide_player(d, &d->player_pos, (t_rot){d->rot + M_PI, cos(d->rot + M_PI), sin(d->rot + M_PI)}, MOVE_STEP * d->speed_modifier);
+    if (d->clavier[SDL_SCANCODE_I])
+        d->z_offset += 0.05;
+    if (d->clavier[SDL_SCANCODE_O])
+        d->z_offset -= 0.05;
+	
+	event_change_weapon(d);
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
 
@@ -203,47 +255,7 @@ void handle_poll_event(t_data *d)
             }
 			
         }
-		if  (d->e.type == SDL_MOUSEBUTTONDOWN)
-            {
-            if (d->e.button.button == SDL_BUTTON_LEFT)
-                {
-					shoot_gun(d);
-					d->sprite[d->gun_ind].time = SDL_GetTicks();
-					if (d->sprite[d->gun_ind].aim_on == 0)
-						d->sprite[d->gun_ind].index = FIRE;
-					else if (d->gun_ind == 3 || d->gun_ind == 4)
-						d->sprite[d->gun_ind].index = AIMFIRE;
-					d->sprite[d->gun_ind].on = 0;
-					d->sprite[d->gun_ind].anim_end = 0;
-					printf("sound played\n");
-					play_sound(d, d->gun_ind);
-                }
-            else if (d->e.button.button == SDL_BUTTON_RIGHT)
-                {
-                if (d->gun_ind == 3 || d->gun_ind == 4)
-                {
-                d->sprite[d->gun_ind].time = SDL_GetTicks();
-                d->sprite[d->gun_ind].index = AIM;
-                d->sprite[d->gun_ind].on = 0;
-                if (d->sprite[d->gun_ind].aim_on == 0)
-                    d->sprite[d->gun_ind].aim_on = 1;
-                else
-                    d->sprite[d->gun_ind].aim_on = 0;
-                }
-                }
-            }
-            else if (d->e.type == SDL_MOUSEBUTTONUP)
-           {
-            if (d->e.button.button == SDL_BUTTON_LEFT)
-                {
-                d->sprite[d->gun_ind].anim_end = -1;
-                if (d->gun_ind > 2 && d->gun_ind < 6)
-                play_sound(d, d->gun_ind + 10);
-                }
-            else if (d->e.button.button == SDL_BUTTON_RIGHT)
-                {
-                d->sprite[d->gun_ind].on = -1;
-                }
-            }
+		event_gun_mouse(d);
+		
     }
 }
