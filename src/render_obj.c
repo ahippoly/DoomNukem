@@ -27,6 +27,7 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	obj.can_collide = wall->can_collide;
 	obj.room_id = wall->room_id_ref;
 	obj.rotation = calc_sin_cos_rot(wall->rotation);
+	obj.z_ground = -1;
 	printf("wall rot = %.10f, rot = %.10f\n", wall->rotation, obj.rotation.rot);
 	obj.origin = wall;
 	return (obj);
@@ -67,7 +68,7 @@ t_obj	convert_mob_to_obj(t_data	*d,	t_mob *mob)
 	obj.z_height.size = mob->z_size;
 	obj.z_step.pos = 0;
 	obj.z_step.size = 0;
-	obj.z_text_offset = get_float_part(obj.z_height.pos);
+	obj.z_text_offset = get_float_part(obj.z_height.pos + obj.z_height.size);
 	obj.length = 1;
 	obj.alpha = 1;
 	obj.room_id = TYPE_MOB;
@@ -76,6 +77,9 @@ t_obj	convert_mob_to_obj(t_data	*d,	t_mob *mob)
 	obj.w = d->img[1].w;
 	obj.h = d->img[1].h;
 	obj.can_collide = 0;
+	obj.z_ground = DEFAULT_Z_GROUND;
+	obj.z_force = 0;
+	obj.air_time = 0;
 	obj.origin = mob;
 	return (obj);
 }
@@ -99,6 +103,9 @@ t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 	obj.w = props->text->w;
 	obj.h = props->text->h;
 	obj.can_collide = props->can_collide;
+	obj.z_ground = DEFAULT_Z_GROUND;
+	obj.z_force = 0;
+	obj.air_time = 0;
 	obj.origin = props;
 	return (obj);
 }

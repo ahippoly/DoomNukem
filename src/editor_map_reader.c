@@ -104,6 +104,7 @@ void read_wall(char *line, t_wall *wall)
 	wall->p1_f = (t_point){wall->p1.x, wall->p1.y};
 	wall->p2_f = (t_point){wall->p2.x, wall->p2.y};
 	wall->z_text_offset = 0;
+	wall->can_collide = 1;
     // printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     // printf("wall length = %f\n", wall->length);
     // printf("wall rot = %f\n", wall->rotation);

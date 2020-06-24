@@ -71,7 +71,7 @@ void handle_poll_event(t_data *d)
                 d->z_offset -= PLAYER_HEIGHT / 2;
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
-                d->z_force = 0.07;
+                d->z_force = JUMP_FORCE;
 			//debug
 			if (d->e.key.keysym.scancode == SDL_SCANCODE_G)
                	rot_grabbed_wall(d, 0.05 * M_PI_2, 0);
@@ -104,11 +104,12 @@ void handle_poll_event(t_data *d)
 				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
-				// t_ray sorted[200];
+				t_ray sorted[200];
 
-				// sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
+				sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
 				// move_with_collide(d, &sorted[0].obj_ref->pos, get_angle(d->player_pos, sorted[0].obj_ref->pos), 10);
-
+				if (sorted[0].dist < 9999)
+					repulse_obj(d, sorted[0].obj_ref, 0.05, 5);
 				// t_ray  ray = check_perp_obj(&d->obj_list[0], d->player_pos);
 				// t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);
 				// print_ray(ray);

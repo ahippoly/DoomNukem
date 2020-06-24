@@ -25,9 +25,15 @@ void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray)
 	p_cord = range.start_x + range.start_y;
 	while (p_cord < range.end_y)
 	{
-		while (ty > obj.h)
+		while (ty > obj.h - INTER_TOLERANCE)
 			ty -= obj.h;
-		//pixels[range.start_x + p_cord] = obj.pixels[tx + (int)ty * obj.w];
+		if (ty < 0)
+			printf("ty neg : %f\n", ty);
+		if (p_cord >= WIN_SIZE_X * WIN_SIZE_Y)
+			printf("pos screen : %i,%i\n", range.start_x, (p_cord - range.start_x) / WIN_SIZE_X);
+		if (tx + (int)ty * obj.w >= obj.h * obj.w)
+			printf("t : %i,%f, obj-hw %d,%d\n", tx, ty, obj.w, obj.h);
+		//pixels[p_cord] = obj.pixels[tx + (int)ty * obj.w];
 		pixels[p_cord] = calc_transparency2(pixels[p_cord], obj.pixels[tx + (int)ty * obj.w], obj.alpha);
 		//calc_transparency(&pixels[p_cord], &obj.pixels[tx + (int)ty * obj.w], obj.alpha);
 		ty += ty_step;

@@ -112,17 +112,10 @@ void move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed)
 	}
 	// printf("inter : %f,%f, diff : %f,%f, dir : %f,%f\n", inter.x, inter.y, inter.x - pos->x, inter.y - pos->y, cos(rot), + sin(rot));
 	if (will_collide == 1)
-	{
 		// printf("recalc needed, wall rot = %f, rot = %f\n", res.wall.rotation / M_PI_2, rot.rot / M_PI_2);
 		move_attempt(d, pos, cos(rot.rot - res.obj_ref->rotation.rot) * speed, res.obj_ref->rotation);
-		move_grabbed_wall(d, res.obj_ref->rotation, cos(rot.rot - res.obj_ref->rotation.rot) * speed);
-	}
 	else if (will_collide < 1)
-	{
 		move_attempt(d, pos, speed, rot);
-		move_grabbed_wall(d, rot, speed);
-	}
-	d->z_ground = set_room_ground(d, *pos);
 }
 
 void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed)
@@ -174,6 +167,36 @@ void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed)
 	d->z_ground = set_room_ground(d, *pos);
 }
 
+void gravity_obj(t_data *d, t_obj *objs, int nb_obj)
+{
+	int i;
+	t_obj	*obj;
+
+	i = 0;
+	while (i < nb_obj)
+	{
+		obj = &objs[i];
+		if (obj->z_ground > -1)
+		{
+			obj->z_height.pos += obj->z_force;
+			if (obj->z_height.pos > obj->z_ground)
+			{
+				obj->z_height.pos -=  GRAVITY_FORCE * obj->air_time * obj->air_time ;
+				obj->air_time += d->time - d->time_last_frame;
+				//printf("air_time = %d\n", obj->air_time);
+			}
+			obj->z_text_offset = obj->z_height.pos + obj->z_height.size;
+			if (obj->z_height.pos < obj->z_ground)
+			{
+				obj->z_height.pos = obj->z_ground;
+				obj->z_force = 0;
+				obj->air_time = 0;
+			}
+		}
+		i++;
+	}
+}
+
 void gravity(t_data *d)
 {
     d->z_pos += d->z_force;
@@ -182,7 +205,7 @@ void gravity(t_data *d)
 	//	printf("is in room\n");
     if (d->z_pos > d->z_ground)
     {
-        d->z_pos -=  GRAVITY_FORCE * d->air_time * d->air_time ;
+        d->z_pos -= GRAVITY_FORCE * d->air_time * d->air_time ;
         d->air_time += d->time - d->time_last_frame;
         //printf("air_time = %d\n", d->air_time);
     }
@@ -192,4 +215,6 @@ void gravity(t_data *d)
         d->z_force = 0;
         d->air_time = 0;
     }
+	gravity_obj(d, d->obj_list, d->nb_obj);
 }
+

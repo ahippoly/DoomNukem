@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/23 14:24:49 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 05:04:08 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,5 +260,6 @@ void del_from_array(void *list, int *size, void *to_remove, int obj_size)
 		i++;
 	}
 	(*size)--;
+	printf("deleted from array, size = %i\n", *size);
 	ft_memmove2(list + obj_size * i, list + obj_size * (i + 1), (*size - i) * obj_size);
 }

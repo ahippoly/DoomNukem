@@ -70,12 +70,14 @@ int main(int ac, char **av)
         handle_key_event(&d);
         gravity(&d);
 		create_obj_raybox(&d);
+		load_repulsed_obj(&d, d.repulsed, d.nb_repulsed);
 		// check_props_collect(&d, d.props, &hud);
 
 		//draw_all_floor_slice(&d);
 
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
+		move_mobs_in_range(&d, d.mobs, d.nb_mob);
 		raycast_thread_init(&d);
 		//print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		//print_prop(&d, &d.props[0]);

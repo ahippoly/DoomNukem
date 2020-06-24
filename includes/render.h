@@ -21,6 +21,7 @@
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 0.5
 # define GRAVITY_FORCE 0.0000005
+# define JUMP_FORCE 0.1
 # define DEFAULT_Z_GROUND 2
 # define PLAYER_HEIGHT 0.5
 # define THREAD_NB 4
@@ -142,6 +143,8 @@ typedef struct      s_data
 	int				nb_mob;
 	t_obj			obj_list[NB_MAX_OBJ];
 	int				nb_obj;
+	t_obj			*repulsed[15];
+	int				nb_repulsed;
 	int				bullet;
 	t_sprite        sprite[15];
     int             gun_ind;
@@ -274,6 +277,11 @@ t_room	*get_room_by_id(t_data *d, int room_id);
 
 //render_load_icons.c
 void load_icons(t_data *d, t_map_data *map);
+
+void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob);
+void gravity_obj(t_data *d, t_obj *objs, int nb_obj);
+void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed);
+void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse);
 
 
 #endif

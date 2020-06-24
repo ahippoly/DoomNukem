@@ -114,8 +114,8 @@ typedef	struct					s_obj
 				t_p_size		z_height;
 				t_p_size		z_step;
 				float			z_text_offset;
-				float			z_ground;
 				float			length;
+				float			z_ground;
 				unsigned int	*pixels;
 				int				w;
 				int				h;
@@ -125,6 +125,8 @@ typedef	struct					s_obj
 				int				room_id;
 				t_rot			rotation;
 				char			can_collide;
+				float			z_force;
+				float			air_time;
 				void			*origin;
 }								t_obj;
 

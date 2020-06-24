@@ -16,7 +16,7 @@ t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 	mob.size = DEMON_SIZE;
 	mob.pos.x = (float)pos.x / UNIT;
 	mob.pos.y = (float)pos.y / UNIT;
-	mob.z_pos = 2;
+	mob.z_pos = 10;
 	mob.z_size = 1;
 	return (mob);
 }
@@ -32,7 +32,7 @@ t_props	add_prop_key(t_data *d, SDL_Point pos)
 	prop.can_collide = 0;
 	prop.id = KEY_ITEM_ID;
 	prop.text = &d->img[IMG_KEY];
-	prop.z_pos = 2;
+	prop.z_pos = 10;
 	return (prop);
 }
 

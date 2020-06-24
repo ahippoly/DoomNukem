@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 13:29:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/22 14:55:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/24 04:05:04 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define DEMON_ATTACK 10
 # define DEMON_ATTACK_SPEED 0.5
 # define DEMON_ATTACK_RANGE 1
-# define DEMON_MOVE_SPEED 2
-# define DEMON_AGGRO_RANGE 3
+# define DEMON_MOVE_SPEED 1
+# define DEMON_AGGRO_RANGE 8
 # define DEMON_SIZE 0.5
 
 #endif
