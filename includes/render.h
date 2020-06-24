@@ -151,7 +151,13 @@ typedef struct      s_data
     int             mob_ind;
     int             mobs_on_screen;
 	t_sound			sound[30];
-
+	/* hud data */
+    unsigned int    *p_hud; // hud screen
+    SDL_Texture     *hud_texture; //hud texture
+	t_hud			hud;
+	/* ttf data */
+	TTF_Font		*font_nb;
+	TTF_Font		*font_text;
 }                   t_data;
 
 typedef	struct		s_thread
@@ -175,7 +181,9 @@ t_img read_img_surface(char *file);
 void init_sdl_ressources_rend(t_data *d);
 void init_mini_map(t_data *d, t_map_data *map);
 void init_data(t_data *d, int ac, char **av);
-
+int					init_hud_data(t_data *d);
+int					init_hud(t_data *d);
+int					init_pscreen(t_data *d);
 
 //render_event_gesture.c
 void handle_key_event(t_data *d);
@@ -283,5 +291,9 @@ void gravity_obj(t_data *d, t_obj *objs, int nb_obj);
 void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed);
 void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse);
 
+/* ttf_init.c */
+
+int					init_ttf(t_data *d);
+int					quit_ttf(t_data *d);
 
 #endif
