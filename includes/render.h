@@ -168,9 +168,6 @@ typedef	struct		s_thread
 	t_data			*d;
 }					t_thread;
 
-
-
-
 void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
 void print_player_look_vector(t_data *d, t_map_data *map, float rot);
