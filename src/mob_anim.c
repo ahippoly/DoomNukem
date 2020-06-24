@@ -1,8 +1,5 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+
 
 SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int ind)
 {

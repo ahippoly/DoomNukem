@@ -1,8 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
@@ -95,7 +91,6 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
 {
     SDL_Event event;
 
-	SDL_PumpEvents();
     while (SDL_PollEvent(&event))
     {
         if  (event.type == SDL_MOUSEBUTTONDOWN)
@@ -109,7 +104,6 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
                     d->sprite[d->gun_ind].index = AIMFIRE;
                 d->sprite[d->gun_ind].on = 0;
                 d->sprite[d->gun_ind].anim_end = 0;
-				printf("sound played\n");
                 play_sound(d, d->gun_ind);
                 }
             else if (event.button.button == SDL_BUTTON_RIGHT)
@@ -179,7 +173,7 @@ void    init_sprite(t_data *d)
 //         SDL_PumpEvents();
 //         handle_key_event_sprite(&d, &map);
 //         handle_mouse_event_gun(&d, &map);
-//         //handle_poll_event(&d, &map);
+//         handle_poll_event(&d, &map);
 //         mob_anim(&d);
 //         sprite_anim_gun(&d);
 //         SDL_RenderPresent(d.rend);

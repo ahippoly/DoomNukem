@@ -1,8 +1,5 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+
 
 static void      init_anim_pyro(t_sprite *Pyro)
 {

@@ -1,9 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-
 
 SDL_Rect    get_gun_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos)
 {
@@ -20,6 +15,10 @@ SDL_Rect    gun_dimension(SDL_Rect dstdim, t_data *d)
     dstdim.y = HALF_WIN_SIZE_Y - d->sprite[d->gun_ind].size.y;
     dstdim.w = (HALF_WIN_SIZE_X + d->sprite[d->gun_ind].size.x) - dstdim.x;
     dstdim.h = HALF_WIN_SIZE_Y + d->sprite[d->gun_ind].size.y;
+    if (d->gun_ind == 5)
+        dstdim.x += 40;
+    if (d->gun_ind == 3 && (d->sprite[d->gun_ind].index == AIM || d->sprite[d->gun_ind].index == AIMFIRE))
+        dstdim.y += 80;
     return (dstdim);
 }
 
@@ -42,10 +41,9 @@ void    gun_idle_anim(t_data *d)
     }
     srcdim = get_gun_pos(srcdim, d, pos);
     dstdim = gun_dimension(dstdim, d);
-	// d->displayed_gun = d->sprite[d->gun_ind].text;
-	d->dst_gun = dstdim;
 	d->src_gun = srcdim;
-    // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
+	d->dst_gun = dstdim;
+    //SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
 }
 
 void    sprite_anim_gun(t_data *d)
@@ -68,12 +66,12 @@ void    sprite_anim_gun(t_data *d)
     {
         srcdim = get_gun_pos(srcdim, d, pos);
         dstdim = gun_dimension(dstdim, d);
-		// d->displayed_gun = d->sprite[d->gun_ind].text;
-		d->dst_gun = dstdim;
 		d->src_gun = srcdim;
+		d->dst_gun = dstdim;
         // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
     }
-    else if ((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE) && (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
+    else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 
+    (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
         d->sprite[d->gun_ind].time = SDL_GetTicks();
     else
     {

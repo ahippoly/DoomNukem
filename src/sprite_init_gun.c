@@ -1,8 +1,5 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+
 
 static void      init_anim_AR(t_sprite *AR)
 {
@@ -15,7 +12,7 @@ static void      init_anim_AR(t_sprite *AR)
     AR->anim[IDLE].offset.y = 12;
     AR->anim[FIRE].pos->x = 2;
     AR->anim[FIRE].pos->y = 0;
-    AR->anim[FIRE].nb_frame = 4;
+    AR->anim[FIRE].nb_frame = 3;
     AR->anim[FIRE].offset.x = 0;
     AR->anim[FIRE].offset.y = 12;
     AR->anim[AIM].pos->x = 1;
@@ -107,7 +104,7 @@ t_sprite    sprite_init_DD(SDL_Texture *text)
 {
     t_sprite DD;
 
-    DD.size.x = 250;
+    DD.size.x = 300;
     DD.size.y = 0;
 
     DD.aim_on = 0;
@@ -154,7 +151,7 @@ static void      init_anim_LMG(t_sprite *LMG)
     LMG->anim[IDLE].offset.y = 32;
     LMG->anim[FIRE].pos->x = 4;
     LMG->anim[FIRE].pos->y = 6; 
-    LMG->anim[FIRE].nb_frame = 5;
+    LMG->anim[FIRE].nb_frame = 3;
     LMG->anim[FIRE].offset.x = 0;
     LMG->anim[FIRE].offset.y = 32;
     LMG->anim[AIM].pos->x = 0;
