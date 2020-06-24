@@ -1,4 +1,4 @@
-#include <hud.h>
+#include "hud.h"
 
 /* initialise et creation de la texture pour l'icone de HP  */
 
@@ -32,8 +32,9 @@ int				put_health_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 
 /* initialise et creation de la texture pour afficher le texte de HP  */
 
-int					set_health_info(t_hud *hud, int nb)
+int					set_health_info(t_data *d, t_hud *hud, int nb)
 {
+	SDL_Texture		*t_cpy;
 	SDL_Surface		*s_cpy;	
 	char			*text;
 
@@ -43,12 +44,12 @@ int					set_health_info(t_hud *hud, int nb)
 		nb = 100;
 	if (!(text = ft_itoa(nb)))
 		return (error(hud));
-	if(!(s_cpy = TTF_RenderText_Blended(hud->font_nb, text, hud->color)))
+	if(!(s_cpy = TTF_RenderText_Blended(d->font_nb, text, hud->color)))
 	{
 		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
 		return (error(hud));
 	}
-	if (!(hud->message_health_s = copy_surface(s_cpy, hud)))
+	if (!(hud->message_health_s = copy_surface(d, s_cpy, hud)))
 		return (error(hud));
 	SDL_FreeSurface(s_cpy);
 	return (0);
