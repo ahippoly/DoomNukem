@@ -2,9 +2,17 @@
 
 SDL_Surface		*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud)
 {
-	SDL_Surface *dest;
-
-	if (!(dest = SDL_CreateRGBSurface(0, 30, 30, 32, 0, 0, 0, 0)))
+	SDL_Surface	*dest;
+	Uint32		rmask;
+	Uint32		gmask;
+	Uint32		bmask;
+	Uint32		amask;
+	
+	rmask = 0xff000000;
+	gmask = 0x00ff0000;
+	bmask = 0x0000ff00;
+	amask = 0x000000ff;
+	if (!(dest = SDL_CreateRGBSurface(0, 30, 30, 32, rmask, gmask, bmask, amask)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
 		exit_hud(hud);
