@@ -12,6 +12,7 @@
 # include "img_file.h"
 # include "FMOD/fmod.h"
 
+# include "SDL_ttf.h"
 
 # define WIN_SIZE_X 800
 # define WIN_SIZE_Y 800
@@ -271,6 +272,58 @@ typedef struct      s_map_data
 	t_icon			*icon_list;
     t_wall_ref      ***map_wall_ref;
 }                   t_map_data;
+
+typedef struct		s_weapon
+{
+	int				id;
+	int				dammage; // pts de dégat
+	int				range; // portée d'une arme
+	int				ammo_left; // munitions restantes
+	char			*name;
+	int				capacity; // capacité max de chargement
+	SDL_Surface 	*surface;
+	SDL_Texture 	*texture;
+}					t_weapon;
+
+typedef struct		s_perso
+{
+	int				hp_max; //health point max
+	int				hp; //health point
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
+}					t_perso;
+
+typedef struct		s_inv
+{
+	SDL_Texture		*healthpack_icon_t;
+	SDL_Texture		*healthpack_info_t;
+	SDL_Texture		*key_icon_t;
+	SDL_Texture		*key_info_t;
+	SDL_Surface		*healthpack_icon_s;
+	SDL_Surface		*healthpack_info_s;
+	SDL_Surface		*key_info_s;
+	int				health_pack;
+	int				key;
+}					t_inv;
+
+typedef struct		s_hud
+{
+	int				current_weap_id;
+	int				current_perso_id;
+	int				hp;
+	SDL_Surface 	*s_perso_w;
+	SDL_Surface		*message_ammo_s;
+	SDL_Surface		*message_health_s;
+	SDL_Texture		*message_ammo_t;
+	SDL_Texture		*health_texture; //icon health
+	SDL_Texture		*ammo_texture; //icon ammo
+	SDL_Texture		*message_health_t;
+	SDL_Texture 	*t_perso_w;
+	t_weapon		**perso_weapon;
+	t_perso			perso;
+	SDL_Color		color;
+	t_inv			inv;
+}					t_hud;
 
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);

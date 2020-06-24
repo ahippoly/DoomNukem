@@ -155,6 +155,13 @@ typedef struct      s_data
 	SDL_Texture		*displayed_gun;
 	SDL_Rect		src_gun;
 	SDL_Rect		dst_gun;
+	/* hud data */
+    unsigned int    *p_hud; // hud screen
+    SDL_Texture     *hud_texture; //hud texture
+	t_hud			hud;
+	/* ttf data */
+	TTF_Font		*font_nb;
+	TTF_Font		*font_text;
 }                   t_data;
 
 typedef	struct		s_thread
@@ -164,9 +171,6 @@ typedef	struct		s_thread
 	t_range			screen_x;
 	t_data			*d;
 }					t_thread;
-
-
-
 
 void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
@@ -178,7 +182,9 @@ t_img read_img_surface(char *file);
 void init_sdl_ressources_rend(t_data *d);
 void init_mini_map(t_data *d, t_map_data *map);
 void init_data(t_data *d, int ac, char **av);
-
+int					init_hud_data(t_data *d);
+int					init_hud(t_data *d);
+int					init_pscreen(t_data *d);
 
 //render_event_gesture.c
 void handle_key_event(t_data *d);
@@ -257,6 +263,7 @@ void draw_floor2(t_data *d, t_floor *fl, double height);
 void print_prop(t_data *d, t_props *prop);
 t_range	calc_prop_draw_range(t_data *d, float dist, float height, float size);
 void create_obj_raybox(t_data *d);
+void check_props_collect(t_data *d, t_props *props, t_hud *hud);
 
 //render_obj.c
 void init_obj_list(t_data *d);
@@ -291,5 +298,9 @@ void shoot_gun(t_data *d);
 void    init_sprite(t_data *d);
 void handle_key_event_sprite(t_data *d, t_map_data *map);
 void handle_mouse_event_gun(t_data *d, t_map_data *map);
+/* ttf_init.c */
+
+int					init_ttf(t_data *d);
+int					quit_ttf(t_data *d);
 
 #endif

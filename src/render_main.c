@@ -5,28 +5,27 @@
 #include "hud.h"
 #include "sprite.h"
 
-
 void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
 {
     SDL_Rect tmp;
-    //printf("before print\n");
     //SDL_RenderClear(d->rend);
     SDL_UpdateTexture(d->screen, NULL, d->p_screen, WIN_SIZE_X * 4);
     print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
     tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-	update_hud_info(hud);
-	render_hud_info(d, hud);
-	render_hud_icons(d, hud);
+
     SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
+	update_hud_info(d);
+	render_hud_info(d);
+	render_hud_icons(d);
     SDL_RenderCopy(d->rend, d->mini_map, NULL, &tmp);
     SDL_RenderPresent(d->rend);
 }
 
-void free_render_env(t_data *d)
-{
+// void free_render_env(t_data *d)
+// {
 
-}
+// }
 
 void calc_n_disp_framerate(t_data *d)
 {
@@ -53,14 +52,11 @@ void calc_n_disp_framerate(t_data *d)
 int main(int ac, char **av)
 {
     t_data      d;
-	t_hud		hud;
     
     init_data(&d, ac, av);
     ft_putstr("Main worked");
     printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
 
-	init_hud(&d, &hud);
-	init_ttf(&hud);
 	init_sprite(&d);
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
@@ -78,7 +74,7 @@ int main(int ac, char **av)
         gravity(&d);
 		create_obj_raybox(&d);
 		load_repulsed_obj(&d, d.repulsed, d.nb_repulsed);
-		check_props_collect(&d, d.props, &hud);
+		check_props_collect(&d, d.props, &d.hud);
 
 		//draw_all_floor_slice(&d);
 
@@ -93,8 +89,8 @@ int main(int ac, char **av)
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);
-        print_data2screen(&d, &d.map, &hud);
+        print_data2screen(&d, &d.map, &d.hud);
     }
-    free_render_env(&d);
+    // free_render_env(&d);
 }
 

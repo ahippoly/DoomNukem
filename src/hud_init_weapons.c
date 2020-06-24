@@ -1,4 +1,4 @@
-#include <hud.h>
+#include "hud.h"
 
 int				init_weapon_0(t_data *d, t_hud *hud)
 {
@@ -11,12 +11,12 @@ int				init_weapon_0(t_data *d, t_hud *hud)
 	if (!(hud->perso_weapon[0]->surface = SDL_LoadBMP(WEAPON_PATH_0)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	if (!(hud->perso_weapon[0]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[0]->surface)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	SDL_FreeSurface(hud->perso_weapon[0]->surface);
 	return (0);
@@ -33,12 +33,12 @@ int				init_weapon_1(t_data *d, t_hud *hud)
 	if (!(hud->perso_weapon[1]->surface = SDL_LoadBMP(WEAPON_PATH_1)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	if (!(hud->perso_weapon[1]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[1]->surface)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	SDL_FreeSurface(hud->perso_weapon[1]->surface);
 	return (0);
@@ -55,12 +55,12 @@ int				init_weapon_2(t_data *d, t_hud *hud)
 	if (!(hud->perso_weapon[2]->surface = SDL_LoadBMP(WEAPON_PATH_2)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	if (!(hud->perso_weapon[2]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[2]->surface)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	SDL_FreeSurface(hud->perso_weapon[2]->surface);
 	return (0);
@@ -77,12 +77,12 @@ int				init_weapon_3(t_data *d, t_hud *hud)
 	if (!(hud->perso_weapon[3]->surface = SDL_LoadBMP(WEAPON_PATH_3)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	if (!(hud->perso_weapon[3]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[3]->surface)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	SDL_FreeSurface(hud->perso_weapon[3]->surface);
 	return (0);
@@ -99,12 +99,12 @@ int				init_weapon_4(t_data *d, t_hud *hud)
 	if (!(hud->perso_weapon[4]->surface = SDL_LoadBMP(WEAPON_PATH_4)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	if (!(hud->perso_weapon[4]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[4]->surface)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (error(hud));
+		return (exit_hud(hud));
 	}
 	SDL_FreeSurface(hud->perso_weapon[4]->surface);
 	return (0);
