@@ -4,12 +4,12 @@
 #include "img_file.h"
 #include "sprite.h"
 
-SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int mob_ind)
+SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int ind)
 {
-    srcdim.x = d->sprite[mob_ind].frame_size.w * pos.x;
-    srcdim.y = d->sprite[mob_ind].frame_size.h * pos.y;
-    srcdim.w = d->sprite[mob_ind].frame_size.w - d->sprite[mob_ind].anim[d->sprite[mob_ind].index].offset.x;
-    srcdim.h = d->sprite[mob_ind].frame_size.h - d->sprite[mob_ind].anim[d->sprite[mob_ind].index].offset.y;
+    srcdim.x = d->sprite[ind].frame_size.w * pos.x;
+    srcdim.y = d->sprite[ind].frame_size.h * pos.y;
+    srcdim.w = d->sprite[ind].frame_size.w - d->sprite[ind].anim[d->sprite[ind].index].offset.x;
+    srcdim.h = d->sprite[ind].frame_size.h - d->sprite[ind].anim[d->sprite[ind].index].offset.y;
     return (srcdim);
 }
 
@@ -55,28 +55,37 @@ void    mob_anim(t_data *d)
     int diff;
     int i;
 
-    i = 0;
-     while (i < d->mobs_on_screen)
+    i = MOB_INDEX; //index du premier mob
+     while (i < NB_MAX_MOBS + 10)
      {
-        diff = 0;      //Diff represente l'index dans l'animation, il est calculé plus bas en fonction du temps
-        if (d->sprite[d->mob_ind].on >= 0)
+        if (d->sprite[i].on == 0)
         {
-            currTime = SDL_GetTicks();
-            diff = (currTime - d->sprite[d->mob_ind].time) / d->sprite[d->mob_ind].anim[d->sprite[d->mob_ind].index].speed;
+            diff = 0;      //Diff represente l'index dans l'animation, il est calculé plus bas en fonction du temps
+            if (d->sprite[i].on >= 0)
+            {
+                currTime = SDL_GetTicks();
+                diff = (currTime - d->sprite[i].time) / d->sprite[i].anim[d->sprite[i].index].speed;
+            }
+            //printf("diff= %d\n", diff);
+            pos.x = (d->sprite[i].anim[d->sprite[i].index].pos->x + diff) % d->sprite[i].nb_frame.x;
+            pos.y = d->sprite[i].anim[d->sprite[i].index].pos->y + (d->sprite[i].anim[d->sprite[i].index].pos->x + diff) / d->sprite[i].nb_frame.x;
+            
+            if (diff < d->sprite[i].anim[d->sprite[i].index].nb_frame && d->sprite[i].on == 0)
+            {   
+                srcdim = get_sprite_mob_pos(srcdim, d, pos, i); //le SDL_Rect qui represente la frame de l'animation sur le sprite sheet
+                dstdim = print_mob(dstdim, 300, 300, 400);    //le SDL_Rect qui represente la position a l'affichage de l'animation avec comme parametre x,y,z
+                d->sprite[i].displayed_part.x = srcdim.x;
+                d->sprite[i].displayed_part.y = srcdim.y;
+                //copy_frame(d->sprite[i], srcdim);
+                //if (i == d->mob_ind)
+                SDL_RenderCopy(d->rend, d->sprite[i].text, &srcdim, &dstdim);
+            }
+            else if (d->sprite[i].index != DEATH)
+                d->sprite[i].time = SDL_GetTicks(); //permet de boucler l'animation a l'infini en redemarrant le compteur temps
+            //else
+            //    free mob after last frame of death animation
+            //    d->sprite[i].on = -1;
+            i++;
         }
-        pos.x = (d->sprite[d->mob_ind].anim[d->sprite[d->mob_ind].index].pos->x + diff) % d->sprite[d->mob_ind].nb_frame.x;
-        pos.y = d->sprite[d->mob_ind].anim[d->sprite[d->mob_ind].index].pos->y + (d->sprite[d->mob_ind].anim[d->sprite[d->mob_ind].index].pos->x + diff) / d->sprite[d->mob_ind].nb_frame.x;
-        if (diff < d->sprite[d->mob_ind].anim[d->sprite[d->mob_ind].index].nb_frame && d->sprite[d->mob_ind].on == 0)
-        {   
-            srcdim = get_sprite_mob_pos(srcdim, d, pos, d->mob_ind); //le SDL_Rect qui represente la frame de l'animation sur le sprite sheet
-            dstdim = print_mob(dstdim, i * 500, 0, 500);    //le SDL_Rect qui represente la position a l'affichage de l'animation avec comme parametre x,y,z
-            d->sprite[d->mob_ind].displayed_part.x = srcdim.x;
-            d->sprite[d->mob_ind].displayed_part.y = srcdim.y;
-            //copy_frame(d->sprite[d->mob_ind], srcdim);
-            SDL_RenderCopy(d->rend, d->sprite[d->mob_ind].text, &srcdim, &dstdim);
-        }
-        else
-            d->sprite[d->mob_ind].time = SDL_GetTicks(); //permet de boucler l'animation a l'infini en redemarrant le compteur temps
-        i++;
     }
 }

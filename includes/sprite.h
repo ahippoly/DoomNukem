@@ -17,9 +17,9 @@
 # define DEATH 2
 # define PROJECTILE 3
 
-# define PYRO 10
-# define AFRIT 11
-
+# define AFRIT 8
+# define PYRO 9
+# define MOB_INDEX 10
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d);
 
 //sprite_init_gun.c

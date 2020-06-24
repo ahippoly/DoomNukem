@@ -42,7 +42,10 @@ void    gun_idle_anim(t_data *d)
     }
     srcdim = get_gun_pos(srcdim, d, pos);
     dstdim = gun_dimension(dstdim, d);
-    SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
+	// d->displayed_gun = d->sprite[d->gun_ind].text;
+	d->dst_gun = dstdim;
+	d->src_gun = srcdim;
+    // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
 }
 
 void    sprite_anim_gun(t_data *d)
@@ -65,7 +68,10 @@ void    sprite_anim_gun(t_data *d)
     {
         srcdim = get_gun_pos(srcdim, d, pos);
         dstdim = gun_dimension(dstdim, d);
-        SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
+		// d->displayed_gun = d->sprite[d->gun_ind].text;
+		d->dst_gun = dstdim;
+		d->src_gun = srcdim;
+        // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
     }
     else if ((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE) && (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
         d->sprite[d->gun_ind].time = SDL_GetTicks();

@@ -2,6 +2,8 @@
 #include "render.h"
 #include "editor.h"
 #include "img_file.h"
+#include "sound.h"
+#include "sprite.h"
 
 
 void handle_key_event(t_data *d)
@@ -25,6 +27,70 @@ void handle_key_event(t_data *d)
         d->z_offset += 0.05;
     if (d->clavier[SDL_SCANCODE_F])
         d->z_offset -= 0.05;
+	if (d->clavier[SDL_SCANCODE_R])
+    {
+            d->sprite[d->gun_ind].time = SDL_GetTicks();
+            d->sprite[d->gun_ind].index = RELOAD;
+            d->sprite[d->gun_ind].on = 0;
+            d->sprite[d->gun_ind].aim_on = 0;
+            d->sprite[d->gun_ind].anim_end = 0;
+            if (d->gun_ind > 0 && d->gun_ind < 5)
+            play_sound(d, d->gun_ind + 5);
+    }
+    if (d->clavier[SDL_SCANCODE_1])
+    {
+            d->gun_ind = 0;
+            d->sprite[d->gun_ind].on = -1;
+            d->sprite[d->gun_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_2])
+    {
+            d->gun_ind = 1;
+            d->sprite[d->gun_ind].on = -1;
+            d->sprite[d->gun_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_3])
+    {
+            d->gun_ind = 2;
+            d->sprite[d->gun_ind].on = -1;
+            d->sprite[d->gun_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_4])
+    {
+            d->gun_ind = 3;
+            d->sprite[d->gun_ind].on = -1;
+            d->sprite[d->gun_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_5])
+    {
+            d->gun_ind = 4;
+            d->sprite[d->gun_ind].on = -1;
+            d->sprite[d->gun_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_6])
+    {
+            d->gun_ind = 5;
+            d->sprite[d->gun_ind].on = -1;
+            d->sprite[d->gun_ind].aim_on = 0;
+    }
+    if (d->clavier[SDL_SCANCODE_8]) //Test mob animation
+    {
+            d->sprite[d->mob_ind].time = SDL_GetTicks();
+            d->sprite[d->mob_ind].on = 0;
+            d->sprite[d->mob_ind].index = IDLE;
+    }
+    if (d->clavier[SDL_SCANCODE_9]) //Test mob animation
+    {
+            d->sprite[d->mob_ind].time = SDL_GetTicks();
+            d->sprite[d->mob_ind].on = 0;
+            d->sprite[d->mob_ind].index = DEATH;
+    }
+    if (d->clavier[SDL_SCANCODE_0]) //Test mob animation
+    {
+            d->sprite[d->mob_ind].time = SDL_GetTicks();
+            d->sprite[d->mob_ind].on = 0;
+            d->sprite[d->mob_ind].index = ATTACK;
+    }
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
 
@@ -104,12 +170,8 @@ void handle_poll_event(t_data *d)
 				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
-				t_ray sorted[200];
 
-				sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
 				// move_with_collide(d, &sorted[0].obj_ref->pos, get_angle(d->player_pos, sorted[0].obj_ref->pos), 10);
-				if (sorted[0].dist < 9999)
-					repulse_obj(d, sorted[0].obj_ref, 0.05, 5);
 				// t_ray  ray = check_perp_obj(&d->obj_list[0], d->player_pos);
 				// t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);
 				// print_ray(ray);
@@ -139,6 +201,49 @@ void handle_poll_event(t_data *d)
 					printf("no longer grab wall\n");
 				}
             }
+			
         }
+		if  (d->e.type == SDL_MOUSEBUTTONDOWN)
+            {
+            if (d->e.button.button == SDL_BUTTON_LEFT)
+                {
+					shoot_gun(d);
+					d->sprite[d->gun_ind].time = SDL_GetTicks();
+					if (d->sprite[d->gun_ind].aim_on == 0)
+						d->sprite[d->gun_ind].index = FIRE;
+					else if (d->gun_ind == 3 || d->gun_ind == 4)
+						d->sprite[d->gun_ind].index = AIMFIRE;
+					d->sprite[d->gun_ind].on = 0;
+					d->sprite[d->gun_ind].anim_end = 0;
+					printf("sound played\n");
+					play_sound(d, d->gun_ind);
+                }
+            else if (d->e.button.button == SDL_BUTTON_RIGHT)
+                {
+                if (d->gun_ind == 3 || d->gun_ind == 4)
+                {
+                d->sprite[d->gun_ind].time = SDL_GetTicks();
+                d->sprite[d->gun_ind].index = AIM;
+                d->sprite[d->gun_ind].on = 0;
+                if (d->sprite[d->gun_ind].aim_on == 0)
+                    d->sprite[d->gun_ind].aim_on = 1;
+                else
+                    d->sprite[d->gun_ind].aim_on = 0;
+                }
+                }
+            }
+            else if (d->e.type == SDL_MOUSEBUTTONUP)
+           {
+            if (d->e.button.button == SDL_BUTTON_LEFT)
+                {
+                d->sprite[d->gun_ind].anim_end = -1;
+                if (d->gun_ind > 2 && d->gun_ind < 6)
+                play_sound(d, d->gun_ind + 10);
+                }
+            else if (d->e.button.button == SDL_BUTTON_RIGHT)
+                {
+                d->sprite[d->gun_ind].on = -1;
+                }
+            }
     }
 }

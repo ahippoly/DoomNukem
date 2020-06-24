@@ -3,6 +3,7 @@
 #include "editor.h"
 #include "img_file.h"
 #include "hud.h"
+#include "sprite.h"
 
 
 void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
@@ -14,9 +15,10 @@ void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
     print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
     tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-	// update_hud_info(d, hud);
-	// render_hud_info(d, hud);
-	// render_hud_icons(d, hud);
+	update_hud_info(hud);
+	render_hud_info(d, hud);
+	render_hud_icons(d, hud);
+    SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
     SDL_RenderCopy(d->rend, d->mini_map, NULL, &tmp);
     SDL_RenderPresent(d->rend);
 }
@@ -57,8 +59,11 @@ int main(int ac, char **av)
     ft_putstr("Main worked");
     printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
 
-	// init_hud(&d, &hud);
-	// init_ttf(&hud);
+	init_hud(&d, &hud);
+	init_ttf(&hud);
+	init_sprite(&d);
+    init_sound(&d);
+    play_sound(&d, MUS1); //Play Music
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -68,10 +73,12 @@ int main(int ac, char **av)
         SDL_PumpEvents();
         handle_poll_event(&d);
         handle_key_event(&d);
+		// handle_key_event_sprite(&d, &map);
+		//handle_mouse_event_gun(&d, &d.map);
         gravity(&d);
 		create_obj_raybox(&d);
 		load_repulsed_obj(&d, d.repulsed, d.nb_repulsed);
-		// check_props_collect(&d, d.props, &hud);
+		check_props_collect(&d, d.props, &hud);
 
 		//draw_all_floor_slice(&d);
 
@@ -82,6 +89,7 @@ int main(int ac, char **av)
 		//print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
+		sprite_anim_gun(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);

@@ -95,6 +95,7 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
 {
     SDL_Event event;
 
+	SDL_PumpEvents();
     while (SDL_PollEvent(&event))
     {
         if  (event.type == SDL_MOUSEBUTTONDOWN)
@@ -108,6 +109,7 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
                     d->sprite[d->gun_ind].index = AIMFIRE;
                 d->sprite[d->gun_ind].on = 0;
                 d->sprite[d->gun_ind].anim_end = 0;
+				printf("sound played\n");
                 play_sound(d, d->gun_ind);
                 }
             else if (event.button.button == SDL_BUTTON_RIGHT)
@@ -142,38 +144,45 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
 
 void    init_sprite(t_data *d)
 {
+    int i;
+
+    i = 10;
     load_sprite_gun(d);
     load_sprite_mob(d);
     
     d->gun_ind = 0;   //Le sprite a afficher
     d->sprite[d->gun_ind].index = 0;   //L'animation du sprite a afficher
-    
-    d->mob_ind = AFRIT;
-    d->sprite[d->mob_ind].index = 0;
-    d->sprite[d->mob_ind].on = 0;
-    d->mobs_on_screen = 2;
-}
-
-int main(int ac, char **av)
-{
-    t_map_data  map;
-    t_data      d;
-
-    map = read_map("maps/editor_map_0");
-    init_data(&d, ac, av);
-    init_sprite(&d);
-    init_sound(&d);
-    while (!d.quit)
+    d->mob_ind = 15;
+    while (i < NB_MAX_MOBS + 10)
     {
-        SDL_RenderClear(d.rend);
-        //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
-        SDL_PumpEvents();
-        handle_key_event_sprite(&d, &map);
-        handle_mouse_event_gun(&d, &map);
-        handle_poll_event(&d, &map);
-        mob_anim(&d);
-        sprite_anim_gun(&d);
-        SDL_RenderPresent(d.rend);
+    d->sprite[i].index = 0;
+    d->sprite[i].on = 0;
+    i++;
     }
-	SDL_CloseAudio();
 }
+
+// int main(int ac, char **av)
+// {
+//     t_map_data  map;
+//     t_data      d;
+
+//     map = read_map("maps/editor_map_0");
+//     init_data(&d, ac, av);
+//     init_sprite(&d);
+//     init_sound(&d);
+//     play_sound(&d, MUS1); //Play Music
+//     while (!d.quit)
+//     {
+//         SDL_RenderClear(d.rend);
+//         //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
+//         calc_n_disp_framerate(&d);
+//         SDL_PumpEvents();
+//         handle_key_event_sprite(&d, &map);
+//         handle_mouse_event_gun(&d, &map);
+//         //handle_poll_event(&d, &map);
+//         mob_anim(&d);
+//         sprite_anim_gun(&d);
+//         SDL_RenderPresent(d.rend);
+//     }
+// 	SDL_CloseAudio();
+// }

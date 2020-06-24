@@ -143,15 +143,18 @@ typedef struct      s_data
 	int				nb_mob;
 	t_obj			obj_list[NB_MAX_OBJ];
 	int				nb_obj;
-	t_obj			*repulsed[15];
+	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
 	int				nb_repulsed;
 	int				bullet;
-	t_sprite        sprite[15];
+	t_sprite        sprite[30];
     int             gun_ind;
     int             mob_ind;
     int             mobs_on_screen;
-	t_sound			sound[30];
-
+	FMOD_SOUND		*sound[30];
+	FMOD_SYSTEM 	*system;
+	SDL_Texture		*displayed_gun;
+	SDL_Rect		src_gun;
+	SDL_Rect		dst_gun;
 }                   t_data;
 
 typedef	struct		s_thread
@@ -282,6 +285,11 @@ void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob);
 void gravity_obj(t_data *d, t_obj *objs, int nb_obj);
 void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed);
 void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse);
+void shoot_gun(t_data *d);
 
+
+void    init_sprite(t_data *d);
+void handle_key_event_sprite(t_data *d, t_map_data *map);
+void handle_mouse_event_gun(t_data *d, t_map_data *map);
 
 #endif

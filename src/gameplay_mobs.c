@@ -53,3 +53,12 @@ void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse)
 	}
 
 }
+
+void shoot_gun(t_data *d)
+{
+	t_ray sorted[200];
+
+	sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
+	if (sorted[0].dist < 9999)
+		repulse_obj(d, sorted[0].obj_ref, 0.05, 5);
+}

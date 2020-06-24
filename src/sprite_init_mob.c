@@ -4,7 +4,7 @@
 #include "img_file.h"
 #include "sprite.h"
 
-static void      init_anim_Pyro(t_sprite *Pyro)
+static void      init_anim_pyro(t_sprite *Pyro)
 {
     Pyro->anim[IDLE].pos->x = 7;
     Pyro->anim[IDLE].pos->y = 1;
@@ -26,28 +26,29 @@ static void      init_anim_Pyro(t_sprite *Pyro)
     Pyro->anim[DEATH].speed = 150;
 }
 
-t_sprite    sprite_init_Pyro(SDL_Texture *text)
+t_sprite    sprite_init_pyro(void)
 {
     t_sprite Pyro;
 
-    Pyro.index = 3;
+    Pyro.on = 0;
+    Pyro.index = IDLE;
     Pyro.total_size.w = 1160;
     Pyro.total_size.h = 360;
     Pyro.nb_frame.x = 10;    
     Pyro.nb_frame.y = 4;  
     Pyro.frame_size.w = Pyro.total_size.w / Pyro.nb_frame.x;
     Pyro.frame_size.h = Pyro.total_size.h / Pyro.nb_frame.y;
-    
+    Pyro.time = 0;
 
     Pyro.displayed_part.x = 0;
     Pyro.displayed_part.y = 0;
     
-    Pyro.text = text;
-    init_anim_Pyro(&Pyro);
+    //Pyro.text = text;
+    init_anim_pyro(&Pyro);
     return (Pyro);
 }
 
-static void      init_anim_Afrit(t_sprite *Afrit)
+static void      init_anim_afrit(t_sprite *Afrit)
 {
     Afrit->anim[IDLE].pos->x = 2;
     Afrit->anim[IDLE].pos->y = 1;
@@ -75,24 +76,25 @@ static void      init_anim_Afrit(t_sprite *Afrit)
     Afrit->anim[PROJECTILE].speed = 150;
 }
 
-t_sprite    sprite_init_Afrit(SDL_Texture *text)
+t_sprite    sprite_init_afrit(void)
 {
     t_sprite Afrit;
 
-    Afrit.index = 3;
+    Afrit.on = 0;
+    Afrit.index = IDLE;
     Afrit.total_size.w = 1920;
     Afrit.total_size.h = 320;
     Afrit.nb_frame.x = 15;  
     Afrit.nb_frame.y = 2;  
     Afrit.frame_size.w = Afrit.total_size.w / Afrit.nb_frame.x;
     Afrit.frame_size.h = Afrit.total_size.h / Afrit.nb_frame.y;
-
+    Afrit.time = 0;
 
     Afrit.displayed_part.x = 0;
     Afrit.displayed_part.y = 0;
 
-    Afrit.text = text;
-    init_anim_Afrit(&Afrit);
+    //Afrit.text = text;
+    init_anim_afrit(&Afrit);
     return (Afrit);
 }
 
@@ -101,12 +103,11 @@ static void    load_Pyro(t_data *d)
     int i;
 
     i = 0;
-    while (i < 10)
+    while (i < NB_MAX_MOBS / 2)
     {
         d->mobs[i].attack_dist = 2;
         d->mobs[i].dmg_per_hit = 20;
-        d->mobs[i].sprite = d->sprite[PYRO];
-        d->mobs[i].sprite.index = PYRO;
+        d->mobs[i].sprite = d->sprite[i + MOB_INDEX];
         d->mobs[i].life = 100;
         i++;
     }
@@ -116,13 +117,12 @@ static void    load_Afrit(t_data *d)
 {
     int i;
 
-    i = 10;
-    while (i < 15)
+    i = NB_MAX_MOBS / 2;
+    while (i < NB_MAX_MOBS)
     {
         d->mobs[i].attack_dist = 1;
         d->mobs[i].dmg_per_hit = 15;
-        d->mobs[i].sprite = d->sprite[AFRIT];
-        d->mobs[i].sprite.index = AFRIT;
+        d->mobs[i].sprite = d->sprite[i + MOB_INDEX];
         d->mobs[i].life = 200;
         i++;
     }
@@ -139,20 +139,48 @@ void     fill_pixels(char *str, t_data *d, int mob)
     SDL_FreeSurface(surface);
 }
 
+void    duplicate_mob(t_data *d, SDL_Texture *texture, SDL_Texture *texture2)
+{
+    int i;
+
+    i = MOB_INDEX;
+    while (i < NB_MAX_MOBS / 2 + MOB_INDEX)
+    {
+        d->sprite[i] = sprite_init_pyro();
+        d->sprite[i].pixels = d->sprite[PYRO].pixels;
+        d->sprite[i].text = texture;
+        i++;
+    }
+    while (i < NB_MAX_MOBS + MOB_INDEX)
+    {
+        d->sprite[i] = sprite_init_afrit();
+        d->sprite[i].pixels = d->sprite[AFRIT].pixels;
+        d->sprite[i].text = texture2;
+        i++;
+    }
+}
+
 void    load_sprite_mob(t_data *d)
 {
     SDL_Texture *texture;
-    t_sprite commando;
-
+    SDL_Texture *texture2;
+    
     texture = NULL;
     texture = load_sprite_bmp("Sprites/Mobs/pyro.bmp", d);
-    d->sprite[PYRO] = sprite_init_Pyro(texture);
+    d->sprite[PYRO] = sprite_init_pyro();
+    d->sprite[PYRO].text = texture;
     fill_pixels("Sprites/Mobs/pyro.bmp", d, PYRO);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Mobs/afrit.bmp", d);
-    d->sprite[AFRIT] = sprite_init_Afrit(texture);
+
+    texture2 = NULL;
+    texture2 = load_sprite_bmp("Sprites/Mobs/afrit.bmp", d);
+    d->sprite[AFRIT] = sprite_init_afrit();
+    d->sprite[AFRIT].text = texture2;
     fill_pixels("Sprites/Mobs/afrit.bmp", d, AFRIT);
+
+    duplicate_mob(d, texture, texture2);
     texture = NULL;
+    texture2 = NULL;
+
     load_Pyro(d);
     load_Afrit(d);
 }

@@ -3,8 +3,7 @@
 
 #include "render.h"
 
-
-#define MUS_PATH1 "Sound/Music/hushed.wav"
+#define MUS_PATH1 "Sound/Music/Urdak.wav"
 
 #define ARLONG_PATH "Sound/Guns/ARlong.wav"
 #define ARSHORT_PATH "Sound/Guns/ARshort.wav"
