@@ -52,7 +52,7 @@ t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot 
 }
 
 
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, t_rot look_rot)
+t_calced_walls check_intersect_with_all_wall_rend(t_data *d, t_point pos, t_rot rot, t_rot look_rot)
 {
     int i;
     t_calced_walls res ;

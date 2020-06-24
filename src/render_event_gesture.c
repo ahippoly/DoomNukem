@@ -235,8 +235,8 @@ void handle_poll_event(t_data *d)
 
 				// init_floors(d);
 				// raycast_screen(d, (t_range){400, 401}, d->rot, 0);
-                // draw_vertical_line(d, 500, check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot));
-                // printf("scale_z to wall test = %f\n", check_intersect_with_all_wall(d, d->player_pos, d->rot, d->rot).scale_z);
+                // draw_vertical_line(d, 500, check_intersect_with_all_wall_rend(d, d->player_pos, d->rot, d->rot));
+                // printf("scale_z to wall test = %f\n", check_intersect_with_all_wall_rend(d, d->player_pos, d->rot, d->rot).scale_z);
                 // printf("d->rot = %f\n", d->rot);
             }
                 

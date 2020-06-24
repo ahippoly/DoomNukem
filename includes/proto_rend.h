@@ -30,7 +30,7 @@ void gravity(t_data *d);
 //render_wall_processing.c
 float calc_wall_hit_scale(t_wall wall, t_point inter);
 t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot look_rot);
-t_calced_walls check_intersect_with_all_wall(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
+t_calced_walls check_intersect_with_all_wall_rend(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
 void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);

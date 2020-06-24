@@ -94,7 +94,7 @@ void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
 		// 	i++;
 		//draw_floor_lines(d, screen_x.start, i, sorted);
 		//printf("segfault, i = %i\n", i);
-        //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, start_angle, d->rot), d->texture[0]);
+        //draw_vertical_line(d, x, check_intersect_with_all_wall_rend(d, map, start_angle, d->rot), d->texture[0]);
         start_angle += step;
         screen_x.start++;
     }
@@ -154,7 +154,7 @@ void raycast_all_screen(t_data *d, t_map_data *map)
     //     sort_walls_by_dist_player(d, d->player_pos, (t_rot){current_angle, cos(current_angle), sin(current_angle)}, sorted_walls);
     //     while (i < map->wall_count)
     //         draw_vertical_line(d, x, sorted_walls[i++]);
-    //     //draw_vertical_line(d, x, check_intersect_with_all_wall(d, map, current_angle, d->rot), d->texture[0]);
+    //     //draw_vertical_line(d, x, check_intersect_with_all_wall_rend(d, map, current_angle, d->rot), d->texture[0]);
     //     current_angle += step;
     //     x++;
     // }

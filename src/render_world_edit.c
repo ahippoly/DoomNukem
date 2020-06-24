@@ -9,7 +9,7 @@ int	grab_wall(t_data *d, t_point pos, t_rot look_rot)
 	int success;
 
 	success = 0;
-	res = check_intersect_with_all_wall(d, pos, look_rot, look_rot);
+	res = check_intersect_with_all_wall_rend(d, pos, look_rot, look_rot);
 	if (res.dist < 9999)
 	{
 		d->grabbed_wall = &d->map.wall_list[res.wall.id];
