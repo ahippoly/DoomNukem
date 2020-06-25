@@ -36,6 +36,7 @@ void load_bmp_files(t_data *d)
     d->texture[3] = read_img_surface(TEXT_PATH_3);
     d->texture[4] = read_img_surface(TEXT_PATH_4);
     d->texture[5] = read_img_surface(TEXT_PATH_5);
+    d->texture[6] = read_img_surface(TEXT_PATH_6);
 }
 
 void init_rend_img(t_data *d)

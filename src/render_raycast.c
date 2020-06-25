@@ -40,8 +40,8 @@ void draw_floor_slice(t_data *d, t_ray *queue, int *nb, t_ray checked, int x)
 		check_room = checked.room_id;
 		if (check_room == queue_room)
 		{
-			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue_room);
-			print_floor_slice(d, d->fl[queue_room], calc_floor_draw_range(d, queue[*nb], checked.dist, x),  get_room_by_id(d, queue[*nb].room_id)->floor_text);
+			if (queue[*nb].dist < RENDER_DISTANCE_MAX)
+				print_floor_slice(d, d->fl[queue_room], calc_floor_draw_range(d, queue[*nb], checked.dist, x),  get_room_by_id(d, queue[*nb].room_id)->floor_text);
 			(*nb)--;
 			if (*nb > -1)
 				queue[*nb].dist = checked.dist;
@@ -49,8 +49,8 @@ void draw_floor_slice(t_data *d, t_ray *queue, int *nb, t_ray checked, int x)
 		}
 		else
 		{
-			print_floor_slice(d, d->fl[queue_room], calc_floor_draw_range(d, queue[*nb], checked.dist, x),  get_room_by_id(d, queue[*nb].room_id)->floor_text);
-			//draw_floor_line(d, calc_floor_draw_range(d, queue[*nb], checked), x, queue[*nb].obj_ref->wall_ref->room_id_ref);
+			if (queue[*nb].dist < RENDER_DISTANCE_MAX)
+				print_floor_slice(d, d->fl[queue_room], calc_floor_draw_range(d, queue[*nb], checked.dist, x),  get_room_by_id(d, queue[*nb].room_id)->floor_text);
 			queue[*nb].dist = checked.dist;
 		}
 	}
@@ -77,24 +77,14 @@ void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
 		while (i < d->nb_obj && sorted[i].dist < 9999)
 			i++;
 		nb = -1;
-		// if (sorted[i].dist < 9999)
-		// 	d->p_screen[screen_x.start + 400 * WIN_SIZE_X] = 0xFFDDAADD;
         while (i-- > 0)
 		{
 			draw_floor_slice(d, queue, &nb, sorted[i], screen_x.start);
-			if (sorted[i].dist < 9998)
+			if (sorted[i].dist < RENDER_DISTANCE_MAX)
 				draw_text_slice(d->p_screen, calc_ray_draw_range(d, sorted[i], screen_x.start), *sorted[i].obj_ref, sorted[i]);
 		}
-		//printf("nb = %i\n", nb);
 		if (nb > -1)
 			print_floor_slice(d, d->fl[queue[nb].room_id], calc_floor_draw_range_end(d, queue[nb].dist, get_room_by_id(d, queue[nb].room_id), screen_x.start), get_room_by_id(d, queue[nb].room_id)->floor_text);
-			//draw_floor_line(d, calc_floor_draw_range_end(d, queue[nb]), screen_x.start, queue[nb].wall.room_id_ref);
-		// i = 0;
-		// while (i < d->map.wall_count && sorted[i].dist > 9998)
-		// 	i++;
-		//draw_floor_lines(d, screen_x.start, i, sorted);
-		//printf("segfault, i = %i\n", i);
-        //draw_vertical_line(d, x, check_intersect_with_all_wall_rend(d, map, start_angle, d->rot), d->texture[0]);
         start_angle += step;
         screen_x.start++;
     }

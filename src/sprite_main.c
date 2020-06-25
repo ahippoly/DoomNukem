@@ -9,9 +9,9 @@ SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
     surface = NULL;
     texture = NULL;
     if (!(surface = SDL_LoadBMP(str)))
-      printf("Erreur de chargement de l'image : %s",SDL_GetError());
+      printf("Erreur de chargement de l'image : %s\n",SDL_GetError());
     if (!(texture = SDL_CreateTextureFromSurface(d->rend, surface)))
-      printf("Erreur de conversion de la surface : %s",SDL_GetError());
+      printf("Erreur de conversion de la surface : %s\n",SDL_GetError());
     SDL_FreeSurface(surface);
     return (texture);
 }
@@ -139,6 +139,7 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map)
 void    init_sprite(t_data *d)
 {
     int i;
+	t_sprite *sprite;
 
     i = 10;
     load_sprite_gun(d);
@@ -149,10 +150,13 @@ void    init_sprite(t_data *d)
     d->mob_ind = 15;
     while (i < NB_MAX_MOBS + 10)
     {
-    d->sprite[i].index = 0;
-    d->sprite[i].on = 0;
-    i++;
+		sprite = &d->sprite[i];
+		sprite->pixels_dst = p_malloc(sprite->frame_size.w * sprite->frame_size.h);
+		sprite->index = 0;
+		sprite->on = 0;
+		i++;
     }
+	d->sprite[10].on = 1;
 }
 
 // int main(int ac, char **av)
@@ -169,11 +173,11 @@ void    init_sprite(t_data *d)
 //     {
 //         SDL_RenderClear(d.rend);
 //         //ft_bzero(d.p_screen, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
-//         calc_n_disp_framerate(&d);
+//         //calc_n_disp_framerate(&d);
 //         SDL_PumpEvents();
 //         handle_key_event_sprite(&d, &map);
 //         handle_mouse_event_gun(&d, &map);
-//         handle_poll_event(&d, &map);
+//         // handle_poll_event(&d, &map);
 //         mob_anim(&d);
 //         sprite_anim_gun(&d);
 //         SDL_RenderPresent(d.rend);

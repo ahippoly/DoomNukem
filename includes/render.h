@@ -15,6 +15,8 @@
 # define ROT_STEP 0.05 * M_PI_2
 # define MOUSE_SENS 0.004
 # define Y_VIEW_RANGE 1
+# define RENDER_DISTANCE_MAX 30
+# define RAY_DIST_MAX 9999
 # define HEIGHT_STEP 0.025
 # define SCREEN_HEIGHT_STEP 15
 # define WALL_SIZE 0.5

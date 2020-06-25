@@ -48,13 +48,14 @@
 # define INPUT_ROOM_CEIL 6
 # define INPUT_COLLIDE 7
 
-# define NB_TEXTURE 6
+# define NB_TEXTURE 7
 # define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
 # define TEXT_PATH_1 "img/hud/key.bmp"
 # define TEXT_PATH_2 "img/textures/Paver300.bmp"
 # define TEXT_PATH_3 "img/textures/Floor_Wdn.bmp"
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
 # define TEXT_PATH_5 "img/textures/tech_skin_1.bmp"
+# define TEXT_PATH_6 "img/hud/doctor.bmp"
 
 # define NB_TXT 15
 # define TXT_MAP_EDITOR 0

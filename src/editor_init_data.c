@@ -28,6 +28,7 @@ void init_texture(t_env *env)
     env->text_list[3] = bmp_to_texture(TEXT_PATH_3, env->rend);
     env->text_list[4] = bmp_to_texture(TEXT_PATH_4, env->rend);
     env->text_list[5] = bmp_to_texture(TEXT_PATH_5, env->rend);
+    env->text_list[6] = bmp_to_texture(TEXT_PATH_6, env->rend);
 }
 
 void init_buttons(t_env *env)

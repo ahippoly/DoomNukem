@@ -55,9 +55,10 @@ int main(int ac, char **av)
     ft_putstr("Main worked");
     printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
 
-	init_sprite(&d);
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
+		t_img test2 = read_img_surface("Sprites/Mobs/afrit.bmp");
+
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -80,6 +81,8 @@ int main(int ac, char **av)
         //raycast_all_screen(&d, &d.map);
 		move_mobs_in_range(&d, d.mobs, d.nb_mob);
 		raycast_thread_init(&d);
+		// t_img test = (t_img){d.sprite[AFRIT].pixels, (SDL_Rect){0,0,0,0}, d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h};
+		// print_text_screen(d.p_screen, &test, (SDL_Rect){100, 100, 500, 500});
 		// print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);

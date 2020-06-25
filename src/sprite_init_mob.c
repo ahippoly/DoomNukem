@@ -1,6 +1,12 @@
 #include "proto_global.h"
 
 
+
+void print_sprite(t_sprite *sprite)
+{
+	printf("size : %i,%i, on : %i, totalsize : %i,%i, frame_size : %i,%i\n", sprite->size.x, sprite->size.y, sprite->on, sprite->total_size.w, sprite->total_size.h, sprite->frame_size.w, sprite->frame_size.h);
+}
+
 static void      init_anim_pyro(t_sprite *Pyro)
 {
     Pyro->anim[IDLE].pos->x = 7;
@@ -128,12 +134,21 @@ static void    load_Afrit(t_data *d)
 void     fill_pixels(char *str, t_data *d, int mob)
 {
     SDL_Surface *surface;
+    SDL_Surface *converted;
+	SDL_PixelFormat *format;
 
     surface = NULL;
     if (!(surface = SDL_LoadBMP(str)))
-      printf("Erreur de chargement de l'image : %s",SDL_GetError());
-    d->sprite[mob].pixels = surface->pixels;
-    SDL_FreeSurface(surface);
+      printf("Erreur de chargement de l'image : %s\n",SDL_GetError());
+    format = SDL_AllocFormat(SDL_PIXELFORMAT_ARGB32);
+    converted = SDL_ConvertSurface(surface, format, 0);
+	
+    d->sprite[mob].pixels = converted->pixels;
+
+
+
+	
+    //SDL_FreeSurface(surface);
 }
 
 void    duplicate_mob(t_data *d, SDL_Texture *texture, SDL_Texture *texture2)

@@ -29,6 +29,7 @@
 # define NB_WALL_MAX 200
 # define INTER_TOLERANCE 0.000000001
 # define PI_X_2 6.28318530718
+# define RAY_LENGTH 99999
 
 # define NB_FRAME 15
 # define NB_ANIM 20

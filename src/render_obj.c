@@ -74,9 +74,14 @@ t_obj	convert_mob_to_obj(t_data	*d,	t_mob *mob)
 	obj.alpha = 1;
 	obj.room_id = TYPE_MOB;
 	// obj.text = (t_img){mob->text->pixels, (SDL_Rect){0, 0, 0, 0}, mob->text->w, mob->text->h};
-	obj.pixels = d->img[1].pixels;
-	obj.w = d->img[1].w;
-	obj.h = d->img[1].h;
+	// obj.pixels = d->img[1].pixels;
+	// obj.w = d->img[1].w;
+	// obj.h = d->img[1].h;
+	print_sprite(&d->sprite[AFRIT]);
+	obj.pixels = d->sprite[AFRIT].pixels;
+	obj.w = d->sprite[AFRIT].frame_size.w;
+	obj.h = d->sprite[AFRIT].frame_size.h;
+	printf("obj : %i,%i\n", obj.w, obj.h);
 	obj.can_collide = 0;
 	obj.z_ground = DEFAULT_Z_GROUND;
 	obj.z_force = 0;

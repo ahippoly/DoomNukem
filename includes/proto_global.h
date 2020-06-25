@@ -57,5 +57,6 @@ t_rot	get_angle(t_point pos1, t_point pos2);
 void del_from_array(void *list, int *size, void *to_remove, int obj_size);
 void	*ft_memmove2(void *dst, const void *src, size_t len);
 
+void print_sprite(t_sprite *sprite);
 
 #endif

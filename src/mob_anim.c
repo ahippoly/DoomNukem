@@ -19,29 +19,29 @@ SDL_Rect    print_mob(SDL_Rect dstdim, int x, int y, int z)
     return (dstdim);
 }
 
-void    copy_frame(t_sprite sprite, SDL_Rect size)
-{
-    SDL_Point pos;
-    SDL_Point pos2;
-    SDL_Point frame_max;
+// void    copy_frame(unsigned int *dst, int dst_size, unsigned int *src, SDL_Rect pos_size)
+// {
+//     SDL_Point pos;
+//     SDL_Point pos2;
+//     SDL_Point frame_max;
 
-    frame_max.x = sprite.displayed_part.x + size.w;
-    frame_max.y = sprite.displayed_part.y + size.h;
+//     frame_max.x = sprite.displayed_part.x + size.w;
+//     frame_max.y = sprite.displayed_part.y + size.h;
 
-    pos.y = sprite.displayed_part.y;
-    while (pos.y < frame_max.y)
-    {
-        pos.x = sprite.displayed_part.x;
-        pos2.x = 0;
-        while (pos.x < frame_max.x)
-        {
-            sprite.pixels_dst[pos2.x + pos2.y] = sprite.pixels[pos.x + pos.y];
-            pos.x++;
-        }
-        pos2.y += sprite.frame_size.w;
-        pos.y += sprite.total_size.w;
-    }
-}
+//     pos.y = sprite.displayed_part.y;
+//     while (pos.y < frame_max.y)
+//     {
+//         pos.x = sprite.displayed_part.x;
+//         pos2.x = 0;
+//         while (pos.x < frame_max.x)
+//         {
+//             sprite.pixels_dst[pos2.x + pos2.y] = sprite.pixels[pos.x + pos.y];
+//             pos.x++;
+//         }
+//         pos2.y += sprite.frame_size.w;
+//         pos.y += sprite.total_size.w;
+//     }
+// }
 
 void    mob_anim(t_data *d)
 {
@@ -75,7 +75,7 @@ void    mob_anim(t_data *d)
                 d->sprite[i].displayed_part.y = srcdim.y;
                 //copy_frame(d->sprite[i], srcdim);
                 //if (i == d->mob_ind)
-                SDL_RenderCopy(d->rend, d->sprite[i].text, &srcdim, &dstdim);
+                //SDL_RenderCopy(d->rend, d->sprite[i].text, &srcdim, &dstdim);
             }
             else if (d->sprite[i].index != DEATH)
                 d->sprite[i].time = SDL_GetTicks(); //permet de boucler l'animation a l'infini en redemarrant le compteur temps
