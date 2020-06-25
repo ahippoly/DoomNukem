@@ -22,11 +22,6 @@ void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
     SDL_RenderPresent(d->rend);
 }
 
-// void free_render_env(t_data *d)
-// {
-
-// }
-
 void calc_n_disp_framerate(t_data *d)
 {
     static int  last_time;

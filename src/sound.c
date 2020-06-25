@@ -43,7 +43,7 @@ void    init_sound(t_data *d)
 
 
 	FMOD_System_GetMasterChannelGroup(d->system, &channel);
-	FMOD_ChannelGroup_SetVolume(channel, 0.5);
+	FMOD_ChannelGroup_SetVolume(channel, 0.3);
 
 	FMOD_Sound_SetLoopCount(d->sound[MUS1], -1);
 	/* Free */
