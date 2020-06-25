@@ -116,4 +116,3 @@ typedef struct		s_hud
 }					t_hud;
 
 #endif
-
