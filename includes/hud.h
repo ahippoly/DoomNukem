@@ -115,8 +115,5 @@ typedef struct		s_hud
 	t_inv			inv;
 }					t_hud;
 
-
-
-
 #endif
 
