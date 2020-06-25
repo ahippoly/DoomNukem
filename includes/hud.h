@@ -29,17 +29,17 @@
 /* weapons */
 
 # define WEAPON_NB		5
-# define WEAPON_PATH_0	"img/hud/ssg.bmp"
-# define WEAPON_PATH_1	"img/hud/ar.bmp"
-# define WEAPON_PATH_2	"img/hud/dd.bmp"
-# define WEAPON_PATH_3	"img/hud/revolver.bmp"
-# define WEAPON_PATH_4	"img/hud/lmg.bmp"
+# define WEAPON_PATH_0	"img/hud/revolver.bmp"
+# define WEAPON_PATH_1	"img/hud/ssg.bmp"
+# define WEAPON_PATH_2	"img/hud/ar.bmp"
+# define WEAPON_PATH_3	"img/hud/lmg.bmp"
+# define WEAPON_PATH_4	"img/hud/death_dealer.bmp"
 
-# define WEAPON_NAME_0	"LMG"
-# define WEAPON_NAME_1	"AR"
-# define WEAPON_NAME_2	"DD"
-# define WEAPON_NAME_3	"REVOLVER"
-# define WEAPON_NAME_4	"SSG"
+# define WEAPON_NAME_0	"REVOLVER"
+# define WEAPON_NAME_1	"SSG"
+# define WEAPON_NAME_2	"AR"
+# define WEAPON_NAME_3	"LMG"
+# define WEAPON_NAME_4	"DEATH_DEALER"
 
 /* perso */
 

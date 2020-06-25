@@ -2,7 +2,7 @@
 
 int				init_weapon_0(t_data *d, t_hud *hud)
 {
-	hud->perso_weapon[0]->id = 0;
+	hud->perso_weapon[0]->id = 1;
 	hud->perso_weapon[0]->name = WEAPON_NAME_0;
 	hud->perso_weapon[0]->ammo_left = 0;
 	hud->perso_weapon[0]->capacity = 50;
@@ -24,7 +24,7 @@ int				init_weapon_0(t_data *d, t_hud *hud)
 
 int				init_weapon_1(t_data *d, t_hud *hud)
 {
-	hud->perso_weapon[1]->id = 0;
+	hud->perso_weapon[1]->id = 2;
 	hud->perso_weapon[1]->name = WEAPON_NAME_1;
 	hud->perso_weapon[1]->ammo_left = 0;
 	hud->perso_weapon[1]->capacity = 70;
@@ -46,7 +46,7 @@ int				init_weapon_1(t_data *d, t_hud *hud)
 
 int				init_weapon_2(t_data *d, t_hud *hud)
 {
-	hud->perso_weapon[2]->id = 0;
+	hud->perso_weapon[2]->id = 3;
 	hud->perso_weapon[2]->name = WEAPON_NAME_2;
 	hud->perso_weapon[2]->ammo_left = 0;
 	hud->perso_weapon[2]->capacity = 0;
@@ -68,7 +68,7 @@ int				init_weapon_2(t_data *d, t_hud *hud)
 
 int				init_weapon_3(t_data *d, t_hud *hud)
 {
-	hud->perso_weapon[3]->id = 0;
+	hud->perso_weapon[3]->id = 4;
 	hud->perso_weapon[3]->name = WEAPON_NAME_3;
 	hud->perso_weapon[3]->ammo_left = 0;
 	hud->perso_weapon[3]->capacity = 0;
@@ -90,7 +90,7 @@ int				init_weapon_3(t_data *d, t_hud *hud)
 
 int				init_weapon_4(t_data *d, t_hud *hud)
 {
-	hud->perso_weapon[4]->id = 0;
+	hud->perso_weapon[4]->id = 5;
 	hud->perso_weapon[4]->name = WEAPON_NAME_4;
 	hud->perso_weapon[4]->ammo_left = 0;
 	hud->perso_weapon[4]->capacity = 0;
