@@ -151,7 +151,7 @@ void    init_sprite(t_data *d)
     while (i < NB_MAX_MOBS + 10)
     {
 		sprite = &d->sprite[i];
-		sprite->pixels_dst = p_malloc(sprite->frame_size.w * sprite->frame_size.h);
+		sprite->pixels_dst = p_malloc(sprite->frame_size.w * sprite->frame_size.h * sizeof(int));
 		sprite->index = 0;
 		sprite->on = 0;
 		i++;

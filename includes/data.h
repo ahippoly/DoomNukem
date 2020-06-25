@@ -9,6 +9,7 @@
 # include "props.h"
 # include "sound.h"
 # include "sprite.h"
+# include "ssprite.h"
 
 typedef struct      s_data
 {
@@ -21,6 +22,7 @@ typedef struct      s_data
     SDL_Rect        mini_map_player_pos;
     t_img			texture[NB_TEXTURE];
 	t_img			img[NB_IMG];
+	t_img			sprite_img[NB_SPRITE];
     t_map_data      map;
     const Uint8     *clavier;
     unsigned int    *p_screen;

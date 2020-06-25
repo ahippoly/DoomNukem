@@ -58,5 +58,6 @@ void del_from_array(void *list, int *size, void *to_remove, int obj_size);
 void	*ft_memmove2(void *dst, const void *src, size_t len);
 
 void print_sprite(t_sprite *sprite);
+void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size);
 
 #endif

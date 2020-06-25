@@ -5,8 +5,8 @@ SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int in
 {
     srcdim.x = d->sprite[ind].frame_size.w * pos.x;
     srcdim.y = d->sprite[ind].frame_size.h * pos.y;
-    srcdim.w = d->sprite[ind].frame_size.w - d->sprite[ind].anim[d->sprite[ind].index].offset.x;
-    srcdim.h = d->sprite[ind].frame_size.h - d->sprite[ind].anim[d->sprite[ind].index].offset.y;
+    srcdim.w = d->sprite[ind].total_size.w;
+    srcdim.h = d->sprite[ind].total_size.h;
     return (srcdim);
 }
 
@@ -19,29 +19,10 @@ SDL_Rect    print_mob(SDL_Rect dstdim, int x, int y, int z)
     return (dstdim);
 }
 
-// void    copy_frame(unsigned int *dst, int dst_size, unsigned int *src, SDL_Rect pos_size)
-// {
-//     SDL_Point pos;
-//     SDL_Point pos2;
-//     SDL_Point frame_max;
-
-//     frame_max.x = sprite.displayed_part.x + size.w;
-//     frame_max.y = sprite.displayed_part.y + size.h;
-
-//     pos.y = sprite.displayed_part.y;
-//     while (pos.y < frame_max.y)
-//     {
-//         pos.x = sprite.displayed_part.x;
-//         pos2.x = 0;
-//         while (pos.x < frame_max.x)
-//         {
-//             sprite.pixels_dst[pos2.x + pos2.y] = sprite.pixels[pos.x + pos.y];
-//             pos.x++;
-//         }
-//         pos2.y += sprite.frame_size.w;
-//         pos.y += sprite.total_size.w;
-//     }
-// }
+void copy_frame_sprite(t_sprite *sprite, SDL_Rect pos_size)
+{
+	copy_frame(sprite->pixels_dst, (SDL_Rect){0, 0, sprite->frame_size.w, sprite->frame_size.h}, sprite->pixels, pos_size);
+}
 
 void    mob_anim(t_data *d)
 {
@@ -73,7 +54,8 @@ void    mob_anim(t_data *d)
                 dstdim = print_mob(dstdim, 300, 300, 400);    //le SDL_Rect qui represente la position a l'affichage de l'animation avec comme parametre x,y,z
                 d->sprite[i].displayed_part.x = srcdim.x;
                 d->sprite[i].displayed_part.y = srcdim.y;
-                //copy_frame(d->sprite[i], srcdim);
+				copy_frame_sprite(&d->sprite[i], srcdim);
+                //copy_frame(d->sprite[i].pixels_dst, srcdim);
                 //if (i == d->mob_ind)
                 //SDL_RenderCopy(d->rend, d->sprite[i].text, &srcdim, &dstdim);
             }

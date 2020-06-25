@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/25 14:53:38 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/25 23:59:49 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,4 +302,28 @@ void print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw)
 		draw.y += WIN_SIZE_Y;
 	}
 
+}
+
+void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size)
+{
+    SDL_Point pos;
+    SDL_Point pos2;
+    SDL_Point frame_max;
+
+    pos.y = pos_size.y * pos_size.w;
+	pos2.y = 0;
+	frame_max.y = dst_size.h * dst_size.w;
+    while (pos2.y < frame_max.y)
+    {
+        pos.x = pos_size.x;
+        pos2.x = 0;
+        while (pos2.x < dst_size.w)
+        {
+        	dst[pos2.x + pos2.y] = src[pos.x + pos.y];
+			pos2.x++;
+            pos.x++;
+        }
+        pos2.y += dst_size.w;
+        pos.y += pos_size.w;
+    }
 }

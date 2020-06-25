@@ -33,24 +33,8 @@
 
 # define NB_FRAME 15
 # define NB_ANIM 20
-# define NB_SPRITE 3
 # define SPRITE_WEAPON_GUN 0
 # define SPRITE_WEAPON_FIST 1
-
-# define ANIM_MOB_MOVE_FRONT 0;
-# define ANIM_MOB_MOVE_BACK 1;
-# define ANIM_MOB_MOVE_LEFT 2;
-# define ANIM_MOB_MOVE_RIGHT 3;
-# define ANIM_MOB_MELEE 4;
-# define ANIM_MOB_SHOOT 5;
-# define ANIM_MOB_DEATH 6;
-
-# define ANIM_STATE_OPEN 0;
-# define ANIM_STATE_CLOSE 1;
-# define ANIM_STATE_TRIGGERED 2;
-
-# define ANIM_WEAPON_RELOAD 0;
-# define ANIM_WEAPON_SHOOT 1;
 
 typedef struct  s_coord
 {
@@ -164,7 +148,6 @@ typedef struct      s_sprite
                     int             idle_animation;
                     SDL_Texture     *text;
 }                   t_sprite;
-
 
 typedef struct					s_mob
 {

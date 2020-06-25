@@ -35,9 +35,11 @@ void calc_n_disp_framerate(t_data *d)
     int time;
 
     time = SDL_GetTicks();
+	//SDL_Delay(50);
     if (time > last_time + 1000)
     {
         last_framerate = framerate;
+		printf("diff time = %i\n", time - last_time);
 		// printf("framerate = %i\n", last_framerate);
 		// printf("diff_time = %f\n", d->diff_time);
         framerate = 0;
@@ -58,7 +60,16 @@ int main(int ac, char **av)
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
 		t_img test2 = read_img_surface("Sprites/Mobs/afrit.bmp");
+	t_img test;
+	// test.pixels = alloc_image(500, 500);
+	// test.w = 500;
+	// test.h = 500;
+	// copy_frame(test.pixels, (SDL_Rect){0,0, test.w, test.h}, d.texture[0].pixels, (SDL_Rect){0, 0, d.texture[0].w, d.texture[0].h});
 
+	// test.pixels = alloc_image(d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h);
+	// test.w = d.sprite[AFRIT].frame_size.w;
+	// test.h = d.sprite[AFRIT].frame_size.h;
+	// copy_frame(test.pixels, (SDL_Rect){0,0, test.w, test.h}, d.sprite[AFRIT].pixels, (SDL_Rect){0, 0, d.sprite[AFRIT].total_size.w, d.sprite[AFRIT].total_size.h});
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -75,14 +86,16 @@ int main(int ac, char **av)
 		load_repulsed_obj(&d, d.repulsed, d.nb_repulsed);
 		check_props_collect(&d, d.props, &d.hud);
 
+
 		//draw_all_floor_slice(&d);
 
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		move_mobs_in_range(&d, d.mobs, d.nb_mob);
 		raycast_thread_init(&d);
-		// t_img test = (t_img){d.sprite[AFRIT].pixels, (SDL_Rect){0,0,0,0}, d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h};
-		// print_text_screen(d.p_screen, &test, (SDL_Rect){100, 100, 500, 500});
+		//mob_anim(&d);
+		// test = (t_img){d.sprite[10].pixels_dst, (SDL_Rect){0,0,0,0}, d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h};
+		// print_text_screen(d.p_screen, &test, (SDL_Rect){100, 100, 200, 200});
 		// print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);

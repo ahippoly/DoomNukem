@@ -29,6 +29,7 @@ SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int mo
 SDL_Rect    print_mob(SDL_Rect dstdim, int x, int y, int z);
 void        mob_idle_anim(t_data *d);
 void        mob_anim(t_data *d);
+void 		copy_frame_sprite(t_sprite *sprite, SDL_Rect pos_size);
 
 
 #endif
