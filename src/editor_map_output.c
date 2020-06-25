@@ -92,7 +92,7 @@ void write_wall_ref(int fd, t_env *env)
     ft_putstr_fd("WALL_REF MAP\n", fd);
     write_head_param(fd, "MAP_SIZE", join_int_value(env->map_size.w, ",", env->map_size.h));
     write_head_param(fd, "PLAYER_SPAWN", join_int_value((int)env->player_spawn.x, ",", (int)env->player_spawn.y));
-    print_wall_ref(env->map_wall_ref, env->map_size, fd);
+    //print_wall_ref(env->map_wall_ref, env->map_size, fd);
     ft_putchar_fd('\n',fd);
 }
 
@@ -138,7 +138,7 @@ void map_output(t_env *env)
 	printf("env map name = %s\n", env->map_name);
     printf("map output name = %s, fd = %i\n",str, fd);
     rearange_wall_lst(env);
-    recreate_full_map_ref(env);
+    //recreate_full_map_ref(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list, env->room_count);
 	write_icon_list(fd, env->icon_list, env->icon_count);

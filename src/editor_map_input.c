@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 22:30:07 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/25 11:49:46 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:50:58 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void map2env(t_env *e, t_map_data *map)
 {
 	int i;
 
-	if (!map->is_valid)
+	if (map->is_valid != 1)
 	{
 		ft_putstr("error while reading map, initializing new map\n");
 		return ;

@@ -282,6 +282,11 @@ t_map_data  read_map(char *path_file)
 
     map.is_valid = 0;
     line = NULL;
+	map.wall_list = NULL;
+	map.icon_list = NULL;
+	map.room_list = NULL;
+	map.player_spawn.x = 1;
+	map.player_spawn.y = 1;
     printf("started map read\n");
     if ((fd = open(path_file, O_RDONLY)) == -1)
         return (map);
