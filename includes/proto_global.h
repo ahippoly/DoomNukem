@@ -3,6 +3,7 @@
 
 #include "data.h"
 #include "proto_hud.h"
+#include "proto_menu.h"
 #include "proto_rend.h"
 #include "proto_sound.h"
 #include "proto_sprite.h"

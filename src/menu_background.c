@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "proto_global.h"
 
 int				init_background(t_data *d)
 {

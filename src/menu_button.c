@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "proto_global.h"
 
 int				render_bg_btn(t_data *d, SDL_Rect pos)
 {
@@ -53,9 +53,9 @@ int				render_btn(t_data *d)
 	text_x = WIN_SIZE_X / 2 + 10;
 	text_y = WIN_SIZE_Y / 3 + 13;
 	render_bg_btn(d, set_sdl_rect(WIN_SIZE_X / 2, btn_y, 200, 50));
-	render_text_btn(d, set_sdl_rect(text_x, text_y, 0, 0), d->menu.text0_t, "START");
+	render_text_btn(d, set_sdl_rect(text_x, text_y, 0, 0), d->menu.text0_t, "PLAY");
 	render_bg_btn(d, set_sdl_rect(WIN_SIZE_X / 2, btn_y + 100, 200, 50));
-	render_text_btn(d, set_sdl_rect(text_x, text_y + 100, 0, 0), d->menu.text1_t, "PLAY");
+	render_text_btn(d, set_sdl_rect(text_x, text_y + 100, 0, 0), d->menu.text1_t, "EDIT MAP");
 	render_bg_btn(d, set_sdl_rect(WIN_SIZE_X / 2, btn_y + 200, 200, 50));
 	render_text_btn(d, set_sdl_rect(text_x, text_y + 200, 0, 0), d->menu.text2_t, "EXIT");
 	return (0);

@@ -32,6 +32,16 @@ void init_mini_map(t_data *d, t_map_data *map)
     d->mini_map_player_pos = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
 }
 
+int		init_menu(t_data *d)
+{
+	d->p_menu = NULL;
+    d->menu_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
+	d->p_menu = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
+    ft_bzero(d->p_menu, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+	ft_bzero(&d->menu, sizeof(d->menu));
+	return (0);
+}
+
 int		init_hud(t_data *d)
 {
     d->hud_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
@@ -46,9 +56,14 @@ void init_data(t_data *d, int ac, char **av)
 {
     init_sdl_ressources_rend(d);
 	init_hud(d);
+	init_menu(d);
 	init_ttf(d);
 	if (ac > 1)
+	{
+		d->argv = ft_strdup(av[1]);
+		// ft_putendl(av[1]);
 		d->map = read_map(av[1]);
+	}
 	else
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)
