@@ -26,6 +26,7 @@ int main(int argc, char **argv)
     t_env       env;
     
     init_env(&env);
+	load_map(&env, argc, argv);
     while(!env.quit)
     {
         reset_textures(&env);
@@ -43,5 +44,6 @@ int main(int argc, char **argv)
         display_selected_point(&env);
         print_env2screen(&env);
     }
+	free(env.map_name);
     clear_map_ref(&env);
 }

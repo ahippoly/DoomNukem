@@ -52,6 +52,7 @@ t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
     wall.p2 = p2;
     wall.texture_id = env->selected_texture;
     wall.transparency = env->input_lst[INPUT_TRANSPARENCY].value;
+    wall.can_collide = env->input_lst[INPUT_COLLIDE].value;
     wall.p1_height.start = env->input_lst[INPUT_BEGIN_P1].value;
     wall.p2_height.start = env->input_lst[INPUT_BEGIN_P2].value;
     wall.p1_height.end = env->input_lst[INPUT_END_P1].value;

@@ -25,10 +25,11 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	// printf("wall z_step : pos = %f, size = %f\n", obj.z_step.pos, obj.z_step.size);
 	obj.z_text_offset = 0;
 	obj.can_collide = wall->can_collide;
+	printf("wall collide = %i\n", wall->can_collide);
 	obj.room_id = wall->room_id_ref;
 	obj.rotation = calc_sin_cos_rot(wall->rotation);
 	obj.z_ground = -1;
-	printf("wall rot = %.10f, rot = %.10f\n", wall->rotation, obj.rotation.rot);
+	// printf("wall rot = %.10f, rot = %.10f\n", wall->rotation, obj.rotation.rot);
 	obj.origin = wall;
 	return (obj);
 }

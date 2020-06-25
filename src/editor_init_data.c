@@ -81,4 +81,6 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_ROOM_HEIGHT] = create_text_img("Room", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y));
     env->txt_lst[TXT_ROOM_BOT] = create_text_img("Bot", 1, 0xFFDDDDDD, create_point(0.207 * WIN_SIZE_X, 0.855 * WIN_SIZE_Y));
     env->txt_lst[TXT_ROOM_TOP] = create_text_img("Top", 1, 0xFFDDDDDD, create_point(0.315 * WIN_SIZE_X, 0.855 * WIN_SIZE_Y));
+    env->txt_lst[TXT_COLLIDE] = create_text_img("Can_collide", 1, 0xFFDDDDDD, create_point(0.500 * WIN_SIZE_X, 0.870 * WIN_SIZE_Y));
+
 }

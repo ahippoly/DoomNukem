@@ -10,6 +10,7 @@ void init_input(t_env *env)
     env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.780 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
     env->input_lst[INPUT_ROOM_GROUND] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.890 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
     env->input_lst[INPUT_ROOM_CEIL] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.890 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
+    env->input_lst[INPUT_COLLIDE] = create_t_input(set_sdl_rect(0.530 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 1, 1);
 }
 
 void init_img(t_env *env)
@@ -34,6 +35,7 @@ void init_env2(t_env *env)
     env->selected_wall_id = -1;
     env->selected_input = -1;
     env->room_list = NULL;
+	env->map_name = NULL;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;

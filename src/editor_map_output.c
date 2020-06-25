@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 char *join_int_value(int val1, char *separator, int val2)
 {
@@ -58,6 +57,7 @@ void write_walls(int fd, t_wall *list, int wall_count)
         write_param(fd, "texture_id", ft_itoa(wall.texture_id));
         write_param(fd, "room_id_ref", ft_itoa(wall.room_id_ref));
         write_param(fd, "transparency", ft_itoa(wall.transparency));
+        write_param(fd, "can_collide", ft_itoa(wall.can_collide));
         write(fd, "\n", 1);
         i++;
     }
@@ -129,9 +129,13 @@ void map_output(t_env *env)
     //     free(str);
     //     i++;
     // }
-    fd = open(str = ft_strjoinfree("maps/editor_map_", ft_itoa(i), 1), O_WRONLY | O_TRUNC | O_CREAT, 0600);
+	if (env->map_name)
+   		fd = open(env->map_name, O_WRONLY | O_TRUNC | O_CREAT, 0600);
+	else
+   		fd = open(str = ft_strjoinfree("maps/editor_map_", ft_itoa(i), 1), O_WRONLY | O_TRUNC | O_CREAT, 0600);
     if (fd < 0)
         return;
+	printf("env map name = %s\n", env->map_name);
     printf("map output name = %s, fd = %i\n",str, fd);
     rearange_wall_lst(env);
     recreate_full_map_ref(env);
@@ -139,10 +143,10 @@ void map_output(t_env *env)
     write_rooms(fd, env->room_list, env->room_count);
 	write_icon_list(fd, env->icon_list, env->icon_count);
     write_wall_ref(fd, env);
-    printf("map output name = %s, fd = %i\n",str, 1);
-    write_walls(1, env->wall_list, env->wall_count);
-    write_rooms(1, env->room_list, env->room_count);
-    write_wall_ref(1, env);
+    // printf("map output name = %s, fd = %i\n",str, 1);
+    // write_walls(1, env->wall_list, env->wall_count);
+    // write_rooms(1, env->room_list, env->room_count);
+    // write_wall_ref(1, env);
     free(str);
     close(fd);
 }

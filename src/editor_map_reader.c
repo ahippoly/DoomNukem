@@ -94,6 +94,8 @@ void read_wall(char *line, t_wall *wall)
     error += read_param(line, "texture_id", &wall->texture_id);
     error += read_param(line, "room_id_ref", &wall->room_id_ref);
     error += read_param(line, "transparency", &wall->transparency);
+    error += read_param(line, "can_collide", &wall->can_collide);
+	printf("wall collide readed = %i\n", wall->can_collide);
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);
     wall->alpha = (float)(100 - wall->transparency) / 100;
@@ -104,11 +106,10 @@ void read_wall(char *line, t_wall *wall)
 	wall->p1_f = (t_point){wall->p1.x, wall->p1.y};
 	wall->p2_f = (t_point){wall->p2.x, wall->p2.y};
 	wall->z_text_offset = 0;
-	wall->can_collide = 1;
     // printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     // printf("wall length = %f\n", wall->length);
     // printf("wall rot = %f\n", wall->rotation);
-	printf("p1_z : %f,%f,  p2_z : %f,%f\n", wall->p1_z_start, wall->p1_z_size, wall->p2_z_start, wall->p2_z_size);
+	// printf("p1_z : %f,%f,  p2_z : %f,%f\n", wall->p1_z_start, wall->p1_z_size, wall->p2_z_start, wall->p2_z_size);
     //printf("WALL ID READED\n");
     if (error > 0)
         exit_with_msg("error while assigning value to wall on map reader\n");
@@ -162,26 +163,26 @@ void read_wall_ref_list(int fd, t_map_data *map)
         read_param(line, "PLAYER_SPAWN", &map->player_spawn.x);
     else
         exit_with_msg("error while reading map");
-    map->map_wall_ref = init_wall_ref(map->map_size);
-    //printf("WALL REF DEBUG \n");
-    i = 0;
-    while (i < map->map_size.h)
-    {
-        j = 0;
-        if (get_next_line(fd, &line) != 1)
-            exit_with_msg("error while reading wall ref map");
-        while (j < map->map_size.w)
-        {
-            line = skip_space(line);
-            map->map_wall_ref[i][j] = read_wall_ref(line);
-            //printf("i %i, j %i ", i, j);
-            line = skip_until_char(line, ' ', '\0');
-            //printf("line = %s\n", line);
-            j++;
-        }
-        //printf("\n");
-        i++;
-    }
+    // map->map_wall_ref = init_wall_ref(map->map_size);
+    // //printf("WALL REF DEBUG \n");
+    // i = 0;
+    // while (i < map->map_size.h)
+    // {
+    //     j = 0;
+    //     if (get_next_line(fd, &line) != 1)
+    //         exit_with_msg("error while reading wall ref map");
+    //     while (j < map->map_size.w)
+    //     {
+    //         line = skip_space(line);
+    //         map->map_wall_ref[i][j] = read_wall_ref(line);
+    //         //printf("i %i, j %i ", i, j);
+    //         line = skip_until_char(line, ' ', '\0');
+    //         //printf("line = %s\n", line);
+    //         j++;
+    //     }
+    //     //printf("\n");
+    //     i++;
+    // }
 }
 
 void read_icon(char *line, t_icon *icon)
@@ -284,7 +285,9 @@ t_map_data  read_map(char *path_file)
     printf("started map read\n");
     if ((fd = open(path_file, O_RDONLY)) == -1)
         return (map);
-    printf("ca merde, fd = %i\n", fd);
+	if (read(fd, line, 0) == -1)
+		return (map);
+    // printf("ca merde, fd = %i\n", fd);
     // get_next_line(fd, &line);
     // printf("line 1 = %s\n", line);
 	map.icon_count = 0;

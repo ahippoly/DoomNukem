@@ -122,6 +122,8 @@ void get_wall_param(t_env *env)
     env->input_lst[INPUT_BEGIN_P2].value = env->wall_list[env->selected_wall_id].p2_height.start;
     env->input_lst[INPUT_END_P1].value = env->wall_list[env->selected_wall_id].p1_height.end;
     env->input_lst[INPUT_END_P2].value = env->wall_list[env->selected_wall_id].p2_height.end;
+    env->input_lst[INPUT_COLLIDE].value = env->wall_list[env->selected_wall_id].can_collide;
+
 	if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) > -1)
 	{
 			env->input_lst[INPUT_ROOM_GROUND].value = env->room_height[tmp].start;

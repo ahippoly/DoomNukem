@@ -38,7 +38,7 @@
 # define MOUSE_MODE_CREATE_ROOM 1
 # define MOUSE_MODE_PLACING 2
 
-# define NB_INPUT 7
+# define NB_INPUT 8
 # define INPUT_TRANSPARENCY 0
 # define INPUT_BEGIN_P1 1
 # define INPUT_BEGIN_P2 2
@@ -46,6 +46,7 @@
 # define INPUT_END_P2 4
 # define INPUT_ROOM_GROUND 5
 # define INPUT_ROOM_CEIL 6
+# define INPUT_COLLIDE 7
 
 # define NB_TEXTURE 6
 # define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
@@ -55,7 +56,7 @@
 # define TEXT_PATH_4 "img/textures/WoodFine.bmp"
 # define TEXT_PATH_5 "img/textures/tech_skin_1.bmp"
 
-# define NB_TXT 14
+# define NB_TXT 15
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
@@ -70,6 +71,7 @@
 # define TXT_ROOM_HEIGHT 11
 # define TXT_ROOM_BOT 12
 # define TXT_ROOM_TOP 13
+# define TXT_COLLIDE 14
 
 # define TEXT_POS_X 0.800 * WIN_SIZE_X
 # define TEXT_POS_Y 0.150 * WIN_SIZE_Y
@@ -93,6 +95,7 @@
 
 # define ICON_ARRAY_SIZE 20
 # define ICON_PLAYER_SIZE 30
+# define ICON_DEFAULT_SIZE 30
 # define ICON_MOB_RANGE_BEGIN 1
 # define ICON_MOB_RANGE_END 4
 # define ICON_MOB_POS_X 0.800 * WIN_SIZE_X
@@ -176,6 +179,7 @@ typedef struct      s_env
     t_input			input_lst[NB_INPUT];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
+	char			*map_name;
 }                   t_env;
 
 
@@ -296,5 +300,10 @@ void select_previous_mob(t_env *env);
 void select_next_mob(t_env *env);
 void select_previous_texture(t_env *env);
 void	set_room_text(t_env *env);
+
+//editor_map_input.c
+void map2env(t_env *e, t_map_data *map);
+void load_map(t_env *e, int ac, char **av);
+
 
 #endif
