@@ -59,11 +59,6 @@ int main(int ac, char **av)
 
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
-	// t_img test;
-	// test.pixels = alloc_image(500, 500);
-	// test.w = 500;
-	// test.h = 500;
-	// copy_frame(test.pixels, (SDL_Rect){0,0, test.w, test.h}, d.texture[0].pixels, (SDL_Rect){0, 0, d.texture[0].w, d.texture[0].h});
 
 	// test.pixels = alloc_image(d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h);
 	// test.w = d.sprite[AFRIT].frame_size.w;

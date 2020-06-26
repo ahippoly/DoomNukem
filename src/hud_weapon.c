@@ -34,10 +34,14 @@ int			init_weapons(t_data *d, t_hud *hud)
 /* Afficher les armes à l'écran */
 int				put_weapon_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 {
-	if (SDL_RenderCopy(d->rend, hud->perso_weapon[hud->current_weap_id]->texture, NULL, &pos))
+	if (d->gun_ind > 0)
 	{
-		printf("Erreur render copy : %s", SDL_GetError());
-		return (exit_hud(hud));
+		hud->current_weap_id = d->gun_ind - 1;
+		if (SDL_RenderCopy(d->rend, hud->perso_weapon[hud->current_weap_id]->texture, NULL, &pos))
+		{
+			printf("Erreur render copy : %s", SDL_GetError());
+			return (exit_hud(hud));
+		}
 	}
 	return (0);
 }

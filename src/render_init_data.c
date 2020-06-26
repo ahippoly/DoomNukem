@@ -45,6 +45,7 @@ int		init_hud(t_data *d)
 void init_data(t_data *d, int ac, char **av)
 {
     init_sdl_ressources_rend(d);
+	init_sprite(d);
 	init_hud(d);
 	init_ttf(d);
 	if (ac > 1)
@@ -74,7 +75,6 @@ void init_data(t_data *d, int ac, char **av)
 	d->nb_repulsed = 0;
 	d->bullet = 0;
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
-	init_sprite(d);
     load_bmp_files(d);
 	init_sprites_img(d);
 	init_rend_img(d);
