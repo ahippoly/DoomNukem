@@ -92,7 +92,6 @@ void write_wall_ref(int fd, t_env *env)
     ft_putstr_fd("WALL_REF MAP\n", fd);
     write_head_param(fd, "MAP_SIZE", join_int_value(env->map_size.w, ",", env->map_size.h));
     write_head_param(fd, "PLAYER_SPAWN", join_int_value((int)env->player_spawn.x, ",", (int)env->player_spawn.y));
-    //print_wall_ref(env->map_wall_ref, env->map_size, fd);
     ft_putchar_fd('\n',fd);
 }
 
@@ -118,35 +117,22 @@ void	write_icon_list(int fd, t_icon *icon_list, int nb_icon)
 void map_output(t_env *env)
 {
     int fd;
-    int i;
     char *str;
 
-    i = 0;
     printf("map output fct\n");
-    // while ((fd = open(str = ft_strjoinfree("maps/editor_map_", ft_itoa(i), 1), O_WRONLY | O_CREAT | O_EXCL | O_TRUNC)) < 0)
-    // {
-    //     printf("i = %i fd = %i\n", i, fd);
-    //     free(str);
-    //     i++;
-    // }
 	if (env->map_name)
    		fd = open(env->map_name, O_WRONLY | O_TRUNC | O_CREAT, 0600);
 	else
-   		fd = open(str = ft_strjoinfree("maps/editor_map_", ft_itoa(i), 1), O_WRONLY | O_TRUNC | O_CREAT, 0600);
+   		fd = open(str = ft_strjoinfree("maps/editor_map_", 0, 1), O_WRONLY | O_TRUNC | O_CREAT, 0600);
     if (fd < 0)
         return;
 	printf("env map name = %s\n", env->map_name);
     printf("map output name = %s, fd = %i\n",str, fd);
     rearange_wall_lst(env);
-    //recreate_full_map_ref(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list, env->room_count);
 	write_icon_list(fd, env->icon_list, env->icon_count);
     write_wall_ref(fd, env);
-    // printf("map output name = %s, fd = %i\n",str, 1);
-    // write_walls(1, env->wall_list, env->wall_count);
-    // write_rooms(1, env->room_list, env->room_count);
-    // write_wall_ref(1, env);
     free(str);
     close(fd);
 }

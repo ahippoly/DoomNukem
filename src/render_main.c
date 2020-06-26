@@ -57,7 +57,6 @@ int main(int ac, char **av)
 
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
-		t_img test2 = read_img_surface("Sprites/Mobs/afrit.bmp");
 
     while (!d.quit)
     {
