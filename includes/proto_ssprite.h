@@ -12,6 +12,7 @@ static void      init_anim_afrit2(t_ssprite *afrit);
 t_ssprite    sprite_init_afrit2(t_img src_img);
 void load_anim(t_ssprite *sprite, int time, int anim_id);
 void process_anim(t_ssprite *sprite, int time);
+void process_mobs_anim(t_data *d);
 
 
 

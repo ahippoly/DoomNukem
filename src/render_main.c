@@ -90,17 +90,14 @@ int main(int ac, char **av)
 		//handle_mouse_event_gun(&d, &d.map);
         gravity(&d);
 		create_obj_raybox(&d);
-		load_repulsed_obj(&d, d.repulsed, d.nb_repulsed);
+		process_mobs_gameplay(&d);
 		check_props_collect(&d, d.props, &d.hud);
-
 
 		//draw_all_floor_slice(&d);
 
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
-		move_mobs_in_range(&d, d.mobs, d.nb_mob);
 		raycast_thread_init(&d);
-		//mob_anim(&d);
 		// test = (t_img){d.sprite[10].pixels_dst, (SDL_Rect){0,0,0,0}, d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h};
 		// process_anim(&new_afr, d.time);
 		// print_text_screen(d.p_screen, &test, (SDL_Rect){100, 100, 200, 200});

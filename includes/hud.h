@@ -41,6 +41,20 @@
 # define WEAPON_NAME_3	"REVOLVER"
 # define WEAPON_NAME_4	"SSG"
 
+# define WEAPON_DEFAULT 0
+
+# define WEAPON_FIST_ID 1
+# define WEAPON_FIST_RANGE 1
+# define WEAPON_FIST_DAMAGE 10
+# define WEAPON_FIST_Z_FORCE 0.05
+# define WEAPON_FIST_DELAY 100
+
+# define WEAPON_SSG_ID 0
+# define WEAPON_SSG_RANGE 5
+# define WEAPON_SSG_DAMAGE 3
+# define WEAPON_SSG_Z_FORCE 0.02
+# define WEAPON_SSG_DELAY 100
+
 /* perso */
 
 # define PERSO_NAME_0 "Loni"
@@ -67,7 +81,10 @@ typedef struct		s_weapon
 {
 	int				id;
 	int				dammage; // pts de dégat
-	int				range; // portée d'une arme
+	int				attack_delay;
+	int				time;
+	float			z_force;
+	float			range; // portée d'une arme
 	int				ammo_left; // munitions restantes
 	char			*name;
 	int				capacity; // capacité max de chargement

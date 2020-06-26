@@ -2,14 +2,15 @@
 # define DATA_H
 
 # include "global_header.h"
+# include "ssprite.h"
 # include "render.h"
+# include "editor.h"
 # include "hud.h"
 # include "mobs.h"
+# include "gameplay.h"
 # include "props.h"
 # include "sound.h"
 # include "sprite.h"
-# include "ssprite.h"
-# include "editor.h"
 
 typedef struct      s_data
 {
@@ -63,6 +64,7 @@ typedef struct      s_data
 	int				nb_obj;
 	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
 	int				nb_repulsed;
+	t_weapon		*actual_weapon;
 	int				bullet;
 	t_sprite        sprite[30];
     int             gun_ind;

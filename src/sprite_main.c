@@ -143,20 +143,20 @@ void    init_sprite(t_data *d)
 
     i = 10;
     load_sprite_gun(d);
-    load_sprite_mob(d);
+    //load_sprite_mob(d);
     
     d->gun_ind = 0;   //Le sprite a afficher
     d->sprite[d->gun_ind].index = 0;   //L'animation du sprite a afficher
     d->mob_ind = 15;
-    while (i < NB_MAX_MOBS + 10)
-    {
-		sprite = &d->sprite[i];
-		sprite->pixels_dst = p_malloc(sprite->frame_size.w * sprite->frame_size.h * sizeof(int));
-		sprite->index = 0;
-		sprite->on = 0;
-		i++;
-    }
-	d->sprite[10].on = 1;
+    // while (i < NB_MAX_MOBS + 10)
+    // {
+	// 	sprite = &d->sprite[i];
+	// 	sprite->pixels_dst = p_malloc(sprite->frame_size.w * sprite->frame_size.h * sizeof(int));
+	// 	sprite->index = 0;
+	// 	sprite->on = 0;
+	// 	i++;
+    // }
+	// d->sprite[10].on = 1;
 }
 
 // int main(int ac, char **av)

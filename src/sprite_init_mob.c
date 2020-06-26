@@ -110,7 +110,7 @@ static void    load_Pyro(t_data *d)
     {
         d->mobs[i].attack_dist = 2;
         d->mobs[i].dmg_per_hit = 20;
-        d->mobs[i].sprite = d->sprite[i + MOB_INDEX];
+        //d->mobs[i].sprite = d->sprite[i + MOB_INDEX];
         d->mobs[i].life = 100;
         i++;
     }
@@ -125,7 +125,7 @@ static void    load_Afrit(t_data *d)
     {
         d->mobs[i].attack_dist = 1;
         d->mobs[i].dmg_per_hit = 15;
-        d->mobs[i].sprite = d->sprite[i + MOB_INDEX];
+        //d->mobs[i].sprite = d->sprite[i + MOB_INDEX];
         d->mobs[i].life = 200;
         i++;
     }

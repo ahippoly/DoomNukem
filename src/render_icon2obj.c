@@ -16,6 +16,7 @@ t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 	mob.size = DEMON_SIZE;
 	mob.pos.x = (float)pos.x / UNIT;
 	mob.pos.y = (float)pos.y / UNIT;
+	mob.sprite = sprite_init_afrit2(d->sprite_img[SPRITE_ID_AFRIT]);
 	mob.z_pos = 10;
 	mob.z_size = 1;
 	return (mob);

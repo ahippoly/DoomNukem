@@ -123,7 +123,8 @@ void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob);
 void gravity_obj(t_data *d, t_obj *objs, int nb_obj);
 void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed);
 void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse);
-void shoot_gun(t_data *d);
+void shoot_gun(t_data *d, t_weapon *weapon);
+void process_mobs_gameplay(t_data *d);
 
 
 void    init_sprite(t_data *d);

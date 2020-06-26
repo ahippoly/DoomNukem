@@ -12,7 +12,7 @@ void event_gun_mouse(t_data *d)
             {
         		if (d->e.button.button == SDL_BUTTON_LEFT)
                 {
-					shoot_gun(d);
+					shoot_gun(d, d->actual_weapon);
 					d->sprite[d->gun_ind].time = SDL_GetTicks();
 					if (d->sprite[d->gun_ind].aim_on == 0)
 						d->sprite[d->gun_ind].index = FIRE;

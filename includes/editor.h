@@ -109,6 +109,53 @@
 # define HEAD_WALL_REF "WALL_REF MAP"
 
 
+
+typedef struct			s_move_wall
+{
+    t_point 			p1;
+    t_point 			p2;
+	int					travel_time;
+}						t_move_wall;
+
+typedef struct          s_wall_ref
+{
+    int                 wall_id;
+    struct s_wall_ref   *next;
+}                       t_wall_ref;
+
+typedef struct          s_room
+{
+    int                 room_id;
+    int                 nb_wall;
+	t_range				height;
+	int					floor_text;
+	float				z_ground;
+	float				z_ceil;
+    t_range             wall_ref;
+}                       t_room;
+
+typedef struct      s_icon
+{
+    t_point         pos;
+	SDL_Point		pos_i;
+    t_size          size;
+    int             id_ref;
+}                   t_icon;
+
+typedef struct      s_map_data
+{
+    int             is_valid;
+    t_size          map_size;
+    int             wall_count;
+    int             room_count;
+	int				icon_count;
+    SDL_Point       player_spawn;
+    t_wall          *wall_list;
+    t_room          *room_list;
+	t_icon			*icon_list;
+    t_wall_ref      ***map_wall_ref;
+}                   t_map_data;
+
 typedef struct		s_input
 {
 	SDL_Rect 		pos_size;

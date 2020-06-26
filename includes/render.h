@@ -44,13 +44,6 @@ typedef struct	s_proj_point
 	int			on_screen;
 }				t_proj_point;
 
-typedef	struct	s_proj_wall
-{
-	t_proj_point	p1;
-	t_proj_point	p2;
-	t_wall			wall;
-}				t_proj_wall;
-
 typedef	struct	s_draw_line
 {
 	t_frange	draw_y;
@@ -75,6 +68,98 @@ typedef	struct				s_look_rot
 	float					step;
 	float					rev;
 }							t_look_rot;
+
+typedef	struct					s_obj
+{
+				t_point			p1;
+				t_point			p2;
+				t_p_size		z_height;
+				t_p_size		z_step;
+				float			z_text_offset;
+				float			length;
+				float			z_ground;
+				unsigned int	*pixels;
+				int				w;
+				int				h;
+				t_point			pos;
+				float			size;
+				float			alpha;
+				int				room_id;
+				t_rot			rotation;
+				char			can_collide;
+				float			z_force;
+				float			air_time;
+				void			*origin;
+}								t_obj;
+
+typedef	struct				s_ray
+{
+				float		dist;
+				float		scale;
+				float		mod_scale;
+				t_p_size	z_height;
+				float		z_text;
+				t_point		inter;
+				int			room_id;
+				t_obj		*obj_ref;
+}							t_ray;
+
+typedef struct      s_wall
+{
+    int             id;
+    SDL_Point       p1;
+    SDL_Point       p2;
+    t_range         p1_height;
+    t_range         p2_height;
+    int             texture_id;
+    int             room_id_ref;
+    int             transparency;
+    int             can_collide;
+    float			length;
+    float			rotation;
+	float			alpha;
+	t_point			p1_f;
+    t_point			p2_f;
+	float			p1_z_start;
+	float			p1_z_size;
+	float			p2_z_start;
+	float			p2_z_size;
+	float			z_text_offset;
+	t_obj			*obj_ref;
+}                   t_wall;
+
+typedef	struct	s_proj_wall
+{
+	t_proj_point	p1;
+	t_proj_point	p2;
+	t_wall			wall;
+}				t_proj_wall;
+
+typedef struct      s_calced_walls
+{
+	float  			dist;
+	float  			scale;
+	float			scale_z;
+	t_point			inter;
+	t_wall			wall;
+}                   t_calced_walls;
+
+typedef struct					s_mob
+{
+                    int         life;
+					int			dmg_per_hit;
+					float		attack_speed;
+					float		aggro_range;
+					float		attack_dist;
+					float		speed;
+                    t_point		pos;
+					t_rot		rot;
+					float		z_pos;
+					float		z_size;
+					float		size;
+                    t_ssprite	sprite;
+					t_obj		*obj_ref;
+}								t_mob;
 
 typedef	struct				s_props
 {

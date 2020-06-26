@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/26 13:26:14 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:09:42 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void init_sprites_img_env(t_env *e)
 	//e->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, , SDL_PIXELFORMAT_RGBA32);
 }
 
-void init_sprites(t_data *d)
-{
-	
-}
+
 
 
 void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_frame)
@@ -144,6 +141,11 @@ t_ssprite    sprite_init_afrit2(t_img src_img)
     return (afrit);
 }
 
+void init_sprites(t_data *d)
+{
+	
+}
+
 void load_anim(t_ssprite *sprite, int time, int anim_id)
 {
 	SDL_Point curr_anim_pos;
@@ -181,5 +183,17 @@ void process_anim(t_ssprite *sprite, int time)
 		// printf("step frame\n");
 		copy_frame_ssprite(sprite, curr_anim_pos);
 		//copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->frame_size.w, sprite->frame_size.h}, sprite->src.pixels, (SDL_Rect){curr_anim_pos.x, curr_anim_pos.y, sprite->src.w, sprite->src.h});
+	}
+}
+
+void process_mobs_anim(t_data *d)
+{
+	int i;
+
+	i = 0;
+	while (i < d->nb_mob)
+	{
+		process_anim(&d->mobs[i].sprite, d->time);
+		i++;
 	}
 }

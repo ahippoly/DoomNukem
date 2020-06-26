@@ -22,7 +22,7 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 						ttf_init.c  hud_init.c \
 						sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c\
-						gameplay_mobs.c ssprite.c)
+						gameplay_mobs.c ssprite.c gameplay_weapon.c)
 
 HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
@@ -86,7 +86,7 @@ LDLIBS = -lft -lm
 
 .PHONY: all clean fclean re libft
 
-all: $(NAME)
+all: $(NAME) $(RENDER_NAME)
 
 link_fmod :
 	#export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./FMOD"
