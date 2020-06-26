@@ -6,7 +6,6 @@
 /* hud_clean.c */
 
 void				free_hud(t_hud *hud);
-void				free_hud_weapon(t_hud *hud);
 int					exit_hud(t_hud *hud);
 
 /* hud_weapons.c */

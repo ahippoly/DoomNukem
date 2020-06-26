@@ -28,7 +28,6 @@ static void	free_texture(t_hud *hud)
 void		free_hud(t_hud *hud)
 {
 	free_texture(hud);
-	ft_putendl("destroy texture done.");
 }
 
 int			exit_hud(t_hud *hud)

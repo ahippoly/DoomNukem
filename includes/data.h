@@ -6,6 +6,7 @@
 # include "render.h"
 # include "editor.h"
 # include "hud.h"
+# include "menu.h"
 # include "mobs.h"
 # include "gameplay.h"
 # include "props.h"
@@ -82,6 +83,11 @@ typedef struct      s_data
 	/* ttf data */
 	TTF_Font		*font_nb;
 	TTF_Font		*font_text;
+	/* menu data */
+	unsigned int    *p_menu; // menu screen
+    SDL_Texture     *menu_texture; //menu texture
+	t_menu			menu;
+	char			*argv;
 }                   t_data;
 
 typedef	struct		s_thread

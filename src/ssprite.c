@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/26 16:09:42 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/26 23:16:48 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void init_sprites_img_env(t_env *e)
 	e->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_RGBA32);
 	//e->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, , SDL_PIXELFORMAT_RGBA32);
 }
-
-
-
 
 void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_frame)
 {
@@ -63,9 +60,7 @@ void init_curr_frames(t_ssprite *sprite)
 	while (i < NB_ANIM)
 	{
 		sprite->anim[i++].current_frame = 0;
-		
 	}
-	
 }
 
 static void      init_anim_afrit2(t_ssprite *afrit)
@@ -148,7 +143,7 @@ void init_sprites(t_data *d)
 
 void load_anim(t_ssprite *sprite, int time, int anim_id)
 {
-	SDL_Point curr_anim_pos;
+	SDL_Point	curr_anim_pos;
 
 	sprite->current_anim = anim_id;
 	sprite->anim[anim_id].current_frame = 0;
@@ -160,9 +155,9 @@ void load_anim(t_ssprite *sprite, int time, int anim_id)
 
 void process_anim(t_ssprite *sprite, int time)
 {
-	t_anim *anim;
-	SDL_Point curr_anim_pos;
-
+	t_anim		*anim;
+	SDL_Point	curr_anim_pos;
+	
 	if (sprite->current_anim < 0)
 		return ;
 	anim = &sprite->anim[sprite->current_anim];

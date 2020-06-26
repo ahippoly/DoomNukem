@@ -65,9 +65,9 @@ void shoot_gun(t_data *d, t_weapon *weapon)
 	t_ray sorted[NB_MAX_OBJ];
 
 	sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
-	if (sorted[0].dist < weapon->range && sorted[0].room_id == TYPE_MOB)
+	if (sorted[0].dist < 10 && sorted[0].room_id == TYPE_MOB)
 	{
-		repulse_obj(d, sorted[0].obj_ref, weapon->z_force, 5);
+		repulse_obj(d, sorted[0].obj_ref, 0.02, 5);
 	}
 }
 

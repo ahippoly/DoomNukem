@@ -117,23 +117,20 @@ void	write_icon_list(int fd, t_icon *icon_list, int nb_icon)
 void map_output(t_env *env)
 {
     int fd;
-    char *str;
 
     printf("map output fct\n");
 	if (env->map_name)
    		fd = open(env->map_name, O_WRONLY | O_TRUNC | O_CREAT, 0600);
 	else
-   		fd = open(str = ft_strjoinfree("maps/editor_map_", 0, 1), O_WRONLY | O_TRUNC | O_CREAT, 0600);
+   		fd = open("maps/editor_map_0", O_WRONLY | O_TRUNC | O_CREAT, 0600);
     if (fd < 0)
         return;
 	printf("env map name = %s\n", env->map_name);
-    printf("map output name = %s, fd = %i\n",str, fd);
     rearange_wall_lst(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list, env->room_count);
 	write_icon_list(fd, env->icon_list, env->icon_count);
     write_wall_ref(fd, env);
-    free(str);
     close(fd);
 }
 

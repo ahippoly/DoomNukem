@@ -1,19 +1,14 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
-void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
+void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
 {
-    SDL_Rect tmp;
+    SDL_Rect 	tmp;
+
+    tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
     //SDL_RenderClear(d->rend);
     SDL_UpdateTexture(d->screen, NULL, d->p_screen, WIN_SIZE_X * 4);
     print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
-    tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-
     SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
 	update_hud_info(d);
 	render_hud_info(d);
@@ -22,17 +17,12 @@ void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
     SDL_RenderPresent(d->rend);
 }
 
-// void free_render_env(t_data *d)
-// {
-
-// }
-
-void calc_n_disp_framerate(t_data *d)
+void			calc_n_disp_framerate(t_data *d)
 {
     static int  last_time;
     static int  framerate;
     static int  last_framerate;
-    int time;
+    int			time;
 
     time = SDL_GetTicks();
 	//SDL_Delay(50);
@@ -49,9 +39,9 @@ void calc_n_disp_framerate(t_data *d)
     input_text_to_img(ft_itoa(last_framerate), 2, 0xFFFFFFFF, create_img(d->p_screen, set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
 }
 
-int main(int ac, char **av)
+int					main(int ac, char **av)
 {
-    t_data      d;
+    t_data			d;
     
     init_data(&d, ac, av);
     ft_putstr("Main worked");
@@ -105,6 +95,6 @@ int main(int ac, char **av)
         calc_n_disp_framerate(&d);
         print_data2screen(&d, &d.map, &d.hud);
     }
-    // free_render_env(&d);
+	exit_env(&d);
 }
 

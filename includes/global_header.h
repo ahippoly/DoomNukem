@@ -10,7 +10,6 @@
 # include <pthread.h>
 # include "libft.h"
 # include "img_file.h"
-
 # include "FMOD/fmod.h"
 # include "SDL_ttf.h"
 

@@ -34,7 +34,6 @@
 # define SPRITE_PATH_PYRO "Sprites/Mobs/pyro.bmp"
 # define SPRITE_PATH_AFRIT "Sprites/Mobs/afrit.bmp"
 
-
 typedef struct      s_anim
 {
                     SDL_Point   offset;

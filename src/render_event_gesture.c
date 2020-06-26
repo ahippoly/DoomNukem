@@ -150,7 +150,6 @@ void handle_key_event(t_data *d)
 	event_change_weapon(d);
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;
-
 	//debug
 		if (d->clavier[SDL_SCANCODE_C])
 			raycast_thread_init(d);
@@ -261,6 +260,5 @@ void handle_poll_event(t_data *d)
 			
         }
 		event_gun_mouse(d);
-		
     }
 }

@@ -7,6 +7,7 @@
 #include "proto_sound.h"
 #include "proto_sprite.h"
 #include "proto_ssprite.h"
+#include "proto_menu.h"
 
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
@@ -62,5 +63,9 @@ void print_sprite(t_sprite *sprite);
 void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size);
 SDL_Texture *t_img2sdl_text(SDL_Renderer *rend , t_img src);
 
+
+/* exit.c */
+
+void exit_env(t_data *d);
 
 #endif
