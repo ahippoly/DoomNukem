@@ -23,11 +23,13 @@ char		**malloc_tab(t_data *d, int n)
 
 int			catch_btn_event(t_data *d, int ac, char **av)
 {
-	char	**argv_tab; // permet de passer la liste des arguments a execv
-
 	d->menu.argv_tab = malloc_tab(d, 3);
+	ft_bzero(d->menu.argv_tab, sizeof(d->menu.argv_tab));
 	d->menu.argv_tab[0] = NULL;
-	d->menu.argv_tab[1] = ft_strdup(av[1]); // map passée en parametre
+	if (av[1]) // dans le cas ou une map est passée en parametre
+		d->menu.argv_tab[1] = ft_strdup(av[1]); 
+	else
+		d->menu.argv_tab[1] = NULL;
 	d->menu.argv_tab[2] = NULL;
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1)
 	{
