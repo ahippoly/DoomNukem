@@ -27,7 +27,7 @@ int			catch_btn_event(t_data *d, int ac, char **av)
 
 	d->menu.argv_tab = malloc_tab(d, 3);
 	d->menu.argv_tab[0] = NULL;
-	d->menu.argv_tab[1] = av[1]; // map passée en parametre
+	d->menu.argv_tab[1] = ft_strdup(av[1]); // map passée en parametre
 	d->menu.argv_tab[2] = NULL;
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1)
 	{

@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-int			free_menu(t_data *d)
+static int	free_texture_menu(t_data *d)
 {
 	if (!d)
 		return (0);
@@ -23,25 +23,34 @@ static int	free_argv_tab(t_data *d)
 {
 	int		i;
 
-	while (i < 3)
+	i = 0;
+	if (d->menu.argv_tab)
 	{
-		if (d->menu.argv_tab[i])
+		while (i < 3)
 		{
-			free(d->menu.argv_tab[i]);
-			d->menu.argv_tab[i] = NULL;
+			if (d->menu.argv_tab[i])
+			{
+				free(d->menu.argv_tab[i]);
+				d->menu.argv_tab[i] = NULL;
+			}
+			i++;
 		}
-		i++;
+		free(d->menu.argv_tab);
 	}
-	free(d->menu.argv_tab);
 	d->menu.argv_tab = NULL;
+	return (0);
+}
+
+int			free_menu(t_data *d)
+{
+	free_texture_menu(d);
+	free_argv_tab(d);
 	return (0);
 }
 
 int			exit_menu(t_data *d)
 {
-	ft_putendl("Free menu...");
 	free_menu(d);
-	free_argv_tab(d);
 	quit_ttf(d);
 	SDL_Quit();
 	ft_putendl("bye !");

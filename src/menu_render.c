@@ -17,5 +17,6 @@ int				main(int ac, char **av)
 		catch_btn_event(&d, ac, av);
  		SDL_RenderPresent(d.rend);
 	}
+	exit_env(&d);
 	return (0);
 }

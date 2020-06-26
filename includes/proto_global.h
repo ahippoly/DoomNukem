@@ -1,12 +1,12 @@
 #ifndef PROTOT_GLOBAL_H
 # define PROTOT_GLOBAL_H
 
-#include "data.h"
-#include "proto_hud.h"
-#include "proto_menu.h"
-#include "proto_rend.h"
-#include "proto_sound.h"
-#include "proto_sprite.h"
+# include "data.h"
+# include "proto_hud.h"
+# include "proto_menu.h"
+# include "proto_rend.h"
+# include "proto_sound.h"
+# include "proto_sprite.h"
 
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
@@ -59,5 +59,9 @@ void del_from_array(void *list, int *size, void *to_remove, int obj_size);
 void	*ft_memmove2(void *dst, const void *src, size_t len);
 
 void print_sprite(t_sprite *sprite);
+
+/* exit.c */
+
+void exit_env(t_data *d);
 
 #endif

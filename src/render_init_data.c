@@ -59,11 +59,7 @@ void init_data(t_data *d, int ac, char **av)
 	init_menu(d);
 	init_ttf(d);
 	if (ac > 1)
-	{
-		d->argv = ft_strdup(av[1]);
-		// ft_putendl(av[1]);
 		d->map = read_map(av[1]);
-	}
 	else
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)
