@@ -211,6 +211,7 @@ void read_wall_list(int fd, t_map_data *map)
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->wall_count)
         read_wall(line, &map->wall_list[i++]);
+	//printf("map reader, wall_count = %i\n", map->wall_count);
 }
 
 void read_room_list(int fd, t_map_data *map)

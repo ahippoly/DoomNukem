@@ -6,6 +6,7 @@
 #include "proto_rend.h"
 #include "proto_sound.h"
 #include "proto_sprite.h"
+#include "proto_ssprite.h"
 
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
@@ -38,10 +39,10 @@ float ft_interpolate(float val1, float val2, float scale);
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);
 
-void process_all_idle_anim(t_sprite sprite[NB_SPRITE]); //prend en paramètre un tableau de sprite, et calcul frame par frame leur animation par défaut
-void process_idle_anim(t_sprite *sprite); //calcul l'animation par défaut d'un sprite
-void load_anim(t_sprite *t_sprite, int anim_id); //calcul une animation du sprite puis reviens a l'animation par défaut
-void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par défaut du sprite
+// void process_all_idle_anim(t_sprite sprite[NB_SPRITE]); //prend en paramètre un tableau de sprite, et calcul frame par frame leur animation par défaut
+// void process_idle_anim(t_sprite *sprite); //calcul l'animation par défaut d'un sprite
+// void load_anim(t_sprite *t_sprite, int anim_id); //calcul une animation du sprite puis reviens a l'animation par défaut
+// void change_idle_anim(t_sprite *t_sprite, int anim_id); //change l'animation par défaut du sprite
 
 t_rot calc_sin_cos_rot(float rot);
 void sort_int(int *a, int *b);
@@ -59,5 +60,7 @@ void	*ft_memmove2(void *dst, const void *src, size_t len);
 
 void print_sprite(t_sprite *sprite);
 void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size);
+SDL_Texture *t_img2sdl_text(SDL_Renderer *rend , t_img src);
+
 
 #endif

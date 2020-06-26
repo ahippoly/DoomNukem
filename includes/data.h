@@ -2,7 +2,6 @@
 # define DATA_H
 
 # include "global_header.h"
-# include "editor.h"
 # include "render.h"
 # include "hud.h"
 # include "mobs.h"
@@ -10,6 +9,7 @@
 # include "sound.h"
 # include "sprite.h"
 # include "ssprite.h"
+# include "editor.h"
 
 typedef struct      s_data
 {
@@ -47,7 +47,8 @@ typedef struct      s_data
     int             time;
 	float			diff_time;
     int             air_time;
-    t_sprite        sprite_lst[NB_SPRITE];
+    t_ssprite       sprite_lst[NB_SPRITE_MAX];
+	int				nb_sprite;
 	/* world edit*/
 	t_wall			*grabbed_wall;
 	t_point			grab_pos;

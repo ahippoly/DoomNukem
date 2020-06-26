@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/25 23:59:49 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/26 12:49:32 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,4 +326,13 @@ void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_
         pos2.y += dst_size.w;
         pos.y += pos_size.w;
     }
+}
+
+SDL_Texture *t_img2sdl_text(SDL_Renderer *rend , t_img src)
+{
+	SDL_Texture *new;
+
+	new = SDL_CreateTexture(rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, src.w, src.h);
+	SDL_UpdateTexture(new, NULL, src.pixels, src.w * 4);
+	return (new);
 }

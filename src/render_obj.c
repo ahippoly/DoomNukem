@@ -127,7 +127,7 @@ void init_obj_list(t_data *d)
 	while (i < d->map.wall_count)
 	{
 		d->obj_list[j++] = convert_wall_to_obj(d, &d->map.wall_list[i++]);
-		printf("wall obj created , i = %i\n", i);
+		printf("wall obj created , i = %i wall_count = %i\n", i, d->map.wall_count);
 	}
 	i = 0;
 	while (i < d->nb_props)

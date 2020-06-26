@@ -76,6 +76,7 @@ void init_data(t_data *d, int ac, char **av)
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 	init_sprite(d);
     load_bmp_files(d);
+	init_sprites_img(d);
 	init_rend_img(d);
 	load_icons(d, &d->map);
 	init_obj_list(d);

@@ -34,6 +34,7 @@ int main(int argc, char **argv)
         env.mouse_button = SDL_GetMouseState(&env.mouse.x, &env.mouse.y);
         handle_keyboard_event(&env);
         env.hovered_corner = check_tiles_hitbox(env.mouse, env.p_grid, &env);
+		process_anim(&env.sprites[SPRITE_ID_AFRIT], SDL_GetTicks());
         create_grid(env.p_grid, 1, &env);
         check_hovered_buttons(&env);
         check_hovered_input(&env);

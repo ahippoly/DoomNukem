@@ -7,7 +7,7 @@ void create_mini_map(t_data *d, t_map_data *map);
 void update_player_pos_mini_map(t_data *d, t_map_data *map);
 void print_player_look_vector(t_data *d, t_map_data *map, float rot);
 void print_mini_map(t_data *d, t_map_data *map);
-t_img read_img_surface(char *file);
+t_img read_img_surface(char *file, Uint32 pixel_format);
 
 //render_init_data.c
 void init_sdl_ressources_rend(t_data *d);

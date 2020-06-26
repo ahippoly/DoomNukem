@@ -4,22 +4,23 @@
 # include "data.h"
 
 # define ANIM_MOB_IDLE 0
-# define ANIM_MOB_MOVE_FRONT 1;
-# define ANIM_MOB_MOVE_BACK 2;
-# define ANIM_MOB_MOVE_LEFT 3;
-# define ANIM_MOB_MOVE_RIGHT 4;
-# define ANIM_MOB_MELEE 5;
-# define ANIM_MOB_SHOOT 6;
-# define ANIM_MOB_DEATH 7;
+# define ANIM_MOB_MOVE_FRONT 1
+# define ANIM_MOB_MOVE_BACK 2
+# define ANIM_MOB_MOVE_LEFT 3
+# define ANIM_MOB_MOVE_RIGHT 4
+# define ANIM_MOB_MELEE 5
+# define ANIM_MOB_SHOOT 6
+# define ANIM_MOB_DEATH 7
 
-# define ANIM_STATE_OPEN 0;
-# define ANIM_STATE_CLOSE 1;
-# define ANIM_STATE_TRIGGERED 2;
+# define ANIM_STATE_OPEN 0
+# define ANIM_STATE_CLOSE 1
+# define ANIM_STATE_TRIGGERED 2
 
-# define ANIM_WEAPON_RELOAD 0;
-# define ANIM_WEAPON_SHOOT 1;
+# define ANIM_WEAPON_RELOAD 0
+# define ANIM_WEAPON_SHOOT 1
 
-# define NB_SPRITE 2
+# define NB_SPRITE 1
+# define NB_SPRITE_MAX 30
 
 # define SPRITE_ID_AFRIT 0
 # define SPRITE_ID_PYRO 1
@@ -27,7 +28,6 @@
 # define SPRITE_PATH_PYRO "Sprites/Mobs/pyro.bmp"
 # define SPRITE_PATH_AFRIT "Sprites/Mobs/afrit.bmp"
 
-# define NB_SPRITE_MAX 30
 
 // typedef struct      s_sprite
 // {  
@@ -58,6 +58,7 @@ typedef struct					s_ssprite
 								int dst_w;
 								int dst_h;
 								t_size frame_size;
+								t_size frame_disp_size;
 								SDL_Point nb_frame;
 								SDL_Point	default_frame;
 								t_anim		anim[NB_ANIM];

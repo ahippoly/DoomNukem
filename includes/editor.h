@@ -1,7 +1,7 @@
 #ifndef EDITOR_H
 # define EDITOR_H
 
-# include "global_header.h"
+# include "data.h"
 # include "SDL.h"
 # include "libft.h"
 # include "text_img.h"
@@ -29,9 +29,9 @@
 # define BUTTON_MOB_PLACING 8
 # define BUTTON_FLOOR_TEXT 9
 
-#define UNIT 10
+# define UNIT 10
 
-#define DEFAULT_HEIGHT_START 10
+# define DEFAULT_HEIGHT_START 10
 
 # define NB_MOUSE_MODE 3
 # define MOUSE_MODE_NEUTRAL 0
@@ -164,17 +164,8 @@ typedef struct      s_env
 	int				room_text[NB_WALL_MAX];
     t_wall_ref      ***map_wall_ref;
     t_size          map_size;
-    t_button        edit;
-    t_button        del;
-    t_button        create_room;
-    t_button        text_select_left;
-    t_button        text_select_right;
-    t_txt_img       map_editor;
-    t_txt_img       text_select;
-    t_txt_img       height;
-    t_txt_img       transparency;
-    t_txt_img       img_p1;
-    t_txt_img       img_p2;
+	t_img			sprite_img[NB_SPRITE];
+	t_ssprite		sprites[NB_SPRITE];
     t_button        buttons_lst[NB_BUTTONS];
     t_txt_img       txt_lst[NB_TXT];
     t_input			input_lst[NB_INPUT];

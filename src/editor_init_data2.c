@@ -20,10 +20,10 @@ void init_img(t_env *env)
     env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE);
     env->being_placed = NULL;
     env->icon_list_size = ICON_ARRAY_SIZE;
-    env->img_list[0] = bmp_to_texture(IMG_PATH_0, env->rend);
-    env->img_list[1] = bmp_to_texture(IMG_PATH_1, env->rend);
-    env->img_list[2] = bmp_to_texture(IMG_PATH_2, env->rend);
-    env->img_list[3] = bmp_to_texture(IMG_PATH_3, env->rend);
+    env->img_list[IMG_PLAYER] = bmp_to_texture(IMG_PATH_0, env->rend);
+    env->img_list[IMG_DEMON] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h);
+    env->img_list[IMG_ORC] = bmp_to_texture(IMG_PATH_2, env->rend);
+    env->img_list[IMG_KEY] = bmp_to_texture(IMG_PATH_3, env->rend);
 }
 
 void init_env2(t_env *env)
@@ -36,6 +36,7 @@ void init_env2(t_env *env)
     env->selected_input = -1;
     env->room_list = NULL;
 	env->map_name = NULL;
+	
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -48,6 +49,8 @@ void init_env(t_env *env)
     init_buttons(env);
     init_txt_img(env);
     init_mouse_mode(env);
+	init_sprites_img_env(env);
+	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit2(env->sprite_img[SPRITE_ID_AFRIT]);
     init_img(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);
