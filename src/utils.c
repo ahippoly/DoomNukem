@@ -263,3 +263,44 @@ void del_from_array(void *list, int *size, void *to_remove, int obj_size)
 	printf("deleted from array, size = %i\n", *size);
 	ft_memmove2(list + obj_size * i, list + obj_size * (i + 1), (*size - i) * obj_size);
 }
+
+void print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw)
+{
+	SDL_Point	end;
+	t_point		t_scale;
+	t_point		t_step;
+	int ty;
+	float tx_start;
+	int x_start;
+	unsigned int *pixels;
+
+
+	t_step.x = (float)text->w / draw.w;
+	t_step.y = (float)text->h / draw.h;
+	end.x = ft_min(draw.x + draw.w, WIN_SIZE_X);
+	end.y = ft_min(draw.y + draw.h, WIN_SIZE_Y) * WIN_SIZE_Y;
+	tx_start = 0;
+	if (draw.x < 0)
+		tx_start = t_step.x * -draw.x;
+	if (draw.y < 0)
+		t_scale.y = t_step.y * -draw.y;
+	draw.y = ft_max(draw.y, 0) * WIN_SIZE_Y;
+	x_start = ft_max(draw.x, 0);
+	pixels = (unsigned int*)text->pixels;
+	while (draw.y < end.y)
+	{
+		t_scale.x = tx_start;
+		ty = (int)t_scale.y * text->w;
+		draw.x = x_start;
+		while (draw.x < end.x)
+		{
+			//printf("draw : %d,%d, t_scale : %f,%f\n", draw.x, draw.y, t_scale.x, t_scale.y);
+			p_tab[draw.x + draw.y] = pixels[(int)t_scale.x + ty];
+			t_scale.x += t_step.x;
+			draw.x++;
+		}
+		t_scale.y += t_step.y;
+		draw.y += WIN_SIZE_Y;
+	}
+
+}

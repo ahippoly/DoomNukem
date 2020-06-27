@@ -37,7 +37,7 @@ static void      init_anim_AR(t_sprite *AR)
     AR->anim[ICON].offset.y = 0;
 }
 
-t_sprite    sprite_init_AR(SDL_Texture *text)
+t_sprite    sprite_init_AR(t_img *img)
 {
     t_sprite AR;
 
@@ -69,7 +69,7 @@ t_sprite    sprite_init_AR(SDL_Texture *text)
 
     AR.idle_animation = 3;
 
-    AR.text = text;
+    AR.img = img;
     init_anim_AR(&AR);
     return (AR);
 }
@@ -100,7 +100,7 @@ static void      init_anim_DD(t_sprite *DD)
     DD->anim[ICON].offset.y = 0;
 }
 
-t_sprite    sprite_init_DD(SDL_Texture *text)
+t_sprite    sprite_init_DD(t_img *img)
 {
     t_sprite DD;
 
@@ -135,7 +135,7 @@ t_sprite    sprite_init_DD(SDL_Texture *text)
 
     DD.idle_animation = 2;
 
-    DD.text = text;
+    DD.img = img;
     init_anim_DD(&DD);
     return (DD);
 }
@@ -177,7 +177,7 @@ static void      init_anim_LMG(t_sprite *LMG)
 
 }
 
-t_sprite    sprite_init_LMG(SDL_Texture *text)
+t_sprite    sprite_init_LMG(t_img *img)
 {
     t_sprite LMG;
 
@@ -211,7 +211,7 @@ t_sprite    sprite_init_LMG(SDL_Texture *text)
 
     LMG.idle_animation = 2;
 
-    LMG.text = text;
+    LMG.img = img;
     init_anim_LMG(&LMG);
     return (LMG);
 }
@@ -247,7 +247,7 @@ static void      init_anim_Rev(t_sprite *Rev)
     Rev->anim[ALTFIRE].offset.y = 0; 
 }
 
-t_sprite    sprite_init_Revolver(SDL_Texture *text)
+t_sprite    sprite_init_Revolver(t_img *img)
 {
     t_sprite Rev;
 
@@ -282,7 +282,7 @@ t_sprite    sprite_init_Revolver(SDL_Texture *text)
 
     Rev.idle_animation = 3;
 
-    Rev.text = text;
+    Rev.img = img;
     init_anim_Rev(&Rev);
     return (Rev);
 }
@@ -309,7 +309,7 @@ static void      init_anim_SSG(t_sprite *SSG)
     SSG->anim[RELOAD].offset.y = 0;
 }
 
-t_sprite    sprite_init_SSG(SDL_Texture *text)
+t_sprite    sprite_init_SSG(t_img *img)
 {
     t_sprite SSG;
 
@@ -344,7 +344,7 @@ t_sprite    sprite_init_SSG(SDL_Texture *text)
 
     SSG.idle_animation = 3;
 
-    SSG.text = text;
+    SSG.img = img;
     init_anim_SSG(&SSG);
     return (SSG);
 }
@@ -370,7 +370,7 @@ static void      init_anim_Melee(t_sprite *Melee)
     Melee->anim[RELOAD].offset.y = 5;
 }
 
-t_sprite    sprite_init_Melee(SDL_Texture *text)
+t_sprite    sprite_init_Melee(t_img *img)
 {
     t_sprite Melee;
 
@@ -404,7 +404,7 @@ t_sprite    sprite_init_Melee(SDL_Texture *text)
 
     Melee.idle_animation = 0;
 
-    Melee.text = text;
+    Melee.img = img;
     init_anim_Melee(&Melee);
     return (Melee);
 }
@@ -412,25 +412,29 @@ t_sprite    sprite_init_Melee(SDL_Texture *text)
 
 void    load_sprite_gun(t_data *d)
 {
-    SDL_Texture *texture;
-    t_sprite commando;
+    t_img *img[6];
+    
+    img[0] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Guns/Melee.bmp", img[0]);
+    d->sprite[0] = sprite_init_Melee(img[0]);
 
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/AssaultRifle.bmp", d);
-    d->sprite[3] = sprite_init_AR(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/DeathDealer.bmp", d);
-    d->sprite[5] = sprite_init_DD(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/lmg.bmp", d);
-    d->sprite[4] = sprite_init_LMG(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/Revolver.bmp", d);
-    d->sprite[1] = sprite_init_Revolver(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/SuperShotgun.bmp", d);
-    d->sprite[2] = sprite_init_SSG(texture);
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Guns/Melee.bmp", d);
-    d->sprite[0] = sprite_init_Melee(texture);
+    img[1] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Guns/Revolver.bmp", img[1]);
+    d->sprite[1] = sprite_init_Revolver(img[1]);
+
+    img[2] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Guns/SuperShotgun.bmp", img[2]);
+    d->sprite[2] = sprite_init_SSG(img[2]);
+
+    img[3] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Guns/AssaultRifle.bmp", img[3]);
+    d->sprite[3] = sprite_init_AR(img[3]);
+
+    img[4] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Guns/lmg.bmp", img[4]);
+    d->sprite[4] = sprite_init_LMG(img[4]);
+    
+    img[5] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Guns/DeathDealer.bmp", img[5]);
+    d->sprite[5] = sprite_init_DD(img[5]);
 }

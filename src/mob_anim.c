@@ -75,7 +75,7 @@ void    mob_anim(t_data *d)
                 d->sprite[i].displayed_part.y = srcdim.y;
                 //copy_frame(d->sprite[i], srcdim);
                 //if (i == d->mob_ind)
-                SDL_RenderCopy(d->rend, d->sprite[i].text, &srcdim, &dstdim);
+                //SDL_RenderCopy(d->rend, d->sprite[i].text, &srcdim, &dstdim);
             }
             else if (d->sprite[i].index != DEATH)
                 d->sprite[i].time = SDL_GetTicks(); //permet de boucler l'animation a l'infini en redemarrant le compteur temps

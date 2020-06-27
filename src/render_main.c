@@ -14,7 +14,7 @@ void print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
     tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
 
-    SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
+    //SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
 	update_hud_info(d);
 	render_hud_info(d);
 	render_hud_icons(d);
@@ -77,7 +77,9 @@ int main(int ac, char **av)
         //raycast_all_screen(&d, &d.map);
 		move_mobs_in_range(&d, d.mobs, d.nb_mob);
 		raycast_thread_init(&d);
-		// print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
+
+		//print_text_screen(d.p_screen, &d.texture[1], (SDL_Rect){200,200, 200, 200});
+        //print_text_screen(d.p_screen, d.sprite[0].img, (SDL_Rect){100,100, 500, 500});
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
 		sprite_anim_gun(&d);

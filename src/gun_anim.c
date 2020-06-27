@@ -68,6 +68,8 @@ void    sprite_anim_gun(t_data *d)
         dstdim = gun_dimension(dstdim, d);
 		d->src_gun = srcdim;
 		d->dst_gun = dstdim;
+		print_text_screen(d->p_screen, d->sprite[d->gun_ind].img, (SDL_Rect){0, 0, 700, 700});
+
         // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
     }
     else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 

@@ -1,5 +1,5 @@
-#ifndef GLOABAL_HEADER_H
-# define GLOABAL_HEADER_H
+#ifndef GLOBAL_HEADER_H
+# define GLOBAL_HEADER_H
 
 # include <math.h>
 # include "SDL.h"
@@ -161,7 +161,7 @@ typedef struct      s_sprite
                     t_anim          anim[NB_ANIM];
                     int             nb_anim;
                     int             idle_animation;
-                    SDL_Texture     *text;
+                    t_img           *img;
 }                   t_sprite;
 
 

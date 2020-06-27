@@ -125,18 +125,7 @@ static void    load_Afrit(t_data *d)
     }
 }
 
-void     fill_pixels(char *str, t_data *d, int mob)
-{
-    SDL_Surface *surface;
-
-    surface = NULL;
-    if (!(surface = SDL_LoadBMP(str)))
-      printf("Erreur de chargement de l'image : %s",SDL_GetError());
-    d->sprite[mob].pixels = surface->pixels;
-    SDL_FreeSurface(surface);
-}
-
-void    duplicate_mob(t_data *d, SDL_Texture *texture, SDL_Texture *texture2)
+void    duplicate_mob(t_data *d, t_img *img, t_img *img2)
 {
     int i;
 
@@ -144,40 +133,30 @@ void    duplicate_mob(t_data *d, SDL_Texture *texture, SDL_Texture *texture2)
     while (i < NB_MAX_MOBS / 2 + MOB_INDEX)
     {
         d->sprite[i] = sprite_init_pyro();
-        d->sprite[i].pixels = d->sprite[PYRO].pixels;
-        d->sprite[i].text = texture;
+        d->sprite[i].pixels = img->pixels;
         i++;
     }
     while (i < NB_MAX_MOBS + MOB_INDEX)
     {
         d->sprite[i] = sprite_init_afrit();
-        d->sprite[i].pixels = d->sprite[AFRIT].pixels;
-        d->sprite[i].text = texture2;
+        d->sprite[i].pixels = img2->pixels;
         i++;
     }
 }
 
 void    load_sprite_mob(t_data *d)
 {
-    SDL_Texture *texture;
-    SDL_Texture *texture2;
+    t_img   *img[2];
     
-    texture = NULL;
-    texture = load_sprite_bmp("Sprites/Mobs/pyro.bmp", d);
+    img[0] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Mobs/pyro.bmp", img[0]);
     d->sprite[PYRO] = sprite_init_pyro();
-    d->sprite[PYRO].text = texture;
-    fill_pixels("Sprites/Mobs/pyro.bmp", d, PYRO);
 
-    texture2 = NULL;
-    texture2 = load_sprite_bmp("Sprites/Mobs/afrit.bmp", d);
+    img[1] = ft_memalloc(sizeof(t_img));
+    bmp_reader("Sprites/Mobs/afrit.bmp", img[1]);
     d->sprite[AFRIT] = sprite_init_afrit();
-    d->sprite[AFRIT].text = texture2;
-    fill_pixels("Sprites/Mobs/afrit.bmp", d, AFRIT);
 
-    duplicate_mob(d, texture, texture2);
-    texture = NULL;
-    texture2 = NULL;
-
-    load_Pyro(d);
-    load_Afrit(d);
+    //duplicate_mob(d, img, img2);
+    //load_Pyro(d);
+    //load_Afrit(d);
 }
