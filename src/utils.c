@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/26 12:49:32 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/27 18:04:09 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,6 +325,38 @@ void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_
         }
         pos2.y += dst_size.w;
         pos.y += pos_size.w;
+    }
+}
+
+void    copy_frame_scale(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size)
+{
+    t_point pos;
+    SDL_Point pos2;
+    SDL_Point frame_max;
+	t_point		step;
+	int y;
+	
+	pos2.y = 0;
+	frame_max.y = dst_size.h * dst_size.w;
+	step.x = (double)dst_size.x / dst_size.w;
+	step.y = (double)dst_size.y / dst_size.h;
+	// printf("dst_x : %f,%f\n", step.x, step.y);
+	// printf("step : %f,%f\n", step.x, step.y);
+	pos.y = pos_size.y;
+    y = pos_size.y * pos_size.w;
+    while (pos2.y < frame_max.y)
+    {
+        pos.x = pos_size.x;
+        pos2.x = 0;
+        while (pos2.x < dst_size.w)
+        {
+        	dst[pos2.x + pos2.y] = src[(int)pos.x + y];
+			pos2.x++;
+            pos.x += step.x;
+        }
+        pos2.y += dst_size.w;
+		pos.y += step.y;
+        y = (int)pos.y * pos_size.w;
     }
 }
 

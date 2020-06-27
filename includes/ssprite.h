@@ -38,6 +38,7 @@ typedef struct      s_anim
 {
                     SDL_Point   offset;
                     SDL_Point   pos[NB_FRAME];
+					t_size		size[NB_FRAME];
                     int         nb_frame;
                     int         current_frame;
                     float		speed;
