@@ -83,7 +83,7 @@ void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
 			if (sorted[i].dist < RENDER_DISTANCE_MAX)
 				draw_text_slice(d->p_screen, calc_ray_draw_range(d, sorted[i], screen_x.start), *sorted[i].obj_ref, sorted[i]);
 		}
-		if (nb > -1)
+		if (nb > -1 && sorted[0].dist < RENDER_DISTANCE_MAX)
 			print_floor_slice(d, d->fl[queue[nb].room_id], calc_floor_draw_range_end(d, queue[nb].dist, get_room_by_id(d, queue[nb].room_id), screen_x.start), get_room_by_id(d, queue[nb].room_id)->floor_text);
         start_angle += step;
         screen_x.start++;
