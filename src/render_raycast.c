@@ -115,6 +115,7 @@ void raycast_thread_init(t_data *d)
 		param[i].start_angle = start;
 		param[i].step = step;
 		param[i].screen_x = (t_range){i * WIN_SIZE_X / THREAD_NB, (i + 1) * WIN_SIZE_X / THREAD_NB};
+		// prlintf("start = %i, end = %i\n", i * WIN_SIZE_X / THREAD_NB, (i + 1) * WIN_SIZE_X / THREAD_NB);
 		pthread_create(&thread[i], NULL, raycast_thread, &param[i]);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/26 23:16:48 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/27 14:52:44 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ t_ssprite    sprite_init_afrit2(t_img src_img)
 	afrit.dst = alloc_image(afrit.dst_w, afrit.dst_h);
     init_anim_afrit2(&afrit);
 	copy_frame_ssprite(&afrit, afrit.default_frame);
+	afrit.callback = NULL;
+	afrit.param = NULL;
     return (afrit);
 }
 
@@ -153,6 +155,12 @@ void load_anim(t_ssprite *sprite, int time, int anim_id)
 	// copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->dst_w, sprite->dst_h}, sprite->src.pixels, (SDL_Rect){curr_anim_pos.x, curr_anim_pos.y, sprite->src.w, sprite->src.h});
 }
 
+void set_sprite_callback(t_ssprite *sprite, void *(*funct)(void *), void *param)
+{
+	sprite->callback = funct;
+	sprite->param = param;
+}
+
 void process_anim(t_ssprite *sprite, int time)
 {
 	t_anim		*anim;
@@ -168,6 +176,9 @@ void process_anim(t_ssprite *sprite, int time)
 		if (anim->current_frame >= anim->nb_frame)
 		{
 			// printf("load new anim\n");
+			if (sprite->callback != NULL)
+				sprite->callback(sprite->param);
+			sprite->callback = NULL;
 			if (sprite->idle_anim >= 0)
 				load_anim(sprite, time, sprite->idle_anim);
 			else

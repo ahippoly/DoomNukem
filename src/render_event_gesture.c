@@ -25,16 +25,16 @@ void event_gun_mouse(t_data *d)
                 }
            		else if (d->e.button.button == SDL_BUTTON_RIGHT)
                 {
-                if (d->gun_ind == 3 || d->gun_ind == 4)
-                {
-                d->sprite[d->gun_ind].time = SDL_GetTicks();
-                d->sprite[d->gun_ind].index = AIM;
-                d->sprite[d->gun_ind].on = 0;
-                if (d->sprite[d->gun_ind].aim_on == 0)
-                    d->sprite[d->gun_ind].aim_on = 1;
-                else
-                    d->sprite[d->gun_ind].aim_on = 0;
-                }
+					if (d->gun_ind == 3 || d->gun_ind == 4)
+					{
+						d->sprite[d->gun_ind].time = SDL_GetTicks();
+						d->sprite[d->gun_ind].index = AIM;
+						d->sprite[d->gun_ind].on = 0;
+						if (d->sprite[d->gun_ind].aim_on == 0)
+							d->sprite[d->gun_ind].aim_on = 1;
+						else
+							d->sprite[d->gun_ind].aim_on = 0;
+					}
                 }
             }
             else if (d->e.type == SDL_MOUSEBUTTONUP)
@@ -163,6 +163,12 @@ void inc_fov(t_data *d, float inc)
 	printf("fov = %f\n", d->fov);
 }
 
+void *test(void *param)
+{
+		printf("Hey, im tested\n");
+		return (NULL);
+}
+
 void handle_poll_event(t_data *d)
 {
     while (SDL_PollEvent(&d->e))
@@ -222,6 +228,9 @@ void handle_poll_event(t_data *d)
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
+				set_sprite_callback(&d->mobs[0].sprite, test, NULL);
+				load_anim(&d->mobs[0].sprite, d->time, ANIM_MOB_MELEE);
+				//d->mobs[0].sprite.idle_anim = ANIM_MOB_DEATH;
 				// printf("checking room\n");
 				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");

@@ -13,6 +13,7 @@ t_ssprite    sprite_init_afrit2(t_img src_img);
 void load_anim(t_ssprite *sprite, int time, int anim_id);
 void process_anim(t_ssprite *sprite, int time);
 void process_mobs_anim(t_data *d);
+void set_sprite_callback(t_ssprite *sprite, void *(*funct)(void *), void *param);
 
 
 

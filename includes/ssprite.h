@@ -80,7 +80,8 @@ typedef struct					s_ssprite
 								int			current_anim;
 								int			idle_anim;
 								int time;
-
+								void	*(*callback)(void*);
+								void	*param;
 }								t_ssprite;
 
 #endif

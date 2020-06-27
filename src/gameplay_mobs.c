@@ -63,10 +63,13 @@ void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse)
 void shoot_gun(t_data *d, t_weapon *weapon)
 {
 	t_ray sorted[NB_MAX_OBJ];
+	t_mob *origin;
 
 	sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
 	if (sorted[0].dist < 10 && sorted[0].room_id == TYPE_MOB)
 	{
+		origin = (t_mob*)sorted[0].obj_ref->origin;
+		printf("mob hit speed = %f\n", origin->speed);
 		repulse_obj(d, sorted[0].obj_ref, 0.02, 5);
 	}
 }

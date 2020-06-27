@@ -1,23 +1,16 @@
 WALL LIST
-WALL_COUNT 7
-id : 0 ; p1 : 49,38 ; p2 : 6,39 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 1 ; p1 : 6,39 ; p2 : 1,30 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 2 ; p1 : 1,30 ; p2 : 3,7 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 3 ; p1 : 3,7 ; p2 : 7,1 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 4 ; p1 : 7,1 ; p2 : 33,18 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 5 ; p1 : 33,18 ; p2 : 50,33 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 6 ; p1 : 50,33 ; p2 : 49,38 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+WALL_COUNT 0
 
 ROOM LIST
-ROOM_COUNT 1
-id : 0 ; nb_wall : 7 ; wall_ref_range : 0,7 ; height : 20,30 ; floor_text : 0 ; 
+ROOM_COUNT 0
 
 
 ICON LIST
-ICON_COUNT 0
+ICON_COUNT 1
+id : 1 ; pos : 46,56 ; 
 
 
 WALL_REF MAP
 MAP_SIZE 30,30
-PLAYER_SPAWN 36,31
+PLAYER_SPAWN 5,7
 
