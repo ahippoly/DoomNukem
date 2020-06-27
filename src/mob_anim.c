@@ -19,30 +19,6 @@ SDL_Rect    print_mob(SDL_Rect dstdim, int x, int y, int z)
     return (dstdim);
 }
 
-void    copy_frame(t_sprite sprite, SDL_Rect size)
-{
-    SDL_Point pos;
-    SDL_Point pos2;
-    SDL_Point frame_max;
-
-    frame_max.x = sprite.displayed_part.x + size.w;
-    frame_max.y = sprite.displayed_part.y + size.h;
-
-    pos.y = sprite.displayed_part.y;
-    while (pos.y < frame_max.y)
-    {
-        pos.x = sprite.displayed_part.x;
-        pos2.x = 0;
-        while (pos.x < frame_max.x)
-        {
-            sprite.pixels_dst[pos2.x + pos2.y] = sprite.pixels[pos.x + pos.y];
-            pos.x++;
-        }
-        pos2.y += sprite.frame_size.w;
-        pos.y += sprite.total_size.w;
-    }
-}
-
 void    mob_anim(t_data *d)
 {
     SDL_Rect srcdim;
