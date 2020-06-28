@@ -6,21 +6,21 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 13:29:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/27 21:11:32 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/28 16:30:00 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MOBS_H
 # define MOBS_H
 
-# define DEMON_ICON_ID 1
-# define DEMON_PV 100
-# define DEMON_ATTACK 10
-# define DEMON_ATTACK_DELAY 1000
-# define DEMON_ATTACK_RANGE 1
-# define DEMON_MOVE_SPEED 1
-# define DEMON_AGGRO_RANGE 8
-# define DEMON_SIZE 0.5
+# define AFRIT_ICON_ID 1
+# define AFRIT_PV 100
+# define AFRIT_ATTACK 10
+# define AFRIT_ATTACK_DELAY 3000
+# define AFRIT_ATTACK_RANGE 2
+# define AFRIT_MOVE_SPEED 1
+# define AFRIT_AGGRO_RANGE 8
+# define AFRIT_SIZE 0.5
 
 # define PYRO_ICON_ID 2
 # define PYRO_PV 100

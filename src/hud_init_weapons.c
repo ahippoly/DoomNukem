@@ -6,8 +6,9 @@ int				init_weapon_0(t_data *d, t_hud *hud)
 	hud->perso_weapon[0]->name = WEAPON_NAME_0;
 	hud->perso_weapon[0]->ammo_left = 0;
 	hud->perso_weapon[0]->capacity = 50;
-	hud->perso_weapon[0]->dammage = 0;
-	hud->perso_weapon[0]->range = 0;
+	hud->perso_weapon[0]->dammage = 10;
+	hud->perso_weapon[0]->range = 10;
+	hud->perso_weapon[0]->z_force = 0.03;
 	if (!(hud->perso_weapon[0]->surface = SDL_LoadBMP(WEAPON_PATH_0)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());

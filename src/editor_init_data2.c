@@ -21,8 +21,8 @@ void init_img(t_env *env)
     env->being_placed = NULL;
     env->icon_list_size = ICON_ARRAY_SIZE;
     env->img_list[IMG_PLAYER] = bmp_to_texture(IMG_PATH_0, env->rend);
-    env->img_list[IMG_DEMON] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h);
-	SDL_SetTextureBlendMode(env->img_list[IMG_DEMON], SDL_BLENDMODE_BLEND);
+    env->img_list[IMG_AFRIT] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h);
+	SDL_SetTextureBlendMode(env->img_list[IMG_AFRIT], SDL_BLENDMODE_BLEND);
     env->img_list[IMG_ORC] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_PYRO].dst_w, env->sprites[SPRITE_ID_PYRO].dst_h);
 	SDL_SetTextureBlendMode(env->img_list[IMG_ORC], SDL_BLENDMODE_BLEND);
     env->img_list[IMG_KEY] = bmp_to_texture(IMG_PATH_3, env->rend);

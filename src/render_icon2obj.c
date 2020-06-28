@@ -7,18 +7,19 @@ t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 {
 	t_mob mob;
 
-	mob.life = DEMON_PV;
-	mob.dmg_per_hit = DEMON_ATTACK;
-	mob.attack_delay = DEMON_ATTACK_DELAY;
-	mob.attack_dist = DEMON_ATTACK_RANGE;
-	mob.speed = DEMON_MOVE_SPEED;
-	mob.aggro_range = DEMON_AGGRO_RANGE;
-	mob.size = DEMON_SIZE;
+	mob.life = AFRIT_PV;
+	mob.dmg_per_hit = AFRIT_ATTACK;
+	mob.attack_delay = AFRIT_ATTACK_DELAY;
+	mob.attack_dist = AFRIT_ATTACK_RANGE;
+	mob.speed = AFRIT_MOVE_SPEED;
+	mob.aggro_range = AFRIT_AGGRO_RANGE;
+	mob.size = AFRIT_SIZE;
 	mob.pos.x = (float)pos.x / UNIT;
 	mob.pos.y = (float)pos.y / UNIT;
 	mob.sprite = sprite_init_afrit2(d->sprite_img[SPRITE_ID_AFRIT]);
 	mob.z_pos = 10;
 	mob.z_size = 1;
+	mob.attack_timer = 0;
 	return (mob);
 }
 
@@ -38,6 +39,7 @@ t_mob	add_mob_pyro(t_data *d, SDL_Point pos)
 	mob.sprite = sprite_init_pyro2(d->sprite_img[SPRITE_ID_PYRO]);
 	mob.z_pos = 10;
 	mob.z_size = 1;
+	mob.attack_timer = 0;
 	return (mob);
 }
 
@@ -84,7 +86,7 @@ void load_icons(t_data *d, t_map_data *map)
 	while (i < map->icon_count)
 	{
 		current = &map->icon_list[i];
-		if (current->id_ref == DEMON_ICON_ID)
+		if (current->id_ref == AFRIT_ICON_ID)
 			d->mobs[nb_mob++] = add_mob_demon(d, current->pos_i);
 		if (current->id_ref == PYRO_ICON_ID)
 			d->mobs[nb_mob++] = add_mob_pyro(d, current->pos_i);

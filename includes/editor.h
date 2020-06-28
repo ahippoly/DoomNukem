@@ -85,7 +85,7 @@
 # define NB_IMG 5
 
 # define IMG_PLAYER 0
-# define IMG_DEMON 1
+# define IMG_AFRIT 1
 # define IMG_ORC 2
 # define IMG_KEY 3
 # define IMG_HEAL_PACK 4

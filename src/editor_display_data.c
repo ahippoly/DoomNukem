@@ -26,7 +26,7 @@ void display_txt_img(t_env *env)
 
 void update_sprite_texture(t_env *env)
 {
-	SDL_UpdateTexture(env->img_list[IMG_DEMON], NULL, env->sprites[SPRITE_ID_AFRIT].dst, env->sprites[SPRITE_ID_AFRIT].dst_w * 4);
+	SDL_UpdateTexture(env->img_list[IMG_AFRIT], NULL, env->sprites[SPRITE_ID_AFRIT].dst, env->sprites[SPRITE_ID_AFRIT].dst_w * 4);
 	SDL_UpdateTexture(env->img_list[IMG_ORC], NULL, env->sprites[SPRITE_ID_PYRO].dst, env->sprites[SPRITE_ID_PYRO].dst_w * 4);
 }
 

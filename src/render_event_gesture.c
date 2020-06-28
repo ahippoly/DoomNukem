@@ -9,47 +9,47 @@
 void event_gun_mouse(t_data *d)
 {
 	if  (d->e.type == SDL_MOUSEBUTTONDOWN)
-            {
-        		if (d->e.button.button == SDL_BUTTON_LEFT)
-                {
-					shoot_gun(d, d->actual_weapon);
-					d->sprite[d->gun_ind].time = SDL_GetTicks();
-					if (d->sprite[d->gun_ind].aim_on == 0)
-						d->sprite[d->gun_ind].index = FIRE;
-					else if (d->gun_ind == 3 || d->gun_ind == 4)
-						d->sprite[d->gun_ind].index = AIMFIRE;
-					d->sprite[d->gun_ind].on = 0;
-					d->sprite[d->gun_ind].anim_end = 0;
-					printf("sound played\n");
-					play_sound(d, d->gun_ind);
-                }
-           		else if (d->e.button.button == SDL_BUTTON_RIGHT)
-                {
-					if (d->gun_ind == 3 || d->gun_ind == 4)
-					{
-						d->sprite[d->gun_ind].time = SDL_GetTicks();
-						d->sprite[d->gun_ind].index = AIM;
-						d->sprite[d->gun_ind].on = 0;
-						if (d->sprite[d->gun_ind].aim_on == 0)
-							d->sprite[d->gun_ind].aim_on = 1;
-						else
-							d->sprite[d->gun_ind].aim_on = 0;
-					}
-                }
-            }
-            else if (d->e.type == SDL_MOUSEBUTTONUP)
-           {
-            if (d->e.button.button == SDL_BUTTON_LEFT)
-                {
-                d->sprite[d->gun_ind].anim_end = -1;
-                if (d->gun_ind > 2 && d->gun_ind < 6)
-                play_sound(d, d->gun_ind + 10);
-                }
-            else if (d->e.button.button == SDL_BUTTON_RIGHT)
-                {
-                d->sprite[d->gun_ind].on = -1;
-                }
-            }
+	{
+		if (d->e.button.button == SDL_BUTTON_LEFT)
+		{
+			shoot_gun(d, d->actual_weapon);
+			d->sprite[d->gun_ind].time = SDL_GetTicks();
+			if (d->sprite[d->gun_ind].aim_on == 0)
+				d->sprite[d->gun_ind].index = FIRE;
+			else if (d->gun_ind == 3 || d->gun_ind == 4)
+				d->sprite[d->gun_ind].index = AIMFIRE;
+			d->sprite[d->gun_ind].on = 0;
+			d->sprite[d->gun_ind].anim_end = 0;
+			printf("sound played\n");
+			play_sound(d, d->gun_ind);
+		}
+		else if (d->e.button.button == SDL_BUTTON_RIGHT)
+		{
+			if (d->gun_ind == 3 || d->gun_ind == 4)
+			{
+				d->sprite[d->gun_ind].time = SDL_GetTicks();
+				d->sprite[d->gun_ind].index = AIM;
+				d->sprite[d->gun_ind].on = 0;
+				if (d->sprite[d->gun_ind].aim_on == 0)
+					d->sprite[d->gun_ind].aim_on = 1;
+				else
+					d->sprite[d->gun_ind].aim_on = 0;
+			}
+		}
+	}
+	else if (d->e.type == SDL_MOUSEBUTTONUP)
+	{
+		if (d->e.button.button == SDL_BUTTON_LEFT)
+		{
+			d->sprite[d->gun_ind].anim_end = -1;
+			if (d->gun_ind > 2 && d->gun_ind < 6)
+			play_sound(d, d->gun_ind + 10);
+		}
+		else if (d->e.button.button == SDL_BUTTON_RIGHT)
+		{
+			d->sprite[d->gun_ind].on = -1;
+		}
+	}
 }
 
 void event_change_weapon(t_data *d)
@@ -229,7 +229,7 @@ void handle_poll_event(t_data *d)
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
 				// set_sprite_callback(&d->mobs[0].sprite, test, NULL);
-				// load_anim(&d->mobs[0].sprite, d->time, ANIM_MOB_MELEE);
+				load_anim(&d->mobs[0].sprite, d->time, ANIM_MOB_MELEE);
 				//d->mobs[0].sprite.idle_anim = ANIM_MOB_DEATH;
 				// printf("checking room\n");
 				// if (check_obj_room(d, d->player_pos) > -1)

@@ -1,7 +1,7 @@
 #ifndef GAMEPLAY_H
 # define GAMEPLAY_H
 
-# define MOB_MIN_RANGE 0.5
+# define MOB_MIN_RANGE 1
 
 # define WEAPON_DAMAGE 25
 

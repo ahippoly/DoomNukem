@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/27 19:40:24 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/28 18:10:48 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ t_ssprite    sprite_init_afrit2(t_img src_img)
     init_anim_afrit2(&afrit);
 	copy_frame_ssprite(&afrit, afrit.default_frame, afrit.frame_disp_size);
 	afrit.callback = NULL;
-	afrit.param = NULL;
     return (afrit);
 }
 
@@ -174,7 +173,6 @@ t_ssprite    sprite_init_pyro2(t_img src_img)
     init_anim_pyro2(&pyro);
 	copy_frame_ssprite(&pyro, pyro.default_frame, pyro.frame_disp_size);
 	pyro.callback = NULL;
-	pyro.param = NULL;
     return (pyro);
 }
 
@@ -197,7 +195,7 @@ void load_anim(t_ssprite *sprite, int time, int anim_id)
 	// copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->dst_w, sprite->dst_h}, sprite->src.pixels, (SDL_Rect){curr_anim_pos.x, curr_anim_pos.y, sprite->src.w, sprite->src.h});
 }
 
-void set_sprite_callback(t_ssprite *sprite, void *(*funct)(void *), void *param)
+void set_sprite_callback(t_ssprite *sprite, void (*funct)(t_param), t_param param)
 {
 	sprite->callback = funct;
 	sprite->param = param;

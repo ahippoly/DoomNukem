@@ -65,24 +65,35 @@ typedef struct      s_sprite
                     SDL_Texture     *text;
 }                   t_sprite;
 
-
+typedef	struct	s_param
+{
+	struct s_data *d;
+	union 
+	{
+		struct s_mob	*mob;
+	};
+	
+}				t_param;
 
 typedef struct					s_ssprite
 {
-								t_img src;
-								unsigned int *dst;
-								int dst_w;
-								int dst_h;
-								t_size frame_size;
-								t_size frame_disp_size;
-								SDL_Point nb_frame;
-								SDL_Point	default_frame;
-								t_anim		anim[NB_ANIM];
-								int			current_anim;
-								int			idle_anim;
-								int time;
-								void	*(*callback)(void*);
-								void	*param;
+	t_img						src;
+	unsigned int				*dst;
+	int							dst_w;
+	int							dst_h;
+	t_size						frame_size;
+	t_size						frame_disp_size;
+	SDL_Point					nb_frame;
+	SDL_Point					default_frame;
+	t_anim						anim[NB_ANIM];
+	int							current_anim;
+	int							idle_anim;
+	int							time;
+	void						(*callback)(t_param);
+	t_param						param;
 }								t_ssprite;
+
+
+
 
 #endif

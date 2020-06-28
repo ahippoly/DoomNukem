@@ -6,13 +6,14 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 05:25:25 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/24 20:09:34 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/28 17:52:58 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "bresenham.h"
 #include "proto_global.h"
+
 
 void	oct_ini(t_oct *oct, SDL_Point pos1, SDL_Point pos2, int pos[2][2])
 {

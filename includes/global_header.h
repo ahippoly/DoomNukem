@@ -93,7 +93,4 @@ typedef	struct 		s_rot
 
 
 
-
-
-
 #endif

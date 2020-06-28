@@ -149,7 +149,7 @@ typedef struct					s_mob
 {
                     int         life;
 					int			dmg_per_hit;
-					float		attack_delay;
+					int			attack_delay;
 					int			attack_timer;
 					float		aggro_range;
 					float		attack_dist;
@@ -174,8 +174,6 @@ typedef	struct				s_props
 				t_img		*text;
 				t_obj		*obj_ref;
 }							t_props;
-
-
 
 
 #endif

@@ -16,7 +16,7 @@ t_ssprite    sprite_init_pyro2(t_img src_img);
 void load_anim(t_ssprite *sprite, int time, int anim_id);
 void process_anim(t_ssprite *sprite, int time);
 void process_mobs_anim(t_data *d);
-void set_sprite_callback(t_ssprite *sprite, void *(*funct)(void *), void *param);
+void set_sprite_callback(t_ssprite *sprite, void (*funct)(t_param param), t_param param);
 void    copy_frame_scale(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size);
 
 
