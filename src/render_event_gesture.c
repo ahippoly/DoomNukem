@@ -165,8 +165,8 @@ void inc_fov(t_data *d, float inc)
 
 void *test(void *param)
 {
-		printf("Hey, im tested\n");
-		return (NULL);
+	printf("Hey, im tested\n");
+	return (NULL);
 }
 
 void handle_poll_event(t_data *d)
@@ -228,14 +228,15 @@ void handle_poll_event(t_data *d)
             }
             if (d->e.key.keysym.scancode == SDL_SCANCODE_Z)
             {
-				set_sprite_callback(&d->mobs[0].sprite, test, NULL);
-				load_anim(&d->mobs[0].sprite, d->time, ANIM_MOB_MELEE);
+				// set_sprite_callback(&d->mobs[0].sprite, test, NULL);
+				// load_anim(&d->mobs[0].sprite, d->time, ANIM_MOB_MELEE);
 				//d->mobs[0].sprite.idle_anim = ANIM_MOB_DEATH;
 				// printf("checking room\n");
 				// if (check_obj_room(d, d->player_pos) > -1)
 				// 	printf("Is in room\n");
 				//print_wall(d, d->map.wall_list[0]);
 
+				d->hud.hp -= 10;
 				// move_with_collide(d, &sorted[0].obj_ref->pos, get_angle(d->player_pos, sorted[0].obj_ref->pos), 10);
 				// t_ray  ray = check_perp_obj(&d->obj_list[0], d->player_pos);
 				// t_ray ray = check_inter_with_obj(&d->obj_list[2], d->rot_calc, d->player_pos, d->rot_calc);

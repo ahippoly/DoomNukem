@@ -39,25 +39,3 @@ void draw_prop_slice(t_data *d, t_props *prop, t_ray ray, int x)
 		draw_y.start++;
 	}
 }
-
-void check_props_collect(t_data *d, t_props *props, t_hud *hud)
-{
-	int i;
-	int nb_props;
-	t_props *prop;
-
-	nb_props = d->nb_props;
-	i = 0;
-	while (i < nb_props)
-	{
-		prop = &d->props[i];
-		if (prop->collectable && get_dist(prop->pos, d->player_pos) < prop->size)
-		{
-			if (prop->id == KEY_ITEM_ID)
-				hud->inv.key += 1;
-			del_from_array(d->props, &d->nb_props, prop, sizeof(t_props));
-			del_obj(d->obj_list, &d->nb_obj, prop->obj_ref);
-		}
-		i++;
-	}
-}

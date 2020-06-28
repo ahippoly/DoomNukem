@@ -24,6 +24,12 @@ void display_txt_img(t_env *env)
         txt_img2screen(env, env->txt_lst[i++]);
 }
 
+void update_sprite_texture(t_env *env)
+{
+	SDL_UpdateTexture(env->img_list[IMG_DEMON], NULL, env->sprites[SPRITE_ID_AFRIT].dst, env->sprites[SPRITE_ID_AFRIT].dst_w * 4);
+	SDL_UpdateTexture(env->img_list[IMG_ORC], NULL, env->sprites[SPRITE_ID_PYRO].dst, env->sprites[SPRITE_ID_PYRO].dst_w * 4);
+}
+
 void print_env2screen(t_env *env)
 {
     SDL_Rect tmp;
@@ -50,7 +56,7 @@ void print_env2screen(t_env *env)
     tmp = set_sdl_rect(TEXT_POS_X, TEXT_POS_Y, TEXT_SIZE_X, TEXT_SIZE_Y);
     SDL_RenderCopy(env->rend, env->text_list[env->selected_texture], NULL, &tmp);
     //tmp = set_sdl_rect(ICON_MOB_POS_X, ICON_MOB_POS_Y, ICON_MOB_SIZE_X, ICON_MOB_SIZE_Y);
-	SDL_UpdateTexture(env->img_list[IMG_DEMON], NULL, env->sprites[SPRITE_ID_AFRIT].dst, env->sprites[SPRITE_ID_AFRIT].dst_w * 4);
+	update_sprite_texture(env);
     tmp = set_sdl_rect(ICON_MOB_POS_X, ICON_MOB_POS_Y, ICON_MOB_SIZE_X, ICON_MOB_SIZE_Y);
     SDL_RenderCopy(env->rend, env->img_list[env->selected_mob], NULL, &tmp);
     SDL_RenderPresent(env->rend);

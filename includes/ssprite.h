@@ -19,7 +19,7 @@
 # define ANIM_WEAPON_RELOAD 0
 # define ANIM_WEAPON_SHOOT 1
 
-# define NB_SPRITE 1
+# define NB_SPRITE 2
 # define NB_SPRITE_MAX 30
 
 # define NB_FRAME 15

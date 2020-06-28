@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/27 17:59:22 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/27 19:40:24 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 void init_sprites_img(t_data *d)
 {
 	d->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_ARGB32);
-	// d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
+	d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
 }
 
 void init_sprites_img_env(t_env *e)
 {
 	e->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_RGBA32);
-	//e->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, , SDL_PIXELFORMAT_RGBA32);
+	e->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_RGBA32);
 }
 
 void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_frame)
@@ -32,11 +32,7 @@ void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_
 	i = 0;
 	while (i < nb_frame)
 	{
-		if (start.x >= sprite->nb_frame.x)
-		{
-			start.x = 0;
-			start.y += 1;
-		}
+		
 		if (start.y >= sprite->nb_frame.y)
 			return ;
 		anim->pos[i].x = start.x * sprite->frame_size.w + anim->offset.x;
@@ -45,6 +41,11 @@ void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_
 		anim->size[i].h = sprite->frame_disp_size.h;
 		start.x++;
 		i++;
+		if (start.x >= sprite->nb_frame.x)
+		{
+			start.x = 0;
+			start.y += 1;
+		}
 	}
 	
 }
@@ -69,11 +70,11 @@ void init_curr_frames(t_ssprite *sprite)
 static void      init_anim_afrit2(t_ssprite *afrit)
 {
     afrit->anim[ANIM_MOB_IDLE].nb_frame = 4;
-    afrit->anim[ANIM_MOB_IDLE].offset.x = -15;
+    afrit->anim[ANIM_MOB_IDLE].offset.x = -2;
     afrit->anim[ANIM_MOB_IDLE].offset.y = 0;
     afrit->anim[ANIM_MOB_IDLE].speed = 350;
-	afrit->frame_disp_size.w = afrit->frame_size.w / 1.6;
-	afrit->frame_disp_size.h = afrit->frame_size.h / 1.6;
+	afrit->frame_disp_size.w = afrit->frame_size.w / 1.8;
+	afrit->frame_disp_size.h = afrit->frame_size.h / 1.8;
 	init_anim_range_x(afrit, &afrit->anim[ANIM_MOB_IDLE], (SDL_Point){2, 1}, 4);
     afrit->anim[ANIM_MOB_MELEE].nb_frame = 3;
     afrit->anim[ANIM_MOB_MELEE].offset.x = 0;
@@ -96,28 +97,6 @@ static void      init_anim_afrit2(t_ssprite *afrit)
 	afrit->frame_disp_size.h = afrit->frame_size.h / 1.2;
 	init_curr_frames(afrit);
 }
-
-// t_sprite    sprite_init_afrit(void)
-// {
-//     t_sprite Afrit;
-
-//     Afrit.on = 0;
-//     Afrit.index = IDLE;
-//     Afrit.total_size.w = 1920;
-//     Afrit.total_size.h = 320;
-//     Afrit.nb_frame.x = 15;  
-//     Afrit.nb_frame.y = 2;  
-//     Afrit.frame_size.w = Afrit.total_size.w / Afrit.nb_frame.x;
-//     Afrit.frame_size.h = Afrit.total_size.h / Afrit.nb_frame.y;
-//     Afrit.time = 0;
-
-//     Afrit.displayed_part.x = 0;
-//     Afrit.displayed_part.y = 0;
-
-//     //Afrit.text = text;
-//     init_anim_afrit(&Afrit);
-//     return (Afrit);
-// }
 
 t_ssprite    sprite_init_afrit2(t_img src_img)
 {
@@ -145,6 +124,58 @@ t_ssprite    sprite_init_afrit2(t_img src_img)
 	afrit.callback = NULL;
 	afrit.param = NULL;
     return (afrit);
+}
+
+static void      init_anim_pyro2(t_ssprite *pyro)
+{
+    pyro->anim[ANIM_MOB_IDLE].nb_frame = 4;
+    pyro->anim[ANIM_MOB_IDLE].offset.x = -20;
+    pyro->anim[ANIM_MOB_IDLE].offset.y = 20;
+    pyro->anim[ANIM_MOB_IDLE].speed = 350;
+	pyro->frame_disp_size.w = pyro->frame_size.w / 1.3;
+	pyro->frame_disp_size.h = pyro->frame_size.h / 1.3;
+	init_anim_range_x(pyro, &pyro->anim[ANIM_MOB_IDLE], (SDL_Point){7, 1}, 4);
+    pyro->anim[ANIM_MOB_MELEE].nb_frame = 8;
+    pyro->anim[ANIM_MOB_MELEE].offset.x = 0;
+    pyro->anim[ANIM_MOB_MELEE].offset.y = 0;
+    pyro->anim[ANIM_MOB_MELEE].speed = 150;
+	init_anim_range_x(pyro, &pyro->anim[ANIM_MOB_MELEE], (SDL_Point){0, 0}, 8);
+    pyro->anim[ANIM_MOB_DEATH].nb_frame = 9;
+    pyro->anim[ANIM_MOB_DEATH].offset.x = 0;
+    pyro->anim[ANIM_MOB_DEATH].offset.y = 0;
+    pyro->anim[ANIM_MOB_DEATH].speed = 150;
+	init_anim_range_x(pyro, &pyro->anim[ANIM_MOB_DEATH], (SDL_Point){8, 0}, 9);
+	pyro->frame_disp_size.w = pyro->frame_size.w / 1;
+	pyro->frame_disp_size.h = pyro->frame_size.h / 1;
+	init_curr_frames(pyro);
+}
+
+t_ssprite    sprite_init_pyro2(t_img src_img)
+{
+    t_ssprite pyro;
+
+    pyro.current_anim = ANIM_MOB_IDLE;
+	pyro.idle_anim = ANIM_MOB_IDLE;
+    pyro.src.w = src_img.w;
+    pyro.src.h = src_img.h;
+    pyro.nb_frame.x = 10;  
+    pyro.nb_frame.y = 4;  
+    pyro.frame_size.w = pyro.src.w / pyro.nb_frame.x;
+    pyro.frame_size.h = pyro.src.h / pyro.nb_frame.y;
+	pyro.frame_disp_size.w = pyro.frame_size.w / 1;
+	pyro.frame_disp_size.h = pyro.frame_size.h / 1;
+	pyro.default_frame.x = 0;
+	pyro.default_frame.y = 0;
+    pyro.time = 0;
+	pyro.src = src_img;
+	pyro.dst_w = pyro.frame_disp_size.w;
+	pyro.dst_h = pyro.frame_disp_size.h;
+	pyro.dst = alloc_image(pyro.dst_w, pyro.dst_h);
+    init_anim_pyro2(&pyro);
+	copy_frame_ssprite(&pyro, pyro.default_frame, pyro.frame_disp_size);
+	pyro.callback = NULL;
+	pyro.param = NULL;
+    return (pyro);
 }
 
 void init_sprites(t_data *d)

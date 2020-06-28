@@ -27,10 +27,9 @@ int is_cursor_in_wall(SDL_Point cursor, SDL_Point p1, SDL_Point p2)
             swap_point(&p1, &p2);
         if (cursor.y < p2.y && cursor.y > p1.y && cursor.x > p1.x - WALL_HITBOX && cursor.x < p1.x + WALL_HITBOX)
             return(1);
-        return(0);
+        return (0);
     }
-    if (p2.x < p1.x)
-        swap_point(&p1, &p2);
+    sort_point_by_x(&p1, &p2);
     wall_pos_ratio = (float)(cursor.x - p1.x) / (p2.x - p1.x);
     delta_y = p2.y - p1.y;
     if (wall_pos_ratio < 0 || wall_pos_ratio > 1)

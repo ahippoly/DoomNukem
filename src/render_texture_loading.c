@@ -45,4 +45,5 @@ void init_rend_img(t_data *d)
 	d->img[IMG_DEMON] = read_img_surface(IMG_PATH_1, SDL_PIXELFORMAT_ARGB32);
 	d->img[IMG_ORC] = read_img_surface(IMG_PATH_2, SDL_PIXELFORMAT_ARGB32);
 	d->img[IMG_KEY] = read_img_surface(IMG_PATH_3, SDL_PIXELFORMAT_ARGB32);
+	d->img[IMG_HEAL_PACK] = read_img_surface(IMG_PATH_4, SDL_PIXELFORMAT_ARGB32);
 }

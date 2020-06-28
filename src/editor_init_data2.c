@@ -22,8 +22,11 @@ void init_img(t_env *env)
     env->icon_list_size = ICON_ARRAY_SIZE;
     env->img_list[IMG_PLAYER] = bmp_to_texture(IMG_PATH_0, env->rend);
     env->img_list[IMG_DEMON] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h);
-    env->img_list[IMG_ORC] = bmp_to_texture(IMG_PATH_2, env->rend);
+	SDL_SetTextureBlendMode(env->img_list[IMG_DEMON], SDL_BLENDMODE_BLEND);
+    env->img_list[IMG_ORC] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_PYRO].dst_w, env->sprites[SPRITE_ID_PYRO].dst_h);
+	SDL_SetTextureBlendMode(env->img_list[IMG_ORC], SDL_BLENDMODE_BLEND);
     env->img_list[IMG_KEY] = bmp_to_texture(IMG_PATH_3, env->rend);
+    env->img_list[IMG_HEAL_PACK] = bmp_to_texture(IMG_PATH_4, env->rend);
 }
 
 void init_env2(t_env *env)
@@ -51,6 +54,7 @@ void init_env(t_env *env)
     init_mouse_mode(env);
 	init_sprites_img_env(env);
 	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit2(env->sprite_img[SPRITE_ID_AFRIT]);
+	env->sprites[SPRITE_ID_PYRO] = sprite_init_pyro2(env->sprite_img[SPRITE_ID_PYRO]);
     init_img(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);

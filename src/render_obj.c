@@ -143,16 +143,50 @@ void init_obj_list(t_data *d)
 	}
 }
 
+void correct_origin_ref(t_obj *obj_list, int i, int nb_obj, t_obj *obj)
+{
+	int size;
+	int type;
+
+	if (obj->room_id == TYPE_PROP)
+	{
+		type = TYPE_PROP;
+		size = sizeof(t_props);
+	}
+	if (obj->room_id == TYPE_MOB)
+	{
+		type = TYPE_MOB;
+		size = sizeof(t_mob);
+	}
+	while (i < nb_obj)
+	{
+		if (obj->room_id == type)
+			obj->origin -= size;
+		i++;
+	}
+}
+
 void del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj)
 {
 	int i;
+	t_obj	*obj2;
 
 	i = 0;
 	while (i < *nb_obj)
 		if (&obj_list[i++] == obj)
 			break;
 	i--;
-	while (++i < *nb_obj)
-		obj_list[i - 1] = obj_list[i];
 	(*nb_obj)--;
+	//correct_origin_ref(obj_list, i, *nb_obj, obj);
+	while (i < *nb_obj)
+	{
+		obj = &obj_list[i + 1];
+		if (obj->room_id == TYPE_PROP)
+			((t_props*)obj->origin)->obj_ref -= 1;
+		if (obj->room_id == TYPE_MOB)
+			((t_mob*)obj->origin)->obj_ref -= 1;
+		obj_list[i] = obj_list[i + 1];
+		i++;
+	}
 }
+
