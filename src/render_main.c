@@ -54,7 +54,7 @@ int main(int ac, char **av)
 
 	init_sprite(&d);
     init_sound(&d);
-    play_sound(&d, MUS1); //Play Music
+    //play_sound(&d, MUS1); //Play Music
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -87,6 +87,7 @@ int main(int ac, char **av)
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d);
         print_data2screen(&d, &d.map, &d.hud);
+        //SDL_RenderClear(d.rend);
     }
     // free_render_env(&d);
 }
