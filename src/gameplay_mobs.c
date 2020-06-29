@@ -58,9 +58,11 @@ void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob)
 	{
 		mob = &mobs[i];
 		dist = get_dist(mob->obj_ref->pos, d->player_pos);
+		if (mob->life < -9998)
+			return ;
 		if (dist < mob->aggro_range && dist > MOB_MIN_RANGE)
 			move_with_collide(d , mob->obj_ref, get_angle(mob->obj_ref->pos, d->player_pos), mob->speed);
-		if (dist < mob->attack_dist && d->time - mob->attack_timer > mob->attack_delay && mob->life > -9999)
+		if (dist < mob->attack_dist && d->time - mob->attack_timer > mob->attack_delay)
 		{
 			// printf("diff time mob attack = %i\n", d->time - mob->attack_timer);
 			mob->attack_timer = d->time;
