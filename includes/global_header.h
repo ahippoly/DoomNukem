@@ -1,5 +1,5 @@
-#ifndef GLOABAL_HEADER_H
-# define GLOABAL_HEADER_H
+#ifndef GLOBAL_HEADER_H
+# define GLOBAL_HEADER_H
 
 # include <math.h>
 # include "SDL.h"

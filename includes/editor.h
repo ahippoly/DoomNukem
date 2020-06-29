@@ -296,6 +296,8 @@ void create_straight_line(unsigned int *pixels, SDL_Rect pos_size, t_size screen
 void create_straight_column(unsigned int *pixels, SDL_Rect pos_size, t_size screen_length, int color);
 void adapt_min(int *pos, int *length);
 void adapt_max(int *pos, int *length, int max);
+void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst);
+
 
 //editor_icon.c
 t_icon create_icon(t_point pos, t_size size, int id_ref);

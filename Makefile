@@ -25,7 +25,7 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						ttf_init.c  hud_init.c \
 						sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c \
 						gameplay_mobs.c ssprite.c gameplay_props.c gameplay_weapon.c \
-						menu_clean.c hud_clean.c exit.c )
+						menu_clean.c hud_clean.c exit.c bmp_reader_rotessie.c)
 
 ## HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \

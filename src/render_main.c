@@ -10,6 +10,8 @@ void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
     print_mini_map(d, map);
     SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
     SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
+
+    //SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &d->src_gun, &d->dst_gun);
 	update_hud_info(d);
 	render_hud_info(d);
 	render_hud_icons(d);
@@ -62,6 +64,7 @@ int					main(int ac, char **av)
 	// test.h = new_afr.dst_h;
 	// load_anim(&new_afr, d.time, ANIM_MOB_DEATH);
 	// new_afr.idle_anim = ANIM_MOB_MELEE;
+	d.gun_ind = 0;
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -84,10 +87,6 @@ int					main(int ac, char **av)
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
-		// test = (t_img){d.sprite[10].pixels_dst, (SDL_Rect){0,0,0,0}, d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h};
-		// process_anim(&new_afr, d.time);
-		// print_text_screen(d.p_screen, &test, (SDL_Rect){100, 100, 200, 200});
-		// print_text_screen(d.p_screen, d.texture[1], (SDL_Rect){200,200, 200, 200});
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
 		sprite_anim_gun(&d);
@@ -95,6 +94,7 @@ int					main(int ac, char **av)
         print_player_look_vector(&d, &d.map, d.rot);
         calc_n_disp_framerate(&d, d.p_screen);
         print_data2screen(&d, &d.map, &d.hud);
+        //SDL_RenderClear(d.rend);
     }
 	exit_env(&d);
 }

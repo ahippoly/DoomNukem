@@ -43,7 +43,8 @@ void    gun_idle_anim(t_data *d)
     dstdim = gun_dimension(dstdim, d);
 	d->src_gun = srcdim;
 	d->dst_gun = dstdim;
-    //SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
+	print_img_portion(d->p_screen, d->sprite[d->gun_ind].img, srcdim, dstdim);
+    
 }
 
 void    sprite_anim_gun(t_data *d)
@@ -68,8 +69,7 @@ void    sprite_anim_gun(t_data *d)
         dstdim = gun_dimension(dstdim, d);
 		d->src_gun = srcdim;
 		d->dst_gun = dstdim;
-		// printf("reapeated\n");
-        // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
+		print_img_portion(d->p_screen, d->sprite[d->gun_ind].img, srcdim, dstdim);
     }
     // else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 
     // (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)

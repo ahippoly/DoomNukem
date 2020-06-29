@@ -64,6 +64,7 @@ void print_sprite(t_sprite *sprite);
 void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size);
 SDL_Texture *t_img2sdl_text(SDL_Renderer *rend , t_img src);
 void			calc_n_disp_framerate(t_data *d, unsigned int *pix);
+//void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst); // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
 
 
 /* exit.c */

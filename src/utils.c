@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/27 18:04:09 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:12:08 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,72 @@ void del_from_array(void *list, int *size, void *to_remove, int obj_size)
 	ft_memmove2(list + obj_size * i, list + obj_size * (i + 1), (*size - i) * obj_size);
 }
 
+// void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_Rect pos_size)
+// {
+//     SDL_Point pos;
+//     SDL_Point pos2;
+//     SDL_Point frame_max;
+
+//     pos.y = pos_size.y * pos_size.w;
+// 	pos2.y = 0;
+// 	frame_max.y = dst_size.h * dst_size.w;
+//     while (pos2.y < frame_max.y)
+//     {
+//         pos.x = pos_size.x;
+//         pos2.x = 0;
+//         while (pos2.x < dst_size.w)
+//         {
+//         	dst[pos2.x + pos2.y] = src[pos.x + pos.y];
+// 			pos2.x++;
+//             pos.x++;
+//         }
+//         pos2.y += dst_size.w;
+//         pos.y += pos_size.w;
+//     }
+// }
+
+void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst) // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
+{
+	SDL_Point	end;
+	t_point		t_scale;
+	t_point		t_step;
+	int ty;
+	float tx_start;
+	int x_start;
+	unsigned int *pixels;
+
+
+	t_step.x = (float)src.w / dst.w;
+	t_step.y = (float)src.h / dst.h;
+	end.x = ft_min(dst.x + dst.w, WIN_SIZE_X);
+	end.y = ft_min(dst.y + dst.h, WIN_SIZE_Y) * WIN_SIZE_Y;
+	tx_start = 0;
+	if (dst.x < 0)
+		tx_start = t_step.x * -dst.x;
+	if (dst.y < 0)
+		t_scale.y = t_step.y * -dst.y;
+	dst.y = ft_max(dst.y, 0) * WIN_SIZE_Y;
+	x_start = ft_max(dst.x, 0);
+	pixels = (unsigned int*)text->pixels;
+	while (dst.y < end.y)
+	{
+		t_scale.x = tx_start;
+		ty = (int)t_scale.y * text->w;
+		dst.x = x_start;
+		while (dst.x < end.x)
+		{
+			//printf("dst : %d,%d, t_scale : %f,%f\n", dst.x, dst.y, t_scale.x, t_scale.y);
+			if (pixels[(int)t_scale.x + ty] != 0xFFFFFF)
+				p_tab[dst.x + dst.y] = pixels[(int)t_scale.x + ty];
+			t_scale.x += t_step.x;
+			dst.x++;
+		}
+		t_scale.y += t_step.y;
+		dst.y += WIN_SIZE_Y;
+	}
+
+}
+
 void print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw)
 {
 	SDL_Point	end;
@@ -273,6 +339,7 @@ void print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw)
 	float tx_start;
 	int x_start;
 	unsigned int *pixels;
+
 
 	t_step.x = (float)text->w / draw.w;
 	t_step.y = (float)text->h / draw.h;

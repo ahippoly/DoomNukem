@@ -12,6 +12,7 @@
 # include "props.h"
 # include "sound.h"
 # include "sprite.h"
+# include "bmp.h"
 
 typedef struct      s_data
 {
@@ -22,9 +23,7 @@ typedef struct      s_data
     SDL_Texture     *t_player_pos;
     SDL_Event       e;
     SDL_Rect        mini_map_player_pos;
-    t_img			texture[NB_TEXTURE];
-	t_img			img[NB_IMG];
-	t_img			sprite_img[NB_SPRITE];
+    
     t_map_data      map;
     const Uint8     *clavier;
     unsigned int    *p_screen;
@@ -49,31 +48,23 @@ typedef struct      s_data
     int             time;
 	float			diff_time;
     int             air_time;
-    t_ssprite       sprite_lst[NB_SPRITE_MAX];
 	int				nb_sprite;
 	/* world edit*/
 	t_wall			*grabbed_wall;
 	t_point			grab_pos;
 	float			grab_z;
 	/* floor drawing */
-	t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
-	t_props			props[NB_MAX_PROPS];
+
 	int				nb_props;
-	t_mob			mobs[NB_MAX_MOBS];
 	int				nb_mob;
-	t_obj			obj_list[NB_MAX_OBJ];
 	int				nb_obj;
-	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
 	int				nb_repulsed;
 	t_weapon		*actual_weapon;
 	int				bullet;
-	t_sprite        sprite[30];
-	t_ssprite		weapon_img[WEAPON_NB];
 	char			shoot_repeat;
     int             gun_ind;
     int             mob_ind;
     int             mobs_on_screen;
-	FMOD_SOUND		*sound[30];
 	FMOD_SYSTEM 	*system;
 	SDL_Texture		*displayed_gun;
 	SDL_Rect		src_gun;
@@ -90,6 +81,19 @@ typedef struct      s_data
     SDL_Texture     *menu_texture; //menu texture
 	t_menu			menu;
 	char			*argv;
+	t_img			texture[NB_TEXTURE];
+	t_img			img[NB_IMG];
+	t_img			sprite_img[NB_SPRITE];
+	FMOD_SOUND		*sound[30];
+    t_ssprite       sprite_lst[NB_SPRITE_MAX];
+	t_ssprite		weapon_img[WEAPON_NB];
+	t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
+	t_props			props[NB_MAX_PROPS];
+	t_mob			mobs[NB_MAX_MOBS];
+	t_obj			obj_list[NB_MAX_OBJ];
+	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
+	t_sprite        sprite[30];
+
 }                   t_data;
 
 typedef	struct		s_thread

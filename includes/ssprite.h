@@ -63,6 +63,7 @@ typedef struct      s_sprite
                     t_anim          anim[NB_ANIM];
                     int             nb_anim;
                     int             idle_animation;
+					t_img			*img;
                     SDL_Texture     *text;
 }                   t_sprite;
 
