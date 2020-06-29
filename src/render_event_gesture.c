@@ -75,35 +75,30 @@ void event_change_weapon(t_data *d)
             d->gun_ind = 1;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
-			// d->hud.current_weap_id = 1;
     }
     if (d->clavier[SDL_SCANCODE_3])
     {
             d->gun_ind = 2;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
-			// d->hud.current_weap_id = 2;
     }
     if (d->clavier[SDL_SCANCODE_4])
     {
             d->gun_ind = 3;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
-			// d->hud.current_weap_id = 3;
     }
     if (d->clavier[SDL_SCANCODE_5])
     {
             d->gun_ind = 4;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
-			// d->hud.current_weap_id = 4;
     }
     if (d->clavier[SDL_SCANCODE_6])
     {
             d->gun_ind = 5;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
-			// d->hud.current_weap_id = 5;
     }
     if (d->clavier[SDL_SCANCODE_8]) //Test mob animation
     {
@@ -146,7 +141,12 @@ void handle_key_event(t_data *d)
         d->z_offset += 0.05;
     if (d->clavier[SDL_SCANCODE_O])
         d->z_offset -= 0.05;
-	
+	if (d->clavier[SDL_SCANCODE_L]) // simuler la mort du perso
+	{
+		d->hud.hp = 0;
+		ft_putendl("death");
+	}
+	printf("");
 	event_change_weapon(d);
     if (d->clavier[SDL_SCANCODE_ESCAPE])
         d->quit = 1;

@@ -8,7 +8,8 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c \
 			editor_map_input.c ssprite.c render_texture_loading.c \
 			ttf_init.c  \
-			menu_clean.c hud_clean.c exit.c)
+			menu_clean.c menu_button.c menu_exec.c hud_clean.c exit.c \
+			gameover_background.c gameover_button.c gameover_main.c)
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
@@ -25,7 +26,8 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						ttf_init.c  hud_init.c \
 						sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c \
 						gameplay_mobs.c ssprite.c\
-						menu_clean.c hud_clean.c exit.c )
+						menu_clean.c menu_button.c menu_exec.c hud_clean.c exit.c \
+						gameover_background.c gameover_button.c gameover_main.c)
 
 ## HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
@@ -67,7 +69,8 @@ MENU_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						hud_weapon.c hud_init_weapons.c hud_perso.c hud_init.c \
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 						menu_main.c menu_background.c menu_button.c menu_exec.c ttf_init.c \
-						menu_clean.c hud_clean.c exit.c ) ##
+						menu_clean.c hud_clean.c exit.c \
+						gameover_background.c gameover_button.c gameover_main.c) ##
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/

@@ -3,15 +3,11 @@
 int				init_hud_data(t_data *d)
 {
 	d->hud.current_weap_id = d->gun_ind; // initialisation de l'arme, a enlever si on commence à 0
-	printf("weap id 1 = %i\n", d->hud.current_weap_id);
-	// if (d->hud.current_weap_id < 0 || d->hud.current_weap_id >= 7)
-		// d->hud.current_weap_id = -1;
-	
-	d->hud.current_perso_id = 7; // recuperer dynamiquement les perso 
+	d->hud.current_perso_id = 1; // recuperer dynamiquement les perso 
 	if (d->hud.current_perso_id != PERSO_F || d->hud.current_perso_id != PERSO_M)
 		d->hud.current_perso_id = PERSO_F; // recuperer dynamiquement les perso 
 	init_weapons(d, &d->hud);
-	printf("weap id = %i\n", d->hud.current_weap_id);
+	// printf("weap id = %i\n", d->hud.current_weap_id);
 	d->hud.perso_weapon[d->hud.current_weap_id]->ammo_left = d->hud.perso_weapon[d->hud.current_weap_id]->capacity;
 	init_perso(d, &d->hud);
 	init_health_icon(d, &d->hud);

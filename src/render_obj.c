@@ -25,7 +25,7 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	// printf("wall z_step : pos = %f, size = %f\n", obj.z_step.pos, obj.z_step.size);
 	obj.z_text_offset = 0;
 	obj.can_collide = wall->can_collide;
-	printf("wall collide = %i\n", wall->can_collide);
+	// printf("wall collide = %i\n", wall->can_collide);
 	obj.room_id = wall->room_id_ref;
 	obj.rotation = calc_sin_cos_rot(wall->rotation);
 	obj.z_ground = -1;
@@ -127,7 +127,7 @@ void init_obj_list(t_data *d)
 	while (i < d->map.wall_count)
 	{
 		d->obj_list[j++] = convert_wall_to_obj(d, &d->map.wall_list[i++]);
-		printf("wall obj created , i = %i wall_count = %i\n", i, d->map.wall_count);
+		// printf("wall obj created , i = %i wall_count = %i\n", i, d->map.wall_count);
 	}
 	i = 0;
 	while (i < d->nb_props)

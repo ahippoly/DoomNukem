@@ -65,6 +65,7 @@ int					render_key_info(t_data *d, t_hud *hud, SDL_Rect pos);
 void				update_hud_info(t_data *d);
 void				render_hud_info(t_data *d);
 void				render_hud_icons(t_data *d);
+void				render_hud(t_data *d);
 
 
 #endif

@@ -12,7 +12,7 @@ int			is_mouse_on_target(t_data *d, SDL_Rect pos)
 	return (0);
 }
 
-char		**malloc_tab(t_data *d, int n)
+char		**malloc_argv(t_data *d, int n)
 {
 	char	**tab;
 
@@ -23,27 +23,28 @@ char		**malloc_tab(t_data *d, int n)
 
 int			catch_btn_event(t_data *d, int ac, char **av)
 {
-	d->menu.argv_tab = malloc_tab(d, 3);
-	ft_bzero(d->menu.argv_tab, sizeof(d->menu.argv_tab));
-	d->menu.argv_tab[0] = NULL;
-	if (av[1]) // dans le cas ou une map est passée en parametre
-		d->menu.argv_tab[1] = ft_strdup(av[1]); 
-	else
-		d->menu.argv_tab[1] = NULL;
-	d->menu.argv_tab[2] = NULL;
-	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1)
+	// d->menu.argv_tab = malloc_tab(d, 3);
+	// ft_bzero(d->menu.argv_tab, sizeof(d->menu.argv_tab));
+	// d->menu.argv_tab[0] = NULL;
+	// if (av[1]) // dans le cas ou une map est passée en parametre
+	// 	d->menu.argv_tab[1] = ft_strdup(av[1]); 
+	// else
+	// 	d->menu.argv_tab[1] = NULL;
+	// d->menu.argv_tab[2] = NULL;
+	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1) //play
 	{
 		d->menu.argv_tab[0] = ft_strdup("./doom-nukem");
 		if (execv("./doom-nukem", d->menu.argv_tab) && access("./doom-nukem", W_OK))
 			return (exit_menu(d));
 	}
-	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 100, 200, 50)) == 1)
+	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 100, 200, 50)) == 1) //editor
 	{
+		printf("d->menu.argv_tab[1] : %s\n", d->menu.argv_tab[1]);
 		d->menu.argv_tab[0] = ft_strdup("./editor");
 		if (execv("./editor", d->menu.argv_tab) && access("./editor", W_OK))
 			return (exit_menu(d));
 	}
-	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 200, 200, 50)) == 1)
+	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 200, 200, 50)) == 1) //exit
 		return (exit_menu(d));
 	return (0);
 }

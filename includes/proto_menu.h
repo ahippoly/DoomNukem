@@ -21,6 +21,23 @@ int				exit_menu(t_data *d);
 
 /* menu_exec */
 
+int				is_mouse_on_target(t_data *d, SDL_Rect pos);
 int				catch_btn_event(t_data *d, int ac, char **av);
+char			**malloc_argv(t_data *d, int n);
+
+
+/* gameover_background.c */
+
+int				init_gameover_background(t_data *d);
+int				put_gameover_bg(t_data *d);
+
+/* gameover_button.c */
+
+int				render_gameover_button(t_data *d);
+int				catch_over_btn_event(t_data *d);
+
+/* proto_menu.c */
+
+int				render_gameover(t_data *d);
 
 #endif

@@ -42,6 +42,19 @@ int		init_menu(t_data *d)
 	return (0);
 }
 
+int		init_gameover(t_data *d, char **av) // doit etre initialisée après init_menu car partage la meme structure t_menu !
+{
+	d->p_gameover = NULL;
+    d->gameover_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
+	d->p_gameover = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
+    d->menu.argv_tab = malloc_argv(d, 3);
+	ft_bzero(d->menu.argv_tab, sizeof(d->menu.argv_tab));
+	d->menu.argv_tab[2] = NULL; //secu utile ?
+	ft_bzero(d->p_gameover, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+	init_gameover_background(d);
+	return (0);
+}
+
 int		init_hud(t_data *d)
 {
     d->hud_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
@@ -54,15 +67,23 @@ int		init_hud(t_data *d)
 
 void init_data(t_data *d, int ac, char **av)
 {
+	ft_putendl("init data...");
     init_sdl_ressources_rend(d);
 	init_sprite(d);
 	init_hud(d);
 	init_menu(d);
+	init_gameover(d, av); //doit etre avant le check des arguments
 	init_ttf(d);
 	if (ac > 1)
+	{
+		d->menu.argv_tab[1] = ft_strdup(av[1]);
 		d->map = read_map(av[1]);
+	}
 	else
+	{
+		d->menu.argv_tab[1] = ft_strdup("maps/editor_map_0");
     	d->map = read_map("maps/editor_map_0");
+	}
 	if (d->map.is_valid == 0)
 		exit_with_msg("error : wrong map file\n");
     init_mini_map(d, &d->map);
