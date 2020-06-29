@@ -25,7 +25,8 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						ttf_init.c  hud_init.c \
 						sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c \
 						gameplay_mobs.c ssprite.c gameplay_props.c gameplay_weapon.c \
-						menu_clean.c hud_clean.c exit.c bmp_reader_rotessie.c)
+						menu_clean.c hud_clean.c exit.c bmp_reader_rotessie.c \
+						sprite_init_gun2.c sprite_init_gun3.c sprite_init_gun4.c)
 
 ## HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
@@ -67,7 +68,7 @@ MENU_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						hud_weapon.c hud_init_weapons.c hud_perso.c hud_init.c \
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 						menu_main.c menu_background.c menu_button.c menu_exec.c ttf_init.c \
-						menu_clean.c hud_clean.c exit.c ) ##
+						menu_clean.c hud_clean.c exit.c) ##
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/

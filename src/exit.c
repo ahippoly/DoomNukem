@@ -3,7 +3,7 @@
 void exit_env(t_data *d)
 {
 	ft_putendl("exiting...");
-	
+
 	/* menu */
 	free_menu(d);
 	
@@ -11,8 +11,12 @@ void exit_env(t_data *d)
 	free_hud(&d->hud);
 
 	/* sprite */
+	clean_sprite_gun(d);
 
 	/* editor */
+
+	/* sound*/
+	clean_sounds(d);
 
 	/* doom */
 

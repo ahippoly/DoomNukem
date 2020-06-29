@@ -5,6 +5,6 @@
 
 void    init_sound(t_data *d);
 int     play_sound(t_data *d, int index);
-void	stop_sound(t_data *d, int index);
+void	clean_sounds(t_data *d);
 
 #endif

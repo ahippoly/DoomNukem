@@ -4,8 +4,10 @@ SDL_Rect    get_gun_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos)
 {
     srcdim.x = d->sprite[d->gun_ind].frame_size.w * pos.x;
     srcdim.y = d->sprite[d->gun_ind].frame_size.h * pos.y;
-    srcdim.w = d->sprite[d->gun_ind].frame_size.w - d->sprite[d->gun_ind].anim[d->sprite[d->gun_ind].index].offset.x;
-    srcdim.h = d->sprite[d->gun_ind].frame_size.h - d->sprite[d->gun_ind].anim[d->sprite[d->gun_ind].index].offset.y;
+    srcdim.w = d->sprite[d->gun_ind].frame_size.w - 
+        d->sprite[d->gun_ind].anim[d->sprite[d->gun_ind].index].offset.x;
+    srcdim.h = d->sprite[d->gun_ind].frame_size.h - 
+        d->sprite[d->gun_ind].anim[d->sprite[d->gun_ind].index].offset.y;
     return (srcdim);
 }
 
@@ -17,7 +19,8 @@ SDL_Rect    gun_dimension(SDL_Rect dstdim, t_data *d)
     dstdim.h = HALF_WIN_SIZE_Y + d->sprite[d->gun_ind].size.y;
     if (d->gun_ind == 5)
         dstdim.x += 40;
-    if (d->gun_ind == 3 && (d->sprite[d->gun_ind].index == AIM || d->sprite[d->gun_ind].index == AIMFIRE))
+    if (d->gun_ind == 3 && (d->sprite[d->gun_ind].index == AIM || 
+        d->sprite[d->gun_ind].index == AIMFIRE))
         dstdim.y += 80;
     return (dstdim);
 }
@@ -44,7 +47,6 @@ void    gun_idle_anim(t_data *d)
 	d->src_gun = srcdim;
 	d->dst_gun = dstdim;
 	print_img_portion(d->p_screen, d->sprite[d->gun_ind].img, srcdim, dstdim);
-    
 }
 
 void    sprite_anim_gun(t_data *d)

@@ -7,17 +7,17 @@
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d);
 
 //sprite_init_gun.c
-t_sprite    sprite_init_AR(t_img *img);
-t_sprite    sprite_init_DD(t_img *img);
-t_sprite    sprite_init_LMG(t_img *img);
-t_sprite    sprite_init_Revolver(t_img *img);
-t_sprite    sprite_init_SSG(t_img *img);
-t_sprite    sprite_init_Melee(t_img *img);
-void        load_sprite_gun(t_data *d);
+t_sprite    sprite_init_ar(t_img *img);
+t_sprite    sprite_init_dd(t_img *img);
+t_sprite    sprite_init_lmg(t_img *img);
+t_sprite    sprite_init_revolver(t_img *img);
+t_sprite    sprite_init_ssg(t_img *img);
+t_sprite    sprite_init_melee(t_img *img);
+void        clean_sprite_gun(t_data *d);
+int        load_sprite_gun(t_data *d);
 
 //sprite_init_mob.c
-void        load_sprite_mob(t_data *d);
-t_sprite    sprite_init_Zombie(t_img *img);
+int        load_sprite_mob(t_data *d);
 
 //gun_anim.c
 void        sprite_anim_gun(t_data *d);

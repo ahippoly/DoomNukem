@@ -170,19 +170,22 @@ void    duplicate_mob(t_data *d, t_img *img, t_img *img2)
     }
 }
 
-void    load_sprite_mob(t_data *d)
+int    load_sprite_mob(t_data *d)
 {
     t_img   *img[2];
     
-    img[0] = ft_memalloc(sizeof(t_img));
+    if (!(img[0] = ft_memalloc(sizeof(t_img))))
+        return (EXIT_FAILURE);
     bmp_reader("Sprites/Mobs/pyro.bmp", img[0]);
     d->sprite[PYRO] = sprite_init_pyro();
 
-    img[1] = ft_memalloc(sizeof(t_img));
+    if (!(img[1] = ft_memalloc(sizeof(t_img))))
+        return (EXIT_FAILURE);
     bmp_reader("Sprites/Mobs/afrit.bmp", img[1]);
     d->sprite[AFRIT] = sprite_init_afrit();
 
     //duplicate_mob(d, img, img2);
     //load_Pyro(d);
     //load_Afrit(d);
+    return (0);
 }
