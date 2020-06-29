@@ -28,7 +28,7 @@
 
 /* weapons */
 
-# define WEAPON_NB		5
+# define WEAPON_NB		6
 # define WEAPON_PATH_0	"img/hud/revolver.bmp"
 # define WEAPON_PATH_1	"img/hud/ssg.bmp"
 # define WEAPON_PATH_2	"img/hud/ar.bmp"
@@ -40,6 +40,7 @@
 # define WEAPON_NAME_2	"AR"
 # define WEAPON_NAME_3	"LMG"
 # define WEAPON_NAME_4	"DEATH_DEALER"
+# define WEAPON_NAME_5	"FIST"
 
 # define WEAPON_DEFAULT 0
 
@@ -86,8 +87,11 @@ typedef struct		s_weapon
 	float			z_force;
 	float			range; // portée d'une arme
 	int				ammo_left; // munitions restantes
-	char			*name;
 	int				capacity; // capacité max de chargement
+	int				reload_delay;
+	char			is_reloading;
+	char			shoot_repeat;
+	char			*name;
 	SDL_Surface 	*surface;
 	SDL_Texture 	*texture;
 }					t_weapon;

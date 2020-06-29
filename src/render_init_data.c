@@ -85,6 +85,7 @@ void init_data(t_data *d, int ac, char **av)
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
 	d->nb_repulsed = 0;
 	d->bullet = 0;
+	d->shoot_repeat = 0;
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
 	init_sprites_img(d);

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/22 13:29:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/28 16:30:00 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/29 02:05:30 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define PYRO_ICON_ID 2
 # define PYRO_PV 100
 # define PYRO_ATTACK 10
-# define PYRO_ATTACK_DELAY 1000
+# define PYRO_ATTACK_DELAY 2000
 # define PYRO_ATTACK_RANGE 1
 # define PYRO_MOVE_SPEED 1
 # define PYRO_AGGRO_RANGE 8

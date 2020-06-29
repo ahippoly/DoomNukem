@@ -76,6 +76,7 @@ int					main(int ac, char **av)
         gravity(&d);
 		create_obj_raybox(&d);
 		process_mobs_gameplay(&d);
+		process_gun(d.actual_weapon, d.time, &d);
 		check_props_collect(&d, d.props, &d.hud);
 
 		//draw_all_floor_slice(&d);

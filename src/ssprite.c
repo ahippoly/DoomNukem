@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/28 18:10:48 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/28 21:49:27 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void init_sprites_img(t_data *d)
 {
 	d->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_ARGB32);
 	d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
+	//d->sprite_img[SPRITE_ID_REVOLVER] = read_img_surface(WEAPON_PATH_0, SDL_PIXELFORMAT_ARGB32);
 }
 
 void init_sprites_img_env(t_env *e)
@@ -62,9 +63,7 @@ void init_curr_frames(t_ssprite *sprite)
 
 	i = 0;
 	while (i < NB_ANIM)
-	{
 		sprite->anim[i++].current_frame = 0;
-	}
 }
 
 static void      init_anim_afrit2(t_ssprite *afrit)

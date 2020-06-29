@@ -68,6 +68,8 @@ typedef struct      s_data
 	t_weapon		*actual_weapon;
 	int				bullet;
 	t_sprite        sprite[30];
+	t_ssprite		weapon_img[WEAPON_NB];
+	char			shoot_repeat;
     int             gun_ind;
     int             mob_ind;
     int             mobs_on_screen;

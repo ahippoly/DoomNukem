@@ -27,6 +27,7 @@ int			init_weapons(t_data *d, t_hud *hud)
 	init_weapon_2(d, hud);
 	init_weapon_3(d, hud);
 	init_weapon_4(d, hud);
+	init_weapon_5(d, hud);
 	d->actual_weapon = hud->perso_weapon[WEAPON_DEFAULT];
 	return (0);
 }

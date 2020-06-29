@@ -6,41 +6,25 @@
 #include "proto_global.h"
 
 
+
 void event_gun_mouse(t_data *d)
 {
 	if  (d->e.type == SDL_MOUSEBUTTONDOWN)
 	{
 		if (d->e.button.button == SDL_BUTTON_LEFT)
 		{
-			shoot_gun(d, d->actual_weapon);
-			d->sprite[d->gun_ind].time = SDL_GetTicks();
-			if (d->sprite[d->gun_ind].aim_on == 0)
-				d->sprite[d->gun_ind].index = FIRE;
-			else if (d->gun_ind == 3 || d->gun_ind == 4)
-				d->sprite[d->gun_ind].index = AIMFIRE;
-			d->sprite[d->gun_ind].on = 0;
-			d->sprite[d->gun_ind].anim_end = 0;
-			printf("sound played\n");
-			play_sound(d, d->gun_ind);
+			shoot_attempt(d, d->actual_weapon);
 		}
 		else if (d->e.button.button == SDL_BUTTON_RIGHT)
 		{
-			if (d->gun_ind == 3 || d->gun_ind == 4)
-			{
-				d->sprite[d->gun_ind].time = SDL_GetTicks();
-				d->sprite[d->gun_ind].index = AIM;
-				d->sprite[d->gun_ind].on = 0;
-				if (d->sprite[d->gun_ind].aim_on == 0)
-					d->sprite[d->gun_ind].aim_on = 1;
-				else
-					d->sprite[d->gun_ind].aim_on = 0;
-			}
+			aim_gun(d);
 		}
 	}
 	else if (d->e.type == SDL_MOUSEBUTTONUP)
 	{
 		if (d->e.button.button == SDL_BUTTON_LEFT)
 		{
+			d->shoot_repeat = 0;
 			d->sprite[d->gun_ind].anim_end = -1;
 			if (d->gun_ind > 2 && d->gun_ind < 6)
 			play_sound(d, d->gun_ind + 10);
@@ -56,25 +40,21 @@ void event_change_weapon(t_data *d)
 {
 	if (d->clavier[SDL_SCANCODE_R])
     {
-            d->sprite[d->gun_ind].time = SDL_GetTicks();
-            d->sprite[d->gun_ind].index = RELOAD;
-            d->sprite[d->gun_ind].on = 0;
-            d->sprite[d->gun_ind].aim_on = 0;
-            d->sprite[d->gun_ind].anim_end = 0;
-            if (d->gun_ind > 0 && d->gun_ind < 5)
-            play_sound(d, d->gun_ind + 5);
+		reload_weapon(d, d->actual_weapon);
     }
 	if (d->clavier[SDL_SCANCODE_1])
     {
             d->gun_ind = 0;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
+			d->actual_weapon = d->hud.perso_weapon[0];
     }
     if (d->clavier[SDL_SCANCODE_2])
     {
             d->gun_ind = 1;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
+			d->actual_weapon = d->hud.perso_weapon[1];
 			// d->hud.current_weap_id = 1;
     }
     if (d->clavier[SDL_SCANCODE_3])
@@ -82,6 +62,7 @@ void event_change_weapon(t_data *d)
             d->gun_ind = 2;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
+			d->actual_weapon = d->hud.perso_weapon[2];
 			// d->hud.current_weap_id = 2;
     }
     if (d->clavier[SDL_SCANCODE_4])
@@ -89,6 +70,7 @@ void event_change_weapon(t_data *d)
             d->gun_ind = 3;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
+			d->actual_weapon = d->hud.perso_weapon[3];
 			// d->hud.current_weap_id = 3;
     }
     if (d->clavier[SDL_SCANCODE_5])
@@ -96,6 +78,7 @@ void event_change_weapon(t_data *d)
             d->gun_ind = 4;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
+			d->actual_weapon = d->hud.perso_weapon[4];
 			// d->hud.current_weap_id = 4;
     }
     if (d->clavier[SDL_SCANCODE_6])
@@ -103,6 +86,7 @@ void event_change_weapon(t_data *d)
             d->gun_ind = 5;
             d->sprite[d->gun_ind].on = -1;
             d->sprite[d->gun_ind].aim_on = 0;
+			d->actual_weapon = d->hud.perso_weapon[5];
 			// d->hud.current_weap_id = 5;
     }
     if (d->clavier[SDL_SCANCODE_8]) //Test mob animation

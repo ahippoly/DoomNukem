@@ -20,7 +20,7 @@ void			render_hud_info(t_data *d)
 
 void			update_hud_info(t_data *d)
 {
-	set_ammo_info(d, &d->hud, d->hud.perso_weapon[d->hud.current_weap_id]->ammo_left);
+	set_ammo_info(d, &d->hud, d->actual_weapon->ammo_left);
 	set_health_info(d, &d->hud, d->hud.hp);
 	set_healthpack_info(d, &d->hud, d->hud.inv.health_pack);
 	set_key_info(d, &d->hud, d->hud.inv.key);

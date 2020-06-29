@@ -30,14 +30,14 @@ void    gun_idle_anim(t_data *d)
 
     if (d->sprite[d->gun_ind].aim_on == 0)
     {
-    pos.x = d->sprite[d->gun_ind].anim[IDLE].pos->x;
-    pos.y = d->sprite[d->gun_ind].anim[IDLE].pos->y;
+		pos.x = d->sprite[d->gun_ind].anim[IDLE].pos->x;
+		pos.y = d->sprite[d->gun_ind].anim[IDLE].pos->y;
     }
     else if (d->sprite[d->gun_ind].aim_on == 1)
     {
-            pos.x = d->sprite[d->gun_ind].anim[AIM].pos->x;
-            pos.y = d->sprite[d->gun_ind].anim[AIM].pos->y;
-            d->sprite[d->gun_ind].index = AIM;
+		pos.x = d->sprite[d->gun_ind].anim[AIM].pos->x;
+		pos.y = d->sprite[d->gun_ind].anim[AIM].pos->y;
+		d->sprite[d->gun_ind].index = AIM;
     }
     srcdim = get_gun_pos(srcdim, d, pos);
     dstdim = gun_dimension(dstdim, d);
@@ -68,13 +68,15 @@ void    sprite_anim_gun(t_data *d)
         dstdim = gun_dimension(dstdim, d);
 		d->src_gun = srcdim;
 		d->dst_gun = dstdim;
+		// printf("reapeated\n");
         // SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text, &srcdim, &dstdim);
     }
-    else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 
-    (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
-        d->sprite[d->gun_ind].time = SDL_GetTicks();
+    // else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 
+    // (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
+    //     d->sprite[d->gun_ind].time = SDL_GetTicks();
     else
     {
+		// printf("once \n");
         d->sprite[d->gun_ind].index = IDLE;
         d->sprite[d->gun_ind].on = -1;
         gun_idle_anim(d);

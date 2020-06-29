@@ -8,6 +8,7 @@
 #include "proto_sprite.h"
 #include "proto_ssprite.h"
 #include "proto_menu.h"
+#include "proto_gameplay.h"
 
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);

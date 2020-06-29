@@ -30,6 +30,7 @@
 
 # define SPRITE_ID_AFRIT 0
 # define SPRITE_ID_PYRO 1
+# define SPRITE_ID_REVOLVER 2
 
 # define SPRITE_PATH_PYRO "Sprites/Mobs/pyro.bmp"
 # define SPRITE_PATH_AFRIT "Sprites/Mobs/afrit.bmp"
