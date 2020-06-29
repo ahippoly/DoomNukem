@@ -17,7 +17,7 @@ void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
     SDL_RenderPresent(d->rend);
 }
 
-void			calc_n_disp_framerate(t_data *d)
+void			calc_n_disp_framerate(t_data *d, unsigned int *pix)
 {
     static int  last_time;
     static int  framerate;
@@ -36,7 +36,7 @@ void			calc_n_disp_framerate(t_data *d)
         last_time = time;
     }
     framerate += 1;
-    input_text_to_img(ft_itoa(last_framerate), 2, 0xFFFFFFFF, create_img(d->p_screen, set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(last_framerate), 2, 0xFFFFFFFF, create_img(pix, set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
 }
 
 int					main(int ac, char **av)
@@ -93,7 +93,7 @@ int					main(int ac, char **av)
 		sprite_anim_gun(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);
-        calc_n_disp_framerate(&d);
+        calc_n_disp_framerate(&d, d.p_screen);
         print_data2screen(&d, &d.map, &d.hud);
     }
 	exit_env(&d);

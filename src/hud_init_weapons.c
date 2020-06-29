@@ -34,10 +34,10 @@ int				init_weapon_1(t_data *d, t_hud *hud)
 	hud->perso_weapon[1]->capacity = 6;
 	hud->perso_weapon[1]->attack_delay = 550;
 	hud->perso_weapon[1]->reload_delay = 1200;
-	hud->perso_weapon[1]->dammage = 10;
+	hud->perso_weapon[1]->dammage = 35;
 	hud->perso_weapon[1]->range = 10;
 	hud->perso_weapon[1]->z_force = 0.015;
-	hud->perso_weapon[1]->shoot_repeat = 1;
+	hud->perso_weapon[1]->shoot_repeat = 0;
 	if (!(hud->perso_weapon[1]->surface = SDL_LoadBMP(WEAPON_PATH_1)))
 	{
 		printf("Erreur de chargement de l'image : %s", SDL_GetError());
@@ -86,7 +86,7 @@ int				init_weapon_3(t_data *d, t_hud *hud)
 	hud->perso_weapon[3]->capacity = 20;
 	hud->perso_weapon[3]->attack_delay = 200;
 	hud->perso_weapon[3]->reload_delay = 1700;
-	hud->perso_weapon[3]->dammage = 7;
+	hud->perso_weapon[3]->dammage = 15;
 	hud->perso_weapon[3]->range = 10;
 	hud->perso_weapon[3]->z_force = 0.005;
 	hud->perso_weapon[3]->shoot_repeat = 1;
@@ -112,7 +112,7 @@ int				init_weapon_4(t_data *d, t_hud *hud)
 	hud->perso_weapon[4]->capacity = 20;
 	hud->perso_weapon[4]->attack_delay = 200;
 	hud->perso_weapon[4]->reload_delay = 1700;
-	hud->perso_weapon[4]->dammage = 7;
+	hud->perso_weapon[4]->dammage = 15;
 	hud->perso_weapon[4]->range = 10;
 	hud->perso_weapon[4]->z_force = 0.005;
 	hud->perso_weapon[4]->shoot_repeat = 1;
@@ -138,7 +138,7 @@ int				init_weapon_5(t_data *d, t_hud *hud)
 	hud->perso_weapon[5]->capacity = 100;
 	hud->perso_weapon[5]->attack_delay = 150;
 	hud->perso_weapon[5]->reload_delay = 2700;
-	hud->perso_weapon[5]->dammage = 5;
+	hud->perso_weapon[5]->dammage = 12;
 	hud->perso_weapon[5]->range = 10;
 	hud->perso_weapon[5]->z_force = 0.003;
 	hud->perso_weapon[5]->shoot_repeat = 1;

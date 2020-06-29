@@ -3,20 +3,18 @@
 #include "proto_global.h"
 #include "proto_global.h"
 
-void	clear_p_tab(t_data *d, t_range screen_x)
+void	clear_p_tab(t_data *d, t_range screen_x, unsigned int *p_tab)
 {
 	int i;
-	unsigned int *pixels;
 	int end_y;
 
-	pixels = d->p_screen;
 	end_y = WIN_SIZE_Y * WIN_SIZE_X;
 	while (screen_x.start < screen_x.end)
 	{
 		i = 0;
 		while (i < end_y)
 		{
-			pixels[screen_x.start + i] = 0x00000000;
+			p_tab[screen_x.start + i] = 0x00000000;
 			i += WIN_SIZE_X;
 		}
 		screen_x.start++;
@@ -69,7 +67,7 @@ void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step)
 	int nb;
 
 	start_angle += step * screen_x.start;
-	clear_p_tab(d, screen_x);
+	clear_p_tab(d, screen_x, d->p_screen);
 	while (screen_x.start < screen_x.end)
     {
         i = 0;
