@@ -70,6 +70,6 @@ void	clean_sounds(t_data *d)
 		d->sound[i] = NULL;
 		i++;
 	}
-	FMOD_System_Close(system);
-	FMOD_System_Release(system);
+	FMOD_System_Close(d->system);
+	FMOD_System_Release(d->system);
 }

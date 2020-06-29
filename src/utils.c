@@ -288,7 +288,7 @@ void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_
     }
 }
 
-void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst)
+void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst) // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
 {
 	SDL_Point	end;
 	t_point		t_scale;
@@ -319,7 +319,8 @@ void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect 
 		while (dst.x < end.x)
 		{
 			//printf("dst : %d,%d, t_scale : %f,%f\n", dst.x, dst.y, t_scale.x, t_scale.y);
-			p_tab[dst.x + dst.y] = pixels[(int)t_scale.x + ty];
+			if (pixels[(int)t_scale.x + ty] != 0xFFFFFF)
+				p_tab[dst.x + dst.y] = pixels[(int)t_scale.x + ty];
 			t_scale.x += t_step.x;
 			dst.x++;
 		}
