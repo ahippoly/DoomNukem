@@ -1,13 +1,13 @@
 #ifndef PROTOT_GLOBAL_H
 # define PROTOT_GLOBAL_H
 
-#include "data.h"
-#include "proto_hud.h"
-#include "proto_rend.h"
-#include "proto_sound.h"
-#include "proto_sprite.h"
-#include "proto_ssprite.h"
-#include "proto_menu.h"
+# include "data.h"
+# include "proto_hud.h"
+# include "proto_rend.h"
+# include "proto_sound.h"
+# include "proto_sprite.h"
+# include "proto_ssprite.h"
+# include "proto_menu.h"
 
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);

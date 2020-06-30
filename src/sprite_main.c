@@ -1,6 +1,5 @@
 #include "proto_global.h"
 
-
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
 {
     SDL_Surface *surface;
@@ -84,7 +83,7 @@ void handle_key_event_sprite(t_data *d, t_map_data *map)
             d->sprite[d->mob_ind].index = ATTACK;
     }
     if (d->clavier[SDL_SCANCODE_ESCAPE])
-        d->quit = 1;
+        d->run_game = 0;
 }
 
 void handle_mouse_event_gun(t_data *d, t_map_data *map)

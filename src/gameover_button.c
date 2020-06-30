@@ -1,6 +1,7 @@
 #include "proto_global.h"
+#include <errno.h>
 
-int		render_gameover_button(t_data *d)
+int		render_gameover_button(t_data *d, char **av)
 {
 	int	btn_y;
 	int	text_x;
@@ -17,35 +18,27 @@ int		render_gameover_button(t_data *d)
 	return (0);
 }
 
-int		catch_over_btn_event(t_data *d)
+int		catch_over_btn_event(t_data *d, char **av)
 {
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2, 200, 50)) == 1) //continue
 	{
-		// recharge bien la map
-		if (execv("./doom-nukem", d->menu.argv_tab) && access("./doom-nukem", W_OK))
-			return (exit_menu(d));
+		if  (access("./doom-nukem", X_OK))
+		{
+			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
+			exit_env(d);
+		}
+		else
+			d->run_game = 1;
 	}
-	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2 + 100, 200, 50)) == 1) //quit
+	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2 + 100, 200, 50)) == 1) //quit
 	{
-		// il n'y a plus de map a charger
-		if (execv("./menu", d->menu.argv_tab) && access("./menu", W_OK))
-			return (exit_menu(d));
+		if (access("./menu", X_OK))
+		{
+			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
+			exit_env(d);
+		}
+		else 
+			d->run_game = 2;
 	}
 	return (0);
 }
-
-/*
-int		catch_over_btn_event(t_data *d)
-{
-	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2, 200, 50)) == 1)
-	{
-		if (execv("./doom-nukem", d->menu.argv_tab) && access("./doom-nukem", W_OK))
-			return (exit_menu(d));
-	}
-	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2 + 100, 200, 50)) == 1)
-	{
-		if (execv("./menu", d->menu.argv_tab) && access("./menu", W_OK))
-			return (exit_menu(d));
-	}
-}
-*/

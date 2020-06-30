@@ -13,9 +13,9 @@ t_img read_img_surface(char *file, Uint32 pixel_format);
 void init_sdl_ressources_rend(t_data *d);
 void init_mini_map(t_data *d, t_map_data *map);
 void init_data(t_data *d, int ac, char **av);
-int					init_hud_data(t_data *d);
-int					init_hud(t_data *d);
-int					init_pscreen(t_data *d);
+int	init_hud_data(t_data *d);
+int	init_hud(t_data *d);
+int	init_pscreen(t_data *d);
 
 //render_event_gesture.c
 void handle_key_event(t_data *d);
@@ -134,6 +134,8 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map);
 
 int					init_ttf(t_data *d);
 int					quit_ttf(t_data *d);
+
+int					render_game(t_data *d, int ac, char **av);
 
 
 #endif

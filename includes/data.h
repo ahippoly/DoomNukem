@@ -31,7 +31,8 @@ typedef struct      s_data
     unsigned int    *p_mini_map_bg;
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
-    int             quit;
+    // int             quit;
+	int				run_game; //quit
     float			rot;
 	t_rot			rot_calc;
 	float			fov;

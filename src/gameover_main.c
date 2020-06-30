@@ -1,9 +1,16 @@
 #include "proto_global.h"
 
-int	render_gameover(t_data *d)
+int	render_gameover(t_data *d, char **av)
 {
-	put_gameover_bg(d);
-	render_gameover_button(d);
-	catch_over_btn_event(d);
-    // SDL_RenderPresent(d->rend);
+	while (d->run_game == 3)
+	{
+		SDL_PumpEvents();
+		handle_key_event(d);
+		handle_poll_event(d);
+		put_gameover_bg(d);
+		render_gameover_button(d, av);
+		catch_over_btn_event(d, av);
+    	SDL_RenderPresent(d->rend);
+	}
+	return (0);
 }

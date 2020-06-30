@@ -3,6 +3,10 @@
 
 # include "data.h"
 
+/* menu_main.c */
+
+int				render_menu(t_data *d, int ac, char **av);
+
 /* menu_background.c */
 
 int				init_background(t_data *d);
@@ -33,11 +37,11 @@ int				put_gameover_bg(t_data *d);
 
 /* gameover_button.c */
 
-int				render_gameover_button(t_data *d);
-int				catch_over_btn_event(t_data *d);
+int				render_gameover_button(t_data *d, char **av);
+int				catch_over_btn_event(t_data *d, char **av);
 
 /* proto_menu.c */
 
-int				render_gameover(t_data *d);
+int				render_gameover(t_data *d, char **av);
 
 #endif

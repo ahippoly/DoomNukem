@@ -1,10 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-
 
 void event_gun_mouse(t_data *d)
 {
@@ -20,7 +14,7 @@ void event_gun_mouse(t_data *d)
 						d->sprite[d->gun_ind].index = AIMFIRE;
 					d->sprite[d->gun_ind].on = 0;
 					d->sprite[d->gun_ind].anim_end = 0;
-					printf("sound played\n");
+					// printf("sound played\n");
 					play_sound(d, d->gun_ind);
                 }
            		else if (d->e.button.button == SDL_BUTTON_RIGHT)
@@ -144,12 +138,12 @@ void handle_key_event(t_data *d)
 	if (d->clavier[SDL_SCANCODE_L]) // simuler la mort du perso
 	{
 		d->hud.hp = 0;
-		ft_putendl("death");
+		d->run_game = 3 ;
 	}
 	printf("");
 	event_change_weapon(d);
     if (d->clavier[SDL_SCANCODE_ESCAPE])
-        d->quit = 1;
+        d->run_game = 0;
 	//debug
 		if (d->clavier[SDL_SCANCODE_C])
 			raycast_thread_init(d);
@@ -176,7 +170,7 @@ void handle_poll_event(t_data *d)
         if (d->e.type == SDL_WINDOWEVENT)
         {
             if (d->e.window.event == SDL_WINDOWEVENT_CLOSE)
-                d->quit = 1;
+                d->run_game = 0;
         }
         if (d->e.type == SDL_MOUSEMOTION)
         {

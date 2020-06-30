@@ -1,8 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 void init_sdl_ressources_rend(t_data *d)
 {
@@ -39,6 +35,7 @@ int		init_menu(t_data *d)
 	d->p_menu = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_menu, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 	ft_bzero(&d->menu, sizeof(d->menu));
+	init_background(d);
 	return (0);
 }
 
@@ -48,7 +45,7 @@ int		init_gameover(t_data *d, char **av) // doit etre initialisée après init_m
     d->gameover_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
 	d->p_gameover = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     d->menu.argv_tab = malloc_argv(d, 3);
-	ft_bzero(d->menu.argv_tab, sizeof(d->menu.argv_tab));
+	ft_bzero(d->menu.argv_tab, sizeof(char *) * 3);
 	d->menu.argv_tab[2] = NULL; //secu utile ?
 	ft_bzero(d->p_gameover, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 	init_gameover_background(d);
@@ -76,12 +73,12 @@ void init_data(t_data *d, int ac, char **av)
 	init_ttf(d);
 	if (ac > 1)
 	{
-		d->menu.argv_tab[1] = ft_strdup(av[1]);
+		// d->menu.argv_tab[1] = ft_strdup(av[1]);
 		d->map = read_map(av[1]);
 	}
 	else
 	{
-		d->menu.argv_tab[1] = ft_strdup("maps/editor_map_0");
+		// d->menu.argv_tab[1] = ft_strdup("maps/editor_map_0");
     	d->map = read_map("maps/editor_map_0");
 	}
 	if (d->map.is_valid == 0)
@@ -99,7 +96,7 @@ void init_data(t_data *d, int ac, char **av)
     d->speed_modifier = 1;
     d->framerate = 0;
     d->time = 0;
-    d->quit = 0;
+    // d->run_game = 2; // d.quit, ici initialisé a la vue menu
 	d->grabbed_wall = NULL;
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
