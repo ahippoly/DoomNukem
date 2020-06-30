@@ -69,14 +69,14 @@ t_sprite    sprite_init_ar(t_img *img)
 
 static void      init_anim_dd(t_sprite *DD)
 {
-    DD->anim[IDLE].pos->x = 4;
-    DD->anim[IDLE].pos->y = 1;
+    DD->anim[IDLE].pos->x = 3;
+    DD->anim[IDLE].pos->y = 0;
     DD->anim[IDLE].nb_frame = 1;
     DD->anim[IDLE].offset.x = 0;
     DD->anim[IDLE].offset.y = 0;
     DD->anim[FIRE].pos->x = 0;
     DD->anim[FIRE].pos->y = 0;
-    DD->anim[FIRE].nb_frame = 10;
+    DD->anim[FIRE].nb_frame = 7;
     DD->anim[FIRE].offset.x = 0;
     DD->anim[FIRE].offset.y = 0;
     DD->anim[AIM].pos->x = 1;

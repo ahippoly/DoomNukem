@@ -297,7 +297,9 @@ void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect 
 	float tx_start;
 	int x_start;
 	unsigned int *pixels;
-
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
 
 	t_step.x = (float)src.w / dst.w;
 	t_step.y = (float)src.h / dst.h;
@@ -308,19 +310,28 @@ void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect 
 		tx_start = t_step.x * -dst.x;
 	if (dst.y < 0)
 		t_scale.y = t_step.y * -dst.y;
+	// t_scale.x = src.x;
+	// t_scale.y = src.y;
 	dst.y = ft_max(dst.y, 0) * WIN_SIZE_Y;
 	x_start = ft_max(dst.x, 0);
 	pixels = (unsigned int*)text->pixels;
 	while (dst.y < end.y)
 	{
 		t_scale.x = tx_start;
-		ty = (int)t_scale.y * text->w;
+		ty = (int)(t_scale.y + src.y) * text->w;
 		dst.x = x_start;
 		while (dst.x < end.x)
 		{
-			//printf("dst : %d,%d, t_scale : %f,%f\n", dst.x, dst.y, t_scale.x, t_scale.y);
 			if (pixels[(int)t_scale.x + ty] != 0xFFFFFF)
-				p_tab[dst.x + dst.y] = pixels[(int)t_scale.x + ty];
+			{
+				r = (pixels[(int)t_scale.x + ty + src.x] >> 16) & 0xFF;
+				g = (pixels[(int)t_scale.x + ty + src.x] >> 8) & 0xFF;
+				b = (pixels[(int)t_scale.x + ty + src.x]) & 0xFF;
+				p_tab[dst.x + dst.y] = ((r) << 24 | (g) << 16 | (b) << 8) & 0xFF;
+				//p_tab[dst.x + dst.y] = ((pixels[(int)t_scale.x + ty + src.x]) << 8);
+			}
+			else
+				p_tab[dst.x + dst.y] = 0x00FFFFFF;
 			t_scale.x += t_step.x;
 			dst.x++;
 		}

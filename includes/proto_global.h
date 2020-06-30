@@ -66,6 +66,16 @@ SDL_Texture *t_img2sdl_text(SDL_Renderer *rend , t_img src);
 void			calc_n_disp_framerate(t_data *d, unsigned int *pix);
 //void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst); // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
 
+/* maths.c */
+
+int	ft_short(unsigned char *nb);
+int	ft_int(unsigned char *nb);
+
+/* bit_swaps.c */
+
+uint32_t	swap4(uint32_t x);
+uint16_t	swap2(uint16_t x);
+
 
 /* exit.c */
 

@@ -14,7 +14,8 @@ t_sprite    sprite_init_revolver(t_img *img);
 t_sprite    sprite_init_ssg(t_img *img);
 t_sprite    sprite_init_melee(t_img *img);
 void        clean_sprite_gun(t_data *d);
-int        load_sprite_gun(t_data *d);
+int         load_sprite_gun(t_data *d);
+void        init_sprite(t_data *d);
 
 //sprite_init_mob.c
 int        load_sprite_mob(t_data *d);

@@ -54,6 +54,15 @@ typedef struct		s_file
 }					t_file;
 
 void				bmp_reader(char *bmp, t_img *image);
-
+int					check_header(t_file *file);
+uint32_t			memory(t_dib dib);
+uint32_t			scanline(t_dib dib, uint8_t padding);
+uint8_t				padding(t_dib dib);
+void				make_img(t_file *file, uint8_t *stream, t_info info);
+static uint32_t		make_pixel(uint8_t *stream);
+void				set_info(t_info *info);
+int					check_file(t_file *file, char *bmp, uint8_t *buffer);
+int					check_size(uint32_t *size, uint8_t *buff);
+void				set_file(t_file *file);
 
 #endif
