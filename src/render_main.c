@@ -14,15 +14,15 @@ int					main(int ac, char **av)
     // play_sound(&d, MUS1); //Play Music
 	while (d.run_game > 0)
 	{
-		if (d.run_game == 1) // game
+		if (d.run_game == GAME)
 		{
 			render_game(&d, ac, av);
 		}
-		else if (d.run_game == 2) // menu
+		else if (d.run_game == MENU)
 			render_menu(&d, ac, av);
-		else if (d.run_game == 3) // gameover
+		else if (d.run_game == GAMEOVER)
 			render_gameover(&d, ac, av);
-		else if (d.run_game == 4) // editor
+		else if (d.run_game == EDITOR)
 		{
 			if (access("./editor", X_OK))
 			{

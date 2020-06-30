@@ -2,7 +2,7 @@
 
 int	render_menu(t_data *d, int ac, char **av)
 {
-	while (d->run_game == 2)
+	while (d->run_game == MENU)
 	{
 		SDL_PumpEvents();
 		handle_key_event(d);

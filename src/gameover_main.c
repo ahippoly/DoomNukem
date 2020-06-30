@@ -3,7 +3,7 @@
 int	render_gameover(t_data *d, int ac, char **av)
 {
 	init_data(d, ac, av);
-	while (d->run_game == 3)
+	while (d->run_game == GAMEOVER)
 	{
 		SDL_PumpEvents();
 		handle_key_event(d);

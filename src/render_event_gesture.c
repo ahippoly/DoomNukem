@@ -138,7 +138,7 @@ void handle_key_event(t_data *d)
 	if (d->clavier[SDL_SCANCODE_L]) // simuler la mort du perso
 	{
 		d->hud.hp = 0;
-		d->run_game = 3 ;
+		d->run_game = GAMEOVER;
 	}
 	printf("");
 	event_change_weapon(d);

@@ -2,7 +2,7 @@
 
 int	render_game(t_data *d, int ac, char **av)
 {
-	while (d->run_game == 1)
+	while (d->run_game == GAME)
 	{
 		d->time_last_frame = d->time;
 		d->time = SDL_GetTicks();

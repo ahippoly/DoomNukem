@@ -23,18 +23,17 @@ int			catch_btn_event(t_data *d, int ac, char **av)
 			exit_env(d);
 		}
 		else
-			d->run_game = 1;
+			d->run_game = GAME;
 	}
 	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 100, 200, 50)) == 1) //editor
 	{
-		d->run_game = 4;
 		if (access("./editor", X_OK))
 		{
 			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
 			exit_env(d);
 		}
 		else
-			d->run_game = 4;
+			d->run_game = EDITOR;
 	}
 	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 200, 200, 50)) == 1) //exit
 		exit_env(d);
