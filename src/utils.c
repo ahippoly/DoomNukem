@@ -324,14 +324,12 @@ void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect 
 		{
 			if (pixels[(int)t_scale.x + ty] != 0xFFFFFF)
 			{
-				r = (pixels[(int)t_scale.x + ty + src.x] >> 16) & 0xFF;
-				g = (pixels[(int)t_scale.x + ty + src.x] >> 8) & 0xFF;
-				b = (pixels[(int)t_scale.x + ty + src.x]) & 0xFF;
-				p_tab[dst.x + dst.y] = ((r) << 24 | (g) << 16 | (b) << 8) & 0xFF;
-				//p_tab[dst.x + dst.y] = ((pixels[(int)t_scale.x + ty + src.x]) << 8);
+				// r = (pixels[(int)t_scale.x + ty + src.x] >> 16) & 0xFF;
+				// g = (pixels[(int)t_scale.x + ty + src.x] >> 8) & 0xFF;
+				// b = (pixels[(int)t_scale.x + ty + src.x]) & 0xFF;
+				// p_tab[dst.x + dst.y] = ((r) << 24 | (g) << 16 | (b) << 8) & 0xFF;
+				p_tab[dst.x + dst.y] = ((pixels[(int)t_scale.x + ty + src.x]));
 			}
-			else
-				p_tab[dst.x + dst.y] = 0x00FFFFFF;
 			t_scale.x += t_step.x;
 			dst.x++;
 		}

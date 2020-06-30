@@ -29,6 +29,11 @@ void init_texture(t_env *env)
     env->text_list[4] = bmp_to_texture(TEXT_PATH_4, env->rend);
     env->text_list[5] = bmp_to_texture(TEXT_PATH_5, env->rend);
     env->text_list[6] = bmp_to_texture(TEXT_PATH_6, env->rend);
+    env->text_list[7] = bmp_to_texture(TEXT_PATH_7, env->rend);
+    env->text_list[8] = bmp_to_texture(TEXT_PATH_8, env->rend);
+    env->text_list[9] = bmp_to_texture(TEXT_PATH_9, env->rend);
+    env->text_list[10] = bmp_to_texture(TEXT_PATH_10, env->rend);
+    env->text_list[11] = bmp_to_texture(TEXT_PATH_11, env->rend);
 }
 
 void init_buttons(t_env *env)

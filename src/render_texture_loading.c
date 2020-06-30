@@ -37,6 +37,11 @@ void load_bmp_files(t_data *d)
     d->texture[4] = read_img_surface(TEXT_PATH_4, SDL_PIXELFORMAT_ARGB32);
     d->texture[5] = read_img_surface(TEXT_PATH_5, SDL_PIXELFORMAT_ARGB32);
     d->texture[6] = read_img_surface(TEXT_PATH_6, SDL_PIXELFORMAT_ARGB32);
+    d->texture[7] = read_img_surface(TEXT_PATH_7, SDL_PIXELFORMAT_ARGB32);
+    d->texture[8] = read_img_surface(TEXT_PATH_8, SDL_PIXELFORMAT_ARGB32);
+    d->texture[9] = read_img_surface(TEXT_PATH_9, SDL_PIXELFORMAT_ARGB32);
+    d->texture[10] = read_img_surface(TEXT_PATH_10, SDL_PIXELFORMAT_ARGB32);
+    d->texture[11] = read_img_surface(TEXT_PATH_11, SDL_PIXELFORMAT_ARGB32);
 }
 
 void init_rend_img(t_data *d)

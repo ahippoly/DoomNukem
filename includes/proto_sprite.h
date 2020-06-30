@@ -23,7 +23,7 @@ int        load_sprite_mob(t_data *d);
 //gun_anim.c
 void        sprite_anim_gun(t_data *d);
 void        gun_idle_anim(t_data *d);
-SDL_Rect    get_gun_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos);
+//SDL_Rect    get_gun_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos);
 
 //mob_anim.c
 SDL_Rect    get_sprite_mob_pos(SDL_Rect srcdim, t_data *d, SDL_Point pos, int mob_ind);
