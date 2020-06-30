@@ -44,9 +44,6 @@ int		init_gameover(t_data *d, char **av) // doit etre initialisée après init_m
 	d->p_gameover = NULL;
     d->gameover_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
 	d->p_gameover = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
-    d->menu.argv_tab = malloc_argv(d, 3);
-	ft_bzero(d->menu.argv_tab, sizeof(char *) * 3);
-	d->menu.argv_tab[2] = NULL; //secu utile ?
 	ft_bzero(d->p_gameover, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 	init_gameover_background(d);
 	return (0);
@@ -72,15 +69,9 @@ void init_data(t_data *d, int ac, char **av)
 	init_gameover(d, av); //doit etre avant le check des arguments
 	init_ttf(d);
 	if (ac > 1)
-	{
-		// d->menu.argv_tab[1] = ft_strdup(av[1]);
 		d->map = read_map(av[1]);
-	}
 	else
-	{
-		// d->menu.argv_tab[1] = ft_strdup("maps/editor_map_0");
     	d->map = read_map("maps/editor_map_0");
-	}
 	if (d->map.is_valid == 0)
 		exit_with_msg("error : wrong map file\n");
     init_mini_map(d, &d->map);
@@ -96,7 +87,6 @@ void init_data(t_data *d, int ac, char **av)
     d->speed_modifier = 1;
     d->framerate = 0;
     d->time = 0;
-    // d->run_game = 2; // d.quit, ici initialisé a la vue menu
 	d->grabbed_wall = NULL;
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;

@@ -32,32 +32,9 @@ static int	free_gameover(t_data *d)
 	return (0);
 }
 
-static int	free_argv_tab(t_data *d)
-{
-	int		i;
-
-	i = 0;
-	if (d->menu.argv_tab)
-	{
-		while (i < 3)
-		{
-			if (d->menu.argv_tab[i])
-			{
-				free(d->menu.argv_tab[i]);
-				d->menu.argv_tab[i] = NULL;
-			}
-			i++;
-		}
-		free(d->menu.argv_tab);
-	}
-	d->menu.argv_tab = NULL;
-	return (0);
-}
-
 int			free_menu(t_data *d)
 {
 	free_texture_menu(d);
-	free_argv_tab(d);
 	return (0);
 }
 

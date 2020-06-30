@@ -13,15 +13,6 @@ int			is_mouse_on_target(t_data *d, SDL_Rect pos)
 	return (0);
 }
 
-char		**malloc_argv(t_data *d, int n)
-{
-	char	**tab;
-
-	if ((!(tab = (char **)ft_memalloc(sizeof(char *) * n))))
-		exit_env(d);
-	return (tab);
-}
-
 int			catch_btn_event(t_data *d, int ac, char **av)
 {
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1) //play
