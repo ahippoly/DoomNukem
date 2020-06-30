@@ -21,7 +21,7 @@ int					main(int ac, char **av)
 		else if (d.run_game == 2) // menu
 			render_menu(&d, ac, av);
 		else if (d.run_game == 3) // gameover
-			render_gameover(&d, av);
+			render_gameover(&d, ac, av);
 		else if (d.run_game == 4) // editor
 		{
 			if (access("./editor", X_OK))

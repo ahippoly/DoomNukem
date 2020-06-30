@@ -37,7 +37,7 @@ int		catch_over_btn_event(t_data *d, char **av)
 			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
 			exit_env(d);
 		}
-		else 
+		else
 			d->run_game = 2;
 	}
 	return (0);

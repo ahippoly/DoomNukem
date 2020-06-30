@@ -42,6 +42,6 @@ int				catch_over_btn_event(t_data *d, char **av);
 
 /* proto_menu.c */
 
-int				render_gameover(t_data *d, char **av);
+int				render_gameover(t_data *d, int ac, char **av);
 
 #endif

@@ -1,7 +1,8 @@
 #include "proto_global.h"
 
-int	render_gameover(t_data *d, char **av)
+int	render_gameover(t_data *d, int ac, char **av)
 {
+	init_data(d, ac, av);
 	while (d->run_game == 3)
 	{
 		SDL_PumpEvents();
