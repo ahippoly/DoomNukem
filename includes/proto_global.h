@@ -20,6 +20,7 @@ t_point create_t_point(float x, float y);
 t_range create_t_range(int start, int end);
 t_size create_t_size(int w, int h);
 t_img	ft_load_bmp(char *file);
+t_img	ft_load_bmp2(char *file);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);
 t_point	line_intersect(t_point pos, float rot, t_point p1, t_point p2);
@@ -37,6 +38,8 @@ float get_float_part(float value);
 t_point sdl_p_to_t_p(SDL_Point p);
 float ft_interpolate(float val1, float val2, float scale);
 
+void swap_char(char *a, char *b);
+void remove_color(unsigned int *pixels, int total_size, unsigned int color);
 
 //editor_map_reader.c
 t_map_data  read_map(char *path_file);
@@ -65,6 +68,7 @@ void    copy_frame(unsigned int *dst, SDL_Rect dst_size, unsigned int *src, SDL_
 SDL_Texture *t_img2sdl_text(SDL_Renderer *rend , t_img src);
 void			calc_n_disp_framerate(t_data *d, unsigned int *pix);
 //void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst); // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
+void convert_pixel_format(unsigned int *pixels, int total_size);
 
 
 /* exit.c */

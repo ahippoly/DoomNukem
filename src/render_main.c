@@ -52,19 +52,15 @@ int					main(int ac, char **av)
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
 
-	// test.pixels = alloc_image(d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h);
-	// test.w = d.sprite[AFRIT].frame_size.w;
-	// test.h = d.sprite[AFRIT].frame_size.h;
-	// copy_frame(test.pixels, (SDL_Rect){0,0, test.w, test.h}, d.sprite[AFRIT].pixels, (SDL_Rect){0, 0, d.sprite[AFRIT].total_size.w, d.sprite[AFRIT].total_size.h});
-	// t_ssprite new_afr;
-
-	// new_afr = sprite_init_afrit2(d.sprite_img[SPRITE_ID_AFRIT]);
-	// test.pixels = new_afr.dst;
-	// test.w = new_afr.dst_w;
-	// test.h = new_afr.dst_h;
-	// load_anim(&new_afr, d.time, ANIM_MOB_DEATH);
-	// new_afr.idle_anim = ANIM_MOB_MELEE;
-	d.gun_ind = 0;
+	t_img img;
+	//img = ft_load_bmp("img/textures/stones.bmp");
+	//img = ft_load_bmp2("img/textures/stones.bmp");
+	img = ft_load_bmp2("img/hud/doctor.bmp");
+	//img = ft_load_bmp2("Sprites/Mobs/afrit.bmp");
+	//img = read_img_surface("img/hud/doctor.bmp", SDL_PIXELFORMAT_ARGB32);
+	//convert_pixel_format(img.pixels, img.w * img.h);
+	// img.w = 512;
+	// img.h = 512;
     while (!d.quit)
     {
         d.time_last_frame = d.time;
@@ -89,6 +85,7 @@ int					main(int ac, char **av)
 		raycast_thread_init(&d);
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
+		print_text_screen(d.p_screen, &img, (SDL_Rect){100, 100, 200, 200});
 		sprite_anim_gun(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);

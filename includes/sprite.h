@@ -17,6 +17,11 @@
 # define PYRO 9
 # define MOB_INDEX 10
 
-
+# define SPRITE_PATH_0 "Sprites/Guns/Melee.bmp"
+# define SPRITE_PATH_1 "Sprites/Guns/Revolver.bmp"
+# define SPRITE_PATH_2 "Sprites/Guns/SuperShotgun.bmp"
+# define SPRITE_PATH_3 "Sprites/Guns/AssaultRifle.bmp"
+# define SPRITE_PATH_4 "Sprites/Guns/lmg.bmp"
+# define SPRITE_PATH_5 "Sprites/Guns/DeathDealer.bmp"
 
 #endif

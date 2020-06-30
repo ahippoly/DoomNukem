@@ -2,6 +2,8 @@
 # define IMG_FILE
 # include "SDL.h"
 
+# define BMP_HEADER_READ 32
+
 typedef struct      s_img
 {
     unsigned int    *pixels;

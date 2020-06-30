@@ -37,7 +37,7 @@ static void      init_anim_AR(t_sprite *AR)
     AR->anim[ICON].offset.y = 0;
 }
 
-t_sprite    sprite_init_AR(t_img *img)
+t_sprite    sprite_init_AR(t_img img)
 {
     t_sprite AR;
 
@@ -100,7 +100,7 @@ static void      init_anim_DD(t_sprite *DD)
     DD->anim[ICON].offset.y = 0;
 }
 
-t_sprite    sprite_init_DD(t_img *img)
+t_sprite    sprite_init_DD(t_img img)
 {
     t_sprite DD;
 
@@ -177,7 +177,7 @@ static void      init_anim_LMG(t_sprite *LMG)
 
 }
 
-t_sprite    sprite_init_LMG(t_img *img)
+t_sprite    sprite_init_LMG(t_img img)
 {
     t_sprite LMG;
 
@@ -247,7 +247,7 @@ static void      init_anim_Rev(t_sprite *Rev)
     Rev->anim[ALTFIRE].offset.y = 0; 
 }
 
-t_sprite    sprite_init_Revolver(t_img *img)
+t_sprite    sprite_init_Revolver(t_img img)
 {
     t_sprite Rev;
 
@@ -309,7 +309,7 @@ static void      init_anim_SSG(t_sprite *SSG)
     SSG->anim[RELOAD].offset.y = 0;
 }
 
-t_sprite    sprite_init_SSG(t_img *img)
+t_sprite    sprite_init_SSG(t_img img)
 {
     t_sprite SSG;
 
@@ -370,7 +370,7 @@ static void      init_anim_Melee(t_sprite *Melee)
     Melee->anim[RELOAD].offset.y = 5;
 }
 
-t_sprite    sprite_init_Melee(t_img *img)
+t_sprite    sprite_init_Melee(t_img img)
 {
     t_sprite Melee;
 
@@ -412,29 +412,19 @@ t_sprite    sprite_init_Melee(t_img *img)
 
 void    load_sprite_gun(t_data *d)
 {
-    t_img *img[6];
+
+    d->sprite[0] = sprite_init_Melee(ft_load_bmp2(SPRITE_PATH_0));
+
+    d->sprite[1] = sprite_init_Revolver(ft_load_bmp2(SPRITE_PATH_1));
+
+
+    d->sprite[2] = sprite_init_SSG(ft_load_bmp2(SPRITE_PATH_2));
+
+
+    d->sprite[3] = sprite_init_AR(ft_load_bmp2(SPRITE_PATH_3));
+
+    d->sprite[4] = sprite_init_LMG(ft_load_bmp2(SPRITE_PATH_4));
     
-    img[0] = ft_memalloc(sizeof(t_img));
-    bmp_reader("Sprites/Guns/Melee.bmp", img[0]);
-    d->sprite[0] = sprite_init_Melee(img[0]);
 
-    img[1] = ft_memalloc(sizeof(t_img));
-    bmp_reader("Sprites/Guns/Revolver.bmp", img[1]);
-    d->sprite[1] = sprite_init_Revolver(img[1]);
-
-    img[2] = ft_memalloc(sizeof(t_img));
-    bmp_reader("Sprites/Guns/SuperShotgun.bmp", img[2]);
-    d->sprite[2] = sprite_init_SSG(img[2]);
-
-    img[3] = ft_memalloc(sizeof(t_img));
-    bmp_reader("Sprites/Guns/AssaultRifle.bmp", img[3]);
-    d->sprite[3] = sprite_init_AR(img[3]);
-
-    img[4] = ft_memalloc(sizeof(t_img));
-    bmp_reader("Sprites/Guns/lmg.bmp", img[4]);
-    d->sprite[4] = sprite_init_LMG(img[4]);
-    
-    img[5] = ft_memalloc(sizeof(t_img));
-    bmp_reader("Sprites/Guns/DeathDealer.bmp", img[5]);
-    d->sprite[5] = sprite_init_DD(img[5]);
+    d->sprite[5] = sprite_init_DD(ft_load_bmp2(SPRITE_PATH_5));
 }

@@ -175,5 +175,6 @@ void		bmp_reader(char *bmp, t_img *img)
 	{
 		parse_bmp(&file, img);
 		clean_file(&file);
+		convert_pixel_format(img->pixels, img->h * img->w);
 	}
 }

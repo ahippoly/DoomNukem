@@ -22,7 +22,7 @@
 # define MINI_MAP_W 100
 # define MINI_MAP_H 100
 # define PERSO 5
-# define BUFF_SIZE 1000000
+# define BUFF_SIZE 9600
 # define NAZI "Alerte nazi, Test de nazi detecte, Alerte nazi\n"
 # define MOUSE 3
 # define NB_WALL_MAX 200
