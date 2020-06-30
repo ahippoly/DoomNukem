@@ -20,8 +20,8 @@ SRC_NAME =	$(sort editor_main.c error_gesture.c image_gesture.c \
 			render_draw_floor.c render_props.c render_obj.c render_draw_slice.c \
 			render_debug_ray.c render_ray_process.c render_pixel_put.c \
 			render_icon2obj.c \
-			menu_clean.c menu_main.c menu_button.c menu_background.c menu_exec.c hud_clean.c exit.c \
-			gameover_background.c gameover_button.c gameover_main.c \
+			menu_clean.c menu_render.c menu_button.c menu_background.c menu_exec.c hud_clean.c exit.c \
+			gameover_background.c gameover_button.c gameover_render.c \
 			gameplay_mobs.c game_render.c render_game.c frame.c )
 
 RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creation.c \
@@ -39,8 +39,8 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						ttf_init.c hud_init.c \
 						sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c \
 						gameplay_mobs.c ssprite.c\
-						menu_clean.c menu_button.c menu_main.c menu_exec.c menu_background.c hud_clean.c exit.c \
-						gameover_background.c gameover_button.c gameover_main.c \
+						menu_clean.c menu_button.c menu_render.c menu_exec.c menu_background.c hud_clean.c exit.c \
+						gameover_background.c gameover_button.c gameover_render.c \
 						game_render.c \
 						render_game.c frame.c )
 
@@ -83,9 +83,9 @@ MENU_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						gameplay_mobs.c ssprite.c gameplay_mobs.c\
 						hud_weapon.c hud_init_weapons.c hud_perso.c hud_init.c \
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
-						menu_main.c menu_background.c menu_button.c menu_exec.c ttf_init.c \
+						menu_render.c menu_background.c menu_button.c menu_exec.c ttf_init.c \
 						menu_clean.c hud_clean.c exit.c \
-						gameover_background.c gameover_button.c gameover_main.c \
+						gameover_background.c gameover_button.c gameover_render.c \
 						game_render.c ) ##
 
 SRC_PATH = ./src/
@@ -96,14 +96,14 @@ FMOD_LIB_PATH = ./FMOD/
 INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_REND_NAME = $(RENDER_SRC_NAME:.c=.o)
-## OBJ_HUD_NAME = $(HUD_SRC_NAME:.c=.o) ##
+# OBJ_HUD_NAME = $(HUD_SRC_NAME:.c=.o) ##
 OBJ_SPRITE_NAME = $(SPRITE_SRC_NAME:.c=.o) ##
 OBJ_MENU_NAME = $(MENU_SRC_NAME:.c=.o) ##
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 OBJ_REND = $(addprefix $(OBJ_PATH),$(OBJ_REND_NAME))
-## OBJ_HUD = $(addprefix $(OBJ_PATH),$(OBJ_HUD_NAME)) ##
+# OBJ_HUD = $(addprefix $(OBJ_PATH),$(OBJ_HUD_NAME)) ##
 OBJ_SPRITE = $(addprefix $(OBJ_PATH),$(OBJ_SPRITE_NAME)) ##
 OBJ_MENU = $(addprefix $(OBJ_PATH),$(OBJ_MENU_NAME)) ##
 INC = $(addprefix -I,$(INC_PATH))
@@ -114,7 +114,7 @@ NAME = editor
 RENDER_NAME = doom-nukem
 OPTI = -g3
 PTHREAD = -lpthread
-## HUD = hud ##
+# HUD = hud ##
 SPRITE = sprite ##
 MENU = menu ##
 
@@ -130,7 +130,7 @@ LDLIBS = -lft -lm
 
 .PHONY: all clean fclean re libft
 
-all: $(NAME) $(RENDER_NAME)
+all: $(NAME) $(RENDER_NAME) link_fmod
 
 link_fmod :
 	export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./FMOD"
@@ -155,15 +155,16 @@ $(RENDER_NAME): libft $(OBJ_REND)
 ##	@$(CC) $(CFLAGS) $(INC) $(OBJ_HUD) -o $(HUD) -g $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
 ##	@printf "\e[1;32m[OK]\e[0m\n"
 
-$(SPRITE): libft $(OBJ_SPRITE) link_fmod##
+$(SPRITE): libft $(OBJ_SPRITE)
 	@printf "%-50s" "create executable "$(notdir $@)... 
 	@$(CC) $(CFLAGS) $(INC) $(OBJ_SPRITE) -o $(SPRITE) -g $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
 	@printf "\e[1;32m[OK]\e[0m\n"
 
-$(MENU): $(NAME) $(RENDER_NAME) $(OBJ_MENU) ##
-	@printf "%-50s" "create executable "$(notdir $@)... 
-	@$(CC) $(CFLAGS) $(INC) $(OBJ_MENU) -o $(MENU) -g $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
-	@printf "\e[1;32m[OK]\e[0m\n"
+
+# $(MENU): $(NAME) $(RENDER_NAME) $(OBJ_MENU) ##
+#	@printf "%-50s" "create executable "$(notdir $@)... 
+#	@$(CC) $(CFLAGS) $(INC) $(OBJ_MENU) -o $(MENU) -g $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
+#	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...

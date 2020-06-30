@@ -6,18 +6,16 @@ int					main(int ac, char **av)
     t_data			d;
     
     init_data(&d, ac, av);
-    ft_putstr("Main worked\n");
-	printf("map: %s\n", av[1]);
-	printf("d.run_game: %d\n", d.run_game);
-	d.run_game = 2;
+    // ft_putstr("Main worked\n");
+	// printf("map: %s\n", av[1]);
+	// printf("d.run_game: %d\n", d.run_game);
+	d.run_game = MENU;
     // init_sound(&d);
-    // play_sound(&d, MUS1); //Play Music
+    // play_sound(&d, MUS1);
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)
-		{
 			render_game(&d, ac, av);
-		}
 		else if (d.run_game == MENU)
 			render_menu(&d, ac, av);
 		else if (d.run_game == GAMEOVER)
