@@ -52,10 +52,10 @@ int					main(int ac, char **av)
     init_sound(&d);
     play_sound(&d, MUS1); //Play Music
 
-	t_img img;
+	//t_img img;
 	//img = ft_load_bmp("img/textures/stones.bmp");
 	//img = ft_load_bmp2("img/textures/stones.bmp");
-	img = ft_load_bmp2("img/hud/doctor.bmp");
+	//img = ft_load_bmp2("img/hud/doctor.bmp");
 	//img = ft_load_bmp2("Sprites/Mobs/afrit.bmp");
 	//img = read_img_surface("img/hud/doctor.bmp", SDL_PIXELFORMAT_ARGB32);
 	//convert_pixel_format(img.pixels, img.w * img.h);
@@ -83,9 +83,10 @@ int					main(int ac, char **av)
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
+		print_skybox(&d, d.skybox, d.rot_calc.rot, d.p_screen);
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
-		print_text_screen(d.p_screen, &img, (SDL_Rect){100, 100, 200, 200});
+		//print_text_screen(d.p_screen, &img, (SDL_Rect){100, 100, 200, 200});
 		sprite_anim_gun(&d);
         update_player_pos_mini_map(&d, &d.map);
         print_player_look_vector(&d, &d.map, d.rot);

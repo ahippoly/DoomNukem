@@ -22,6 +22,7 @@ void handle_key_event(t_data *d);
 void handle_poll_event(t_data *d);
 
 //render_movement.c
+float mod_pi(float rot);
 void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot);
 void move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed);
 void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed);
@@ -125,6 +126,9 @@ void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed);
 void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse);
 void shoot_gun(t_data *d, t_weapon *weapon);
 void process_mobs_gameplay(t_data *d);
+
+//render_skybox.c
+void print_skybox(t_data *d, t_img skybox, float rot, unsigned int *screen);
 
 
 void    init_sprite(t_data *d);

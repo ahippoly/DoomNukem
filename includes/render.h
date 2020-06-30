@@ -34,6 +34,8 @@
 # define TYPE_PROP -2
 # define TYPE_MOB -3
 
+# define SKY_PATH_0 "img/skybox/skybox01.bmp"
+
 typedef struct	s_proj_point
 {
 	int			screen_x;

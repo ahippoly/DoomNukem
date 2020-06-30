@@ -12,9 +12,10 @@ void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot)
 
 float mod_pi(float rot)
 {
+	rot = fmod(rot, PI_X_2);
 	if (rot < 0)
 		rot = PI_X_2 + rot;
-	return(fmod(rot, PI_X_2));
+	return(rot);
 }
 
 int is_angle_in_range(float rot, float min, float max)

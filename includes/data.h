@@ -81,6 +81,7 @@ typedef struct      s_data
     SDL_Texture     *menu_texture; //menu texture
 	t_menu			menu;
 	char			*argv;
+	t_img			skybox;
 	t_img			texture[NB_TEXTURE];
 	t_img			img[NB_IMG];
 	t_img			sprite_img[NB_SPRITE];
