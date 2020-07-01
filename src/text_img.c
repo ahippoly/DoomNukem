@@ -114,6 +114,8 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
             charts2pixels(charts[38], size, draw_letter);
         else if (str[i] == '<')
             charts2pixels(charts[39], size, draw_letter);
+		else if (str[i] == '-')
+            charts2pixels(charts[40], size, draw_letter);
         else
             //exit_with_msg("Wrong chars entered in create_text_img()");
             {

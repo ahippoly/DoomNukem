@@ -3,7 +3,7 @@
 
 # include "SDL.h"
 
-# define CHAR_NB 40
+# define CHAR_NB 41
 # define SIZE_X 10
 # define SIZE_Y 10
 # define PIXEL '#'

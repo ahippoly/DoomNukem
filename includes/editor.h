@@ -57,7 +57,7 @@
 # define TEXT_PATH_5 "img/textures/tech_skin_1.bmp"
 # define TEXT_PATH_6 "img/hud/doctor.bmp"
 
-# define NB_TXT 15
+# define NB_TXT 16
 # define TXT_MAP_EDITOR 0
 # define TXT_TEXT_SELECT 1
 # define TXT_HEIGHT 2
@@ -73,6 +73,7 @@
 # define TXT_ROOM_BOT 12
 # define TXT_ROOM_TOP 13
 # define TXT_COLLIDE 14
+# define TXT_WALL_ID 15
 
 # define TEXT_POS_X 0.800 * WIN_SIZE_X
 # define TEXT_POS_Y 0.150 * WIN_SIZE_Y
