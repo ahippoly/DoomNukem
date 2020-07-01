@@ -51,8 +51,8 @@ int					main(int ac, char **av)
     ft_putstr("Main worked");
     printf("player pos = %f, %f, wall count = %i\n", d.player_pos.x, d.player_pos.y, d.map.wall_count);
 
-    init_sound(&d);
-    play_sound(&d, MUS1); //Play Music
+    // init_sound(&d);
+    // play_sound(&d, MUS1); //Play Music
 
 	// test.pixels = alloc_image(d.sprite[AFRIT].frame_size.w, d.sprite[AFRIT].frame_size.h);
 	// test.w = d.sprite[AFRIT].frame_size.w;
