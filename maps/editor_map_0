@@ -1,20 +1,27 @@
 WALL LIST
-WALL_COUNT 5
-id : 0 ; p1 : 3.0003,5.0005 ; p2 : 4.0004,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 10 ; can_collide : 1 ; 
-id : 1 ; p1 : 4.0004,5.0005 ; p2 : 5.0005,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 30 ; can_collide : 1 ; 
-id : 2 ; p1 : 5.0005,5.0005 ; p2 : 6.0006,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 50 ; can_collide : 1 ; 
-id : 3 ; p1 : 6.0006,5.0005 ; p2 : 7.0007,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 70 ; can_collide : 1 ; 
-id : 4 ; p1 : 7.0007,5.0005 ; p2 : 8.0008,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
+WALL_COUNT 7
+id : 0 ; p1 : 2.0002,3.0003 ; p2 : 6.0006,1.0001 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+id : 1 ; p1 : 6.0006,1.0001 ; p2 : 15.00015,4.0004 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+id : 2 ; p1 : 15.00015,4.0004 ; p2 : 14.00014,9.0009 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+id : 3 ; p1 : 14.00014,9.0009 ; p2 : 6.0006,13.00013 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+id : 4 ; p1 : 6.0006,13.00013 ; p2 : 0.0000,7.0007 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+id : 5 ; p1 : 0.0000,7.0007 ; p2 : 2.0002,3.0003 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
+id : 6 ; p1 : 7.0007,7.0007 ; p2 : 10.00010,6.0006 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 2 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 
 ROOM LIST
-ROOM_COUNT 0
+ROOM_COUNT 1
+id : 0 ; nb_wall : 6 ; wall_ref_range : 0,6 ; height : 20,30 ; floor_text : 0 ; 
 
 
 ICON LIST
-ICON_COUNT 0
+ICON_COUNT 4
+id : 1 ; pos : 53,83 ; 
+id : 2 ; pos : 85,91 ; 
+id : 3 ; pos : 107,40 ; 
+id : 4 ; pos : 17,68 ; 
 
 
 WALL_REF MAP
 MAP_SIZE 30,30
-PLAYER_SPAWN 5,6
+PLAYER_SPAWN 6,3
 

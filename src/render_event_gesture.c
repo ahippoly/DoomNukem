@@ -224,8 +224,7 @@ void handle_poll_event(t_data *d)
                	inc_fov(d, 0.05);
 			if (d->e.key.keysym.scancode == SDL_SCANCODE_K)
                	inc_fov(d, -0.05);
-			if (d->e.key.keysym.scancode == SDL_SCANCODE_V)
-				print_floor(d);
+			
 
         }
         if (d->e.type == SDL_KEYUP)
