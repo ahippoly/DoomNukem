@@ -44,7 +44,7 @@ t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot)
 	
 	//print_ray(res);
         //dist = hypot(obj->inter.x - pos.x, obj->inter.y - pos.y) * cos((look_rot - rot ));
-    //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1_f.x, wall.p2.x, obj->inter.x, calc_wall_hit_scale(wall, obj->inter), rot, look_rot);
+    //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, obj->inter.x, calc_wall_hit_scale(wall, obj->inter), rot, look_rot);
 	return (res);
 }
 
@@ -90,7 +90,7 @@ t_ray check_perp_obj(t_obj *obj, t_point pos)
 	
 	//print_ray(res);
         //dist = hypot(obj->inter.x - pos.x, obj->inter.y - pos.y) * cos((look_rot - rot ));
-    //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1_f.x, wall.p2.x, obj->inter.x, calc_wall_hit_scale(wall, obj->inter), rot, look_rot);
+    //printf("wall x min = %i, x max = %i, touch x = %f, scale = %f, rot = %f, look_rot = %f\n", wall.p1.x, wall.p2.x, obj->inter.x, calc_wall_hit_scale(wall, obj->inter), rot, look_rot);
 	return (res);
 }
 

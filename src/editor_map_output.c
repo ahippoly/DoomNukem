@@ -10,6 +10,16 @@ char *join_int_value(int val1, char *separator, int val2)
     return (str);
 }
 
+char *join_float_value(float val1, char *separator, float val2)
+{
+    char *str;
+
+    str = ft_ftoa(val1, p_malloc(3), 3);
+    str = ft_strjoinfree(str, separator, 0);
+    str = ft_strjoinfree(str, ft_ftoa(val2, p_malloc(3), 3), 0);
+    return (str);
+}
+
 void write_key(int fd, char *key)
 {
     write(fd, " ", 1);
@@ -50,8 +60,8 @@ void write_walls(int fd, t_wall *list, int wall_count)
     {
         wall = list[i];
         write_param(fd, "id", ft_itoa(wall.id));
-        write_param(fd, "p1", join_int_value(wall.p1.x, ",", wall.p1.y));
-        write_param(fd, "p2", join_int_value(wall.p2.x, ",", wall.p2.y));
+        write_param(fd, "p1", join_float_value(wall.p1.x, ",", wall.p1.y));
+        write_param(fd, "p2", join_float_value(wall.p2.x, ",", wall.p2.y));
         write_param(fd, "p1_height", join_int_value(wall.p1_height.start, ",", wall.p1_height.end));
         write_param(fd, "p2_height", join_int_value(wall.p2_height.start, ",", wall.p2_height.end));
         write_param(fd, "texture_id", ft_itoa(wall.texture_id));

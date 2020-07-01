@@ -100,7 +100,7 @@ int read_paramf(char *chunk, char *key, float *to_fill)
     return (error);
 }
 
-float calc_line_angle(SDL_Point p1, SDL_Point p2)
+float calc_line_angle(t_point p1, t_point p2)
 {
     float a;
 
@@ -117,16 +117,15 @@ void read_wall(char *line, t_wall *wall)
 
     error = 0;
     error += read_param(line, "id", &wall->id);
-    error += read_param(line, "p1", &wall->p1.x);
-    error += read_param(line, "p2", &wall->p2.x);
+    error += read_paramf(line, "p1", &wall->p1.x);
+    error += read_paramf(line, "p2", &wall->p2.x);
     error += read_param(line, "p1_height", &wall->p1_height.start);
     error += read_param(line, "p2_height", &wall->p2_height.start);
     error += read_param(line, "texture_id", &wall->texture_id);
     error += read_param(line, "room_id_ref", &wall->room_id_ref);
     error += read_param(line, "transparency", &wall->transparency);
     error += read_param(line, "can_collide", &wall->can_collide);
-	error += read_paramf(line, "p1", &wall->p1_f.x);
-    error += read_paramf(line, "p2", &wall->p2_f.x);
+
 	printf("wall collide readed = %i\n", wall->can_collide);
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);

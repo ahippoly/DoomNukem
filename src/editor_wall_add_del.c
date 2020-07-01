@@ -13,14 +13,14 @@ void check_intersect_with_all_wall(t_wall wall,t_env *env)
         checked_wall = env->wall_list[i];
         if (i != wall.id && checked_wall.id != -1)
         {
-            inter = segment_intersect(wall.p1, wall.p2, checked_wall.p1, checked_wall.p2);
+            inter = find_intersect(wall.p1, wall.p2, checked_wall.p1, checked_wall.p2);
             printf("Intersect between wall nb %i and %i is x=%f, y=%f\n",wall.id, checked_wall.id, inter.x, inter.y);
             i++;
         }
     }
 }
 
-int check_intersect_with_all_wall_point(SDL_Point p1, SDL_Point p2, t_env *env)
+int check_intersect_with_all_wall_point(t_point p1, t_point p2, t_env *env)
 {
     int i;
     t_wall checked_wall;
@@ -33,7 +33,7 @@ int check_intersect_with_all_wall_point(SDL_Point p1, SDL_Point p2, t_env *env)
         checked_wall = env->wall_list[i];
         if (checked_wall.id != -1)
         {
-            inter = segment_intersect(p1, p2, checked_wall.p1, checked_wall.p2);
+            inter = find_intersect(p1, p2, checked_wall.p1, checked_wall.p2);
             printf("Intersect between wall created and wall nb %i is x=%f, y=%f\n", checked_wall.id, inter.x, inter.y);
             if (inter.x != -42)
                 return (1);
@@ -43,13 +43,13 @@ int check_intersect_with_all_wall_point(SDL_Point p1, SDL_Point p2, t_env *env)
     return (0);
 }
 
-t_wall create_wall(SDL_Point p1, SDL_Point p2, int id, t_env *env)
+t_wall create_wall(t_point p1, t_point p2, int id, t_env *env)
 {
     t_wall wall;
 
     wall.id = id;
-    wall.p1 = p1;
-    wall.p2 = p2;
+    wall.p1 = (p1);
+    wall.p2 = (p2);
     wall.texture_id = env->selected_texture;
     wall.transparency = env->input_lst[INPUT_TRANSPARENCY].value;
     wall.can_collide = env->input_lst[INPUT_COLLIDE].value;
@@ -119,7 +119,7 @@ void rearange_wall_lst(t_env *env)
     recreate_room_list(env);
 }
 
-int add_wall(SDL_Point p1, SDL_Point p2, t_env *env)
+int add_wall(t_point p1, t_point p2, t_env *env)
 {
     int success;
 
@@ -202,9 +202,9 @@ void print_walls_in_map(t_env *env)
         if (wall.id != -1)
         {
             if (wall.room_id_ref == -1)
-                draw_line(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF00FFFF);
+                draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), (env->map_move), 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF00FFFF);
             else
-                draw_line(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFFFF88CC);                
+                draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), (env->map_move), 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFFFF88CC);                
         }
         i++;
     }
@@ -217,6 +217,6 @@ void print_selected_wall(t_env *env)
     if (env->selected_wall_id != -1)
     {
         wall = env->wall_list[env->selected_wall_id];
-        draw_line(add_sdl_point(mult_sdl_point(wall.p1, TILE_SIZE), env->map_move, 0), add_sdl_point(mult_sdl_point(wall.p2, TILE_SIZE), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF00FF00);
+        draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF00FF00);
     }
 }

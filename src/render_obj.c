@@ -9,8 +9,8 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	t_obj obj;
 	t_img *text;
 
-	obj.p1 = wall->p1_f;
-	obj.p2 = wall->p2_f;
+	obj.p1 = wall->p1;
+	obj.p2 = wall->p2;
 	obj.length = wall->length;
 	text = &d->texture[wall->texture_id];
 	// obj.text = (t_img){text->pixels, (SDL_Rect){0, 0, 0, 0}, text->w, text->h};

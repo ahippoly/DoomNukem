@@ -11,7 +11,7 @@ void create_room_mode(t_env *env)
         if (env->selected_corner.x == -1)
             env->selected_corner = env->hovered_corner;
         else
-            if (!add_wall(env->selected_corner, env->hovered_corner, env))
+            if (!add_wall(convert_sdlpoint2tpoint(env->selected_corner), convert_sdlpoint2tpoint(env->hovered_corner), env))
                 return;
         printf("2selected corner : x=%i, y=%i\n", env->selected_corner.x, env->selected_corner.y);
         
@@ -46,7 +46,7 @@ void neutral_mouse_mode(t_env *env)
         else if (env->selected_corner.x != env->hovered_corner.x
             || env->selected_corner.y != env->hovered_corner.y)
         {
-            add_wall(env->selected_corner, env->hovered_corner, env);
+            add_wall(convert_sdlpoint2tpoint(env->selected_corner), convert_sdlpoint2tpoint(env->hovered_corner), env);
             env->selected_corner.x = -1;
         }
     }

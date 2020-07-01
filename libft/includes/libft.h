@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 18:17:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/03/09 21:52:05 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/01 03:54:16 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,7 @@ void    			*p_malloc(unsigned int size);
 void				print_memory(const void *addr, size_t size);
 int					get_next_line(const int fd, char **line);
 void				*double_array_size(void *data, int unit_size, size_t array_length);
+char				*ft_ftoa(float n, char *res, int afterpoint);
+
 
 #endif

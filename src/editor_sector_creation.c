@@ -40,14 +40,14 @@ t_wall_ref *add_wall_reference(t_wall_ref *chain, int new_wall_id)
     return (new);
 }
 
-void reference_wall(SDL_Point pos, int wall_id, t_env *env)
+void reference_wall(t_point pos, int wall_id, t_env *env)
 {
     t_wall_ref *new_ref;
     // faut mettre le first maillon de la liste chainee
     
     new_ref = alloc_wall(wall_id);
-    new_ref->next = env->map_wall_ref[pos.y][pos.x];
-    env->map_wall_ref[pos.y][pos.x] = new_ref;
+    new_ref->next = env->map_wall_ref[(int)pos.y][(int)pos.x];
+    env->map_wall_ref[(int)pos.y][(int)pos.x] = new_ref;
 }
 
 void add_wall_ref_point(t_wall wall, t_env *env)

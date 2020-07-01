@@ -16,12 +16,35 @@ SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub)
     return (p);
 }
 
+t_point add_t_point(t_point p, t_point add, int is_sub)
+{
+    if (is_sub == 1)
+    {
+        p.x -= add.x;
+        p.y -= add.y;
+    }
+    else
+    {
+        p.x += add.x;
+        p.y += add.y;
+    }
+    return (p);
+}
+
 SDL_Point mult_sdl_point(SDL_Point p, float mul)
 {
     p.x = mul * p.x;
     p.y = mul * p.y;
     return (p);
 }
+
+t_point mult_t_point(t_point p, float mul)
+{
+    p.x = mul * p.x;
+    p.y = mul * p.y;
+    return (p);
+}
+
 
 void swap_point(SDL_Point *p1, SDL_Point *p2)
 {
@@ -60,4 +83,13 @@ SDL_Point create_point(int x, int y)
     p.x = x;
     p.y = y;
     return (p);
+}
+
+SDL_Point convert_t_point(t_point point)
+{
+	SDL_Point new_point;
+
+	new_point.x = point.x;
+	new_point.y = point.y;
+	return (new_point);
 }

@@ -6,7 +6,7 @@
 #    By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/15 13:12:19 by ahippoly          #+#    #+#              #
-#    Updated: 2020/03/09 21:56:09 by ahippoly         ###   ########.fr        #
+#    Updated: 2020/07/01 03:32:25 by ahippoly         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_NAME =	ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_b
 			ft_strnew.c ft_strsplit.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c ft_atoi.c ft_lstnew.c ft_lstdelone.c \
 			ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c print_memory.c ft_pow.c ft_abs.c ft_max.c ft_min.c \
 			ft_fmax.c ft_fmin.c ft_range.c ft_frange.c get_next_line.c ft_strlower.c ft_strupper.c ft_protected_malloc.c \
-			ft_double_array_size.c ft_fatoi.c
+			ft_double_array_size.c ft_fatoi.c ft_ftoa.c
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/

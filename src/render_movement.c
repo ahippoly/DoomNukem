@@ -46,7 +46,7 @@ int is_angle_in_range(float rot, float min, float max)
 // 	{
 // 		if (sorted[i].dist < WALL_SIZE)
 // 		{
-// 			inter = find_intersect_no_bound(*pos, (t_point){pos->x + (rot.cos_rot), pos->y + (rot.sin_rot)}, (sorted[i].wall.p1_f), (sorted[i].wall.p2_f));
+// 			inter = find_intersect_no_bound(*pos, (t_point){pos->x + (rot.cos_rot), pos->y + (rot.sin_rot)}, (sorted[i].wall.p1), (sorted[i].wall.p2));
 // 			diff_x = inter.x - pos->x;
 // 			if ( (diff_x > 0 && (rot.cos_rot) > 0) || (diff_x < 0 && (rot.cos_rot) < 0) )
 // 			{

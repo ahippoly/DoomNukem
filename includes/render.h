@@ -110,8 +110,8 @@ typedef	struct				s_ray
 typedef struct      s_wall
 {
     int             id;
-    SDL_Point       p1;
-    SDL_Point       p2;
+    t_point       p1;
+    t_point       p2;
     t_range         p1_height;
     t_range         p2_height;
     int             texture_id;
@@ -121,8 +121,6 @@ typedef struct      s_wall
     float			length;
     float			rotation;
 	float			alpha;
-	t_point			p1_f;
-    t_point			p2_f;
 	float			p1_z_start;
 	float			p1_z_size;
 	float			p2_z_start;

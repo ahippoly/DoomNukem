@@ -228,7 +228,7 @@ void exit_with_msg(char *msg);
 SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub);
 SDL_Point mult_sdl_point(SDL_Point p, float mul);
 void draw_rectangle(unsigned int *pixels, SDL_Rect rect, t_size screen_size, int color);
-int add_wall(SDL_Point p1, SDL_Point p2, t_env *env);
+int add_wall(t_point p1, t_point p2, t_env *env);
 void del_wall(t_env *env, int wall_id);
 void del_room(t_env *env, int room_id);
 void print_walls_in_map(t_env *env);

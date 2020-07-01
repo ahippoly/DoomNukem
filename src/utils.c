@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 15:42:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/30 20:27:42 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/01 03:58:13 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,3 +480,4 @@ void convert_pixel_format(unsigned int *pixels, int total_size)
 		i++;
 	}
 }
+

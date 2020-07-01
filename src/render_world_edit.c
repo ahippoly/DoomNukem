@@ -21,8 +21,8 @@ int	grab_wall(t_data *d, t_point pos, t_rot look_rot)
 
 void	move_wall(t_data *d, t_wall *wall, t_rot look_rot, float speed)
 {
-	move_attempt(d, &wall->p1_f, speed, look_rot);
-	move_attempt(d, &wall->p2_f, speed, look_rot);
+	move_attempt(d, &wall->p1, speed, look_rot);
+	move_attempt(d, &wall->p2, speed, look_rot);
 }
 
 void	move_grabbed_wall(t_data *d, t_rot look_rot, float speed)
@@ -45,7 +45,7 @@ void	rot_wall(t_wall *wall, float rot, int pivot_point)
 {
 	wall->rotation += rot;
 	if (pivot_point == 0)
-		wall->p2_f = (t_point){wall->p1_f.x + wall->length * cos(wall->rotation), wall->p1_f.y + wall->length * sin(wall->rotation)};
+		wall->p2 = (t_point){wall->p1.x + wall->length * cos(wall->rotation), wall->p1.y + wall->length * sin(wall->rotation)};
 }
 
 void	rot_grabbed_wall(t_data *d, float rot, int pivot_point)
