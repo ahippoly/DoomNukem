@@ -151,6 +151,11 @@ void handle_key_event(t_data *d)
         d->z_offset += 0.05;
     if (d->clavier[SDL_SCANCODE_O])
         d->z_offset -= 0.05;
+	if (d->clavier[SDL_SCANCODE_LALT])
+	{
+		d->z_force += 0.001;
+		d->air_time = 0;	   
+	}
        //event_misc_sound(d);
 	
 	event_change_weapon(d);
@@ -204,6 +209,8 @@ void handle_poll_event(t_data *d)
                 d->speed_modifier -= 0.5;
                 d->z_offset -= PLAYER_HEIGHT / 2;
             }
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_LALT)
+                d->z_force = 0.001;
             if (d->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
                 d->z_force = JUMP_FORCE;
 			//debug
