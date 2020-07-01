@@ -1,7 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 t_img read_img_surface(char *file, Uint32 pixel_format)
 {
@@ -12,22 +9,20 @@ t_img read_img_surface(char *file, Uint32 pixel_format)
 
     readed_file = SDL_LoadBMP(file);
     if (readed_file == NULL)
-        exit_with_msg("failed to load texture bmp file");
+        exit_env(d);
     format = SDL_AllocFormat(pixel_format);
     converted = SDL_ConvertSurface(readed_file, format, 0);
     SDL_FreeFormat(format);
     SDL_FreeSurface(readed_file);
 	img.pixels = alloc_image(converted->w, converted->h);
 	ft_memcpy_int(img.pixels, converted->pixels, converted->w * converted->h);
-	//img.pixels = converted->pixels;
 	img.w = converted->w;
 	img.h = converted->h;
-    //SDL_LockSurface(readed_file);
-    printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
     SDL_FreeSurface(converted);
     return (img);
 }
 
+/*
 void load_bmp_files(t_data *d)
 {
     d->texture[0] = read_img_surface(TEXT_PATH_0, SDL_PIXELFORMAT_ARGB32);
@@ -38,7 +33,28 @@ void load_bmp_files(t_data *d)
     d->texture[5] = read_img_surface(TEXT_PATH_5, SDL_PIXELFORMAT_ARGB32);
     d->texture[6] = read_img_surface(TEXT_PATH_6, SDL_PIXELFORMAT_ARGB32);
 }
+*/
 
+/* refactor alex, d->texture initialisé dans render_init_data.c */
+int			load_bmp_files(t_data *d)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	path = ft_strdup("TEXT_PATH_0");
+	while (i < NB_TEXTURE)
+	{
+		path[10] = i;
+		d->texture[i] = read_img_surface(path, SDL_PIXELFORMAT_ARGB32);
+		i++;
+	}
+	free(path);
+	path = NULL;
+	return (0);
+}
+
+/* initialisation de d->img[MB_IMG] dans render_init_data.c */
 void init_rend_img(t_data *d)
 {
 	d->img[IMG_PLAYER] = read_img_surface(IMG_PATH_0, SDL_PIXELFORMAT_ARGB32);

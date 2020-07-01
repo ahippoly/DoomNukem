@@ -14,17 +14,6 @@
 
 # define BLACK 0
 # define WHITE 0xFFFFFF
-# define DAYSKY 0x2FC4EE
-# define NIGHTSKY 0x084B83
-# define DAYFLOOR 0xC5B087
-# define NIGHTFLOOR 0x081c15
-# define DAY_HUD 0x253237
-# define NIGHT_HUD 0x5500a8
-# define BEYOND_MAP 0x42321b
-# define FLOOR 0xC5B087
-# define RAY 0x89fc00
-# define BLUE 0xd00000
-# define BLOC_COLOR 0x1B9E77
 
 /* weapons */
 

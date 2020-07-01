@@ -1,7 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 /*SDL_Rect precision : x and y are beginning pos of letter. h and w are size of image */
 void charts2pixels(char letter[SIZE_Y][SIZE_X], int size, t_txt_img txt)

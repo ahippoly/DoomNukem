@@ -1,7 +1,5 @@
 #include "proto_global.h"
 
-
-
 void print_sprite(t_sprite *sprite)
 {
 	printf("size : %i,%i, on : %i, totalsize : %i,%i, frame_size : %i,%i\n", sprite->size.x, sprite->size.y, sprite->on, sprite->total_size.w, sprite->total_size.h, sprite->frame_size.w, sprite->frame_size.h);

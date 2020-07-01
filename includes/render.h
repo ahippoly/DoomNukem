@@ -34,28 +34,28 @@
 # define TYPE_PROP -2
 # define TYPE_MOB -3
 
-typedef struct	s_proj_point
+typedef struct		s_proj_point
 {
-	int			screen_x;
-	float		dist;
-	float		wall_start;
-	float		wall_size;
-	float		scale_x;
-	float		scale_len;
-	int			on_screen;
-}				t_proj_point;
+	int				screen_x;
+	float			dist;
+	float			wall_start;
+	float			wall_size;
+	float			scale_x;
+	float			scale_len;
+	int				on_screen;
+}					t_proj_point;
 
-typedef	struct	s_draw_line
+typedef	struct		s_draw_line
 {
-	t_frange	draw_y;
-	int			x;
-	float		scale_x;
-	float		scale_z;
-	float		scale_z_step;
+	t_frange		draw_y;
+	int				x;
+	float			scale_x;
+	float			scale_z;
+	float			scale_z_step;
 	unsigned int	*text;
-	int			tw;
-	int			th;
-}				t_draw_line;
+	int				tw;
+	int				th;
+}					t_draw_line;
 
 typedef	struct		s_floor
 {
@@ -63,47 +63,47 @@ typedef	struct		s_floor
 	t_point			floor_step;
 }					t_floor;
 
-typedef	struct				s_look_rot
+typedef	struct		s_look_rot
 {
-	float					angle;
-	float					step;
-	float					rev;
-}							t_look_rot;
+	float			angle;
+	float			step;
+	float			rev;
+}					t_look_rot;
 
-typedef	struct					s_obj
+typedef	struct		s_obj
 {
-				t_point			p1;
-				t_point			p2;
-				t_p_size		z_height;
-				t_p_size		z_step;
-				float			z_text_offset;
-				float			length;
-				float			z_ground;
-				unsigned int	*pixels;
-				int				w;
-				int				h;
-				t_point			pos;
-				float			size;
-				float			alpha;
-				int				room_id;
-				t_rot			rotation;
-				char			can_collide;
-				float			z_force;
-				float			air_time;
-				void			*origin;
-}								t_obj;
+	t_point			p1;
+	t_point			p2;
+	t_p_size		z_height;
+	t_p_size		z_step;
+	float			z_text_offset;
+	float			length;
+	float			z_ground;
+	unsigned int	*pixels;
+	int				w;
+	int				h;
+	t_point			pos;
+	float			size;
+	float			alpha;
+	int				room_id;
+	t_rot			rotation;
+	char			can_collide;
+	float			z_force;
+	float			air_time;
+	void			*origin;
+}					t_obj;
 
-typedef	struct				s_ray
+typedef	struct		s_ray
 {
-				float		dist;
-				float		scale;
-				float		mod_scale;
-				t_p_size	z_height;
-				float		z_text;
-				t_point		inter;
-				int			room_id;
-				t_obj		*obj_ref;
-}							t_ray;
+	float			dist;
+	float			scale;
+	float			mod_scale;
+	t_p_size		z_height;
+	float			z_text;
+	t_point			inter;
+	int				room_id;
+	t_obj			*obj_ref;
+}					t_ray;
 
 typedef struct      s_wall
 {
@@ -129,12 +129,12 @@ typedef struct      s_wall
 	t_obj			*obj_ref;
 }                   t_wall;
 
-typedef	struct	s_proj_wall
+typedef	struct		s_proj_wall
 {
 	t_proj_point	p1;
 	t_proj_point	p2;
 	t_wall			wall;
-}				t_proj_wall;
+}					t_proj_wall;
 
 typedef struct      s_calced_walls
 {
@@ -145,35 +145,35 @@ typedef struct      s_calced_walls
 	t_wall			wall;
 }                   t_calced_walls;
 
-typedef struct					s_mob
+typedef struct		s_mob
 {
-                    int         life;
-					int			dmg_per_hit;
-					int			attack_delay;
-					int			attack_timer;
-					float		aggro_range;
-					float		attack_dist;
-					float		speed;
-                    t_point		pos;
-					t_rot		rot;
-					float		z_pos;
-					float		z_size;
-					float		size;
-                    t_ssprite	sprite;
-					t_obj		*obj_ref;
-}								t_mob;
+	int       	  	life;
+	int				dmg_per_hit;
+	int				attack_delay;
+	int				attack_timer;
+	float			aggro_range;
+	float			attack_dist;
+	float			speed;
+	t_point			pos;
+	t_rot			rot;
+	float			z_pos;
+	float			z_size;
+	float			size;
+	t_ssprite		sprite;
+	t_obj			*obj_ref;
+}					t_mob;
 
-typedef	struct				s_props
+typedef	struct		s_props
 {
-				t_point		pos;
-				float		size;
-				float		z_pos;
-				char		collectable;
-				char		can_collide;
-				char		id;
-				t_img		*text;
-				t_obj		*obj_ref;
-}							t_props;
+	t_point			pos;
+	float			size;
+	float			z_pos;
+	char			collectable;
+	char			can_collide;
+	char			id;
+	t_img			*text;
+	t_obj			*obj_ref;
+}					t_props;
 
 
 #endif

@@ -89,8 +89,4 @@ typedef	struct 		s_rot
 	float			sin_rot;
 }					t_rot;
 
-
-
-
-
 #endif

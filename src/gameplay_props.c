@@ -12,12 +12,12 @@
 
 #include "proto_global.h"
 
-void ref_origin(void *type_list, int nb_type, int type)
+void 		ref_origin(void *type_list, int nb_type, int type)
 {
-	t_obj *obj;
-	int i;
-	int size;
-	void *selected;
+	t_obj	*obj;
+	int		i;
+	int		size;
+	void	*selected;
 
 	i = 0;
 	if (type == TYPE_PROP)
@@ -40,11 +40,11 @@ void ref_origin(void *type_list, int nb_type, int type)
 	}
 }
 
-void check_props_collect(t_data *d, t_props *props, t_hud *hud)
+void		check_props_collect(t_data *d, t_props *props, t_hud *hud)
 {
-	int i;
-	int nb_props;
-	t_props *prop;
+	int		i;
+	int		nb_props;
+	t_props	*prop;
 
 	nb_props = d->nb_props;
 	i = 0;

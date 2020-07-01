@@ -12,21 +12,38 @@
 
 # include "proto_global.h"
 
+/* sprite_img[NB_SPRITE] */
+int		malloc_sprite_img_data(t_data *d)
+{	
+	if (!(d->sprite_img = malloc_img(NB_SPRITE)))
+		exit_env(d);
+	return (0);
+}
 
-void init_sprites_img(t_data *d)
+void	init_sprites_img(t_data *d)
 {
+	malloc_sprite_img_data(d);
 	d->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_ARGB32);
 	d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
 	//d->sprite_img[SPRITE_ID_REVOLVER] = read_img_surface(WEAPON_PATH_0, SDL_PIXELFORMAT_ARGB32);
 }
 
-void init_sprites_img_env(t_env *e)
+/* sprite_img[NB_SPRITE] */
+int		malloc_sprite_img_env(t_env *e)
 {
+	if (!(e->sprite_img = malloc_img(NB_SPRITE)))
+		return (-1) //retourner une erreur ici
+	return (0);
+}
+
+void 	init_sprites_img_env(t_env *e)
+{
+	malloc_sprite_img_env(e);
 	e->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_RGBA32);
 	e->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_RGBA32);
 }
 
-void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_frame)
+void 	init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_frame)
 {
 	int i;
 
@@ -48,7 +65,6 @@ void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_
 			start.y += 1;
 		}
 	}
-	
 }
 
 void copy_frame_ssprite(t_ssprite *sprite, SDL_Point pos_anim, t_size size_anim)

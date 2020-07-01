@@ -1,7 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 int	grab_wall(t_data *d, t_point pos, t_rot look_rot)
 {

@@ -1,8 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 void init_sdl_ressources_rend(t_data *d)
 {
@@ -52,7 +48,51 @@ int		init_hud(t_data *d)
 	return (0);
 }
 
-void init_data(t_data *d, int ac, char **av)
+/* initialise data->texture[NB_TEXTURE] ------------- to free */
+int			malloc_img_texture(t_data *d)
+{
+	if (!(d->texture = malloc_img(NB_TEXTURE)))
+		exit_env(d);
+	return (0);
+}
+
+/* initialise data->img[NB_IMG] ------------- to free */
+int			malloc_img(t_data *d)
+{
+	if (!(d->img = malloc_img(NB_IMG)))
+		exit_env(d);
+	return (0);
+}
+
+int			malloc_props(t_data *d)
+{
+	if (!(d->propos = malloc_props(NB_MAX_PROPS)))
+		exit_env(d);
+	return (0);
+}
+
+int			malloc_mobs(t_data *d)
+{
+	if (!(d->mobs = malloc_mob(NB_MAX_MOBS)))
+		exit_env(d);
+	return (0);
+}
+
+int			malloc_obj_list(t_data *d)
+{
+	if (!(d->obj_list = malloc_obj(NB_MAX_OBJ)))
+		exit_env(d);
+	return (0);
+} 
+
+int			malloc_sprite(t_data *d)
+{
+	if (!(d->sprite = malloc_sprite(30)))
+		exit_env(d);
+	return (0);
+}
+
+void		init_data(t_data *d, int ac, char **av)
 {
     init_sdl_ressources_rend(d);
 	init_sprite(d);
@@ -64,8 +104,18 @@ void init_data(t_data *d, int ac, char **av)
 	else
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)
-		exit_with_msg("error : wrong map file\n");
-    init_mini_map(d, &d->map);
+	{
+		ft_putendl("error : wrong map file");
+		exit_env(d);
+	}
+	
+	malloc_img_texture(d); //initialise data->texture[NB_TEXTURE]
+	malloc_img(d); //initialise data->img[NB_IMG]
+	malloc_props(d); // initialise data->props[NB_MAX_PROPS];
+    malloc_mobs(d); //initialise data->mobs[NB_MAX_MOBS];
+	malloc_obj_list(d);
+	malloc_sprite(d);
+	init_mini_map(d, &d->map);
     d->player_pos = create_t_point(0.5 + d->map.player_spawn.x, 0.5 + d->map.player_spawn.y);
     d->rot = -1.00015592 * M_PI_2;
     d->screen_height = HALF_WIN_SIZE_Y;

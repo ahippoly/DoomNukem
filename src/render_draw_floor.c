@@ -1,12 +1,9 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
-t_draw calc_floor_draw_range(t_data *d, t_ray ray1, float dist2, int x)
+t_draw			calc_floor_draw_range(t_data *d, t_ray ray1, float dist2, int x)
 {
-	t_draw	draw;
-	t_room	*room;
+	t_draw		draw;
+	t_room		*room;
 
 	room = get_room_by_id(d, ray1.room_id);
 	draw.start_y = ft_max(d->screen_height + ((d->player_height - room->z_ground) * WIN_SIZE_Y) / ray1.dist, 0);
@@ -15,9 +12,9 @@ t_draw calc_floor_draw_range(t_data *d, t_ray ray1, float dist2, int x)
 	return (draw);
 }
 
-t_draw calc_floor_draw_range_end(t_data *d, float dist1, t_room *room, int x)
+t_draw			calc_floor_draw_range_end(t_data *d, float dist1, t_room *room, int x)
 {
-	t_draw	draw;
+	t_draw		draw;
 
 	draw.start_y = ft_max(d->screen_height + ((d->player_height - room->z_ground) * WIN_SIZE_Y) / dist1, 0);
 	draw.end_y = WIN_SIZE_Y;
@@ -25,9 +22,9 @@ t_draw calc_floor_draw_range_end(t_data *d, float dist1, t_room *room, int x)
 	return (draw);
 }
 
-void draw_floor_line(t_data *d, t_range draw, int x, int room_id)
+void			draw_floor_line(t_data *d, t_range draw, int x, int room_id)
 {
-	int color;
+	int			color;
 
 	if (room_id == 0)
 		color = 0xFF0000FF;
@@ -46,36 +43,24 @@ void draw_floor_line(t_data *d, t_range draw, int x, int room_id)
 	}
 }
 
-void draw_floor(t_data *d, SDL_Surface *text)
+void			draw_floor(t_data *d, SDL_Surface *text)
 {
-    int x;
-    int y;
-    int p;
-
-    
-
-    float ray_dir_x0;
-    float ray_dir_y0;
-    float ray_dir_x1;
-    float ray_dir_y1;
-
-
-    float pos_z;
-
-    float rowDistance;
-
-    float floorStepX;
-    float floorStepY;
-
-    float floorX;
-    float floorY;
-	t_point floor;
-
- 
-
-    int text_acces_pos;
-
-    int *pixels;
+    int			x;
+    int			y;
+    int			p;
+    float		ray_dir_x0;
+    float		ray_dir_y0;
+    float		ray_dir_x1;
+    float		ray_dir_y1;
+    float		pos_z;
+    float		rowDistance;
+    float		floorStepX;
+    float		floorStepY;
+    float		floorX;
+    float		floorY;
+	t_point 	floor;
+    int			text_acces_pos;
+    int			*pixels;
 
     ray_dir_x0 = cos(d->rot) + d->fov * sin(d->rot);
     ray_dir_x1 = cos(d->rot) - d->fov * sin(d->rot);
@@ -86,7 +71,6 @@ void draw_floor(t_data *d, SDL_Surface *text)
     pos_z = (d->player_height - DEFAULT_Z_GROUND ) * WIN_SIZE_Y;
 
     pixels = (int*)text->pixels;
-    
 
     // real world coordinates of the leftmost column. This will be updated as we step to the right.
     
@@ -109,14 +93,9 @@ void draw_floor(t_data *d, SDL_Surface *text)
 
         while (x < WIN_SIZE_X)
         {
-
-
-      
         // get the texture coordinate from the fractional part
         // floorX = fabs(floorX);
         // floorY = fabs(floorY);
-        
-
         floorX = floor.x + floorStepX * x;
         floorY = floor.y + floorStepY * x;
 
@@ -124,7 +103,6 @@ void draw_floor(t_data *d, SDL_Surface *text)
         // floorX += floorStepX;
         // floorY += floorStepY;
 
-     
         // printf("tx = %d, ty = %d, ty2 = %d\n", (int)(get_float_part(floorX) * text->w), (int)(get_float_part(floorY) * text->h) * text->w, (int)(get_float_part(floorY) * text->h * text->w));
         // printf("x scale = %f, y scale = %f\n", get_float_part(floorX), get_float_part(floorY));
         put_pixel(d->p_screen, create_point(x, y), create_t_size(WIN_SIZE_X, WIN_SIZE_Y), pixels[text_acces_pos]);
@@ -134,14 +112,14 @@ void draw_floor(t_data *d, SDL_Surface *text)
     }
 }
 
-void draw_floor2(t_data *d, t_floor *fl, double height)
+void				draw_floor2(t_data *d, t_floor *fl, double height)
 {
-    int y;
-    float pos_z;
-    float row_dist;
-	t_point ray_dir0;
-	t_point ray_dir1;
-	t_point ray_diff;
+    int				y;
+    float			pos_z;
+    float			row_dist;
+	t_point			ray_dir0;
+	t_point			ray_dir1;
+	t_point			ray_diff;
 
     ray_dir0.x = cos(d->rot) + d->fov * sin(d->rot);
     ray_dir1.x = cos(d->rot) - d->fov * sin(d->rot);
@@ -164,17 +142,17 @@ void draw_floor2(t_data *d, t_floor *fl, double height)
     }
 }
 
-void init_floor(t_data *d, t_floor *fl, double height)
+void				init_floor(t_data *d, t_floor *fl, double height)
 {
-    int y;
-    float pos_z;
-    float row_dist;
-	t_point ray_dir0;
-	t_point ray_dir1;
-	t_point ray_diff;
+    int				y;
+    float			pos_z;
+    float			row_dist;
+	t_point			ray_dir0;
+	t_point			ray_dir1;
+	t_point			ray_diff;
 
-    ray_dir0.x = cos(d->rot) + d->fov * sin(d->rot);
-    ray_dir1.x = cos(d->rot) - d->fov * sin(d->rot);
+	ray_dir0.x = cos(d->rot) + d->fov * sin(d->rot);
+	ray_dir1.x = cos(d->rot) - d->fov * sin(d->rot);
     ray_dir0.y = sin(d->rot) - d->fov * cos(d->rot);
     ray_dir1.y = sin(d->rot) + d->fov * cos(d->rot);
     pos_z = (d->player_height - height) * WIN_SIZE_Y;
@@ -195,11 +173,30 @@ void init_floor(t_data *d, t_floor *fl, double height)
     }
 }
 
-void	init_floors(t_data *d)
+/* malloc d->fl[NB_WALL_MAX / 2][WIN_SIZE_Y] */
+int					malloc_floor(t_data *d)
 {
-	int i;
+	int				i;
 
 	i = 0;
+	if (!(d->fl = malloc_floor_tab(NB_WALL_MAX / 2)))
+		exit_env(d);
+	while (i < NB_WALL_MAX / 2)
+	{
+		if (!(d->fl[i] = malloc_floor(WIN_SIZE_Y)))
+			exit_env(d);
+		ft_bzero(d->fl[i], sizeof(t_floor *));
+		i++;
+	}
+	return (0);
+}
+
+void				init_floors(t_data *d)
+{
+	int 			i;
+
+	i = 0;
+	malloc_floor(d);
 	while (i < d->map.room_count)
 	{
 		init_floor(d, d->fl[i], d->map.room_list[i].z_ground);
@@ -208,9 +205,9 @@ void	init_floors(t_data *d)
 	}
 }
 
-void print_floor(t_data *d)
+void 				print_floor(t_data *d)
 {
-	int i;
+	int 			i;
 
 	i = 0;
 	while (i < WIN_SIZE_Y)
@@ -220,12 +217,12 @@ void print_floor(t_data *d)
 	}
 }
 
-void	print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id)
+void				print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id)
 {
-	t_size t_max;
-	t_range y;
-	t_floor current;
-	t_img *text;
+	t_size			t_max;
+	t_range			y;
+	t_floor			current;
+	t_img			*text;
 	unsigned int	*pixels;
 
 	text = &d->texture[text_id];

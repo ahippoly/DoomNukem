@@ -16,6 +16,9 @@ void exit_env(t_data *d)
 
 	/* doom */
 
+	/* sound */
+	clean_sounds(d);
+
 	/* SDL */
 	quit_ttf(d);
 	SDL_Quit();

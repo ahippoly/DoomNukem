@@ -81,18 +81,43 @@ typedef struct      s_data
     SDL_Texture     *menu_texture; //menu texture
 	t_menu			menu;
 	char			*argv;
-	t_img			texture[NB_TEXTURE];
-	t_img			img[NB_IMG];
-	t_img			sprite_img[NB_SPRITE];
-	FMOD_SOUND		*sound[30];
-    t_ssprite       sprite_lst[NB_SPRITE_MAX];
-	t_ssprite		weapon_img[WEAPON_NB];
-	t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
-	t_props			props[NB_MAX_PROPS];
-	t_mob			mobs[NB_MAX_MOBS];
-	t_obj			obj_list[NB_MAX_OBJ];
-	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
-	t_sprite        sprite[30];
+	
+	// t_img			texture[NB_TEXTURE];
+	t_img			*texture;
+	
+	// t_img			img[NB_IMG];
+	t_img			*img;
+
+	// t_img			sprite_img[NB_SPRITE];
+	t_img			*sprite_img;
+	
+	// FMOD_SOUND		*sound[30];
+	// FMOD_SOUND		**sound;
+	FMOD_SOUND		*sound;
+    
+	// t_ssprite       sprite_lst[NB_SPRITE_MAX];
+	t_ssprite       *sprite_lst; // pas utilisé ?
+	
+	// t_ssprite		weapon_img[WEAPON_NB];
+	t_ssprite		*weapon_img; //pas utilisé ?
+	
+	// t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
+	t_floor			**fl;
+	
+	// t_props			props[NB_MAX_PROPS];
+	t_props			*props;
+	
+	// t_mob			mobs[NB_MAX_MOBS];
+	t_mob			*mobs;
+	
+	// t_obj			obj_list[NB_MAX_OBJ];
+	t_obj			*obj_list;
+	
+	// t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
+	t_obj			**repulsed; // dont't know what to malloc
+	
+	// t_sprite        sprite[30];
+	t_sprite        *sprite;
 
 }                   t_data;
 

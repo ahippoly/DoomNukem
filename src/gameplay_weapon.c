@@ -48,7 +48,6 @@ void reload_weapon(t_data *d, t_weapon *weapon)
 	}
 }
 
-
 void anim_weapon(t_data *d)
 {
 	d->sprite[d->gun_ind].time = d->time;

@@ -1,16 +1,17 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 void init_input(t_env *env)
 {
-    env->input_lst[INPUT_TRANSPARENCY] = create_t_input(set_sdl_rect(0.835 * WIN_SIZE_X, 0.650 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 0, 100);
-    env->input_lst[INPUT_BEGIN_P1] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
-    env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
-    env->input_lst[INPUT_END_P1] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.780 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
-    env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.780 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
-    env->input_lst[INPUT_ROOM_GROUND] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.890 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
-    env->input_lst[INPUT_ROOM_CEIL] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.890 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
-    env->input_lst[INPUT_COLLIDE] = create_t_input(set_sdl_rect(0.530 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 1, 1);
+	if (!(env->input_lst = malloc_input(NB_INPUT)))
+		return ; //retourner exit fonction
+	env->input_lst[INPUT_TRANSPARENCY] = create_t_input(set_sdl_rect(0.835 * WIN_SIZE_X, 0.650 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 0, 100);
+	env->input_lst[INPUT_BEGIN_P1] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
+	env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
+	env->input_lst[INPUT_END_P1] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.780 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
+	env->input_lst[INPUT_END_P2] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.780 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
+	env->input_lst[INPUT_ROOM_GROUND] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.890 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
+	env->input_lst[INPUT_ROOM_CEIL] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.890 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 30, 200);
+	env->input_lst[INPUT_COLLIDE] = create_t_input(set_sdl_rect(0.530 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 1, 1);
 }
 
 void init_img(t_env *env)

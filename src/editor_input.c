@@ -33,7 +33,6 @@ void print_inputs(t_env *env)
             input_text_to_img(ft_itoa(input.value), 2, 0xFFDDDDDD, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
         i++;
     }
-    
 }
 
 t_input create_t_input(SDL_Rect pos_size, int default_value, int max)

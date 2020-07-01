@@ -17,6 +17,4 @@
 # define PYRO 9
 # define MOB_INDEX 10
 
-
-
 #endif

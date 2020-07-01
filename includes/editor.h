@@ -173,9 +173,14 @@ typedef struct      s_env
     SDL_Window      *win;
     SDL_Texture     *screen;
     SDL_Texture     *editor_grid;
-    SDL_Texture     *text_list[NB_TEXTURE];
-    SDL_Texture     *img_list[NB_IMG];
-    SDL_Rect        grid_pos;
+    
+	// SDL_Texture     *text_list[NB_TEXTURE];
+    SDL_Texture     **text_list;
+
+    // SDL_Texture     *img_list[NB_IMG];
+    SDL_Texture     **img_list;
+    
+	SDL_Rect        grid_pos;
     const Uint8     *clavier;
     unsigned int    *p_screen;
     unsigned int    *p_grid;
@@ -209,16 +214,32 @@ typedef struct      s_env
 	t_icon			*icon_list;
     t_wall          *wall_list;
     t_room          *room_list;
-	t_range			room_height[NB_WALL_MAX];
-	int				room_text[NB_WALL_MAX];
-    t_wall_ref      ***map_wall_ref;
+
+	// t_range			room_height[NB_WALL_MAX];
+	t_range			*room_height;
+	
+	// int				room_text[NB_WALL_MAX];
+	int				*room_text;
+    
+	t_wall_ref      ***map_wall_ref;
     t_size          map_size;
-	t_img			sprite_img[NB_SPRITE];
-	t_ssprite		sprites[NB_SPRITE];
-    t_button        buttons_lst[NB_BUTTONS];
-    t_txt_img       txt_lst[NB_TXT];
-    t_input			input_lst[NB_INPUT];
-    void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
+
+	// t_img			sprite_img[NB_SPRITE];
+	t_img			*sprite_img;
+	
+	// t_ssprite		sprites[NB_SPRITE];
+	t_ssprite		*sprites; // pas utilisé ?
+
+    // t_button        buttons_lst[NB_BUTTONS];
+    t_button		*buttons_lst;
+    
+	// t_txt_img       txt_lst[NB_TXT];
+	t_txt_img		*txt_lst;
+
+    // t_input			input_lst[NB_INPUT];
+    t_input			*input_lst;
+    
+	void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
 	char			*map_name;
 }                   t_env;

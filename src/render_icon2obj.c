@@ -1,7 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 {
