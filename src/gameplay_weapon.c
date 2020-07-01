@@ -35,7 +35,7 @@ void anim_reload(t_data *d)
 	d->sprite[d->gun_ind].aim_on = 0;
 	d->sprite[d->gun_ind].anim_end = 0;
 	if (d->gun_ind > 0 && d->gun_ind < 5)
-	play_sound(d, d->gun_ind + 5);
+		play_sound(d, d->gun_ind + 5);
 }
 
 void reload_weapon(t_data *d, t_weapon *weapon)

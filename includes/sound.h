@@ -4,6 +4,7 @@
 # include "render.h"
 
 # define MUS_PATH1 "Sound/Music/Slayer.wav"
+# define MUS_PATH2 "Sound/Music/Creatures.wav"
 
 # define ARLONG_PATH "Sound/Guns/ARlong.wav"
 # define ARSHORT_PATH "Sound/Guns/ARshort.wav"
@@ -18,17 +19,6 @@
 # define MELEESHORT_PATH "Sound/Guns/Meleeattack.wav"
 # define SHOTGUNSHORT_PATH "Sound/Guns/Shotgunshot.wav"
 # define SHOTGUNRELOAD_PATH "Sound/Guns/ShotungReload.wav"
-
-# define WALKSOUND_PATH "Sound/Pas/Footsteps_walk.wav"
-# define RUNSOUND_PATH "Sound/Pas/Footsteps_run.wav"
-# define JUMPSOUND_PATH "Sound/Pas/Footsteps_jump.wav"
-
-# define PLAYERDEATHSCREAM_PATH "Sound/Personnage/Player_deathscream.wav"
-# define PLAYERPAIN_PATH "Sound/Personnage/Player_pain.wav"
-# define PLAYERBREATH_PATH "Sound/Personnage/Player_heavybreath.wav"
-
-# define AFRITROAR_PATH "Sound/Monstres/Afrit_roar.wav"
-# define PYROROAR_PATH "Sound/Monstres/Pyro_roar.wav"
 
 # define MELEESHORT 0
 # define REVSHORT 1
@@ -45,17 +35,7 @@
 # define DDSHORT 15
 
 # define MUS1 16
+# define MUS2 17
 
-# define WALKSOUND 17
-# define RUNSOUND 18
-# define JUMPSOUND 19
-
-# define PLAYERDEATHSCREAM 20
-# define PLAYERPAIN 21
-# define PLAYERBREATH 22
-
-# define AFRITROAR 23
-# define PYROROAR 24
-
-# define MAX_SOUNDS 25
+# define MAX_SOUNDS 18
 #endif

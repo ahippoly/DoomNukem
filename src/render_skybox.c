@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 21:47:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/30 23:41:29 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:19:29 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void print_skybox(t_data *d, t_img skybox, float rot, unsigned int *screen)
 		pos.y += WIN_SIZE_X;
 		p.y += scale.y;
 	}
-	printf("rot = %f natural = %f\n", mod_pi(rot), rot);
+	//printf("rot = %f natural = %f\n", mod_pi(rot), rot);
 }

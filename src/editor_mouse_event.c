@@ -52,18 +52,18 @@ void neutral_mouse_mode(t_env *env)
     }
     else
         env->selected_corner.x = -1;
-    if (env->hovered_wall_id != -1)
-    {
-        env->selected_wall_id = env->hovered_wall_id;
-        update_wall_param(env);
-        get_wall_param(env);
-    }
-    else if (env->selected_button != -1)
+    if (env->selected_button != -1)
         env->buttons_fct[env->selected_button](env);
     else if (env->hovered_input_id != -1)
     {
         env->selected_input = env->hovered_input_id;
         env->input_lst[env->selected_input].value = 0;
+    }
+	else if (env->hovered_wall_id != -1)
+    {
+        env->selected_wall_id = env->hovered_wall_id;
+        update_wall_param(env);
+        get_wall_param(env);
     }
     else
     {

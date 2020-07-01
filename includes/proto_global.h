@@ -74,6 +74,16 @@ t_point mult_t_point(t_point p, float mul);
 t_point convert_sdlpoint2tpoint(SDL_Point point);
 SDL_Point convert_t_point(t_point point);
 
+/* maths.c */
+
+int	ft_short(unsigned char *nb);
+int	ft_int(unsigned char *nb);
+
+/* bit_swaps.c */
+
+uint32_t	swap4(uint32_t x);
+uint16_t	swap2(uint16_t x);
+
 
 /* exit.c */
 

@@ -36,27 +36,6 @@ void event_gun_mouse(t_data *d)
 	}
 }
 
-void event_misc_sound(t_data *d)
-{
-    if (d->e.type == SDL_KEYUP)
-        {
-        if (d->e.key.keysym.scancode == SDL_SCANCODE_W)
-            {
-                if (d->e.key.keysym.scancode == SDL_SCANCODE_LSHIFT)
-                    play_sound(d, RUNSOUND);
-                else
-                    play_sound(d, WALKSOUND);
-            }
-        }
-    else
-    {
-        stop_sound(d, RUNSOUND);
-        stop_sound(d, WALKSOUND);
-    }
-        if (d->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
-        play_sound(d, JUMPSOUND);
-}
-
 void event_change_weapon(t_data *d)
 {
 	if (d->clavier[SDL_SCANCODE_R])
