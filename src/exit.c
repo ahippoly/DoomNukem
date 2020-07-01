@@ -11,7 +11,7 @@ void exit_env(t_data *d)
 	free_hud(&d->hud);
 
 	/* sprite */
-	clean_sprite_gun(d);
+	//clean_sprite_gun(d);
 
 	/* editor */
 

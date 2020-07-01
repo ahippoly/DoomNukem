@@ -12,7 +12,6 @@
 # include "props.h"
 # include "sound.h"
 # include "sprite.h"
-# include "bmp.h"
 
 typedef struct      s_data
 {

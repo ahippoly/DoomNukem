@@ -83,7 +83,6 @@ void    sprite_anim_gun(t_data *d)
     //     d->sprite[d->gun_ind].time = SDL_GetTicks();
     else
     {
-		// printf("once \n");
         d->sprite[d->gun_ind].index = IDLE;
         d->sprite[d->gun_ind].on = -1;
         gun_idle_anim(d);

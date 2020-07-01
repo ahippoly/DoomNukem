@@ -288,56 +288,56 @@ void del_from_array(void *list, int *size, void *to_remove, int obj_size)
 //     }
 // }
 
-void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst) // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
-{
-	SDL_Point	end;
-	t_point		t_scale;
-	t_point		t_step;
-	int ty;
-	float tx_start;
-	int x_start;
-	unsigned int *pixels;
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
+// void print_img_portion(unsigned int *p_tab, t_img *text, SDL_Rect src, SDL_Rect dst) // Works like SDL_RenderCopy, 24bits image not printing FFFFFF
+// {
+// 	SDL_Point	end;
+// 	t_point		t_scale;
+// 	t_point		t_step;
+// 	int ty;
+// 	float tx_start;
+// 	int x_start;
+// 	unsigned int *pixels;
+// 	unsigned char r;
+// 	unsigned char g;
+// 	unsigned char b;
 
-	t_step.x = (float)src.w / dst.w;
-	t_step.y = (float)src.h / dst.h;
-	end.x = ft_min(dst.x + dst.w, WIN_SIZE_X);
-	end.y = ft_min(dst.y + dst.h, WIN_SIZE_Y) * WIN_SIZE_Y;
-	tx_start = 0;
-	if (dst.x < 0)
-		tx_start = t_step.x * -dst.x;
-	if (dst.y < 0)
-		t_scale.y = t_step.y * -dst.y;
-	// t_scale.x = src.x;
-	// t_scale.y = src.y;
-	dst.y = ft_max(dst.y, 0) * WIN_SIZE_Y;
-	x_start = ft_max(dst.x, 0);
-	pixels = (unsigned int*)text->pixels;
-	while (dst.y < end.y)
-	{
-		t_scale.x = tx_start;
-		ty = (int)(t_scale.y + src.y) * text->w;
-		dst.x = x_start;
-		while (dst.x < end.x)
-		{
-			if (pixels[(int)t_scale.x + ty] != 0xFFFFFF)
-			{
-				// r = (pixels[(int)t_scale.x + ty + src.x] >> 16) & 0xFF;
-				// g = (pixels[(int)t_scale.x + ty + src.x] >> 8) & 0xFF;
-				// b = (pixels[(int)t_scale.x + ty + src.x]) & 0xFF;
-				// p_tab[dst.x + dst.y] = ((r) << 24 | (g) << 16 | (b) << 8) & 0xFF;
-				p_tab[dst.x + dst.y] = ((pixels[(int)t_scale.x + ty + src.x]));
-			}
-			t_scale.x += t_step.x;
-			dst.x++;
-		}
-		t_scale.y += t_step.y;
-		dst.y += WIN_SIZE_Y;
-	}
+// 	t_step.x = (float)src.w / dst.w;
+// 	t_step.y = (float)src.h / dst.h;
+// 	end.x = ft_min(dst.x + dst.w, WIN_SIZE_X);
+// 	end.y = ft_min(dst.y + dst.h, WIN_SIZE_Y) * WIN_SIZE_Y;
+// 	tx_start = 0;
+// 	if (dst.x < 0)
+// 		tx_start = t_step.x * -dst.x;
+// 	if (dst.y < 0)
+// 		t_scale.y = t_step.y * -dst.y;
+// 	// t_scale.x = src.x;
+// 	// t_scale.y = src.y;
+// 	dst.y = ft_max(dst.y, 0) * WIN_SIZE_Y;
+// 	x_start = ft_max(dst.x, 0);
+// 	pixels = (unsigned int*)text->pixels;
+// 	while (dst.y < end.y)
+// 	{
+// 		t_scale.x = tx_start;
+// 		ty = (int)(t_scale.y + src.y) * text->w;
+// 		dst.x = x_start;
+// 		while (dst.x < end.x)
+// 		{
+// 			if (pixels[(int)t_scale.x + ty] != 0xFFFFFF)
+// 			{
+// 				// r = (pixels[(int)t_scale.x + ty + src.x] >> 16) & 0xFF;
+// 				// g = (pixels[(int)t_scale.x + ty + src.x] >> 8) & 0xFF;
+// 				// b = (pixels[(int)t_scale.x + ty + src.x]) & 0xFF;
+// 				// p_tab[dst.x + dst.y] = ((r) << 24 | (g) << 16 | (b) << 8) & 0xFF;
+// 				p_tab[dst.x + dst.y] = ((pixels[(int)t_scale.x + ty + src.x]));
+// 			}
+// 			t_scale.x += t_step.x;
+// 			dst.x++;
+// 		}
+// 		t_scale.y += t_step.y;
+// 		dst.y += WIN_SIZE_Y;
+// 	}
 
-}
+// }
 
 void print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw)
 {

@@ -3,16 +3,15 @@
 
 # include "data.h"
 
-
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d);
 
 //sprite_init_gun.c
-t_sprite    sprite_init_ar(t_img *img);
-t_sprite    sprite_init_dd(t_img *img);
-t_sprite    sprite_init_lmg(t_img *img);
-t_sprite    sprite_init_revolver(t_img *img);
-t_sprite    sprite_init_ssg(t_img *img);
-t_sprite    sprite_init_melee(t_img *img);
+t_sprite    sprite_init_ar(SDL_Texture *text);
+t_sprite    sprite_init_dd(SDL_Texture *text);
+t_sprite    sprite_init_lmg(SDL_Texture *text);
+t_sprite    sprite_init_revolver(SDL_Texture *text);
+t_sprite    sprite_init_ssg(SDL_Texture *text);
+t_sprite    sprite_init_melee(SDL_Texture *text);
 void        clean_sprite_gun(t_data *d);
 int         load_sprite_gun(t_data *d);
 void        init_sprite(t_data *d);
