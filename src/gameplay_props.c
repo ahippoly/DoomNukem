@@ -57,6 +57,10 @@ void check_props_collect(t_data *d, t_props *props, t_hud *hud)
 				hud->inv.key += 1;
 			if (prop->id == HEAL_PACK_ITEM_ID)
 				hud->inv.health_pack += 1;
+			if (prop->id == JETPACK_ITEM_ID)
+				d->jetpack = 1;
+			if (prop->id == SHIP_ITEM_ID)
+				printf("gg !\n");
 			//del_from_array(d->obj_list, &d->nb_obj, prop->obj_ref, sizeof(t_obj));
 			del_obj(d->obj_list, &d->nb_obj, prop->obj_ref);
 			del_from_array(d->props, &d->nb_props, prop, sizeof(t_props));

@@ -16,7 +16,7 @@ void init_sdl_ressources_rend(t_data *d)
         exit_with_msg("Failed to create Renderer");
     d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    //SDL_SetRelativeMouseMode(SDL_TRUE);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
     //SDL_SetTextureBlendMode(d->screen, SDL_BLENDMODE_BLEND);
     //SDL_SetRenderDrawBlendMode(d->rend, SDL_BLENDMODE_NONE);
 }
@@ -93,4 +93,5 @@ void init_data(t_data *d, int ac, char **av)
 	init_rend_img(d);
 	load_icons(d, &d->map);
 	init_obj_list(d);
+    d->jetpack = 0;
 }

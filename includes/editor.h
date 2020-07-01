@@ -48,7 +48,7 @@
 # define INPUT_ROOM_CEIL 6
 # define INPUT_COLLIDE 7
 
-# define NB_TEXTURE 25
+# define NB_TEXTURE 28
 # define TEXT_PATH_0 "img/textures/Red_Bricks.bmp"
 # define TEXT_PATH_1 "img/hud/key.bmp"
 # define TEXT_PATH_2 "img/textures/Paver300.bmp"
@@ -74,6 +74,9 @@
 # define TEXT_PATH_22 "img/textures/tiles_large2.bmp"
 # define TEXT_PATH_23 "img/textures/tiles_large1.bmp"
 # define TEXT_PATH_24 "img/textures/brick_red.bmp"
+# define TEXT_PATH_25 "img/textures/poster1.bmp"
+# define TEXT_PATH_26 "img/textures/poster2.bmp"
+# define TEXT_PATH_27 "img/textures/poster3.bmp"
 
 # define NB_TXT 16
 # define TXT_MAP_EDITOR 0
@@ -101,19 +104,23 @@
 # define MAP_SIZE_X 30
 # define MAP_SIZE_Y 30
 
-# define NB_IMG 5
+# define NB_IMG 7
 
 # define IMG_PLAYER 0
 # define IMG_AFRIT 1
 # define IMG_ORC 2
 # define IMG_KEY 3
 # define IMG_HEAL_PACK 4
+# define IMG_SHIP 5
+# define IMG_JETPACK 6
 
 # define IMG_PATH_0 "img/icons/person.bmp"
 # define IMG_PATH_1 "img/icons/monster2.bmp"
 # define IMG_PATH_2 "img/icons/monster.bmp"
 # define IMG_PATH_3 "img/hud/key.bmp"
 # define IMG_PATH_4 "img/hud/doctor.bmp"
+# define IMG_PATH_5 "img/misc/ship1.bmp"
+# define IMG_PATH_6 "img/misc/jetpack.bmp"
 
 # define ICON_ARRAY_SIZE 20
 # define ICON_PLAYER_SIZE 30

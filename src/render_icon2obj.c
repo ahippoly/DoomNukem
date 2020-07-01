@@ -73,6 +73,36 @@ t_props	add_prop_heal_pack(t_data *d, SDL_Point pos)
 	return (prop);
 }
 
+t_props	add_prop_ship(t_data *d, SDL_Point pos)
+{
+	t_props prop;
+
+	prop.pos.x = (float)pos.x / UNIT;
+	prop.pos.y = (float)pos.y / UNIT;
+	prop.size = SHIP_SIZE;
+	prop.collectable = SHIP_COLLECTABLE;
+	prop.can_collide = 0;
+	prop.id = SHIP_ITEM_ID;
+	prop.text = &d->img[IMG_SHIP];
+	prop.z_pos = 10;
+	return (prop);
+}
+
+t_props	add_prop_jetpack(t_data *d, SDL_Point pos)
+{
+	t_props prop;
+
+	prop.pos.x = (float)pos.x / UNIT;
+	prop.pos.y = (float)pos.y / UNIT;
+	prop.size = JETPACK_SIZE;
+	prop.collectable = JETPACK_COLLECTABLE;
+	prop.can_collide = 0;
+	prop.id = JETPACK_ITEM_ID;
+	prop.text = &d->img[IMG_JETPACK];
+	prop.z_pos = 10;
+	return (prop);
+}
+
 void load_icons(t_data *d, t_map_data *map)
 {
 	int i;
@@ -94,6 +124,10 @@ void load_icons(t_data *d, t_map_data *map)
 			d->props[nb_prop++] = add_prop_key(d, current->pos_i);
 		if (current->id_ref == HEAL_PACK_ICON_ID)
 			d->props[nb_prop++] = add_prop_heal_pack(d, current->pos_i);
+		if (current->id_ref == SHIP_ICON_ID)
+			d->props[nb_prop++] = add_prop_ship(d, current->pos_i);
+		if (current->id_ref == JETPACK_ICON_ID)
+			d->props[nb_prop++] = add_prop_jetpack(d, current->pos_i);
 		i++;
 	}
 	d->nb_mob = nb_mob;

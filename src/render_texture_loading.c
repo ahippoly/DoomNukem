@@ -58,6 +58,9 @@ void load_bmp_files(t_data *d)
     d->texture[22] = read_img_surface(TEXT_PATH_22, SDL_PIXELFORMAT_ARGB32);
     d->texture[23] = read_img_surface(TEXT_PATH_23, SDL_PIXELFORMAT_ARGB32);
     d->texture[24] = read_img_surface(TEXT_PATH_24, SDL_PIXELFORMAT_ARGB32);
+    d->texture[25] = read_img_surface(TEXT_PATH_25, SDL_PIXELFORMAT_ARGB32);
+    d->texture[26] = read_img_surface(TEXT_PATH_26, SDL_PIXELFORMAT_ARGB32);
+    d->texture[27] = read_img_surface(TEXT_PATH_27, SDL_PIXELFORMAT_ARGB32);
 }
 
 void init_rend_img(t_data *d)
@@ -67,4 +70,6 @@ void init_rend_img(t_data *d)
 	d->img[IMG_ORC] = read_img_surface(IMG_PATH_2, SDL_PIXELFORMAT_ARGB32);
 	d->img[IMG_KEY] = read_img_surface(IMG_PATH_3, SDL_PIXELFORMAT_ARGB32);
 	d->img[IMG_HEAL_PACK] = read_img_surface(IMG_PATH_4, SDL_PIXELFORMAT_ARGB32);
+	d->img[IMG_SHIP] = read_img_surface(IMG_PATH_5, SDL_PIXELFORMAT_ARGB32);
+	d->img[IMG_JETPACK] = read_img_surface(IMG_PATH_6, SDL_PIXELFORMAT_ARGB32);
 }

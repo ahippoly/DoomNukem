@@ -93,7 +93,7 @@ typedef struct      s_data
 	t_obj			obj_list[NB_MAX_OBJ];
 	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
 	t_sprite        sprite[30];
-
+	int				jetpack;
 }                   t_data;
 
 typedef	struct		s_thread
