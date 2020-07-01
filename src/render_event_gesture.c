@@ -211,6 +211,8 @@ void handle_poll_event(t_data *d)
             }
 			if (d->e.key.keysym.scancode == SDL_SCANCODE_LALT)
                 d->z_force = 0.001;
+			if (d->e.key.keysym.scancode == SDL_SCANCODE_N)
+                create_mini_map(d, &d->map);
             if (d->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
                 d->z_force = JUMP_FORCE;
 			//debug

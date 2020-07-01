@@ -3,12 +3,23 @@
 #include "proto_global.h"
 #include "proto_global.h"
 
+void put_p(unsigned int *addr, unsigned int color, float alpha)
+{
+	*addr = color;
+}
+
+void put_p_alpha(unsigned int *addr, unsigned int color, float alpha)
+{
+	*addr = calc_transparency2(*addr, color, alpha);
+}
+
 void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray)
 {
 	float ty_step;
 	float ty;
 	int		tx;
 	int		p_cord;
+	void	(*put_pix)(unsigned int*, unsigned int, float);
 
 	tx = ray.mod_scale * obj.w;
 	ty_step = (float)obj.h * (ray.z_text) / (range.end_y - range.start_y);
@@ -23,6 +34,10 @@ void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray)
 	range.end_y = ft_min(range.end_y, WIN_SIZE_Y * WIN_SIZE_X);
 	//printf("range x = %i\n", range.start_x);
 	p_cord = range.start_x + range.start_y;
+	if (obj.alpha < 0.001)
+		put_pix = &put_p;
+	else
+		put_pix = &put_p_alpha;
 	while (p_cord < range.end_y)
 	{
 		while (ty > obj.h - INTER_TOLERANCE)
@@ -34,7 +49,8 @@ void draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj, t_ray ray)
 		if (tx + (int)ty * obj.w >= obj.h * obj.w)
 			printf("t : %i,%f, obj-wh %d,%d\n", tx, ty, obj.w, obj.h);
 		//pixels[p_cord] = obj.pixels[tx + (int)ty * obj.w];
-		pixels[p_cord] = calc_transparency2(pixels[p_cord], obj.pixels[tx + (int)ty * obj.w], obj.alpha);
+		(*put_pix)(&pixels[p_cord], obj.pixels[tx + (int)ty * obj.w], obj.alpha);
+		//pixels[p_cord] = calc_transparency2(pixels[p_cord], obj.pixels[tx + (int)ty * obj.w], obj.alpha);
 		//calc_transparency(&pixels[p_cord], &obj.pixels[tx + (int)ty * obj.w], obj.alpha);
 		ty += ty_step;
 		p_cord += WIN_SIZE_X;

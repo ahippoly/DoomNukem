@@ -83,7 +83,7 @@ int					main(int ac, char **av)
         //draw_floor(&d, d.texture[1]);
         //raycast_all_screen(&d, &d.map);
 		raycast_thread_init(&d);
-		print_skybox(&d, d.skybox, d.rot_calc.rot, d.p_screen);
+		//print_skybox(&d, d.skybox, d.rot_calc.rot, d.p_screen);
 		//print_prop(&d, &d.props[0]);
 		//print_walls(&d);
 		// print_text_screen(d.p_screen, &img, (SDL_Rect){100, 100, 200, 200});

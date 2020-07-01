@@ -1,17 +1,10 @@
 WALL LIST
-WALL_COUNT 12
-id : 0 ; p1 : 3.0003,6.0006 ; p2 : 7.0007,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 1 ; p1 : 4.0004,7.0007 ; p2 : 8.0008,6.0006 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 2 ; p1 : 6.0006,8.0008 ; p2 : 8.0008,7.0007 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 3 ; p1 : 10.00010,4.0004 ; p2 : 10.00010,7.0007 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 4 ; p1 : 10.19910,4.0004 ; p2 : 10.19910,7.0007 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 5 ; p1 : 10.50010,3.0003 ; p2 : 11.00011,3.0003 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 6 ; p1 : 10.50010,7.5007 ; p2 : 11.50011,6.5006 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 7 ; p1 : 11.00011,8.3008 ; p2 : 13.00013,6.3006 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 8 ; p1 : 11.00011,3.0003 ; p2 : 12.00012,4.0004 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 9 ; p1 : 12.00012,6.0006 ; p2 : 13.00013,4.0004 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 10 ; p1 : 13.00013,4.0004 ; p2 : 12.00012,3.0003 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
-id : 11 ; p1 : 12.00012,4.0004 ; p2 : 12.00012,3.0003 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
+WALL_COUNT 5
+id : 0 ; p1 : 3.0003,5.0005 ; p2 : 4.0004,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 10 ; can_collide : 1 ; 
+id : 1 ; p1 : 4.0004,5.0005 ; p2 : 5.0005,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 30 ; can_collide : 1 ; 
+id : 2 ; p1 : 5.0005,5.0005 ; p2 : 6.0006,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 50 ; can_collide : 1 ; 
+id : 3 ; p1 : 6.0006,5.0005 ; p2 : 7.0007,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 5 ; room_id_ref : -1 ; transparency : 70 ; can_collide : 1 ; 
+id : 4 ; p1 : 7.0007,5.0005 ; p2 : 8.0008,5.0005 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 
 ROOM LIST
 ROOM_COUNT 0
@@ -23,5 +16,5 @@ ICON_COUNT 0
 
 WALL_REF MAP
 MAP_SIZE 30,30
-PLAYER_SPAWN 10,8
+PLAYER_SPAWN 5,6
 

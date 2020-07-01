@@ -27,8 +27,8 @@ void create_mini_map(t_data *d, t_map_data *map)
     while (i < map->wall_count)
     {
         wall = map->wall_list[i];
-        draw_line(create_point(scale.x * wall.p1.x, scale.y * wall.p1.y), 
-            create_point(scale.x * wall.p2.x, scale.y * wall.p2.y), 
+        draw_line(create_point(scale.x * (wall.p1.x - d->player_pos.x + map->map_size.w * 0.5), scale.y * (wall.p1.y - d->player_pos.y + map->map_size.h * 0.5)), 
+            create_point(scale.x * (wall.p2.x - d->player_pos.x + map->map_size.w * 0.5), scale.y * (wall.p2.y - d->player_pos.y + map->map_size.h * 0.5)), 
             (t_img){d->p_mini_map_bg, (SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}},
             0xFFFFBB88);
         i++;
@@ -39,11 +39,13 @@ void update_player_pos_mini_map(t_data *d, t_map_data *map)
 {
     t_point scale;
 
-    scale.x = (float)MINI_MAP_SIZE_X / map->map_size.w;
-    scale.y = (float)MINI_MAP_SIZE_Y / map->map_size.h;
+    // scale.x = (float)MINI_MAP_SIZE_X / map->map_size.w;
+    // scale.y = (float)MINI_MAP_SIZE_Y / map->map_size.h;
 
-    d->mini_map_player_pos.x = ft_range(scale.x * d->player_pos.x, 0, MINI_MAP_SIZE_X);
-    d->mini_map_player_pos.y = ft_range(scale.y * d->player_pos.y, 0, MINI_MAP_SIZE_Y);
+    // d->mini_map_player_pos.x = ft_range(scale.x * d->player_pos.x, 0, MINI_MAP_SIZE_X);
+    // d->mini_map_player_pos.y = ft_range(scale.y * d->player_pos.y, 0, MINI_MAP_SIZE_Y);
+	d->mini_map_player_pos.x = ft_range(MINI_MAP_SIZE_X * 0.5, 0, MINI_MAP_SIZE_X);
+	d->mini_map_player_pos.y = ft_range(MINI_MAP_SIZE_Y * 0.5, 0, MINI_MAP_SIZE_Y);
 }
 
 void print_player_look_vector(t_data *d, t_map_data *map, float rot)
