@@ -70,6 +70,36 @@ int read_param(char *chunk, char *key, int *to_fill)
     return (error);
 }
 
+int read_paramf(char *chunk, char *key, float *to_fill)
+{
+    int error;
+    int i;
+
+    error = 1;
+	sizeof(float);
+    chunk = ft_strstr(chunk, key);
+    // printf("chunk = %s\n", chunk);
+    if (chunk)
+    {
+        chunk = skip_until_char(chunk, ' ', ';');
+        chunk = skip_until_num(chunk, ';');
+        if (*chunk == ';')
+            return (error);
+        // printf("num chunk = %s\n", chunk);
+        *to_fill = ft_fatoi(chunk);
+        chunk = skip_until_char(chunk, ',', ';');
+        i = 0;
+        while (*chunk == ',')
+        {
+            *(to_fill + ++i) = ft_fatoi(++chunk);
+            //printf("to fill + 1 = %i et chunk = %d\n", *(to_fill + 1), ft_atoi(chunk));
+            chunk = skip_until_char(chunk, ',', ';');
+        }
+        error = 0;
+    }
+    return (error);
+}
+
 float calc_line_angle(SDL_Point p1, SDL_Point p2)
 {
     float a;
@@ -95,6 +125,8 @@ void read_wall(char *line, t_wall *wall)
     error += read_param(line, "room_id_ref", &wall->room_id_ref);
     error += read_param(line, "transparency", &wall->transparency);
     error += read_param(line, "can_collide", &wall->can_collide);
+	error += read_paramf(line, "p1", &wall->p1_f.x);
+    error += read_paramf(line, "p2", &wall->p2_f.x);
 	printf("wall collide readed = %i\n", wall->can_collide);
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);
@@ -103,8 +135,7 @@ void read_wall(char *line, t_wall *wall)
 	wall->p1_z_size = (float)(wall->p1_height.end - wall->p1_height.start) / UNIT;
 	wall->p2_z_start = (float)wall->p2_height.start / UNIT;
 	wall->p2_z_size = (float)(wall->p2_height.end - wall->p2_height.start) / UNIT;
-	wall->p1_f = (t_point){wall->p1.x, wall->p1.y};
-	wall->p2_f = (t_point){wall->p2.x, wall->p2.y};
+
 	wall->z_text_offset = 0;
     // printf("p1 = %i,%i ; p2 = %i,%i\n", wall->p1.x, wall->p1.y, wall->p2.x, wall->p2.y);
     // printf("wall length = %f\n", wall->length);

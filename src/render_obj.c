@@ -23,7 +23,6 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	obj.alpha = wall->alpha;
 	// printf("wall z_height : pos = %f, size = %f\n", obj.z_height.pos, obj.z_height.size);
 	// printf("wall z_step : pos = %f, size = %f\n", obj.z_step.pos, obj.z_step.size);
-	obj.z_text_offset = 0;
 	obj.can_collide = wall->can_collide;
 	printf("wall collide = %i\n", wall->can_collide);
 	obj.room_id = wall->room_id_ref;

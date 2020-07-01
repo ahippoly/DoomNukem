@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 21:47:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/30 23:36:26 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/06/30 23:41:29 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ void print_skybox(t_data *d, t_img skybox, float rot, unsigned int *screen)
 	rot = mod_pi(rot);
 	scale.x = (float)skybox.w * 0.25 / WIN_SIZE_X;
 	scale.y = (float)skybox.h * 0.8 / WIN_SIZE_Y;
-	if (rot > M_PI + M_PI_2)
-	{
-		start_x = 0;
-	}
-	else
-	{
-		
-	}
 	start_x = rot * skybox.w / PI_X_2;
 	pos.y = 0;
 	p.y = (1 - (float)d->screen_height / WIN_SIZE_Y) * skybox.h * 0.2;
