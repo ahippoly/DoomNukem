@@ -5,12 +5,12 @@
 # define MAX_WEAPONS 6
 # define MAX_MOBS 2
 
-# define MELEE_PATH "Sprites/Guns/Melee.bmp"
-# define REVOLVER_PATH "Sprites/Guns/Revolver.bmp"
-# define SSG_PATH "Sprites/Guns/SuperShotgun.bmp"
-# define ASSAULT_RIFLE_PATH "Sprites/Guns/AssaultRifle.bmp"
-# define LMG_PATH "Sprites/Guns/lmg.bmp"
-# define DEATH_DEALER_PATH "Sprites/Guns/DeathDealer.bmp"
+# define MELEE_PATH "asset/img/guns/Melee.bmp"
+# define REVOLVER_PATH "asset/img/guns/Revolver.bmp"
+# define SSG_PATH "asset/img/guns/SuperShotgun.bmp"
+# define ASSAULT_RIFLE_PATH "asset/img/guns/AssaultRifle.bmp"
+# define LMG_PATH "asset/img/guns/lmg.bmp"
+# define DEATH_DEALER_PATH "asset/img/guns/DeathDealer.bmp"
 
 # define IDLE 0
 # define FIRE 1
@@ -26,12 +26,12 @@
 # define PYRO 9
 # define MOB_INDEX 10
 
-# define SPRITE_PATH_0 "Sprites/Guns/Melee.bmp"
-# define SPRITE_PATH_1 "Sprites/Guns/Revolver.bmp"
-# define SPRITE_PATH_2 "Sprites/Guns/SuperShotgun.bmp"
-# define SPRITE_PATH_3 "Sprites/Guns/AssaultRifle.bmp"
-# define SPRITE_PATH_4 "Sprites/Guns/lmg.bmp"
-# define SPRITE_PATH_5 "Sprites/Guns/DeathDealer.bmp"
+// # define SPRITE_PATH_0 "Sprites/Guns/Melee.bmp"
+// # define SPRITE_PATH_1 "Sprites/Guns/Revolver.bmp"
+// # define SPRITE_PATH_2 "Sprites/Guns/SuperShotgun.bmp"
+// # define SPRITE_PATH_3 "Sprites/Guns/AssaultRifle.bmp"
+// # define SPRITE_PATH_4 "Sprites/Guns/lmg.bmp"
+// # define SPRITE_PATH_5 "Sprites/Guns/DeathDealer.bmp"
 
 # define MELEE 0
 # define REVOLVER 1

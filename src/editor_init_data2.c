@@ -27,6 +27,8 @@ void init_img(t_env *env)
 	SDL_SetTextureBlendMode(env->img_list[IMG_ORC], SDL_BLENDMODE_BLEND);
     env->img_list[IMG_KEY] = bmp_to_texture(IMG_PATH_3, env->rend);
     env->img_list[IMG_HEAL_PACK] = bmp_to_texture(IMG_PATH_4, env->rend);
+    env->img_list[IMG_SHIP] = bmp_to_texture(IMG_PATH_5, env->rend);
+    env->img_list[IMG_JETPACK] = bmp_to_texture(IMG_PATH_6, env->rend);
 }
 
 void init_env2(t_env *env)

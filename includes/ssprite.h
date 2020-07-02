@@ -32,8 +32,8 @@
 # define SPRITE_ID_PYRO 1
 # define SPRITE_ID_REVOLVER 2
 
-# define SPRITE_PATH_PYRO "Sprites/Mobs/pyro.bmp"
-# define SPRITE_PATH_AFRIT "Sprites/Mobs/afrit.bmp"
+# define SPRITE_PATH_PYRO "asset/img/mobs/pyro.bmp"
+# define SPRITE_PATH_AFRIT "asset/img/mobs/afrit.bmp"
 
 typedef struct      s_anim
 {

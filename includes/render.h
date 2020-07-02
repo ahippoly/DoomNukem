@@ -34,7 +34,7 @@
 # define TYPE_PROP -2
 # define TYPE_MOB -3
 
-# define SKY_PATH_0 "img/skybox/skybox01.bmp"
+# define SKY_PATH_0 "asset/img/skybox/skybox02.bmp"
 
 typedef struct	s_proj_point
 {

@@ -101,4 +101,5 @@ void init_data(t_data *d, int ac, char **av)
 	init_rend_img(d);
 	load_icons(d, &d->map);
 	init_obj_list(d);
+    d->jetpack = 0;
 }
