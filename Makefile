@@ -15,7 +15,7 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_init_data.c render_event_gesture.c \
-						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
+						render_wall_processing.c render_event_poll.c render_texture_loading.c \
 						text_img.c render_movement.c image_gesture2.c render_raycast.c \
 						render_world_edit.c render_collide_z.c \
 						render_draw_floor.c render_draw_floor2.c render_props.c render_obj.c render_draw_slice.c \
@@ -35,7 +35,7 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_init_data.c render_event_gesture.c \
-						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
+						render_wall_processing.c render_event_poll.c render_texture_loading.c \
 						hud_clean.c hud_weapon.c hud_init_weapons.c hud_perso.c \
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_main.c \
 						text_img.c render_movement.c image_gesture2.c render_raycast.c \
@@ -47,7 +47,7 @@ SPRITE_SRC_NAME = $(sort editor_map_reader.c editor_sector_creation.c image_gest
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_init_data.c render_event_gesture.c \
-						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
+						render_wall_processing.c render_event_poll.c render_texture_loading.c \
 						sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c \
 						 text_img.c render_movement.c  render_raycast.c \
 						render_world_edit.c render_collide_z.c \
@@ -60,7 +60,7 @@ MENU_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 						bresenham.c render_init_data.c render_event_gesture.c \
-						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
+						render_wall_processing.c render_event_poll.c render_texture_loading.c \
 						text_img.c render_movement.c image_gesture2.c render_raycast.c \
 						render_world_edit.c render_collide_z.c \
 						render_draw_floor.c render_draw_floor2.c render_props.c render_obj.c render_draw_slice.c \

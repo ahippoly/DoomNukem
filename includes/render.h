@@ -110,8 +110,8 @@ typedef	struct				s_ray
 typedef struct      s_wall
 {
     int             id;
-    t_point       p1;
-    t_point       p2;
+    t_point			p1;
+    t_point			p2;
     t_range         p1_height;
     t_range         p2_height;
     int             texture_id;
