@@ -12,7 +12,7 @@ int				init_ttf(t_data *d)
 	d->hud.color.r = 255;
 	d->hud.color.g = 229;
 	d->hud.color.b = 41;
-	d->hud.color.a = 180;
+	d->hud.color.a = 0;
 	return (0);
 }
 

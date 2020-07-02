@@ -27,7 +27,8 @@ void change_mob_life(t_data *d, t_mob *mob, int damage)
 
 void game_over(t_data *d)
 {
-	exit_with_msg("======== GAME OVER ==========\nt mort gros naze !!\nMerci d'avoir joué sinon\n=============================\n");
+	d->run_game = GAMEOVER;
+	//exit_with_msg("======== GAME OVER ==========\nt mort gros naze !!\nMerci d'avoir joué sinon\n=============================\n");
 }
 
 void change_player_life(t_data *d, int *hp, int damage)

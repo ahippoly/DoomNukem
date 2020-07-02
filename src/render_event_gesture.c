@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:28:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/02 05:09:06 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:20:43 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	handle_key_event2(t_data *d, const Uint8 *clavier)
 	}
 	event_change_weapon(d, clavier);
 	if (clavier[SDL_SCANCODE_ESCAPE])
-		d->quit = 1;
+		d->run_game = -1;
 }
 
 void	handle_key_event(t_data *d)

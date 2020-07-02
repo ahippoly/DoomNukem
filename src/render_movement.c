@@ -20,7 +20,7 @@ float mod_pi(float rot)
 
 int is_angle_in_range(float rot, float min, float max)
 {
-	printf("rot = %f, min = %f, max = %f\n", rot, min, max);
+	// printf("rot = %f, min = %f, max = %f\n", rot, min, max);
 	if (min > max && (rot > min || rot < max))
 		return (1);
 	else if (rot > min && rot < max)

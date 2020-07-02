@@ -126,7 +126,6 @@ void read_wall(char *line, t_wall *wall)
     error += read_param(line, "transparency", &wall->transparency);
     error += read_param(line, "can_collide", &wall->can_collide);
 
-	printf("wall collide readed = %i\n", wall->can_collide);
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);
     wall->alpha = (float)(100 - wall->transparency) / 100;
@@ -235,7 +234,7 @@ void read_wall_list(int fd, t_map_data *map)
         read_param(line, "WALL_COUNT", &map->wall_count);
     else
         exit_with_msg("error while reading map");
-    printf("WALL COUNT READED, value = %i\n", map->wall_count);
+    // printf("WALL COUNT READED, value = %i\n", map->wall_count);
     if (!(map->wall_list = (t_wall*)malloc(sizeof(t_wall) * map->wall_count)))
         exit_with_msg("Failed to malloc");
     i = 0;
@@ -288,7 +287,7 @@ void read_head(int fd, char *line, t_map_data *map)
     //printf("line = %s\n", line);
     if (ft_strequ(line, "WALL LIST"))
     {
-        printf("wALL LIST READED\n");
+        // printf("wALL LIST READED\n");
         read_wall_list(fd, map);
     }
     if (ft_strequ(line, "ROOM LIST"))

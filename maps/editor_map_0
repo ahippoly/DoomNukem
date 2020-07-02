@@ -31,12 +31,15 @@ id : 3 ; nb_wall : 4 ; wall_ref_range : 17,21 ; height : 26,30 ; floor_text : 22
 
 
 ICON LIST
-ICON_COUNT 5
+ICON_COUNT 8
 id : 1 ; pos : 58,81 ; 
 id : 2 ; pos : 77,48 ; 
 id : 3 ; pos : 95,129 ; 
 id : 4 ; pos : 79,169 ; 
 id : 1 ; pos : 194,155 ; 
+id : 3 ; pos : 201,58 ; 
+id : 4 ; pos : 213,76 ; 
+id : 2 ; pos : 161,46 ; 
 
 
 WALL_REF MAP

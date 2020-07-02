@@ -26,7 +26,7 @@ t_img read_img_surface(char *file, Uint32 pixel_format)
 	img.w = converted->w;
 	img.h = converted->h;
     //SDL_LockSurface(readed_file);
-    printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
+    // printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
     SDL_FreeSurface(converted);
     return (img);
 }

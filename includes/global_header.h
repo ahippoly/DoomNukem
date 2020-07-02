@@ -29,6 +29,10 @@
 # define INTER_TOLERANCE 0.000000001
 # define PI_X_2 6.28318530718
 
+# define GAME 1
+# define MENU 2
+# define GAMEOVER 3
+# define EDITOR 4
 
 typedef struct  s_coord
 {
@@ -88,9 +92,5 @@ typedef	struct 		s_rot
 	float			cos_rot;
 	float			sin_rot;
 }					t_rot;
-
-
-
-
 
 #endif

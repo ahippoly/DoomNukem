@@ -29,7 +29,8 @@ typedef struct      s_data
     unsigned int    *p_mini_map_bg;
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
-    int             quit;
+    // int             quit;
+	int				run_game; //quit
     float			rot;
 	t_rot			rot_calc;
 	float			fov;
@@ -79,6 +80,9 @@ typedef struct      s_data
 	unsigned int    *p_menu; // menu screen
     SDL_Texture     *menu_texture; //menu texture
 	t_menu			menu;
+	/* gameover */
+	unsigned int    *p_gameover; // menu screen
+    SDL_Texture     *gameover_texture; //menu texture
 	char			*argv;
 	t_img			skybox;
 	t_img			texture[NB_TEXTURE];

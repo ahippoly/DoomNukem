@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "proto_global.h"
-#include "proto_global.h"
 
 t_point create_t_point(float x, float y)
 {

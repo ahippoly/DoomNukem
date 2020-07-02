@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:06:15 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/02 05:09:16 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:21:10 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ void	handle_poll_event(t_data *d)
 {
 	SDL_Event	event;
 
-	while (SDL_PollEvent(&event))
+	while (SDL_PollEvent(&d->e))
 	{
+		event = d->e;
 		if (event.type == SDL_WINDOWEVENT
 			&& event.window.event == SDL_WINDOWEVENT_CLOSE)
-			d->quit = 1;
+			d->run_game = -1;
 		if (event.type == SDL_MOUSEMOTION)
 		{
 			d->rot += MOUSE_SENS * event.motion.xrel * M_PI_2;
