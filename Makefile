@@ -56,6 +56,8 @@ PTHREAD = -lpthread
 
 LIBFT = libft/libft.a
 
+URL = https://drive.google.com/uc?export=download&id=1esNwBxxYwrrXUokdo6JR5H0i9vTKrj2Q
+
 LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
 
 SDLM = `sdl2-config --cflags --libs`
