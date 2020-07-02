@@ -3,7 +3,7 @@
 
 # include "render.h"
 
-# define MENU_BG_PATH "img/menu/jail_bg1.bmp"
+# define MENU_BG_PATH "asset/img/menu/jail_bg1.bmp"
 
 typedef struct		s_menu
 {

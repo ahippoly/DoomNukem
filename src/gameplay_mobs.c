@@ -84,7 +84,7 @@ void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed)
 	obj->z_force += z_force;
 	while (i < d->nb_repulsed)
 	{
-		if (d->repulsed[i++] == obj);
+		if (d->repulsed[i++] == obj)
 		{
 			//printf("mob found, not added to list, nb_repulse : %d\n", d->nb_repulsed);
 			return ;

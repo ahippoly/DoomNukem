@@ -7,8 +7,8 @@ int				init_ttf(t_data *d)
 		printf("Erreur d'initialisation de la lib TTF : %s\n", TTF_GetError());
 		exit(EXIT_FAILURE);
 	}
-	d->font_nb = TTF_OpenFont("font/halflife2.ttf", 20);
-	d->font_text = TTF_OpenFont("font/airborn.ttf", 20);
+	d->font_nb = TTF_OpenFont("asset/font/halflife2.ttf", 20);
+	d->font_text = TTF_OpenFont("asset/font/airborn.ttf", 20);
 	d->hud.color.r = 255;
 	d->hud.color.g = 229;
 	d->hud.color.b = 41;

@@ -29,11 +29,11 @@
 /* weapons */
 
 # define WEAPON_NB		6
-# define WEAPON_PATH_0	"img/hud/revolver.bmp"
-# define WEAPON_PATH_1	"img/hud/ssg.bmp"
-# define WEAPON_PATH_2	"img/hud/ar.bmp"
-# define WEAPON_PATH_3	"img/hud/lmg.bmp"
-# define WEAPON_PATH_4	"img/hud/death_dealer.bmp"
+# define WEAPON_PATH_0	"asset/img/hud/revolver.bmp"
+# define WEAPON_PATH_1	"asset/img/hud/ssg.bmp"
+# define WEAPON_PATH_2	"asset/img/hud/ar.bmp"
+# define WEAPON_PATH_3	"asset/img/hud/lmg.bmp"
+# define WEAPON_PATH_4	"asset/img/hud/death_dealer.bmp"
 
 # define WEAPON_NAME_0	"REVOLVER"
 # define WEAPON_NAME_1	"SSG"
@@ -64,18 +64,18 @@
 # define PERSO_F 0
 # define PERSO_M 1
 
-# define PERSO_PATH_0 "img/hud/perso_w.bmp"
-# define PERSO_PATH_1 "img/hud/perso_m.bmp"
+# define PERSO_PATH_0 "asset/img/hud/perso_w.bmp"
+# define PERSO_PATH_1 "asset/img/hud/perso_m.bmp"
 
 /* other hud icons */
 
-# define HEALTH_ICON_PATH "img/hud/health.bmp"
-# define AMMO_ICON_PATH "img/hud/bullet.bmp"
+# define HEALTH_ICON_PATH "asset/img/hud/health.bmp"
+# define AMMO_ICON_PATH "asset/img/hud/bullet.bmp"
 
 /* inventory */
 
-# define HEALTHPACK_PATH "img/hud/doctor.bmp"
-# define KEY_PATH "img/hud/key.bmp"
+# define HEALTHPACK_PATH "asset/img/hud/doctor.bmp"
+# define KEY_PATH "asset/img/hud/key.bmp"
 
 
 typedef struct		s_weapon
