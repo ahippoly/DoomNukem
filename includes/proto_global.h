@@ -9,6 +9,7 @@
 #include "proto_ssprite.h"
 #include "proto_menu.h"
 #include "proto_gameplay.h"
+#include "proto_clean.h"
 
 void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud);
 void exit_with_msg(char *msg);

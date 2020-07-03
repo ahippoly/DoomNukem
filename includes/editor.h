@@ -194,12 +194,13 @@ typedef struct		s_input
 
 typedef struct      s_env
 {
-    SDL_Renderer    *rend;
-    SDL_Event       ev;
-    SDL_Window      *win;
+    SDL_Renderer	*rend;
+    SDL_Event		ev;
+    SDL_Window		*win;
     SDL_Texture     *screen;
     SDL_Texture     *editor_grid;
-    SDL_Texture     *text_list[NB_TEXTURE];
+    // SDL_Texture     *text_list[NB_TEXTURE];
+    SDL_Texture     **text_list;
     SDL_Texture     *img_list[NB_IMG];
     SDL_Rect        grid_pos;
     const Uint8     *clavier;
@@ -248,7 +249,6 @@ typedef struct      s_env
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
 	char			*map_name;
 }                   t_env;
-
 
 void exit_with_msg(char *msg);
 SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub);

@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 void init_sdl_ressources(t_env *env)
 {
@@ -14,6 +13,13 @@ void init_sdl_ressources(t_env *env)
     env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
     env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, GRID_SIZE_X, GRID_SIZE_Y);
     //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
+}
+
+int		malloc_texture_list(t_env *env)
+{
+	if (!(env->text_list = malloc_texture_tab(NB_TEXTURE)))
+		return (-1);
+	return (0);
 }
 
 void init_texture(t_env *env)

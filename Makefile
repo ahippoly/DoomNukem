@@ -7,7 +7,7 @@ SRC_NAME =	$(sort \
 			editor_icon.c editor_init_data.c editor_init_data2.c  \
 			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c \
 			editor_map_input.c \
-			 editor_map_reader.c editor_sector_creation.c \
+			editor_map_reader.c editor_sector_creation.c \
 			error_gesture.c image_gesture.c line_intersect.c \
 			tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
 			bresenham.c render_init_data.c render_event_gesture.c \
@@ -28,7 +28,8 @@ SRC_NAME =	$(sort \
 			menu_clean.c menu_button.c menu_render.c menu_exec.c menu_background.c hud_clean.c exit.c \
 			gameover_background.c gameover_button.c gameover_render.c \
 			game_render.c \
-			render_game.c frame.c)
+			render_game.c frame.c \
+			clean_data.c clean_editor.c )
 
 GAME_MAIN = render_main.c $(SRC_NAME)
 
