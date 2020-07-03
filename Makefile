@@ -29,7 +29,7 @@ SRC_NAME =	$(sort \
 			gameover_background.c gameover_button.c gameover_render.c \
 			game_render.c \
 			render_game.c frame.c \
-			clean_data.c clean_editor.c )
+			clean_data.c clean_editor.c malloc.c)
 
 GAME_MAIN = render_main.c $(SRC_NAME)
 

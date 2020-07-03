@@ -120,8 +120,9 @@ t_img		ft_load_bmp(char *file)
 	size_t	ret;
 	int		pix_array_pos;
 	t_img	img;
-	t_img	res;
+	t_img	res; //CHECK ERREUR
 
+	ft_bzero(&res, sizeof(t_img));
 	res.w = -42;
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{
@@ -147,12 +148,7 @@ t_img		ft_load_bmp(char *file)
 		ft_putendl("wrong bmp file input");
 		res.w = -42;
 	}
-	if (res.w == -42)
-	{
-		ft_bzero(&res, sizeof(t_img));
-		res.w = -42;
-	}
-	else
+	if (!res.w)
 		res = verif_bpp(head, fd, img.pos_size.w, img.pos_size.h);
 	return (res);
 }
@@ -209,7 +205,6 @@ void read_file_pixels(t_img text, int bpp, int fd)
 		}
 		printf(" x = %i\n", x);
 	}
-
 }
 
 t_img				ft_load_bmp2(char *file) //si return NULL exit_program
@@ -259,4 +254,3 @@ t_img				ft_load_bmp2(char *file) //si return NULL exit_program
 	read_file_pixels(img, bpp, fd);
 	return (img);
 }
-

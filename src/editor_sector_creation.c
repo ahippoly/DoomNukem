@@ -166,8 +166,8 @@ void recreate_room_list(t_env *env)
 
     i = 0;
     free(env->room_list);
-	if (!(env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count)))
-		exit_editor(env); //MALLOC
+	if (!(env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count))) //MALLOC
+		exit_editor(env, "error: failed to malloc");
 	recreate_room_height(env);
 	recreate_floor_text(env);
     while (i < env->wall_count)

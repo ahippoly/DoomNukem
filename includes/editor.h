@@ -163,62 +163,62 @@ typedef struct          s_room
     t_range             wall_ref;
 }                       t_room;
 
-typedef struct      s_icon
+typedef struct      	s_icon
 {
-    t_point         pos;
-	SDL_Point		pos_i;
-    t_size          size;
-    int             id_ref;
-}                   t_icon;
+    t_point         	pos;
+	SDL_Point			pos_i;
+    t_size          	size;
+    int             	id_ref;
+}                   	t_icon;
 
-typedef struct      s_map_data
+typedef struct			s_map_data
 {
-    int             is_valid;
-    t_size          map_size;
-    int             wall_count;
-    int             room_count;
-	int				icon_count;
-    SDL_Point       player_spawn;
-    t_wall          *wall_list;
-    t_room          *room_list;
-	t_icon			*icon_list;
-    t_wall_ref      ***map_wall_ref;
-}                   t_map_data;
+    int					is_valid;
+    t_size				map_size;
+    int					wall_count;
+    int					room_count;
+	int					icon_count;
+    SDL_Point			player_spawn;
+    t_wall				*wall_list;
+    t_room				*room_list;
+	t_icon				*icon_list;
+    t_wall_ref			***map_wall_ref;
+}						t_map_data;
 
-typedef struct		s_input
+typedef struct			s_input
 {
-	SDL_Rect 		pos_size;
-	int				value;
-	int				max;
-	int				is_in_input_mode;
-}					t_input;
+	SDL_Rect 			pos_size;
+	int					value;
+	int					max;
+	int					is_in_input_mode;
+}						t_input;
 
-typedef struct      s_env
+typedef struct			s_env
 {
-    SDL_Renderer	*rend;
-    SDL_Event		ev;
-    SDL_Window		*win;
-    SDL_Texture     *screen;
-    SDL_Texture     *editor_grid;
+    SDL_Renderer		*rend;
+    SDL_Event			ev;
+    SDL_Window			*win;
+    SDL_Texture			*screen;
+    SDL_Texture			*editor_grid;
     // SDL_Texture     *text_list[NB_TEXTURE];
-    SDL_Texture     **text_list; //OK
+    SDL_Texture			**text_list; //OK
 
     // SDL_Texture     *img_list[NB_IMG];
-    SDL_Texture     **img_list; //OK
-    SDL_Rect        grid_pos;
-    const Uint8     *clavier; //bas besoin de free
-    unsigned int    *p_screen;
-    unsigned int    *p_grid;
-    Uint32          mouse_button;
-    SDL_Point       mouse;
-    SDL_Point       hovered_corner;
-    SDL_Point       selected_corner;
-    SDL_Point       start_room_point;
-    SDL_Point       map_move;
-    t_range         p1_height;
-    t_range         p2_height;
-    int             tile_size;
-    int             quit;
+    SDL_Texture     	**img_list; //OK
+    SDL_Rect        	grid_pos;
+    const Uint8			*clavier; //bas besoin de free
+    unsigned int		*p_screen;
+    unsigned int		*p_grid;
+    Uint32				mouse_button;
+    SDL_Point			mouse;
+    SDL_Point			hovered_corner;
+    SDL_Point			selected_corner;
+    SDL_Point			start_room_point;
+    SDL_Point			map_move;
+    t_range				p1_height;
+    t_range				p2_height;
+    int					tile_size;
+    int					quit;
     int             wall_count;
     int             room_count;
 	int				icon_count;

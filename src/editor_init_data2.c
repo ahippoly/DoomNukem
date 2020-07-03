@@ -19,7 +19,7 @@ void init_img(t_env *env)
     env->icon_count = 0;
     env->selected_mob = 0 + ICON_MOB_RANGE_BEGIN;
 	if (!(env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE))) //MALLOC
-		exit_editor(env);
+		exit_editor(env, "error: failed to malloc");
     env->being_placed = NULL;
     env->icon_list_size = ICON_ARRAY_SIZE;
     env->img_list[IMG_PLAYER] = bmp_to_texture(IMG_PATH_0, env->rend);
@@ -44,16 +44,16 @@ void init_env2(t_env *env)
     env->room_list = NULL;
 	env->map_name = NULL;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
-        exit_with_msg("Failed to malloc");
+        exit_env(env);
     env->quit = 0;
 }
 
 void	init_env(t_env *env)
 {
 	if (!(env->room_height = malloc_range(NB_WALL_MAX)))
-		exit_editor(env); //MALLOC ALEX
+		exit_editor(env, "error: failed to malloc"); //MALLOC ALEX
 	if (!(env->room_text = malloc_int_tab(NB_WALL_MAX)))
-		exit_editor(env); //MALLOC ALEX
+		exit_editor(env, "error: failed to malloc"); //MALLOC ALEX
     init_sdl_ressources(env);
     init_texture(env);
     init_buttons(env);
@@ -66,8 +66,10 @@ void	init_env(t_env *env)
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);
     env->map_wall_ref = init_wall_ref(env->map_size);
-    env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
-    env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y);
+	if (!(env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y))) //SECU
+		exit_env(env);
+    if (!(env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y))) //SECU
+		exit_env(env);
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
     env->room_count = 0;

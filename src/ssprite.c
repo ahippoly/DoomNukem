@@ -52,7 +52,6 @@ void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_
 			start.y += 1;
 		}
 	}
-	
 }
 
 void copy_frame_ssprite(t_ssprite *sprite, SDL_Point pos_anim, t_size size_anim)

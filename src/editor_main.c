@@ -50,5 +50,5 @@ int main(int argc, char **argv)
     }
 	// free(env.map_name); dans exit_env
     // clear_map_ref(&env); dans exit_env
-	exit_editor(&env);
+	exit_editor(&env, "bye !");
 }

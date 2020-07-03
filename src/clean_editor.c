@@ -1,15 +1,6 @@
 #include "proto_global.h"
 
 /* text_list[NB_TEXTURE] */
-SDL_Texture		**malloc_texture_tab(int size)
-{
-	SDL_Texture	**tab;
-
-	if (!(tab = (SDL_Texture**)ft_memalloc(sizeof(SDL_Texture *) * (size + 1))))
-		return (NULL);
-	return (tab);
-}
-
 int				destroy_texture_tab(SDL_Texture **tab, int size)
 {
 	int			i;
@@ -54,47 +45,9 @@ void			clear_map_ref(t_env *env)
     free(env->map_wall_ref);
 }
 
-t_range			*malloc_range(int size)
+int				exit_editor(t_env *e, char *msg)
 {
-	t_range		*range;
-
-	if (!(range = (t_range*)ft_memalloc(sizeof(t_range) * (size + 1))))
-		return (NULL);
-	return (range);
-}
-
-int				*malloc_int_tab(int size)
-{
-	int			*tab;
-
-	if (!(tab = (int *)ft_memalloc(sizeof(int) * (size + 1))))
-		return (NULL);
-	return (tab);
-}
-
-t_icon			*malloc_icon(int size)
-{
-	t_icon		*ptr;
-
-	if (!(ptr = (t_icon *)ft_memalloc(sizeof(t_icon) * (size + 1))))
-		return (NULL);
-	return (ptr);
-}
-
-/*
-t_wall			*malloc_wall(int size)
-{
-	t_icon		*ptr;
-
-	if (!(ptr = (t_wall *)ft_memalloc(sizeof(t_wall) * (size + 1))))
-		return (NULL);
-	return (ptr);
-}
-*/
-
-int				exit_editor(t_env *e)
-{
-	ft_putendl("exiting editor...");
+	ft_putendl(msg);
 	if (e->map_name != NULL)
 		free(e->map_name);
 	if (e->room_height)
