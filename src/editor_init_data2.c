@@ -44,7 +44,7 @@ void init_env2(t_env *env)
     env->room_list = NULL;
 	env->map_name = NULL;
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
-        exit_env(env);
+        exit_editor(env, "error: failed to malloc");
     env->quit = 0;
 }
 
@@ -67,9 +67,9 @@ void	init_env(t_env *env)
     init_input(env);
     env->map_wall_ref = init_wall_ref(env->map_size);
 	if (!(env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y))) //SECU
-		exit_env(env);
+		exit_editor(env, "error : failed to malloc");
     if (!(env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y))) //SECU
-		exit_env(env);
+		exit_editor(env, "error : failed to malloc");
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
     env->room_count = 0;
