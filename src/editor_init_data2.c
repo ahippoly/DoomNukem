@@ -49,7 +49,12 @@ void init_env2(t_env *env)
 
 void	init_env(t_env *env)
 {
-	env->room_height = malloc_range(NB_WALL_MAX); //MALLOC ALEX
+	if (!(env->room_height = malloc_range(NB_WALL_MAX)))
+		exit_env(env); //MALLOC ALEX
+	if (!(env->room_text = malloc_int_tab(NB_WALL_MAX)))
+		exit_env(env); //MALLOC ALEX
+	if (!(env->icon_list = malloc_icon(1)))
+		exit_env(env); //MALLOC ALEX
     init_sdl_ressources(env);
     init_texture(env);
     init_buttons(env);

@@ -235,15 +235,17 @@ typedef struct      s_env
     int             selected_texture;
     int             selected_mob;
     t_point         player_spawn;
-    t_point         *being_placed;
-	t_icon			*icon_list;
+    t_point         *being_placed; // pas besoin de malloc ou free
+	t_icon			*icon_list; //OK
     t_wall          *wall_list;
     t_room          *room_list;
 
 	// t_range			room_height[NB_WALL_MAX];
-	t_range			*room_height;
+	t_range			*room_height; //OK
 
-	int				room_text[NB_WALL_MAX];
+	// int				room_text[NB_WALL_MAX];
+	int				*room_text; //OK
+
     t_wall_ref      ***map_wall_ref; //OK
     t_size          map_size;
 	t_img			sprite_img[NB_SPRITE];

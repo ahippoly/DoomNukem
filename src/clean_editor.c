@@ -20,7 +20,7 @@ int				destroy_texture_tab(SDL_Texture **tab, int size)
 		SDL_DestroyTexture(tab[i]);
 		i++;
 	}
-	free(tab);
+	SDL_DestroyTexture(tab);
 	return (0);
 }
 
@@ -63,6 +63,24 @@ t_range			*malloc_range(int size)
 	return (range);
 }
 
+int				*malloc_int_tab(int size)
+{
+	int			*tab;
+
+	if (!(tab = (int *)ft_memalloc(sizeof(int) * (size + 1))))
+		return (NULL);
+	return (tab);
+}
+
+t_icon			*malloc_icon(int size)
+{
+	t_icon		*ptr;
+
+	if (!(ptr = (t_icon *)ft_memalloc(sizeof(t_icon) * (size + 1))))
+		return (NULL);
+	return (ptr);
+}
+
 int				exit_editor(t_env *e)
 {
 	ft_putendl("exiting editor...");
@@ -70,6 +88,10 @@ int				exit_editor(t_env *e)
 		free(e->map_name);
 	if (e->room_height)
 		free(e->room_height);
+	if (e->room_text)
+		free(e->room_text);
+	if (e->icon_list)
+		free(e->icon_list);
 	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
 	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
 	clear_map_ref(e);
