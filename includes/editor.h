@@ -204,7 +204,9 @@ typedef struct      s_env
     SDL_Texture     *editor_grid;
     // SDL_Texture     *text_list[NB_TEXTURE];
     SDL_Texture     **text_list;
-    SDL_Texture     *img_list[NB_IMG];
+
+    // SDL_Texture     *img_list[NB_IMG];
+    SDL_Texture     **img_list;
     SDL_Rect        grid_pos;
     const Uint8     *clavier;
     unsigned int    *p_screen;

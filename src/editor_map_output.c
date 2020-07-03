@@ -135,7 +135,6 @@ void map_output(t_env *env)
    		fd = open("maps/editor_map_0", O_WRONLY | O_TRUNC | O_CREAT, 0600);
     if (fd < 0)
         return;
-	printf("env map name = %s\n", env->map_name);
     rearange_wall_lst(env);
     write_walls(fd, env->wall_list, env->wall_count);
     write_rooms(fd, env->room_list, env->room_count);

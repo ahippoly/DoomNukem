@@ -57,13 +57,13 @@ void			clear_map_ref(t_env *env)
 int				exit_editor(t_env *e)
 {
 	ft_putendl("exiting editor...");
-	// if (e->map_name)
-	// {
-	// 	printf("e->map_name: %s\n", e->map_name);
-	// 	// free(e->map_name);
-	// }
+	if (e->map_name != NULL)
+	{
+		// printf("e->map_name: %s\n", e->map_name);
+		free(e->map_name);
+	}
 	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
 	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
-	// clear_map_ref(e);
+	clear_map_ref(e);
 	exit(0);
 }

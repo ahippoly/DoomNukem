@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 {
     t_env       env;
     
+	ft_putendl("load map...");
     init_env(&env);
 	load_map(&env, argc, argv);
     while(!env.quit)

@@ -70,9 +70,9 @@ void load_map(t_env *e, int ac, char **av)
 	t_map_data map;
 	
 	if (ac > 1)
-		{
-			e->map_name = strdup(av[1]);
-			map = read_map(av[1]);
-			map2env(e, &map);
-		}
+	{
+		e->map_name = strdup(av[1]);
+		map = read_map(av[1]);
+		map2env(e, &map);
+	}
 }
