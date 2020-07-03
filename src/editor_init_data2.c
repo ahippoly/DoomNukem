@@ -55,6 +55,8 @@ void	init_env(t_env *env)
 		exit_env(env); //MALLOC ALEX
 	if (!(env->icon_list = malloc_icon(1)))
 		exit_env(env); //MALLOC ALEX
+	if (!(env->wall_list = malloc_wall(1)))
+		exit_env(env); //MALLOC ALEX
     init_sdl_ressources(env);
     init_texture(env);
     init_buttons(env);

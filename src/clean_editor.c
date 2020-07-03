@@ -81,6 +81,15 @@ t_icon			*malloc_icon(int size)
 	return (ptr);
 }
 
+t_wall			*malloc_wall(int size)
+{
+	t_icon		*ptr;
+
+	if (!(ptr = (t_wall *)ft_memalloc(sizeof(t_wall) * (size + 1))))
+		return (NULL);
+	return (ptr);
+}
+
 int				exit_editor(t_env *e)
 {
 	ft_putendl("exiting editor...");
@@ -92,6 +101,8 @@ int				exit_editor(t_env *e)
 		free(e->room_text);
 	if (e->icon_list)
 		free(e->icon_list);
+	if (e->wall_list)
+		free(e->wall_list);
 	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
 	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
 	clear_map_ref(e);

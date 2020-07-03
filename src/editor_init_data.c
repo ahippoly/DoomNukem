@@ -15,13 +15,6 @@ void init_sdl_ressources(t_env *env)
     //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
 }
 
-int			malloc_texture_list(t_env *env)
-{
-	if (!(env->text_list = malloc_texture_tab(NB_TEXTURE)))
-		return (-1);
-	return (0);
-}
-
 void		load_text_list(t_env *env)
 {
     int		i;
@@ -45,7 +38,8 @@ void		load_text_list(t_env *env)
 
 void	init_texture(t_env *env)
 {
-	malloc_texture_list(env);
+	if (!(env->text_list = malloc_texture_tab(NB_TEXTURE)))
+		exit_env(env);
 	load_text_list(env);
 }
 

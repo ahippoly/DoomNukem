@@ -237,7 +237,7 @@ typedef struct      s_env
     t_point         player_spawn;
     t_point         *being_placed; // pas besoin de malloc ou free
 	t_icon			*icon_list; //OK
-    t_wall          *wall_list;
+    t_wall          *wall_list; //OK
     t_room          *room_list;
 
 	// t_range			room_height[NB_WALL_MAX];
