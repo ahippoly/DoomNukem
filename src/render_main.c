@@ -11,7 +11,7 @@ int					main(int ac, char **av)
 	// printf("d.run_game: %d\n", d.run_game);
 	d.run_game = MENU;
     init_sound(&d);
-    play_sound(&d, MUS1);
+    play_sound(&d, MUS2);
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)

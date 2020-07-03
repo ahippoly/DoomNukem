@@ -53,12 +53,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 EDITOR_NAME = editor
 GAME_NAME = doom-nukem
-OPTI = -O6
+OPTI = -g3
 PTHREAD = -lpthread
 
 LIBFT = libft/libft.a
-
-URL = https://drive.google.com/uc?export=download&id=1esNwBxxYwrrXUokdo6JR5H0i9vTKrj2Q
 
 LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
 
@@ -95,6 +93,20 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
+
+assets :
+	@printf "\e[1;32m[Downloading assets]\e[0m\n"
+	@wget -q --show-progress --load-cookies /tmp/cookies.txt \
+	"https://docs.google.com/uc?export=download&confirm=$$(wget --quiet $\
+	--save-cookies /tmp/cookies.txt --keep-session-cookies $\
+	--no-check-certificate 'https://docs.google.com/uc?export=download&id=$\
+	1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp' -O- | $(SED) -rn $\
+	's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')\
+	&id=1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp" -O asset.tar.gz \
+	&& rm -rf /tmp/cookies.txt
+	@printf "\e[1;32m[Extracting assets]\e[0m\n"
+	@tar zxvf asset.tar.gz
+	@rm -rf asset.tar.gz
 
 clean:
 	@printf "%-50s" "deleting objects..." 
