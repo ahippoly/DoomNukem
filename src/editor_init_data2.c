@@ -15,6 +15,7 @@ void init_input(t_env *env)
 
 void init_img(t_env *env)
 {
+	env->img_list = malloc_texture_tab(NB_IMG); //MALLOC ALEX
     env->icon_count = 0;
     env->selected_mob = 0 + ICON_MOB_RANGE_BEGIN;
     env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE);
@@ -41,7 +42,6 @@ void init_env2(t_env *env)
     env->selected_input = -1;
     env->room_list = NULL;
 	env->map_name = NULL;
-	
     if (!(env->wall_list = (t_wall*)malloc(sizeof(t_wall) * NB_WALL_MAX)))
         exit_with_msg("Failed to malloc");
     env->quit = 0;
@@ -57,6 +57,7 @@ void init_env(t_env *env)
 	init_sprites_img_env(env);
 	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit2(env->sprite_img[SPRITE_ID_AFRIT]);
 	env->sprites[SPRITE_ID_PYRO] = sprite_init_pyro2(env->sprite_img[SPRITE_ID_PYRO]);
+	// ft_putendl("initing env...");
     init_img(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);

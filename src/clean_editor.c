@@ -15,9 +15,9 @@ int				destroy_texture_tab(SDL_Texture **tab, int size)
 	int			i;
 
 	i = 0;
-	while ((SDL_Texture *)tab[i])
+	while (tab[i])
 	{
-		SDL_DestroyTexture((SDL_Texture *)tab[i]);
+		SDL_DestroyTexture(tab[i]);
 		i++;
 	}
 	free(tab);
@@ -57,8 +57,13 @@ void			clear_map_ref(t_env *env)
 int				exit_editor(t_env *e)
 {
 	ft_putendl("exiting editor...");
-	free(e->map_name);
-	destroy_texture_tab(e->text_list, NB_TEXTURE);
-	clear_map_ref(e);
+	// if (e->map_name)
+	// {
+	// 	printf("e->map_name: %s\n", e->map_name);
+	// 	// free(e->map_name);
+	// }
+	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
+	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
+	// clear_map_ref(e);
 	exit(0);
 }
