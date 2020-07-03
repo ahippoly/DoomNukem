@@ -54,14 +54,22 @@ void			clear_map_ref(t_env *env)
     free(env->map_wall_ref);
 }
 
+t_range			*malloc_range(int size)
+{
+	t_range		*range;
+
+	if (!(range = (t_range*)ft_memalloc(sizeof(t_range) * (size + 1))))
+		return (NULL);
+	return (range);
+}
+
 int				exit_editor(t_env *e)
 {
 	ft_putendl("exiting editor...");
 	if (e->map_name != NULL)
-	{
-		// printf("e->map_name: %s\n", e->map_name);
 		free(e->map_name);
-	}
+	if (e->room_height)
+		free(e->room_height);
 	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
 	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
 	clear_map_ref(e);

@@ -139,8 +139,6 @@
 # define HEAD_ROOM_LIST "ROOM LIST"
 # define HEAD_WALL_REF "WALL_REF MAP"
 
-
-
 typedef struct			s_move_wall
 {
     t_point 			p1;
@@ -203,10 +201,10 @@ typedef struct      s_env
     SDL_Texture     *screen;
     SDL_Texture     *editor_grid;
     // SDL_Texture     *text_list[NB_TEXTURE];
-    SDL_Texture     **text_list;
+    SDL_Texture     **text_list; //OK
 
     // SDL_Texture     *img_list[NB_IMG];
-    SDL_Texture     **img_list;
+    SDL_Texture     **img_list; //OK
     SDL_Rect        grid_pos;
     const Uint8     *clavier;
     unsigned int    *p_screen;
@@ -241,9 +239,12 @@ typedef struct      s_env
 	t_icon			*icon_list;
     t_wall          *wall_list;
     t_room          *room_list;
-	t_range			room_height[NB_WALL_MAX];
+
+	// t_range			room_height[NB_WALL_MAX];
+	t_range			*room_height;
+
 	int				room_text[NB_WALL_MAX];
-    t_wall_ref      ***map_wall_ref;
+    t_wall_ref      ***map_wall_ref; //OK
     t_size          map_size;
 	t_img			sprite_img[NB_SPRITE];
 	t_ssprite		sprites[NB_SPRITE];
@@ -252,7 +253,7 @@ typedef struct      s_env
     t_input			input_lst[NB_INPUT];
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
-	char			*map_name;
+	char			*map_name; //OK
 }                   t_env;
 
 void exit_with_msg(char *msg);
