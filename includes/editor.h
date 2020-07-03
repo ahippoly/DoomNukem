@@ -283,7 +283,7 @@ void move_map_move_down(t_env *env);
 void change_selected_wall_texture(t_env *env, int texture_id);
 
 void add_wall_ref_point(t_wall wall, t_env *env);
-void clear_map_ref(t_env *env);
+void clear_map_ref(t_env *env);// proto_clean.h
 void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd);
 void find_sector(t_env *env, t_wall wall);
 void input_text_to_img(char *str, int size, int color, t_img to_fill);

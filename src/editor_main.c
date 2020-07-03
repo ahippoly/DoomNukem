@@ -46,6 +46,7 @@ int main(int argc, char **argv)
         display_selected_point(&env);
         print_env2screen(&env);
     }
-	free(env.map_name);
-    clear_map_ref(&env);
+	// free(env.map_name); dans exit_env
+    // clear_map_ref(&env); dans exit_env
+	exit_editor(&env);
 }
