@@ -20,7 +20,7 @@ int				destroy_texture_tab(SDL_Texture **tab, int size)
 		SDL_DestroyTexture(tab[i]);
 		i++;
 	}
-	SDL_DestroyTexture(tab);
+	SDL_DestroyTexture(*tab);
 	return (0);
 }
 
@@ -105,6 +105,8 @@ int				exit_editor(t_env *e)
 		free(e->icon_list);
 	if (e->wall_list)
 		free(e->wall_list);
+	if (e->room_list)
+		free(e->room_list);
 	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
 	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
 	clear_map_ref(e);

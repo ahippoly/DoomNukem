@@ -1,12 +1,14 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 unsigned int *alloc_image(int width, int height)
 {
     unsigned int *image;
 
     if (!(image = (unsigned int *)malloc(sizeof(unsigned int) * width * height)))
-       exit_with_msg("Failed To malloc");
+	{
+       ft_putendl("Failed To malloc");
+	   return (NULL);
+	}
     ft_bzero(image, width * height * sizeof(unsigned int));
     return (image);
 }

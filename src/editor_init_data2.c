@@ -18,7 +18,8 @@ void init_img(t_env *env)
 	env->img_list = malloc_texture_tab(NB_IMG); //MALLOC ALEX
     env->icon_count = 0;
     env->selected_mob = 0 + ICON_MOB_RANGE_BEGIN;
-    env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE);
+	if (!(env->icon_list = (t_icon*)p_malloc(sizeof(t_icon) * ICON_ARRAY_SIZE))) //MALLOC
+		exit_editor(env);
     env->being_placed = NULL;
     env->icon_list_size = ICON_ARRAY_SIZE;
     env->img_list[IMG_PLAYER] = bmp_to_texture(IMG_PATH_0, env->rend);
@@ -52,8 +53,6 @@ void	init_env(t_env *env)
 	if (!(env->room_height = malloc_range(NB_WALL_MAX)))
 		exit_editor(env); //MALLOC ALEX
 	if (!(env->room_text = malloc_int_tab(NB_WALL_MAX)))
-		exit_editor(env); //MALLOC ALEX
-	if (!(env->icon_list = malloc_icon(1)))
 		exit_editor(env); //MALLOC ALEX
     init_sdl_ressources(env);
     init_texture(env);

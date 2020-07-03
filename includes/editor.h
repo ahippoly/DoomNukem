@@ -206,7 +206,7 @@ typedef struct      s_env
     // SDL_Texture     *img_list[NB_IMG];
     SDL_Texture     **img_list; //OK
     SDL_Rect        grid_pos;
-    const Uint8     *clavier;
+    const Uint8     *clavier; //bas besoin de free
     unsigned int    *p_screen;
     unsigned int    *p_grid;
     Uint32          mouse_button;
@@ -236,9 +236,9 @@ typedef struct      s_env
     int             selected_mob;
     t_point         player_spawn;
     t_point         *being_placed; // pas besoin de malloc ou free
-	t_icon			*icon_list; //OK
-    t_wall          *wall_list; //pas de malloc car memcpy et free dans le code
-    t_room          *room_list;
+	t_icon			*icon_list; // deja malloc
+    t_wall          *wall_list; // deja malloc
+    t_room          *room_list; //deja malloc
 
 	// t_range			room_height[NB_WALL_MAX];
 	t_range			*room_height; //OK
