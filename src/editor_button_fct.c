@@ -40,7 +40,7 @@ void	mob_placing_mode(t_env *env)
 	new = create_icon(create_t_point(-1, -1),
 			create_t_size(30, 30), env->selected_mob);
 	add_icon(env, new);
-	env->being_placed = &env->icon_list[env->icon_count - 1].pos;
+	env->being_placed = &env->icon_list[env->icon_count - 1].pos; //free icon_list
 	env->selected_mouse_mode = MOUSE_MODE_PLACING;
 }
 
