@@ -3,6 +3,8 @@
 
 void init_input(t_env *env)
 {
+	if (!(env->input_lst = malloc_input(NB_INPUT)))
+		exit_editor(env, "error : failed to malloc");
     env->input_lst[INPUT_TRANSPARENCY] = create_t_input(set_sdl_rect(0.835 * WIN_SIZE_X, 0.650 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 0, 100);
     env->input_lst[INPUT_BEGIN_P1] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
     env->input_lst[INPUT_BEGIN_P2] = create_t_input(set_sdl_rect(0.305 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
@@ -51,9 +53,11 @@ void init_env2(t_env *env)
 void	init_env(t_env *env)
 {
 	if (!(env->room_height = malloc_range(NB_WALL_MAX)))
-		exit_editor(env, "error: failed to malloc"); //MALLOC ALEX
+		exit_editor(env, "error: failed to malloc rooms"); //MALLOC ALEX
 	if (!(env->room_text = malloc_int_tab(NB_WALL_MAX)))
-		exit_editor(env, "error: failed to malloc"); //MALLOC ALEX
+		exit_editor(env, "error: failed to malloc room texture"); //MALLOC ALEX
+	if (!(env->sprite_img = malloc_img(NB_SPRITE)))
+		exit_editor(env, "error: failed to malloc sprites"); //MALLOC ALEX
     init_sdl_ressources(env);
     init_texture(env);
     init_buttons(env);

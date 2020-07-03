@@ -48,7 +48,7 @@ void			clear_map_ref(t_env *env)
 int				exit_editor(t_env *e, char *msg)
 {
 	ft_putendl(msg);
-	if (e->map_name != NULL)
+	if (e->map_name)
 		free(e->map_name);
 	if (e->room_height)
 		free(e->room_height);
@@ -60,8 +60,30 @@ int				exit_editor(t_env *e, char *msg)
 		free(e->wall_list);
 	if (e->room_list)
 		free(e->room_list);
-	destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
-	destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
+	if (e->text_list)
+		destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
+	if (e->img_list)
+		destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
+	if (e->p_screen)
+		free(e->p_screen);
+	if (e->p_grid)
+		free(e->p_grid);
+	if (e->sprite_img)
+		free(e->sprite_img);
+	if (e->buttons_lst)
+		free(e->buttons_lst);
+	if (e->txt_lst)
+		free(e->txt_lst);
+	if (e->input_lst)
+		free(e->input_lst);
 	clear_map_ref(e);
+	if (e->win)
+		SDL_DestroyWindow(e->win);
+	if (e->screen)
+		SDL_DestroyTexture(e->screen);
+	if (e->rend)
+		SDL_DestroyRenderer(e->rend);
+	if (e->editor_grid)
+		SDL_DestroyTexture(e->editor_grid);
 	exit(0);
 }

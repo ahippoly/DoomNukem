@@ -195,11 +195,11 @@ typedef struct			s_input
 
 typedef struct			s_env
 {
-    SDL_Renderer		*rend;
+    SDL_Renderer		*rend; //OK
     SDL_Event			ev;
-    SDL_Window			*win;
-    SDL_Texture			*screen;
-    SDL_Texture			*editor_grid;
+    SDL_Window			*win; //OK
+    SDL_Texture			*screen; //OK
+    SDL_Texture			*editor_grid; //ok
     // SDL_Texture     *text_list[NB_TEXTURE];
     SDL_Texture			**text_list; //OK
 
@@ -236,9 +236,9 @@ typedef struct			s_env
     int             selected_mob;
     t_point         player_spawn;
     t_point         *being_placed; // pas besoin de malloc ou free
-	t_icon			*icon_list; // deja malloc
-    t_wall          *wall_list; // deja malloc
-    t_room          *room_list; //deja malloc
+	t_icon			*icon_list; // deja malloc OK
+    t_wall          *wall_list; // deja malloc OK
+    t_room          *room_list; //deja malloc OK
 
 	// t_range			room_height[NB_WALL_MAX];
 	t_range			*room_height; //OK
@@ -248,11 +248,15 @@ typedef struct			s_env
 
     t_wall_ref      ***map_wall_ref; //OK
     t_size          map_size;
-	t_img			sprite_img[NB_SPRITE];
-	t_ssprite		sprites[NB_SPRITE];
-    t_button        buttons_lst[NB_BUTTONS];
-    t_txt_img       txt_lst[NB_TXT];
-    t_input			input_lst[NB_INPUT];
+	// t_img			sprite_img[NB_SPRITE];
+	t_img			*sprite_img; //OK
+	t_ssprite		sprites[NB_SPRITE]; // OU INITIALISER ?
+    // t_button        buttons_lst[NB_BUTTONS]; 
+    t_button        *buttons_lst; //OK
+    // t_txt_img       txt_lst[NB_TXT];
+    t_txt_img       *txt_lst; //OK
+    // t_input			input_lst[NB_INPUT];
+    t_input			*input_lst;
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
 	char			*map_name; //OK

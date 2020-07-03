@@ -177,11 +177,6 @@ t_ssprite    sprite_init_pyro2(t_img src_img)
     return (pyro);
 }
 
-void init_sprites(t_data *d)
-{
-	
-}
-
 void load_anim(t_ssprite *sprite, int time, int anim_id)
 {
 	SDL_Point	curr_anim_pos;
