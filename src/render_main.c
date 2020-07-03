@@ -6,9 +6,6 @@ int					main(int ac, char **av)
     t_data			d;
     
     init_data(&d, ac, av);
-    // ft_putstr("Main worked\n");
-	// printf("map: %s\n", av[1]);
-	// printf("d.run_game: %d\n", d.run_game);
 	d.run_game = MENU;
 	while (d.run_game > 0)
 	{

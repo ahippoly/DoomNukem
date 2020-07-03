@@ -9,7 +9,7 @@ SRC_NAME =	$(sort \
 			editor_map_input.c \
 			editor_map_reader.c editor_sector_creation.c \
 			error_gesture.c image_gesture.c line_intersect.c \
-			tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
+			tool_sdlpoint_arithmetic.c utils.c render_minimap.c render_minimap2.c \
 			bresenham.c render_init_data.c render_init_data2.c render_event_gesture.c \
 			render_wall_processing.c render_event_poll.c render_texture_loading.c \
 			text_img.c render_movement.c image_gesture2.c render_raycast.c \

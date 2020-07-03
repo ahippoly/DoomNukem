@@ -155,5 +155,8 @@ int		init_menu(t_data *d);
 int		init_gameover(t_data *d, char **av); // doit etre initialisée après init_menu car partage la meme structure t_menu !
 int		init_hud(t_data *d);
 
+t_point calc_map_scale(t_map_data *map);
+
+
 
 #endif
