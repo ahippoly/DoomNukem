@@ -22,7 +22,7 @@ int		malloc_texture_list(t_env *env)
 	return (0);
 }
 
-void		fill_text_list(t_env *env)
+void		load_text_list(t_env *env)
 {
     int		i;
     t_img	*tmp;
@@ -46,7 +46,7 @@ void		fill_text_list(t_env *env)
 void	init_texture(t_env *env)
 {
 	malloc_texture_list(env);
-	fill_text_list(env);
+	load_text_list(env);
 }
 
 void init_buttons(t_env *env)
