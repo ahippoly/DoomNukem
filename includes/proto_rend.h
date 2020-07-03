@@ -141,5 +141,12 @@ int					quit_ttf(t_data *d);
 
 int					render_game(t_data *d, int ac, char **av);
 
+//render_icon2obj_type.c
+t_mob	add_mob_demon(t_data *d, SDL_Point pos);
+t_mob	add_mob_pyro(t_data *d, SDL_Point pos);
+t_props	add_prop_key(t_data *d, SDL_Point pos);
+t_props	add_prop_heal_pack(t_data *d, SDL_Point pos);
+t_props	add_prop_ship(t_data *d, SDL_Point pos);
+
 
 #endif

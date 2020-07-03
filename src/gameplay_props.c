@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 21:51:48 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/29 00:51:55 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/03 21:31:19 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void ref_origin(void *type_list, int nb_type, int type)
 {
-	t_obj *obj;
-	int i;
-	int size;
-	void *selected;
+	t_obj	*obj;
+	int		i;
+	int		size;
+	void	*selected;
 
 	i = 0;
 	if (type == TYPE_PROP)
@@ -40,18 +40,24 @@ void ref_origin(void *type_list, int nb_type, int type)
 	}
 }
 
+void game_won(t_data *d)
+{
+	exit_with_msg("You won the game, gg !");
+}
+
 void check_props_collect(t_data *d, t_props *props, t_hud *hud)
 {
-	int i;
-	int nb_props;
-	t_props *prop;
+	int		i;
+	int		nb_props;
+	t_props	*prop;
 
 	nb_props = d->nb_props;
 	i = 0;
 	while (i < nb_props)
 	{
-		prop = &d->props[i];
-		if (prop->collectable && get_dist(prop->pos, d->player_pos) < prop->size)
+		prop = &d->props[i++];
+		if (prop->collectable
+			&& get_dist(prop->pos, d->player_pos) < ft_fmin(prop->size, 2))
 		{
 			if (prop->id == KEY_ITEM_ID)
 				hud->inv.key += 1;
@@ -60,12 +66,10 @@ void check_props_collect(t_data *d, t_props *props, t_hud *hud)
 			if (prop->id == JETPACK_ITEM_ID)
 				d->jetpack = 1;
 			if (prop->id == SHIP_ITEM_ID)
-				printf("gg !\n");
-			//del_from_array(d->obj_list, &d->nb_obj, prop->obj_ref, sizeof(t_obj));
+				game_won(d);
 			del_obj(d->obj_list, &d->nb_obj, prop->obj_ref);
 			del_from_array(d->props, &d->nb_props, prop, sizeof(t_props));
 			ref_origin(props, d->nb_props, TYPE_PROP);
 		}
-		i++;
 	}
 }

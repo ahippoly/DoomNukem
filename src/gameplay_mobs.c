@@ -70,7 +70,6 @@ void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob)
 			set_sprite_callback(&mob->sprite, check_mob_attack, (t_param){d, mob});
 			load_anim(&mob->sprite, d->time, ANIM_MOB_MELEE);
 		}
-
 		i++;
 	}
 }
@@ -109,7 +108,6 @@ void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse)
 			del_from_array(*repulsed, &d->nb_repulsed, obj, sizeof(t_obj*));
 		i++;
 	}
-
 }
 
 void shoot_gun(t_data *d, t_weapon *weapon)

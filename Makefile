@@ -28,7 +28,7 @@ SRC_NAME =	$(sort \
 			menu_clean.c menu_button.c menu_render.c menu_exec.c menu_background.c hud_clean.c exit.c \
 			gameover_background.c gameover_button.c gameover_render.c \
 			game_render.c \
-			render_game.c frame.c)
+			render_game.c frame.c render_icon2obj_type.c)
 
 GAME_MAIN = render_main.c $(SRC_NAME)
 
