@@ -7,10 +7,10 @@ SRC_NAME =	$(sort \
 			editor_icon.c editor_init_data.c editor_init_data2.c  \
 			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c \
 			editor_map_input.c \
-			 editor_map_reader.c editor_sector_creation.c \
+			editor_map_reader.c editor_sector_creation.c \
 			error_gesture.c image_gesture.c line_intersect.c \
 			tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
-			bresenham.c render_init_data.c render_event_gesture.c \
+			bresenham.c render_init_data.c render_init_data2.c render_event_gesture.c \
 			render_wall_processing.c render_event_poll.c render_texture_loading.c \
 			text_img.c render_movement.c image_gesture2.c render_raycast.c \
 			render_world_edit.c render_collide_z.c \

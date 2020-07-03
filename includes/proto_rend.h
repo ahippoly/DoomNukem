@@ -148,5 +148,12 @@ t_props	add_prop_key(t_data *d, SDL_Point pos);
 t_props	add_prop_heal_pack(t_data *d, SDL_Point pos);
 t_props	add_prop_ship(t_data *d, SDL_Point pos);
 
+//render_init_data2.c
+void	init_sdl_ressources_rend(t_data *d);
+void	init_mini_map(t_data *d, t_map_data *map);
+int		init_menu(t_data *d);
+int		init_gameover(t_data *d, char **av); // doit etre initialisée après init_menu car partage la meme structure t_menu !
+int		init_hud(t_data *d);
+
 
 #endif
