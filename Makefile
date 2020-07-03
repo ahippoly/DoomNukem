@@ -27,18 +27,6 @@ RENDER_SRC_NAME = $(sort render_main.c editor_map_reader.c editor_sector_creatio
 						gameplay_mobs.c ssprite.c gameplay_props.c gameplay_weapon.c \
 						menu_clean.c hud_clean.c exit.c bmp_reader_rotessie.c)
 
-## HUD_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
-						error_gesture.c image_gesture.c line_intersect.c \
-						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
-						bresenham.c render_init_data.c render_event_gesture.c \
-						render_wall_processing.c render_draw_walls.c render_texture_loading.c \
-						hud_clean.c hud_weapon.c hud_init_weapons.c hud_perso.c \
-						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_main.c \
-						text_img.c render_movement.c image_gesture2.c render_raycast.c \
-						render_world_edit.c render_collide_z.c \
-						render_draw_floor.c) ##
-
-
 SPRITE_SRC_NAME = $(sort editor_map_reader.c editor_sector_creation.c image_gesture2.c \
 						error_gesture.c image_gesture.c line_intersect.c \
 						tool_sdlpoint_arithmetic.c utils.c render_minimap.c \
@@ -50,7 +38,7 @@ SPRITE_SRC_NAME = $(sort editor_map_reader.c editor_sector_creation.c image_gest
 						render_draw_floor.c render_props.c render_obj.c render_draw_slice.c \
 						render_debug_ray.c render_ray_process.c render_pixel_put.c \
 						render_icon2obj.c sound.c gameplay_mobs.c ttf_init.c \
-						menu_clean.c hud_clean.c exit.c ) ##
+						menu_clean.c hud_clean.c exit.c )
 
 MENU_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						error_gesture.c image_gesture.c line_intersect.c \
@@ -67,7 +55,7 @@ MENU_SRC_NAME = $(sort  editor_map_reader.c editor_sector_creation.c \
 						hud_weapon.c hud_init_weapons.c hud_perso.c hud_init.c \
 						hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 						menu_main.c menu_background.c menu_button.c menu_exec.c ttf_init.c \
-						menu_clean.c hud_clean.c exit.c ) ##
+						menu_clean.c hud_clean.c exit.c )
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
@@ -77,14 +65,12 @@ FMOD_LIB_PATH = ./FMOD/
 INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_REND_NAME = $(RENDER_SRC_NAME:.c=.o)
-## OBJ_HUD_NAME = $(HUD_SRC_NAME:.c=.o) ##
 OBJ_SPRITE_NAME = $(SPRITE_SRC_NAME:.c=.o) ##
 OBJ_MENU_NAME = $(MENU_SRC_NAME:.c=.o) ##
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 OBJ_REND = $(addprefix $(OBJ_PATH),$(OBJ_REND_NAME))
-## OBJ_HUD = $(addprefix $(OBJ_PATH),$(OBJ_HUD_NAME)) ##
 OBJ_SPRITE = $(addprefix $(OBJ_PATH),$(OBJ_SPRITE_NAME)) ##
 OBJ_MENU = $(addprefix $(OBJ_PATH),$(OBJ_MENU_NAME)) ##
 INC = $(addprefix -I,$(INC_PATH))
@@ -95,9 +81,8 @@ NAME = editor
 RENDER_NAME = doom-nukem
 OPTI = -g3
 PTHREAD = -lpthread
-## HUD = hud ##
-SPRITE = sprite ##
-MENU = menu ##
+SPRITE = sprite #
+MENU = menu #
 
 LIBFT = libft/libft.a
 

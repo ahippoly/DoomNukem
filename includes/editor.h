@@ -136,27 +136,27 @@ typedef struct          s_room
     t_range             wall_ref;
 }                       t_room;
 
-typedef struct      s_icon
+typedef struct      	s_icon
 {
-    t_point         pos;
-	SDL_Point		pos_i;
-    t_size          size;
-    int             id_ref;
-}                   t_icon;
+    t_point				pos;
+	SDL_Point			pos_i;
+    t_size				size;
+    int					id_ref;
+}						t_icon;
 
-typedef struct      s_map_data
+typedef struct			s_map_data
 {
-    int             is_valid;
-    t_size          map_size;
-    int             wall_count;
-    int             room_count;
-	int				icon_count;
-    SDL_Point       player_spawn;
-    t_wall          *wall_list;
-    t_room          *room_list;
-	t_icon			*icon_list;
-    t_wall_ref      ***map_wall_ref;
-}                   t_map_data;
+    int					is_valid;
+    t_size				map_size;
+    int					wall_count;
+    int					room_count;
+	int					icon_count;
+    SDL_Point			player_spawn;
+    t_wall				*wall_list;
+    t_room				*room_list;
+	t_icon				*icon_list;
+    t_wall_ref			***map_wall_ref;
+}						t_map_data;
 
 typedef struct		s_input
 {
@@ -183,7 +183,7 @@ typedef struct      s_env
     SDL_Texture     *img_list; //malloc simple tableau
     
 	SDL_Rect        grid_pos;
-    const Uint8     *clavier; //It will be valid for the whole lifetime of the application and should not be freed by the caller.
+    const Uint8     *clavier; //It will be valid for the whole lifetime of the application and should not be 	freed by the caller.
     unsigned int    *p_screen;
     unsigned int    *p_grid;
     Uint32          mouse_button;
