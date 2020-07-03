@@ -11,8 +11,12 @@ SDL_Texture		**malloc_texture_tab(int size)
 }
 
 /*
-int				exit_env()
+int				exit_env(t_env *e)
 {
+	int			i;
+	while (i < NB_TEXTURE)
+	{
 
+	}
 }
 */

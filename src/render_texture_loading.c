@@ -1,7 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
 
 t_img read_img_surface(char *file, Uint32 pixel_format)
 {
@@ -31,36 +28,23 @@ t_img read_img_surface(char *file, Uint32 pixel_format)
     return (img);
 }
 
-void load_bmp_files(t_data *d)
+void	load_bmp_files(t_data *d)
 {
-    d->texture[0] = read_img_surface(TEXT_PATH_0, SDL_PIXELFORMAT_ARGB32);
-    d->texture[1] = read_img_surface(TEXT_PATH_1, SDL_PIXELFORMAT_ARGB32);
-    d->texture[2] = read_img_surface(TEXT_PATH_2, SDL_PIXELFORMAT_ARGB32);
-    d->texture[3] = read_img_surface(TEXT_PATH_3, SDL_PIXELFORMAT_ARGB32);
-    d->texture[4] = read_img_surface(TEXT_PATH_4, SDL_PIXELFORMAT_ARGB32);
-    d->texture[5] = read_img_surface(TEXT_PATH_5, SDL_PIXELFORMAT_ARGB32);
-    d->texture[6] = read_img_surface(TEXT_PATH_6, SDL_PIXELFORMAT_ARGB32);
-    d->texture[7] = read_img_surface(TEXT_PATH_7, SDL_PIXELFORMAT_ARGB32);
-    d->texture[8] = read_img_surface(TEXT_PATH_8, SDL_PIXELFORMAT_ARGB32);
-    d->texture[9] = read_img_surface(TEXT_PATH_9, SDL_PIXELFORMAT_ARGB32);
-    d->texture[10] = read_img_surface(TEXT_PATH_10, SDL_PIXELFORMAT_ARGB32);
-    d->texture[11] = read_img_surface(TEXT_PATH_11, SDL_PIXELFORMAT_ARGB32);
-    d->texture[12] = read_img_surface(TEXT_PATH_12, SDL_PIXELFORMAT_ARGB32);
-    d->texture[13] = read_img_surface(TEXT_PATH_13, SDL_PIXELFORMAT_ARGB32);
-    d->texture[14] = read_img_surface(TEXT_PATH_14, SDL_PIXELFORMAT_ARGB32);
-    d->texture[15] = read_img_surface(TEXT_PATH_15, SDL_PIXELFORMAT_ARGB32);
-    d->texture[16] = read_img_surface(TEXT_PATH_16, SDL_PIXELFORMAT_ARGB32);
-    d->texture[17] = read_img_surface(TEXT_PATH_17, SDL_PIXELFORMAT_ARGB32);
-    d->texture[18] = read_img_surface(TEXT_PATH_18, SDL_PIXELFORMAT_ARGB32);
-    d->texture[19] = read_img_surface(TEXT_PATH_19, SDL_PIXELFORMAT_ARGB32);
-    d->texture[20] = read_img_surface(TEXT_PATH_20, SDL_PIXELFORMAT_ARGB32);
-    d->texture[21] = read_img_surface(TEXT_PATH_21, SDL_PIXELFORMAT_ARGB32);
-    d->texture[22] = read_img_surface(TEXT_PATH_22, SDL_PIXELFORMAT_ARGB32);
-    d->texture[23] = read_img_surface(TEXT_PATH_23, SDL_PIXELFORMAT_ARGB32);
-    d->texture[24] = read_img_surface(TEXT_PATH_24, SDL_PIXELFORMAT_ARGB32);
-    d->texture[25] = read_img_surface(TEXT_PATH_25, SDL_PIXELFORMAT_ARGB32);
-    d->texture[26] = read_img_surface(TEXT_PATH_26, SDL_PIXELFORMAT_ARGB32);
-    d->texture[27] = read_img_surface(TEXT_PATH_27, SDL_PIXELFORMAT_ARGB32);
+	char	*path;
+	int	i;
+
+	path = ft_strnew(36);
+	i = 0;
+    while (i < NB_TEXTURE)
+	{
+		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
+		ft_strcat(path, ft_itoa(i));
+		ft_strcat(path, ".bmp");
+		d->texture[i] = read_img_surface(path, SDL_PIXELFORMAT_ARGB32);
+		ft_bzero(path, sizeof(char *));
+		i++;
+	}
+	free(path);
 }
 
 void init_rend_img(t_data *d)

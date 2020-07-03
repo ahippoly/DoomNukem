@@ -22,40 +22,31 @@ int		malloc_texture_list(t_env *env)
 	return (0);
 }
 
-void init_texture(t_env *env)
+void		fill_text_list(t_env *env)
 {
-    int i;
-    t_img *tmp;
+    int		i;
+    t_img	*tmp;
+	char	*path;
 
     env->selected_texture = 0;
-    env->text_list[0] = bmp_to_texture(TEXT_PATH_0, env->rend);
-    env->text_list[1] = bmp_to_texture(TEXT_PATH_1, env->rend);
-    env->text_list[2] = bmp_to_texture(TEXT_PATH_2, env->rend);
-    env->text_list[3] = bmp_to_texture(TEXT_PATH_3, env->rend);
-    env->text_list[4] = bmp_to_texture(TEXT_PATH_4, env->rend);
-    env->text_list[5] = bmp_to_texture(TEXT_PATH_5, env->rend);
-    env->text_list[6] = bmp_to_texture(TEXT_PATH_6, env->rend);
-    env->text_list[7] = bmp_to_texture(TEXT_PATH_7, env->rend);
-    env->text_list[8] = bmp_to_texture(TEXT_PATH_8, env->rend);
-    env->text_list[9] = bmp_to_texture(TEXT_PATH_9, env->rend);
-    env->text_list[10] = bmp_to_texture(TEXT_PATH_10, env->rend);
-    env->text_list[11] = bmp_to_texture(TEXT_PATH_11, env->rend);
-    env->text_list[12] = bmp_to_texture(TEXT_PATH_12, env->rend);
-    env->text_list[13] = bmp_to_texture(TEXT_PATH_13, env->rend);
-    env->text_list[14] = bmp_to_texture(TEXT_PATH_14, env->rend);
-    env->text_list[15] = bmp_to_texture(TEXT_PATH_15, env->rend);
-    env->text_list[16] = bmp_to_texture(TEXT_PATH_16, env->rend);
-    env->text_list[17] = bmp_to_texture(TEXT_PATH_17, env->rend);
-    env->text_list[18] = bmp_to_texture(TEXT_PATH_18, env->rend);
-    env->text_list[19] = bmp_to_texture(TEXT_PATH_19, env->rend);
-    env->text_list[20] = bmp_to_texture(TEXT_PATH_20, env->rend);
-    env->text_list[21] = bmp_to_texture(TEXT_PATH_21, env->rend);
-    env->text_list[22] = bmp_to_texture(TEXT_PATH_22, env->rend);
-    env->text_list[23] = bmp_to_texture(TEXT_PATH_23, env->rend);
-    env->text_list[24] = bmp_to_texture(TEXT_PATH_24, env->rend);
-    env->text_list[25] = bmp_to_texture(TEXT_PATH_25, env->rend);
-    env->text_list[26] = bmp_to_texture(TEXT_PATH_26, env->rend);
-    env->text_list[27] = bmp_to_texture(TEXT_PATH_27, env->rend);
+	i = 0;
+	path = ft_strnew(36);
+	while (i < NB_TEXTURE)
+	{
+		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
+		ft_strcat(path, ft_itoa(i));
+		ft_strcat(path, ".bmp");
+		env->text_list[i] = bmp_to_texture(path, env->rend);
+		ft_bzero(path, sizeof(char *));
+		i++;
+	}
+	free(path);
+}
+
+void	init_texture(t_env *env)
+{
+	malloc_texture_list(env);
+	fill_text_list(env);
 }
 
 void init_buttons(t_env *env)

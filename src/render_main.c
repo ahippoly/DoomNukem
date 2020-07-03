@@ -10,8 +10,8 @@ int					main(int ac, char **av)
 	// printf("map: %s\n", av[1]);
 	// printf("d.run_game: %d\n", d.run_game);
 	d.run_game = MENU;
-    init_sound(&d);
-    play_sound(&d, MUS1);
+    // init_sound(&d);
+    // play_sound(&d, MUS1);
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)

@@ -49,6 +49,8 @@
 # define INPUT_COLLIDE 7
 
 # define NB_TEXTURE 28
+
+/*
 # define TEXT_PATH_0 "asset/img/textures/Red_Bricks.bmp"
 # define TEXT_PATH_1 "asset/img/hud/key.bmp"
 # define TEXT_PATH_2 "asset/img/textures/Paver300.bmp"
@@ -77,6 +79,7 @@
 # define TEXT_PATH_25 "asset/img/textures/poster1.bmp"
 # define TEXT_PATH_26 "asset/img/textures/poster2.bmp"
 # define TEXT_PATH_27 "asset/img/textures/poster3.bmp"
+*/
 
 # define NB_TXT 16
 # define TXT_MAP_EDITOR 0
