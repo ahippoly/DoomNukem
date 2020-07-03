@@ -26,23 +26,23 @@ t_img read_img_surface(char *file, Uint32 pixel_format)
 	img.w = converted->w;
 	img.h = converted->h;
     //SDL_LockSurface(readed_file);
-    // printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
+    printf("texture w,h = %i,%i, pith = %i\n",converted->w, converted->h, converted->pitch);
     SDL_FreeSurface(converted);
     return (img);
 }
 
 void load_bmp_files(t_data *d)
 {
-    d->texture[0] = read_img_surface(TEXT_PATH_0, SDL_PIXELFORMAT_ARGB32);
-    d->texture[1] = read_img_surface(TEXT_PATH_1, SDL_PIXELFORMAT_ARGB32);
-    d->texture[2] = read_img_surface(TEXT_PATH_2, SDL_PIXELFORMAT_ARGB32);
-    d->texture[3] = read_img_surface(TEXT_PATH_3, SDL_PIXELFORMAT_ARGB32);
-    d->texture[4] = read_img_surface(TEXT_PATH_4, SDL_PIXELFORMAT_ARGB32);
-    d->texture[5] = read_img_surface(TEXT_PATH_5, SDL_PIXELFORMAT_ARGB32);
-    d->texture[6] = read_img_surface(TEXT_PATH_6, SDL_PIXELFORMAT_ARGB32);
-    d->texture[7] = read_img_surface(TEXT_PATH_7, SDL_PIXELFORMAT_ARGB32);
-    d->texture[8] = read_img_surface(TEXT_PATH_8, SDL_PIXELFORMAT_ARGB32);
-    d->texture[9] = read_img_surface(TEXT_PATH_9, SDL_PIXELFORMAT_ARGB32);
+    d->texture[0] = ft_load_bmp2(TEXT_PATH_0, BMP_TYPE_BGRA);
+    d->texture[1] = ft_load_bmp2(TEXT_PATH_1, BMP_TYPE_BGRA);
+    d->texture[2] = ft_load_bmp2(TEXT_PATH_2, BMP_TYPE_ABGR);
+    d->texture[3] = ft_load_bmp2(TEXT_PATH_3, BMP_TYPE_BGRA);
+    d->texture[4] = ft_load_bmp2(TEXT_PATH_4, BMP_TYPE_BGRA);
+    d->texture[5] = ft_load_bmp2(TEXT_PATH_5, BMP_TYPE_BGRA);
+    d->texture[6] = ft_load_bmp2(TEXT_PATH_6, BMP_TYPE_BGRA);
+    d->texture[7] = ft_load_bmp2(TEXT_PATH_7, BMP_TYPE_BGRA);
+    d->texture[8] = ft_load_bmp2(TEXT_PATH_8, BMP_TYPE_BGRA);
+    d->texture[9] = ft_load_bmp2(TEXT_PATH_9, BMP_TYPE_BGRA);
     d->texture[10] = read_img_surface(TEXT_PATH_10, SDL_PIXELFORMAT_ARGB32);
     d->texture[11] = read_img_surface(TEXT_PATH_11, SDL_PIXELFORMAT_ARGB32);
     d->texture[12] = read_img_surface(TEXT_PATH_12, SDL_PIXELFORMAT_ARGB32);

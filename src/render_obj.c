@@ -115,6 +115,21 @@ t_obj	convert_prop_to_obj(t_data	*d,	t_props *props)
 	return (obj);
 }
 
+void init_obj_room_ground(t_data *d, t_obj *obj_list, int nb_obj)
+{
+	int i;
+	t_obj *curr;
+
+	i = 0;
+	while (i < nb_obj)
+	{
+		curr = &obj_list[i];
+		if (curr->room_id < -1)
+			curr->z_ground = set_room_ground(d, curr->pos);
+		i++;
+	}
+}
+
 void init_obj_list(t_data *d)
 {
 	int i;
@@ -140,6 +155,7 @@ void init_obj_list(t_data *d)
 		d->obj_list[j] = convert_mob_to_obj(d, &d->mobs[i]);
 		d->mobs[i++].obj_ref = &d->obj_list[j++];
 	}
+	init_obj_room_ground(d, d->obj_list, d->nb_obj);
 }
 
 void correct_origin_ref(t_obj *obj_list, int i, int nb_obj, t_obj *obj)

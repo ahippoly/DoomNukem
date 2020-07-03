@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/30 21:34:30 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/03 20:10:02 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_img	ft_load_bmp(char *file)
 	return (verif_bpp(head, fd, img.pos_size.w, img.pos_size.h));
 }
 
-void read_file_pixels(t_img text, int bpp, int fd)
+void read_file_pixels(t_img text, int bpp, int fd, int convert)
 {
 	char buffer[BUFF_SIZE];
 	int ret;
@@ -157,14 +157,19 @@ void read_file_pixels(t_img text, int bpp, int fd)
 					x = 0;
 				}
 				ft_memcpy(&pixel[x + y], buffer + (BUFF_SIZE - ret), 4);
-				swap_char(&pixel[x + y], &pixel[x + y + 3]);
-				swap_char(&pixel[x + y + 1], &pixel[x + y + 2]);
+				if (convert == BMP_TYPE_BGRA)
+				{
+					swap_char(&pixel[x + y], &pixel[x + y + 3]);
+					swap_char(&pixel[x + y + 1], &pixel[x + y + 2]);
+				}
+				else if (convert == BMP_TYPE_ABGR)
+					swap_char(&pixel[x + y + 1], &pixel[x + y + 3]);
 				x += 4;
 				ret -= 4;
 			}
 		}
 	}
-	if (bpp == 24)
+	else if (bpp == 24)
 	{
 		pixel = (char*)text.pixels;
 		while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
@@ -185,10 +190,11 @@ void read_file_pixels(t_img text, int bpp, int fd)
 		}
 		printf(" x = %i\n", x);
 	}
-
+	else
+		exit_with_msg("Error while loading bmp file, wrong bpp\n");
 }
 
-t_img	ft_load_bmp2(char *file)
+t_img	ft_load_bmp2(char *file, int convert)
 {
 	int		fd;
 	unsigned char	head[200];
@@ -203,17 +209,18 @@ t_img	ft_load_bmp2(char *file)
 		exit_with_msg("wrong bmp file input");
 	if ((ret = read(fd, head, BMP_HEADER_READ)) != BMP_HEADER_READ)
 		exit_with_msg("wrong bmp file header");
-	// printf("bmp type = %c%c\n", hex2dec(&head[0], 1), hex2dec(&head[1], 1));
-	// printf("bmp total_size = %i\n", hex2dec(&head[2], 4));
-	// printf("bmp p_tab begin = %i\n", hex2dec(&head[10], 4));
-	// printf("bmp header size = %i\n", hex2dec(&head[14], 4));
-	// printf("bmp w = %i\n", hex2dec(&head[18], 4));
-	// printf("bmp h = %i\n", hex2dec(&head[22], 4));
-	// printf("bmp color planes = %i\n", hex2dec(&head[26], 2));
-	// printf("bmp bpp = %i\n", hex2dec(&head[28], 2));
+	printf("bmp type = %c%c\n", hex2dec(&head[0], 1), hex2dec(&head[1], 1));
+	printf("bmp total_size = %i\n", hex2dec(&head[2], 4));
+	printf("bmp p_tab begin = %i\n", hex2dec(&head[10], 4));
+	printf("bmp header size = %i\n", hex2dec(&head[14], 4));
+	printf("bmp w = %i\n", hex2dec(&head[18], 4));
+	printf("bmp h = %i\n", hex2dec(&head[22], 4));
+	printf("bmp color planes = %i\n", hex2dec(&head[26], 2));
+	printf("bmp bpp = %i\n", hex2dec(&head[28], 2));
 	pix_array_pos = hex2dec(&((unsigned char*)head)[10], 4);
 	img.pos_size.w = hex2dec(&((unsigned char*)head)[18], 4);
 	img.pos_size.h = ft_abs(hex2dec(&((unsigned char*)head)[22], 4));
+	printf("bmp unsigned char size : %i,%i\n", img.pos_size.w, img.pos_size.h);
 	img.w = img.pos_size.w;
 	img.h = img.pos_size.h;
 	bpp = hex2dec(&head[28], 2);
@@ -221,7 +228,7 @@ t_img	ft_load_bmp2(char *file)
 	if ((ret = read(fd, head, pix_array_pos - BMP_HEADER_READ)) !=
 			(size_t)pix_array_pos - BMP_HEADER_READ)
 		exit_with_msg("Wrong bmp format");
-	read_file_pixels(img, bpp, fd);
+	read_file_pixels(img, bpp, fd, convert);
 	//convert_pixel_format(img.pixels, img.w * img.h);
 	return (img);
 }

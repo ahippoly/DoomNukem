@@ -1,8 +1,16 @@
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_movement.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/02 18:40:04 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/07/02 18:40:10 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "proto_global.h"
 
 void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot)
 {

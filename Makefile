@@ -53,7 +53,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 EDITOR_NAME = editor
 GAME_NAME = doom-nukem
-OPTI = -O6
+OPTI = -g3
 PTHREAD = -lpthread
 
 LIBFT = libft/libft.a

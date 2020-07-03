@@ -85,9 +85,6 @@ typedef struct      s_data
     SDL_Texture     *gameover_texture; //menu texture
 	char			*argv;
 	t_img			skybox;
-	t_img			texture[NB_TEXTURE];
-	t_img			img[NB_IMG];
-	t_img			sprite_img[NB_SPRITE];
 	FMOD_SOUND		*sound[30];
     t_ssprite       sprite_lst[NB_SPRITE_MAX];
 	t_ssprite		weapon_img[WEAPON_NB];
@@ -97,6 +94,9 @@ typedef struct      s_data
 	t_obj			obj_list[NB_MAX_OBJ];
 	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
 	t_sprite        sprite[30];
+	t_img			texture[NB_TEXTURE];
+	t_img			img[NB_IMG];
+	t_img			sprite_img[NB_SPRITE];
 	int				jetpack;
 }                   t_data;
 

@@ -21,7 +21,7 @@ t_point create_t_point(float x, float y);
 t_range create_t_range(int start, int end);
 t_size create_t_size(int w, int h);
 t_img	ft_load_bmp(char *file);
-t_img	ft_load_bmp2(char *file);
+t_img	ft_load_bmp2(char *file, int convert);
 void sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3, SDL_Point p4);
 t_point	line_intersect(t_point pos, float rot, t_point p1, t_point p2);

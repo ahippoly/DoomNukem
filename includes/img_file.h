@@ -3,6 +3,8 @@
 # include "SDL.h"
 
 # define BMP_HEADER_READ 32
+# define BMP_TYPE_BGRA 0
+# define BMP_TYPE_ABGR 1
 
 typedef struct      s_img
 {

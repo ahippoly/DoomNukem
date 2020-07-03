@@ -103,6 +103,22 @@ t_props	add_prop_jetpack(t_data *d, SDL_Point pos)
 	return (prop);
 }
 
+void	identify_icon(t_data *d, t_icon *current)
+{
+	if (current->id_ref == AFRIT_ICON_ID)
+		d->mobs[d->nb_mob++] = add_mob_demon(d, current->pos_i);
+	if (current->id_ref == PYRO_ICON_ID)
+		d->mobs[d->nb_mob++] = add_mob_pyro(d, current->pos_i);
+	if (current->id_ref == KEY_ICON_ID)
+		d->props[d->nb_props++] = add_prop_key(d, current->pos_i);
+	if (current->id_ref == HEAL_PACK_ICON_ID)
+		d->props[d->nb_props++] = add_prop_heal_pack(d, current->pos_i);
+	if (current->id_ref == SHIP_ICON_ID)
+		d->props[d->nb_props++] = add_prop_ship(d, current->pos_i);
+	if (current->id_ref == JETPACK_ICON_ID)
+		d->props[d->nb_props++] = add_prop_jetpack(d, current->pos_i);
+}
+
 void load_icons(t_data *d, t_map_data *map)
 {
 	int i;
@@ -111,25 +127,8 @@ void load_icons(t_data *d, t_map_data *map)
 	t_icon	*current;
 
 	i = 0;
-	nb_mob = 0;
-	nb_prop = 0;
+	d->nb_mob = 0;
+	d->nb_props = 0;
 	while (i < map->icon_count)
-	{
-		current = &map->icon_list[i];
-		if (current->id_ref == AFRIT_ICON_ID)
-			d->mobs[nb_mob++] = add_mob_demon(d, current->pos_i);
-		if (current->id_ref == PYRO_ICON_ID)
-			d->mobs[nb_mob++] = add_mob_pyro(d, current->pos_i);
-		if (current->id_ref == KEY_ICON_ID)
-			d->props[nb_prop++] = add_prop_key(d, current->pos_i);
-		if (current->id_ref == HEAL_PACK_ICON_ID)
-			d->props[nb_prop++] = add_prop_heal_pack(d, current->pos_i);
-		if (current->id_ref == SHIP_ICON_ID)
-			d->props[nb_prop++] = add_prop_ship(d, current->pos_i);
-		if (current->id_ref == JETPACK_ICON_ID)
-			d->props[nb_prop++] = add_prop_jetpack(d, current->pos_i);
-		i++;
-	}
-	d->nb_mob = nb_mob;
-	d->nb_props = nb_prop;
+		identify_icon(d, &map->icon_list[i++]);
 }
