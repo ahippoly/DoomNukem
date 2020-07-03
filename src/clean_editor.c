@@ -81,6 +81,7 @@ t_icon			*malloc_icon(int size)
 	return (ptr);
 }
 
+/*
 t_wall			*malloc_wall(int size)
 {
 	t_icon		*ptr;
@@ -89,6 +90,7 @@ t_wall			*malloc_wall(int size)
 		return (NULL);
 	return (ptr);
 }
+*/
 
 int				exit_editor(t_env *e)
 {
