@@ -27,6 +27,9 @@ void move_attempt(t_data *d, t_point *pos, float speed, t_rot look_rot);
 void move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed);
 void move_with_collide_player(t_data *d, t_point *pos, t_rot rot, float speed);
 void gravity(t_data *d);
+int		check_collide(t_data *d, t_ray *res, float z_pos, int *will_collide);
+int		is_angle_in_range(float rot, float min, float max);
+t_point check_wall_front(t_point pos, t_rot rot, t_ray *ray);
 
 //render_wall_processing.c
 float calc_wall_hit_scale(t_wall wall, t_point inter);
