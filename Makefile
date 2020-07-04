@@ -66,8 +66,10 @@ FMOD_WINDOWS = /usr/lib/fmod.dll /usr/lib/fmodL.dll
 FMOD_OSX = /usr/local/lib/libfmod.dylib /usr/local/lib/libfmodL.dylib
 
 FMOD_LINUX = /usr/lib/libfmod.so /usr/lib/libfmodL.so \
-			 /usr/lib/libfmod.so.12 /usr/lib/libfmodL.so.12 \
-			 /usr/lib/libfmod.so.12.0 /usr/lib/libfmodL.so.12.0
+			 /usr/lib/libfmod.so.11 /usr/lib/libfmodL.so.11 \
+			 /usr/lib/libfmod.so.11.9 /usr/lib/libfmodL.so.11.9
+
+SED = sed
 
 ## Flags
 
@@ -78,6 +80,18 @@ PTHREAD = -lpthread
 SDLM = `sdl2-config --cflags --libs`
 LIBS = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
 LDLIBS = -lft -lm
+
+ifeq ($(OS),Windows_NT)
+	FMOD = $(FMOD_WINDOWS)
+else
+	UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	FMOD = $(FMOD_OSX)
+	SED = gsed	
+else 
+	FMOD = $(FMOD_LINUX)
+	endif	
+endif
 
 .PHONY: all clean fclean re libft
 
@@ -106,7 +120,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 $(ASSETS) :
 	@printf "\e[1;32m[Downloading assets]\e[0m\n"
-	@wget -q --show-progress --load-cookies /tmp/cookies.txt \
+	@wget -r -q --show-progress --load-cookies /tmp/cookies.txt \
 	"https://docs.google.com/uc?export=download&confirm=$$(wget --quiet $\
 	--save-cookies /tmp/cookies.txt --keep-session-cookies $\
 	--no-check-certificate 'https://docs.google.com/uc?export=download&id=$\
@@ -115,7 +129,7 @@ $(ASSETS) :
 	&id=1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp" -O asset.tar.gz \
 	&& rm -rf /tmp/cookies.txt
 	@printf "\e[1;32m[Extracting assets]\e[0m\n"
-	@tar zxvf asset.tar.gz
+	@tar xf asset.tar.gz
 	@rm -rf asset.tar.gz
 
 $(FMOD_WINDOWS):
@@ -124,26 +138,15 @@ $(FMOD_WINDOWS):
 
 $(FMOD_LINUX):
 	@sudo cp FMOD/libfmod.so /usr/lib/
-	@sudo cp FMOD/libfmod.so.12 /usr/lib/
-	@sudo cp FMOD/libfmod.so.12.0 /usr/lib/
+	@sudo cp FMOD/libfmod.so.11 /usr/lib/
+	@sudo cp FMOD/libfmod.so.11.9 /usr/lib/
 	@sudo cp FMOD/libfmodL.so /usr/lib/
-	@sudo cp FMOD/libfmodL.so.12 /usr/lib/
-	@sudo cp FMOD/libfmodL.so.12.0 /usr/lib/
+	@sudo cp FMOD/libfmodL.so.11 /usr/lib/
+	@sudo cp FMOD/libfmodL.so.11.9 /usr/lib/
 
 $(FMOD_OSX):
 	@sudo cp FMOD/libfmod.dylib /usr/local/lib
 	@sudo cp FMOD/libfmodL.dylib /usr/local/lib
-
-ifeq ($(OS),Windows_NT)
-	FMOD = $(FMOD_WINDOWS)
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
-		FMOD = $(FMOD_LINUX)
-	else 
-		FMOD = $(FMOD_OSX)
-	endif
-endif
 
 clean:
 	@printf "%-50s" "deleting objects..." 
