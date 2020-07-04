@@ -18,7 +18,7 @@ SRC_NAME =	$(sort \
 			render_wall_processing.c render_event_poll.c render_texture_loading.c \
 			text_img.c render_movement.c render_movement_utils.c render_gravity.c image_gesture2.c render_raycast.c \
 			render_world_edit.c render_collide_z.c \
-			render_draw_floor.c render_draw_floor2.c render_props.c render_obj.c render_draw_slice.c \
+			render_draw_floor.c render_draw_floor2.c render_props.c render_obj.c render_obj_convert.c render_draw_slice.c \
 			render_ray_process.c render_pixel_put.c \
 			render_icon2obj.c \
 			hud_weapon.c hud_init_weapons.c hud_perso.c \

@@ -15,6 +15,7 @@ void			calc_n_disp_framerate(t_data *d)
 		//printf("diff time = %i\n", time - last_time);
 		// printf("framerate = %i\n", last_framerate);
 		// printf("diff_time = %f\n", d->diff_time);
+		create_mini_map(d, &d->map);
         framerate = 0;
         last_time = time;
     }
