@@ -1,25 +1,35 @@
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_props.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/04 23:39:33 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/07/04 23:43:12 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 t_range	calc_prop_draw_range(t_data *d, float dist, float height, float size)
 {
 	t_range	res;
 
-	res.start = d->screen_height - ((height - d->player_height + size) * WIN_SIZE_Y) / dist;
-	res.end = d->screen_height + ((d->player_height - height + size)  * WIN_SIZE_Y) / dist;
+	res.start = d->screen_height - ((height - d->player_height + size)
+		* WIN_SIZE_Y) / dist;
+	res.end = d->screen_height + ((d->player_height - height + size)
+		* WIN_SIZE_Y) / dist;
 	return (res);
 }
 
-void draw_prop_slice(t_data *d, t_props *prop, t_ray ray, int x)
+void	draw_prop_slice(t_data *d, t_props *prop, t_ray ray, int x)
 {
-	t_range draw_y;
-	int tx;
-	unsigned int *pixels;
-	float		th;
-	float		th_step;
+	t_range			draw_y;
+	int				tx;
+	unsigned int	*pixels;
+	float			th;
+	float			th_step;
 
 	draw_y = calc_prop_draw_range(d, ray.dist, prop->z_pos, prop->size);
 	tx = ray.scale * prop->text->w;
