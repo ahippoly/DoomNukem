@@ -9,6 +9,7 @@
 #include "proto_ssprite.h"
 #include "proto_menu.h"
 #include "proto_gameplay.h"
+#include "proto_clean.h"
 
 void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud);
 void exit_with_msg(char *msg);
@@ -88,6 +89,6 @@ uint16_t	swap2(uint16_t x);
 
 /* exit.c */
 
-void exit_env(t_data *d);
+void exit_game(t_data *d, char *msg);
 
 #endif

@@ -61,36 +61,6 @@ void add_wall_ref_point(t_wall wall, t_env *env)
     // la faut faire pour les 2 points du wall
 }
 
-void clear_map_ref(t_env *env)
-{
-    int i;
-    int j;
-    t_wall_ref *wall_ref;
-    t_wall_ref *tmp;
-
-    i = 0;
-    if (env->map_wall_ref == NULL)
-        return;
-    while (i < env->map_size.h)
-    {
-        j = 0;
-        while (j < env->map_size.w)
-        {
-            wall_ref = env->map_wall_ref[i][j];
-            while (wall_ref != NULL)
-            {
-                tmp = wall_ref;
-                wall_ref = wall_ref->next;
-                free(tmp);
-            }
-            j++;
-        }
-        free(env->map_wall_ref[i]);
-        i++;
-    }
-    free(env->map_wall_ref);
-}
-
 void recreate_full_map_ref(t_env *env)
 {
     int i;
@@ -196,7 +166,8 @@ void recreate_room_list(t_env *env)
 
     i = 0;
     free(env->room_list);
-    env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count);
+	if (!(env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count))) //MALLOC
+		exit_editor(env, "error: failed to malloc");
 	recreate_room_height(env);
 	recreate_floor_text(env);
     while (i < env->wall_count)

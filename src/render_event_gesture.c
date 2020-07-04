@@ -76,5 +76,10 @@ void	handle_key_event(t_data *d)
 	if (clavier[SDL_SCANCODE_S])
 		move_with_collide_player(d, &d->player_pos,
 		calc_sin_cos_rot(d->rot + M_PI), MOVE_STEP * d->speed_modifier);
+	if (clavier[SDL_SCANCODE_L])
+	{
+		d->hud.hp = 0;
+		d->run_game = GAMEOVER;
+	}
 	handle_key_event2(d, clavier);
 }

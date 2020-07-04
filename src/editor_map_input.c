@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-void	*ft_memcpy2(void *s1, const void *s2, size_t n)
+void		*ft_memcpy2(void *s1, const void *s2, size_t n)
 {
 	char	*c1;
 	char	*c2;
@@ -27,15 +27,12 @@ void	*ft_memcpy2(void *s1, const void *s2, size_t n)
 	return (s1);
 }
 
-void map2env(t_env *e, t_map_data *map)
+void	map2env(t_env *e, t_map_data *map) // A CHECK
 {
-	int i;
+	int	i;
 
 	if (map->is_valid != 1)
-	{
-		ft_putstr("error while reading map, initializing new map\n");
-		return ;
-	}
+		exit_editor(e, "error : failed to read map, initializing new map");
 	e->wall_count = map->wall_count;
 	ft_memcpy2(e->wall_list, map->wall_list, sizeof(t_wall) * map->wall_count);
 	free(map->wall_list);
@@ -70,9 +67,9 @@ void load_map(t_env *e, int ac, char **av)
 	t_map_data map;
 	
 	if (ac > 1)
-		{
-			e->map_name = strdup(av[1]);
-			map = read_map(av[1]);
-			map2env(e, &map);
-		}
+	{
+		e->map_name = strdup(av[1]);
+		map = read_map(av[1]);
+		map2env(e, &map);
+	}
 }

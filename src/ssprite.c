@@ -6,20 +6,18 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/03 20:39:07 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/04 22:29:03 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "proto_global.h"
 
-
 void init_sprites_img(t_data *d)
 {
 	d->sprite_img[SPRITE_ID_AFRIT] = ft_load_bmp2(SPRITE_PATH_AFRIT, BMP_TYPE_ABGR);
-	// d->sprite_img[SPRITE_ID_AFRIT] = read_img_surface(SPRITE_PATH_AFRIT, SDL_PIXELFORMAT_ARGB32);
-	// d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
-	d->sprite_img[SPRITE_ID_PYRO] = ft_load_bmp2(SPRITE_PATH_PYRO, BMP_TYPE_ABGR);
-	//d->sprite_img[SPRITE_ID_REVOLVER] = read_img_surface(WEAPON_PATH_0, SDL_PIXELFORMAT_ARGB32);
+	if (d->sprite_img[SPRITE_ID_AFRIT].w == -42)
+		exit_game(d, "error : failed to init sprites images");
+	d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
 }
 
 void init_sprites_img_env(t_env *e)
@@ -50,12 +48,10 @@ void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_
 			start.y += 1;
 		}
 	}
-	
 }
 
 void copy_frame_ssprite(t_ssprite *sprite, SDL_Point pos_anim, t_size size_anim)
 {
-	//copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->frame_disp_size.w, sprite->frame_disp_size.h}, sprite->src.pixels, (SDL_Rect){pos_anim.x, pos_anim.y, sprite->src.w, sprite->src.h});
 	copy_frame_scale(sprite->dst, (SDL_Rect){size_anim.w, size_anim.h, sprite->frame_disp_size.w, sprite->frame_disp_size.h}, sprite->src.pixels, (SDL_Rect){pos_anim.x, pos_anim.y, sprite->src.w, sprite->src.h});
 }
 
@@ -177,11 +173,6 @@ t_ssprite    sprite_init_pyro2(t_img src_img)
     return (pyro);
 }
 
-void init_sprites(t_data *d)
-{
-	
-}
-
 void load_anim(t_ssprite *sprite, int time, int anim_id)
 {
 	SDL_Point	curr_anim_pos;
@@ -193,7 +184,6 @@ void load_anim(t_ssprite *sprite, int time, int anim_id)
 	curr_anim_pos = sprite->anim[anim_id].pos[0];
 	curr_anim_size = sprite->anim[anim_id].size[0];
 	copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);
-	// copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->dst_w, sprite->dst_h}, sprite->src.pixels, (SDL_Rect){curr_anim_pos.x, curr_anim_pos.y, sprite->src.w, sprite->src.h});
 }
 
 void set_sprite_callback(t_ssprite *sprite, void (*funct)(t_param), t_param param)
@@ -202,7 +192,7 @@ void set_sprite_callback(t_ssprite *sprite, void (*funct)(t_param), t_param para
 	sprite->param = param;
 }
 
-void process_anim(t_ssprite *sprite, int time)
+void			process_anim(t_ssprite *sprite, int time) // cas d'erreur a verifier
 {
 	t_anim		*anim;
 	SDL_Point	curr_anim_pos;
@@ -217,7 +207,6 @@ void process_anim(t_ssprite *sprite, int time)
 		anim->current_frame += 1;
 		if (anim->current_frame >= anim->nb_frame)
 		{
-			// printf("load new anim\n");
 			if (sprite->callback != NULL)
 				sprite->callback(sprite->param);
 			sprite->callback = NULL;
@@ -229,9 +218,7 @@ void process_anim(t_ssprite *sprite, int time)
 		}
 		curr_anim_pos = anim->pos[anim->current_frame];
 		curr_anim_size = anim->size[anim->current_frame];
-		// printf("step frame\n");
 		copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);
-		//copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->frame_size.w, sprite->frame_size.h}, sprite->src.pixels, (SDL_Rect){curr_anim_pos.x, curr_anim_pos.y, sprite->src.w, sprite->src.h});
 	}
 }
 

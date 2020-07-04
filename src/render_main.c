@@ -9,6 +9,7 @@ int					main(int ac, char **av)
 	d.run_game = MENU;
     init_sound(&d);
     play_sound(&d, MUS2);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)
@@ -28,6 +29,5 @@ int					main(int ac, char **av)
 				execv("./editor", av);
 		}
 	}
-	exit_env(&d);
+	exit_game(&d, "bye all!");
 }
-

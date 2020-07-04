@@ -1,58 +1,79 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
-void init_sdl_ressources(t_env *env)
+int			init_sdl_ressources(t_env *env) //SECURE
 {
     env->win = NULL;
     if(0 != SDL_Init(SDL_INIT_VIDEO))
-        exit_with_msg("Failed to Init SDL");
+		exit_editor(env, "error : failed to init SDL");
     if (!(env->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                               WIN_SIZE_X, WIN_SIZE_Y, SDL_WINDOW_SHOWN)))
-        exit_with_msg("Failed to create Window");
+        exit_editor(env, "error : failed to create window");
     if (!(env->rend = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_ACCELERATED)))
-        exit_with_msg("Failed to create Renderer");
-    env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
-    env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, GRID_SIZE_X, GRID_SIZE_Y);
-    //env->stones = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 512, 512);
+        exit_editor(env, "error : failed to create Renderer");
+    if (!(env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y)))
+        exit_editor(env, "error : failed to create texture");
+	if (!(env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, GRID_SIZE_X, GRID_SIZE_Y)))
+        exit_editor(env, "error : failed to create texture");
+	return (0);
 }
 
-void init_texture(t_env *env)
+int			load_text_list(t_env *env) //SECURE
 {
-    int i;
-    t_img *tmp;
+    int		i;
+	char	*path;
 
     env->selected_texture = 0;
-    env->text_list[0] = bmp_to_texture(TEXT_PATH_0, env->rend);
-    env->text_list[1] = bmp_to_texture(TEXT_PATH_1, env->rend);
-    env->text_list[2] = bmp_to_texture(TEXT_PATH_2, env->rend);
-    env->text_list[3] = bmp_to_texture(TEXT_PATH_3, env->rend);
-    env->text_list[4] = bmp_to_texture(TEXT_PATH_4, env->rend);
-    env->text_list[5] = bmp_to_texture(TEXT_PATH_5, env->rend);
-    env->text_list[6] = bmp_to_texture(TEXT_PATH_6, env->rend);
-    env->text_list[7] = bmp_to_texture(TEXT_PATH_7, env->rend);
-    env->text_list[8] = bmp_to_texture(TEXT_PATH_8, env->rend);
-    env->text_list[9] = bmp_to_texture(TEXT_PATH_9, env->rend);
-    env->text_list[10] = bmp_to_texture(TEXT_PATH_10, env->rend);
-    env->text_list[11] = bmp_to_texture(TEXT_PATH_11, env->rend);
-    env->text_list[12] = bmp_to_texture(TEXT_PATH_12, env->rend);
-    env->text_list[13] = bmp_to_texture(TEXT_PATH_13, env->rend);
-    env->text_list[14] = bmp_to_texture(TEXT_PATH_14, env->rend);
-    env->text_list[15] = bmp_to_texture(TEXT_PATH_15, env->rend);
-    env->text_list[16] = bmp_to_texture(TEXT_PATH_16, env->rend);
-    env->text_list[17] = bmp_to_texture(TEXT_PATH_17, env->rend);
-    env->text_list[18] = bmp_to_texture(TEXT_PATH_18, env->rend);
-    env->text_list[19] = bmp_to_texture(TEXT_PATH_19, env->rend);
-    env->text_list[20] = bmp_to_texture(TEXT_PATH_20, env->rend);
-    env->text_list[21] = bmp_to_texture(TEXT_PATH_21, env->rend);
-    env->text_list[22] = bmp_to_texture(TEXT_PATH_22, env->rend);
-    env->text_list[23] = bmp_to_texture(TEXT_PATH_23, env->rend);
-    env->text_list[24] = bmp_to_texture(TEXT_PATH_24, env->rend);
-    env->text_list[25] = bmp_to_texture(TEXT_PATH_25, env->rend);
-    env->text_list[26] = bmp_to_texture(TEXT_PATH_26, env->rend);
-    env->text_list[27] = bmp_to_texture(TEXT_PATH_27, env->rend);
+	i = 0;
+	if (!(path = ft_strnew(36)))
+		exit_editor(env, "error : failed to load texture list with strnew");
+	ft_bzero(path, sizeof(char *));
+	while (i < NB_TEXTURE)
+	{
+		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
+		ft_strcat(path, ft_itoa(i));
+		ft_strcat(path, ".bmp");
+		if (access(path, R_OK) < 0)
+			exit_editor(env, "error : failed to read file");
+		if (!(env->text_list[i] = bmp_to_texture(path, env->rend)))
+			exit_editor(env, "error : failed to create texture from bmp file");
+		ft_bzero(path, sizeof(char *));
+		i++;
+	}
+	free(path);
+	return (0);
 }
 
-void init_buttons(t_env *env)
+void	init_texture(t_env *env)
+{
+	if (!(env->text_list = malloc_texture_tab(NB_TEXTURE)))
+		exit_editor(env, "error: failed to malloc");
+	load_text_list(env);
+}
+
+/* buttons_lst[NB_BUTTONS] */
+int		malloc_editor_button(t_env *env)
+{
+	if (!(env->buttons_lst = malloc_button(NB_BUTTONS)))
+		exit_editor(env, "error: failes to malloc editor buttons");
+	return (0);
+}
+
+/* j'ai decoupé en deux fonctions l'initialisation des bouttons */
+void	init_create_button(t_env *env)
+{
+	env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(0.85 * WIN_SIZE_X, 0.020 * WIN_SIZE_Y)), create_text_img("del", 2, 0xFFFFFFFF, create_point(0.85 * WIN_SIZE_X, 0.02 * WIN_SIZE_Y)), BUTTON_DEL);
+    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_LEFT);
+    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_RIGHT);
+    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), BUTTON_CREATE_ROOM);
+    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), BUTTON_MAP_OUTPUT);
+    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), BUTTON_SET_PLAYER_SPAWN);
+    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_LEFT);
+    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_RIGHT);
+    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 1, 0xFFDDDDDD, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), create_text_img("Place", 1, 0xFF88FF88, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), BUTTON_MOB_PLACING);
+    env->buttons_lst[BUTTON_FLOOR_TEXT] = create_button(create_text_img("Set_floor_text", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), create_text_img("Set_floor_text", 1, 0xFFDDDDDD, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), BUTTON_FLOOR_TEXT);
+}
+
+void	init_select_button(t_env *env)
 {
     env->buttons_fct[BUTTON_DEL] = del_selected_wall;
     env->buttons_fct[BUTTON_TEXT_LEFT] = select_previous_texture;
@@ -64,17 +85,14 @@ void init_buttons(t_env *env)
     env->buttons_fct[BUTTON_MOB_RIGHT] = select_next_mob;
     env->buttons_fct[BUTTON_MOB_PLACING] = mob_placing_mode;
     env->buttons_fct[BUTTON_FLOOR_TEXT] = set_room_text;
-    
-    env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(0.85 * WIN_SIZE_X, 0.020 * WIN_SIZE_Y)), create_text_img("del", 2, 0xFFFFFFFF, create_point(0.85 * WIN_SIZE_X, 0.02 * WIN_SIZE_Y)), BUTTON_DEL);
-    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_LEFT);
-    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_RIGHT);
-    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), BUTTON_CREATE_ROOM);
-    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), BUTTON_MAP_OUTPUT);
-    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), BUTTON_SET_PLAYER_SPAWN);
-    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_LEFT);
-    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_RIGHT);
-    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 1, 0xFFDDDDDD, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), create_text_img("Place", 1, 0xFF88FF88, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), BUTTON_MOB_PLACING);
-    env->buttons_lst[BUTTON_FLOOR_TEXT] = create_button(create_text_img("Set_floor_text", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), create_text_img("Set_floor_text", 1, 0xFFDDDDDD, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), BUTTON_FLOOR_TEXT);
+}
+
+/* appel les fonctions plus hautes pour initialiser les bouttons*/
+void	init_buttons(t_env *env)
+{
+	malloc_editor_button(env);
+	init_create_button(env);
+	init_select_button(env);
 }
 
 void init_mouse_mode(t_env *env)
@@ -88,6 +106,8 @@ void init_mouse_mode(t_env *env)
 
 void init_txt_img(t_env *env)
 {
+	if (!(env->txt_lst = malloc_txtimg(NB_TXT))) // MALLOC
+		exit_editor(env, "error: failed to malloc texture list");
     env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(0.005 * WIN_SIZE_X, 0.012 * WIN_SIZE_Y));
     env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 1, 0xFFDDDDDD, create_point(0.798 * WIN_SIZE_X, 0.100 * WIN_SIZE_Y));
     env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 1, 0xFFDDDDDD, create_point(0.235 * WIN_SIZE_X, 0.640 * WIN_SIZE_Y));
@@ -104,5 +124,4 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_ROOM_TOP] = create_text_img("Top", 1, 0xFFDDDDDD, create_point(0.315 * WIN_SIZE_X, 0.855 * WIN_SIZE_Y));
     env->txt_lst[TXT_COLLIDE] = create_text_img("Can_collide", 1, 0xFFDDDDDD, create_point(0.500 * WIN_SIZE_X, 0.870 * WIN_SIZE_Y));
     env->txt_lst[TXT_WALL_ID] = create_text_img("Id", 1, 0xFFDDDDDD, create_point(0.700 * WIN_SIZE_X, 0.670 * WIN_SIZE_Y));
-
 }

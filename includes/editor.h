@@ -49,6 +49,8 @@
 # define INPUT_COLLIDE 7
 
 # define NB_TEXTURE 28
+
+/*
 # define TEXT_PATH_0 "asset/img/textures/Red_Bricks.bmp"
 # define TEXT_PATH_1 "asset/img/hud/key.bmp"
 # define TEXT_PATH_2 "asset/img/textures/Paver300.bmp"
@@ -77,6 +79,7 @@
 # define TEXT_PATH_25 "asset/img/textures/poster1.bmp"
 # define TEXT_PATH_26 "asset/img/textures/poster2.bmp"
 # define TEXT_PATH_27 "asset/img/textures/poster3.bmp"
+*/
 
 # define NB_TXT 16
 # define TXT_MAP_EDITOR 0
@@ -136,8 +139,6 @@
 # define HEAD_ROOM_LIST "ROOM LIST"
 # define HEAD_WALL_REF "WALL_REF MAP"
 
-
-
 typedef struct			s_move_wall
 {
     t_point 			p1;
@@ -162,59 +163,62 @@ typedef struct          s_room
     t_range             wall_ref;
 }                       t_room;
 
-typedef struct      s_icon
+typedef struct      	s_icon
 {
-    t_point         pos;
-	SDL_Point		pos_i;
-    t_size          size;
-    int             id_ref;
-}                   t_icon;
+    t_point         	pos;
+	SDL_Point			pos_i;
+    t_size          	size;
+    int             	id_ref;
+}                   	t_icon;
 
-typedef struct      s_map_data
+typedef struct			s_map_data
 {
-    int             is_valid;
-    t_size          map_size;
-    int             wall_count;
-    int             room_count;
-	int				icon_count;
-    SDL_Point       player_spawn;
-    t_wall          *wall_list;
-    t_room          *room_list;
-	t_icon			*icon_list;
-    t_wall_ref      ***map_wall_ref;
-}                   t_map_data;
+    int					is_valid;
+    t_size				map_size;
+    int					wall_count;
+    int					room_count;
+	int					icon_count;
+    SDL_Point			player_spawn;
+    t_wall				*wall_list;
+    t_room				*room_list;
+	t_icon				*icon_list;
+    t_wall_ref			***map_wall_ref;
+}						t_map_data;
 
-typedef struct		s_input
+typedef struct			s_input
 {
-	SDL_Rect 		pos_size;
-	int				value;
-	int				max;
-	int				is_in_input_mode;
-}					t_input;
+	SDL_Rect 			pos_size;
+	int					value;
+	int					max;
+	int					is_in_input_mode;
+}						t_input;
 
-typedef struct      s_env
+typedef struct			s_env
 {
-    SDL_Renderer    *rend;
-    SDL_Event       ev;
-    SDL_Window      *win;
-    SDL_Texture     *screen;
-    SDL_Texture     *editor_grid;
-    SDL_Texture     *text_list[NB_TEXTURE];
-    SDL_Texture     *img_list[NB_IMG];
-    SDL_Rect        grid_pos;
-    const Uint8     *clavier;
-    unsigned int    *p_screen;
-    unsigned int    *p_grid;
-    Uint32          mouse_button;
-    SDL_Point       mouse;
-    SDL_Point       hovered_corner;
-    SDL_Point       selected_corner;
-    SDL_Point       start_room_point;
-    SDL_Point       map_move;
-    t_range         p1_height;
-    t_range         p2_height;
-    int             tile_size;
-    int             quit;
+    SDL_Renderer		*rend; //OK
+    SDL_Event			ev;
+    SDL_Window			*win; //OK
+    SDL_Texture			*screen; //OK
+    SDL_Texture			*editor_grid; //ok
+    // SDL_Texture     *text_list[NB_TEXTURE];
+    SDL_Texture			**text_list; //OK
+
+    // SDL_Texture     *img_list[NB_IMG];
+    SDL_Texture     	**img_list; //OK
+    SDL_Rect        	grid_pos;
+    const Uint8			*clavier; //bas besoin de free
+    unsigned int		*p_screen;
+    unsigned int		*p_grid;
+    Uint32				mouse_button;
+    SDL_Point			mouse;
+    SDL_Point			hovered_corner;
+    SDL_Point			selected_corner;
+    SDL_Point			start_room_point;
+    SDL_Point			map_move;
+    t_range				p1_height;
+    t_range				p2_height;
+    int					tile_size;
+    int					quit;
     int             wall_count;
     int             room_count;
 	int				icon_count;
@@ -231,24 +235,32 @@ typedef struct      s_env
     int             selected_texture;
     int             selected_mob;
     t_point         player_spawn;
-    t_point         *being_placed;
-	t_icon			*icon_list;
-    t_wall          *wall_list;
-    t_room          *room_list;
-	t_range			room_height[NB_WALL_MAX];
-	int				room_text[NB_WALL_MAX];
-    t_wall_ref      ***map_wall_ref;
+    t_point         *being_placed; // pas besoin de malloc ou free
+	t_icon			*icon_list; // deja malloc OK
+    t_wall          *wall_list; // deja malloc OK
+    t_room          *room_list; //deja malloc OK
+
+	// t_range			room_height[NB_WALL_MAX];
+	t_range			*room_height; //OK
+
+	// int				room_text[NB_WALL_MAX];
+	int				*room_text; //OK
+
+    t_wall_ref      ***map_wall_ref; //OK
     t_size          map_size;
-	t_img			sprite_img[NB_SPRITE];
-	t_ssprite		sprites[NB_SPRITE];
-    t_button        buttons_lst[NB_BUTTONS];
-    t_txt_img       txt_lst[NB_TXT];
-    t_input			input_lst[NB_INPUT];
+	// t_img			sprite_img[NB_SPRITE];
+	t_img			*sprite_img; //OK
+	t_ssprite		sprites[NB_SPRITE]; // OU INITIALISER ?
+    // t_button        buttons_lst[NB_BUTTONS]; 
+    t_button        *buttons_lst; //OK
+    // t_txt_img       txt_lst[NB_TXT];
+    t_txt_img       *txt_lst; //OK
+    // t_input			input_lst[NB_INPUT];
+    t_input			*input_lst;
     void            (*buttons_fct[NB_BUTTONS])(struct s_env*);
     void            (*mouse_click_fct[NB_MOUSE_MODE])(struct s_env*);
-	char			*map_name;
+	char			*map_name; //OK
 }                   t_env;
-
 
 void exit_with_msg(char *msg);
 SDL_Point add_sdl_point(SDL_Point p, SDL_Point add, int is_sub);
@@ -280,7 +292,7 @@ void move_map_move_down(t_env *env);
 void change_selected_wall_texture(t_env *env, int texture_id);
 
 void add_wall_ref_point(t_wall wall, t_env *env);
-void clear_map_ref(t_env *env);
+void clear_map_ref(t_env *env);// proto_clean.h
 void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd);
 void find_sector(t_env *env, t_wall wall);
 void input_text_to_img(char *str, int size, int color, t_img to_fill);
@@ -336,7 +348,7 @@ void select_previous_mob(t_env *env);
 void select_next_mob(t_env *env);
 
 //editor_init_data.c
-void init_sdl_ressources(t_env *env);
+int		init_sdl_ressources(t_env *env);
 void init_texture(t_env *env);
 void init_buttons(t_env *env);
 void init_mouse_mode(t_env *env);

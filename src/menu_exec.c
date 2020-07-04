@@ -17,26 +17,20 @@ int			catch_btn_event(t_data *d, int ac, char **av)
 {
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1) //play
 	{
-		printf("i got bamboozled\n");
+		// printf("i got bamboozled\n");
 		if (access("doom-nukem", X_OK))
-		{
-			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
-			exit_env(d);
-		}
+			exit_game(d, "error : something went wrong with read()!");
 		else
 			d->run_game = GAME;
 	}
 	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 100, 200, 50)) == 1) //editor
 	{
 		if (access("./editor", X_OK))
-		{
-			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
-			exit_env(d);
-		}
+			exit_game(d, "error : filed to access ./editor");
 		else
 			d->run_game = EDITOR;
 	}
 	else if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3 + 200, 200, 50)) == 1) //exit
-		exit_env(d);
+		exit_game(d, "exiting...");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/03 22:14:57 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/04 22:25:12 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void init_data(t_data *d, int ac, char **av)
 	init_gameover(d, av); //doit etre avant le check des arguments
 	init_ttf(d);
 	if (ac > 1)
+	{
 		d->map = read_map(av[1]);
+	}
 	else
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)
