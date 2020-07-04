@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 char *skip_space(char *str)
 {
@@ -41,7 +40,7 @@ int read_file(char *path_file)
     return (fd);
 }
 
-int read_param(char *chunk, char *key, int *to_fill)
+int		read_param(char *chunk, char *key, int *to_fill)
 {
     int error;
     int i;
@@ -214,7 +213,7 @@ void read_wall_ref_list(int fd, t_map_data *map)
     // }
 }
 
-void read_icon(char *line, t_icon *icon)
+int		read_icon(char *line, t_icon *icon)
 {
     int error;
 
@@ -222,7 +221,11 @@ void read_icon(char *line, t_icon *icon)
     error += read_param(line, "id", &icon->id_ref);
     error += read_param(line, "pos", &icon->pos_i.x);
     if (error > 0)
-        exit_with_msg("error while assigning value to icon on map reader\n");
+	{
+        ft_putendl("error while assigning value to icon on map reader\n");
+		return (-1);
+	}
+	return (0);
 }
 
 void read_wall_list(int fd, t_map_data *map)
@@ -259,30 +262,39 @@ void read_room_list(int fd, t_map_data *map)
         read_room(line, &map->room_list[i++]);
 }
 
-void read_icon_list(int fd, t_map_data *map)
+int			read_icon_list(int fd, t_map_data *map)
 {
-    char *line;
-    int i;
+    char	*line;
+    int		i;
 
     if (get_next_line(fd, &line) == 1)
         read_param(line, "ICON_COUNT", &map->icon_count);
     else
-        exit_with_msg("error while reading map");
+	{
+        // ft_putendl("error while reading map");
+		return (-1);
+	}
     if (!(map->icon_list = (t_icon*)malloc(sizeof(t_icon) * map->icon_count)))
-        exit_with_msg("Failed to malloc");
+	{
+        // ft_putendl("error : failed to malloc");
+		return (-1);
+	}
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->icon_count)
-		read_icon(line, &map->icon_list[i++]);
-
+	{
+		if ((read_icon(line, &map->icon_list[i++])) < 0)
+			return (-1);
+	}
 	i = 0;
 	while (i < map->icon_count)
 	{
 		printf("i = %i, id_ref = %i, pos :%i,%i\n", i, map->icon_list[i].id_ref, map->icon_list[i].pos_i.x, map->icon_list[i].pos_i.y);
 		i++;
 	}
+	return (0);
 }
 
-void read_head(int fd, char *line, t_map_data *map)
+int		read_head(int fd, char *line, t_map_data *map)
 {
     //printf("line = %s\n", line);
     if (ft_strequ(line, "WALL LIST"))
@@ -296,19 +308,21 @@ void read_head(int fd, char *line, t_map_data *map)
     }
 	if (ft_strequ(line, "ICON LIST"))
     {
-        read_icon_list(fd, map);
+        if ((read_icon_list(fd, map)) < 0)
+			return (-1);
     }
     if (ft_strequ(line, "WALL_REF MAP"))
     {
         read_wall_ref_list(fd, map);
     }
+	return (0);
 }
 
-t_map_data  read_map(char *path_file)
+t_map_data		read_map(char *path_file)
 {
     int         fd;
-    t_map_data  map;
-    char *line;
+    t_map_data	map;
+    char		*line;
 
     map.is_valid = 0;
     line = NULL;
@@ -329,7 +343,10 @@ t_map_data  read_map(char *path_file)
 	map.wall_count = 0;
 	map.room_count = 0;
     while (get_next_line(fd, &line) == 1)
-        read_head(fd, line, &map);
+	{
+		if ((read_head(fd, line, &map)) < 0)
+			map.is_valid = -1; // CHECK ALEX
+	}
     map.is_valid = 1;
     // print_wall_list(&map);
     // print_rooms_content(map.room_list, map.room_count);

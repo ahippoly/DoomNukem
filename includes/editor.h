@@ -348,7 +348,7 @@ void select_previous_mob(t_env *env);
 void select_next_mob(t_env *env);
 
 //editor_init_data.c
-void init_sdl_ressources(t_env *env);
+int		init_sdl_ressources(t_env *env);
 void init_texture(t_env *env);
 void init_buttons(t_env *env);
 void init_mouse_mode(t_env *env);

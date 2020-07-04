@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "proto_global.h"
-#include "proto_global.h"
 
 void	select_next_texture(t_env *env)
 {

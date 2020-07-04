@@ -17,11 +17,12 @@ void init_sdl_ressources_rend(t_data *d)
     //SDL_SetRenderDrawBlendMode(d->rend, SDL_BLENDMODE_NONE);
 }
 
-void init_mini_map(t_data *d, t_map_data *map)
+void init_mini_map(t_data *d, t_map_data *map) //MALLOC & SECURE
 {
     d->p_mini_map_bg = NULL;
     create_mini_map(d, map);
-    SDL_UpdateTexture(d->mini_map, NULL, d->p_mini_map_bg, MINI_MAP_SIZE_X * 4);
+	if ((SDL_UpdateTexture(d->mini_map, NULL, d->p_mini_map_bg, MINI_MAP_SIZE_X * 4)) < 0)
+		exit_game(d, "error : failed to update texture");
     d->p_player_pos = alloc_image(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
     d->p_mini_map = alloc_image(MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
     draw_rectangle(d->p_player_pos, set_sdl_rect(0, 0, MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), set_size(MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE), 0xFF0000FF);

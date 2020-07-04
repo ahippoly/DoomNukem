@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 void move_map_move_left(t_env *env)
 {
@@ -7,7 +6,7 @@ void move_map_move_left(t_env *env)
         env->map_move.x += MOVE_SPEED;
 }
 
-void move_map_move_right(t_env *env)
+void move_map_move_right(t_env *env) 
 {
     env->map_move.x -= MOVE_SPEED;
 }

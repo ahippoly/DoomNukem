@@ -18,7 +18,7 @@ void init_sprites_img(t_data *d)
 	
 	d->sprite_img[SPRITE_ID_AFRIT] = ft_load_bmp2(SPRITE_PATH_AFRIT);
 	if (d->sprite_img[SPRITE_ID_AFRIT].w == -42)
-		exit_env(d);
+		exit_game(d, "error : failed to init sprites images");
 	img = &d->sprite_img[SPRITE_ID_AFRIT];
 	remove_color(img->pixels, img->w * img->h, 0xFFFFFFFF);
 	d->sprite_img[SPRITE_ID_PYRO] = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
@@ -196,7 +196,7 @@ void set_sprite_callback(t_ssprite *sprite, void (*funct)(t_param), t_param para
 	sprite->param = param;
 }
 
-void process_anim(t_ssprite *sprite, int time)
+void			process_anim(t_ssprite *sprite, int time) // cas d'erreur a verifier
 {
 	t_anim		*anim;
 	SDL_Point	curr_anim_pos;
@@ -211,7 +211,6 @@ void process_anim(t_ssprite *sprite, int time)
 		anim->current_frame += 1;
 		if (anim->current_frame >= anim->nb_frame)
 		{
-			// printf("load new anim\n");
 			if (sprite->callback != NULL)
 				sprite->callback(sprite->param);
 			sprite->callback = NULL;
@@ -223,9 +222,7 @@ void process_anim(t_ssprite *sprite, int time)
 		}
 		curr_anim_pos = anim->pos[anim->current_frame];
 		curr_anim_size = anim->size[anim->current_frame];
-		// printf("step frame\n");
 		copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);
-		//copy_frame(sprite->dst, (SDL_Rect){0, 0, sprite->frame_size.w, sprite->frame_size.h}, sprite->src.pixels, (SDL_Rect){curr_anim_pos.x, curr_anim_pos.y, sprite->src.w, sprite->src.h});
 	}
 }
 

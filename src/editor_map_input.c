@@ -27,15 +27,12 @@ void	*ft_memcpy2(void *s1, const void *s2, size_t n)
 	return (s1);
 }
 
-void map2env(t_env *e, t_map_data *map)
+void	map2env(t_env *e, t_map_data *map) // A CHECK
 {
-	int i;
+	int	i;
 
 	if (map->is_valid != 1)
-	{
-		ft_putstr("error while reading map, initializing new map\n");
-		return ;
-	}
+		exit_editor(e, "error : failed to read map, initializing new map");
 	e->wall_count = map->wall_count;
 	ft_memcpy2(e->wall_list, map->wall_list, sizeof(t_wall) * map->wall_count);
 	free(map->wall_list);

@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include <errno.h>
 
 int		render_gameover_button(t_data *d, char **av)
 {
@@ -23,10 +22,7 @@ int		catch_over_btn_event(t_data *d, char **av)
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2, 200, 50)) == 1) //continue
 	{
 		if  (access("./doom-nukem", X_OK))
-		{
-			printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
-			exit_env(d);
-		}
+			exit_game(d, "error : something went wrong with read()");
 		else
 			d->run_game = GAME;
 	}

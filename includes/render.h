@@ -3,7 +3,6 @@
 
 # include "global_header.h"
 
-
 # define FOV_ANGLE 60
 # define MINI_MAP_SIZE_X 250
 # define MINI_MAP_SIZE_Y 250

@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-void init_sdl_ressources(t_env *env)
+int			init_sdl_ressources(t_env *env) //SECURE
 {
     env->win = NULL;
     if(0 != SDL_Init(SDL_INIT_VIDEO))
@@ -9,32 +9,38 @@ void init_sdl_ressources(t_env *env)
                               WIN_SIZE_X, WIN_SIZE_Y, SDL_WINDOW_SHOWN)))
         exit_editor(env, "error : failed to create window");
     if (!(env->rend = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_ACCELERATED)))
-        exit_editor(env, "Failed to create Renderer");
+        exit_editor(env, "error : failed to create Renderer");
     if (!(env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y)))
-        exit_editor(env, "Failed to create texture");
+        exit_editor(env, "error : failed to create texture");
 	if (!(env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, GRID_SIZE_X, GRID_SIZE_Y)))
-        exit_editor(env, "Failed to create texture");
+        exit_editor(env, "error : failed to create texture");
+	return (0);
 }
 
-void		load_text_list(t_env *env)
+int			load_text_list(t_env *env) //SECURE
 {
     int		i;
-    t_img	*tmp;
 	char	*path;
 
     env->selected_texture = 0;
 	i = 0;
-	path = ft_strnew(36);
+	if (!(path = ft_strnew(36)))
+		exit_editor(env, "error : failed to load texture list with strnew");
+	ft_bzero(path, sizeof(char *));
 	while (i < NB_TEXTURE)
 	{
 		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
 		ft_strcat(path, ft_itoa(i));
 		ft_strcat(path, ".bmp");
-		env->text_list[i] = bmp_to_texture(path, env->rend);
+		if (access(path, R_OK) < 0)
+			exit_editor(env, "error : failed to read file");
+		if (!(env->text_list[i] = bmp_to_texture(path, env->rend)))
+			exit_editor(env, "error : failed to create texture from bmp file");
 		ft_bzero(path, sizeof(char *));
 		i++;
 	}
 	free(path);
+	return (0);
 }
 
 void	init_texture(t_env *env)
@@ -100,8 +106,8 @@ void init_mouse_mode(t_env *env)
 
 void init_txt_img(t_env *env)
 {
-	if (!(env->txt_lst = malloc_txtimg(NB_TXT))) //MALLOC ALEX
-		exit_editor(env, "error: failed to malloc");
+	if (!(env->txt_lst = malloc_txtimg(NB_TXT))) // MALLOC
+		exit_editor(env, "error: failed to malloc texture list");
     env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(0.005 * WIN_SIZE_X, 0.012 * WIN_SIZE_Y));
     env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 1, 0xFFDDDDDD, create_point(0.798 * WIN_SIZE_X, 0.100 * WIN_SIZE_Y));
     env->txt_lst[TXT_HEIGHT] = create_text_img("Height", 1, 0xFFDDDDDD, create_point(0.235 * WIN_SIZE_X, 0.640 * WIN_SIZE_Y));

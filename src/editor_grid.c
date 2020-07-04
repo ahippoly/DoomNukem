@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "proto_global.h"
-#include "proto_global.h"
 
 void			create_grid(unsigned int *pixels, float scale, t_env *env)
 {

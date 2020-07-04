@@ -31,6 +31,6 @@ int					main(int ac, char **av)
 				execv("./editor", av);
 		}
 	}
-	exit_env(&d);
+	exit_game(&d, "");
 }
 

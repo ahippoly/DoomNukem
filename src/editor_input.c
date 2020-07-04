@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 void check_hovered_input(t_env *env)
 {
@@ -36,7 +35,7 @@ void print_inputs(t_env *env)
     
 }
 
-t_input create_t_input(SDL_Rect pos_size, int default_value, int max)
+t_input		create_t_input(SDL_Rect pos_size, int default_value, int max)
 {
     t_input input;
 
@@ -47,7 +46,7 @@ t_input create_t_input(SDL_Rect pos_size, int default_value, int max)
     return (input);
 }
 
-void handle_input_mode(t_env *env, SDL_Scancode key_released)
+void		handle_input_mode(t_env *env, SDL_Scancode key_released)
 {
     t_input *input;
     int     added_num;
@@ -87,7 +86,7 @@ void handle_input_mode(t_env *env, SDL_Scancode key_released)
     }
 }
 
-void update_wall_param(t_env *env)
+void	update_wall_param(t_env *env)
 {
 	int tmp;
 
@@ -114,9 +113,9 @@ void update_wall_param(t_env *env)
     }
 }
 
-void get_wall_param(t_env *env)
+void		get_wall_param(t_env *env)
 {
-	int tmp;
+	int		tmp;
 
     env->selected_texture = env->wall_list[env->selected_wall_id].texture_id;
     env->input_lst[INPUT_TRANSPARENCY].value = env->wall_list[env->selected_wall_id].transparency;

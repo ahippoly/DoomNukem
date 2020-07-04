@@ -22,18 +22,23 @@ t_img create_img(unsigned int *pixels, SDL_Rect pos_size)
     return (img);
 }
 
-SDL_Texture *bmp_to_texture(char *file, SDL_Renderer *rend)
+SDL_Texture		*bmp_to_texture(char *file, SDL_Renderer *rend)
 {
     SDL_Surface *readed_file;
     SDL_Texture *new;
 
-    readed_file = SDL_LoadBMP(file);
-    if (readed_file == NULL)
+	if ((access(file, R_OK)) < 0)
+		return (NULL);
+    if (!(readed_file = SDL_LoadBMP(file)))
+		return (NULL);
+	if (readed_file == NULL)
 	{
-		printf("readed file = %s\n", file);
-        exit_with_msg("failed to load texture bmp file\n");
+		// printf("readed file = %s\n", file);
+        ft_putendl("failed to load texture bmp file");
+		return (NULL);
 	}
-    new = SDL_CreateTextureFromSurface(rend, readed_file);
+	if ((new = SDL_CreateTextureFromSurface(rend, readed_file)) < 0)
+		return (NULL);
     SDL_FreeSurface(readed_file);
     return (new);
 }

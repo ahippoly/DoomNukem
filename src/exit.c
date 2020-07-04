@@ -1,8 +1,8 @@
 #include "proto_global.h"
 
-void exit_env(t_data *d)
+void exit_game(t_data *d, char *msg)
 {
-	ft_putendl("exiting...");
+	ft_putendl(msg);
 
 	/* menu */
 	free_menu(d);
@@ -23,5 +23,6 @@ void exit_env(t_data *d)
 	/* SDL */
 	quit_ttf(d);
 	SDL_Quit();
+	ft_putendl("bye !");
 	exit(0);
 }

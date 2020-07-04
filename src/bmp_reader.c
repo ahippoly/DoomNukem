@@ -207,7 +207,7 @@ void read_file_pixels(t_img text, int bpp, int fd)
 	}
 }
 
-t_img				ft_load_bmp2(char *file) //si return NULL exit_program
+t_img				ft_load_bmp2(char *file) //MALLOC & SECURE - tricks a double check
 {
 	int				fd;
 	unsigned char	head[200];
