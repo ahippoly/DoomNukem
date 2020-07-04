@@ -1,3 +1,7 @@
+EDITOR_NAME = editor
+
+GAME_NAME = doom-nukem
+
 SRC_NAME =	$(sort \
 			editor_wall_add_del.c \
 			editor_wall_edit.c editor_buttons.c \
@@ -34,12 +38,17 @@ GAME_MAIN = render_main.c $(SRC_NAME)
 
 EDITOR_MAIN = editor_main.c $(SRC_NAME)
 
+## Folders paths 
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
 LIBFT_PATH = ./libft/
 FMOD_LIB_PATH = ./FMOD/
+ASSETS_PATH = ./asset/
+FONT_DIR = font/
+IMG_DIR = img/
+SOUND_DIR = sound/
 INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
 OBJ_EDITOR_NAME = $(EDITOR_MAIN:.c=.o)
 OBJ_REND_NAME = $(GAME_MAIN:.c=.o)
@@ -48,30 +57,35 @@ SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_EDITOR = $(addprefix $(OBJ_PATH),$(OBJ_EDITOR_NAME))
 OBJ_REND = $(addprefix $(OBJ_PATH),$(OBJ_REND_NAME))
 INC = $(addprefix -I,$(INC_PATH))
+ASSETS = $(addprefix $(ASSETS_PATH), $(FONT_DIR) $(IMG_DIR) $(SOUND_DIR))
+LIBFT = $(addprefix $(LIBFT_PATH), libft.a)
+LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
+
+FMOD_WINDOWS = /usr/lib/fmod.dll /usr/lib/fmodL.dll
+
+FMOD_OSX = /usr/local/lib/libfmod.dylib /usr/local/lib/libfmodL.dylib
+
+FMOD_LINUX = /usr/lib/libfmod.so /usr/lib/libfmodL.so \
+			 /usr/lib/libfmod.so.12 /usr/lib/libfmodL.so.12 \
+			 /usr/lib/libfmod.so.12.0 /usr/lib/libfmodL.so.12.0
+
+## Flags
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-EDITOR_NAME = editor
-GAME_NAME = doom-nukem
 OPTI = -g3
 PTHREAD = -lpthread
-
-LIBFT = libft/libft.a
-
-LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
-
 SDLM = `sdl2-config --cflags --libs`
-
 LIBS = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
-
 LDLIBS = -lft -lm
 
 .PHONY: all clean fclean re libft
 
-all: $(EDITOR_NAME) $(GAME_NAME) link_fmod
+all: $(EDITOR_NAME) $(GAME_NAME) $(ASSETS) $(FMOD)
 
 link_fmod :
 	export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./FMOD"
+	        echo -L$(LD_LIBRARY_PATH)
 
 libft:
 	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
@@ -94,7 +108,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
-assets :
+$(ASSETS) :
 	@printf "\e[1;32m[Downloading assets]\e[0m\n"
 	@wget -q --show-progress --load-cookies /tmp/cookies.txt \
 	"https://docs.google.com/uc?export=download&confirm=$$(wget --quiet $\
@@ -107,6 +121,34 @@ assets :
 	@printf "\e[1;32m[Extracting assets]\e[0m\n"
 	@tar zxvf asset.tar.gz
 	@rm -rf asset.tar.gz
+
+$(FMOD_WINDOWS):
+	@sudo cp FMOD/fmod.dll /usr/lib/
+	@sudo cp FMOD/fmodL.dll /usr/lib/
+
+$(FMOD_LINUX):
+	@sudo cp FMOD/libfmod.so /usr/lib/
+	@sudo cp FMOD/libfmod.so.12 /usr/lib/
+	@sudo cp FMOD/libfmod.so.12.0 /usr/lib/
+	@sudo cp FMOD/libfmodL.so /usr/lib/
+	@sudo cp FMOD/libfmodL.so.12 /usr/lib/
+	@sudo cp FMOD/libfmodL.so.12.0 /usr/lib/
+
+$(FMOD_OSX):
+	@sudo cp FMOD/libfmod.dylib /usr/local/lib
+	@sudo cp FMOD/libfmodL.dylib /usr/local/lib
+
+ifeq ($(OS),Windows_NT)
+	FMOD = $(FMOD_WINDOWS)
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		FMOD = $(FMOD_LINUX)
+	else 
+		FMOD = $(FMOD_OSX)
+	endif
+endif
+
 
 clean:
 	@printf "%-50s" "deleting objects..." 
