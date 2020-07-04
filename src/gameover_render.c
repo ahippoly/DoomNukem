@@ -3,6 +3,7 @@
 int	render_gameover(t_data *d, int ac, char **av)
 {
 	init_data(d, ac, av); // reinitialise la data à la fin du jeu tout en conservant les arguments
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (d->run_game == GAMEOVER)
 	{
 		SDL_PumpEvents();

@@ -83,10 +83,6 @@ LDLIBS = -lft -lm
 
 all: $(EDITOR_NAME) $(GAME_NAME) $(ASSETS) $(FMOD)
 
-link_fmod :
-	export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./FMOD"
-	        echo -L$(LD_LIBRARY_PATH)
-
 libft:
 	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
 	@make -C $(LIBFT_PATH)
@@ -148,7 +144,6 @@ else
 		FMOD = $(FMOD_OSX)
 	endif
 endif
-
 
 clean:
 	@printf "%-50s" "deleting objects..." 

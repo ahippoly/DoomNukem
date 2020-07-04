@@ -2,6 +2,7 @@
 
 int	render_menu(t_data *d, int ac, char **av)
 {
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (d->run_game == MENU)
 	{
 		SDL_PumpEvents();

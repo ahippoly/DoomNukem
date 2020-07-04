@@ -172,7 +172,7 @@ id : 2 ; pos : 79,201 ;
 id : 5 ; pos : 365,204 ; 
 id : 4 ; pos : 264,224 ; 
 id : 4 ; pos : 254,224 ; 
-id : 6 ; pos : 206,260 ; 
+id : 6 ; pos : 180,260 ; 
 id : 2 ; pos : 199,107 ; 
 id : 1 ; pos : 106,170 ; 
 id : 1 ; pos : 110,249 ; 
@@ -180,5 +180,5 @@ id : 1 ; pos : 110,249 ;
 
 WALL_REF MAP
 MAP_SIZE 30,30
-PLAYER_SPAWN 20,8
+PLAYER_SPAWN 2,7
 
