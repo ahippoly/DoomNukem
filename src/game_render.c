@@ -2,7 +2,7 @@
 
 int	render_game(t_data *d, int ac, char **av)
 {
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	while (d->run_game == GAME)
 	{
 		d->time_last_frame = d->time;
