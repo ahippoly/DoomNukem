@@ -70,7 +70,9 @@ void init_data(t_data *d, int ac, char **av)
 	init_gameover(d, av); //doit etre avant le check des arguments
 	init_ttf(d);
 	if (ac > 1)
+	{
 		d->map = read_map(av[1]);
+	}
 	else
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)

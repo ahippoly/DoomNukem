@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-void print_rooms_content(t_room *room_list, int room_count)
+void	print_rooms_content(t_room *room_list, int room_count)
 {
     int     i;
     t_room room;
@@ -16,7 +16,7 @@ void print_rooms_content(t_room *room_list, int room_count)
     }
 }
 
-void debug_print(t_env *env, SDL_Scancode key) // TO CHECK
+void	debug_print(t_env *env, SDL_Scancode key) // TO CHECK
 {
     if (key == SDL_SCANCODE_Q)
         print_wall_ref(env->map_wall_ref, env->map_size, 1);

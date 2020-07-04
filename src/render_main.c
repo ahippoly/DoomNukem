@@ -31,6 +31,5 @@ int					main(int ac, char **av)
 				execv("./editor", av);
 		}
 	}
-	exit_game(&d, "");
+	exit_game(&d, "bye all!");
 }
-

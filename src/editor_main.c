@@ -47,5 +47,5 @@ int main(int argc, char **argv)
         display_selected_point(&env);
         print_env2screen(&env);
     }
-	exit_editor(&env, "bye !");
+	exit_editor(&env, "bye editor!");
 }
