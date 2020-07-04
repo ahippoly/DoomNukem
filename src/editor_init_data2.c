@@ -73,7 +73,8 @@ void	init_env(t_env *env) //MALLOC
     init_txt_img(env);
     init_mouse_mode(env);
 	init_sprites_img_env(env);
-	//malloc ssprites
+	if (!(env->sprites = malloc_ssprite(NB_SPRITE)))
+		exit_editor(env, "error : failed to malloc sprite");
 	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit2(env->sprite_img[SPRITE_ID_AFRIT]);
 	env->sprites[SPRITE_ID_PYRO] = sprite_init_pyro2(env->sprite_img[SPRITE_ID_PYRO]);
     init_img(env);

@@ -250,7 +250,9 @@ typedef struct			s_env
     t_size          map_size;
 	// t_img			sprite_img[NB_SPRITE];
 	t_img			*sprite_img; //OK
-	t_ssprite		sprites[NB_SPRITE]; // OU INITIALISER ?
+	// t_ssprite		sprites[NB_SPRITE]; // OU INITIALISER ?
+	t_ssprite		*sprites; // OU INITIALISER ?
+
     // t_button        buttons_lst[NB_BUTTONS]; 
     t_button        *buttons_lst; //OK
     // t_txt_img       txt_lst[NB_TXT];
