@@ -47,6 +47,12 @@ t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot);
 t_ray check_perp_obj(t_obj *obj, t_point pos);
 void sort_perp_ray(t_data *d, t_point pos, t_ray *sorted);
 
+//render_ray_utils.c
+float	calc_ray_hit_scale(t_point p1, t_point p2, t_point inter);
+void	init_ray(t_ray *res, t_obj *obj);
+void	init_perp_points(t_point *p1, t_point *p2, t_point pos, t_rot look_rot);
+void	define_z_text(t_ray *res);
+
 
 //render_draw_walls.c
 void draw_vertical_line(t_data *d, int x, t_calced_walls dist_scale);

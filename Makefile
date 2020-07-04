@@ -27,7 +27,7 @@ SRC_NAME =	$(sort \
 			sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c \
 			gameplay_mobs.c ssprite.c gameplay_props.c gameplay_weapon.c \
 			bmp_reader.c \
-			render_skybox.c \
+			render_skybox.c render_ray_utils.c\
 			sprite_init_gun2.c sprite_init_gun3.c sprite_init_gun4.c sprite_main.c \
 			menu_clean.c menu_button.c menu_render.c menu_exec.c menu_background.c hud_clean.c exit.c \
 			gameover_background.c gameover_button.c gameover_render.c \
