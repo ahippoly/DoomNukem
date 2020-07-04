@@ -1,3 +1,7 @@
+EDITOR_NAME = editor
+
+GAME_NAME = doom-nukem
+
 SRC_NAME =	$(sort \
 			editor_wall_add_del.c \
 			editor_wall_edit.c editor_buttons.c \
@@ -34,12 +38,17 @@ GAME_MAIN = render_main.c $(SRC_NAME)
 
 EDITOR_MAIN = editor_main.c $(SRC_NAME)
 
+## Folders paths 
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 SDL_PATH = ./SDL2/
 LIBFT_PATH = ./libft/
 FMOD_LIB_PATH = ./FMOD/
+ASSETS_PATH = ./asset/
+FONT_DIR = font/
+IMG_DIR = img/
+SOUND_DIR = sound/
 INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
 OBJ_EDITOR_NAME = $(EDITOR_MAIN:.c=.o)
 OBJ_REND_NAME = $(GAME_MAIN:.c=.o)
@@ -48,44 +57,57 @@ SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_EDITOR = $(addprefix $(OBJ_PATH),$(OBJ_EDITOR_NAME))
 OBJ_REND = $(addprefix $(OBJ_PATH),$(OBJ_REND_NAME))
 INC = $(addprefix -I,$(INC_PATH))
+ASSETS = $(addprefix $(ASSETS_PATH), $(FONT_DIR) $(IMG_DIR) $(SOUND_DIR))
+LIBFT = $(addprefix $(LIBFT_PATH), libft.a)
+LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
+
+FMOD_WINDOWS = /usr/lib/fmod.dll /usr/lib/fmodL.dll
+
+FMOD_OSX = /usr/local/lib/libfmod.dylib /usr/local/lib/libfmodL.dylib
+
+FMOD_LINUX = /usr/lib/libfmod.so /usr/lib/libfmodL.so \
+			 /usr/lib/libfmod.so.11 /usr/lib/libfmodL.so.11 \
+			 /usr/lib/libfmod.so.11.9 /usr/lib/libfmodL.so.11.9
+
+SED = sed
+
+## Flags
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-EDITOR_NAME = editor
-GAME_NAME = doom-nukem
 OPTI = -g3
 PTHREAD = -lpthread
-
-LIBFT = libft/libft.a
-
-URL = https://drive.google.com/uc?export=download&id=1esNwBxxYwrrXUokdo6JR5H0i9vTKrj2Q
-
-LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
-
 SDLM = `sdl2-config --cflags --libs`
-
 LIBS = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
-
 LDLIBS = -lft -lm
+
+ifeq ($(OS),Windows_NT)
+	FMOD = $(FMOD_WINDOWS)
+else
+	UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	FMOD = $(FMOD_OSX)
+	SED = gsed	
+else 
+	FMOD = $(FMOD_LINUX)
+	endif	
+endif
 
 .PHONY: all clean fclean re libft
 
-all: $(EDITOR_NAME) $(GAME_NAME) link_fmod
-
-link_fmod :
-	export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./FMOD"
+all: $(EDITOR_NAME) $(GAME_NAME) $(ASSETS) $(FMOD)
 
 libft:
 	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
 	@make -C $(LIBFT_PATH)
 	@printf "/---------------- library $@ created... ----------/\n"
 
-$(EDITOR_NAME): libft $(OBJ_EDITOR)
+$(EDITOR_NAME): libft $(OBJ_EDITOR) $(ASSETS)
 	@printf "%-50s" "create executable "$(notdir $@)...
 	@$(CC) $(CFLAGS) $(OPTI) $(INC) $(OBJ_EDITOR) -o $(EDITOR_NAME) $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
 	@printf "\e[1;32m[OK]\e[0m\n"
 
-$(GAME_NAME): libft $(OBJ_REND)
+$(GAME_NAME): libft $(OBJ_REND) $(ASSETS)
 	@printf "%-50s" "create executable "$(notdir $@)...
 	@$(CC) $(OPTI) $(CFLAGS) $(INC) $(OBJ_REND) -o $(GAME_NAME) $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
 	@printf "\e[1;32m[OK]\e[0m\n"
@@ -95,6 +117,36 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
+
+$(ASSETS) :
+	@printf "\e[1;32m[Downloading assets]\e[0m\n"
+	@wget -r -q --show-progress --load-cookies /tmp/cookies.txt \
+	"https://docs.google.com/uc?export=download&confirm=$$(wget --quiet $\
+	--save-cookies /tmp/cookies.txt --keep-session-cookies $\
+	--no-check-certificate 'https://docs.google.com/uc?export=download&id=$\
+	1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp' -O- | $(SED) -rn $\
+	's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')\
+	&id=1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp" -O asset.tar.gz \
+	&& rm -rf /tmp/cookies.txt
+	@printf "\e[1;32m[Extracting assets]\e[0m\n"
+	@tar xf asset.tar.gz
+	@rm -rf asset.tar.gz
+
+$(FMOD_WINDOWS):
+	@sudo cp FMOD/fmod.dll /usr/lib/
+	@sudo cp FMOD/fmodL.dll /usr/lib/
+
+$(FMOD_LINUX):
+	@sudo cp FMOD/libfmod.so /usr/lib/
+	@sudo cp FMOD/libfmod.so.11 /usr/lib/
+	@sudo cp FMOD/libfmod.so.11.9 /usr/lib/
+	@sudo cp FMOD/libfmodL.so /usr/lib/
+	@sudo cp FMOD/libfmodL.so.11 /usr/lib/
+	@sudo cp FMOD/libfmodL.so.11.9 /usr/lib/
+
+$(FMOD_OSX):
+	@sudo cp FMOD/libfmod.dylib /usr/local/lib
+	@sudo cp FMOD/libfmodL.dylib /usr/local/lib
 
 clean:
 	@printf "%-50s" "deleting objects..." 

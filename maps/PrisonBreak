@@ -1,5 +1,5 @@
 WALL LIST
-WALL_COUNT 148
+WALL_COUNT 150
 id : 0 ; p1 : 4.0004,2.0002 ; p2 : 4.0004,4.0004 ; p1_height : 20,40 ; p2_height : 20,40 ; texture_id : 10 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 id : 1 ; p1 : 4.0004,8.0008 ; p2 : 4.0004,6.0006 ; p1_height : 20,40 ; p2_height : 20,40 ; texture_id : 10 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 id : 2 ; p1 : 4.0004,6.0006 ; p2 : 5.0005,6.0006 ; p1_height : 20,40 ; p2_height : 20,40 ; texture_id : 10 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
@@ -148,6 +148,8 @@ id : 144 ; p1 : 42.00042,1.0001 ; p2 : 42.00042,30.00030 ; p1_height : 20,60 ; p
 id : 145 ; p1 : 42.00042,30.00030 ; p2 : 42.00042,34.00034 ; p1_height : 20,60 ; p2_height : 20,60 ; texture_id : 2 ; room_id_ref : 7 ; transparency : 0 ; can_collide : 1 ; 
 id : 146 ; p1 : 42.00042,34.00034 ; p2 : 1.0001,34.00034 ; p1_height : 20,60 ; p2_height : 20,60 ; texture_id : 2 ; room_id_ref : 7 ; transparency : 0 ; can_collide : 1 ; 
 id : 147 ; p1 : 1.0001,34.00034 ; p2 : 1.0001,1.0001 ; p1_height : 20,60 ; p2_height : 20,60 ; texture_id : 2 ; room_id_ref : 7 ; transparency : 0 ; can_collide : 1 ; 
+id : 148 ; p1 : 21.10021,10.00010 ; p2 : 21.90021,10.00010 ; p1_height : 20,28 ; p2_height : 20,28 ; texture_id : 26 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
+id : 149 ; p1 : 21.10021,23.00023 ; p2 : 22.10022,23.00023 ; p1_height : 30,40 ; p2_height : 30,40 ; texture_id : 25 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 
 ROOM LIST
 ROOM_COUNT 8
@@ -160,6 +162,7 @@ id : 5 ; nb_wall : 3 ; wall_ref_range : 136,139 ; height : 20,20 ; floor_text : 
 id : 6 ; nb_wall : 3 ; wall_ref_range : 140,143 ; height : 20,20 ; floor_text : 23 ; 
 id : 7 ; nb_wall : 4 ; wall_ref_range : 144,148 ; height : 20,20 ; floor_text : 7 ; 
 
+
 ICON LIST
 ICON_COUNT 11
 id : 1 ; pos : 60,26 ; 
@@ -169,10 +172,11 @@ id : 2 ; pos : 79,201 ;
 id : 5 ; pos : 365,204 ; 
 id : 4 ; pos : 264,224 ; 
 id : 4 ; pos : 254,224 ; 
-id : 6 ; pos : 206,260 ; 
+id : 6 ; pos : 180,260 ; 
 id : 2 ; pos : 199,107 ; 
 id : 1 ; pos : 106,170 ; 
 id : 1 ; pos : 110,249 ; 
+
 
 WALL_REF MAP
 MAP_SIZE 30,30

@@ -2,9 +2,7 @@
 
 int	render_menu(t_data *d, int ac, char **av)
 {
-	// t_img test = ft_load_bmp2(IMG_PATH_4);
-
-
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	while (d->run_game == MENU)
 	{
 		SDL_PumpEvents();

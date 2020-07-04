@@ -2,11 +2,7 @@
 
 int	render_game(t_data *d, int ac, char **av)
 {
-	// init_sound(d);
-    // play_sound(d, MUS1);
-	// ft_load_bmp2(IMG_PATH_0);
-	// ft_load_bmp2(IMG_PATH_1);
-	//t_img test = read_img_surface(SPRITE_PATH_PYRO, SDL_PIXELFORMAT_ARGB32);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	while (d->run_game == GAME)
 	{
 		d->time_last_frame = d->time;
