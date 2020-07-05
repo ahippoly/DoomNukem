@@ -42,7 +42,7 @@ void init_data(t_data *d, int ac, char **av)
 	init_sprite(d);
 	init_hud(d);
 	init_menu(d);
-	init_gameover(d, av); //doit etre avant le check des arguments
+	init_gameover(d); //doit etre avant le check des arguments
 	init_ttf(d);
 	if (ac > 1)
 	{

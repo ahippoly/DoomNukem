@@ -38,7 +38,7 @@ int		init_menu(t_data *d)
 	return (0);
 }
 
-int		init_gameover(t_data *d, char **av) // doit etre initialisée après init_menu car partage la meme structure t_menu !
+int		init_gameover(t_data *d) // doit etre initialisée après init_menu car partage la meme structure t_menu !
 {
 	d->p_gameover = NULL;
     d->gameover_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32,

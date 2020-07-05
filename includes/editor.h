@@ -265,7 +265,7 @@ void					move_map_move_up(t_env *env);
 void					move_map_move_down(t_env *env);
 
 /* editor_grid.c */
-void					create_grid(unsigned int *pixels, float scale, t_env *env);
+void					create_grid(unsigned int *pixels, t_env *env);
 SDL_Point				check_tiles_hitbox(SDL_Point mouse, unsigned int *pixels, t_env *env);
 void					display_selected_point(t_env *env);
 
@@ -379,10 +379,6 @@ t_wall_ref				*add_wall_reference(t_wall_ref *chain, int new_wall_id);
 /* -------------------------- PARSER -------------------------- */
 
 /* parser_map.c */
-static void				read_wall_list(int fd, t_map_data *map);
-static void				read_room_list(int fd, t_map_data *map);
-static int				read_icon_list(int fd, t_map_data *map);
-static int				read_head(int fd, char *line, t_map_data *map);
 t_map_data				read_map(char *path_file);
 
 /* parser_map2.c */

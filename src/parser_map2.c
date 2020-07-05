@@ -63,8 +63,6 @@ t_wall_ref *read_wall_ref(char *chunk)
 void read_wall_ref_list(int fd, t_map_data *map)
 {
     char *line;
-    int i;
-    int j;
 
     if (get_next_line(fd, &line) == 1)
         read_param(line, "MAP_SIZE", &map->map_size.w);

@@ -3,7 +3,7 @@
 // OKK
 
 /* text_list[NB_TEXTURE] */
-int				destroy_texture_tab(SDL_Texture **tab, int size)
+int				destroy_texture_tab(SDL_Texture **tab)
 {
 	int			i;
 
@@ -88,9 +88,9 @@ void			free_sdl_ptr(t_env *e)
 	if (e->editor_grid)
 		SDL_DestroyTexture(e->editor_grid);
 	if (e->text_list)
-		destroy_texture_tab(e->text_list, NB_TEXTURE); //**text_list;
+		destroy_texture_tab(e->text_list); //**text_list;
 	if (e->img_list)
-		destroy_texture_tab(e->img_list, NB_IMG); //**img_list;
+		destroy_texture_tab(e->img_list); //**img_list;
 }
 
 int				exit_editor(t_env *e, char *msg)

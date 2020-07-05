@@ -22,8 +22,8 @@ void	put_pix(unsigned int *pixels, t_draw p_pos, t_img text,
 void	put_pix_alpha(unsigned int *pixels, t_draw p_pos,
 		unsigned int color, float alpha)
 {
-	int	pixel_pos;
-	int	dst_color;
+	int				pixel_pos;
+	unsigned int	dst_color;
 
 	pixel_pos = p_pos.start_x + p_pos.start_y;
 	dst_color = pixels[pixel_pos];

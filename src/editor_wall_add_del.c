@@ -76,7 +76,6 @@ int add_wall(t_point p1, t_point p2, t_env *env)
 static void del_room(t_env *env, int room_id)
 {
     int i;
-    t_wall wall;
 
     i = 0;
     while (i < env->wall_count)

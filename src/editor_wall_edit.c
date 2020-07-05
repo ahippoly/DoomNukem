@@ -1,15 +1,15 @@
 #include "proto_global.h"
 
 //OKK
-static float calc_coef_dir(SDL_Point p1, SDL_Point p2)
-{
-    int delta_x;
-    int delta_y;
+// static float calc_coef_dir(SDL_Point p1, SDL_Point p2)
+// {
+//     int delta_x;
+//     int delta_y;
 
-    delta_x = p2.x - p1.x;
-    delta_y = p2.y - p1.y;
-    return ((float)delta_y / delta_x);
-}
+//     delta_x = p2.x - p1.x;
+//     delta_y = p2.y - p1.y;
+//     return ((float)delta_y / delta_x);
+// }
 
 static int is_cursor_in_wall(t_point cursor, t_point p1, t_point p2)
 {
@@ -53,7 +53,10 @@ void check_mouse_in_walls(t_env *env)
         if (is_cursor_in_wall(convert_sdlpoint2tpoint(add_sdl_point(env->mouse, env->map_move, 1)), wall.p1, wall.p2))
         {
             env->hovered_wall_id = wall.id;
-            draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, RED);
+            draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)),
+            env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)),
+            env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}, 0, 0},
+            RED);
         }
         i++;
     }

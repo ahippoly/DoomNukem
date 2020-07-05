@@ -45,7 +45,7 @@ int					render_ammo_info(t_data *d, t_hud *hud, SDL_Rect pos);
 
 /*  hud utils */
 
-SDL_Surface			*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud);
+SDL_Surface			*copy_surface(SDL_Surface *src, t_hud *hud);
 
 /* hud_inv.c */
 

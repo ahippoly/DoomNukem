@@ -73,7 +73,7 @@ void	raycast_thread_init(t_data *d);
 void	raycast_all_screen(t_data *d, t_map_data *map);
 void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step);
 //render_raycast_utils.c
-void	clear_p_tab(t_data *d, t_range screen_x, unsigned int *p_tab);
+void	clear_p_tab(t_range screen_x, unsigned int *p_tab);
 t_room	*get_room_by_id(t_data *d, int room_id);
 void	add_to_queue(int *nb, t_ray *queue, t_ray *checked);
 void	draw_same_room(t_data *d, t_ray *ray, t_ray *checked, int x);
@@ -170,7 +170,7 @@ t_props	add_prop_ship(t_data *d, SDL_Point pos);
 //render_init_data2.c
 void	init_mini_map(t_data *d, t_map_data *map);
 int		init_menu(t_data *d);
-int		init_gameover(t_data *d, char **av); // doit etre initialisée après init_menu car partage la meme structure t_menu !
+int		init_gameover(t_data *d); // doit etre initialisée après init_menu car partage la meme structure t_menu !
 int		init_hud(t_data *d);
 
 t_point calc_map_scale(t_map_data *map);

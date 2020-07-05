@@ -30,7 +30,6 @@ int					put_ammo_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 
 int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 {
-	SDL_Texture		*t_cpy;
 	SDL_Surface		*s_cpy;	
 	char			*text;
 	
@@ -44,7 +43,7 @@ int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
 		return (exit_hud(hud));
 	}
-	if (!(hud->message_ammo_s = copy_surface(d, s_cpy, hud)))
+	if (!(hud->message_ammo_s = copy_surface(s_cpy, hud)))
 		return (exit_hud(hud));
 	SDL_FreeSurface(s_cpy);
 	return (0);
@@ -52,8 +51,6 @@ int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 
 int					render_ammo_info(t_data *d, t_hud *hud, SDL_Rect pos)
 {
-	SDL_Texture		*t_cpy;
-
 	if (!(hud->message_ammo_t = SDL_CreateTextureFromSurface(d->rend, hud->message_ammo_s)))
 	{
 		printf("Erreur de conversion de la surface : %s", SDL_GetError());

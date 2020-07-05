@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-void	clear_p_tab(t_data *d, t_range screen_x, unsigned int *p_tab)
+void	clear_p_tab(t_range screen_x, unsigned int *p_tab)
 {
 	int i;
 	int end_y;

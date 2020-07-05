@@ -9,8 +9,6 @@ void init_anim_range_x(t_ssprite *sprite, t_anim *anim, SDL_Point start, int nb_
 // void copy_frame_ssprite(t_ssprite *sprite, SDL_Point pos_anim);
 void copy_frame_ssprite(t_ssprite *sprite, SDL_Point pos_anim, t_size size_anim);
 void init_curr_frames(t_ssprite *sprite);
-static void      init_anim_afrit2(t_ssprite *afrit);
-static void      init_anim_pyro2(t_ssprite *pyro);
 t_ssprite    sprite_init_afrit2(t_img src_img);
 t_ssprite    sprite_init_pyro2(t_img src_img);
 void load_anim(t_ssprite *sprite, int time, int anim_id);
