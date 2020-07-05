@@ -1,18 +1,36 @@
 #include "proto_global.h"
 
-void create_room_mode(t_env *env)
+void			process_hovered_corner(t_env *env) //enfant de create_room_mode
 {
-    if (env->hovered_corner.x != -1)
+	int			room_ground;
+	int			room_ceil;
+
+    room_ground = env->input_lst[INPUT_ROOM_GROUND].value;
+	room_ceil = env->input_lst[INPUT_ROOM_CEIL].value;
+	env->selected_mouse_mode = 0;
+	env->hovered_corner.x = -1;
+	env->start_room_point = create_point(-1, -1);
+	env->room_height[env->room_count].start = room_ground;
+	env->room_height[env->room_count].end = room_ceil;
+	env->room_text[env->room_count] = 0;
+	env->room_count++;
+}
+
+void			create_room_mode(t_env *env)
+{
+	t_point		hov_corner;
+	t_point		selec_corner;
+
+	hov_corner = convert_sdlpoint2tpoint(env->hovered_corner);
+	selec_corner = convert_sdlpoint2tpoint(env->selected_corner);
+	if (env->hovered_corner.x != -1)
     {
-        printf("1start room point : x=%i, y=%i, hovered_corner : x=%i, y=%i\n", env->start_room_point.x, env->start_room_point.y, env->hovered_corner.x, env->hovered_corner.y);
-        printf("selected corner : x=%i, y=%i\n", env->selected_corner.x, env->selected_corner.y);
+		process_hovered_corner(env);
         if (env->selected_corner.x == -1)
             env->selected_corner = env->hovered_corner;
         else
-            if (!add_wall(convert_sdlpoint2tpoint(env->selected_corner), convert_sdlpoint2tpoint(env->hovered_corner), env))
-                return;
-        printf("2selected corner : x=%i, y=%i\n", env->selected_corner.x, env->selected_corner.y);
-        
+            if (!add_wall(selec_corner, hov_corner, env))
+                return ;
         if (env->start_room_point.x < 0)
         {
             env->start_room_point = env->selected_corner;
@@ -20,23 +38,13 @@ void create_room_mode(t_env *env)
         }
         else if (env->hovered_corner.x == env->start_room_point.x
         && env->hovered_corner.y == env->start_room_point.y)
-        {
-            env->selected_mouse_mode = 0;
-            env->hovered_corner.x = -1;
-            env->start_room_point = create_point(-1, -1);
-			env->room_height[env->room_count].start = env->input_lst[INPUT_ROOM_GROUND].value;
-			env->room_height[env->room_count].end = env->input_lst[INPUT_ROOM_CEIL].value;
-			env->room_text[env->room_count] = 0;
-            env->room_count++;
-        }
-        printf("start room point : x=%i, y=%i, hovered_corner : x=%i, y=%i\n", env->start_room_point.x, env->start_room_point.y, env->hovered_corner.x, env->hovered_corner.y);
+			process_hovered_corner(env);
         env->selected_corner = env->hovered_corner;
     }
 }
 
 void neutral_mouse_mode(t_env *env)
-{
-    
+{ 
     if (env->hovered_corner.x != -1)
     {
         if (env->selected_corner.x == -1)
