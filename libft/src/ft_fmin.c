@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-double ft_fmin(double a, double b)
+double  ft_fmin(double a, double b)
 {
     if (a < b)
         return (a);

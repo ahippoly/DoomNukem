@@ -17,19 +17,6 @@ void add_wall_ref_point(t_wall wall, t_env *env)
         reference_wall(wall.p1, wall.id, env);
         reference_wall(wall.p2, wall.id, env);
     }
-    // c est le truc du dessus
-    // la faut faire pour les 2 points du wall
-}
-
-static void recreate_full_map_ref(t_env *env)
-{
-    int i;
-
-    clear_map_ref(env);
-    env->map_wall_ref = init_wall_ref(env->map_size);
-    i = 0;
-    while (i < env->wall_count)
-        add_wall_ref_point(env->wall_list[i++], env);
 }
 
 static void	process_print_wall(int one_at_least, t_wall_ref *ref, int fd) //enfant de print_wall_ref

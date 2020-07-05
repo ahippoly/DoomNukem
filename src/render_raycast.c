@@ -69,7 +69,7 @@ void	raycast_screen2(t_data *d, t_range screen_x,
 	float start_angle, float step)
 {
 	start_angle += step * screen_x.start;
-	clear_p_tab(d, screen_x, d->p_screen);
+	clear_p_tab(screen_x, d->p_screen);
 	while (screen_x.start < screen_x.end)
 	{
 		draw_each_objs(d, start_angle, screen_x);

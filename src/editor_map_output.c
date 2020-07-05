@@ -31,7 +31,6 @@ static void write_walls(int fd, t_wall *list, int wall_count)
 static void write_rooms(int fd, t_room *room, int room_count)
 {
     int i;
-    char *walls;
     t_room display;
 
     write(fd, "ROOM LIST\n", 10);

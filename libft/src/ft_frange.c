@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-double ft_frange(double value, double min, double max)
+double	ft_frange(double value, double min, double max)
 {
 	if (value < min)
 		return (min);

@@ -47,7 +47,6 @@ int read_paramf(char *chunk, char *key, float *to_fill)
     int i;
 
     error = 1;
-	sizeof(float);
     chunk = ft_strstr(chunk, key);
     // printf("chunk = %s\n", chunk);
     if (chunk)

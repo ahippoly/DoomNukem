@@ -13,10 +13,9 @@
 #include "proto_global.h"
 
 // OKK
-void			create_grid(unsigned int *pixels, float scale, t_env *env)
+void			create_grid(unsigned int *pixels, t_env *env)
 {
 	int			i;
-	int			total_step;
 
 	i = 0;
 	while (i < GRID_SIZE_X)

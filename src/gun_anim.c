@@ -32,10 +32,10 @@ void    gun_dimension(t_data *d)
 
 void    gun_idle_anim(t_data *d)
 {
-    // SDL_Rect srcdim;
-    // SDL_Rect dstdim;
     SDL_Point pos;
 
+    pos.x = 0;
+    pos.y = 0;
     if (d->sprite[d->gun_ind].aim_on == 0)
     {
 		pos.x = d->sprite[d->gun_ind].anim[IDLE].pos->x;
@@ -49,15 +49,10 @@ void    gun_idle_anim(t_data *d)
     }
     get_gun_pos(d, pos);
     gun_dimension(d);
-	// d->src_gun = srcdim;
-	// d->dst_gun = dstdim;
-	// print_img_portion(d->p_screen, d->sprite[d->gun_ind].img, srcdim, dstdim);
 }
 
 void    sprite_anim_gun(t_data *d)
 {
-    SDL_Rect srcdim;
-    SDL_Rect dstdim;
     SDL_Point pos;
     Uint32 currTime;
     int diff;

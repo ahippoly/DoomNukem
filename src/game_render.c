@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-int	render_game(t_data *d, int ac, char **av)
+int	render_game(t_data *d)
 {
 	d->time_last_frame = d->time;
 	d->time = SDL_GetTicks();
@@ -16,9 +16,9 @@ int	render_game(t_data *d, int ac, char **av)
 	raycast_thread_init(d);
 	print_skybox(d, d->skybox, d->rot_calc.rot, d->p_screen);
 	sprite_anim_gun(d);
-	update_player_pos_mini_map(d, &d->map);
+	update_player_pos_mini_map(d);
 	print_player_look_vector(d, &d->map, d->rot);
 	calc_n_disp_framerate(d);
-	print_data2screen(d, &d->map, &d->hud);
+	print_data2screen(d, &d->map);
 	return (0);
 }

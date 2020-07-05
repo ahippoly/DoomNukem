@@ -13,11 +13,11 @@ int					main(int ac, char **av)
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)
-			render_game(&d, ac, av);
+			render_game(&d);
 		else if (d.run_game == MENU)
-			render_menu(&d, ac, av);
+			render_menu(&d);
 		else if (d.run_game == GAMEOVER)
-			render_gameover(&d, ac, av);
+			render_gameover(&d);
 		else if (d.run_game == EDITOR)
 		{
 			if (access("./editor", X_OK))

@@ -73,7 +73,6 @@ t_ray	check_collide_with_all_player(t_data *d, int *will_collide, t_rot rot)
 
 void	move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed)
 {
-	t_ray	sorted[NB_MAX_OBJ];
 	int		will_collide;
 	t_ray	res;
 	t_point	*pos;
@@ -92,7 +91,6 @@ void	move_with_collide(t_data *d, t_obj *obj, t_rot rot, float speed)
 void	move_with_collide_player(t_data *d, t_point *pos, t_rot rot,
 	float speed)
 {
-	t_ray	sorted[NB_MAX_OBJ];
 	int		will_collide;
 	t_ray	res;
 

@@ -73,6 +73,7 @@ static int		malloc_env(t_env *env)
 		exit_editor(env, "error : failed to malloc");
     if (!(env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y)))
 		exit_editor(env, "error : failed to malloc");
+    return (1);
 }
 
 void			init_env(t_env *env)

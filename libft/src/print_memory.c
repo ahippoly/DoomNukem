@@ -12,12 +12,12 @@
 
 #include <unistd.h>
 
-static void ft_putc(unsigned char c)
+static void	ft_putc(unsigned char c)
 {
 	write(1, &c, 1);
 }
 
-static void print_hexa(unsigned char c)
+static void	print_hexa(unsigned char c)
 {
 	if (c > 9)
 		ft_putc(c + 87);
@@ -25,13 +25,16 @@ static void print_hexa(unsigned char c)
 		ft_putc(c + 48);
 }
 
-void print_memory(const void *addr, size_t size)
+void		print_memory(const void *addr, size_t size)
 {
-	size_t i = 0;
-	size_t bloc = 0;
-	size_t step = 16;
-	unsigned char *mem;
+	size_t			i;
+	size_t			bloc;
+	size_t			step;
+	unsigned char	*mem;
 
+	i = 0;
+	bloc = 0;
+	step = 16;
 	mem = (unsigned char *)addr;
 	while (i < size)
 	{
@@ -65,6 +68,6 @@ void print_memory(const void *addr, size_t size)
 			}
 			i++;
 		}
-		write(1,"\n",1);	
+		ft_putc('\n');
 	}
 }

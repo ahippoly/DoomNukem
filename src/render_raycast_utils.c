@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-void	clear_p_tab(t_data *d, t_range screen_x, unsigned int *p_tab)
+void	clear_p_tab(t_range screen_x, unsigned int *p_tab)
 {
 	int i;
 	int end_y;
@@ -34,6 +34,8 @@ t_room	*get_room_by_id(t_data *d, int room_id)
 {
 	if (room_id > -1)
 		return (&d->map.room_list[room_id]);
+	else
+		return (NULL);	    //ATTENTION
 }
 
 void	add_to_queue(int *nb, t_ray *queue, t_ray *checked)
@@ -51,22 +53,4 @@ void	draw_same_room(t_data *d, t_ray *ray, t_ray *checked, int x)
 		print_floor_slice(d, d->fl[ray->room_id], calc_floor_draw_range(d,
 		*ray, checked->dist, x), get_room_by_id(d, ray->room_id)->floor_text);
 	ray->dist = checked->dist;
-}
-
-void	raycast_all_screen(t_data *d, t_map_data *map)
-{
-	float	current_angle;
-	float	step;
-	int		x;
-	int		i;
-	t_range	screen_x;
-
-	current_angle = d->rot - d->fov_rad / 2;
-	step = d->fov_rad / WIN_SIZE_X;
-	x = 0;
-	screen_x.start = 0;
-	screen_x.end = WIN_SIZE_Y;
-	init_floors(d);
-	create_obj_raybox(d);
-	raycast_screen2(d, screen_x, current_angle, step);
 }

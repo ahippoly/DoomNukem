@@ -20,16 +20,10 @@ void change_mob_life(t_data *d, t_mob *mob, int damage)
 	{
 		// printf("mob life = %i\n", mob->life);
 		mob->life = -9999;
-		set_sprite_callback(&mob->sprite, kill_mob, (t_param){d, mob});
+		set_sprite_callback(&mob->sprite, kill_mob, (t_param){d, {mob}});
 		load_anim(&mob->sprite, d->time, ANIM_MOB_DEATH);
 	}
 }
-
-// void game_over(t_data *d)
-// {
-// 	d->run_game = GAMEOVER;
-// 	//exit_with_msg("======== GAME OVER ==========\nt mort gros naze !!\nMerci d'avoir joué sinon\n=============================\n");
-// }
 
 void change_player_life(t_data *d, int *hp, int damage)
 {
@@ -68,18 +62,15 @@ void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob)
 			move_with_collide(d , mob->obj_ref, get_angle(mob->obj_ref->pos, d->player_pos), mob->speed);
 		if (dist < mob->attack_dist && d->time - mob->attack_timer > mob->attack_delay)
 		{
-			// printf("diff time mob attack = %i\n", d->time - mob->attack_timer);
 			mob->attack_timer = d->time;
-			set_sprite_callback(&mob->sprite, check_mob_attack, (t_param){d, mob});
+			set_sprite_callback(&mob->sprite, check_mob_attack, (t_param){d, {mob}});
 			load_anim(&mob->sprite, d->time, ANIM_MOB_MELEE);
 		}
 		i++;
 	}
 }
 
-
-
-void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed)
+void repulse_obj(t_data *d, t_obj *obj, float z_force)
 {
 	int i;
 
@@ -125,7 +116,7 @@ void shoot_gun(t_data *d, t_weapon *weapon)
 		// printf("mob hit speed = %f\n", origin->speed);
 		if (origin->life > -9999)
 		{
-			repulse_obj(d, sorted[0].obj_ref, weapon->z_force, 5);
+			repulse_obj(d, sorted[0].obj_ref, weapon->z_force);
 			change_mob_life(d, origin, weapon->dammage);
 		}
 	}

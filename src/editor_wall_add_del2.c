@@ -57,9 +57,19 @@ void print_walls_in_map(t_env *env)
         if (wall.id != -1)
         {
             if (wall.room_id_ref == -1)
-                draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), (env->map_move), 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF00FFFF);
+            {
+                draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), 
+                env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)),
+                 (env->map_move), 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}, 0, 0},
+                  0xFF00FFFF);
+            }
             else
-                draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), (env->map_move), 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFFFF88CC);                
+            {
+                draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)),
+                 env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)),
+                  (env->map_move), 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}, 0, 0},
+                   0xFFFF88CC);                
+            }
         }
         i++;
     }
@@ -72,7 +82,10 @@ void print_selected_wall(t_env *env)
     if (env->selected_wall_id != -1)
     {
         wall = env->wall_list[env->selected_wall_id];
-        draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF00FF00);
+        draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)),
+         env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)),
+          env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}, 0, 0},
+           0xFF00FF00);
     }
 }
 

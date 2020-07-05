@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-int		render_gameover_button(t_data *d, char **av)
+int		render_gameover_button(t_data *d)
 {
 	int	btn_y;
 	int	text_x;
@@ -17,7 +17,7 @@ int		render_gameover_button(t_data *d, char **av)
 	return (0);
 }
 
-int		catch_over_btn_event(t_data *d, char **av)
+int		catch_over_btn_event(t_data *d)
 {
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2 - 100, WIN_SIZE_Y / 2, 200, 50)) == 1) //try again
 	{

@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-void	create_raybox(t_data *d, t_obj *obj, t_rot rot_calc)
+static void	create_raybox(t_obj *obj, t_rot rot_calc)
 {
 	if (obj->room_id < -1)
 	{
@@ -31,37 +31,36 @@ void	create_obj_raybox(t_data *d)
 	i = 0;
 	while (i < d->nb_obj)
 	{
-		create_raybox(d, &d->obj_list[i++], d->rot_calc);
+		create_raybox(&d->obj_list[i++], d->rot_calc);
 	}
 }
 
-void	correct_origin_ref(t_obj *obj_list, int i, int nb_obj, t_obj *obj)
-{
-	int	size;
-	int	type;
+// void	correct_origin_ref(int i, int nb_obj, t_obj *obj)
+// {
+// 	int	size;
+// 	int	type;
 
-	if (obj->room_id == TYPE_PROP)
-	{
-		type = TYPE_PROP;
-		size = sizeof(t_props);
-	}
-	if (obj->room_id == TYPE_MOB)
-	{
-		type = TYPE_MOB;
-		size = sizeof(t_mob);
-	}
-	while (i < nb_obj)
-	{
-		if (obj->room_id == type)
-			obj->origin -= size;
-		i++;
-	}
-}
+// 	if (obj->room_id == TYPE_PROP)
+// 	{
+// 		type = TYPE_PROP;
+// 		size = sizeof(t_props);
+// 	}
+// 	if (obj->room_id == TYPE_MOB)
+// 	{
+// 		type = TYPE_MOB;
+// 		size = sizeof(t_mob);
+// 	}
+// 	while (i < nb_obj)
+// 	{
+// 		if (obj->room_id == type)
+// 			obj->origin -= size;
+// 		i++;
+// 	}
+// }
 
 void	del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj)
 {
 	int		i;
-	t_obj	*obj2;
 
 	i = 0;
 	while (i < *nb_obj)

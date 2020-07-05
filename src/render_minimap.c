@@ -12,10 +12,8 @@
 
 #include "proto_global.h"
 
-void	update_player_pos_mini_map(t_data *d, t_map_data *map)
+void	update_player_pos_mini_map(t_data *d)
 {
-    t_point	scale;
-
 	d->mini_map_player_pos.x = ft_range(MINI_MAP_SIZE_X * 0.5, 0, MINI_MAP_SIZE_X);
 	d->mini_map_player_pos.y = ft_range(MINI_MAP_SIZE_Y * 0.5, 0, MINI_MAP_SIZE_Y);
 }
@@ -34,11 +32,11 @@ void	print_player_look_vector(t_data *d, t_map_data *map, float rot)
     draw_line(screen_player_pos, create_point(screen_player_pos.x
 		+ cos(rot + fov) * 45, screen_player_pos.y + sin(rot + fov) * 45),
 		(t_img){d->p_mini_map,
-		(SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
+		(SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}, 0, 0}, 0xFF00DDDD);
     draw_line(screen_player_pos, create_point(screen_player_pos.x
 		+ cos(rot - fov) * 45, screen_player_pos.y + sin(rot - fov) * 45),
 		(t_img){d->p_mini_map,
-		(SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}}, 0xFF00DDDD);
+		(SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}, 0, 0}, 0xFF00DDDD);
 }
 
 void	print_mini_map(t_data *d, t_map_data *map)

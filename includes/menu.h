@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/05 23:12:15 by robin             #+#    #+#             */
+/*   Updated: 2020/07/05 23:12:15 by robin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MENU_H
 # define MENU_H
 
@@ -8,7 +20,7 @@
 
 typedef struct		s_menu
 {
-	char			**argv_tab; //tab pour enregistrer les arguments et les passer a execv
+	char			**argv_tab;
 	char			**argv_over_tab;
 	SDL_Texture		*menu_bg_t;
 	SDL_Texture		*gameover_t;

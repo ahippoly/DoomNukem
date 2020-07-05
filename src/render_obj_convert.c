@@ -37,7 +37,7 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	return (obj);
 }
 
-t_obj	convert_mob_to_obj(t_data *d, t_mob *mob)
+static t_obj	convert_mob_to_obj(t_mob *mob)
 {
 	t_obj	obj;
 
@@ -62,7 +62,7 @@ t_obj	convert_mob_to_obj(t_data *d, t_mob *mob)
 	return (obj);
 }
 
-t_obj	convert_prop_to_obj(t_data *d, t_props *props)
+static t_obj	convert_prop_to_obj(t_props *props)
 {
 	t_obj	obj;
 
@@ -115,13 +115,13 @@ void	init_obj_list(t_data *d)
 	i = 0;
 	while (i < d->nb_props)
 	{
-		d->obj_list[j] = convert_prop_to_obj(d, &d->props[i]);
+		d->obj_list[j] = convert_prop_to_obj(&d->props[i]);
 		d->props[i++].obj_ref = &d->obj_list[j++];
 	}
 	i = 0;
 	while (i < d->nb_mob)
 	{
-		d->obj_list[j] = convert_mob_to_obj(d, &d->mobs[i]);
+		d->obj_list[j] = convert_mob_to_obj(&d->mobs[i]);
 		d->mobs[i++].obj_ref = &d->obj_list[j++];
 	}
 	init_obj_room_ground(d, d->obj_list, d->nb_obj);

@@ -46,9 +46,6 @@ void	identify_icon(t_data *d, t_icon *current)
 void	load_icons(t_data *d, t_map_data *map)
 {
 	int		i;
-	int		nb_prop;
-	int		nb_mob;
-	t_icon	*current;
 
 	i = 0;
 	d->nb_mob = 0;

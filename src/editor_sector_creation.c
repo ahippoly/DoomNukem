@@ -57,6 +57,8 @@ void		recreate_room_list(t_env *env)
     t_room	*current_room;
 
     i = 0;
+	current_room_id = 0;
+	current_room = NULL;
     free(env->room_list);
 	if (!(env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count)))
 		exit_editor(env, "error: failed to malloc");

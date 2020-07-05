@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   proto_clean.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/05 23:14:05 by robin             #+#    #+#             */
+/*   Updated: 2020/07/05 23:14:28 by robin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PROTO_CLEAN_H
 # define PROTO_CLEAN_H
 
 # include "render.h"
 
-/* malloc.c */
+/*
+** malloc.c
+*/
 
 SDL_Texture		**malloc_texture_tab(int size);
 t_range			*malloc_range(int size);
@@ -16,8 +30,9 @@ t_button		*malloc_button(int size);
 t_txt_img		*malloc_txtimg(int size);
 t_input			*malloc_input(int size);
 
-
-/* clean_editor.c */
+/*
+** clean_editor.c
+*/
 
 void			clear_map_ref(t_env *env);
 int				exit_editor(t_env *e, char *msg);

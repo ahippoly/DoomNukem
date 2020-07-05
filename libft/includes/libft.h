@@ -105,12 +105,12 @@ double				ft_fmax(double a, double b);
 double				ft_fmin(double a, double b);
 int					ft_range(int value, int min, int max);
 double				ft_frange(double value, double min, double max);
-void    			*p_malloc(unsigned int size);
+void				*p_malloc(unsigned int size);
 
 void				print_memory(const void *addr, size_t size);
 int					get_next_line(const int fd, char **line);
-void				*double_array_size(void *data, int unit_size, size_t array_length);
+void				*double_array_size(void *data, int unit_size,
+						size_t array_length);
 char				*ft_ftoa(float n, char *res, int afterpoint);
-
 
 #endif

@@ -14,7 +14,6 @@
 
 void ref_origin(void *type_list, int nb_type, int type)
 {
-	t_obj	*obj;
 	int		i;
 	int		size;
 	void	*selected;
@@ -40,7 +39,7 @@ void ref_origin(void *type_list, int nb_type, int type)
 	}
 }
 
-void game_won(t_data *d)
+void game_won(void)
 {
 	exit_with_msg("You won the game, gg !");
 }
@@ -66,7 +65,7 @@ void check_props_collect(t_data *d, t_props *props, t_hud *hud)
 			if (prop->id == JETPACK_ITEM_ID)
 				d->jetpack = 1;
 			if (prop->id == SHIP_ITEM_ID)
-				game_won(d);
+				game_won();
 			del_obj(d->obj_list, &d->nb_obj, prop->obj_ref);
 			del_from_array(d->props, &d->nb_props, prop, sizeof(t_props));
 			ref_origin(props, d->nb_props, TYPE_PROP);
