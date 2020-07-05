@@ -12,9 +12,10 @@
 
 #include "proto_global.h"
 
-t_icon		create_icon(t_point pos, t_size size, int id_ref)
+// OKK
+t_icon			create_icon(t_point pos, t_size size, int id_ref)
 {
-	t_icon	new;
+	t_icon		new;
 
 	new.pos = pos;
 	new.size = size,
@@ -22,17 +23,7 @@ t_icon		create_icon(t_point pos, t_size size, int id_ref)
 	return (new);
 }
 
-void		add_icon(t_env *env, t_icon new)
-{
-	env->icon_list[env->icon_count++] = new;
-	if (env->icon_count >= env->icon_list_size)
-	{
-		env->icon_list = double_array_size(env->icon_list, sizeof(t_icon), env->icon_count);
-		env->icon_list_size *= 2;
-	}
-}
-
-void		print_icon(t_env *env, t_icon icon) //SECURE
+void			print_icon(t_env *env, t_icon icon)
 {
 	SDL_Rect tmp;
 	//printf("icon pos : x = %f, y = %f\n", icon.pos.x, icon.pos.y);
@@ -45,7 +36,7 @@ void		print_icon(t_env *env, t_icon icon) //SECURE
 	}
 }
 
-void print_mouse_icon(t_env *env) //SECURE
+void			print_mouse_icon(t_env *env)
 {
 	if (env->mouse_icon.id_ref != -1)
 	{
@@ -59,7 +50,7 @@ void print_mouse_icon(t_env *env) //SECURE
 	}
 }
 
-void	print_player_spawn(t_env *env) //SECURE
+void			print_player_spawn(t_env *env)
 {
 	if (env->player_spawn.x > 0.001)
 	{
@@ -71,7 +62,7 @@ void	print_player_spawn(t_env *env) //SECURE
 	}
 }
 
-void	print_icon_list(t_env *env) //SECURE
+void			print_icon_list(t_env *env)
 {
 	int i;
 

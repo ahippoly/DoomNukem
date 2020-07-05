@@ -3,14 +3,19 @@
 
 #include "data.h"
 
-void create_mini_map(t_data *d, t_map_data *map);
-void update_player_pos_mini_map(t_data *d, t_map_data *map);
-void print_player_look_vector(t_data *d, t_map_data *map, float rot);
-void print_mini_map(t_data *d, t_map_data *map);
-t_img read_img_surface(char *file, Uint32 pixel_format);
+void			create_mini_map(t_data *d, t_map_data *map);
+void			update_player_pos_mini_map(t_data *d, t_map_data *map);
+void			print_player_look_vector(t_data *d, t_map_data *map, float rot);
+void			print_mini_map(t_data *d, t_map_data *map);
+t_img			read_img_surface(char *file, Uint32 pixel_format);
+
+/* sdl_init.c */
+void			init_sdl_ressources_rend(t_data *d);
+
+/* editor_wall_add_del2.c */
+t_calced_walls	check_intersect_with_all_wall_rend(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
 
 //render_init_data.c
-void init_sdl_ressources_rend(t_data *d);
 void init_mini_map(t_data *d, t_map_data *map);
 void init_data(t_data *d, int ac, char **av);
 int	init_hud_data(t_data *d);
@@ -34,7 +39,6 @@ t_point check_wall_front(t_point pos, t_rot rot, t_ray *ray);
 //render_wall_processing.c
 float calc_wall_hit_scale(t_wall wall, t_point inter);
 t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot look_rot);
-t_calced_walls check_intersect_with_all_wall_rend(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
 void sort_walls_by_dist(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_walls_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_calced_walls *sorted_walls);
 void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
@@ -164,7 +168,6 @@ t_props	add_prop_heal_pack(t_data *d, SDL_Point pos);
 t_props	add_prop_ship(t_data *d, SDL_Point pos);
 
 //render_init_data2.c
-void	init_sdl_ressources_rend(t_data *d);
 void	init_mini_map(t_data *d, t_map_data *map);
 int		init_menu(t_data *d);
 int		init_gameover(t_data *d, char **av); // doit etre initialisée après init_menu car partage la meme structure t_menu !

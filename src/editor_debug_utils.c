@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OKK FICHIER A DELETE A LA FIN
+
 void	print_rooms_content(t_room *room_list, int room_count)
 {
     int     i;
@@ -26,6 +28,8 @@ void	debug_print(t_env *env, SDL_Scancode key) // TO CHECK
         read_map("maps/editor_map_0"); // HERE
 }
 
+/* 
+
 void print_wall_content(t_wall wall)
 {
     // printf("id = %3d ; p1 = %3d,%3d ; p2 = %3d,%3d ; p1_height = %3d,%3d ; p2_height = %3d,%3d ; texture_id = %3d, room_id = %3d, transparency = %3d\n",
@@ -41,3 +45,4 @@ void print_wall_list(t_map_data *map)
     while (i < map->wall_count)
         print_wall_content(map->wall_list[i++]);
 }
+*/

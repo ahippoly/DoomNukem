@@ -3,15 +3,17 @@ EDITOR_NAME = editor
 GAME_NAME = doom-nukem
 
 SRC_NAME =	$(sort \
-			editor_wall_add_del.c \
+			editor_wall_add_del.c editor_wall_add_del2.c \
 			editor_wall_edit.c editor_buttons.c \
 			editor_map_move.c \
-			editor_mouse_event.c editor_map_output.c \
-			editor_input.c editor_debug_utils.c \
-			editor_icon.c editor_init_data.c editor_init_data2.c  \
-			editor_display_data.c editor_grid.c editor_button_fct.c editor_button_fct2.c \
+			editor_mouse_event.c editor_mouse_event2.c editor_map_output.c editor_map_output2.c\
+			editor_input.c editor_input2.c editor_debug_utils.c \
+			editor_icon.c editor_icon2.c editor_init_data.c editor_init_data2.c editor_init_data3.c \
+			editor_display_data.c editor_display_data2.c editor_grid.c editor_button_fct.c editor_button_fct2.c \
 			editor_map_input.c \
-			editor_map_reader.c editor_sector_creation.c \
+			parser_map.c parser_map2.c parser_map3.c parser_map4.c \
+			editor_sector_creation.c editor_sector_creation2.c editor_sector_creation3.c \
+			editor_key_event.c \
 			error_gesture.c image_gesture.c line_intersect.c \
 			tool_sdlpoint_arithmetic.c utils.c render_minimap.c render_minimap2.c \
 			bresenham.c render_init_data.c render_init_data2.c render_event_gesture.c \
@@ -33,7 +35,8 @@ SRC_NAME =	$(sort \
 			gameover_background.c gameover_button.c gameover_render.c \
 			game_render.c \
 			render_game.c frame.c render_icon2obj_type.c \
-			clean_data.c clean_editor.c malloc.c)
+			clean_data.c clean_editor.c malloc.c \
+			sdl_init.c)
 
 GAME_MAIN = render_main.c $(SRC_NAME)
 

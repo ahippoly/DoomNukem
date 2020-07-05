@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OKK
+
 /* text_list[NB_TEXTURE] */
 int				destroy_texture_tab(SDL_Texture **tab, int size)
 {
@@ -71,6 +73,8 @@ void			free_env_ptr(t_env *e)
 		free(e->txt_lst);
 	if (e->input_lst)
 		free(e->input_lst);
+	if (e->sprites)
+		free(e->sprites);
 }
 
 void			free_sdl_ptr(t_env *e)

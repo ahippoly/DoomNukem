@@ -10,7 +10,7 @@ SDL_Surface		*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud)
 	
 	rmask = 0xff000000;
 	gmask = 0x00ff0000;
-	bmask = 0x0000ff00;
+	bmask = BLUE;
 	amask = 0x000000ff;
 	if (!(dest = SDL_CreateRGBSurface(0, 30, 30, 32, rmask, gmask, bmask, amask)))
 	{

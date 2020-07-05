@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+//OKK
+
 int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size)
 {
     if (env->mouse.x > pos_size.x && env->mouse.x < pos_size.x + pos_size.w

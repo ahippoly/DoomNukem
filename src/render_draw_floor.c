@@ -31,13 +31,13 @@ void	draw_floor_line(t_data *d, t_range draw, int x, int room_id)
 	int		color;
 
 	if (room_id == 0)
-		color = 0xFF0000FF;
+		color = RED;
 	if (room_id == 1)
 		color = 0xFFF00FFF;
 	if (room_id == 2)
 		color = 0x00FFFFFF;
 	if (room_id == 3)
-		color = 0x0000FFFF;
+		color = BLUE;
 	draw.start *= WIN_SIZE_X;
 	draw.end *= WIN_SIZE_X;
 	while (draw.start < draw.end)
