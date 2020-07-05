@@ -21,9 +21,9 @@ SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
     surface = NULL;
     texture = NULL;
     if (!(surface = SDL_LoadBMP(str)))
-        exit_with_msg("Erreur de chargement de l'image : %s\n");
+		exit_game(d, "error : failed to load bmp file");
     if (!(texture = SDL_CreateTextureFromSurface(d->rend, surface)))
-        exit_with_msg("Erreur de conversion de la surface : %s\n");
+        exit_game(d, "error : failed to load texture from surface");
     SDL_FreeSurface(surface);
     return (texture);
 }

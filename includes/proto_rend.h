@@ -15,6 +15,17 @@ void			init_sdl_ressources_rend(t_data *d);
 /* editor_wall_add_del2.c */
 t_calced_walls	check_intersect_with_all_wall_rend(t_data *d, t_point pos, t_rot rot, t_rot look_rot);
 
+/* malloc_data.c */
+t_floor			**malloc_floor_tab(int size);
+t_floor			*malloc_floor(int size);
+t_props			*malloc_props(int size);
+t_mob			*malloc_mob(int size);
+t_obj			*malloc_obj(int size);
+t_obj			**malloc_obj_tab(int size);
+t_sprite		*malloc_sprite(int size);
+t_img			*malloc_img(int size);
+
+
 //render_init_data.c
 void init_mini_map(t_data *d, t_map_data *map);
 void init_data(t_data *d, int ac, char **av);
