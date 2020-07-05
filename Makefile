@@ -65,6 +65,8 @@ ASSETS = $(addprefix $(ASSETS_PATH), $(FONT_DIR) $(IMG_DIR) $(SOUND_DIR))
 LIBFT = $(addprefix $(LIBFT_PATH), libft.a)
 LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
 
+INSTALL_LIBS = $(FMOD) $(SDL)
+
 FMOD_WINDOWS = /usr/lib/fmod.dll /usr/lib/fmodL.dll
 
 FMOD_OSX = /usr/local/lib/libfmod.dylib /usr/local/lib/libfmodL.dylib
@@ -151,6 +153,13 @@ $(FMOD_LINUX):
 $(FMOD_OSX):
 	@sudo cp FMOD/libfmod.dylib /usr/local/lib
 	@sudo cp FMOD/libfmodL.dylib /usr/local/lib
+
+SDL :
+	@printf "\e[1;32m[Configure SDL2]\e[0m\n"
+	@./configure
+	@printf "\e[1;32m[Make SDL2]\e[0m\n"
+	@make
+	@sudo make install
 
 clean:
 	@printf "%-50s" "deleting objects..." 
