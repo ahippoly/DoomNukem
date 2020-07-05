@@ -136,9 +136,9 @@ id : 132 ; p1 : 14.00014,2.0002 ; p2 : 15.00015,2.0002 ; p1_height : 30,40 ; p2_
 id : 133 ; p1 : 4.0004,6.8006 ; p2 : 4.0004,7.8007 ; p1_height : 21,30 ; p2_height : 21,30 ; texture_id : 27 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 id : 134 ; p1 : 34.00034,18.00018 ; p2 : 34.00034,18.00018 ; p1_height : 20,155 ; p2_height : 20,155 ; texture_id : 23 ; room_id_ref : 4 ; transparency : 30 ; can_collide : 1 ; 
 id : 135 ; p1 : 34.00134,18.00018 ; p2 : 39.00139,18.00018 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 60 ; can_collide : 1 ; 
-id : 136 ; p1 : 39.00139,18.00018 ; p2 : 39.00139,23.00023 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 60 ; can_collide : 1 ; 
-id : 137 ; p1 : 39.00139,23.00023 ; p2 : 34.00134,23.00023 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 60 ; can_collide : 1 ; 
-id : 138 ; p1 : 34.00134,23.00023 ; p2 : 34.00134,18.00018 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 60 ; can_collide : 1 ; 
+id : 136 ; p1 : 39.00139,18.00018 ; p2 : 39.00139,23.00023 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 0 ; can_collide : 1 ; 
+id : 137 ; p1 : 39.00139,23.00023 ; p2 : 34.00134,23.00023 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 0 ; can_collide : 1 ; 
+id : 138 ; p1 : 34.00134,23.00023 ; p2 : 34.00134,18.00018 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 18 ; room_id_ref : 5 ; transparency : 0 ; can_collide : 1 ; 
 id : 139 ; p1 : 33.00033,20.00020 ; p2 : 33.00033,21.00021 ; p1_height : 30,170 ; p2_height : 30,170 ; texture_id : 23 ; room_id_ref : 6 ; transparency : 40 ; can_collide : 1 ; 
 id : 140 ; p1 : 33.00033,21.00021 ; p2 : 34.00034,21.00021 ; p1_height : 20,170 ; p2_height : 20,170 ; texture_id : 23 ; room_id_ref : 6 ; transparency : 40 ; can_collide : 1 ; 
 id : 141 ; p1 : 34.00034,21.00021 ; p2 : 34.00034,20.00020 ; p1_height : 20,160 ; p2_height : 20,160 ; texture_id : 23 ; room_id_ref : 6 ; transparency : 40 ; can_collide : 1 ; 
@@ -158,14 +158,14 @@ id : 1 ; nb_wall : 7 ; wall_ref_range : 73,80 ; height : 24,24 ; floor_text : 2 
 id : 2 ; nb_wall : 7 ; wall_ref_range : 81,88 ; height : 26,26 ; floor_text : 22 ; 
 id : 3 ; nb_wall : 8 ; wall_ref_range : 114,122 ; height : 20,20 ; floor_text : 20 ; 
 id : 4 ; nb_wall : 1 ; wall_ref_range : 134,135 ; height : 20,0 ; floor_text : 0 ; 
-id : 5 ; nb_wall : 3 ; wall_ref_range : 136,139 ; height : 20,20 ; floor_text : 18 ; 
+id : 5 ; nb_wall : 3 ; wall_ref_range : 136,139 ; height : 160,160 ; floor_text : 18 ; 
 id : 6 ; nb_wall : 3 ; wall_ref_range : 140,143 ; height : 20,20 ; floor_text : 23 ; 
 id : 7 ; nb_wall : 4 ; wall_ref_range : 144,148 ; height : 20,20 ; floor_text : 7 ; 
 
 
 ICON LIST
 ICON_COUNT 11
-id : 1 ; pos : 60,26 ; 
+id : 1 ; pos : 60,10 ; 
 id : 1 ; pos : 244,37 ; 
 id : 1 ; pos : 242,94 ; 
 id : 2 ; pos : 79,201 ; 
