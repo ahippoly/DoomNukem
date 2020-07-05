@@ -1,9 +1,7 @@
 #ifndef BRESENHAM_H
 # define BRESENHAM_H
 
-
 # include "SDL.h"
-
 
 typedef struct  s_oct
 {

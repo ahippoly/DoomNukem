@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_range(int value, int min, int max)
+int	ft_range(int value, int min, int max)
 {
 	if (value < min)
 		return (min);

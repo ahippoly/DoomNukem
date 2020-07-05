@@ -29,7 +29,6 @@ typedef struct      s_data
     unsigned int    *p_mini_map_bg;
     unsigned int    *p_mini_map;
     unsigned int    *p_player_pos;
-    // int             quit;
 	int				run_game; //quit
     float			rot;
 	t_rot			rot_calc;
@@ -85,7 +84,7 @@ typedef struct      s_data
     SDL_Texture     *gameover_texture; //menu texture
 	char			*argv;
 	t_img			skybox;
-	FMOD_SOUND		*sound[30];
+	FMOD_SOUND		*sound[MAX_SOUNDS];
     t_ssprite       sprite_lst[NB_SPRITE_MAX];
 	t_ssprite		weapon_img[WEAPON_NB];
 	t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
