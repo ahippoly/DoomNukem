@@ -10,6 +10,7 @@ static void	channel_set_volume(t_data *d)
 {
 	FMOD_CHANNELGROUP *channel;
 
+
 	FMOD_System_GetMasterChannelGroup(d->system, &channel);
 	FMOD_ChannelGroup_SetVolume(channel, 0.3);
 }
@@ -37,6 +38,8 @@ int		play_sound(t_data *d, int index)
 
 void    init_sound(t_data *d)
 {
+	// if (!(d->sound = malloc_fmod_sound(MAX_SOUNDS)))
+	// 	exit_env(d);
 	init_system_sound(d);
 	FMOD_System_CreateSound(d->system, MELEESHORT_PATH, FMOD_CREATESAMPLE, 0, &d->sound[MELEESHORT]);
 	FMOD_System_CreateSound(d->system, REVSHORT_PATH, FMOD_CREATESAMPLE, 0, &d->sound[REVSHORT]);
@@ -54,7 +57,6 @@ void    init_sound(t_data *d)
 	FMOD_System_CreateSound(d->system, MUS_PATH1, FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &d->sound[MUS1]);
 	FMOD_System_CreateSound(d->system, MUS_PATH2, FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &d->sound[MUS2]);
 	channel_set_volume(d);
-
 	FMOD_Sound_SetLoopCount(d->sound[MUS1], -1);
 	FMOD_Sound_SetLoopCount(d->sound[MUS2], -1);
 }

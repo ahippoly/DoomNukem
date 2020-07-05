@@ -2,8 +2,11 @@
 
 //OKK
 
-static void	handle_realeased_scancode(int added_num, SDL_Scancode key_released)
+static int	handle_realeased_scancode(SDL_Scancode key_released)
 {
+	int added_num;
+	
+	added_num = -1;
 	if (key_released == SDL_SCANCODE_0)
 		added_num = 0;
 	if (key_released == SDL_SCANCODE_1)
@@ -24,6 +27,7 @@ static void	handle_realeased_scancode(int added_num, SDL_Scancode key_released)
 		added_num = 8;
 	if (key_released == SDL_SCANCODE_9)
 		added_num = 9;
+	return (added_num);
 }
 
 void		handle_input_mode(t_env *env, SDL_Scancode key_released)
@@ -33,8 +37,7 @@ void		handle_input_mode(t_env *env, SDL_Scancode key_released)
 
     if (env->selected_input != -1 && env->selected_mouse_mode != MOUSE_MODE_CREATE_ROOM)
     {
-        added_num = -1;
-		handle_realeased_scancode(added_num, key_released);
+		added_num = handle_realeased_scancode(key_released);
         printf("added num = %i\n", added_num);
         if (added_num != -1)
         {

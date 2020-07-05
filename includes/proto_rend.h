@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_rend.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:39:51 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:40:51 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 00:32:28 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ t_img			read_img_surface(char *file, Uint32 pixel_format);
 ** sdl_init.c
 */
 void			init_sdl_ressources_rend(t_data *d);
+
+/* malloc_data.c */
+t_floor			**malloc_floor_tab(int size);
+t_floor			*malloc_floor(int size);
+t_props			*malloc_props(int size);
+t_mob			*malloc_mob(int size);
+t_obj			*malloc_obj(int size);
+t_obj			**malloc_obj_tab(int size);
+t_sprite		*malloc_sprite(int size);
+t_img			*malloc_img(int size);
 
 /*
 ** editor_wall_add_del2.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:00:35 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 00:31:12 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,25 @@ typedef struct		s_data
 	SDL_Texture		*gameover_texture;
 	char			*argv;
 	t_img			skybox;
-	FMOD_SOUND		*sound[MAX_SOUNDS];
-	t_ssprite		sprite_lst[NB_SPRITE_MAX];
-	t_ssprite		weapon_img[WEAPON_NB];
-	t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
-	t_props			props[NB_MAX_PROPS];
-	t_mob			mobs[NB_MAX_MOBS];
-	t_obj			obj_list[NB_MAX_OBJ];
-	t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
-	t_sprite		sprite[30];
-	t_img			texture[NB_TEXTURE];
+	FMOD_SOUND		*sound[MAX_SOUNDS]; //WTF
+	// FMOD_SOUND		sound[MAX_SOUNDS];
+    // t_ssprite       sprite_lst[NB_SPRITE_MAX];
+	// t_ssprite		weapon_img[WEAPON_NB];
+	// t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
+	// t_props			props[NB_MAX_PROPS];
+	// t_mob			mobs[NB_MAX_MOBS];
+	// t_obj			obj_list[NB_MAX_OBJ];
+	// t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
+	// t_img			texture[NB_TEXTURE];
+	t_sprite        sprite[30];
+	// t_img			img[NB_IMG];
+	t_floor			**fl; //OK
+	t_props			*props; //OK
+	t_mob			*mobs; //OK
+	t_obj			*obj_list; //ok
+	t_obj			**repulsed; //OK
+	// t_sprite        *sprite;
+	t_img			*texture;
 	t_img			img[NB_IMG];
 	t_img			sprite_img[NB_SPRITE];
 	int				jetpack;

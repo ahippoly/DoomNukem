@@ -35,7 +35,8 @@ SRC_NAME =	$(sort \
 			gameover_background.c gameover_button.c gameover_render.c \
 			game_render.c \
 			render_game.c frame.c render_icon2obj_type.c \
-			clean_data.c clean_editor.c malloc.c \
+			clean_data.c clean_editor.c \
+			malloc_env.c malloc_env1.c malloc_data.c \
 			sdl_init.c)
 
 GAME_MAIN = render_main.c $(SRC_NAME)
@@ -121,7 +122,7 @@ $(GAME_NAME): libft $(OBJ_REND) $(ASSETS)
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(OPTI) $(INC) -o $@ -c $<
+	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(ASSETS) :

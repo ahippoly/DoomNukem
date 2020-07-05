@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay_props.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 21:51:48 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/03 21:31:19 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/05 23:02:00 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-void ref_origin(void *type_list, int nb_type, int type)
+void		ref_origin(void *type_list, int nb_type, int type)
 {
 	int		i;
 	int		size;
@@ -39,12 +39,12 @@ void ref_origin(void *type_list, int nb_type, int type)
 	}
 }
 
-void game_won(void)
+void		game_won(void)
 {
 	exit_with_msg("You won the game, gg !");
 }
 
-void check_props_collect(t_data *d, t_props *props, t_hud *hud)
+void		check_props_collect(t_data *d, t_props *props, t_hud *hud)
 {
 	int		i;
 	int		nb_props;

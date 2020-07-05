@@ -3,17 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   render_init_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 22:25:12 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 00:16:54 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
+void	malloc_data_init(t_data *d)
+{
+	if (!(d->props = malloc_props(NB_MAX_PROPS)))
+		exit_game(d, "error : failed to malloc props");
+	if (!(d->mobs = malloc_mob(NB_MAX_MOBS)))
+		exit_game(d, "error : failed to malloc mobs");
+	if (!(d->obj_list = malloc_obj(NB_MAX_OBJ)))
+		exit_game(d, "error : failed to malloc objects");
+	if (!(d->repulsed = malloc_obj_tab(NB_MAX_MOBS + NB_MAX_PROPS)))
+		exit_game(d, "error : failed to malloc objects tab");
+	// if (!(d->sprite = malloc_sprite(30)))
+	// 	exit_game(d, "error : failed to malloc sprite");
+	if (!(d->texture = malloc_img(NB_TEXTURE)))
+		exit_game(d, "error : failed to malloc image");
+}
+
 void init_data_var(t_data *d)
 {
+	malloc_data_init(d);
 	d->screen_height = HALF_WIN_SIZE_Y;
     d->player_height = 0;
     d->z_force = 0;
@@ -52,8 +69,8 @@ void init_data(t_data *d, int ac, char **av)
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)
 		exit_with_msg("error : wrong map file\n");
-    init_mini_map(d, &d->map);
 	init_data_var(d);
+    init_mini_map(d, &d->map);
     d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
