@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:39:51 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 00:32:28 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 01:02:36 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 void			create_mini_map(t_data *d, t_map_data *map);
 void			update_player_pos_mini_map(t_data *d);
-void			print_player_look_vector(t_data *d, t_map_data *map,
+void			print_player_look_vector(t_data *d,
 					float rot);
-void			print_mini_map(t_data *d, t_map_data *map);
+void			print_mini_map(t_data *d);
 t_img			read_img_surface(char *file, Uint32 pixel_format);
 
 /*

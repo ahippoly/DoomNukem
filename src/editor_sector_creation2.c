@@ -19,9 +19,9 @@ void add_wall_ref_point(t_wall wall, t_env *env)
     }
 }
 
-static void	process_print_wall(int one_at_least, t_wall_ref *ref, int fd) //enfant de print_wall_ref
+static void	process_print_wall(int *one_at_least, t_wall_ref *ref, int fd) //enfant de print_wall_ref
 {
-	one_at_least = 1;
+	*one_at_least = 1;
 	ft_putstr_fd(ft_itoa(ref->wall_id), fd);
 	ref = ref->next;
 	if (ref)
@@ -45,7 +45,7 @@ void			print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
             ref = map_wall_ref[i][j];
             one_at_least = 0;
             while (ref)
-				process_print_wall(one_at_least, ref, fd);
+				process_print_wall(&one_at_least, ref, fd);
             if (one_at_least == 0)
                 ft_putstr_fd("-1", fd);
             ft_putstr_fd(" ", fd);

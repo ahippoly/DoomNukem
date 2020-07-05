@@ -28,10 +28,10 @@ static void	init_img(t_env *env)
     env->icon_list_size = ICON_ARRAY_SIZE;
     if (!(env->img_list[IMG_PLAYER] = bmp_to_texture(IMG_PATH_0, env->rend)))
 		exit_editor(env, "error : failed to transform bmp to texture");
-	if ((env->img_list[IMG_AFRIT] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h)) < 0)
+	if (!(env->img_list[IMG_AFRIT] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h)))
 		exit_editor(env, "error : failed to create texture");
 	SDL_SetTextureBlendMode(env->img_list[IMG_AFRIT], SDL_BLENDMODE_BLEND);
-	if ((env->img_list[IMG_ORC] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_PYRO].dst_w, env->sprites[SPRITE_ID_PYRO].dst_h)) < 0)
+	if (!(env->img_list[IMG_ORC] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_PYRO].dst_w, env->sprites[SPRITE_ID_PYRO].dst_h)))
 		exit_editor(env, "error : failed to create texture");
 	SDL_SetTextureBlendMode(env->img_list[IMG_ORC], SDL_BLENDMODE_BLEND);
 	if (!(env->img_list[IMG_KEY] = bmp_to_texture(IMG_PATH_3, env->rend)))

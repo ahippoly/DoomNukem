@@ -6,21 +6,22 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:25:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/02 04:25:42 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 00:59:50 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-void	put_p(unsigned int *addr, unsigned int color, float alpha)
+float	put_p(unsigned int *addr, unsigned int color, float alpha)
 {
 	*addr = color;
-	alpha = 0;
+	return (alpha);
 }
 
-void	put_p_alpha(unsigned int *addr, unsigned int color, float alpha)
+float	put_p_alpha(unsigned int *addr, unsigned int color, float alpha)
 {
 	*addr = calc_transparency2(*addr, color, alpha);
+	return (alpha);
 }
 
 void	adapt_ty_and_range(t_draw *range, float *ty, float ty_step)
@@ -42,7 +43,7 @@ void	draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj,
 	float	ty;
 	int		tx;
 	int		p_cord;
-	void	(*put_pix)(unsigned int*, unsigned int, float);
+	float	(*put_pix)(unsigned int*, unsigned int, float);
 
 	tx = ray.mod_scale * obj.w;
 	ty_step = (float)obj.h * (ray.z_text) / (range.end_y - range.start_y);

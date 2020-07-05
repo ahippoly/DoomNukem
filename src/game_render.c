@@ -17,8 +17,8 @@ int	render_game(t_data *d)
 	print_skybox(d, d->skybox, d->rot_calc.rot, d->p_screen);
 	sprite_anim_gun(d);
 	update_player_pos_mini_map(d);
-	print_player_look_vector(d, &d->map, d->rot);
+	print_player_look_vector(d, d->rot);
 	calc_n_disp_framerate(d);
-	print_data2screen(d, &d->map);
+	print_data2screen(d);
 	return (0);
 }

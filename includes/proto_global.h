@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_global.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:24:42 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 01:03:06 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "proto_gameplay.h"
 # include "proto_clean.h"
 
-void			print_data2screen(t_data *d, t_map_data *map);
+void			print_data2screen(t_data *d);
 void			exit_with_msg(char *msg);
 unsigned int	*alloc_image(int width, int height);
 SDL_Rect		set_sdl_rect(int x, int y, int w, int h);

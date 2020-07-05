@@ -66,8 +66,9 @@ int add_wall(t_point p1, t_point p2, t_env *env)
         rearange_wall_lst(env);
         if (env->wall_count < NB_WALL_MAX)
         {
-            env->wall_list[env->wall_count++] = create_wall(p1, p2, env->wall_count, env);
+            env->wall_list[env->wall_count] = create_wall(p1, p2, env->wall_count, env);
             success = 1;
+			env->wall_count++;
         }
     }
     return (success);

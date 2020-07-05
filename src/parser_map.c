@@ -67,14 +67,14 @@ static int	read_icon_list(int fd, t_map_data *map)
 static int		read_head(int fd, char *line, t_map_data *map)
 {
     if (ft_strequ(line, "WALL LIST"))
-        read_wall_list(fd, map);
+		read_wall_list(fd, map);
     if (ft_strequ(line, "ROOM LIST"))
-        read_room_list(fd, map);
+		read_room_list(fd, map);
 	if (ft_strequ(line, "ICON LIST"))
-        if ((read_icon_list(fd, map)) < 0)
+		if ((read_icon_list(fd, map)) < 0)
 			return (-1);
-    if (ft_strequ(line, "WALL_REF MAP"))
-        read_wall_ref_list(fd, map);
+	if (ft_strequ(line, "WALL_REF MAP"))
+		read_wall_ref_list(fd, map);
 	return (0);
 }
 
@@ -91,8 +91,8 @@ t_map_data		read_map(char *path_file)
 	map.room_list = NULL;
 	map.player_spawn.x = 1;
 	map.player_spawn.y = 1;
-    if ((fd = open(path_file, O_RDONLY)) == -1)
-        return (map);
+	if ((fd = open(path_file, O_RDONLY)) == -1)
+		return (map);
 	if (read(fd, line, 0) == -1)
 		return (map);
 	map.icon_count = 0;

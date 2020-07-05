@@ -37,7 +37,7 @@ SDL_Texture		*bmp_to_texture(char *file, SDL_Renderer *rend)
         ft_putendl("failed to load texture bmp file");
 		return (NULL);
 	}
-	if ((new = SDL_CreateTextureFromSurface(rend, readed_file)) < 0)
+	if (!(new = SDL_CreateTextureFromSurface(rend, readed_file)))
 		return (NULL);
     SDL_FreeSurface(readed_file);
     return (new);

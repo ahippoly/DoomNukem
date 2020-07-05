@@ -6,20 +6,20 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:15:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/03 21:33:53 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 01:02:48 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-void 			print_data2screen(t_data *d, t_map_data *map)
+void 			print_data2screen(t_data *d)
 {
     SDL_Rect 	tmp;
 
 	tmp = set_sdl_rect(MINI_MAP_POS_X, MINI_MAP_POS_Y,
 		MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
 	SDL_UpdateTexture(d->screen, NULL, d->p_screen, WIN_SIZE_X * 4);
-	print_mini_map(d, map);
+	print_mini_map(d);
 	SDL_RenderCopy(d->rend, d->screen, NULL, NULL);
 	SDL_RenderCopy(d->rend, d->sprite[d->gun_ind].text,
 		&d->src_gun, &d->dst_gun);

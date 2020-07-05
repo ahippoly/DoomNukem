@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 23:45:10 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/05 00:19:57 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 01:03:48 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ void	sort_ray_by_dist_player(t_data *d, t_point pos,
 	int			j;
 	int			tmp;
 	t_ray		ray;
-	t_map_data	*map;
 
-	map = &d->map;
 	sorted[0] = check_inter_with_obj(&d->obj_list[0], current_angle,
 		pos, d->rot_calc);
 	i = 1;
@@ -100,9 +98,7 @@ void	sort_ray_by_dist(t_data *d, t_point pos, t_rot current_angle,
 	int			j;
 	int			tmp;
 	t_ray		ray;
-	t_map_data	*map;
 
-	map = &d->map;
 	sorted[0] = check_inter_with_obj(&d->obj_list[0],
 		current_angle, pos, current_angle);
 	i = 1;
@@ -128,9 +124,7 @@ void	sort_perp_ray(t_data *d, t_point pos, t_ray *sorted)
 	int			j;
 	int			tmp;
 	t_ray		ray;
-	t_map_data	*map;
 
-	map = &d->map;
 	sorted[0] = check_perp_obj(&d->obj_list[0], pos);
 	i = 1;
 	while (i < d->nb_obj)
