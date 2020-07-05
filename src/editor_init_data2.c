@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OK
+
 void init_input(t_env *env)
 {
 	if (!(env->input_lst = malloc_input(NB_INPUT))) // MALLOC
@@ -14,7 +16,7 @@ void init_input(t_env *env)
     env->input_lst[INPUT_COLLIDE] = create_t_input(set_sdl_rect(0.530 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 1, 1);
 }
 
-void init_img(t_env *env) //MALLOC & SECURE
+void	init_img(t_env *env) //MALLOC & SECURE
 {
 	if (!(env->img_list = malloc_texture_tab(NB_IMG)))
 		exit_editor(env, "error : failed to malloc texture tab");
@@ -28,12 +30,10 @@ void init_img(t_env *env) //MALLOC & SECURE
 		exit_editor(env, "error : failed to transform bmp to texture");
 	if ((env->img_list[IMG_AFRIT] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_AFRIT].dst_w, env->sprites[SPRITE_ID_AFRIT].dst_h)) < 0)
 		exit_editor(env, "error : failed to create texture");
-	if ((SDL_SetTextureBlendMode(env->img_list[IMG_AFRIT], SDL_BLENDMODE_BLEND)) < 0)
-		exit_editor(env, "error : failed to process texture blend mode");
+	SDL_SetTextureBlendMode(env->img_list[IMG_AFRIT], SDL_BLENDMODE_BLEND);
 	if ((env->img_list[IMG_ORC] = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, env->sprites[SPRITE_ID_PYRO].dst_w, env->sprites[SPRITE_ID_PYRO].dst_h)) < 0)
 		exit_editor(env, "error : failed to create texture");
-	if ((SDL_SetTextureBlendMode(env->img_list[IMG_ORC], SDL_BLENDMODE_BLEND)) < 0)
-		exit_editor(env, "error : failed to process texture blend mode");
+	SDL_SetTextureBlendMode(env->img_list[IMG_ORC], SDL_BLENDMODE_BLEND);
 	if (!(env->img_list[IMG_KEY] = bmp_to_texture(IMG_PATH_3, env->rend)))
 		exit_editor(env, "error : failed to transform bmp to texture");
 	if (!(env->img_list[IMG_HEAL_PACK] = bmp_to_texture(IMG_PATH_4, env->rend)))
@@ -59,7 +59,7 @@ void init_env2(t_env *env) //MALLOC & SECURE
     env->quit = 0;
 }
 
-void	init_env(t_env *env) //MALLOC
+int		malloc_env(t_env *env)
 {
 	if (!(env->room_height = malloc_range(NB_WALL_MAX)))
 		exit_editor(env, "error: failed to malloc rooms");
@@ -67,24 +67,28 @@ void	init_env(t_env *env) //MALLOC
 		exit_editor(env, "error: failed to malloc room texture");
 	if (!(env->sprite_img = malloc_img(NB_SPRITE)))
 		exit_editor(env, "error: failed to malloc sprites");
-    init_sdl_ressources(env);
+	if (!(env->sprites = malloc_ssprite(NB_SPRITE)))
+		exit_editor(env, "error : failed to malloc sprites");
+	if (!(env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
+		exit_editor(env, "error : failed to malloc");
+    if (!(env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y)))
+		exit_editor(env, "error : failed to malloc");
+}
+
+void	init_env(t_env *env) //MALLOC
+{
+	malloc_env(env);
     init_texture(env);
     init_buttons(env);
     init_txt_img(env);
     init_mouse_mode(env);
 	init_sprites_img_env(env);
-	if (!(env->sprites = malloc_ssprite(NB_SPRITE)))
-		exit_editor(env, "error : failed to malloc sprite");
 	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit2(env->sprite_img[SPRITE_ID_AFRIT]);
 	env->sprites[SPRITE_ID_PYRO] = sprite_init_pyro2(env->sprite_img[SPRITE_ID_PYRO]);
     init_img(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);
     env->map_wall_ref = init_wall_ref(env->map_size);
-	if (!(env->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
-		exit_editor(env, "error : failed to malloc");
-    if (!(env->p_grid = alloc_image(GRID_SIZE_X, GRID_SIZE_Y)))
-		exit_editor(env, "error : failed to malloc");
     env->grid_pos = set_sdl_rect(GRID_POS_X, GRID_POS_Y, GRID_SIZE_X, GRID_SIZE_Y);
     env->wall_count = 0;
     env->room_count = 0;

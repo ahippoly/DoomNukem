@@ -50,6 +50,11 @@
 
 # define NB_TEXTURE 28
 
+/* colors */
+
+# define BLUE 0x0000ff00
+# define RED 0xFF0000FF
+
 /*
 # define TEXT_PATH_0 "asset/img/textures/Red_Bricks.bmp"
 # define TEXT_PATH_1 "asset/img/hud/key.bmp"

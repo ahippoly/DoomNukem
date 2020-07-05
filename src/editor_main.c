@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OK au poil de cul
+
 void reset_textures(t_env *env)
 {
     ft_bzero(env->p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
@@ -26,6 +28,7 @@ int main(int argc, char **argv)
     t_env       env;
     
 	ft_bzero(&env, sizeof(t_env));
+    init_sdl_ressources(&env); //open window
     init_env(&env);
 	load_map(&env, argc, argv);
     while(!env.quit)

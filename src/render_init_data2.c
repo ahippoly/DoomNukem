@@ -37,7 +37,7 @@ void	init_mini_map(t_data *d, t_map_data *map)
     d->p_mini_map = alloc_image(MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
     draw_rectangle(d->p_player_pos, set_sdl_rect(0, 0, MINI_MAP_PLAYER_SIZE,
 	MINI_MAP_PLAYER_SIZE), set_size(MINI_MAP_PLAYER_SIZE,
-	MINI_MAP_PLAYER_SIZE), 0xFF0000FF);
+	MINI_MAP_PLAYER_SIZE), RED);
     d->mini_map_player_pos = set_sdl_rect(WIN_SIZE_X - MINI_MAP_SIZE_X, 0,
 	MINI_MAP_PLAYER_SIZE, MINI_MAP_PLAYER_SIZE);
 }

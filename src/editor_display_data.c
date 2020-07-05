@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OK
+
 void txt_img2screen(t_env *env, t_txt_img img) //SECURE
 {
     if ((SDL_UpdateTexture(env->screen, &img.pos_size, img.pixels, img.pos_size.w * 4)) < 0)
@@ -32,15 +34,20 @@ void update_sprite_texture(t_env *env) //SECURE
 		exit_editor(env, "error : failed to update texture");
 }
 
+void			process_input(t_env *env) // enfant de print_env2screen
+{
+	input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
+    input_text_to_img(ft_itoa(env->selected_wall_id), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.700 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
+}
+
 void			print_env2screen(t_env *env) //SECURE
 {
     SDL_Rect	tmp;
 
     print_inputs(env);
-    input_text_to_img(ft_itoa(env->wall_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
-    input_text_to_img(ft_itoa(env->room_count), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
-    input_text_to_img(ft_itoa(env->selected_wall_id), 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.700 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
-    if ((SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4)) == -1)
+	process_input(env);
+	if ((SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4)) == -1)
 		exit_editor(env, "error : failed to update texture");
     if ((SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4)) == -1)
     	exit_editor(env, "error : failed to update texture");

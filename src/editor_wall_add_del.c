@@ -1,5 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 void check_intersect_with_all_wall(t_wall wall,t_env *env)
 {

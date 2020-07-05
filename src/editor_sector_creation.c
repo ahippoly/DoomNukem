@@ -1,6 +1,4 @@
 #include "proto_global.h"
-#include "proto_global.h"
-
 
 t_wall_ref ***init_wall_ref(t_size map_size)
 {

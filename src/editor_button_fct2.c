@@ -12,6 +12,8 @@
 
 #include "proto_global.h"
 
+// OK
+
 void change_selected_wall_texture(t_env *env, int texture_id)
 {
     if (env->selected_wall_id != -1)

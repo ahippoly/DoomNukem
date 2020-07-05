@@ -12,6 +12,8 @@
 
 #include "proto_global.h"
 
+// OK
+
 void		*ft_memcpy2(void *s1, const void *s2, size_t n)
 {
 	char	*c1;
@@ -27,15 +29,8 @@ void		*ft_memcpy2(void *s1, const void *s2, size_t n)
 	return (s1);
 }
 
-void	map2env(t_env *e, t_map_data *map) // A CHECK
+void	map2env_icon(t_env *e, t_map_data *map, int i) //enfant de map2env
 {
-	int	i;
-
-	if (map->is_valid != 1)
-		exit_editor(e, "error : failed to read map, initializing new map");
-	e->wall_count = map->wall_count;
-	ft_memcpy2(e->wall_list, map->wall_list, sizeof(t_wall) * map->wall_count);
-	free(map->wall_list);
 	e->icon_count = map->icon_count;
 	ft_memcpy2(e->icon_list , map->icon_list, sizeof(t_icon) * map->icon_count);
 	i = 0;
@@ -47,6 +42,10 @@ void	map2env(t_env *e, t_map_data *map) // A CHECK
 		i++;
 	}
 	free(map->icon_list);
+}
+
+void	map2env_room(t_env *e, t_map_data *map, int i) //enfant de map2env
+{
 	e->room_count = map->room_count;
 	i = 0;
 	while (i < map->room_count)
@@ -57,6 +56,19 @@ void	map2env(t_env *e, t_map_data *map) // A CHECK
 		i++;
 	}
 	free(map->room_list);
+}
+
+void	map2env(t_env *e, t_map_data *map) // A CHECK
+{
+	int	i;
+
+	if (map->is_valid != 1)
+		exit_editor(e, "error : failed to read map, initializing new map");
+	e->wall_count = map->wall_count;
+	ft_memcpy2(e->wall_list, map->wall_list, sizeof(t_wall) * map->wall_count);
+	free(map->wall_list);
+	map2env_icon(e, map, i);
+	map2env_room(e, map, i);
 	e->player_spawn.x = map->player_spawn.x;
 	e->player_spawn.y = map->player_spawn.y;
 	// print_player_spawn(e);

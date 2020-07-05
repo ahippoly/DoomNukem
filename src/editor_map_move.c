@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+//OK
+
 void move_map_move_left(t_env *env)
 {
     if (env->map_move.x <= -MOVE_SPEED)

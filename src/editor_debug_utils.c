@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OK
+
 void	print_rooms_content(t_room *room_list, int room_count)
 {
     int     i;

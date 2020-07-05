@@ -12,6 +12,8 @@
 
 #include "proto_global.h"
 
+// OK
+
 void			create_grid(unsigned int *pixels, float scale, t_env *env)
 {
 	int			i;
@@ -59,8 +61,8 @@ SDL_Point		check_tiles_hitbox(SDL_Point mouse,
 		box_pos.x = map_pos.x * TILE_SIZE - TILE_HITBOX + env->map_move.x;
 		box_pos.y = map_pos.y * TILE_SIZE - TILE_HITBOX + env->map_move.y;
 		draw_rectangle(pixels, set_sdl_rect(box_pos.x, box_pos.y,
-		TILE_HITBOX * 2, TILE_HITBOX * 2),
-				set_size(GRID_SIZE_X, GRID_SIZE_Y), 0x0000ff00);
+		TILE_HITBOX * 2, TILE_HITBOX * 2), set_size(GRID_SIZE_X, GRID_SIZE_Y),
+		BLUE);
 	}
 	return (map_pos);
 }
@@ -72,12 +74,10 @@ void			display_selected_point(t_env *env)
 	if (env->selected_corner.x != -1)
 	{
 		hitbox = TILE_HITBOX - 2;
-		draw_rectangle(env->p_grid,
-				set_sdl_rect(env->selected_corner.x * TILE_SIZE - hitbox / 2
-					+ env->map_move.x,
-					env->selected_corner.y * TILE_SIZE - hitbox / 2
-					+ env->map_move.y, hitbox, hitbox),
-				set_size(GRID_SIZE_X, GRID_SIZE_Y),
-				0xFF0000FF);
+		draw_rectangle(env->p_grid, set_sdl_rect(env->selected_corner.x * TILE_SIZE 
+			- hitbox / 2 + env->map_move.x, env->selected_corner.y * TILE_SIZE 
+			- hitbox / 2
+			+ env->map_move.y, hitbox, hitbox), 
+			set_size(GRID_SIZE_X, GRID_SIZE_Y), RED);
 	}
 }

@@ -1,17 +1,11 @@
 WALL LIST
-WALL_COUNT 8
-id : 0 ; p1 : 1.0001,6.0006 ; p2 : 2.0002,2.0002 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 1 ; p1 : 2.0002,2.0002 ; p2 : 8.0008,1.0001 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 2 ; p1 : 8.0008,1.0001 ; p2 : 13.00013,3.0003 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 3 ; p1 : 13.00013,3.0003 ; p2 : 14.00014,7.0007 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 4 ; p1 : 14.00014,7.0007 ; p2 : 8.0008,11.00011 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 5 ; p1 : 8.0008,11.00011 ; p2 : 3.0003,9.0009 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 6 ; p1 : 3.0003,9.0009 ; p2 : 1.0001,6.0006 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : 0 ; transparency : 0 ; can_collide : 1 ; 
-id : 7 ; p1 : 4.0004,6.0006 ; p2 : 7.0007,4.0004 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
+WALL_COUNT 3
+id : 0 ; p1 : 5.0005,9.0009 ; p2 : 6.0006,8.0008 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
+id : 1 ; p1 : 7.0007,7.0007 ; p2 : 8.0008,6.0006 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
+id : 2 ; p1 : 6.0006,6.0006 ; p2 : 6.0006,7.0007 ; p1_height : 20,30 ; p2_height : 20,30 ; texture_id : 0 ; room_id_ref : -1 ; transparency : 0 ; can_collide : 1 ; 
 
 ROOM LIST
-ROOM_COUNT 1
-id : 0 ; nb_wall : 7 ; wall_ref_range : 0,7 ; height : 20,30 ; floor_text : 0 ; 
+ROOM_COUNT 0
 
 
 ICON LIST
@@ -20,5 +14,5 @@ ICON_COUNT 0
 
 WALL_REF MAP
 MAP_SIZE 30,30
-PLAYER_SPAWN 6,8
+PLAYER_SPAWN 0,0
 

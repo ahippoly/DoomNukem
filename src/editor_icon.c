@@ -12,6 +12,8 @@
 
 #include "proto_global.h"
 
+// OK
+
 t_icon		create_icon(t_point pos, t_size size, int id_ref)
 {
 	t_icon	new;

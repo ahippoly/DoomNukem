@@ -1,9 +1,7 @@
 #include "proto_global.h"
-#include "proto_global.h"
 
 void create_room_mode(t_env *env)
 {
-
     if (env->hovered_corner.x != -1)
     {
         printf("1start room point : x=%i, y=%i, hovered_corner : x=%i, y=%i\n", env->start_room_point.x, env->start_room_point.y, env->hovered_corner.x, env->hovered_corner.y);

@@ -53,7 +53,7 @@ void check_mouse_in_walls(t_env *env)
         if (is_cursor_in_wall(convert_sdlpoint2tpoint(add_sdl_point(env->mouse, env->map_move, 1)), wall.p1, wall.p2))
         {
             env->hovered_wall_id = wall.id;
-            draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, 0xFF0000FF);
+            draw_line(add_sdl_point(convert_t_point(mult_t_point(wall.p1, TILE_SIZE)), env->map_move, 0), add_sdl_point(convert_t_point(mult_t_point(wall.p2, TILE_SIZE)), env->map_move, 0), (t_img){env->p_grid, (SDL_Rect){0, 0, GRID_SIZE_X, GRID_SIZE_Y}}, RED);
         }
         i++;
     }

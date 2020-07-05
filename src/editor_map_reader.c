@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OK
+
 char *skip_space(char *str)
 {
     while (*str == ' ')
@@ -271,12 +273,12 @@ int			read_icon_list(int fd, t_map_data *map)
         read_param(line, "ICON_COUNT", &map->icon_count);
     else
 	{
-        // ft_putendl("error while reading map");
+        ft_putendl("error while reading map");
 		return (-1);
 	}
     if (!(map->icon_list = (t_icon*)malloc(sizeof(t_icon) * map->icon_count)))
 	{
-        // ft_putendl("error : failed to malloc");
+        ft_putendl("error : failed to malloc");
 		return (-1);
 	}
     i = 0;
@@ -287,34 +289,21 @@ int			read_icon_list(int fd, t_map_data *map)
 	}
 	i = 0;
 	while (i < map->icon_count)
-	{
-		printf("i = %i, id_ref = %i, pos :%i,%i\n", i, map->icon_list[i].id_ref, map->icon_list[i].pos_i.x, map->icon_list[i].pos_i.y);
 		i++;
-	}
 	return (0);
 }
 
 int		read_head(int fd, char *line, t_map_data *map)
 {
-    //printf("line = %s\n", line);
     if (ft_strequ(line, "WALL LIST"))
-    {
-        // printf("wALL LIST READED\n");
         read_wall_list(fd, map);
-    }
     if (ft_strequ(line, "ROOM LIST"))
-    {
         read_room_list(fd, map);
-    }
 	if (ft_strequ(line, "ICON LIST"))
-    {
         if ((read_icon_list(fd, map)) < 0)
 			return (-1);
-    }
     if (ft_strequ(line, "WALL_REF MAP"))
-    {
         read_wall_ref_list(fd, map);
-    }
 	return (0);
 }
 
@@ -331,26 +320,19 @@ t_map_data		read_map(char *path_file)
 	map.room_list = NULL;
 	map.player_spawn.x = 1;
 	map.player_spawn.y = 1;
-    printf("started map read\n");
     if ((fd = open(path_file, O_RDONLY)) == -1)
         return (map);
 	if (read(fd, line, 0) == -1)
 		return (map);
-    // printf("ca merde, fd = %i\n", fd);
-    // get_next_line(fd, &line);
-    // printf("line 1 = %s\n", line);
 	map.icon_count = 0;
 	map.wall_count = 0;
 	map.room_count = 0;
     while (get_next_line(fd, &line) == 1)
 	{
 		if ((read_head(fd, line, &map)) < 0)
-			map.is_valid = -1; // CHECK ALEX
+			map.is_valid = -1;
 	}
     map.is_valid = 1;
-    // print_wall_list(&map);
-    // print_rooms_content(map.room_list, map.room_count);
-    // print_wall_ref(map.map_wall_ref, map.map_size, 1);
     close(fd);
     return (map);
 }

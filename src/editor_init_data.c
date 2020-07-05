@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+// OK
+
 int			init_sdl_ressources(t_env *env) //SECURE
 {
     env->win = NULL;
@@ -116,7 +118,7 @@ void init_txt_img(t_env *env)
     env->txt_lst[TXT_BEGIN] = create_text_img("Begin", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.730 * WIN_SIZE_Y));
     env->txt_lst[TXT_END] = create_text_img("end", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.790 * WIN_SIZE_Y));
     env->txt_lst[TXT_TRANSPARENCY] = create_text_img("Transparency", 1, 0xFF00FF00, create_point(0.795 * WIN_SIZE_X, 0.620 * WIN_SIZE_Y));
-    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, 0xFF0000FF, create_point(0.500 * WIN_SIZE_X, 0.770 * WIN_SIZE_Y));
+    env->txt_lst[TXT_WALL_COUNT] = create_text_img("Wall_count", 1, RED, create_point(0.500 * WIN_SIZE_X, 0.770 * WIN_SIZE_Y));
     env->txt_lst[TXT_MOB] = create_text_img("Mob", 1, 0xFFFF0000, create_point(0.845 * WIN_SIZE_X, 0.350 * WIN_SIZE_Y));
     env->txt_lst[TXT_ROOM_COUNT] = create_text_img("Room_count", 1, 0xFFDDDDDD, create_point(0.500 * WIN_SIZE_X, 0.670 * WIN_SIZE_Y));
     env->txt_lst[TXT_ROOM_HEIGHT] = create_text_img("Room", 1, 0xFFDDDDDD, create_point(0.120 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y));

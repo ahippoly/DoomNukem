@@ -12,6 +12,8 @@
 
 #include "proto_global.h"
 
+//OK
+
 void	select_next_texture(t_env *env)
 {
 	if (env->selected_texture == NB_TEXTURE - 1)

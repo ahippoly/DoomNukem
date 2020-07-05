@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+//OK
+
 char *join_int_value(int val1, char *separator, int val2)
 {
     char *str;
