@@ -130,7 +130,7 @@ int				init_weapon_4(t_data *d, t_hud *hud)
 	return (0);
 }
 
-int				init_weapon_5(t_data *d, t_hud *hud)
+int				init_weapon_5(t_hud *hud)
 {
 	hud->perso_weapon[5]->id = 5;
 	hud->perso_weapon[5]->name = WEAPON_NAME_4;

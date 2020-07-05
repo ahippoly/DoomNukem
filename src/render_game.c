@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud)
+void 			print_data2screen(t_data *d, t_map_data *map)
 {
     SDL_Rect 	tmp;
 

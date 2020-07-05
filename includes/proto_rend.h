@@ -4,7 +4,7 @@
 #include "data.h"
 
 void			create_mini_map(t_data *d, t_map_data *map);
-void			update_player_pos_mini_map(t_data *d, t_map_data *map);
+void			update_player_pos_mini_map(t_data *d);
 void			print_player_look_vector(t_data *d, t_map_data *map, float rot);
 void			print_mini_map(t_data *d, t_map_data *map);
 t_img			read_img_surface(char *file, Uint32 pixel_format);
@@ -134,14 +134,12 @@ void print_ray(t_ray ray);
 void put_pix_alpha(unsigned int *pixels, t_draw p_pos, unsigned int color, float alpha);
 void put_pix(unsigned int *pixels, t_draw p_pos, t_img text, SDL_Point t_cord);
 
-t_room	*get_room_by_id(t_data *d, int room_id);
-
 //render_load_icons.c
 void load_icons(t_data *d, t_map_data *map);
 
 void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob);
 void gravity_obj(t_data *d, t_obj *objs, int nb_obj);
-void repulse_obj(t_data *d, t_obj *obj, float z_force, float speed);
+void repulse_obj(t_data *d, t_obj *obj, float z_force);
 void load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse);
 void shoot_gun(t_data *d, t_weapon *weapon);
 void process_mobs_gameplay(t_data *d);
@@ -158,7 +156,7 @@ void handle_mouse_event_gun(t_data *d, t_map_data *map);
 int					init_ttf(t_data *d);
 int					quit_ttf(t_data *d);
 
-int					render_game(t_data *d, int ac, char **av);
+int					render_game(t_data *d);
 
 //render_icon2obj_type.c
 t_mob	add_mob_demon(t_data *d, SDL_Point pos);

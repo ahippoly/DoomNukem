@@ -33,7 +33,7 @@ void	draw_wall_mini_map(t_data *d, t_wall wall, t_point scale,
 			create_point(scale.x * (wall.p2.x + diff_pos.x),
 				scale.y * (wall.p2.y + diff_pos.y)),
 			(t_img){d->p_mini_map_bg, (SDL_Rect){0, 0,
-			MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}},
+			MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}, 0, 0},
 			0xFFFFBB88);
 }
 

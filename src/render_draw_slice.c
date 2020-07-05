@@ -15,6 +15,7 @@
 void	put_p(unsigned int *addr, unsigned int color, float alpha)
 {
 	*addr = color;
+	alpha = 0;
 }
 
 void	put_p_alpha(unsigned int *addr, unsigned int color, float alpha)

@@ -11,7 +11,7 @@
 #include "proto_gameplay.h"
 #include "proto_clean.h"
 
-void 			print_data2screen(t_data *d, t_map_data *map, t_hud *hud);
+void 			print_data2screen(t_data *d, t_map_data *map);
 void exit_with_msg(char *msg);
 unsigned int *alloc_image(int width, int height);
 SDL_Rect set_sdl_rect(int x, int y, int w, int h);

@@ -13,7 +13,7 @@ int			is_mouse_on_target(t_data *d, SDL_Rect pos)
 	return (0);
 }
 
-int			catch_btn_event(t_data *d, int ac, char **av)
+int			catch_btn_event(t_data *d)
 {
 	if (is_mouse_on_target(d, set_sdl_rect(WIN_SIZE_X / 2, WIN_SIZE_Y / 3, 200, 50)) == 1) //play
 	{

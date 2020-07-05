@@ -52,21 +52,3 @@ void	draw_same_room(t_data *d, t_ray *ray, t_ray *checked, int x)
 		*ray, checked->dist, x), get_room_by_id(d, ray->room_id)->floor_text);
 	ray->dist = checked->dist;
 }
-
-void	raycast_all_screen(t_data *d, t_map_data *map)
-{
-	float	current_angle;
-	float	step;
-	int		x;
-	int		i;
-	t_range	screen_x;
-
-	current_angle = d->rot - d->fov_rad / 2;
-	step = d->fov_rad / WIN_SIZE_X;
-	x = 0;
-	screen_x.start = 0;
-	screen_x.end = WIN_SIZE_Y;
-	init_floors(d);
-	create_obj_raybox(d);
-	raycast_screen2(d, screen_x, current_angle, step);
-}

@@ -22,7 +22,7 @@ int					init_weapon_1(t_data *d, t_hud *hud);
 int					init_weapon_2(t_data *d, t_hud *hud);
 int					init_weapon_3(t_data *d, t_hud *hud);
 int					init_weapon_4(t_data *d, t_hud *hud);
-int					init_weapon_5(t_data *d, t_hud *hud);
+int					init_weapon_5(t_hud *hud);
 
 /* hud_perso.c */
 
