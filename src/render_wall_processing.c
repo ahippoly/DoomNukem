@@ -31,7 +31,6 @@ float calc_wall_hit_scale_x(t_wall wall, float scale_z)
 
 t_calced_walls check_inter_with_wall(t_wall wall, t_rot rot, t_point pos, t_rot look_rot)
 {
-    t_point inter;
     t_calced_walls res;
 
     res.dist = 9999;
@@ -57,7 +56,6 @@ t_calced_walls check_intersect_with_all_wall_rend(t_data *d, t_point pos, t_rot 
     int i;
     t_calced_walls res ;
     t_calced_walls tmp;
-    t_point inter;
     t_wall wall;
 
     i = 0;
@@ -106,12 +104,11 @@ t_calced_walls check_perp_wall(t_wall wall, t_point pos)
     return (res);
 }
 
-t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos)
+t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map)
 {
     int i;
     t_calced_walls res ;
     t_calced_walls tmp;
-    t_point inter;
     t_wall wall;
 
     i = 0;
@@ -236,7 +233,7 @@ void sort_props_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ca
     // }
 }
 
-void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls)
+void sort_perp_walls_dist(t_map_data *map, t_point pos, t_calced_walls *sorted_walls)
 {
     int i;
     int j;

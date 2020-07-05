@@ -31,14 +31,11 @@ int    malloc_sprite_gun(t_img *img[6])
 void    init_sprite(t_data *d)
 {
     int i;
-	t_sprite *sprite;
 
     i = 10;
     load_sprite_gun(d);
-    //load_sprite_mob(d);
-    
-    d->gun_ind = 0;   //Le sprite a afficher
-    d->sprite[d->gun_ind].index = 0;   //L'animation du sprite a afficher
+    d->gun_ind = 0;
+    d->sprite[d->gun_ind].index = 0;
     d->mob_ind = 15;
 }
 

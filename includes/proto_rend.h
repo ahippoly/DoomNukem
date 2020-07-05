@@ -45,8 +45,8 @@ void sort_ray_by_dist_player(t_data *d, t_point pos, t_rot current_angle, t_ray 
 void sort_ray_by_dist(t_data *d, t_point pos, t_rot current_angle, t_ray *sorted);
 
 t_calced_walls check_perp_wall(t_wall wall, t_point pos);
-t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map, t_point pos);
-void sort_perp_walls_dist(t_data *d, t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
+t_calced_walls check_perp_all_wall(t_data *d, t_map_data *map);
+void sort_perp_walls_dist(t_map_data *map, t_point pos, t_calced_walls *sorted_walls);
 t_ray check_inter_with_obj(t_obj *obj, t_rot rot, t_point pos, t_rot look_rot);
 t_ray check_perp_obj(t_obj *obj, t_point pos);
 void sort_perp_ray(t_data *d, t_point pos, t_ray *sorted);

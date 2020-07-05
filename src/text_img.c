@@ -144,10 +144,8 @@ void input_text_to_img(char *str, int size, int color, t_img to_fill)
 
 t_txt_img create_text_img(char *str, int size, int color, SDL_Point pos)
 {
-    //char charts[CHAR_NB][SIZE_Y][SIZE_X];
     char (*charts)[SIZE_Y][SIZE_X];
     t_txt_img txt;
-    int x_length;
     int len;
 
     charts = read_char_table();

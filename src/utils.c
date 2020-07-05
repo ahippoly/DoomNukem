@@ -465,27 +465,3 @@ void remove_color(unsigned int *pixels, int total_size, unsigned int color)
 		i++;
 	}
 }
-
-void convert_pixel_format(unsigned int *pixels, int total_size)
-{
-	int i;
-	unsigned char *pixel;
-	unsigned char tmp;
-
-	i = 0;
-	while (i < total_size)
-	{
-		pixel = (char*)&pixels[i];
-		// tmp = pixel[2];
-		// pixel[2] = pixel[1];
-		// pixel[1] = tmp;
-		//swap_char(pixel, pixel + 3);
-		//printf("pix : 0 = %i, 3 = %i\n", pixel[0], pixel[3]);
-		// pixel[0] = 0;
-		// pixel[1] = 0;
-		// pixel[2] = 0;
-		// pixel[3] = 0;
-		i++;
-	}
-}
-

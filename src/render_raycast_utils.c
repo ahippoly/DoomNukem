@@ -34,6 +34,8 @@ t_room	*get_room_by_id(t_data *d, int room_id)
 {
 	if (room_id > -1)
 		return (&d->map.room_list[room_id]);
+	else
+		return (NULL);	    //ATTENTION
 }
 
 void	add_to_queue(int *nb, t_ray *queue, t_ray *checked)
