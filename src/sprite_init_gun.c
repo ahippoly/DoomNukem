@@ -1,49 +1,16 @@
 #include "proto_global.h"
 
-// void    clean_sprite_gun(t_data *d)
-// {
-//     int i;
-
-//     i = 0;
-//     while (i < 6)
-//     {
-//         //if (d->sprite->img[i])
-//             // free(&d->sprite->img[i]);
-//         ft_bzero(&d->sprite->img[i], sizeof(t_img));
-//         i++;
-//     }
-// }
-
-int    malloc_sprite_gun(t_img *img[6])
-{
-    int i;
-
-    i = 0;
-    while (i < 6)
-    {
-    if (!(img[i] = ft_memalloc(sizeof(t_img))))
-        return (EXIT_FAILURE);
-    i++;
-    }
-    return (0);
-}
-
 void    init_sprite(t_data *d)
 {
-    int i;
-
-    i = 10;
     load_sprite_gun(d);
     d->gun_ind = 0;
     d->sprite[d->gun_ind].index = 0;
-    d->mob_ind = 15;
 }
 
 int    load_sprite_gun(t_data *d)
 {
     SDL_Texture *texture;
     
-
     texture = load_sprite_bmp(MELEE_PATH, d);
     d->sprite[MELEE] = sprite_init_melee(texture);
     
@@ -61,8 +28,6 @@ int    load_sprite_gun(t_data *d)
     
     texture = load_sprite_bmp(DEATH_DEALER_PATH, d);
     d->sprite[DEATH_DEALER] = sprite_init_dd(texture);
-
-
 
     return (EXIT_SUCCESS);
 }

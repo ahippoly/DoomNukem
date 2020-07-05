@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hud.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/05 23:05:27 by robin             #+#    #+#             */
+/*   Updated: 2020/07/05 23:06:21 by robin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HUD_H
 # define HUD_H
 
 # include "render.h"
 
-/* Colors */
+/*
+** Colors
+*/
 
 # define HEALTH_BG 0x1DB100
 # define HEALTH 0x76f013
@@ -15,7 +29,9 @@
 # define BLACK 0
 # define WHITE 0xFFFFFF
 
-/* weapons */
+/*
+** Weapons
+*/
 
 # define WEAPON_NB		6
 # define WEAPON_PATH_0	"asset/img/hud/revolver.bmp"
@@ -45,7 +61,9 @@
 # define WEAPON_SSG_Z_FORCE 0.02
 # define WEAPON_SSG_DELAY 100
 
-/* perso */
+/*
+** perso
+*/
 
 # define PERSO_NAME_0 "Loni"
 # define PERSO_NAME_1 "Ray"
@@ -56,39 +74,42 @@
 # define PERSO_PATH_0 "asset/img/hud/perso_w.bmp"
 # define PERSO_PATH_1 "asset/img/hud/perso_m.bmp"
 
-/* other hud icons */
+/*
+** other hud icons
+*/
 
 # define HEALTH_ICON_PATH "asset/img/hud/health.bmp"
 # define AMMO_ICON_PATH "asset/img/hud/bullet.bmp"
 
-/* inventory */
+/*
+** inventory
+*/
 
 # define HEALTHPACK_PATH "asset/img/hud/doctor.bmp"
 # define KEY_PATH "asset/img/hud/key.bmp"
 
-
 typedef struct		s_weapon
 {
 	int				id;
-	int				dammage; // pts de dégat
+	int				dammage;
 	int				attack_delay;
 	int				time;
 	float			z_force;
-	float			range; // portée d'une arme
-	int				ammo_left; // munitions restantes
-	int				capacity; // capacité max de chargement
+	float			range;
+	int				ammo_left;
+	int				capacity;
 	int				reload_delay;
 	char			is_reloading;
 	char			shoot_repeat;
 	char			*name;
-	SDL_Surface 	*surface;
-	SDL_Texture 	*texture;
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
 }					t_weapon;
 
 typedef struct		s_perso
 {
-	int				hp_max; //health point max
-	int				hp; //health point
+	int				hp_max;
+	int				hp;
 	SDL_Surface		*surface;
 	SDL_Texture		*texture;
 }					t_perso;
@@ -111,14 +132,14 @@ typedef struct		s_hud
 	int				current_weap_id;
 	int				current_perso_id;
 	int				hp;
-	SDL_Surface 	*s_perso_w;
+	SDL_Surface		*s_perso_w;
 	SDL_Surface		*message_ammo_s;
 	SDL_Surface		*message_health_s;
 	SDL_Texture		*message_ammo_t;
-	SDL_Texture		*health_texture; //icon health
-	SDL_Texture		*ammo_texture; //icon ammo
+	SDL_Texture		*health_texture;
+	SDL_Texture		*ammo_texture;
 	SDL_Texture		*message_health_t;
-	SDL_Texture 	*t_perso_w;
+	SDL_Texture		*t_perso_w;
 	t_weapon		**perso_weapon;
 	t_perso			perso;
 	SDL_Color		color;

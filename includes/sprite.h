@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 00:05:54 by robin             #+#    #+#             */
+/*   Updated: 2020/07/06 00:05:55 by robin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SPRITE_H
 # define SPRITE_H
 
@@ -25,13 +37,6 @@
 # define AFRIT 8
 # define PYRO 9
 # define MOB_INDEX 10
-
-// # define SPRITE_PATH_0 "Sprites/Guns/Melee.bmp"
-// # define SPRITE_PATH_1 "Sprites/Guns/Revolver.bmp"
-// # define SPRITE_PATH_2 "Sprites/Guns/SuperShotgun.bmp"
-// # define SPRITE_PATH_3 "Sprites/Guns/AssaultRifle.bmp"
-// # define SPRITE_PATH_4 "Sprites/Guns/lmg.bmp"
-// # define SPRITE_PATH_5 "Sprites/Guns/DeathDealer.bmp"
 
 # define MELEE 0
 # define REVOLVER 1

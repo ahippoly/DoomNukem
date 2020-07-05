@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   global_header.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/05 23:03:48 by robin             #+#    #+#             */
+/*   Updated: 2020/07/05 23:04:07 by robin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GLOBAL_HEADER_H
 # define GLOBAL_HEADER_H
 
@@ -34,18 +46,18 @@
 # define GAMEOVER 3
 # define EDITOR 4
 
-typedef struct  s_coord
+typedef struct		s_coord
 {
-    int x;
-    int y;
-    int z;
-}               t_coord;
+	int x;
+	int y;
+	int z;
+}					t_coord;
 
 typedef struct		s_point
 {
-    float			x;
-    float			y;
-}              		t_point;
+	float			x;
+	float			y;
+}					t_point;
 
 typedef	struct		s_line
 {
@@ -55,45 +67,42 @@ typedef	struct		s_line
 
 typedef struct		s_draw
 {
-    int				start_x;
-    int				end_x;
+	int				start_x;
+	int				end_x;
 	int				start_y;
-    int				end_y;
+	int				end_y;
 	int				step_y;
-}               	t_draw;
+}					t_draw;
 
 typedef struct		s_range
 {
-    int				start;
-    int				end;
-}               	t_range;
+	int				start;
+	int				end;
+}					t_range;
 
 typedef struct		s_frange
 {
-    float			start;
-    float			end;
-}               	t_frange;
+	float			start;
+	float			end;
+}					t_frange;
 
-typedef struct      s_p_size
-{   
-    float           pos;
-    float           size;
-}                   t_p_size;
+typedef struct		s_p_size
+{
+	float			pos;
+	float			size;
+}					t_p_size;
 
-typedef struct      s_size
-{   
-    int             w;
-    int             h;
-}                   t_size;
+typedef struct		s_size
+{
+	int				w;
+	int				h;
+}					t_size;
 
-typedef	struct 		s_rot
+typedef	struct		s_rot
 {
 	float			rot;
 	float			cos_rot;
 	float			sin_rot;
 }					t_rot;
-
-
-
 
 #endif

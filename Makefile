@@ -26,7 +26,7 @@ SRC_NAME =	$(sort \
 			hud_weapon.c hud_init_weapons.c hud_perso.c \
 			hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 			ttf_init.c hud_init.c \
-			sprite_main.c sprite_init_gun.c sprite_init_mob.c mob_anim.c gun_anim.c sound.c \
+			sprite_main.c sprite_init_gun.c gun_anim.c sound.c \
 			gameplay_mobs.c ssprite.c gameplay_props.c gameplay_weapon.c \
 			bmp_reader.c \
 			render_skybox.c render_ray_utils.c\
