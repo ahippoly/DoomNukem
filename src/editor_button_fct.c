@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-//OK
+//OKK
 
 void	select_next_texture(t_env *env)
 {
@@ -58,9 +58,4 @@ void	set_room_text(t_env *env)
 	if (env->selected_wall_id > -1)
 		if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) != -1)
 			env->room_text[tmp] = env->selected_texture;
-}
-
-void	create_room_button(t_env *env)
-{
-	env->selected_mouse_mode = MOUSE_MODE_CREATE_ROOM;
 }

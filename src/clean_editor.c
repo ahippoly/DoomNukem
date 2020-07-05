@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-// OK
+// OKK
 
 /* text_list[NB_TEXTURE] */
 int				destroy_texture_tab(SDL_Texture **tab, int size)

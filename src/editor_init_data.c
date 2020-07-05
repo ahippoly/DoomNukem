@@ -1,25 +1,7 @@
 #include "proto_global.h"
 
-// OK
-
-int			init_sdl_ressources(t_env *env) //SECURE
-{
-    env->win = NULL;
-    if(0 != SDL_Init(SDL_INIT_VIDEO))
-		exit_editor(env, "error : failed to init SDL");
-    if (!(env->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                              WIN_SIZE_X, WIN_SIZE_Y, SDL_WINDOW_SHOWN)))
-        exit_editor(env, "error : failed to create window");
-    if (!(env->rend = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_ACCELERATED)))
-        exit_editor(env, "error : failed to create Renderer");
-    if (!(env->screen = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y)))
-        exit_editor(env, "error : failed to create texture");
-	if (!(env->editor_grid = SDL_CreateTexture(env->rend, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, GRID_SIZE_X, GRID_SIZE_Y)))
-        exit_editor(env, "error : failed to create texture");
-	return (0);
-}
-
-int			load_text_list(t_env *env) //SECURE
+// OKK
+static int	load_text_list(t_env *env)
 {
     int		i;
 	char	*path;
@@ -45,56 +27,11 @@ int			load_text_list(t_env *env) //SECURE
 	return (0);
 }
 
-void	init_texture(t_env *env)
+void		init_texture(t_env *env)
 {
 	if (!(env->text_list = malloc_texture_tab(NB_TEXTURE)))
 		exit_editor(env, "error: failed to malloc");
 	load_text_list(env);
-}
-
-/* buttons_lst[NB_BUTTONS] */
-int		malloc_editor_button(t_env *env)
-{
-	if (!(env->buttons_lst = malloc_button(NB_BUTTONS)))
-		exit_editor(env, "error: failes to malloc editor buttons");
-	return (0);
-}
-
-/* j'ai decoupé en deux fonctions l'initialisation des bouttons */
-void	init_create_button(t_env *env)
-{
-	env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(0.85 * WIN_SIZE_X, 0.020 * WIN_SIZE_Y)), create_text_img("del", 2, 0xFFFFFFFF, create_point(0.85 * WIN_SIZE_X, 0.02 * WIN_SIZE_Y)), BUTTON_DEL);
-    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_LEFT);
-    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_RIGHT);
-    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), BUTTON_CREATE_ROOM);
-    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), BUTTON_MAP_OUTPUT);
-    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), BUTTON_SET_PLAYER_SPAWN);
-    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_LEFT);
-    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_RIGHT);
-    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 1, 0xFFDDDDDD, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), create_text_img("Place", 1, 0xFF88FF88, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), BUTTON_MOB_PLACING);
-    env->buttons_lst[BUTTON_FLOOR_TEXT] = create_button(create_text_img("Set_floor_text", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), create_text_img("Set_floor_text", 1, 0xFFDDDDDD, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), BUTTON_FLOOR_TEXT);
-}
-
-void	init_select_button(t_env *env)
-{
-    env->buttons_fct[BUTTON_DEL] = del_selected_wall;
-    env->buttons_fct[BUTTON_TEXT_LEFT] = select_previous_texture;
-    env->buttons_fct[BUTTON_TEXT_RIGHT] = select_next_texture;
-    env->buttons_fct[BUTTON_CREATE_ROOM] = create_room_button;
-    env->buttons_fct[BUTTON_MAP_OUTPUT] = map_output;
-    env->buttons_fct[BUTTON_SET_PLAYER_SPAWN] = set_player_spawn_mode;
-    env->buttons_fct[BUTTON_MOB_LEFT] = select_previous_mob;
-    env->buttons_fct[BUTTON_MOB_RIGHT] = select_next_mob;
-    env->buttons_fct[BUTTON_MOB_PLACING] = mob_placing_mode;
-    env->buttons_fct[BUTTON_FLOOR_TEXT] = set_room_text;
-}
-
-/* appel les fonctions plus hautes pour initialiser les bouttons*/
-void	init_buttons(t_env *env)
-{
-	malloc_editor_button(env);
-	init_create_button(env);
-	init_select_button(env);
 }
 
 void init_mouse_mode(t_env *env)
@@ -108,7 +45,7 @@ void init_mouse_mode(t_env *env)
 
 void init_txt_img(t_env *env)
 {
-	if (!(env->txt_lst = malloc_txtimg(NB_TXT))) // MALLOC
+	if (!(env->txt_lst = malloc_txtimg(NB_TXT)))
 		exit_editor(env, "error: failed to malloc texture list");
     env->txt_lst[TXT_MAP_EDITOR] = create_text_img("map_editor", 2, 0xFFDDDDDD, create_point(0.005 * WIN_SIZE_X, 0.012 * WIN_SIZE_Y));
     env->txt_lst[TXT_TEXT_SELECT] = create_text_img("Texture", 1, 0xFFDDDDDD, create_point(0.798 * WIN_SIZE_X, 0.100 * WIN_SIZE_Y));

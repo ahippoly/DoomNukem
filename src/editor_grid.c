@@ -12,8 +12,7 @@
 
 #include "proto_global.h"
 
-// OK
-
+// OKK
 void			create_grid(unsigned int *pixels, float scale, t_env *env)
 {
 	int			i;

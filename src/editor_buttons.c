@@ -1,6 +1,6 @@
 #include "proto_global.h"
 
-//OK
+//OKK
 
 int is_cursor_in_hitbox(t_env *env, SDL_Rect pos_size)
 {

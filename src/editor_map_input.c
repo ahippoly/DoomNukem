@@ -12,9 +12,8 @@
 
 #include "proto_global.h"
 
-// OK
-
-void		*ft_memcpy2(void *s1, const void *s2, size_t n)
+// OKK
+static void	*ft_memcpy2(void *s1, const void *s2, size_t n)
 {
 	char	*c1;
 	char	*c2;
@@ -29,7 +28,7 @@ void		*ft_memcpy2(void *s1, const void *s2, size_t n)
 	return (s1);
 }
 
-void	map2env_icon(t_env *e, t_map_data *map, int i) //enfant de map2env
+static void	map2env_icon(t_env *e, t_map_data *map, int i)
 {
 	e->icon_count = map->icon_count;
 	ft_memcpy2(e->icon_list , map->icon_list, sizeof(t_icon) * map->icon_count);
@@ -44,7 +43,7 @@ void	map2env_icon(t_env *e, t_map_data *map, int i) //enfant de map2env
 	free(map->icon_list);
 }
 
-void	map2env_room(t_env *e, t_map_data *map, int i) //enfant de map2env
+static void	map2env_room(t_env *e, t_map_data *map, int i)
 {
 	e->room_count = map->room_count;
 	i = 0;
@@ -58,7 +57,7 @@ void	map2env_room(t_env *e, t_map_data *map, int i) //enfant de map2env
 	free(map->room_list);
 }
 
-void	map2env(t_env *e, t_map_data *map) // A CHECK
+static void	map2env(t_env *e, t_map_data *map)
 {
 	int	i;
 
@@ -74,7 +73,7 @@ void	map2env(t_env *e, t_map_data *map) // A CHECK
 	// print_player_spawn(e);
 }
 
-void load_map(t_env *e, int ac, char **av)
+void		load_map(t_env *e, int ac, char **av)
 {
 	t_map_data map;
 	

@@ -1,10 +1,10 @@
 #include "proto_global.h"
 
-// OK
+// OKK
 
-void init_input(t_env *env)
+void		init_input(t_env *env)
 {
-	if (!(env->input_lst = malloc_input(NB_INPUT))) // MALLOC
+	if (!(env->input_lst = malloc_input(NB_INPUT)))
 		exit_editor(env, "error : failed to malloc");
     env->input_lst[INPUT_TRANSPARENCY] = create_t_input(set_sdl_rect(0.835 * WIN_SIZE_X, 0.650 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 0, 100);
     env->input_lst[INPUT_BEGIN_P1] = create_t_input(set_sdl_rect(0.200 * WIN_SIZE_X, 0.720 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 20, 190);
@@ -16,7 +16,7 @@ void init_input(t_env *env)
     env->input_lst[INPUT_COLLIDE] = create_t_input(set_sdl_rect(0.530 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y, 0.060 * WIN_SIZE_X, 0.040 * WIN_SIZE_Y), 1, 1);
 }
 
-void	init_img(t_env *env) //MALLOC & SECURE
+static void	init_img(t_env *env)
 {
 	if (!(env->img_list = malloc_texture_tab(NB_IMG)))
 		exit_editor(env, "error : failed to malloc texture tab");
@@ -44,7 +44,7 @@ void	init_img(t_env *env) //MALLOC & SECURE
 		exit_editor(env, "error : failed to transform bmp to texture");
 }
 
-void init_env2(t_env *env) //MALLOC & SECURE
+static void	init_env2(t_env *env)
 {
     env->p1_height = create_t_range(0, 10);
     env->p2_height = create_t_range(0, 10);
@@ -59,7 +59,7 @@ void init_env2(t_env *env) //MALLOC & SECURE
     env->quit = 0;
 }
 
-int		malloc_env(t_env *env)
+static int		malloc_env(t_env *env)
 {
 	if (!(env->room_height = malloc_range(NB_WALL_MAX)))
 		exit_editor(env, "error: failed to malloc rooms");
@@ -75,7 +75,7 @@ int		malloc_env(t_env *env)
 		exit_editor(env, "error : failed to malloc");
 }
 
-void	init_env(t_env *env) //MALLOC
+void			init_env(t_env *env)
 {
 	malloc_env(env);
     init_texture(env);

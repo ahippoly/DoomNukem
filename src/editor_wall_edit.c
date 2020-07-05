@@ -1,6 +1,7 @@
 #include "proto_global.h"
 
-float calc_coef_dir(SDL_Point p1, SDL_Point p2)
+//OKK
+static float calc_coef_dir(SDL_Point p1, SDL_Point p2)
 {
     int delta_x;
     int delta_y;
@@ -10,7 +11,7 @@ float calc_coef_dir(SDL_Point p1, SDL_Point p2)
     return ((float)delta_y / delta_x);
 }
 
-int is_cursor_in_wall(t_point cursor, t_point p1, t_point p2)
+static int is_cursor_in_wall(t_point cursor, t_point p1, t_point p2)
 {
     float wall_pos_ratio;
     int wall_pos_y;

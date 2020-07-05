@@ -12,7 +12,7 @@
 
 #include "proto_global.h"
 
-// OK
+// OKK
 
 void change_selected_wall_texture(t_env *env, int texture_id)
 {
@@ -44,3 +44,9 @@ void select_previous_texture(t_env *env)
         env->selected_texture--;
     change_selected_wall_texture(env, env->selected_texture);
 }
+
+void	create_room_button(t_env *env)
+{
+	env->selected_mouse_mode = MOUSE_MODE_CREATE_ROOM;
+}
+
