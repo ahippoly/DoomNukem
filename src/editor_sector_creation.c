@@ -1,5 +1,7 @@
 #include "proto_global.h"
 
+//OK
+
 t_wall_ref ***init_wall_ref(t_size map_size)
 {
     t_wall_ref ***wall_ref;
@@ -42,7 +44,6 @@ void reference_wall(t_point pos, int wall_id, t_env *env)
 {
     t_wall_ref *new_ref;
     // faut mettre le first maillon de la liste chainee
-    
     new_ref = alloc_wall(wall_id);
     new_ref->next = env->map_wall_ref[(int)pos.y][(int)pos.x];
     env->map_wall_ref[(int)pos.y][(int)pos.x] = new_ref;
@@ -70,12 +71,21 @@ void recreate_full_map_ref(t_env *env)
         add_wall_ref_point(env->wall_list[i++], env);
 }
 
-void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
+void			process_print_wall(int one_at_least, t_wall_ref *ref, int fd) //enfant de print_wall_ref
 {
-    int i;
-    int j;
-    int one_at_least;
-    t_wall_ref *ref;
+	one_at_least = 1;
+	ft_putstr_fd(ft_itoa(ref->wall_id), fd);
+	ref = ref->next;
+	if (ref)
+		ft_putstr_fd(",", fd);
+}
+
+void			print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
+{
+    int			i;
+    int			j;
+    int 		one_at_least;
+    t_wall_ref	*ref;
 
     //recreate_full_map_ref(env);
     i = 0;
@@ -87,17 +97,9 @@ void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
             ref = map_wall_ref[i][j];
             one_at_least = 0;
             while (ref)
-            {
-                one_at_least = 1;
-                ft_putstr_fd(ft_itoa(ref->wall_id), fd);
-                ref = ref->next;
-                if (ref)
-                    ft_putstr_fd(",", fd);
-            }
+				process_print_wall(one_at_least, ref, fd);
             if (one_at_least == 0)
-            {
                 ft_putstr_fd("-1", fd);
-            }
             ft_putstr_fd(" ", fd);
             j++;
         }
@@ -107,7 +109,7 @@ void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
     ft_putstr_fd("\n", fd);
 }
 
-void recreate_room_height(t_env *env)
+void	recreate_room_height(t_env *env)
 {
 	int nb_deleted;
 	int i;
@@ -139,35 +141,39 @@ void recreate_floor_text(t_env *env)
 	}
 }
 
-void recreate_room_list(t_env *env)
+void		process_current_room(t_env *env, t_room	*current_room, int current_room_id, int i)
 {
-    int i;
-    int begin;
-    int current_room_id;
-    t_room *current_room;
+	int		begin;
+	
+	begin = i;
+	current_room_id = env->wall_list[begin].room_id_ref;
+	while (i < env->wall_count && current_room_id == env->wall_list[i].room_id_ref)
+		i++;
+	current_room = &env->room_list[current_room_id];
+	current_room->room_id = current_room_id;
+	current_room->wall_ref.start = begin;
+	current_room->wall_ref.end = i;
+	current_room->nb_wall = i - begin;
+	current_room->height = env->room_height[current_room_id];
+	current_room->floor_text = env->room_text[current_room_id];
+}
+
+void		recreate_room_list(t_env *env)
+{
+    int		i;
+    int		current_room_id;
+    t_room	*current_room;
 
     i = 0;
     free(env->room_list);
-	if (!(env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count))) //MALLOC
+	if (!(env->room_list = (t_room*)p_malloc(sizeof(t_room) * env->room_count)))
 		exit_editor(env, "error: failed to malloc");
 	recreate_room_height(env);
 	recreate_floor_text(env);
     while (i < env->wall_count)
     {
         if (env->wall_list[i].id != -1 && env->wall_list[i].room_id_ref != -1)
-        {
-            begin = i;
-            current_room_id = env->wall_list[begin].room_id_ref;
-            while (i < env->wall_count && current_room_id == env->wall_list[i].room_id_ref)
-                i++;
-            current_room = &env->room_list[current_room_id];
-            current_room->room_id = current_room_id;
-            current_room->wall_ref.start = begin;
-            current_room->wall_ref.end = i;
-            current_room->nb_wall = i - begin;
-			current_room->height = env->room_height[current_room_id];
-			current_room->floor_text = env->room_text[current_room_id];
-        }
+			process_current_room(env, current_room, current_room_id, i);
         i++;
     }
 }
