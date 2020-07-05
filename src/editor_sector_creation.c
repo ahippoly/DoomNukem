@@ -107,22 +107,6 @@ void print_wall_ref(t_wall_ref ***map_wall_ref, t_size map_size, int fd)
     ft_putstr_fd("\n", fd);
 }
 
-// void create_room(t_env *env, int begin, int end)
-// {
-//     t_room *new;
-//     int i;
-
-//     if (!(new = (t_room*)malloc(sizeof(t_room))))
-//         exit_with_msg("Failed to malloc");
-//     new->nb_wall = end - begin;
-//     new->wall_ref.start = begin;
-//     new->wall_ref.end = end;
-//     new->room_id = env->room_count++;
-//     new->next = env->room_list;
-//     env->room_list = new;
-//     //printf("create room id start = %i, id end = %i\n", new->wall_ref.start, new->wall_ref.end);
-// }
-
 void recreate_room_height(t_env *env)
 {
 	int nb_deleted;
