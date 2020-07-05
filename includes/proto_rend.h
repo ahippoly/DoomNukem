@@ -67,6 +67,12 @@ void	raycast_screen(t_data *d, t_range screen_x, float start_angle, float step);
 void	*raycast_thread(void *data);
 void	raycast_thread_init(t_data *d);
 void	raycast_all_screen(t_data *d, t_map_data *map);
+void	raycast_screen2(t_data *d, t_range screen_x, float start_angle, float step);
+//render_raycast_utils.c
+void	clear_p_tab(t_data *d, t_range screen_x, unsigned int *p_tab);
+t_room	*get_room_by_id(t_data *d, int room_id);
+void	add_to_queue(int *nb, t_ray *queue, t_ray *checked);
+void	draw_same_room(t_data *d, t_ray *ray, t_ray *checked, int x);
 
 //render_world_edit.c
 int		grab_wall(t_data *d, t_point pos, t_rot look_rot);

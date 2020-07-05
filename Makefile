@@ -16,7 +16,7 @@ SRC_NAME =	$(sort \
 			tool_sdlpoint_arithmetic.c utils.c render_minimap.c render_minimap2.c \
 			bresenham.c render_init_data.c render_init_data2.c render_event_gesture.c \
 			render_wall_processing.c render_event_poll.c render_texture_loading.c \
-			text_img.c render_movement.c render_movement_utils.c render_gravity.c image_gesture2.c render_raycast.c \
+			text_img.c render_movement.c render_movement_utils.c render_gravity.c image_gesture2.c render_raycast.c render_raycast_utils.c\
 			render_world_edit.c render_collide_z.c \
 			render_draw_floor.c render_draw_floor2.c render_props.c render_obj.c render_obj_convert.c render_draw_slice.c \
 			render_ray_process.c render_pixel_put.c \

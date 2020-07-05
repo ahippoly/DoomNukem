@@ -108,5 +108,10 @@ typedef	struct		s_thread
 	t_data			*d;
 }					t_thread;
 
+typedef	struct		s_data_x
+{
+	t_data			*d;
+	int				x;
+}					t_data_x;
 
 #endif
