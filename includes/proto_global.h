@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 01:03:06 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:31:22 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_point			create_t_point(float x, float y);
 t_range			create_t_range(int start, int end);
 t_size			create_t_size(int w, int h);
 t_img			ft_load_bmp(char *file);
-t_img			ft_load_bmp2(char *file, int convert);
+t_img			ft_load_bmp2(char *file, int convert, int bpp);
 void			sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point			segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3,
 					SDL_Point p4);
@@ -102,5 +102,23 @@ SDL_Point		convert_t_point(t_point point);
 */
 
 void			exit_game(t_data *d, char *msg);
+
+
+/*
+** bmp_reader.c
+*/
+
+int		hex2dec(unsigned char *mem, int bytes)
+char	*read_pixels(int fd, char *str)
+char	*convert2bgra(char *str, int w, int h)
+void	go_next_line(int *x, int *y, int w)
+void	convert_bmp_type32(char *pixel, int convert)
+
+void	read_bpp32(t_img *text, int fd, int convert)
+void	read_bpp24(t_img *text, int fd)
+void	read_file_pixels(t_img text, int bpp, int fd, int convert)
+t_img	bmp_error(t_img *res, int fd, char *msg)
+void	print_bmp_param(unsigned char *head)
+
 
 #endif

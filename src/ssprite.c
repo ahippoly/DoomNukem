@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 01:54:30 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:01:48 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void init_sprites_img(t_data *d)
 {
-	d->sprite_img[SPRITE_ID_AFRIT] = ft_load_bmp2(SPRITE_PATH_AFRIT, BMP_TYPE_ABGR);
+	d->sprite_img[SPRITE_ID_AFRIT] = ft_load_bmp2(SPRITE_PATH_AFRIT, BMP_TYPE_ABGR, 0);
 	if (d->sprite_img[SPRITE_ID_AFRIT].w == -42)
 		exit_game(d, "error : failed to init sprites images");
-	d->sprite_img[SPRITE_ID_PYRO] = ft_load_bmp2(SPRITE_PATH_PYRO, BMP_TYPE_BGRA);
+	d->sprite_img[SPRITE_ID_PYRO] = ft_load_bmp2(SPRITE_PATH_PYRO, BMP_TYPE_BGRA, 0);
 }
 
 void init_sprites_img_env(t_env *e)

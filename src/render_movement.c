@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:40:04 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 20:16:26 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:10:31 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,10 @@ void	move_with_collide_player(t_data *d, t_point *pos, t_rot rot,
 	{
 		move_attempt(d, pos, cos(rot.rot - res.obj_ref->rotation.rot)
 			* speed, res.obj_ref->rotation);
-		move_grabbed_wall(d, res.obj_ref->rotation,
-			cos(rot.rot - res.obj_ref->rotation.rot) * speed);
 	}
 	else if (will_collide < 1)
 	{
 		move_attempt(d, pos, speed, rot);
-		move_grabbed_wall(d, rot, speed);
 	}
 	d->z_ground = set_room_ground(d, *pos);
 }

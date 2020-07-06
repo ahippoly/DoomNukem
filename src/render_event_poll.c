@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:06:15 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 23:31:52 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:10:57 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	handle_poll_event(t_data *d)
 			d->rot += MOUSE_SENS * event.motion.xrel * M_PI_2;
 			d->screen_height = HALF_WIN_SIZE_Y + (HALF_WIN_SIZE_Y
 			- event.motion.y) * Y_VIEW_RANGE;
-			move_z_grabbed_wall(d, -(float)event.motion.yrel
-			* MOVE_WALL_Z_SPEED / WIN_SIZE_Y);
 		}
 		if (event.type == SDL_KEYDOWN)
 			handle_poll_keydown(d, &event);

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 01:57:00 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:00:55 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void init_data_var(t_data *d)
     d->rot = -1.00015592 * M_PI_2; 
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
-	d->skybox = ft_load_bmp2(SKY_PATH_0, BMP_TYPE_BGRA);
+	d->skybox = ft_load_bmp2(SKY_PATH_0, BMP_TYPE_BGRA, 0);
 }
 
 void init_data(t_data *d, int ac, char **av)

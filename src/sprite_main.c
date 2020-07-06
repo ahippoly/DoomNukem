@@ -19,7 +19,7 @@ SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
 	t_img img;
 
     texture = NULL;
-	img = ft_load_bmp2(str, BMP_TYPE_ARGB);
+	img = ft_load_bmp2(str, BMP_TYPE_ARGB, 0);
 	texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING, img.w, img.h);
 	SDL_UpdateTexture(texture, NULL, img.pixels, img.w * 4);
 	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
