@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:24 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 20:44:01 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 21:07:16 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int read_paramf(char *chunk, char *key, float *to_fill)
     return (error);
 }
 
-float calc_line_angle(t_point p1, t_point p2)
+float		calc_line_angle(t_point p1, t_point p2)
 {
-    float a;
+    float	a;
 
     if (p2.x - p1.x < INTER_TOLERANCE && p2.x - p1.x > - INTER_TOLERANCE)
         a = 2147483647;
