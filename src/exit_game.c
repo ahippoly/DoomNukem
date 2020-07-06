@@ -76,8 +76,6 @@ void			free_sdl_ptr_data(t_data *d)
 		SDL_DestroyRenderer(d->rend);
 	if (d->mini_map)
 		SDL_DestroyTexture(d->mini_map);
-	// if (d->t_player_pos)
-	// 	SDL_DestroyTexture(d->t_player_pos);
 	if (d->hud_texture)
 		SDL_DestroyTexture(d->hud_texture);
 	if (d->gameover_texture)

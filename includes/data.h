@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 04:12:35 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 16:31:27 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct		s_data
 	SDL_Window		*win; //ok
 	SDL_Texture		*screen; //ok
 	SDL_Texture		*mini_map; //ok
-	// SDL_Texture		*t_player_pos; on utilise -------- ??
 	SDL_Event		e;
 	SDL_Rect		mini_map_player_pos;
 	t_map_data		map;
@@ -72,7 +71,6 @@ typedef struct		s_data
 	int				mob_ind;
 	int				mobs_on_screen;
 	FMOD_SYSTEM		*system;
-//	SDL_Texture		*displayed_gun; --------------pas utilisè ?
 	SDL_Rect		src_gun;
 	SDL_Rect		dst_gun;
 	unsigned int	*p_hud; //ok
