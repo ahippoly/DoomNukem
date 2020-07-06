@@ -6,12 +6,14 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:24 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 20:35:53 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:44:01 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
+
+//OK
 int		read_file(char *path_file) //pas utilisée
 {
     int fd;

@@ -6,27 +6,15 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:35 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 20:41:09 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 21:01:02 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-int		read_wall(char *line, t_wall *wall)
+//OK
+static void	set_wall(t_wall *wall)
 {
-    int error;
-
-    error = 0;
-    error += read_param(line, "id", &wall->id);
-    error += read_paramf(line, "p1", &wall->p1.x);
-    error += read_paramf(line, "p2", &wall->p2.x);
-    error += read_param(line, "p1_height", &wall->p1_height.start);
-    error += read_param(line, "p2_height", &wall->p2_height.start);
-    error += read_param(line, "texture_id", &wall->texture_id);
-    error += read_param(line, "room_id_ref", &wall->room_id_ref);
-    error += read_param(line, "transparency", &wall->transparency);
-    error += read_param(line, "can_collide", &wall->can_collide);
-
     wall->length = hypot(wall->p2.x - wall->p1.x, wall->p2.y - wall->p1.y);
     wall->rotation = calc_line_angle(wall->p1, wall->p2);
     wall->alpha = (float)(100 - wall->transparency) / 100;
@@ -34,13 +22,39 @@ int		read_wall(char *line, t_wall *wall)
 	wall->p1_z_size = (float)(wall->p1_height.end - wall->p1_height.start) / UNIT;
 	wall->p2_z_start = (float)wall->p2_height.start / UNIT;
 	wall->p2_z_size = (float)(wall->p2_height.end - wall->p2_height.start) / UNIT;
-
 	wall->z_text_offset = 0;
-    if (error > 0)
-	{
-        ft_putendl("error while assigning value to wall on map reader\n");
+}
+
+int		read_param_wall(char *line, t_wall *wall)
+{
+	if ((read_param(line, "id", &wall->id)) == 1)
 		return (-1);
-	}
+	if ((read_param(line, "id", &wall->id)) == 1)
+		return (-1);
+	if ((read_paramf(line, "p1", &wall->p1.x)) == 1)
+		return (-1);
+	if ((read_paramf(line, "p2", &wall->p2.x)) == 1)
+		return (-1);
+	if ((read_param(line, "p1_height", &wall->p1_height.start)) == 1)
+		return (-1);
+	if ((read_param(line, "p2_height", &wall->p2_height.start)) == 1)
+		return (-1);
+	if ((read_param(line, "texture_id", &wall->texture_id)) == 1)
+		return (-1);
+	if ((read_param(line, "room_id_ref", &wall->room_id_ref)) == 1)
+		return (-1);
+	if ((read_param(line, "transparency", &wall->transparency)) == 1)
+		return (-1);
+	if ((read_param(line, "can_collide", &wall->can_collide)) == 1)
+		return (-1);
+	return (0);
+}
+
+int		read_wall(char *line, t_wall *wall)
+{
+	if ((read_param_wall(line, wall)) < 0)
+		return (-1);
+	set_wall(wall);
 	return (0);
 }
 
