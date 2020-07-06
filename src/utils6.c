@@ -6,23 +6,11 @@
 /*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:05:22 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 16:13:57 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 16:41:17 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
-
-void		sort_int(int *a, int *b)
-{
-	int *tmp;
-
-	if (*a > *b)
-	{
-		tmp = a;
-		a = b;
-		b = tmp;
-	}
-}
 
 void		*ft_memcpy_int(unsigned int *dst, const unsigned int *src, size_t n)
 {
@@ -65,9 +53,4 @@ t_rot		get_angle(t_point pos1, t_point pos2)
 	}
 	rot.sin_rot = sin(rot.rot);
 	return (rot);
-}
-
-float		ft_interpolate(float val1, float val2, float scale)
-{
-	return (val1 * (1 - scale) + val2 * (scale));
 }

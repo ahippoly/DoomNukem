@@ -6,7 +6,7 @@
 /*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 15:19:44 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 16:41:30 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void			put_pixel_transparency(unsigned int *pixels, SDL_Rect pos_size,
 int				is_equ_tolerance(float value1, float value2, float tolerance);
 float			get_float_part(float value);
 t_point			sdl_p_to_t_p(SDL_Point p);
-float			ft_interpolate(float val1, float val2, float scale);
 
 void			swap_char(char *a, char *b);
 void			remove_color(unsigned int *pixels, int total_size,
@@ -65,7 +64,6 @@ void			remove_color(unsigned int *pixels, int total_size,
 t_map_data		read_map(char *path_file);
 
 t_rot			calc_sin_cos_rot(float rot);
-void			sort_int(int *a, int *b);
 void			*ft_memcpy_int(unsigned int *dst,
 					const unsigned int *src, size_t n);
 
