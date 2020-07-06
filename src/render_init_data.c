@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 19:00:55 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 22:55:20 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void init_data(t_data *d, int ac, char **av)
 	init_sprite(d);
 	init_hud(d);
 	init_menu(d);
-	init_gameover(d); //doit etre avant le check des arguments
+	init_gameover(d);
 	init_ttf(d);
 	if (ac > 1)
 	{

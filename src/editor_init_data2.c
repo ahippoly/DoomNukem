@@ -1,7 +1,5 @@
 #include "proto_global.h"
 
-// OKK
-
 void		init_input(t_env *env)
 {
 	if (!(env->input_lst = malloc_input(NB_INPUT)))
@@ -84,8 +82,8 @@ void			init_env(t_env *env)
     init_txt_img(env);
     init_mouse_mode(env);
 	init_sprites_img_env(env);
-	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit2(env->sprite_img[SPRITE_ID_AFRIT]);
-	env->sprites[SPRITE_ID_PYRO] = sprite_init_pyro2(env->sprite_img[SPRITE_ID_PYRO]);
+	env->sprites[SPRITE_ID_AFRIT] = sprite_init_afrit(env->sprite_img[SPRITE_ID_AFRIT]);
+	env->sprites[SPRITE_ID_PYRO] = sprite_init_pyro(env->sprite_img[SPRITE_ID_PYRO]);
     init_img(env);
     env->map_size = create_t_size(MAP_SIZE_X, MAP_SIZE_Y);
     init_input(env);
