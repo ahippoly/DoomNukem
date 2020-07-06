@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 19:31:22 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 22:43:00 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,17 +108,17 @@ void			exit_game(t_data *d, char *msg);
 ** bmp_reader.c
 */
 
-int		hex2dec(unsigned char *mem, int bytes)
-char	*read_pixels(int fd, char *str)
-char	*convert2bgra(char *str, int w, int h)
-void	go_next_line(int *x, int *y, int w)
-void	convert_bmp_type32(char *pixel, int convert)
+int		hex2dec(unsigned char *mem, int bytes);
+char	*read_pixels(int fd, char *str);
+char	*convert2bgra(char *str, int w, int h);
+void	go_next_line(int *x, int *y, int w);
+void	convert_bmp_type32(char *pixel, int convert);
 
-void	read_bpp32(t_img *text, int fd, int convert)
-void	read_bpp24(t_img *text, int fd)
-void	read_file_pixels(t_img text, int bpp, int fd, int convert)
-t_img	bmp_error(t_img *res, int fd, char *msg)
-void	print_bmp_param(unsigned char *head)
+void	read_bpp32(t_img *text, int fd, int convert);
+void	read_bpp24(t_img *text, int fd);
+void	read_file_pixels(t_img text, int bpp, int fd, int convert);
+t_img	bmp_error(t_img *res, int fd, char *msg);
+void	print_bmp_param(unsigned char *head);
 
 
 #endif
