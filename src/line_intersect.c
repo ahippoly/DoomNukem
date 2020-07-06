@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   line_intersect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 18:48:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/01 04:01:58 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:34:12 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
-#include "proto_global.h"
 
+//ok
 float calc_a(t_point p1, t_point p2)
 {
 	return ((p2.y - p1.y) / (p2.x - p1.x));

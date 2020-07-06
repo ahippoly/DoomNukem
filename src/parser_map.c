@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 20:24:31 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 20:24:37 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 //A CHECK
-static void read_wall_list(int fd, t_map_data *map)
+static int read_wall_list(int fd, t_map_data *map)
 {
     char    *line;
     int     i;
@@ -9,17 +21,24 @@ static void read_wall_list(int fd, t_map_data *map)
     if (get_next_line(fd, &line) == 1)
         read_param(line, "WALL_COUNT", &map->wall_count);
     else
-        exit_with_msg("error while reading map");
+	{
+        ft_putendl("error while reading map");
+		return (-1);
+	}
     // printf("WALL COUNT READED, value = %i\n", map->wall_count);
     if (!(map->wall_list = (t_wall*)malloc(sizeof(t_wall) * map->wall_count)))
-        exit_with_msg("Failed to malloc");
+    {
+		ft_putendl("Failed to malloc");
+		return (-1);
+	}
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->wall_count)
         read_wall(line, &map->wall_list[i++]);
 	//printf("map reader, wall_count = %i\n", map->wall_count);
+	return (0);
 }
 
-static void read_room_list(int fd, t_map_data *map)
+static int read_room_list(int fd, t_map_data *map)
 {
     char *line;
     int i;
@@ -27,12 +46,19 @@ static void read_room_list(int fd, t_map_data *map)
     if (get_next_line(fd, &line) == 1)
         read_param(line, "ROOM_COUNT", &map->room_count);
     else
-        exit_with_msg("error while reading map");
+	{
+        ft_putendl("error while reading map");
+		return (-1);
+	}
     if (!(map->room_list = (t_room*)malloc(sizeof(t_room) * map->room_count)))
-        exit_with_msg("Failed to malloc");
+	{
+        ft_putendl("Failed to malloc");
+		return (-1);
+	}
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->room_count)
         read_room(line, &map->room_list[i++]);
+	return (0);
 }
 
 static int	read_icon_list(int fd, t_map_data *map)
@@ -67,14 +93,19 @@ static int	read_icon_list(int fd, t_map_data *map)
 static int		read_head(int fd, char *line, t_map_data *map)
 {
     if (ft_strequ(line, "WALL LIST"))
-		read_wall_list(fd, map);
+	{
+		if ((read_wall_list(fd, map)) < 0)
+			return (-1);
+	}
     if (ft_strequ(line, "ROOM LIST"))
-		read_room_list(fd, map);
+		if ((read_room_list(fd, map)) < 0)
+			return (-1);
 	if (ft_strequ(line, "ICON LIST"))
 		if ((read_icon_list(fd, map)) < 0)
 			return (-1);
 	if (ft_strequ(line, "WALL_REF MAP"))
-		read_wall_ref_list(fd, map);
+		if ((read_wall_ref_list(fd, map)) < 0)
+			return (-1);
 	return (0);
 }
 

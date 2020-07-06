@@ -1,5 +1,6 @@
 #include "proto_global.h"
 
+//OK
 int				init_hud_data(t_data *d)
 {
 	d->hud.current_weap_id = d->gun_ind; // initialisation de l'arme, a enlever si on commence à 0

@@ -80,7 +80,7 @@ SED = sed
 
 ## Flags
 
-CC = gcc
+CC = gcc -ggdb
 CFLAGS = -Wall -Wextra -Werror
 OPTI = -g3
 PTHREAD = -lpthread

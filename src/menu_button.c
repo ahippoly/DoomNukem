@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu_button.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 19:36:05 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 19:37:43 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 int				render_bg_btn(t_data *d, SDL_Rect pos)
@@ -7,9 +19,9 @@ int				render_bg_btn(t_data *d, SDL_Rect pos)
 	calc = set_sdl_rect(0, 0, WIN_SIZE_X, WIN_SIZE_Y);
 	draw_rectangle(d->p_menu, pos, set_size(WIN_SIZE_X, WIN_SIZE_Y), 0xFFFFFF);
 	if ((SDL_UpdateTexture(d->menu_texture, &calc, d->p_menu, WIN_SIZE_X * 4)) < 0)
-		return (exit_menu(d));
+		exit_game(d, "error : failed to update texture");
 	if ((SDL_RenderCopy(d->rend, d->menu_texture, &pos, &pos)) < 0)
-		return (exit_menu(d));
+		exit_game(d, "error : failed to render copy");
 	return (0);
 }
 
@@ -24,21 +36,12 @@ int				render_text_btn(t_data *d, SDL_Rect pos, SDL_Texture *texture, char *text
 	col.a = 0;
 
 	if(!(s_cpy = TTF_RenderText_Blended(d->font_text, text, col)))
-	{
-		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
-		return (exit_menu(d));
-	}
+		exit_game(d, "error : failed to render text blended");
 	if (!(texture = SDL_CreateTextureFromSurface(d->rend, s_cpy)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_menu(d));
-	}
+		exit_game(d, "error : failed to create texture");
 	TTF_SizeText(d->font_text, text, &pos.w, &pos.h);
-	if (SDL_RenderCopy(d->rend, texture, NULL, &pos))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_menu(d));
-	}
+	if ((SDL_RenderCopy(d->rend, texture, NULL, &pos)) < 0)
+		exit_game(d, "error : failed to render copy");
 	SDL_FreeSurface(s_cpy);
 	return (0);
 }

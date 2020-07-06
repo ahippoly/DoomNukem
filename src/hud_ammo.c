@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:48:38 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 16:54:51 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 17:23:06 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 	if (nb <= 0)
 		nb = 0;
 	if (!(text = ft_itoa(nb)))
-		return (exit_hud(hud));
-	
+		exit_game(d, "error : failed to transform int to ascii");
 	if(!(s_cpy = TTF_RenderText_Blended(d->font_nb, text, hud->color)))
 		exit_game(d, "error : failed to render text blender");
-	if (!(hud->message_ammo_s = copy_surface(s_cpy, hud)))
-		return (exit_hud(hud));
+	if (!(hud->message_ammo_s = copy_surface(d, s_cpy, hud)))
+		exit_game(d, "error : failed to copy_surface");
 	SDL_FreeSurface(s_cpy);
 	return (0);
 }

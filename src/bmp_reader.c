@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bmp_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 22:28:04 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 19:46:48 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,18 +240,18 @@ t_img	ft_load_bmp2(char *file, int convert)
 		ft_putendl("wrong bmp file input");
 		res.w = -42;
 	}
-	printf("bmp type = %c%c\n", hex2dec(&head[0], 1), hex2dec(&head[1], 1));
-	printf("bmp total_size = %i\n", hex2dec(&head[2], 4));
-	printf("bmp p_tab begin = %i\n", hex2dec(&head[10], 4));
-	printf("bmp header size = %i\n", hex2dec(&head[14], 4));
-	printf("bmp w = %i\n", hex2dec(&head[18], 4));
-	printf("bmp h = %i\n", hex2dec(&head[22], 4));
-	printf("bmp color planes = %i\n", hex2dec(&head[26], 2));
-	printf("bmp bpp = %i\n", hex2dec(&head[28], 2));
+	// printf("bmp type = %c%c\n", hex2dec(&head[0], 1), hex2dec(&head[1], 1));
+	// printf("bmp total_size = %i\n", hex2dec(&head[2], 4));
+	// printf("bmp p_tab begin = %i\n", hex2dec(&head[10], 4));
+	// printf("bmp header size = %i\n", hex2dec(&head[14], 4));
+	// printf("bmp w = %i\n", hex2dec(&head[18], 4));
+	// printf("bmp h = %i\n", hex2dec(&head[22], 4));
+	// printf("bmp color planes = %i\n", hex2dec(&head[26], 2));
+	// printf("bmp bpp = %i\n", hex2dec(&head[28], 2));
 	pix_array_pos = hex2dec(&((unsigned char*)head)[10], 4);
 	img.pos_size.w = hex2dec(&((unsigned char*)head)[18], 4);
 	img.pos_size.h = ft_abs(hex2dec(&((unsigned char*)head)[22], 4));
-	printf("bmp unsigned char size : %i,%i\n", img.pos_size.w, img.pos_size.h);
+	// printf("bmp unsigned char size : %i,%i\n", img.pos_size.w, img.pos_size.h);
 	img.w = img.pos_size.w;
 	img.h = img.pos_size.h;
 	bpp = hex2dec(&head[28], 2);

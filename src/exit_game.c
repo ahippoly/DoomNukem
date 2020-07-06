@@ -85,7 +85,8 @@ void			free_sdl_ptr_data(t_data *d)
 void exit_game(t_data *d, char *msg)
 {
 	ft_putendl(msg);
-	free_menu(d);	
+	free_menu(d);
+	free_gameover(d);
 	free_hud(&d->hud);
 	//clean_sprite_gun(d);
 	free_data_ptr(d);

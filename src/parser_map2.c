@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_map2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 20:24:35 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 20:28:35 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 void read_wall(char *line, t_wall *wall)
@@ -60,18 +72,25 @@ t_wall_ref *read_wall_ref(char *chunk)
     return (wall_ref);
 }
 
-void read_wall_ref_list(int fd, t_map_data *map)
+int read_wall_ref_list(int fd, t_map_data *map)
 {
     char *line;
 
     if (get_next_line(fd, &line) == 1)
         read_param(line, "MAP_SIZE", &map->map_size.w);
     else
-        exit_with_msg("error while reading map");
+	{
+        ft_putendl("error while reading map");
+		return (-1);
+	}
     if (get_next_line(fd, &line) == 1)
         read_param(line, "PLAYER_SPAWN", &map->player_spawn.x);
     else
-        exit_with_msg("error while reading map");
+	{
+        ft_putendl("error while reading map");
+		return (-1);
+	}
+	return (0);
 }
 
 int		read_icon(char *line, t_icon *icon)

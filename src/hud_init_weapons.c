@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hud_init_weapons.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 19:30:36 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 19:30:42 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
+//OK
 int				init_weapon_0(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[0]->id = 5;
@@ -13,15 +26,9 @@ int				init_weapon_0(t_data *d, t_hud *hud)
 	hud->perso_weapon[0]->z_force = 0.03;
 	hud->perso_weapon[0]->shoot_repeat = 1;
 	if (!(hud->perso_weapon[0]->surface = SDL_LoadBMP(WEAPON_PATH_0)))
-	{
-		printf("Erreur de chargement de l'image : %s\n", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to load image");
 	if (!(hud->perso_weapon[0]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[0]->surface)))
-	{
-		printf("Erreur de conversion de la surface : %s\n", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[0]->surface);
 	return (0);
 }
@@ -39,15 +46,9 @@ int				init_weapon_1(t_data *d, t_hud *hud)
 	hud->perso_weapon[1]->z_force = 0.015;
 	hud->perso_weapon[1]->shoot_repeat = 0;
 	if (!(hud->perso_weapon[1]->surface = SDL_LoadBMP(WEAPON_PATH_1)))
-	{
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to load image");
 	if (!(hud->perso_weapon[1]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[1]->surface)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[1]->surface);
 	return (0);
 }
@@ -65,15 +66,9 @@ int				init_weapon_2(t_data *d, t_hud *hud)
 	hud->perso_weapon[2]->z_force = 0.07;
 	hud->perso_weapon[2]->shoot_repeat = 0;
 	if (!(hud->perso_weapon[2]->surface = SDL_LoadBMP(WEAPON_PATH_2)))
-	{
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to load image");
 	if (!(hud->perso_weapon[2]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[2]->surface)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[2]->surface);
 	return (0);
 }
@@ -91,15 +86,9 @@ int				init_weapon_3(t_data *d, t_hud *hud)
 	hud->perso_weapon[3]->z_force = 0.005;
 	hud->perso_weapon[3]->shoot_repeat = 1;
 	if (!(hud->perso_weapon[3]->surface = SDL_LoadBMP(WEAPON_PATH_3)))
-	{
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to load image");
 	if (!(hud->perso_weapon[3]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[3]->surface)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[3]->surface);
 	return (0);
 }
@@ -117,15 +106,9 @@ int				init_weapon_4(t_data *d, t_hud *hud)
 	hud->perso_weapon[4]->z_force = 0.005;
 	hud->perso_weapon[4]->shoot_repeat = 1;
 	if (!(hud->perso_weapon[4]->surface = SDL_LoadBMP(WEAPON_PATH_4)))
-	{
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to load image");
 	if (!(hud->perso_weapon[4]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[4]->surface)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[4]->surface);
 	return (0);
 }
@@ -142,6 +125,5 @@ int				init_weapon_5(t_hud *hud)
 	hud->perso_weapon[5]->range = 10;
 	hud->perso_weapon[5]->z_force = 0.003;
 	hud->perso_weapon[5]->shoot_repeat = 1;
-	
 	return (0);
 }
