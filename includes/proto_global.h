@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_global.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 01:03:06 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 15:19:44 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,13 @@ void			print_data2screen(t_data *d);
 void			exit_with_msg(char *msg);
 unsigned int	*alloc_image(int width, int height);
 SDL_Rect		set_sdl_rect(int x, int y, int w, int h);
-void			swap_point(SDL_Point *p1, SDL_Point *p2);
 void			draw_line(SDL_Point pos1, SDL_Point pos2, t_img img,
 					int color);
-SDL_Point		create_point(int x, int y);
 t_point			create_t_point(float x, float y);
 t_range			create_t_range(int start, int end);
 t_size			create_t_size(int w, int h);
 t_img			ft_load_bmp(char *file);
 t_img			ft_load_bmp2(char *file, int convert);
-void			sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
 t_point			segment_intersect(SDL_Point p1, SDL_Point p2, SDL_Point p3,
 					SDL_Point p4);
 t_point			line_intersect(t_point pos, float rot, t_point p1, t_point p2);
@@ -46,8 +43,6 @@ t_point			find_intersect_no_bound(t_point p1, t_point p2,
 					t_point p3, t_point p4);
 t_point			first_segment_vertical_case(t_point p1, t_point p2,
 					t_point p3, t_point p4);
-void			swap_t_point(t_point *p1, t_point *p2);
-void			sort_t_point_by_x(t_point *p1, t_point *p2);
 void			put_pixel(unsigned int *pixels, SDL_Point p_pos,
 					t_size img_size, unsigned int color);
 void			put_pixel_attempt(unsigned int *pixels, SDL_Point p_pos,
@@ -92,10 +87,25 @@ void			copy_frame(unsigned int *dst, SDL_Rect dst_size,
 					unsigned int *src, SDL_Rect pos_size);
 SDL_Texture		*t_img2sdl_text(SDL_Renderer *rend, t_img src);
 void			calc_n_disp_framerate(t_data *d);
+t_point			convert_sdlpoint2tpoint(SDL_Point point);
+
+/*
+** tool_sdlpoint_arithmetic.c
+*/
+SDL_Point		convert_t_point(t_point point);
+void			sort_point_by_x(SDL_Point *p1, SDL_Point *p2);
+void			swap_t_point(t_point *p1, t_point *p2);
+SDL_Point		create_point(int x, int y);
+void			sort_t_point_by_x(t_point *p1, t_point *p2);
+
+/*
+** tool_sdlpoint_arithmetic2.c
+*/
+SDL_Point		add_sdl_point(SDL_Point p, SDL_Point add, int is_sub);
 t_point			add_t_point(t_point p, t_point add, int is_sub);
 t_point			mult_t_point(t_point p, float mul);
-t_point			convert_sdlpoint2tpoint(SDL_Point point);
-SDL_Point		convert_t_point(t_point point);
+SDL_Point		mult_sdl_point(SDL_Point p, float mul);
+void			swap_point(SDL_Point *p1, SDL_Point *p2);
 
 /*
 ** exit.c

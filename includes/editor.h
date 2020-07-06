@@ -6,7 +6,7 @@
 /*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:01:12 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 15:34:30 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -482,9 +482,6 @@ void					select_previous_texture(t_env *env);
 void					set_room_text(t_env *env);
 
 void					exit_with_msg(char *msg);
-SDL_Point				add_sdl_point(SDL_Point p,
-							SDL_Point add, int is_sub);
-SDL_Point				mult_sdl_point(SDL_Point p, float mul);
 void					draw_rectangle(unsigned int *pixels,
 							SDL_Rect rect, t_size screen_size, int color);
 void					del_wall(t_env *env, int wall_id);
@@ -528,7 +525,6 @@ void					print_wall_list(t_map_data *map);
 */
 SDL_Rect				set_sdl_rect(int x, int y, int w, int h);
 t_size					set_size(int w, int h);
-SDL_Rect				adapt_border(SDL_Rect pos_size, t_size max);
 void					draw_rectangle(unsigned int *pixels,
 							SDL_Rect rect, t_size screen_size, int color);
 void					create_straight_line(unsigned int *pixels,
