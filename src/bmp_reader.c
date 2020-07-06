@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bmp_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 02:11:40 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 11:47:38 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ t_img	ft_load_bmp2(char *file, int convert)
 	int				bpp;
 	t_img			res;
 
+	printf("BMP Name = %s\n", file);
 	ft_bzero(&res, sizeof(t_img));
 	if ((fd = open(file, O_RDONLY)) == -1)
 	{

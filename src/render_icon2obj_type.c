@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_icon2obj_type.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 21:37:20 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/03 21:47:24 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:04:47 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_mob	add_mob_demon(t_data *d, SDL_Point pos)
 	mob.size = AFRIT_SIZE;
 	mob.pos.x = (float)pos.x / UNIT;
 	mob.pos.y = (float)pos.y / UNIT;
-	mob.sprite = sprite_init_afrit2(d->sprite_img[SPRITE_ID_AFRIT]);
+	mob.sprite = sprite_init_afrit(d->sprite_img[SPRITE_ID_AFRIT]);
 	mob.z_pos = 10;
 	mob.z_size = 1;
 	mob.attack_timer = 0;
@@ -45,7 +45,7 @@ t_mob	add_mob_pyro(t_data *d, SDL_Point pos)
 	mob.size = PYRO_SIZE;
 	mob.pos.x = (float)pos.x / UNIT;
 	mob.pos.y = (float)pos.y / UNIT;
-	mob.sprite = sprite_init_pyro2(d->sprite_img[SPRITE_ID_PYRO]);
+	mob.sprite = sprite_init_pyro(d->sprite_img[SPRITE_ID_PYRO]);
 	mob.z_pos = 10;
 	mob.z_size = 1;
 	mob.attack_timer = 0;
