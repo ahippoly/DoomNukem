@@ -43,8 +43,8 @@ SDL_Texture		*bmp_to_texture(char *file, SDL_Renderer *rend)
     // SDL_FreeSurface(readed_file);
 	new = NULL;
 	img.pixels = NULL;
-	img = ft_load_bmp2(file, BMP_TYPE_ARGB);
-	new = SDL_CreateTexture(rend, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING, img.w, img.h);
+	img = ft_load_bmp2(file, BMP_TYPE_BGRA);
+	new = SDL_CreateTexture(rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, img.w, img.h);
 	SDL_UpdateTexture(new, NULL, img.pixels, img.w * 4);
 	SDL_SetTextureBlendMode(new, SDL_BLENDMODE_BLEND);
 	//free(img.pixels);

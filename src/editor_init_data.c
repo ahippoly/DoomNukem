@@ -8,9 +8,9 @@ static int	load_text_list(t_env *env)
 
     env->selected_texture = 0;
 	i = 0;
-	if (!(path = ft_strnew(36)))
+	if (!(path = ft_strnew(38)))
 		exit_editor(env, "error : failed to load texture list with strnew");
-	ft_bzero(path, sizeof(char *));
+	ft_bzero(path, sizeof(char) * 38);
 	while (i < NB_TEXTURE)
 	{
 		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
@@ -20,7 +20,7 @@ static int	load_text_list(t_env *env)
 			exit_editor(env, "error : failed to read file");
 		if (!(env->text_list[i] = bmp_to_texture(path, env->rend)))
 			exit_editor(env, "error : failed to create texture from bmp file");
-		ft_bzero(path, sizeof(char *));
+		ft_bzero(path, sizeof(char) * 38);
 		i++;
 	}
 	free(path);

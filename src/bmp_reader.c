@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 04:31:45 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:11:21 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void read_file_pixels(t_img text, int bpp, int fd, int convert)
 				if (x >= text.w)
 				{
 					y -= text.w;
+					y = ft_max(y, 0);
 					x = 0;
 				}
 				ft_memcpy(&pixel[x + y], buffer + (BUFF_SIZE - ret), 4);
@@ -200,6 +201,7 @@ void read_file_pixels(t_img text, int bpp, int fd, int convert)
 				if (x >= text.w)
 				{
 					y -= text.w;
+					y = ft_max(y, 0);
 					x = 0;
 				}
 				pixel[x + y] = 0xFF;
@@ -209,7 +211,7 @@ void read_file_pixels(t_img text, int bpp, int fd, int convert)
 				x += 4;
 			}
 		}
-		printf(" x = %i\n", x);
+		printf("x = %i\n", x);
 	}
 	else
 		exit_with_msg("Error while loading bmp file, wrong bpp\n");
