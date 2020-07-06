@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_init_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 00:16:54 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 01:57:00 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void init_data_var(t_data *d)
     d->rot = -1.00015592 * M_PI_2; 
 	d->fov = (float)FOV_ANGLE / 90;
 	d->fov_rad = ((float)FOV_ANGLE * M_PI_2) / 90;
-	d->skybox = read_img_surface(SKY_PATH_0, SDL_PIXELFORMAT_ARGB32);
+	d->skybox = ft_load_bmp2(SKY_PATH_0, BMP_TYPE_BGRA);
 }
 
 void init_data(t_data *d, int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 22:28:04 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 02:11:40 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ void read_file_pixels(t_img text, int bpp, int fd, int convert)
 				}
 				else if (convert == BMP_TYPE_ABGR)
 					swap_char(&pixel[x + y + 1], &pixel[x + y + 3]);
+				
 				x += 4;
 				ret -= 4;
 			}

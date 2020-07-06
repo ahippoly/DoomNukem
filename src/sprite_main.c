@@ -15,15 +15,14 @@ void    free_sprites(t_data *d)
 
 SDL_Texture     *load_sprite_bmp(char *str, t_data *d)
 {
-    SDL_Surface *surface;
     SDL_Texture *texture;
+	t_img img;
 
-    surface = NULL;
     texture = NULL;
-    if (!(surface = SDL_LoadBMP(str)))
-		exit_game(d, "error : failed to load bmp file");
-    if (!(texture = SDL_CreateTextureFromSurface(d->rend, surface)))
-        exit_game(d, "error : failed to load texture from surface");
-    SDL_FreeSurface(surface);
+	img = ft_load_bmp2(str, BMP_TYPE_ARGB);
+	texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING, img.w, img.h);
+	SDL_UpdateTexture(texture, NULL, img.pixels, img.w * 4);
+	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+	free(img.pixels);
     return (texture);
 }
