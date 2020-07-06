@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 02:20:59 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 04:12:35 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@
 
 typedef struct		s_data
 {
-	SDL_Renderer	*rend;
-	SDL_Window		*win;
-	SDL_Texture		*screen;
-	SDL_Texture		*mini_map;
-	SDL_Texture		*t_player_pos;
+	SDL_Renderer	*rend; //ok
+	SDL_Window		*win; //ok
+	SDL_Texture		*screen; //ok
+	SDL_Texture		*mini_map; //ok
+	// SDL_Texture		*t_player_pos; on utilise -------- ??
 	SDL_Event		e;
 	SDL_Rect		mini_map_player_pos;
 	t_map_data		map;
-	const Uint8		*clavier;
-	unsigned int	*p_screen;
-	unsigned int	*p_mini_map_bg;
-	unsigned int	*p_mini_map;
-	unsigned int	*p_player_pos;
+	const Uint8		*clavier; //pas besoin de free
+	unsigned int	*p_screen; //ok
+	unsigned int	*p_mini_map_bg; //ok
+	unsigned int	*p_mini_map; //ok
+	unsigned int	*p_player_pos; //ok
 	int				run_game;
 	float			rot;
 	t_rot			rot_calc;
@@ -58,7 +58,7 @@ typedef struct		s_data
 	float			diff_time;
 	int				air_time;
 	int				nb_sprite;
-	t_wall			*grabbed_wall;
+	t_wall			*grabbed_wall; //ok
 	t_point			grab_pos;
 	float			grab_z;
 	int				nb_props;
@@ -72,20 +72,19 @@ typedef struct		s_data
 	int				mob_ind;
 	int				mobs_on_screen;
 	FMOD_SYSTEM		*system;
-	SDL_Texture		*displayed_gun;
+//	SDL_Texture		*displayed_gun; --------------pas utilisè ?
 	SDL_Rect		src_gun;
 	SDL_Rect		dst_gun;
-	unsigned int	*p_hud;
-	SDL_Texture		*hud_texture;
+	unsigned int	*p_hud; //ok
+	SDL_Texture		*hud_texture; //ok
 	t_hud			hud;
-	TTF_Font		*font_nb;
-	TTF_Font		*font_text;
-	unsigned int	*p_menu;
-	SDL_Texture		*menu_texture;
+	TTF_Font		*font_nb; //ok
+	TTF_Font		*font_text; //ok
+	unsigned int	*p_menu; //ok
+	SDL_Texture		*menu_texture; //ok
 	t_menu			menu;
-	unsigned int	*p_gameover;
-	SDL_Texture		*gameover_texture;
-	char			*argv;
+	unsigned int	*p_gameover; //ok
+	SDL_Texture		*gameover_texture; //ok
 	t_img			skybox;
 	FMOD_SOUND		*sound[MAX_SOUNDS]; //WTF
 	// FMOD_SOUND		sound[MAX_SOUNDS];
@@ -117,12 +116,12 @@ typedef	struct		s_thread
 	float			start_angle;
 	float			step;
 	t_range			screen_x;
-	t_data			*d;
+	t_data			*d; //to free ?
 }					t_thread;
 
 typedef	struct		s_data_x
 {
-	t_data			*d;
+	t_data			*d; //to fre ?
 	int				x;
 }					t_data_x;
 

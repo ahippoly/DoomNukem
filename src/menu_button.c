@@ -6,9 +6,9 @@ int				render_bg_btn(t_data *d, SDL_Rect pos)
 	
 	calc = set_sdl_rect(0, 0, WIN_SIZE_X, WIN_SIZE_Y);
 	draw_rectangle(d->p_menu, pos, set_size(WIN_SIZE_X, WIN_SIZE_Y), 0xFFFFFF);
-	if (SDL_UpdateTexture(d->menu_texture, &calc, d->p_menu, WIN_SIZE_X * 4))
+	if ((SDL_UpdateTexture(d->menu_texture, &calc, d->p_menu, WIN_SIZE_X * 4)) < 0)
 		return (exit_menu(d));
-	if (SDL_RenderCopy(d->rend, d->menu_texture, &pos, &pos))
+	if ((SDL_RenderCopy(d->rend, d->menu_texture, &pos, &pos)) < 0)
 		return (exit_menu(d));
 	return (0);
 }

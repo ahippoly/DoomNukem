@@ -77,7 +77,7 @@ void			free_env_ptr(t_env *e)
 		free(e->sprites);
 }
 
-void			free_sdl_ptr(t_env *e)
+void			free_sdl_ptr_env(t_env *e)
 {
 	if (e->win)
 		SDL_DestroyWindow(e->win);
@@ -97,7 +97,7 @@ int				exit_editor(t_env *e, char *msg)
 {
 	ft_putendl(msg);
 	free_env_ptr(e);
-	free_sdl_ptr(e);
+	free_sdl_ptr_env(e);
 	clear_map_ref(e);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 02:25:25 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 03:30:56 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	malloc_data_init(t_data *d)
 			exit_game(d, "error : failed to malloc floor");
 		i++;
 	}
+	if (!(d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
+		exit_game(d, "error : failed to malloc screens pixel");
 }
 
 void init_data_var(t_data *d)
@@ -69,6 +71,7 @@ void init_data_var(t_data *d)
 void init_data(t_data *d, int ac, char **av)
 {
 	ft_putendl("init data...");
+	ft_bzero(d, sizeof(t_data));
     init_sdl_ressources_rend(d);
 	init_sprite(d);
 	init_hud(d);
@@ -85,7 +88,7 @@ void init_data(t_data *d, int ac, char **av)
 		exit_with_msg("error : wrong map file\n");
 	init_data_var(d);
     init_mini_map(d, &d->map);
-    d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
+    // d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
 	init_sprites_img(d);

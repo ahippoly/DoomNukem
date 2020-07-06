@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:50:42 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 01:02:21 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 03:37:05 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void	print_mini_map(t_data *d)
     SDL_Rect	tmp;
 
     tmp = set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-    ft_memcpy_int(d->p_mini_map, d->p_mini_map_bg, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y);
+	ft_memcpy_int(d->p_mini_map, d->p_mini_map_bg, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y);
     print_player_look_vector(d, d->rot);
-    SDL_UpdateTexture(d->mini_map, &tmp, d->p_mini_map, MINI_MAP_SIZE_X * 4);
-    SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4);
+	if ((SDL_UpdateTexture(d->mini_map, &tmp, d->p_mini_map, MINI_MAP_SIZE_X * 4)) < 0)
+		exit_game(d, "error : failed to update texture");
+	if ((SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4)) < 0)
+		exit_game(d, "error : failed to update texture");
 }
