@@ -1,8 +1,18 @@
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gameplay_mobs.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 16:47:08 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 16:47:09 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
+//OK
 void kill_mob(t_param param)
 {
 	t_data *d;
@@ -45,11 +55,11 @@ void check_mob_attack(t_param param)
 		change_player_life(param.d, &param.d->hud.hp, param.mob->dmg_per_hit);
 }
 
-void move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob)
+void		move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob)
 {
-	int i;
-	t_mob *mob;
-	float dist;
+	int		i;
+	t_mob	*mob;
+	float	dist;
 
 	i = 0;
 	while (i < nb_mob)
@@ -128,5 +138,4 @@ void process_mobs_gameplay(t_data *d)
 	load_repulsed_obj(d, d->repulsed, d->nb_repulsed);
 	move_mobs_in_range(d, d->mobs, d->nb_mob);
 	process_mobs_anim(d);
-	
 }
