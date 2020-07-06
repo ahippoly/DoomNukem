@@ -83,7 +83,7 @@ SED = sed
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-OPTI = -g3
+OPTI = -O3
 PTHREAD = -lpthread
 SDLM = `sdl2-config --cflags --libs`
 LIBS = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
@@ -123,7 +123,7 @@ $(GAME_NAME): libft $(OBJ_REND) $(ASSETS)
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(OPTI) $(INC) -o $@ -c $<
+	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(ASSETS) :
