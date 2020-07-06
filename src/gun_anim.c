@@ -69,13 +69,7 @@ void    sprite_anim_gun(t_data *d)
     {
         get_gun_pos(d, pos);
         gun_dimension(d);
-        // d->src_gun = srcdim;
-		// d->dst_gun = dstdim;
-		// print_img_portion(d->p_screen, d->sprite[d->gun_ind].img, srcdim, dstdim);
     }
-    // else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 
-    // (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
-    //     d->sprite[d->gun_ind].time = SDL_GetTicks();
     else
     {
         d->sprite[d->gun_ind].index = IDLE;

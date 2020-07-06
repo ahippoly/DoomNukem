@@ -7,7 +7,7 @@ void    init_sprite(t_data *d)
     d->sprite[d->gun_ind].index = 0;
 }
 
-int    load_sprite_gun(t_data *d)
+int    load_sprite_gun(t_data *d) //destroy texture
 {
     SDL_Texture *texture;
     

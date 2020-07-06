@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 00:31:12 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 02:20:59 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,18 @@ typedef struct		s_data
 	// t_obj			obj_list[NB_MAX_OBJ];
 	// t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
 	// t_img			texture[NB_TEXTURE];
-	t_sprite        sprite[30];
 	// t_img			img[NB_IMG];
+	// t_img			sprite_img[NB_SPRITE];
 	t_floor			**fl; //OK
 	t_props			*props; //OK
 	t_mob			*mobs; //OK
 	t_obj			*obj_list; //ok
 	t_obj			**repulsed; //OK
+	t_sprite        sprite[MAX_WEAPONS]; //------SG
 	// t_sprite        *sprite;
-	t_img			*texture;
-	t_img			img[NB_IMG];
-	t_img			sprite_img[NB_SPRITE];
+	t_img			*texture; //OK
+	t_img			*img; //OK
+	t_img			*sprite_img; //OK
 	int				jetpack;
 }					t_data;
 

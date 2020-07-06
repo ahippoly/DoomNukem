@@ -43,8 +43,14 @@ void	free_data_ptr(t_data *d)
 		free(d->obj_list);
 	// if (d->sprite)
 	// 	free(d->sprite);
+	if (d->repulsed)
+		free(d->repulsed);
 	if (d->texture)
 		free(d->texture);
+	if (d->img)
+		free(d->img);
+	if (d->sprite_img)
+		free(d->sprite_img);
 }
 
 void exit_game(t_data *d, char *msg)

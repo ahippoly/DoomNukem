@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 00:16:54 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 02:25:25 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	malloc_data_init(t_data *d)
 {
+	int	i;
 	if (!(d->props = malloc_props(NB_MAX_PROPS)))
 		exit_game(d, "error : failed to malloc props");
 	if (!(d->mobs = malloc_mob(NB_MAX_MOBS)))
@@ -22,10 +23,23 @@ void	malloc_data_init(t_data *d)
 		exit_game(d, "error : failed to malloc objects");
 	if (!(d->repulsed = malloc_obj_tab(NB_MAX_MOBS + NB_MAX_PROPS)))
 		exit_game(d, "error : failed to malloc objects tab");
-	// if (!(d->sprite = malloc_sprite(30)))
+	// if (!(d->sprite = malloc_sprite(MAX_WEAPONS))) ---- SG HER
 	// 	exit_game(d, "error : failed to malloc sprite");
 	if (!(d->texture = malloc_img(NB_TEXTURE)))
 		exit_game(d, "error : failed to malloc image");
+	if (!(d->img = malloc_img(NB_IMG)))
+		exit_game(d, "error : failed to malloc image");
+	if (!(d->sprite_img = malloc_img(NB_SPRITE)))
+		exit_game(d, "error : failed to malloc image");
+		if (!(d->fl = malloc_floor_tab(NB_WALL_MAX / 2)))
+		exit_game(d, "error : failed to malloc floor");
+	i = 0;
+	while (i < (NB_WALL_MAX / 2))
+	{
+		if (!(d->fl[i] = malloc_floor(WIN_SIZE_Y)))
+			exit_game(d, "error : failed to malloc floor");
+		i++;
+	}
 }
 
 void init_data_var(t_data *d)

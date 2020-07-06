@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 16:10:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/05 22:47:25 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 02:25:00 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,8 @@ void	init_floor(t_data *d, t_floor *fl, float pos_z)
 
 void	init_floors(t_data *d)
 {
-	int		i;
+	int	i;
 
-	if (!(d->fl = malloc_floor_tab(NB_WALL_MAX / 2)))
-		exit_game(d, "error : failed to malloc floor");
-	i = 0;
-	while (i < (NB_WALL_MAX / 2))
-	{
-		if (!(d->fl[i] = malloc_floor(WIN_SIZE_Y)))
-			exit_game(d, "error : failed to malloc floor");
-		i++;
-	}
 	i = 0;
 	while (i < d->map.room_count)
 	{
