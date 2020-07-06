@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:35 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 21:01:02 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 21:06:04 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,15 +123,15 @@ int read_wall_ref_list(int fd, t_map_data *map)
 
 int		read_icon(char *line, t_icon *icon)
 {
-    int error;
-
-    error = 0;
-    error += read_param(line, "id", &icon->id_ref);
-    error += read_param(line, "pos", &icon->pos_i.x);
-    if (error > 0)
+    if ((read_param(line, "id", &icon->id_ref)) == 1)
 	{
         ft_putendl("error while assigning value to icon on map reader\n");
 		return (-1);
 	}
-	return (0);
+	if ((read_param(line, "pos", &icon->pos_i.x)) == 1)
+	{
+        ft_putendl("error while assigning value to icon on map reader\n");
+		return (-1);
+	}
+ 	return (0);
 }
