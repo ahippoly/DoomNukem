@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 16:26:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 02:11:40 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 04:31:45 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,5 +269,6 @@ t_img	ft_load_bmp2(char *file, int convert)
 	if (res.w == -42)
 		return (res);
 	read_file_pixels(img, bpp, fd, convert);
+	close(fd);
 	return (img);
 }

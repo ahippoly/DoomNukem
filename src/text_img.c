@@ -1,6 +1,15 @@
-#include "proto_global.h"
-#include "proto_global.h"
-#include "proto_global.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   text_img.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 02:21:11 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/07/06 02:26:17 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 /*SDL_Rect precision : x and y are beginning pos of letter. h and w are size of image */
@@ -49,13 +58,9 @@ void parse_letter(char charts[SIZE_Y][SIZE_X], char *letter)
         while (x < SIZE_X)
         {
             if (letter[i++] == PIXEL)
-            {
                 charts[y][x] = 1;
-            }
             else
-            {
                 charts[y][x] = 0;
-            }
             x++;
         }
         i++;
@@ -117,14 +122,12 @@ void read_words(char charts[CHAR_NB][SIZE_Y][SIZE_X], char *str, int size, t_txt
 		else if (str[i] == '-')
             charts2pixels(charts[40], size, draw_letter);
         else
-            //exit_with_msg("Wrong chars entered in create_text_img()");
-            {
-                printf("character attemped to print = %c, the full string is %s\n", str[i], str);
-                exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?\n");
-            }
+		{
+			printf("character attemped to print = %c, the full string is %s\n", str[i], str);
+			exit_with_msg("Wow, c'est pas alphanumerique ca ! Tu te fous de ma gueule ?\n");
+		}
         i++;
     }
-    // printf("end read word\n");
 }
 
 void input_text_to_img(char *str, int size, int color, t_img to_fill)
