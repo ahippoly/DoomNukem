@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:31 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 20:24:37 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:41:39 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ static int read_wall_list(int fd, t_map_data *map)
     int     i;
 
     if (get_next_line(fd, &line) == 1)
-        read_param(line, "WALL_COUNT", &map->wall_count);
+	{
+		if ((read_param(line, "WALL_COUNT", &map->wall_count)))
+			return (-1);
+	}
     else
 	{
-        ft_putendl("error while reading map");
+		ft_putendl("error while reading map");
 		return (-1);
 	}
     // printf("WALL COUNT READED, value = %i\n", map->wall_count);
@@ -33,7 +36,10 @@ static int read_wall_list(int fd, t_map_data *map)
 	}
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->wall_count)
-        read_wall(line, &map->wall_list[i++]);
+	{
+        if ((read_wall(line, &map->wall_list[i++])) < 0)
+			return (-1);
+	}
 	//printf("map reader, wall_count = %i\n", map->wall_count);
 	return (0);
 }
@@ -57,7 +63,10 @@ static int read_room_list(int fd, t_map_data *map)
 	}
     i = 0;
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->room_count)
-        read_room(line, &map->room_list[i++]);
+	{
+		if ((read_room(line, &map->room_list[i++])) < 0)
+			return (-1);
+	}
 	return (0);
 }
 

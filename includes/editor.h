@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 20:20:43 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 20:33:22 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,8 +437,8 @@ t_map_data				read_map(char *path_file);
 /*
 ** parser_map2.c
 */
-void					read_wall(char *line, t_wall *wall);
-void					read_room(char *line, t_room *room);
+int						read_wall(char *line, t_wall *wall);
+int						read_room(char *line, t_room *room);
 t_wall_ref				*read_wall_ref(char *chunk);
 int						read_wall_ref_list(int fd, t_map_data *map);
 int						read_icon(char *line, t_icon *icon);
