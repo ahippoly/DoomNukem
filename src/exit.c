@@ -54,6 +54,7 @@ void exit_game(t_data *d, char *msg)
 	free_hud(&d->hud);
 	//clean_sprite_gun(d);
 	free_data_ptr(d);
+	read_char_table(1);
 	clean_sounds(d);
 	/* SDL */
 	quit_ttf(d);

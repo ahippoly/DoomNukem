@@ -99,5 +99,6 @@ int				exit_editor(t_env *e, char *msg)
 	free_env_ptr(e);
 	free_sdl_ptr(e);
 	clear_map_ref(e);
+	read_char_table(1);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:07:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 02:11:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:12:57 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define BMP_HEADER_READ 32
 # define BMP_TYPE_BGRA 0
 # define BMP_TYPE_ABGR 1
+# define BMP_TYPE_RGBA 2
 # define BMP_TYPE_ARGB -1
 
 typedef struct		s_img

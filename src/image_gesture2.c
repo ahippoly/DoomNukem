@@ -30,17 +30,6 @@ SDL_Texture		*bmp_to_texture(char *file, SDL_Renderer *rend)
 
 	if ((access(file, R_OK)) < 0)
 		return (NULL);
-    // if (!(readed_file = SDL_LoadBMP(file)))
-	// 	return (NULL);
-	// if (readed_file == NULL)
-	// {
-	// 	// printf("readed file = %s\n", file);
-    //     ft_putendl("failed to load texture bmp file");
-	// 	return (NULL);
-	// }
-	// if (!(new = SDL_CreateTextureFromSurface(rend, readed_file)))
-	// 	return (NULL);
-    // SDL_FreeSurface(readed_file);
 	new = NULL;
 	img.pixels = NULL;
 	img = ft_load_bmp2(file, BMP_TYPE_BGRA, 0);
