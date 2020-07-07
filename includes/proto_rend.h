@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_rend.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:39:51 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 01:02:36 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 02:03:24 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_mob			*malloc_mob(int size);
 t_obj			*malloc_obj(int size);
 t_obj			**malloc_obj_tab(int size);
 t_sprite		*malloc_sprite(int size);
+t_sprite		**malloc_sprite_tab(int size);
 t_img			*malloc_img(int size);
 
 /*

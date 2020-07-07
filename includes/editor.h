@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 15:34:30 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/07 16:41:34 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,10 +437,10 @@ t_map_data				read_map(char *path_file);
 /*
 ** parser_map2.c
 */
-void					read_wall(char *line, t_wall *wall);
-void					read_room(char *line, t_room *room);
+int						read_wall(char *line, t_wall *wall);
+int						read_room(char *line, t_room *room);
 t_wall_ref				*read_wall_ref(char *chunk);
-void					read_wall_ref_list(int fd, t_map_data *map);
+int						read_wall_ref_list(int fd, t_map_data *map);
 int						read_icon(char *line, t_icon *icon);
 
 /*

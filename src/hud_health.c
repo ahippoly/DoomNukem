@@ -1,36 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hud_health.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 19:29:51 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 19:30:10 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
-/* initialise et creation de la texture pour l'icone de HP  */
-
+//OK
 int					init_health_icon(t_data *d, t_hud *hud)
 {
 	SDL_Surface		*surface;
 
 	if (!(surface = SDL_LoadBMP(HEALTH_ICON_PATH)))
-	{
-		printf("Erreur de chargement de l'image : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to load image");
 	if (!(hud->health_texture = SDL_CreateTextureFromSurface(d->rend, surface)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(surface);
 	return (0);
 }
 
 int				put_health_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 {	
-	if (SDL_RenderCopy(d->rend, hud->health_texture, NULL, &pos))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+	if ((SDL_RenderCopy(d->rend, hud->health_texture, NULL, &pos)) < 0)
+		exit_game(d, "error : failed to render copy");
 	return (0);
 }
-
-/* initialise et creation de la texture pour afficher le texte de HP  */
 
 int					set_health_info(t_data *d, t_hud *hud, int nb)
 {
@@ -42,14 +42,11 @@ int					set_health_info(t_data *d, t_hud *hud, int nb)
 	else if (nb > 100)
 		nb = 100;
 	if (!(text = ft_itoa(nb)))
-		return (exit_hud(hud));
+		exit_game(d, "error : failed to transform int to ascii");
 	if(!(s_cpy = TTF_RenderText_Blended(d->font_nb, text, hud->color)))
-	{
-		printf("Erreur d'affichage du texte TTF : %s\n", TTF_GetError());
-		return (exit_hud(hud));
-	}
-	if (!(hud->message_health_s = copy_surface(s_cpy, hud)))
-		return (exit_hud(hud));
+		exit_game(d, "error : failed to render text blended");
+	if (!(hud->message_health_s = copy_surface(d, s_cpy, hud)))
+		exit_game(d, "error : failed to copy surface");
 	SDL_FreeSurface(s_cpy);
 	return (0);
 }
@@ -57,14 +54,8 @@ int					set_health_info(t_data *d, t_hud *hud, int nb)
 int				render_health_info(t_data *d, t_hud *hud, SDL_Rect pos)
 {
 	if (!(hud->message_health_t = SDL_CreateTextureFromSurface(d->rend, hud->message_health_s)))
-	{
-		printf("Erreur de conversion de la surface : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
-	if (SDL_RenderCopy(d->rend, hud->message_health_t, NULL, &pos))
-	{
-		printf("Erreur Render Copy : %s", SDL_GetError());
-		return (exit_hud(hud));
-	}
+		exit_game(d, "error : failed to create texture");
+	if ((SDL_RenderCopy(d->rend, hud->message_health_t, NULL, &pos)) < 0)
+		exit_game(d, "error : failed to render copy");
 	return (0);
 }

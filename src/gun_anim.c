@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gun_anim.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 16:48:30 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 16:48:31 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
+//OK
 void    get_gun_pos(t_data *d, SDL_Point pos)
 {
     //SDL_Rect srcdim;
@@ -30,9 +43,9 @@ void    gun_dimension(t_data *d)
     //return (dstdim);
 }
 
-void    gun_idle_anim(t_data *d)
+void			gun_idle_anim(t_data *d)
 {
-    SDL_Point pos;
+    SDL_Point	pos;
 
     pos.x = 0;
     pos.y = 0;
@@ -51,11 +64,11 @@ void    gun_idle_anim(t_data *d)
     gun_dimension(d);
 }
 
-void    sprite_anim_gun(t_data *d)
+void			sprite_anim_gun(t_data *d)
 {
-    SDL_Point pos;
-    Uint32 currTime;
-    int diff;
+    SDL_Point	pos;
+    Uint32		currTime;
+    int			diff;
 
     diff = 0;
     if (d->sprite[d->gun_ind].on >= 0)
@@ -69,13 +82,7 @@ void    sprite_anim_gun(t_data *d)
     {
         get_gun_pos(d, pos);
         gun_dimension(d);
-        // d->src_gun = srcdim;
-		// d->dst_gun = dstdim;
-		// print_img_portion(d->p_screen, d->sprite[d->gun_ind].img, srcdim, dstdim);
     }
-    // else if (((d->sprite[d->gun_ind].index == FIRE || d->sprite[d->gun_ind].index == AIMFIRE)) && (d->gun_ind != 1 && d->gun_ind != 2) && 
-    // (d->sprite[d->gun_ind].on == 0) && d->sprite[d->gun_ind].anim_end == 0)
-    //     d->sprite[d->gun_ind].time = SDL_GetTicks();
     else
     {
         d->sprite[d->gun_ind].index = IDLE;

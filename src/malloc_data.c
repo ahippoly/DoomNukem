@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 21:51:28 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 00:19:09 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/06 02:02:07 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,13 @@ t_sprite		*malloc_sprite(int size)
 	if (!(sprite = (t_sprite *)ft_memalloc(sizeof(t_sprite) * (size + 1))))
 		return (NULL);
 	return (sprite);
+}
+
+t_sprite		**malloc_sprite_tab(int size)
+{
+    t_sprite	**sprite;
+
+    if (!(sprite = (t_sprite **)ft_memalloc(sizeof(t_sprite *) * (size + 1))))
+        return (NULL);
+    return (sprite);
 }

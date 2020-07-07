@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_hud.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:24:57 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:26:19 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 17:23:11 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 */
 
 void				free_hud(t_hud *hud);
-int					exit_hud(t_hud *hud);
+// int					exit_hud(t_hud *hud);
 
 /*
 ** hud_weapons.c
@@ -71,7 +71,7 @@ int					render_ammo_info(t_data *d, t_hud *hud, SDL_Rect pos);
 ** hud utils
 */
 
-SDL_Surface			*copy_surface(SDL_Surface *src, t_hud *hud);
+SDL_Surface			*copy_surface(t_data *d, SDL_Surface *src, t_hud *hud);
 
 /*
 ** hud_inv.c

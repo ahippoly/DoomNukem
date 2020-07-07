@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 22:55:20 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:46:07 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	malloc_data_init(t_data *d)
 {
+	int	i;
 	if (!(d->props = malloc_props(NB_MAX_PROPS)))
 		exit_game(d, "error : failed to malloc props");
 	if (!(d->mobs = malloc_mob(NB_MAX_MOBS)))
@@ -22,10 +23,25 @@ void	malloc_data_init(t_data *d)
 		exit_game(d, "error : failed to malloc objects");
 	if (!(d->repulsed = malloc_obj_tab(NB_MAX_MOBS + NB_MAX_PROPS)))
 		exit_game(d, "error : failed to malloc objects tab");
-	// if (!(d->sprite = malloc_sprite(30)))
+	// if (!(d->sprite = malloc_sprite(MAX_WEAPONS))) ---- SG HER
 	// 	exit_game(d, "error : failed to malloc sprite");
 	if (!(d->texture = malloc_img(NB_TEXTURE)))
 		exit_game(d, "error : failed to malloc image");
+	if (!(d->img = malloc_img(NB_IMG)))
+		exit_game(d, "error : failed to malloc image");
+	if (!(d->sprite_img = malloc_img(NB_SPRITE)))
+		exit_game(d, "error : failed to malloc image");
+	if (!(d->fl = malloc_floor_tab(NB_WALL_MAX / 2)))
+		exit_game(d, "error : failed to malloc floor");
+	i = 0;
+	while (i < (NB_WALL_MAX / 2))
+	{
+		if (!(d->fl[i] = malloc_floor(WIN_SIZE_Y)))
+			exit_game(d, "error : failed to malloc floor");
+		i++;
+	}
+	if (!(d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
+		exit_game(d, "error : failed to malloc screens pixel");
 }
 
 void init_data_var(t_data *d)
@@ -55,6 +71,7 @@ void init_data_var(t_data *d)
 void init_data(t_data *d, int ac, char **av)
 {
 	ft_putendl("init data...");
+	ft_bzero(d, sizeof(t_data));
     init_sdl_ressources_rend(d);
 	init_sprite(d);
 	init_hud(d);
@@ -71,7 +88,7 @@ void init_data(t_data *d, int ac, char **av)
 		exit_with_msg("error : wrong map file\n");
 	init_data_var(d);
     init_mini_map(d, &d->map);
-    d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
+    // d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
 	init_sprites_img(d);

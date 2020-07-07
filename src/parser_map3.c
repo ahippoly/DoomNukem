@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_map3.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/06 20:24:24 by alebui            #+#    #+#             */
+/*   Updated: 2020/07/06 21:35:35 by alebui           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
-int read_file(char *path_file)
+//OK
+int		read_file(char *path_file) //pas utilisée
 {
     int fd;
     char buf[2];
@@ -70,9 +83,9 @@ int read_paramf(char *chunk, char *key, float *to_fill)
     return (error);
 }
 
-float calc_line_angle(t_point p1, t_point p2)
+float		calc_line_angle(t_point p1, t_point p2)
 {
-    float a;
+    float	a;
 
     if (p2.x - p1.x < INTER_TOLERANCE && p2.x - p1.x > - INTER_TOLERANCE)
         a = 2147483647;

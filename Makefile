@@ -31,11 +31,11 @@ SRC_NAME =	$(sort \
 			bmp_reader.c bmp_reader2.c bmp_reader3.c\
 			render_skybox.c render_ray_utils.c\
 			sprite_init_gun2.c sprite_init_gun3.c sprite_init_gun4.c sprite_main.c \
-			menu_clean.c menu_button.c menu_render.c menu_exec.c menu_background.c hud_clean.c exit.c \
+			menu_clean.c menu_button.c menu_render.c menu_exec.c menu_background.c hud_clean.c exit_game.c \
 			gameover_background.c gameover_button.c gameover_render.c \
 			game_render.c \
 			render_game.c frame.c render_icon2obj_type.c \
-			clean_data.c clean_editor.c \
+			clean_data.c exit_editor.c \
 			malloc_env.c malloc_env1.c malloc_data.c \
 			sdl_init.c utils2.c utils3.c utils4.c utils5.c utils6.c sprite_init.c sprite_init_mob.c \
 			copy_frame.c tool_sdlpoint_arithmetic2.c)

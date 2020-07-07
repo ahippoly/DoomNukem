@@ -19,7 +19,7 @@ static int	free_texture_menu(t_data *d)
 	return (0);
 }
 
-static int	free_gameover(t_data *d)
+int			free_gameover(t_data *d)
 {
 	if (!d)
 		return (0);
@@ -38,12 +38,12 @@ int			free_menu(t_data *d)
 	return (0);
 }
 
-int			exit_menu(t_data *d)
-{
-	free_menu(d);
-	free_gameover(d);
-	quit_ttf(d);
-	SDL_Quit();
-	ft_putendl("bye !");
-	exit(-1);
-}
+// int			exit_menu(t_data *d)
+// {
+// 	free_menu(d);
+// 	free_gameover(d);
+// 	quit_ttf(d);
+// 	SDL_Quit();
+// 	ft_putendl("bye !");
+// 	exit(-1);
+// }

@@ -1,5 +1,6 @@
 #include "proto_global.h"
 
+//OK
 int	render_game(t_data *d)
 {
 	d->time_last_frame = d->time;

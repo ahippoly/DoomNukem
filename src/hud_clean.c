@@ -1,5 +1,6 @@
 #include "proto_global.h"
 
+//ok
 static void	free_texture(t_hud *hud)
 {
 	int		i;
@@ -30,10 +31,10 @@ void		free_hud(t_hud *hud)
 	free_texture(hud);
 }
 
-int			exit_hud(t_hud *hud)
-{
-	free_hud(hud);
-	SDL_Quit();
-	ft_putendl("bye!");
-	exit(-1);
-}
+// int			exit_hud(t_hud *hud)
+// {
+// 	free_hud(hud);
+// 	SDL_Quit();
+// 	ft_putendl("bye!");
+// 	exit(-1);
+// }

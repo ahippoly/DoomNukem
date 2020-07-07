@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay_weapon.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 18:34:27 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/29 01:43:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:47:44 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//OK
 
 #include "proto_global.h"
 

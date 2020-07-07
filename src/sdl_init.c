@@ -21,14 +21,16 @@ void	init_sdl_ressources_rend(t_data *d)
 {
     d->win = NULL;
     if (0 != SDL_Init(SDL_INIT_VIDEO))
-		exit_with_msg("Failed to Init SDL");
+		exit_game(d, "error : failed to init SDL");
     if (!(d->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_SIZE_X, WIN_SIZE_Y, SDL_WINDOW_SHOWN)))
-		exit_with_msg("Failed to create Window");
+		exit_game(d, "error : failed to create window");
     if (!(d->rend = SDL_CreateRenderer(d->win, -1, SDL_RENDERER_ACCELERATED)))
-		exit_with_msg("Failed to create Renderer");
-    d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32,
-	SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y);
-    d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32,
-	SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
+		exit_game(d, "error : failed to create renderer");
+	if (!(d->screen = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32,
+	SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y)))
+		exit_game(d, "error : failed to create texture");
+	if (!(d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32,
+	SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y)))
+		exit_game(d, "error : failed to create texture");
 }

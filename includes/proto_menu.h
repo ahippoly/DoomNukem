@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_menu.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:27:13 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:27:36 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 19:41:32 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int				render_btn(t_data *d);
 
 int				free_menu(t_data *d);
 int				exit_menu(t_data *d);
+int				free_gameover(t_data *d);
 
 /*
 ** menu_exec
