@@ -8,7 +8,7 @@ static void write_walls(int fd, t_wall *list, int wall_count)
 
     i = 0;
     printf("wall count = %i\n", wall_count);
-    write(fd, "WALL LIST\n", 10);
+	ft_putstr_fd("WALL LIST\n", fd);
     write_head_param(fd, "WALL_COUNT", ft_itoa(wall_count));
     while (i < wall_count)
     {
@@ -22,10 +22,10 @@ static void write_walls(int fd, t_wall *list, int wall_count)
         write_param(fd, "room_id_ref", ft_itoa(wall.room_id_ref));
         write_param(fd, "transparency", ft_itoa(wall.transparency));
         write_param(fd, "can_collide", ft_itoa(wall.can_collide));
-        write(fd, "\n", 1);
+		ft_putchar_fd('\n', fd);
         i++;
     }
-    write(fd, "\n", 1);
+	ft_putchar_fd('\n', fd);
 }
 
 static void write_rooms(int fd, t_room *room, int room_count)
@@ -33,7 +33,7 @@ static void write_rooms(int fd, t_room *room, int room_count)
     int i;
     t_room display;
 
-    write(fd, "ROOM LIST\n", 10);
+	ft_putstr_fd("ROOM LIST\n", fd);
     write_head_param(fd, "ROOM_COUNT", ft_itoa(room_count));
     i = 0;
     while (i < room_count)

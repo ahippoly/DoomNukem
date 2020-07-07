@@ -23,9 +23,9 @@ char *join_float_value(float val1, char *separator, float val2)
 
 void	write_key(int fd, char *key)
 {
-    write(fd, " ", 1);
-    write(fd, key, ft_strlen(key));
-    write(fd, " ", 1);
+	ft_putchar_fd(' ', fd);
+	ft_putstr_fd(key, fd);
+	ft_putchar_fd(' ', fd);
 }
 
 void write_param(int fd, char *key, char *value)
@@ -35,7 +35,7 @@ void write_param(int fd, char *key, char *value)
     str = ft_strjoin(key, " : ");
     str = ft_strjoinfree(str, value, 0);
     str = ft_strjoinfree(str, " ; ", 0);
-    write(fd, str, ft_strlen(str));
+	ft_putstr_fd(str, fd);
     free(value);
     free(str);
 }

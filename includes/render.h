@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 00:00:55 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 00:04:51 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/06 23:37:31 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ typedef	struct			s_look_rot
 	float				step;
 	float				rev;
 }						t_look_rot;
+
+typedef	struct			s_color_alp
+{
+	unsigned int		color;
+	float				alpha;
+}						t_color_alp;
 
 typedef	struct			s_obj
 {

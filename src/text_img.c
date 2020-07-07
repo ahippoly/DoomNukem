@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 02:21:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 22:59:35 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 03:21:00 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ char		(*read_char_table(void))[SIZE_Y][SIZE_X]
 
 	if (nb == 0)
 	{
-		read(open(CHART_FILE, O_RDONLY), buf, 5000);
+		if (read(open(CHART_FILE, O_RDONLY), buf, 5000) == -1)
+			exit_with_msg("error while reading text_img chart\n");
 		i = 0;
 		letter_size = SIZE_X * (SIZE_Y + 1) + 1;
 		while (nb < CHAR_NB)

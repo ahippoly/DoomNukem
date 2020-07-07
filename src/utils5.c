@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:36:29 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 15:38:06 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/07 03:22:21 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		print_text_screen(unsigned int *p_tab, t_img *text, SDL_Rect draw)
 	tx_start = 0;
 	if (draw.x < 0)
 		tx_start = t_step.x * -draw.x;
+	t_scale.y = 0;
 	if (draw.y < 0)
 		t_scale.y = t_step.y * -draw.y;
 	draw.y = ft_max(draw.y, 0) * WIN_SIZE_Y;

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 23:18:23 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 23:26:25 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 03:19:01 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
 	t_obj	obj;
 	t_img	*text;
 
+	ft_bzero(&obj, sizeof(t_obj));
 	obj.p1 = wall->p1;
 	obj.p2 = wall->p2;
 	obj.length = wall->length;

@@ -6,22 +6,20 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:25:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 00:59:50 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/06 23:39:46 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-float	put_p(unsigned int *addr, unsigned int color, float alpha)
+void	put_p(unsigned int *addr, t_color_alp color)
 {
-	*addr = color;
-	return (alpha);
+	*addr = color.color;
 }
 
-float	put_p_alpha(unsigned int *addr, unsigned int color, float alpha)
+void	put_p_alpha(unsigned int *addr, t_color_alp color)
 {
-	*addr = calc_transparency2(*addr, color, alpha);
-	return (alpha);
+	*addr = calc_transparency2(*addr, color.color, color.alpha);
 }
 
 void	adapt_ty_and_range(t_draw *range, float *ty, float ty_step)
@@ -43,7 +41,7 @@ void	draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj,
 	float	ty;
 	int		tx;
 	int		p_cord;
-	float	(*put_pix)(unsigned int*, unsigned int, float);
+	void	(*put_pix)(unsigned int*, t_color_alp);
 
 	tx = ray.mod_scale * obj.w;
 	ty_step = (float)obj.h * (ray.z_text) / (range.end_y - range.start_y);
@@ -59,8 +57,7 @@ void	draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj,
 	{
 		while (ty > obj.h - INTER_TOLERANCE)
 			ty -= obj.h;
-		(*put_pix)(&pixels[p_cord], obj.pixels[tx + (int)ty * obj.w],
-			obj.alpha);
+		(*put_pix)(&pixels[p_cord], (t_color_alp){obj.pixels[tx + (int)ty * obj.w], obj.alpha});
 		ty += ty_step;
 		p_cord += WIN_SIZE_X;
 	}
