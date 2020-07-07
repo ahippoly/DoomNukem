@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 22:54:18 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 05:31:41 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,17 @@ void	read_file_pixels(t_img text, int bpp, int fd, int convert);
 t_img	bmp_error(t_img *res, int fd, char *msg);
 void	print_bmp_param(unsigned char *head);
 
+char		***read_char_table(int is_free);
+char		***alloc_chart(void);
+void		parse_letter(char **charts, char *letter);
+t_txt_img	create_text_img(char *str, int size, int color, SDL_Point pos);
+
+void		read_words(char ***charts,
+		char *str, int size, t_txt_img txt);
+void		input_text_to_img(char *str, int size, int color, t_img to_fill);
+t_txt_img	set_pos_txt(t_txt_img txt, int x, int y);
+void		charts2pixels(char **letter, int size,
+		t_txt_img txt);
+void		fill_pixels(int x, int y, t_txt_img *txt, t_size size);
 
 #endif
