@@ -6,13 +6,11 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 05:08:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:18:33 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
-
-//OKK
 
 void	select_next_texture(t_env *env)
 {
@@ -54,7 +52,7 @@ void	del_selected_wall(t_env *env)
 void	set_room_text(t_env *env)
 {
 	int tmp;
-	
+
 	if (env->selected_wall_id > -1)
 		if ((tmp = env->wall_list[env->selected_wall_id].room_id_ref) != -1)
 			env->room_text[tmp] = env->selected_texture;

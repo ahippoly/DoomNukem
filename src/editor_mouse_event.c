@@ -60,7 +60,6 @@ void handle_mouse_event(t_env *env)
         if (env->ev.type == SDL_KEYUP)
         {
             handle_input_mode(env, env->ev.key.keysym.scancode);
-            debug_print(env, env->ev.key.keysym.scancode);
         }
         check_click(env);
     }
