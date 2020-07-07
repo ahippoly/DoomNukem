@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/07 20:14:03 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 00:31:24 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,10 @@ int						add_wall(t_point p1, t_point p2, t_env *env);
 */
 void					print_walls_in_map(t_env *env);
 void					print_selected_wall(t_env *env);
+void					rearange_room_id(t_env *env);
+void					draw_wall_editor(t_env *env, t_point p1,
+						t_point p2, int color);
+
 
 /*
 ** editor_wall_edit.c

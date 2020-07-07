@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 22:55:31 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 22:58:10 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 00:40:57 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	reset_textures(t_env *env)
 {
-	ft_memcpy_int(env->p_screen, WIN_SIZE_X * WIN_SIZE_Y);
-	ft_memcpy_int(env->p_grid, GRID_SIZE_X * GRID_SIZE_Y);
+	ft_bzero(env->p_screen, WIN_SIZE_X * WIN_SIZE_Y * 4);
+	ft_bzero(env->p_grid, GRID_SIZE_X * GRID_SIZE_Y * 4);
 }
 
 int			main(int argc, char **argv)

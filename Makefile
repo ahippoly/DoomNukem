@@ -3,7 +3,7 @@ EDITOR_NAME = editor
 GAME_NAME = doom-nukem
 
 SRC_NAME =	$(sort \
-			editor_wall_add_del.c editor_wall_add_del2.c \
+			editor_wall_add_del.c editor_wall_add_del2.c editor_wall_add_del3.c\
 			editor_wall_edit.c editor_buttons.c \
 			editor_map_move.c \
 			editor_mouse_event.c editor_mouse_event2.c editor_map_output.c editor_map_output2.c\
