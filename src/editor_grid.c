@@ -6,14 +6,13 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 04:55:20 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/24 20:07:17 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:09:08 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-// OKK
-void			create_grid(unsigned int *pixels, t_env *env)
+void		create_grid(unsigned int *pixels, t_env *env)
 {
 	int			i;
 
@@ -35,7 +34,7 @@ void			create_grid(unsigned int *pixels, t_env *env)
 	}
 }
 
-SDL_Point		check_tiles_hitbox(SDL_Point mouse,
+SDL_Point	check_tiles_hitbox(SDL_Point mouse,
 	unsigned int *pixels, t_env *env)
 {
 	SDL_Point	rest;
@@ -65,17 +64,18 @@ SDL_Point		check_tiles_hitbox(SDL_Point mouse,
 	return (map_pos);
 }
 
-void			display_selected_point(t_env *env)
+void		display_selected_point(t_env *env)
 {
 	int			hitbox;
 
 	if (env->selected_corner.x != -1)
 	{
 		hitbox = TILE_HITBOX - 2;
-		draw_rectangle(env->p_grid, set_sdl_rect(env->selected_corner.x * TILE_SIZE 
-			- hitbox / 2 + env->map_move.x, env->selected_corner.y * TILE_SIZE 
+		draw_rectangle(env->p_grid, set_sdl_rect(env->selected_corner.x
+			* TILE_SIZE
+			- hitbox / 2 + env->map_move.x, env->selected_corner.y * TILE_SIZE
 			- hitbox / 2
-			+ env->map_move.y, hitbox, hitbox), 
+			+ env->map_move.y, hitbox, hitbox),
 			set_size(GRID_SIZE_X, GRID_SIZE_Y), RED);
 	}
 }

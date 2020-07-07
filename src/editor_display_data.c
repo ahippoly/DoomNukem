@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   editor_display_data.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/07 17:58:34 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/07/07 18:32:13 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 static void		process_input(t_env *env)
@@ -17,11 +29,9 @@ void	print_env2screen2(t_env *env)
 {
 	print_inputs(env);
 	process_input(env);
-	if ((SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4))
-		== -1)
+	if ((SDL_UpdateTexture(env->screen, NULL, env->p_screen, WIN_SIZE_X * 4)) == -1)
 		exit_editor(env, "error : failed to update texture");
-    if ((SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4))
-		== -1)
+    if ((SDL_UpdateTexture(env->editor_grid, NULL, env->p_grid, GRID_SIZE_X * 4)) == -1)
     	exit_editor(env, "error : failed to update texture");
     display_txt_img(env);
     display_buttons(env);

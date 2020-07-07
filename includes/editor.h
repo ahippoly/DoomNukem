@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/07 16:41:34 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 20:14:03 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,6 +379,10 @@ void					init_env(t_env *env);
 ** editor_init_data3.c
 */
 void					init_buttons(t_env *env);
+
+
+void					init_sprites_env(t_env *env);
+void					init_img(t_env *env);
 
 /*
 ** -------------------------- EVENT --------------------------
