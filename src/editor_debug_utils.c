@@ -1,19 +1,14 @@
 #include "proto_global.h"
 
-// OKK FICHIER A DELETE A LA FIN
-
 void	print_rooms_content(t_room *room_list, int room_count)
 {
     int     i;
     t_room room;
 
-    //rearange_wall_lst(env);
-    printf("ROOM_CONTENTS :\n");
     i = 0;
     while (i < room_count)
     {
         room = room_list[i];
-        printf("room id %i have wall id from %i to %i\n", room.room_id, room.wall_ref.start, room.wall_ref.end);
         i++;
     }
 }

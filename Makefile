@@ -48,14 +48,17 @@ EDITOR_MAIN = editor_main.c $(SRC_NAME)
 
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
-SDL_PATH = ./SDL2/
 LIBFT_PATH = ./libft/
 FMOD_LIB_PATH = ./FMOD/
 ASSETS_PATH = ./asset/
 FONT_DIR = font/
 IMG_DIR = img/
 SOUND_DIR = sound/
-INC_PATH = ./includes/ $(LIBFT_PATH)includes/ ./includes/SDL2/
+LIBS_PATH = libs/
+SDL_PATH = $(LIBS_PATH)SDL2-2.0.12/
+SDL_TTF_PATH = $(LIBS_PATH)SDL2_ttf-2.0.15/
+FREETYPE_PATH = $(LIBS_PATH)freetype-2.10.0/
+INC_PATH = ./includes/ $(LIBFT_PATH)includes/ $(SDL_PATH)include/ $(SDL_TTF_PATH)
 OBJ_EDITOR_NAME = $(EDITOR_MAIN:.c=.o)
 OBJ_REND_NAME = $(GAME_MAIN:.c=.o)
 
@@ -67,8 +70,6 @@ ASSETS = $(addprefix $(ASSETS_PATH), $(FONT_DIR) $(IMG_DIR) $(SOUND_DIR))
 LIBFT = $(addprefix $(LIBFT_PATH), libft.a)
 LDFLAGS = $(addprefix -L,$(LIBFT_PATH) $(FMOD_LIB_PATH))
 
-INSTALL_LIBS = $(FMOD) $(SDL)
-
 FMOD_WINDOWS = /usr/lib/fmod.dll /usr/lib/fmodL.dll
 
 FMOD_OSX = /usr/local/lib/libfmod.dylib /usr/local/lib/libfmodL.dylib
@@ -76,6 +77,8 @@ FMOD_OSX = /usr/local/lib/libfmod.dylib /usr/local/lib/libfmodL.dylib
 FMOD_LINUX = /usr/lib/libfmod.so /usr/lib/libfmodL.so \
 			 /usr/lib/libfmod.so.11 /usr/lib/libfmodL.so.11 \
 			 /usr/lib/libfmod.so.11.9 /usr/lib/libfmodL.so.11.9
+
+SDL_LINUX = /usr/local/lib/libSDL2.so
 
 SED = sed
 
@@ -86,7 +89,7 @@ CFLAGS = -Wall -Wextra -Werror
 OPTI = -g3
 PTHREAD = -lpthread
 SDLM = `sdl2-config --cflags --libs`
-LIBS = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
+LIBSFLAG = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
 LDLIBS = -lft -lm
 
 ifeq ($(OS),Windows_NT)
@@ -95,15 +98,18 @@ else
 	UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 	FMOD = $(FMOD_OSX)
-	SED = gsed	
+	SDL = $(SDL_OSX)
+	SED = gsed
 else 
 	FMOD = $(FMOD_LINUX)
+	SDL = $(SDL_LINUX)
+	FREEGLUT = sudo apt-get install freeglut3-dev
 	endif	
 endif
 
 .PHONY: all clean fclean re libft
 
-all: $(EDITOR_NAME) $(GAME_NAME) $(ASSETS) $(FMOD)
+all: $(EDITOR_NAME) $(GAME_NAME) $(ASSETS) $(FMOD) 
 
 libft:
 	@printf "/--------------- creating library \e[1;36m$@\e[0m... ----------/\n"
@@ -112,18 +118,18 @@ libft:
 
 $(EDITOR_NAME): libft $(OBJ_EDITOR) $(ASSETS)
 	@printf "%-50s" "create executable "$(notdir $@)...
-	@$(CC) $(CFLAGS) $(OPTI) $(INC) $(OBJ_EDITOR) -o $(EDITOR_NAME) $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
+	@$(CC) $(CFLAGS) $(OPTI) $(INC) $(OBJ_EDITOR) -o $(EDITOR_NAME) $(SDLM) $(LDFLAGS) $(LIBSFLAG) $(PTHREAD)
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(GAME_NAME): libft $(OBJ_REND) $(ASSETS)
 	@printf "%-50s" "create executable "$(notdir $@)...
-	@$(CC) $(OPTI) $(CFLAGS) $(INC) $(OBJ_REND) -o $(GAME_NAME) $(SDLM) $(LDFLAGS) $(LIBS) $(PTHREAD)
+	@$(CC) $(OPTI) $(CFLAGS) $(INC) $(OBJ_REND) -o $(GAME_NAME) $(SDLM) $(LDFLAGS) $(LIBSFLAG) $(PTHREAD)
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(OPTI) $(INC) -o $@ -c $<
+	@$(CC) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(ASSETS) :
@@ -156,12 +162,32 @@ $(FMOD_OSX):
 	@sudo cp FMOD/libfmod.dylib /usr/local/lib
 	@sudo cp FMOD/libfmodL.dylib /usr/local/lib
 
-SDL :
+install_libs:
+	@printf "\e[1;32m[Unzipping libs]\e[0m\n"
+	@cd $(LIBS_PATH) && tar -xf freetype-2.10.0.tar.gz
+	@cd $(LIBS_PATH) && tar -xf SDL2-2.0.12.tar.gz
+	@cd $(LIBS_PATH) && tar -xf SDL2_ttf-2.0.15.tar.gz
+	@printf "\e[1;32m[Get freeglut]\e[0m\n"
+	@$(FREEGLUT)
 	@printf "\e[1;32m[Configure SDL2]\e[0m\n"
-	@./configure
+	@cd $(SDL_PATH) && ./configure
 	@printf "\e[1;32m[Make SDL2]\e[0m\n"
-	@make
-	@sudo make install
+	@cd $(SDL_PATH) && make
+	@cd $(SDL_PATH) && sudo make install
+	@printf "\e[1;32m[Configure Freetype]\e[0m\n"
+	@cd $(FREETYPE_PATH) && ./configure
+	@printf "\e[1;32m[Make Freetype]\e[0m\n"
+	@cd $(FREETYPE_PATH) && make
+	@cd $(FREETYPE_PATH) && sudo make install
+	@printf "\e[1;32m[Configure SDL_ttf]\e[0m\n"
+	@cd $(SDL_TTF_PATH) && ./configure
+	@printf "\e[1;32m[Make SDL_ttf]\e[0m\n"
+	@cd $(SDL_TTF_PATH) && make
+	@cd $(SDL_TTF_PATH) && sudo make install
+
+clean_libs :
+	@printf "\e[1;32m[Deleting libs]\e[0m\n"
+	@$(RM) -rf $(SDL_PATH) $(SDL_TTF_PATH) $(FREETYPE_PATH)
 
 clean:
 	@printf "%-50s" "deleting objects..." 
