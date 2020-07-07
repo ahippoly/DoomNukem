@@ -6,13 +6,12 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 22:30:07 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/06/25 16:50:58 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/07 22:59:36 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-// OKK
 static void	*ft_memcpy2(void *s1, const void *s2, size_t n)
 {
 	char	*c1;
@@ -33,7 +32,7 @@ static void	map2env_icon(t_env *e, t_map_data *map)
 	int i;
 
 	e->icon_count = map->icon_count;
-	ft_memcpy2(e->icon_list , map->icon_list, sizeof(t_icon) * map->icon_count);
+	ft_memcpy2(e->icon_list, map->icon_list, sizeof(t_icon) * map->icon_count);
 	i = 0;
 	while (i < map->icon_count)
 	{
@@ -72,13 +71,12 @@ static void	map2env(t_env *e, t_map_data *map)
 	map2env_room(e, map);
 	e->player_spawn.x = map->player_spawn.x;
 	e->player_spawn.y = map->player_spawn.y;
-	// print_player_spawn(e);
 }
 
 void		load_map(t_env *e, int ac, char **av)
 {
-	t_map_data map;
-	
+	t_map_data	map;
+
 	if (ac > 1)
 	{
 		e->map_name = strdup(av[1]);
