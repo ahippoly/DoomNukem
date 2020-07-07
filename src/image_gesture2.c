@@ -32,7 +32,7 @@ SDL_Texture		*bmp_to_texture(char *file, SDL_Renderer *rend)
 		return (NULL);
 	new = NULL;
 	img.pixels = NULL;
-	img = ft_load_bmp2(file, BMP_TYPE_BGRA, 0);
+	img = ft_load_bmp2(file, BMP_TYPE_ARGB, 0);
 	new = SDL_CreateTexture(rend, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, img.w, img.h);
 	SDL_UpdateTexture(new, NULL, img.pixels, img.w * 4);
 	SDL_SetTextureBlendMode(new, SDL_BLENDMODE_BLEND);

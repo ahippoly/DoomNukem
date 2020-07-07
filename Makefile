@@ -86,7 +86,7 @@ SED = sed
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-OPTI = -g3
+OPTI = -O3
 PTHREAD = -lpthread
 SDLM = `sdl2-config --cflags --libs`
 LIBSFLAG = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
