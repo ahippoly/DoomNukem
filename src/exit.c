@@ -27,6 +27,33 @@ void	free_obj_tab(t_obj **tab, int size)
 	free(tab);
 }
 
+void	free_mobs(t_data *d)
+{
+	int i;
+
+	i = 0;
+	while (i < NB_MAX_MOBS)
+	{
+	if (d->mobs[i].sprite.dst)
+		free(d->mobs[i].sprite.dst);
+	i++;
+	}
+	if (d->mobs)
+		free(d->mobs);
+}
+
+// void	free_buttons(t_button *button) ** A completer
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (i < NB_BUTTONS)
+// 	{
+// 		env->buttons_lst;
+// 		i++;
+// 	}
+// }
+
 void	free_data_tab(t_data *d)
 {
 	free_floor(d);
@@ -37,14 +64,23 @@ void	free_data_ptr(t_data *d)
 {
 	if (d->props)
 		free(d->props);
-	if (d->mobs)
-		free(d->mobs);
 	if (d->obj_list)
 		free(d->obj_list);
 	// if (d->sprite)
 	// 	free(d->sprite);
 	if (d->texture)
 		free(d->texture);
+	// if (d->sprite_img)
+	// 	free(d->sprite_img);
+	// if (d->img)
+	// 	free(d->img);
+	if (d->p_player_pos)
+		free(d->p_player_pos);
+	if (d->p_mini_map)
+		free(d->p_mini_map);
+	if (d->p_mini_map_bg)
+		free(d->p_mini_map_bg);
+	free_mobs(d);
 }
 
 void exit_game(t_data *d, char *msg)

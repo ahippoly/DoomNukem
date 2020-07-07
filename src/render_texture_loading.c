@@ -37,17 +37,20 @@ t_img	read_img_surface(char *file, Uint32 pixel_format)
 void	load_bmp_files(t_data *d)
 {
 	char	*path;
+	char	*nb;
 	int		i;
 
 	path = ft_strnew(36);
 	i = 0;
 	while (i < NB_TEXTURE)
 	{
+		nb = ft_itoa(i);
 		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
-		ft_strcat(path, ft_itoa(i));
+		ft_strcat(path, nb);
 		ft_strcat(path, ".bmp");
 		d->texture[i] = ft_load_bmp2(path, BMP_TYPE_BGRA, 0);
 		ft_bzero(path, sizeof(char *));
+		free(nb);
 		i++;
 	}
 	free(path);

@@ -97,7 +97,7 @@ void		input_text_to_img(char *str, int size, int color, t_img to_fill)
 	txt.pos_size = to_fill.pos_size;
 	txt.color = color;
 	charts = read_char_table(0);
-	str = ft_strlower(ft_strdup(str));
+	str = ft_strlower(str);
 	read_words(charts, str, size, txt);
 	free(str);
 }

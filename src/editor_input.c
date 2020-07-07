@@ -19,21 +19,23 @@ void print_inputs(t_env *env)
 {
     int i;
     t_input input;
+    char *str;
 
+    str = ft_itoa(input.value);
     i = 0;
     while (i < NB_INPUT)
     {
         input = env->input_lst[i];
         //printf("input pos_sie : x = %i, y = %i\n", input.pos_size.x, input.pos_size.y);
         if (env->selected_input == i)
-            input_text_to_img(ft_itoa(input.value), 2, 0xFF88FF88, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
+            input_text_to_img(str, 2, 0xFF88FF88, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
         else if (env->hovered_input_id == i)
-            input_text_to_img(ft_itoa(input.value), 2, 0xFF8888FF, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
+            input_text_to_img(str, 2, 0xFF8888FF, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
         else
-            input_text_to_img(ft_itoa(input.value), 2, 0xFFDDDDDD, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
+            input_text_to_img(str, 2, 0xFFDDDDDD, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
         i++;
     }
-    
+    free(str);
 }
 
 t_input		create_t_input(SDL_Rect pos_size, int default_value, int max)
