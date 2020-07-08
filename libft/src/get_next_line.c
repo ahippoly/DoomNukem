@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 17:48:17 by alebui            #+#    #+#             */
-/*   Updated: 2019/05/15 15:07:25 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 21:17:22 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+/*
+** GNL ALEX
+*/
 
 static int			split_left_into_line(t_read *f_read, char **line)
 {
