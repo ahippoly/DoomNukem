@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 18:17:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/01 03:54:16 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 23:07:35 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ double				ft_fmin(double a, double b);
 int					ft_range(int value, int min, int max);
 double				ft_frange(double value, double min, double max);
 void				*p_malloc(unsigned int size);
-
 void				print_memory(const void *addr, size_t size);
 int					get_next_line(const int fd, char **line);
 void				*double_array_size(void *data, int unit_size,
 						size_t array_length);
 char				*ft_ftoa(float n, char *res, int afterpoint);
+char				*ft_strsubfree(char **s, unsigned int start, size_t len);
 
 #endif
