@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:13:57 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 16:08:30 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 18:05:38 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		init_menu(t_data *d)
 		exit_game(d, "error : failed to malloc menu pixels");
 	ft_bzero(d->p_menu, sizeof(int) * MINIMAPSIZEY * MINIMAPSIZEX);
 	ft_bzero(&d->menu, sizeof(d->menu));
-	init_background(d);
+	init_backgroundd(d, &d->menu.menu_bg_t, MENU_BG_PATH);
 	return (0);
 }
 
@@ -53,8 +53,8 @@ int		init_gameover(t_data *d)
 		exit_game(d, "error : failed to create texture");
 	if (!(d->p_gameover = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
 		exit_game(d, "error : failed to malloc gameover pixels");
-	ft_bzero(d->p_gameover, sizeof(int) * MINIMAPSIZEY * MINIMAPSIZEX);
-	init_gameover_background(d);
+	ft_bzero(d->p_gameover, sizeof(int) * WIN_SIZE_X * WIN_SIZE_Y);
+	init_backgroundd(d, &d->menu.gameover_t, GAMEOVER_PATH);
 	return (0);
 }
 

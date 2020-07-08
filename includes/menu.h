@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:12:15 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:12:15 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/08 16:24:19 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define GAMEOVER_PATH "asset/img/menu/jail_gameover.bmp"
 # define MENU_BG_PATH "asset/img/menu/jail_bg1.bmp"
+# define WIN_BG_PATH 
 
 typedef struct		s_menu
 {
@@ -30,6 +31,7 @@ typedef struct		s_menu
 	SDL_Texture		*quit_t;
 	SDL_Texture		*over_continue_t;
 	SDL_Texture		*over_quit_t;
+	SDL_Texture		*win_t;
 }					t_menu;
 
 #endif

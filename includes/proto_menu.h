@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:27:13 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 19:41:32 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:02:39 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@
 */
 
 int				render_menu(t_data *d);
-
-/*
-** menu_background.c
-*/
-
-int				init_background(t_data *d);
-int				put_menu_bg(t_data *d);
 
 /*
 ** menu_button.c
@@ -54,13 +47,6 @@ int				catch_btn_event(t_data *d);
 char			**malloc_argv(t_data *d, int n);
 
 /*
-** gameover_background.c
-*/
-
-int				init_gameover_background(t_data *d);
-int				put_gameover_bg(t_data *d);
-
-/*
 ** gameover_button.c
 */
 
@@ -68,9 +54,16 @@ int				render_gameover_button(t_data *d);
 int				catch_over_btn_event(t_data *d);
 
 /*
-** proto_menu.c
+** gameover_render.c
 */
 
 int				render_gameover(t_data *d);
+
+/*
+** render_wallpaper.c
+*/
+
+int				init_backgroundd(t_data *d, SDL_Texture **texture, char *path);
+int				put_bg(t_data *d, SDL_Texture *texture);
 
 #endif
