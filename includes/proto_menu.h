@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:27:13 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 17:02:39 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 00:57:12 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,12 @@ int				render_gameover(t_data *d);
 
 int				init_backgroundd(t_data *d, SDL_Texture **texture, char *path);
 int				put_bg(t_data *d, SDL_Texture *texture);
+
+/*
+** win_render.c
+*/
+
+int				render_win(t_data *d);
+
 
 #endif

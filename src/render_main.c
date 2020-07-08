@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 05:17:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 05:23:26 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 01:04:47 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int					main(int ac, char **av)
 	t_data			d;
 
 	init_data(&d, ac, av);
-	init_sound(&d);
-	play_sound(&d, MUS2);
+	//init_sound(&d);
+	//play_sound(&d, MUS2);
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)
@@ -38,6 +38,8 @@ int					main(int ac, char **av)
 			else
 				execv("./editor", av);
 		}
+		else if (d.run_game == WIN)
+			render_win(&d);
 	}
 	exit_game(&d, "");
 }

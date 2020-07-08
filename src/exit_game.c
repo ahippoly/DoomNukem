@@ -40,6 +40,8 @@ void	free_data_ptr(t_data *d)
 		free(d->p_screen);
 	if (d->p_mini_map_bg)
 		free(d->p_mini_map_bg);
+	if (d->p_win)
+		free(d->p_win);
 	if (d->p_player_pos)
 		free(d->p_player_pos);
 	if (d->p_hud)
@@ -64,6 +66,7 @@ void	free_data_ptr(t_data *d)
 		free(d->p_menu);
 	if (d->grabbed_wall)
 		free(d->grabbed_wall);
+	
 }
 
 void			free_sdl_ptr_data(t_data *d)
@@ -80,6 +83,8 @@ void			free_sdl_ptr_data(t_data *d)
 		SDL_DestroyTexture(d->hud_texture);
 	if (d->gameover_texture)
 		SDL_DestroyTexture(d->gameover_texture);
+	if (d->win_texture)
+		SDL_DestroyTexture(d->win_texture);
 }
 
 void exit_game(t_data *d, char *msg)

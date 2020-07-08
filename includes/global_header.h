@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_header.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:03:48 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 05:24:28 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 01:02:11 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define MENU 2
 # define GAMEOVER 3
 # define EDITOR 4
+# define WIN 5
 
 typedef struct		s_coord
 {

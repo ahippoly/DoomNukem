@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:39:51 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 02:03:24 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 00:59:26 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ void			init_mini_map(t_data *d, t_map_data *map);
 int				init_menu(t_data *d);
 int				init_gameover(t_data *d);
 int				init_hud(t_data *d);
+int				init_winscreen(t_data *d);
 
 t_point			calc_map_scale(t_map_data *map);
 

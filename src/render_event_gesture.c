@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_event_gesture.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:28:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 05:13:11 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 01:04:12 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void	handle_key_event(t_data *d)
 		move_with_collide_player(d, &d->player_pos,
 		calc_sin_cos_rot(d->rot + M_PI), MOVE_STEP * d->speed_modifier);
 	if (clavier[SDL_SCANCODE_L])
-		d->run_game = GAMEOVER;
+	{
+		//d->run_game = GAMEOVER;
+		d->run_game = WIN;
+	}
 	handle_key_event2(d, clavier);
 }
