@@ -1,18 +1,18 @@
 #include "proto_global.h"
 
-int		free_floor(t_data *d)
-{
-	int	i;
+// int		free_floor(t_data *d)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < (NB_WALL_MAX / 2))
-	{
-		free(d->fl[i]);
-		i++;
-	}
-	free(d->fl);
-	return (0);
-}
+// 	i = 0;
+// 	while (i < (NB_WALL_MAX / 2))
+// 	{
+// 		free(d->fl[i]);
+// 		i++;
+// 	}
+// 	free(d->fl);
+// 	return (0);
+// }
 
 void	free_obj_tab(t_obj **tab, int size)
 {
@@ -54,11 +54,11 @@ void	free_mobs(t_data *d)
 // 	}
 // }
 
-void	free_data_tab(t_data *d)
-{
-	free_floor(d);
-	free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
-}
+// void	free_data_tab(t_data *d)
+// {
+// 	free_floor(d);
+// 	free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
+// }
 
 void	free_data_ptr(t_data *d)
 {
@@ -83,18 +83,18 @@ void	free_data_ptr(t_data *d)
 	free_mobs(d);
 }
 
-void exit_game(t_data *d, char *msg)
-{
-	ft_putendl(msg);
-	free_menu(d);	
-	free_hud(&d->hud);
-	//clean_sprite_gun(d);
-	free_data_ptr(d);
-	read_char_table(1);
-	clean_sounds(d);
-	/* SDL */
-	quit_ttf(d);
-	SDL_Quit();
-	ft_putendl("bye !");
-	exit(0);
-}
+// void exit_game(t_data *d, char *msg)
+// {
+// 	ft_putendl(msg);
+// 	free_menu(d);	
+// 	free_hud(&d->hud);
+// 	//clean_sprite_gun(d);
+// 	free_data_ptr(d);
+// 	read_char_table(1);
+// 	clean_sounds(d);
+// 	/* SDL */
+// 	quit_ttf(d);
+// 	SDL_Quit();
+// 	ft_putendl("bye !");
+// 	exit(0);
+// }

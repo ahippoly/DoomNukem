@@ -48,6 +48,7 @@ int					set_health_info(t_data *d, t_hud *hud, int nb)
 	if (!(hud->message_health_s = copy_surface(d, s_cpy, hud)))
 		exit_game(d, "error : failed to copy surface");
 	SDL_FreeSurface(s_cpy);
+	free(text);
 	return (0);
 }
 

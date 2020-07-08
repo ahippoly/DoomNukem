@@ -40,7 +40,7 @@ static int read_wall_list(int fd, t_map_data *map)
         if ((read_wall(line, &map->wall_list[i++])) < 0)
 			return (-1);
 	}
-	//printf("map reader, wall_count = %i\n", map->wall_count);
+	free(line);
 	return (0);
 }
 
@@ -50,8 +50,11 @@ static int read_room_list(int fd, t_map_data *map)
     int i;
 
     if (get_next_line(fd, &line) == 1)
+	{
         read_param(line, "ROOM_COUNT", &map->room_count);
-    else
+		free(line);
+	}
+	else
 	{
         ft_putendl("error while reading map");
 		return (-1);
@@ -66,6 +69,7 @@ static int read_room_list(int fd, t_map_data *map)
 	{
 		if ((read_room(line, &map->room_list[i++])) < 0)
 			return (-1);
+		free(line);
 	}
 	return (0);
 }
@@ -96,6 +100,7 @@ static int	read_icon_list(int fd, t_map_data *map)
 	i = 0;
 	while (i < map->icon_count)
 		i++;
+	free(line);
 	return (0);
 }
 
@@ -145,5 +150,6 @@ t_map_data		read_map(char *path_file)
 	}
     map.is_valid = 1;
     close(fd);
+	free(line);
     return (map);
 }

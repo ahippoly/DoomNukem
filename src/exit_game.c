@@ -5,9 +5,10 @@ int		free_floor(t_data *d)
 	int	i;
 
 	i = 0;
-	while (i < (NB_WALL_MAX / 2))
+	while (d->fl[i])
 	{
-		free(d->fl[i]);
+		if (d->fl[i])
+			free(d->fl[i]);
 		i++;
 	}
 	free(d->fl);
@@ -36,6 +37,8 @@ void	free_data_tab(t_data *d)
 
 void	free_data_ptr(t_data *d)
 {
+	if (d->map.icon_list)
+		free(d->map.icon_list);
 	if (d->p_screen)
 		free(d->p_screen);
 	if (d->p_mini_map_bg)
@@ -64,6 +67,7 @@ void	free_data_ptr(t_data *d)
 		free(d->p_menu);
 	if (d->grabbed_wall)
 		free(d->grabbed_wall);
+	free_data_tab(d);
 }
 
 void			free_sdl_ptr_data(t_data *d)
