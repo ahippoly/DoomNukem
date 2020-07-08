@@ -7,18 +7,28 @@ static int		malloc_editor_button(t_env *env)
 	return (0);
 }
 
+t_button create_txt_button(char *name, SDL_Point pos,
+	SDL_Point color, SDL_Point button_param)
+{
+	return (create_button(create_text_img(name, button_param.x, color.x, pos),
+		create_text_img(name, button_param.x, color.y, pos), button_param.y));
+}
+
 static void		init_create_button(t_env *env)
 {
-	env->buttons_lst[BUTTON_DEL] = create_button(create_text_img("del", 2, 0xFF8888FF, create_point(0.85 * WIN_SIZE_X, 0.020 * WIN_SIZE_Y)), create_text_img("del", 2, 0xFFFFFFFF, create_point(0.85 * WIN_SIZE_X, 0.02 * WIN_SIZE_Y)), BUTTON_DEL);
-    env->buttons_lst[BUTTON_TEXT_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_LEFT);
-    env->buttons_lst[BUTTON_TEXT_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.195 * WIN_SIZE_Y)), BUTTON_TEXT_RIGHT);
-    env->buttons_lst[BUTTON_CREATE_ROOM] = create_button(create_text_img("Create_room", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), create_text_img("Create_room", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.850 * WIN_SIZE_Y)), BUTTON_CREATE_ROOM);
-    env->buttons_lst[BUTTON_MAP_OUTPUT] = create_button(create_text_img("Map_output", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), create_text_img("Map_output", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y)), BUTTON_MAP_OUTPUT);
-    env->buttons_lst[BUTTON_SET_PLAYER_SPAWN] = create_button(create_text_img("set_player_spawn", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), create_text_img("set_player_spawn", 1, 0xFFFFFFFF, create_point(0.730 * WIN_SIZE_X, 0.900 * WIN_SIZE_Y)), BUTTON_SET_PLAYER_SPAWN);
-    env->buttons_lst[BUTTON_MOB_LEFT] = create_button(create_text_img("<", 2, 0xFFDDDDDD, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img("<", 2, 0xFF88FF88, create_point(0.762 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_LEFT);
-    env->buttons_lst[BUTTON_MOB_RIGHT] = create_button(create_text_img(">", 2, 0xFFDDDDDD, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), create_text_img(">", 2, 0xFF88FF88, create_point(0.958 * WIN_SIZE_X, 0.445 * WIN_SIZE_Y)), BUTTON_MOB_RIGHT);
-    env->buttons_lst[BUTTON_MOB_PLACING] = create_button(create_text_img("Place", 1, 0xFFDDDDDD, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), create_text_img("Place", 1, 0xFF88FF88, create_point(0.822 * WIN_SIZE_X, 0.555 * WIN_SIZE_Y)), BUTTON_MOB_PLACING);
-    env->buttons_lst[BUTTON_FLOOR_TEXT] = create_button(create_text_img("Set_floor_text", 1, 0xFFFF88CC, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), create_text_img("Set_floor_text", 1, 0xFFDDDDDD, create_point(0.730 * WIN_SIZE_X, 0.950 * WIN_SIZE_Y)), BUTTON_FLOOR_TEXT);
+	env->buttons_lst[BUTTON_DEL] = create_txt_button("del", create_point(0.85
+		* WIN_SIZE_X, 0.020 * WIN_SIZE_Y),
+		(SDL_Point){0xFF8888FF, 0xFFFFFFFF}, (SDL_Point){2, BUTTON_DEL});
+	env->buttons_lst[BUTTON_TEXT_LEFT] = create_txt_button("<", create_point(0.762
+		* WIN_SIZE_X, 0.195 * WIN_SIZE_Y),
+		(SDL_Point){0xFFDDDDDD, 0xFF88FF88}, (SDL_Point){2, BUTTON_TEXT_LEFT});
+	env->buttons_lst[BUTTON_TEXT_RIGHT] = create_txt_button(">", create_point(0.958
+		* WIN_SIZE_X, 0.195 * WIN_SIZE_Y),
+		(SDL_Point){0xFFDDDDDD, 0xFF88FF88}, (SDL_Point){2, BUTTON_TEXT_RIGHT});
+	env->buttons_lst[BUTTON_CREATE_ROOM] = create_txt_button("Create_room",
+		create_point(0.730	* WIN_SIZE_X, 0.850 * WIN_SIZE_Y),
+		(SDL_Point){0xFFFF88CC, 0xFFFFFFFF}, (SDL_Point){1, BUTTON_CREATE_ROOM});
+	init_create_button2(env);
 }
 
 static void		init_select_button(t_env *env)

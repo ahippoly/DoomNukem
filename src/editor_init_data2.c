@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 19:44:40 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 22:56:26 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 00:56:14 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int		malloc_env(t_env *env)
 
 void			init_env(t_env *env)
 {
-    init_sdl_ressources(env);
+	init_sdl_ressources(env);
 	malloc_env(env);
 	init_texture(env);
 	init_buttons(env);

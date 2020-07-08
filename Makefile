@@ -7,7 +7,7 @@ SRC_NAME =	$(sort \
 			editor_wall_edit.c editor_buttons.c \
 			editor_map_move.c \
 			editor_mouse_event.c editor_mouse_event2.c editor_map_output.c editor_map_output2.c\
-			editor_input.c editor_input2.c editor_debug_utils.c \
+			editor_input.c editor_input2.c \
 			editor_icon.c editor_icon2.c editor_init_data.c editor_init_data2.c editor_init_data3.c editor_init_data4.c \
 			editor_display_data.c editor_display_data2.c editor_grid.c editor_button_fct.c editor_button_fct2.c \
 			editor_map_input.c \

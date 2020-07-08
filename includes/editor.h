@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 00:31:24 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 02:24:54 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,6 +383,10 @@ void					init_env(t_env *env);
 ** editor_init_data3.c
 */
 void					init_buttons(t_env *env);
+void					init_create_button2(t_env *env);
+t_button				create_txt_button(char *name, SDL_Point pos,
+	SDL_Point color, SDL_Point button_param);
+
 
 
 void					init_sprites_env(t_env *env);

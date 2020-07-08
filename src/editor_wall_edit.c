@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 00:26:24 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 00:37:52 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 00:53:53 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		check_mouse_in_walls(t_env *env)
 	{
 		wall = env->wall_list[i];
 		if (is_cursor_in_wall(convert_sdlpoint2tpoint(add_sdl_point(env->mouse,
-							env->map_move, 1)), wall.p1, wall.p2))
+			env->map_move, 1)), wall.p1, wall.p2))
 		{
 			env->hovered_wall_id = wall.id;
 			draw_wall_editor(env, wall.p1, wall.p2, RED);
