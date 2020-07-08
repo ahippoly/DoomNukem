@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:54:44 by alebui            #+#    #+#             */
-/*   Updated: 2019/05/15 15:55:58 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 21:21:47 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include "libft.h"
 
 # define BUFF_SIZE 500
+
+//GNL ALEX
 
 int					get_next_line(const int fd, char **line);
 
