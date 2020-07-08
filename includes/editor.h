@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 05:05:19 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:16:01 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@
 # define MOVE_SPEED 5
 # define MAP_SIZE_X 30
 # define MAP_SIZE_Y 30
+
+# define MAPSIZEX 30
+# define MAPSIZEY 30
 
 # define NB_IMG 7
 

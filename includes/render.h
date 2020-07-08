@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 00:00:55 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 23:37:31 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:04:25 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define MINI_MAP_POS_X 550
 # define MINI_MAP_POS_Y 0
 # define MINI_MAP_PLAYER_SIZE 5
+
+# define MINIMAPPLAYERSIZE 5
+# define MINIMAPSIZEX 250
+# define MINIMAPSIZEY 250
+
 
 # define MOVE_STEP 3
 # define ROT_STEP 0.07853981634 //anciennement 0.05 * M_PI_2

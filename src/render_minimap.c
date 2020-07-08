@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:50:42 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 03:37:05 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 16:19:19 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,42 @@
 
 void	update_player_pos_mini_map(t_data *d)
 {
-	d->mini_map_player_pos.x = ft_range(MINI_MAP_SIZE_X * 0.5, 0, MINI_MAP_SIZE_X);
-	d->mini_map_player_pos.y = ft_range(MINI_MAP_SIZE_Y * 0.5, 0, MINI_MAP_SIZE_Y);
+	d->mini_map_player_pos.x = ft_range(MINIMAPSIZEX * 0.5,
+			0, MINIMAPSIZEX);
+	d->mini_map_player_pos.y = ft_range(MINIMAPSIZEY * 0.5,
+			0, MINIMAPSIZEY);
 }
 
 void	print_player_look_vector(t_data *d, float rot)
 {
-    SDL_Point	screen_player_pos;
-    float		fov;
+	SDL_Point	screen_player_pos;
+	float		fov;
 
-    fov =  d->fov_rad / 2;
-    screen_player_pos = create_point(d->mini_map_player_pos.x
+	fov = d->fov_rad / 2;
+	screen_player_pos = create_point(d->mini_map_player_pos.x
 		+ MINI_MAP_PLAYER_SIZE / 2, d->mini_map_player_pos.y
 		+ MINI_MAP_PLAYER_SIZE / 2);
-    draw_line(screen_player_pos, create_point(screen_player_pos.x
+	draw_line(screen_player_pos, create_point(screen_player_pos.x
 		+ cos(rot + fov) * 45, screen_player_pos.y + sin(rot + fov) * 45),
 		(t_img){d->p_mini_map,
-		(SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}, 0, 0}, 0xFF00DDDD);
-    draw_line(screen_player_pos, create_point(screen_player_pos.x
+		(SDL_Rect){0, 0, MINIMAPSIZEX, MINIMAPSIZEY}, 0, 0}, 0xFF00DDDD);
+	draw_line(screen_player_pos, create_point(screen_player_pos.x
 		+ cos(rot - fov) * 45, screen_player_pos.y + sin(rot - fov) * 45),
 		(t_img){d->p_mini_map,
-		(SDL_Rect){0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y}, 0, 0}, 0xFF00DDDD);
+		(SDL_Rect){0, 0, MINIMAPSIZEX, MINIMAPSIZEY}, 0, 0}, 0xFF00DDDD);
 }
 
 void	print_mini_map(t_data *d)
 {
-    SDL_Rect	tmp;
+	SDL_Rect	tmp;
 
-    tmp = set_sdl_rect(0, 0, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y);
-	ft_memcpy_int(d->p_mini_map, d->p_mini_map_bg, MINI_MAP_SIZE_X * MINI_MAP_SIZE_Y);
-    print_player_look_vector(d, d->rot);
-	if ((SDL_UpdateTexture(d->mini_map, &tmp, d->p_mini_map, MINI_MAP_SIZE_X * 4)) < 0)
+	tmp = set_sdl_rect(0, 0, MINIMAPSIZEX, MINIMAPSIZEY);
+	ft_memcpy_int(d->p_mini_map, d->p_mini_map_bg, MINIMAPSIZEX * MINIMAPSIZEY);
+	print_player_look_vector(d, d->rot);
+	if ((SDL_UpdateTexture(d->mini_map, &tmp,
+		d->p_mini_map, MINIMAPSIZEX * 4)) < 0)
 		exit_game(d, "error : failed to update texture");
-	if ((SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos, d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4)) < 0)
+	if ((SDL_UpdateTexture(d->mini_map, &d->mini_map_player_pos,
+		d->p_player_pos, MINI_MAP_PLAYER_SIZE * 4)) < 0)
 		exit_game(d, "error : failed to update texture");
 }
