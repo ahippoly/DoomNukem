@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 02:24:54 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:05:19 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define GRID_POS_X 0
 # define GRID_POS_Y 60
 # define GRID_SIZE_X 561
+# define GRIDSIZEX 561
 # define GRID_SIZE_Y 441
 # define TILE_SIZE 40
 # define TILE_HITBOX 7
