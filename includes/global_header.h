@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_header.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:03:48 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:04:07 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/08 05:24:28 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "SDL_ttf.h"
 
 # define WIN_SIZE_X 800
+# define WINSIZEX 800
 # define WIN_SIZE_Y 800
 # define HALF_WIN_SIZE_X 400
 # define HALF_WIN_SIZE_Y 400

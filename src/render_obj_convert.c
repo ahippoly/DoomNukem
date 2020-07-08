@@ -6,13 +6,13 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 23:18:23 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 03:19:01 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:22:06 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-t_obj	convert_wall_to_obj(t_data *d, t_wall *wall)
+t_obj			convert_wall_to_obj(t_data *d, t_wall *wall)
 {
 	t_obj	obj;
 	t_img	*text;
@@ -88,7 +88,7 @@ static t_obj	convert_prop_to_obj(t_props *props)
 	return (obj);
 }
 
-void	init_obj_room_ground(t_data *d, t_obj *obj_list, int nb_obj)
+void			init_obj_room_ground(t_data *d, t_obj *obj_list, int nb_obj)
 {
 	int		i;
 	t_obj	*curr;
@@ -103,7 +103,7 @@ void	init_obj_room_ground(t_data *d, t_obj *obj_list, int nb_obj)
 	}
 }
 
-void	init_obj_list(t_data *d)
+void			init_obj_list(t_data *d)
 {
 	int	i;
 	int	j;

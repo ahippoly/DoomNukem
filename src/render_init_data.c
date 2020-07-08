@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 16:46:07 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:20:38 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,13 @@ void init_data(t_data *d, int ac, char **av)
 	init_gameover(d);
 	init_ttf(d);
 	if (ac > 1)
-	{
 		d->map = read_map(av[1]);
-	}
 	else
     	d->map = read_map("maps/editor_map_0");
 	if (d->map.is_valid == 0)
 		exit_with_msg("error : wrong map file\n");
 	init_data_var(d);
     init_mini_map(d, &d->map);
-    // d->p_screen = alloc_image(WIN_SIZE_X, WIN_SIZE_Y);
     ft_bzero(d->p_screen, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
     load_bmp_files(d);
 	init_sprites_img(d);
@@ -96,4 +93,5 @@ void init_data(t_data *d, int ac, char **av)
 	load_icons(d, &d->map);
 	init_obj_list(d);
     d->jetpack = 0;
+	d->run_game = MENU;
 }

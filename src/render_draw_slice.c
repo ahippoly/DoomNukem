@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:25:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 23:39:46 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:09:40 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj,
 	{
 		while (ty > obj.h - INTER_TOLERANCE)
 			ty -= obj.h;
-		(*put_pix)(&pixels[p_cord], (t_color_alp){obj.pixels[tx + (int)ty * obj.w], obj.alpha});
+		(*put_pix)(&pixels[p_cord],
+			(t_color_alp){obj.pixels[tx + (int)ty * obj.w], obj.alpha});
 		ty += ty_step;
 		p_cord += WIN_SIZE_X;
 	}

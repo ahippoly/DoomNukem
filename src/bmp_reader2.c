@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:27:18 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 16:16:01 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:07:49 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ void	convert_bmp_type32(char *pixel, int convert)
 		swap_char(pixel, pixel + 3);
 		swap_char(pixel + 1, pixel + 3);
 		swap_char(pixel + 2, pixel + 3);
-	}	
+	}
 }

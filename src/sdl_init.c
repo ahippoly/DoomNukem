@@ -33,4 +33,5 @@ void	init_sdl_ressources_rend(t_data *d)
 	if (!(d->mini_map = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_RGBA32,
 	SDL_TEXTUREACCESS_STREAMING, MINI_MAP_SIZE_X, MINI_MAP_SIZE_Y)))
 		exit_game(d, "error : failed to create texture");
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 }

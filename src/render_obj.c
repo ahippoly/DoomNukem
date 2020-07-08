@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 23:14:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 23:28:13 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:21:44 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	create_raybox(t_obj *obj, t_rot rot_calc)
 	}
 }
 
-void	create_obj_raybox(t_data *d)
+void		create_obj_raybox(t_data *d)
 {
 	int	i;
 
@@ -35,30 +35,7 @@ void	create_obj_raybox(t_data *d)
 	}
 }
 
-// void	correct_origin_ref(int i, int nb_obj, t_obj *obj)
-// {
-// 	int	size;
-// 	int	type;
-
-// 	if (obj->room_id == TYPE_PROP)
-// 	{
-// 		type = TYPE_PROP;
-// 		size = sizeof(t_props);
-// 	}
-// 	if (obj->room_id == TYPE_MOB)
-// 	{
-// 		type = TYPE_MOB;
-// 		size = sizeof(t_mob);
-// 	}
-// 	while (i < nb_obj)
-// 	{
-// 		if (obj->room_id == type)
-// 			obj->origin -= size;
-// 		i++;
-// 	}
-// }
-
-void	del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj)
+void		del_obj(t_obj *obj_list, int *nb_obj, t_obj *obj)
 {
 	int		i;
 

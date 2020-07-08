@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 16:35:04 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/05 16:42:41 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 05:22:30 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_room	*get_room_by_id(t_data *d, int room_id)
 	if (room_id > -1)
 		return (&d->map.room_list[room_id]);
 	else
-		return (NULL);	    //ATTENTION
+		return (NULL);
 }
 
 void	add_to_queue(int *nb, t_ray *queue, t_ray *checked)
