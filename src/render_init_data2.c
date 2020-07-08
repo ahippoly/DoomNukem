@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:13:57 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 03:48:07 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 16:57:23 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int		init_menu(t_data *d)
 		exit_game(d, "error : failed to malloc menu pixels");
 	ft_bzero(d->p_menu, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
 	ft_bzero(&d->menu, sizeof(d->menu));
-	init_background(d);
+	// init_background(d);
+	init_backgroundd(d, &d->menu.menu_bg_t, MENU_BG_PATH);
 	return (0);
 }
 
@@ -52,7 +53,8 @@ int		init_gameover(t_data *d) // doit etre initialisée après init_menu car par
 	if (!(d->p_gameover = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
 		exit_game(d, "error : failed to malloc gameover pixels");
 	ft_bzero(d->p_gameover, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
-	init_gameover_background(d);
+	// init_gameover_background(d);
+	init_backgroundd(d, &d->menu.gameover_t, GAMEOVER_PATH);
 	return (0);
 }
 

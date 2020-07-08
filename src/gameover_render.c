@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:47:16 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 16:47:17 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 16:45:53 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	render_gameover(t_data *d)
 	SDL_PumpEvents();
 	handle_key_event(d);
 	handle_poll_event(d);
-	put_gameover_bg(d);
+	put_bg(d, d->menu.gameover_t);
 	render_gameover_button(d);
 	catch_over_btn_event(d);
 	SDL_RenderPresent(d->rend);
