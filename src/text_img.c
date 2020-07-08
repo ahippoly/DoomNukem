@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 02:21:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 05:31:36 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 18:37:06 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ void		read_words(char ***charts,
 		else if (str[i] == '-')
 			charts2pixels(charts[40], size, draw_letter);
 		else
+		{
+			printf("str = %s\n", str);
 			exit_with_msg("error : txt_img not alpha_numeric\n");
+		}
 	}
 }
 
@@ -97,7 +100,6 @@ void		input_text_to_img(char *str, int size, int color, t_img to_fill)
 	txt.pos_size = to_fill.pos_size;
 	txt.color = color;
 	charts = read_char_table(0);
-	str = ft_strlower(ft_strdup(str));
+	str = ft_strlower(str);
 	read_words(charts, str, size, txt);
-	free(str);
 }

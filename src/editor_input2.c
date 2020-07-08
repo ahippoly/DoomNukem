@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 22:44:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 22:48:39 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/08 18:36:41 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,24 @@ void		check_hovered_input(t_env *env)
 
 void		print_inputs(t_env *env)
 {
-	int		i;
-	t_input	input;
+	int i;
+    t_input input;
+    char *str;
 
-	i = 0;
-	while (i < NB_INPUT)
-	{
-		input = env->input_lst[i];
-		if (env->selected_input == i)
-			input_text_to_img(ft_itoa(input.value), 2, 0xFF88FF88,
-			create_img(env->p_screen, set_sdl_rect(input.pos_size.x,
-			input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
-		else if (env->hovered_input_id == i)
-			input_text_to_img(ft_itoa(input.value), 2, 0xFF8888FF,
-			create_img(env->p_screen, set_sdl_rect(input.pos_size.x,
-			input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
-		else
-			input_text_to_img(ft_itoa(input.value), 2, 0xFFDDDDDD,
-			create_img(env->p_screen, set_sdl_rect(input.pos_size.x,
-			input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
-		i++;
-	}
+    i = 0;
+    while (i < NB_INPUT)
+    {
+        input = env->input_lst[i];
+   		str = ft_itoa(input.value);
+        //printf("input pos_sie : x = %i, y = %i\n", input.pos_size.x, input.pos_size.y);
+		printf("input str = %s\n", str);
+        if (env->selected_input == i)
+            input_text_to_img(str, 2, 0xFF88FF88, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
+        else if (env->hovered_input_id == i)
+            input_text_to_img(str, 2, 0xFF8888FF, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
+        else
+            input_text_to_img(str, 2, 0xFFDDDDDD, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
+        i++;
+    	free(str);
+    }
 }

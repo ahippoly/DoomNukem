@@ -10,8 +10,11 @@ static void	free_texture(t_hud *hud)
 	{
 		if (hud->perso_weapon[i]->texture)
 			SDL_DestroyTexture(hud->perso_weapon[i]->texture);
+		if (hud->perso_weapon[i])
+			free(hud->perso_weapon[i]);
 		i++;
 	}
+	free(hud->perso_weapon);
 	if (hud->perso.texture)
 		SDL_DestroyTexture(hud->perso.texture);
 	if (hud->message_ammo_t)

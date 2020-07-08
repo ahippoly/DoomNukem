@@ -1,1 +1,0 @@
-/usr/local/Cellar/sdl2_ttf/2.0.15/include/SDL2/SDL_ttf.h
