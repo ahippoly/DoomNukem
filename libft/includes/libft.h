@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 18:17:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 23:07:35 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/08 23:12:27 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ void				*double_array_size(void *data, int unit_size,
 						size_t array_length);
 char				*ft_ftoa(float n, char *res, int afterpoint);
 char				*ft_strsubfree(char **s, unsigned int start, size_t len);
+char				*ft_strjoin_free(char **s1, char *s2);
 
 #endif
