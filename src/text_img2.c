@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:23:15 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 05:30:20 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 04:28:47 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ char		***alloc_chart(void)
 			chart[j][i++] = (char*)p_malloc(sizeof(char) * SIZE_X);
 	}
 	return (chart);
+}
+
+void		free_chart(char ***charts)
+{
+	int i;
+	int j;
+
+	j = 0;
+	while (j < CHAR_NB)
+	{
+		i = 0;
+		while (i < SIZE_Y)
+			free(charts[j][i++]);
+		free(charts[j++]);
+	}
+	free(charts);
+	charts = NULL;
 }
 
 char		***read_char_table(int is_free)
@@ -53,7 +70,7 @@ char		***read_char_table(int is_free)
 		}
 	}
 	if (is_free == 1)
-		free(charts);
+		free_chart(charts);
 	return (charts);
 }
 

@@ -35,7 +35,11 @@ static void	free_texture(t_hud *hud)
 
 void		free_hud(t_hud *hud)
 {
+	int i;
+
 	free_texture(hud);
+	i = 0;
+	
 }
 
 // int			exit_hud(t_hud *hud)

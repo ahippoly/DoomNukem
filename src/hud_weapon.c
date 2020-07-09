@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud_weapon.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:31:54 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 19:32:00 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 05:15:35 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int		malloc_tab_weapons(t_data *d, t_hud *hud)
 		ft_bzero(hud->perso_weapon[i], sizeof(t_weapon));
 		i++;
 	}
-	hud->perso_weapon[WEAPON_NB] = NULL;
 	return (0);
 }
 

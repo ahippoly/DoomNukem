@@ -85,6 +85,8 @@ SED = sed
 
 ## Flags
 
+# EXEC=doom-nukem;ARGS=maps/PrisonBreak;valgrind --tool=memcheck --leak-check=full --leak-resolution=high --show-reachable=yes --log-file=valgrind_log ./$EXEC $ARGS;grep -A1 "valgrind" valgrind_log|grep $EXEC
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 OPTI = -g3

@@ -58,8 +58,8 @@ void	free_data_ptr(t_data *d)
 		free(d->obj_list);
 	// if (d->sprite)
 	// 	free(d->sprite);
-	// if (d->repulsed)
-	// 	free(d->repulsed);
+	if (d->repulsed)
+		free(d->repulsed);
 	if (d->texture)
 		free(d->texture);
 	if (d->img)
@@ -99,6 +99,7 @@ void exit_game(t_data *d, char *msg)
 	free_data_ptr(d);
 	clean_sounds(d);
 	free_sdl_ptr_data(d);
+	read_char_table(1);
 	quit_ttf(d);
 	SDL_Quit();
 	ft_putendl("bye !");

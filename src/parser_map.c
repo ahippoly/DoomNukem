@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:31 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 21:01:15 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 04:21:59 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static int	read_icon_list(int fd, t_map_data *map)
 			return (-1);
 		free(line);
 	}
+	free(line);
 	i = 0;
 	while (i < map->icon_count)
 		i++;
