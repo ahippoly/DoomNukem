@@ -13,7 +13,7 @@ int				destroy_texture_tab(SDL_Texture **tab)
 		SDL_DestroyTexture(tab[i]);
 		i++;
 	}
-	SDL_DestroyTexture(*tab);
+	free(tab);
 	return (0);
 }
 

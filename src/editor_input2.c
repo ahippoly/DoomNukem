@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 22:44:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 18:36:41 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 05:26:20 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void		print_inputs(t_env *env)
     {
         input = env->input_lst[i];
    		str = ft_itoa(input.value);
-        //printf("input pos_sie : x = %i, y = %i\n", input.pos_size.x, input.pos_size.y);
-		printf("input str = %s\n", str);
         if (env->selected_input == i)
             input_text_to_img(str, 2, 0xFF88FF88, create_img(env->p_screen, set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X, WIN_SIZE_Y)));
         else if (env->hovered_input_id == i)

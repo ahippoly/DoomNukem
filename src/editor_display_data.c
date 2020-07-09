@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 17:58:34 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 18:34:26 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 05:26:52 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void		process_input(t_env *env)
 	wcount = ft_itoa(env->wall_count);
 	rcount = ft_itoa(env->room_count);
 	wid = ft_itoa(env->selected_wall_id);
-	printf("count : r = %s, wall = %s, selected = %s\n", rcount, wcount, wid);
 	input_text_to_img(wcount, 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.800 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
 	input_text_to_img(rcount, 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.530 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));
 	input_text_to_img(wid, 2, 0xFFFFFFFF, create_img(env->p_screen, set_sdl_rect(0.700 * WIN_SIZE_X, 0.700 * WIN_SIZE_Y, WIN_SIZE_X, WIN_SIZE_Y)));

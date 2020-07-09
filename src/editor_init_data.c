@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 19:26:30 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 19:37:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 05:28:28 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	load_text_list(t_env *env)
 {
 	int		i;
 	char	*path;
+	char	*nb;
 
 	env->selected_texture = 0;
 	i = 0;
@@ -25,7 +26,8 @@ static int	load_text_list(t_env *env)
 	while (i < NB_TEXTURE)
 	{
 		ft_strcpy(path, "asset/img/textures/TEXT_PATH_");
-		ft_strcat(path, ft_itoa(i));
+		ft_strcat(path, (nb = ft_itoa(i)));
+		free(nb);
 		ft_strcat(path, ".bmp");
 		if (access(path, R_OK) < 0)
 			exit_editor(env, "error : failed to read file");
