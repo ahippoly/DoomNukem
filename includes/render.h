@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 00:00:55 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 16:04:25 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:36:59 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@
 # define MINIMAPSIZEX 250
 # define MINIMAPSIZEY 250
 
-
 # define MOVE_STEP 3
-# define ROT_STEP 0.07853981634 //anciennement 0.05 * M_PI_2
+# define ROT_STEP 0.07853981634
 # define MOUSE_SENS 0.004
 # define Y_VIEW_RANGE 1
 # define RAY_LENGTH 60

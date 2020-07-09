@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay_mobs2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:26:26 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 11:46:04 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:55:26 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	change_mob_life(t_data *d, t_mob *mob, int damage)
 	if (mob->life < 1 && mob->life > -9999)
 	{
 		mob->life = -9999;
-		set_sprite_callback(&mob->sprite, kill_mob, (t_param){d, {mob}});
+		set_sprite_callback(&mob->sprite, kill_mob, (t_param){d, mob});
 		load_anim(&mob->sprite, d->time, ANIM_MOB_DEATH);
 	}
 }
@@ -73,7 +73,7 @@ void	move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob)
 		{
 			mob->attack_timer = d->time;
 			set_sprite_callback(&mob->sprite, check_mob_attack,
-				(t_param){d, {mob}});
+				(t_param){d, mob});
 			load_anim(&mob->sprite, d->time, ANIM_MOB_MELEE);
 		}
 		i++;

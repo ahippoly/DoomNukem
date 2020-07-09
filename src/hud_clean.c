@@ -6,26 +6,14 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 14:13:07 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 14:13:10 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:29:27 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-static void	free_texture(t_hud *hud)
+static void		free_texture2(t_hud *hud)
 {
-	int		i;
-
-	i = 0;
-	while (i < WEAPON_NB)
-	{
-		if (hud->perso_weapon[i]->texture)
-			SDL_DestroyTexture(hud->perso_weapon[i]->texture);
-		if (hud->perso_weapon[i])
-			free(hud->perso_weapon[i]);
-		i++;
-	}
-	free(hud->perso_weapon);
 	if (hud->perso.texture)
 		SDL_DestroyTexture(hud->perso.texture);
 	if (hud->message_ammo_t)
@@ -41,22 +29,27 @@ static void	free_texture(t_hud *hud)
 	if (hud->message_health_s)
 		free(hud->message_health_s);
 	if (hud->inv.healthpack_info_s)
-		free (hud->inv.healthpack_info_s);
+		free(hud->inv.healthpack_info_s);
 }
 
-void		free_hud(t_hud *hud)
+static void		free_texture(t_hud *hud)
 {
-	int i;
+	int		i;
 
-	free_texture(hud);
 	i = 0;
-	
+	while (i < WEAPON_NB)
+	{
+		if (hud->perso_weapon[i]->texture)
+			SDL_DestroyTexture(hud->perso_weapon[i]->texture);
+		if (hud->perso_weapon[i])
+			free(hud->perso_weapon[i]);
+		i++;
+	}
+	free(hud->perso_weapon);
+	free_texture2(hud);
 }
 
-// int			exit_hud(t_hud *hud)
-// {
-// 	free_hud(hud);
-// 	SDL_Quit();
-// 	ft_putendl("bye!");
-// 	exit(-1);
-// }
+void			free_hud(t_hud *hud)
+{
+	free_texture(hud);
+}

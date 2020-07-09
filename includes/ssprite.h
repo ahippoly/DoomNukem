@@ -6,7 +6,7 @@
 /*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 00:06:06 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 00:11:06 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/09 16:53:43 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,11 @@ typedef struct		s_sprite
 	SDL_Texture		*text;
 }					t_sprite;
 
-typedef	struct	s_param
+typedef	struct		s_param
 {
-	struct s_data *d;
-	union
-	{
-		struct s_mob	*mob;
-	};
-}				t_param;
+	struct s_data	*d;
+	struct s_mob	*mob;
+}					t_param;
 
 typedef struct		s_ssprite
 {

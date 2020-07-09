@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:06:15 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 05:15:00 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:36:39 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	inc_fov(t_data *d, float inc)
 {
 	d->fov_rad += inc * M_PI_2;
 	d->fov += inc;
-	printf("fov = %f\n", d->fov);
 }
 
 void	handle_poll_keydown(t_data *d, SDL_Event *event)

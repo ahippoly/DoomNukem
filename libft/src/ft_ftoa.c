@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ftoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 21:37:39 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/05 21:00:57 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/09 17:42:58 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			afterfloat_to_str(int x, char *str, int d)
 	str[i] = '\0';
 	return (i);
 }
- 
+
 char		*ft_ftoa(float n, char *res, int afterpoint)
 {
 	int		ipart;

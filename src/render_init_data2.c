@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_init_data2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:13:57 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 14:37:00 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:26:50 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		init_winscreen(t_data *d)
 		exit_game(d, "error : failed to create texture");
 	if (!(d->p_win = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
 		exit_game(d, "error : failed to malloc gameover pixels");
-	ft_bzero(d->p_win, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+	ft_bzero(d->p_win, sizeof(int) * MAPSIZEY * MAPSIZEX);
 	init_backgroundd(d, &d->menu.win_t, WIN_BG_PATH);
 	return (0);
 }

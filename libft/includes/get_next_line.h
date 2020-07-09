@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 11:54:44 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/08 23:34:59 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:45:44 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <unistd.h>
 
 # define BUFF_SIZE 90000
-
-//GNL ALEX
 
 int					get_next_line(const int fd, char **line);
 

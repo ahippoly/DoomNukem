@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   text_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 02:21:11 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 15:57:31 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:30:38 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-static t_txt_img	process_draw(int i, t_txt_img txt,
-	char *str, int size)
+static t_txt_img	process_draw(int i, t_txt_img txt, int size)
 {
 	t_txt_img		draw_letter;
 
@@ -31,7 +30,7 @@ int					read_words(char ***charts,
 	i = -1;
 	while (str[++i] != '\0')
 	{
-		draw_letter = process_draw(i, txt, str, size);
+		draw_letter = process_draw(i, txt, size);
 		if (str[i] >= 'a' && str[i] <= 'z')
 			charts2pixels(charts[str[i] - 'a'], size, draw_letter);
 		else if (str[i] >= '0' && str[i] <= '9')

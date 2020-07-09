@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 15:27:12 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:28:24 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,8 +354,6 @@ void					print_selected_wall(t_env *env);
 void					rearange_room_id(t_env *env);
 void					draw_wall_editor(t_env *env, t_point p1,
 						t_point p2, int color);
-
-
 /*
 ** editor_wall_edit.c
 */
@@ -390,9 +388,6 @@ void					init_buttons(t_env *env);
 void					init_create_button2(t_env *env);
 t_button				create_txt_button(char *name, SDL_Point pos,
 	SDL_Point color, SDL_Point button_param);
-
-
-
 void					init_sprites_env(t_env *env);
 void					init_img(t_env *env);
 

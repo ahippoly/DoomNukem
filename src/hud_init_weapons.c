@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hud_init_weapons.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:30:36 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 19:30:42 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:16:37 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-//OK
 int				init_weapon_0(t_data *d, t_hud *hud)
 {
 	hud->perso_weapon[0]->id = 5;
@@ -27,7 +26,8 @@ int				init_weapon_0(t_data *d, t_hud *hud)
 	hud->perso_weapon[0]->shoot_repeat = 1;
 	if (!(hud->perso_weapon[0]->surface = SDL_LoadBMP(WEAPON_PATH_0)))
 		exit_game(d, "error : failed to load image");
-	if (!(hud->perso_weapon[0]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[0]->surface)))
+	if (!(hud->perso_weapon[0]->texture = SDL_CreateTextureFromSurface(d->rend,
+		hud->perso_weapon[0]->surface)))
 		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[0]->surface);
 	return (0);
@@ -47,7 +47,8 @@ int				init_weapon_1(t_data *d, t_hud *hud)
 	hud->perso_weapon[1]->shoot_repeat = 0;
 	if (!(hud->perso_weapon[1]->surface = SDL_LoadBMP(WEAPON_PATH_1)))
 		exit_game(d, "error : failed to load image");
-	if (!(hud->perso_weapon[1]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[1]->surface)))
+	if (!(hud->perso_weapon[1]->texture = SDL_CreateTextureFromSurface(d->rend,
+		hud->perso_weapon[1]->surface)))
 		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[1]->surface);
 	return (0);
@@ -67,7 +68,8 @@ int				init_weapon_2(t_data *d, t_hud *hud)
 	hud->perso_weapon[2]->shoot_repeat = 0;
 	if (!(hud->perso_weapon[2]->surface = SDL_LoadBMP(WEAPON_PATH_2)))
 		exit_game(d, "error : failed to load image");
-	if (!(hud->perso_weapon[2]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[2]->surface)))
+	if (!(hud->perso_weapon[2]->texture = SDL_CreateTextureFromSurface(d->rend,
+		hud->perso_weapon[2]->surface)))
 		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[2]->surface);
 	return (0);
@@ -87,7 +89,8 @@ int				init_weapon_3(t_data *d, t_hud *hud)
 	hud->perso_weapon[3]->shoot_repeat = 1;
 	if (!(hud->perso_weapon[3]->surface = SDL_LoadBMP(WEAPON_PATH_3)))
 		exit_game(d, "error : failed to load image");
-	if (!(hud->perso_weapon[3]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[3]->surface)))
+	if (!(hud->perso_weapon[3]->texture = SDL_CreateTextureFromSurface(d->rend,
+		hud->perso_weapon[3]->surface)))
 		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[3]->surface);
 	return (0);
@@ -107,23 +110,9 @@ int				init_weapon_4(t_data *d, t_hud *hud)
 	hud->perso_weapon[4]->shoot_repeat = 1;
 	if (!(hud->perso_weapon[4]->surface = SDL_LoadBMP(WEAPON_PATH_4)))
 		exit_game(d, "error : failed to load image");
-	if (!(hud->perso_weapon[4]->texture = SDL_CreateTextureFromSurface(d->rend, hud->perso_weapon[4]->surface)))
+	if (!(hud->perso_weapon[4]->texture = SDL_CreateTextureFromSurface(d->rend,
+		hud->perso_weapon[4]->surface)))
 		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso_weapon[4]->surface);
-	return (0);
-}
-
-int				init_weapon_5(t_hud *hud)
-{
-	hud->perso_weapon[5]->id = 5;
-	hud->perso_weapon[5]->name = WEAPON_NAME_4;
-	hud->perso_weapon[5]->ammo_left = 100;
-	hud->perso_weapon[5]->capacity = 100;
-	hud->perso_weapon[5]->attack_delay = 150;
-	hud->perso_weapon[5]->reload_delay = 2700;
-	hud->perso_weapon[5]->dammage = 12;
-	hud->perso_weapon[5]->range = 10;
-	hud->perso_weapon[5]->z_force = 0.003;
-	hud->perso_weapon[5]->shoot_repeat = 1;
 	return (0);
 }

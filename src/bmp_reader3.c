@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:29:40 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 19:37:00 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:36:22 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,4 @@ t_img	bmp_error(t_img *res, int fd, char *msg)
 	res->w = -42;
 	close(fd);
 	return (*res);
-}
-
-void	print_bmp_param(unsigned char *head)
-{
-	printf("bmp type = %c%c\n", hex2dec(&head[0], 1), hex2dec(&head[1], 1));
-	printf("bmp total_size = %i\n", hex2dec(&head[2], 4));
-	printf("bmp p_tab begin = %i\n", hex2dec(&head[10], 4));
-	printf("bmp header size = %i\n", hex2dec(&head[14], 4));
-	printf("bmp w = %i\n", hex2dec(&head[18], 4));
-	printf("bmp h = %i\n", hex2dec(&head[22], 4));
-	printf("bmp color planes = %i\n", hex2dec(&head[26], 2));
-	printf("bmp bpp = %i\n", hex2dec(&head[28], 2));
 }

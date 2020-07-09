@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   hud_ammo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:48:38 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 17:23:06 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:22:13 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//OK
 #include "proto_global.h"
 
 int					init_ammo_icon(t_data *d, t_hud *hud)
@@ -34,14 +33,14 @@ int					put_ammo_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 
 int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 {
-	SDL_Surface		*s_cpy;	
+	SDL_Surface		*s_cpy;
 	char			*text;
-	
+
 	if (nb <= 0)
 		nb = 0;
 	if (!(text = ft_itoa(nb)))
 		exit_game(d, "error : failed to transform int to ascii");
-	if(!(s_cpy = TTF_RenderText_Blended(d->font_nb, text, hud->color)))
+	if (!(s_cpy = TTF_RenderText_Blended(d->font_nb, text, hud->color)))
 		exit_game(d, "error : failed to render text blender");
 	if (!(hud->message_ammo_s = copy_surface(d, s_cpy, hud)))
 		exit_game(d, "error : failed to copy_surface");
@@ -52,7 +51,8 @@ int					set_ammo_info(t_data *d, t_hud *hud, int nb)
 
 int					render_ammo_info(t_data *d, t_hud *hud, SDL_Rect pos)
 {
-	if (!(hud->message_ammo_t = SDL_CreateTextureFromSurface(d->rend, hud->message_ammo_s)))
+	if (!(hud->message_ammo_t = SDL_CreateTextureFromSurface(d->rend,
+		hud->message_ammo_s)))
 		exit_game(d, "error : failed to create texture");
 	if ((SDL_RenderCopy(d->rend, hud->message_ammo_t, NULL, &pos)) < 0)
 		exit_game(d, "error : failed to render copy");

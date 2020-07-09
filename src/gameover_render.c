@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameover_render.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:47:16 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/09 11:25:26 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:00:46 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	render_gameover(t_data *d)
 {
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	d->player_pos = create_t_point(0.500148 + d->map.player_spawn.x,
 		0.500148 + d->map.player_spawn.y);
 	d->hud.hp = 100;

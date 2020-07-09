@@ -43,6 +43,7 @@ int		catch_win_btn_event(t_data *d)
 
 int		render_win(t_data *d)
 {
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 	SDL_PumpEvents();
 	handle_key_event(d);
 	handle_poll_event(d);

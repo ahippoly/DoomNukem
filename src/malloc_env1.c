@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_env1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 21:50:09 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/05 21:50:25 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 15:38:21 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_ssprite		*malloc_ssprite(int size)
 	return (sprite);
 }
 
-/* buttons_lst[NB_BUTTONS] */
 t_button		*malloc_button(int size)
 {
 	t_button	*button;
@@ -31,7 +30,6 @@ t_button		*malloc_button(int size)
 	return (button);
 }
 
-/* txt_lst[NB_TXT] */
 t_txt_img		*malloc_txtimg(int size)
 {
 	t_txt_img	*txt;
@@ -41,7 +39,6 @@ t_txt_img		*malloc_txtimg(int size)
 	return (txt);
 }
 
-/* input_lst[NB_INPUT] */
 t_input			*malloc_input(int size)
 {
 	t_input		*input;

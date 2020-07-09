@@ -39,7 +39,7 @@ SRC_NAME =	$(sort \
 			malloc_env.c malloc_env1.c malloc_data.c \
 			sdl_init.c utils2.c utils3.c utils4.c utils5.c utils6.c sprite_init.c sprite_init_mob.c \
 			copy_frame.c tool_sdlpoint_arithmetic2.c \
-			render_wallpaper.c win_render.c )
+			render_wallpaper.c win_render.c parser_map5.c malloc_data2.c line_intersect2.c line_intersect3.c hud_init_weapons2.c)
 
 GAME_MAIN = render_main.c $(SRC_NAME)
 
@@ -89,7 +89,7 @@ SED = sed
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-OPTI = -g3
+OPTI = -O3
 PTHREAD = -lpthread
 SDLM = `sdl2-config --cflags --libs`
 LIBSFLAG = -lft -lm -lSDL2 -lSDL2_ttf -lfmod
@@ -132,7 +132,7 @@ $(GAME_NAME): libft $(OBJ_REND) $(ASSETS)
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@printf "%-50s" "compiling "$(notdir $<)...
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(OPTI) $(INC) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(OPTI) $(INC) -o $@ -c $<
 	@printf "\e[1;32m[OK]\e[0m\n"
 
 $(ASSETS) :

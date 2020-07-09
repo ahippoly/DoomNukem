@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_global.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 15:38:35 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:26:08 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_point			inter_with_dir(t_point pos, t_rot rot, t_point p3, t_point p4);
 t_point			find_intersect(t_point p1, t_point p2, t_point p3, t_point p4);
 t_point			find_intersect_no_bound(t_point p1, t_point p2,
 					t_point p3, t_point p4);
+float			calc_a(t_point p1, t_point p2);
+float			calc_b(t_point p1, float a);
 t_point			first_segment_vertical_case(t_point p1, t_point p2,
 					t_point p3, t_point p4);
 void			put_pixel(unsigned int *pixels, SDL_Point p_pos,
@@ -60,15 +62,16 @@ void			remove_color(unsigned int *pixels, int total_size,
 /*
 ** editor_map_reader.c
 */
-
+int				read_param_wall(char *line, t_wall *wall);
+int				read_wall(char *line, t_wall *wall);
+int				read_room(char *line, t_room *room);
+int				read_wall_list(int fd, t_map_data *map);
 t_map_data		read_map(char *path_file);
 
 t_rot			calc_sin_cos_rot(float rot);
 void			*ft_memcpy_int(unsigned int *dst,
 					const unsigned int *src, size_t n);
 
-void			print_text_screen(unsigned int *p_tab,
-					t_img *text, SDL_Rect draw);
 void			calc_transparency(unsigned int *color_dst,
 					unsigned int *color2, float alpha);
 unsigned int	calc_transparency2(unsigned int color_dst,
@@ -111,33 +114,32 @@ void			swap_point(SDL_Point *p1, SDL_Point *p2);
 
 void			exit_game(t_data *d, char *msg);
 
-
 /*
 ** bmp_reader.c
 */
 
-int		hex2dec(unsigned char *mem, int bytes);
-char	*read_pixels(int fd, char *str);
-char	*convert2bgra(char *str, int w, int h);
-void	go_next_line(int *x, int *y, int w);
-void	convert_bmp_type32(char *pixel, int convert);
+int				hex2dec(unsigned char *mem, int bytes);
+char			*read_pixels(int fd, char *str);
+char			*convert2bgra(char *str, int w, int h);
+void			go_next_line(int *x, int *y, int w);
+void			convert_bmp_type32(char *pixel, int convert);
 
-void	read_bpp32(t_img *text, int fd, int convert);
-void	read_bpp24(t_img *text, int fd);
-void	read_file_pixels(t_img text, int bpp, int fd, int convert);
-t_img	bmp_error(t_img *res, int fd, char *msg);
-void	print_bmp_param(unsigned char *head);
+void			read_bpp32(t_img *text, int fd, int convert);
+void			read_bpp24(t_img *text, int fd);
+void			read_file_pixels(t_img text, int bpp, int fd, int convert);
+t_img			bmp_error(t_img *res, int fd, char *msg);
+void			print_bmp_param(unsigned char *head);
 
-char		***read_char_table(int is_free);
-char		***alloc_chart(void);
-void		parse_letter(char **charts, char *letter);
-t_txt_img	create_text_img(char *str, int size, int color, SDL_Point pos);
+char			***read_char_table(int is_free);
+char			***alloc_chart(void);
+void			parse_letter(char **charts, char *letter);
+t_txt_img		create_text_img(char *str, int size, int color, SDL_Point pos);
 
-int			read_words(char ***charts,
-		char *str, int size, t_txt_img txt);
-t_txt_img	set_pos_txt(t_txt_img txt, int x, int y);
-void		charts2pixels(char **letter, int size,
+int				read_words(char ***charts,
+					char *str, int size, t_txt_img txt);
+t_txt_img		set_pos_txt(t_txt_img txt, int x, int y);
+void			charts2pixels(char **letter, int size,
 		t_txt_img txt);
-void		fill_pixels(int x, int y, t_txt_img *txt, t_size size);
+void			fill_pixels(int x, int y, t_txt_img *txt, t_size size);
 
 #endif

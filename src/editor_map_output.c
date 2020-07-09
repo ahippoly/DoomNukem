@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 23:04:40 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 23:08:21 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:38:12 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	write_walls(int fd, t_wall *list, int wall_count)
 	int		i;
 
 	i = 0;
-	printf("wall count = %i\n", wall_count);
 	ft_putstr_fd("WALL LIST\n", fd);
 	write_head_param(fd, "WALL_COUNT", ft_itoa(wall_count));
 	while (i < wall_count)
@@ -99,7 +98,6 @@ void		map_output(t_env *env)
 {
 	int fd;
 
-	printf("map output fct\n");
 	if (env->map_name)
 		fd = open(env->map_name, O_WRONLY
 				| O_TRUNC | O_CREAT, 0600);

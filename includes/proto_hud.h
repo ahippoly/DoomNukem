@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_hud.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:24:57 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 17:23:11 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:37:13 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 */
 
 void				free_hud(t_hud *hud);
-// int					exit_hud(t_hud *hud);
 
 /*
 ** hud_weapons.c

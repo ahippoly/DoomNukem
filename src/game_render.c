@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:16:30 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 11:16:31 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:59:26 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	render_game(t_data *d)
 {
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	d->time_last_frame = d->time;
 	d->time = SDL_GetTicks();
 	d->diff_time = (float)(d->time - d->time_last_frame) / 1000;

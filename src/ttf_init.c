@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ttf_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:20:48 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 15:20:56 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/09 17:38:01 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int				init_ttf(t_data *d)
 {
 	if (TTF_Init() < 0)
-	{
-		printf("Erreur d'initialisation de la lib TTF : %s\n", TTF_GetError());
-		exit(EXIT_FAILURE);
-	}
+		exit_game(d, "Erreur d'initialisation de la lib TTF");
 	d->font_nb = TTF_OpenFont("asset/font/halflife2.ttf", 20);
 	d->font_text = TTF_OpenFont("asset/font/airborn.ttf", 20);
 	d->hud.color.r = 255;
