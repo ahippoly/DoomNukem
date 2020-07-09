@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_init_data2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:13:57 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 18:05:38 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 00:52:08 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,18 @@ int		init_hud(t_data *d)
 	ft_bzero(d->p_hud, sizeof(int) * MINIMAPSIZEY * MINIMAPSIZEX);
 	ft_bzero(&d->hud, sizeof(d->hud));
 	init_hud_data(d);
+	return (0);
+}
+
+int		init_winscreen(t_data *d) // doit etre initialisée après init_menu car partage la meme structure t_menu !
+{
+	d->p_win = NULL;
+	if (!(d->win_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32,
+		SDL_TEXTUREACCESS_STREAMING, WIN_SIZE_X, WIN_SIZE_Y)))
+		exit_game(d, "error : failed to create texture");
+	if (!(d->p_win = alloc_image(WIN_SIZE_X, WIN_SIZE_Y)))
+		exit_game(d, "error : failed to malloc gameover pixels");
+	ft_bzero(d->p_win, sizeof(int) * MAP_SIZE_Y * MAP_SIZE_X);
+	init_backgroundd(d, &d->menu.win_t, WIN_BG_PATH);
 	return (0);
 }

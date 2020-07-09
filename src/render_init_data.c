@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_init_data.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 18:43:47 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 00:52:48 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		init_data(t_data *d, int ac, char **av)
 	init_hud(d);
 	init_menu(d);
 	init_gameover(d);
+	init_winscreen(d);
 	init_ttf(d);
 	if (ac > 1)
 		d->map = read_map(av[1]);

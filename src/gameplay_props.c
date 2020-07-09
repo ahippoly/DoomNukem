@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 21:51:48 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 11:54:54 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:36:51 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		ref_origin(void *type_list, int nb_type, int type)
 
 void		game_won(t_data *d)
 {
-	exit_game(d, "You won the game, gg !\n");
+	d->run_game = WIN;
 }
 
 void		check_props_collect(t_data *d, t_props *props, t_hud *hud)

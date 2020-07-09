@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/07 16:41:11 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 01:00:39 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct		s_data
 	SDL_Texture		*menu_texture; //ok
 	t_menu			menu;
 	unsigned int	*p_gameover; //ok
+	unsigned int	*p_win;
+	SDL_Texture		*win_texture;
 	SDL_Texture		*gameover_texture; //ok
 	t_img			skybox;
 	FMOD_SOUND		*sound[MAX_SOUNDS]; //WTF
