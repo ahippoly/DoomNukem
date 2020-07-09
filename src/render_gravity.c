@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 14:17:59 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/04 20:21:14 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 05:54:28 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	gravity_obj(t_data *d, t_obj *objs, int nb_obj)
 
 void	gravity(t_data *d)
 {
-	d->z_pos += d->z_force;
+	d->z_pos = ft_fmin(d->z_pos + d->z_force, 50);
 	d->player_height = d->z_pos + d->z_offset;
 	if (d->z_pos > d->z_ground)
 	{
