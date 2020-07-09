@@ -43,6 +43,7 @@ int					set_key_info(t_data *d, t_hud *hud, int nb)
 	if (!(hud->inv.key_info_s = copy_surface(d, s_cpy, hud)))
 		exit_game(d, "error : failed to copy_surface");
 	SDL_FreeSurface(s_cpy);
+	free(text);
 	return (0);
 }
 

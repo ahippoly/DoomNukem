@@ -27,6 +27,10 @@ static void	free_texture(t_hud *hud)
 		SDL_DestroyTexture(hud->ammo_texture);
 	if (hud->ammo_texture)
 		SDL_DestroyTexture(hud->t_perso_w);
+	if (hud->message_health_s)
+		free(hud->message_health_s);
+	if (hud->inv.healthpack_info_s)
+		free (hud->inv.healthpack_info_s);
 }
 
 void		free_hud(t_hud *hud)

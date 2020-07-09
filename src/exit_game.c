@@ -5,9 +5,10 @@ int		free_floor(t_data *d)
 	int	i;
 
 	i = 0;
-	while (i < (NB_WALL_MAX / 2))
+	while (d->fl[i])
 	{
-		free(d->fl[i]);
+		if (d->fl[i])
+			free(d->fl[i]);
 		i++;
 	}
 	free(d->fl);
@@ -22,7 +23,10 @@ void	free_obj_tab(t_obj **tab, int size)
 	i = 0;
 	while (i < size)
 	{
-		free(tab[i]);
+		if (tab[i]->pixels)
+			free(tab[i]->pixels);
+		if (tab[i]);
+			free(tab[i]);
 		i++;
 	}
 	free(tab);
@@ -31,11 +35,13 @@ void	free_obj_tab(t_obj **tab, int size)
 void	free_data_tab(t_data *d)
 {
 	free_floor(d);
-	free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
+	//free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
 }
 
 void	free_data_ptr(t_data *d)
 {
+	if (d->map.icon_list)
+		free(d->map.icon_list);
 	if (d->p_screen)
 		free(d->p_screen);
 	if (d->p_mini_map_bg)
@@ -52,8 +58,8 @@ void	free_data_ptr(t_data *d)
 		free(d->obj_list);
 	// if (d->sprite)
 	// 	free(d->sprite);
-	if (d->repulsed)
-		free(d->repulsed);
+	// if (d->repulsed)
+	// 	free(d->repulsed);
 	if (d->texture)
 		free(d->texture);
 	if (d->img)
@@ -64,6 +70,7 @@ void	free_data_ptr(t_data *d)
 		free(d->p_menu);
 	if (d->grabbed_wall)
 		free(d->grabbed_wall);
+	free_data_tab(d);
 }
 
 void			free_sdl_ptr_data(t_data *d)
