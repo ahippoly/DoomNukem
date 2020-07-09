@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_global.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/07 05:31:41 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:38:35 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,8 @@ char		***alloc_chart(void);
 void		parse_letter(char **charts, char *letter);
 t_txt_img	create_text_img(char *str, int size, int color, SDL_Point pos);
 
-void		read_words(char ***charts,
+int			read_words(char ***charts,
 		char *str, int size, t_txt_img txt);
-void		input_text_to_img(char *str, int size, int color, t_img to_fill);
 t_txt_img	set_pos_txt(t_txt_img txt, int x, int y);
 void		charts2pixels(char **letter, int size,
 		t_txt_img txt);

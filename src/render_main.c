@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 05:17:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 01:04:47 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 14:38:38 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int					main(int ac, char **av)
 	t_data			d;
 
 	init_data(&d, ac, av);
-	//init_sound(&d);
-	//play_sound(&d, MUS2);
+	init_sound(&d);
+	play_sound(&d, MUS2);
 	while (d.run_game > 0)
 	{
 		if (d.run_game == GAME)
@@ -31,10 +31,7 @@ int					main(int ac, char **av)
 		else if (d.run_game == EDITOR)
 		{
 			if (access("./editor", X_OK))
-			{
-				ft_putstr("cant launch editor\n");
 				d.run_game = 0;
-			}
 			else
 				execv("./editor", av);
 		}

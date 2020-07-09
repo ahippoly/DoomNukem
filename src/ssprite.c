@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ssprite.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 23:06:05 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:21:10 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ void			load_anim(t_ssprite *sprite, int time, int anim_id)
 	copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);
 }
 
+void			process_anim_frame(t_anim *anim, t_ssprite *sprite, int time)
+{
+	if (anim->current_frame >= anim->nb_frame)
+	{
+		if (sprite->callback != NULL)
+			sprite->callback(sprite->param);
+		sprite->callback = NULL;
+		if (sprite->idle_anim >= 0)
+			load_anim(sprite, time, sprite->idle_anim);
+		else
+			sprite->current_anim = -1;
+		return ;
+	}
+}
+
 void			process_anim(t_ssprite *sprite, int time)
 {
 	t_anim		*anim;
@@ -47,17 +62,7 @@ void			process_anim(t_ssprite *sprite, int time)
 	{
 		sprite->time = time;
 		anim->current_frame += 1;
-		if (anim->current_frame >= anim->nb_frame)
-		{
-			if (sprite->callback != NULL)
-				sprite->callback(sprite->param);
-			sprite->callback = NULL;
-			if (sprite->idle_anim >= 0)
-				load_anim(sprite, time, sprite->idle_anim);
-			else
-				sprite->current_anim = -1;
-			return ;
-		}
+		process_anim_frame(anim, sprite, time);
 		curr_anim_pos = anim->pos[anim->current_frame];
 		curr_anim_size = anim->size[anim->current_frame];
 		copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);

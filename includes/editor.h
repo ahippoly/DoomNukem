@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/08 16:16:01 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:27:12 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -518,7 +518,7 @@ void					change_selected_wall_texture(t_env *env,
 
 void					clear_map_ref(t_env *env);
 void					find_sector(t_env *env, t_wall wall);
-void					input_text_to_img(char *str, int size,
+int						input_text_to_img(char *str, int size,
 							int color, t_img to_fill);
 
 void					map_output(t_env *env);

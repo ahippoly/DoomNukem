@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_input2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 22:44:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 10:46:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:32:31 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,26 @@ void		print_inputs(t_env *env)
 		input = env->input_lst[i];
 		str = ft_itoa(input.value);
 		if (env->selected_input == i)
-			input_text_to_img(str, 2, 0xFF88FF88, create_img(env->p_screen,
+		{
+			if ((input_text_to_img(str, 2, 0xFF88FF88, create_img(env->p_screen,
 			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
-			WIN_SIZE_Y)));
+			WIN_SIZE_Y)))) < 0)
+				exit_editor(env, "error : failed to transform input text to image");
+		}
 		else if (env->hovered_input_id == i)
-			input_text_to_img(str, 2, 0xFF8888FF, create_img(env->p_screen,
+		{
+			if ((input_text_to_img(str, 2, 0xFF8888FF, create_img(env->p_screen,
 			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
-			WIN_SIZE_Y)));
+			WIN_SIZE_Y)))) < 0)
+				exit_editor(env, "error : failed to transform input text to image");
+		}
 		else
-			input_text_to_img(str, 2, 0xFFDDDDDD, create_img(env->p_screen,
+		{
+			if ((input_text_to_img(str, 2, 0xFFDDDDDD, create_img(env->p_screen,
 			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
-			WIN_SIZE_Y)));
+			WIN_SIZE_Y)))) < 0)
+				exit_editor(env, "error : failed to transform input text to image");
+		}
 		i++;
 		free(str);
 	}

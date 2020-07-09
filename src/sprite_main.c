@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 13:46:23 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 22:55:48 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:15:42 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void				free_sprites(t_data *d)
 {
-	int i;
+	int				i;
 
 	i = 0;
 	while (i < MAX_WEAPONS)
@@ -27,10 +27,10 @@ void				free_sprites(t_data *d)
 
 SDL_Texture			*load_sprite_bmp(char *str, t_data *d)
 {
-	SDL_Texture	*texture;
-	t_img		img;
+	SDL_Texture		*texture;
+	t_img			img;
 
-    texture = NULL;
+	texture = NULL;
 	img = ft_load_bmp2(str, BMP_TYPE_ARGB, 0);
 	texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ABGR32,
 		SDL_TEXTUREACCESS_STREAMING, img.w, img.h);

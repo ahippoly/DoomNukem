@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:14:58 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 11:16:19 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:38:03 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void			calc_n_disp_framerate(t_data *d)
 	}
 	framerate += 1;
 	str = ft_itoa(last_framerate);
-	input_text_to_img(str, 2, 0xFFFFFFFF, create_img(d->p_screen,
-				set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)));
+	if ((input_text_to_img(str, 2, 0xFFFFFFFF, create_img(d->p_screen,
+				set_sdl_rect(5, 5, WIN_SIZE_X, WIN_SIZE_Y)))) < 0)
+		exit_game(d, "error : failed to transform input text to image");
 	free(str);
 }

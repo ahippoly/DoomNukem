@@ -18,7 +18,7 @@ SRC_NAME =	$(sort \
 			tool_sdlpoint_arithmetic.c utils.c render_minimap.c render_minimap2.c \
 			bresenham.c render_init_data.c render_init_data2.c render_event_gesture.c \
 			render_event_poll.c render_texture_loading.c \
-			text_img.c text_img2.c render_movement.c render_movement_utils.c render_gravity.c image_gesture2.c render_raycast.c render_raycast_utils.c\
+			text_img.c text_img2.c text_img3.c render_movement.c render_movement_utils.c render_gravity.c image_gesture2.c render_raycast.c render_raycast_utils.c\
 			render_collide_z.c \
 			render_draw_floor.c render_draw_floor2.c render_props.c render_obj.c render_obj_convert.c render_draw_slice.c \
 			render_ray_process.c render_pixel_put.c \
@@ -26,7 +26,7 @@ SRC_NAME =	$(sort \
 			hud_weapon.c hud_init_weapons.c hud_perso.c \
 			hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 			ttf_init.c hud_init.c \
-			sprite_main.c sprite_init_gun.c gun_anim.c sound.c \
+			sprite_main.c sprite_init_gun.c gun_anim.c sound.c sound1.c\
 			gameplay_mobs.c gameplay_mobs2.c ssprite.c gameplay_props.c gameplay_weapon.c gameplay_weapon2.c\
 			bmp_reader.c bmp_reader2.c bmp_reader3.c\
 			render_skybox.c render_ray_utils.c\

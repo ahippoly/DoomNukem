@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   text_img2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 05:23:15 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 04:28:47 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:42:54 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,11 @@ t_txt_img	create_text_img(char *str, int size, int color, SDL_Point pos)
 	txt.color = color;
 	if (!(txt.pixels = (unsigned int*)malloc(sizeof(unsigned int) *
 					txt.pos_size.w * txt.pos_size.h)))
-		exit_with_msg("Failed to malloc\n");
+		exit_with_msg("error : failed to malloc\n");
 	ft_bzero(txt.pixels, txt.pos_size.w * txt.pos_size.h * sizeof(int));
 	str = ft_strlower(ft_strdup(str));
-	read_words(charts, str, size, txt);
+	if ((read_words(charts, str, size, txt)) < 0)
+		exit_with_msg("error : failed to read words\n");
 	free(str);
 	txt.pos_size.x = pos.x;
 	txt.pos_size.y = pos.y;

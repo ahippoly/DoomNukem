@@ -6,13 +6,13 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:28:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 01:04:12 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 14:34:46 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-void	event_equip_weapon(t_data *d, int weapon_id)
+void			event_equip_weapon(t_data *d, int weapon_id)
 {
 	d->gun_ind = weapon_id;
 	d->sprite[weapon_id].on = -1;
@@ -20,7 +20,7 @@ void	event_equip_weapon(t_data *d, int weapon_id)
 	d->actual_weapon = d->hud.perso_weapon[weapon_id];
 }
 
-void	event_change_weapon(t_data *d, const Uint8 *clavier)
+void			event_change_weapon(t_data *d, const Uint8 *clavier)
 {
 	if (clavier[SDL_SCANCODE_R])
 		reload_weapon(d, d->actual_weapon);
@@ -38,7 +38,7 @@ void	event_change_weapon(t_data *d, const Uint8 *clavier)
 		event_equip_weapon(d, 5);
 }
 
-void	handle_key_event2(t_data *d, const Uint8 *clavier)
+void			handle_key_event2(t_data *d, const Uint8 *clavier)
 {
 	if (clavier[SDL_SCANCODE_I] && d->z_offset < 5)
 		d->z_offset += 0.05;
@@ -54,7 +54,7 @@ void	handle_key_event2(t_data *d, const Uint8 *clavier)
 		d->run_game = -1;
 }
 
-void	handle_key_event(t_data *d)
+void			handle_key_event(t_data *d)
 {
 	const Uint8	*clavier;
 
@@ -77,9 +77,6 @@ void	handle_key_event(t_data *d)
 		move_with_collide_player(d, &d->player_pos,
 		calc_sin_cos_rot(d->rot + M_PI), MOVE_STEP * d->speed_modifier);
 	if (clavier[SDL_SCANCODE_L])
-	{
-		//d->run_game = GAMEOVER;
 		d->run_game = WIN;
-	}
 	handle_key_event2(d, clavier);
 }

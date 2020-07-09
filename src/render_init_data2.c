@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:13:57 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 00:52:08 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 14:37:00 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		init_hud(t_data *d)
 	return (0);
 }
 
-int		init_winscreen(t_data *d) // doit etre initialisée après init_menu car partage la meme structure t_menu !
+int		init_winscreen(t_data *d)
 {
 	d->p_win = NULL;
 	if (!(d->win_texture = SDL_CreateTexture(d->rend, SDL_PIXELFORMAT_ARGB32,
