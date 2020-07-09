@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 11:08:23 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/07/09 11:13:53 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 int		free_floor(t_data *d)
@@ -15,27 +27,25 @@ int		free_floor(t_data *d)
 	return (0);
 }
 
-/* j'appelle les fonctions qui free des tableau de pointeur */
-void	free_obj_tab(t_obj **tab, int size)
+void	free_data2(t_data *d)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (tab[i]->pixels)
-			free(tab[i]->pixels);
-		if (tab[i]);
-			free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
-void	free_data_tab(t_data *d)
-{
+	if (d->mobs)
+		free(d->mobs);
+	if (d->obj_list)
+		free(d->obj_list);
+	if (d->repulsed)
+		free(d->repulsed);
+	if (d->texture)
+		free(d->texture);
+	if (d->img)
+		free(d->img);
+	if (d->sprite_img)
+		free(d->sprite_img);
+	if (d->p_menu)
+		free(d->p_menu);
+	if (d->grabbed_wall)
+		free(d->grabbed_wall);
 	free_floor(d);
-	//free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
 }
 
 void	free_data_ptr(t_data *d)
@@ -52,28 +62,10 @@ void	free_data_ptr(t_data *d)
 		free(d->p_hud);
 	if (d->props)
 		free(d->props);
-	if (d->mobs)
-		free(d->mobs);
-	if (d->obj_list)
-		free(d->obj_list);
-	// if (d->sprite)
-	// 	free(d->sprite);
-	if (d->repulsed)
-		free(d->repulsed);
-	if (d->texture)
-		free(d->texture);
-	if (d->img)
-		free(d->img);
-	if (d->sprite_img)
-		free(d->sprite_img);
-	if (d->p_menu)
-		free(d->p_menu);
-	if (d->grabbed_wall)
-		free(d->grabbed_wall);
-	free_data_tab(d);
+	free_data2(d);
 }
 
-void			free_sdl_ptr_data(t_data *d)
+void	free_sdl_ptr_data(t_data *d)
 {
 	if (d->win)
 		SDL_DestroyWindow(d->win);
@@ -89,13 +81,12 @@ void			free_sdl_ptr_data(t_data *d)
 		SDL_DestroyTexture(d->gameover_texture);
 }
 
-void exit_game(t_data *d, char *msg)
+void	exit_game(t_data *d, char *msg)
 {
 	ft_putendl(msg);
 	free_menu(d);
 	free_gameover(d);
 	free_hud(&d->hud);
-	//clean_sprite_gun(d);
 	free_data_ptr(d);
 	clean_sounds(d);
 	free_sdl_ptr_data(d);

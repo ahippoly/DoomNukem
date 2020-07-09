@@ -27,15 +27,15 @@ SRC_NAME =	$(sort \
 			hud_health.c hud_ammo.c hud_inv.c hud_inv1.c hud_utils.c hud_render.c \
 			ttf_init.c hud_init.c \
 			sprite_main.c sprite_init_gun.c gun_anim.c sound.c \
-			gameplay_mobs.c ssprite.c gameplay_props.c gameplay_weapon.c \
+			gameplay_mobs.c gameplay_mobs2.c ssprite.c gameplay_props.c gameplay_weapon.c gameplay_weapon2.c\
 			bmp_reader.c bmp_reader2.c bmp_reader3.c\
 			render_skybox.c render_ray_utils.c\
 			sprite_init_gun2.c sprite_init_gun3.c sprite_init_gun4.c sprite_main.c \
-			menu_clean.c menu_button.c menu_render.c menu_exec.c hud_clean.c exit_game.c \
+			menu_clean.c menu_button.c menu_render.c menu_exec.c hud_clean.c exit_game.c exit_game2.c \
 			gameover_button.c gameover_render.c \
 			game_render.c \
 			render_game.c frame.c render_icon2obj_type.c \
-			clean_data.c exit_editor.c \
+			exit_editor.c \
 			malloc_env.c malloc_env1.c malloc_data.c \
 			sdl_init.c utils2.c utils3.c utils4.c utils5.c utils6.c sprite_init.c sprite_init_mob.c \
 			copy_frame.c tool_sdlpoint_arithmetic2.c \

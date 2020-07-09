@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 15:39:17 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 15:39:26 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/09 10:57:17 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void		copy_frame_scale(unsigned int *dst, SDL_Rect dst_size,
 		pos2.x = 0;
 		while (pos2.x < dst_size.w)
 		{
-			dst[pos2.x + pos2.y] = src[(int)pos.x + y];
-			pos2.x++;
+			dst[pos2.x++ + pos2.y] = src[(int)pos.x + y];
 			pos.x += step.x;
 		}
 		pos2.y += dst_size.w;

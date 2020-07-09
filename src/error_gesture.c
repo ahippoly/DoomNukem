@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_gesture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 11:02:59 by ahippoly          #+#    #+#             */
+/*   Updated: 2020/07/09 11:04:36 by ahippoly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
-void exit_with_msg(char *msg)
+void	exit_with_msg(char *msg)
 {
-    ft_putstr(msg);
-    exit(1);
+	ft_putstr(msg);
+	exit(1);
 }

@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   gameover_render.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:47:16 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/08 16:45:53 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 11:25:26 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-//OK
 int	render_gameover(t_data *d)
 {
-	//RESET INFO CAR LA JE SUIS MORTE ET AU MEME ENDROIT DE MA MORT
+	d->player_pos = create_t_point(0.500148 + d->map.player_spawn.x,
+		0.500148 + d->map.player_spawn.y);
+	d->hud.hp = 100;
 	SDL_PumpEvents();
 	handle_key_event(d);
 	handle_poll_event(d);
