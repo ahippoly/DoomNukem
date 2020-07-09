@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 22:44:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 15:32:31 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:37:16 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ void		check_hovered_input(t_env *env)
 	}
 }
 
+static void	process_input_color(t_env *env, char *str, t_input input,
+	unsigned int color)
+{
+	if ((input_text_to_img(str, 2, color, create_img(env->p_screen,
+			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
+			WIN_SIZE_Y)))) < 0)
+		exit_editor(env, "error : failed to transform input text to image");
+}
+
 void		print_inputs(t_env *env)
 {
 	int		i;
@@ -84,26 +93,11 @@ void		print_inputs(t_env *env)
 		input = env->input_lst[i];
 		str = ft_itoa(input.value);
 		if (env->selected_input == i)
-		{
-			if ((input_text_to_img(str, 2, 0xFF88FF88, create_img(env->p_screen,
-			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
-			WIN_SIZE_Y)))) < 0)
-				exit_editor(env, "error : failed to transform input text to image");
-		}
+			process_input_color(env, str, input, 0xFF88FF88);
 		else if (env->hovered_input_id == i)
-		{
-			if ((input_text_to_img(str, 2, 0xFF8888FF, create_img(env->p_screen,
-			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
-			WIN_SIZE_Y)))) < 0)
-				exit_editor(env, "error : failed to transform input text to image");
-		}
+			process_input_color(env, str, input, 0xFF8888FF);
 		else
-		{
-			if ((input_text_to_img(str, 2, 0xFFDDDDDD, create_img(env->p_screen,
-			set_sdl_rect(input.pos_size.x, input.pos_size.y, WIN_SIZE_X,
-			WIN_SIZE_Y)))) < 0)
-				exit_editor(env, "error : failed to transform input text to image");
-		}
+			process_input_color(env, str, input, 0xFFDDDDDD);
 		i++;
 		free(str);
 	}
