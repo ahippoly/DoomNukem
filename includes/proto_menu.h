@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_menu.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:27:13 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 00:57:12 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:44:05 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int				put_bg(t_data *d, SDL_Texture *texture);
 */
 
 int				render_win(t_data *d);
-
 
 #endif

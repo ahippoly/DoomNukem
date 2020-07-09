@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameover_render.c                                  :+:      :+:    :+:   */
+/*   hud_init_weapons2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 16:47:16 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/09 17:00:46 by robin            ###   ########.fr       */
+/*   Created: 2020/07/09 16:16:30 by robin             #+#    #+#             */
+/*   Updated: 2020/07/09 16:16:42 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-int	render_gameover(t_data *d)
+int				init_weapon_5(t_hud *hud)
 {
-	SDL_SetRelativeMouseMode(SDL_FALSE);
-	d->player_pos = create_t_point(0.500148 + d->map.player_spawn.x,
-		0.500148 + d->map.player_spawn.y);
-	d->hud.hp = 100;
-	SDL_PumpEvents();
-	handle_key_event(d);
-	handle_poll_event(d);
-	put_bg(d, d->menu.gameover_t);
-	render_gameover_button(d);
-	catch_over_btn_event(d);
-	SDL_RenderPresent(d->rend);
+	hud->perso_weapon[5]->id = 5;
+	hud->perso_weapon[5]->name = WEAPON_NAME_4;
+	hud->perso_weapon[5]->ammo_left = 100;
+	hud->perso_weapon[5]->capacity = 100;
+	hud->perso_weapon[5]->attack_delay = 150;
+	hud->perso_weapon[5]->reload_delay = 2700;
+	hud->perso_weapon[5]->dammage = 12;
+	hud->perso_weapon[5]->range = 10;
+	hud->perso_weapon[5]->z_force = 0.003;
+	hud->perso_weapon[5]->shoot_repeat = 1;
 	return (0);
 }

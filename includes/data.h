@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 01:00:39 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:36:11 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@
 
 typedef struct		s_data
 {
-	SDL_Renderer	*rend; //ok
-	SDL_Window		*win; //ok
-	SDL_Texture		*screen; //ok
-	SDL_Texture		*mini_map; //ok
+	SDL_Renderer	*rend;
+	SDL_Window		*win;
+	SDL_Texture		*screen;
+	SDL_Texture		*mini_map;
 	SDL_Event		e;
 	SDL_Rect		mini_map_player_pos;
 	t_map_data		map;
-	const Uint8		*clavier; //pas besoin de free
-	unsigned int	*p_screen; //ok
-	unsigned int	*p_mini_map_bg; //ok
-	unsigned int	*p_mini_map; //ok
-	unsigned int	*p_player_pos; //ok
+	const Uint8		*clavier;
+	unsigned int	*p_screen;
+	unsigned int	*p_mini_map_bg;
+	unsigned int	*p_mini_map;
+	unsigned int	*p_player_pos;
 	int				run_game;
 	float			rot;
 	t_rot			rot_calc;
@@ -57,7 +57,7 @@ typedef struct		s_data
 	float			diff_time;
 	int				air_time;
 	int				nb_sprite;
-	t_wall			*grabbed_wall; //ok
+	t_wall			*grabbed_wall;
 	t_point			grab_pos;
 	float			grab_z;
 	int				nb_props;
@@ -73,41 +73,29 @@ typedef struct		s_data
 	FMOD_SYSTEM		*system;
 	SDL_Rect		src_gun;
 	SDL_Rect		dst_gun;
-	unsigned int	*p_hud; //ok
-	SDL_Texture		*hud_texture; //ok
+	unsigned int	*p_hud;
+	SDL_Texture		*hud_texture;
 	t_hud			hud;
-	TTF_Font		*font_nb; //ok
-	TTF_Font		*font_text; //ok
-	unsigned int	*p_menu; //ok
-	SDL_Texture		*menu_texture; //ok
+	TTF_Font		*font_nb;
+	TTF_Font		*font_text;
+	unsigned int	*p_menu;
+	SDL_Texture		*menu_texture;
 	t_menu			menu;
-	unsigned int	*p_gameover; //ok
+	unsigned int	*p_gameover;
 	unsigned int	*p_win;
 	SDL_Texture		*win_texture;
-	SDL_Texture		*gameover_texture; //ok
+	SDL_Texture		*gameover_texture;
 	t_img			skybox;
-	FMOD_SOUND		*sound[MAX_SOUNDS]; //WTF
-	// FMOD_SOUND		sound[MAX_SOUNDS];
-    // t_ssprite       sprite_lst[NB_SPRITE_MAX];
-	// t_ssprite		weapon_img[WEAPON_NB];
-	// t_floor			fl[NB_WALL_MAX / 2][WIN_SIZE_Y];
-	// t_props			props[NB_MAX_PROPS];
-	// t_mob			mobs[NB_MAX_MOBS];
-	// t_obj			obj_list[NB_MAX_OBJ];
-	// t_obj			*repulsed[NB_MAX_MOBS + NB_MAX_PROPS];
-	// t_img			texture[NB_TEXTURE];
-	// t_img			img[NB_IMG];
-	// t_img			sprite_img[NB_SPRITE];
-	t_floor			**fl; //OK
-	t_props			*props; //OK
-	t_mob			*mobs; //OK
-	t_obj			*obj_list; //ok
-	t_obj			**repulsed; //OK
-	t_sprite        sprite[MAX_WEAPONS]; //------SG
-	// t_sprite        *sprite;
-	t_img			*texture; //OK
-	t_img			*img; //OK
-	t_img			*sprite_img; //OK
+	FMOD_SOUND		*sound[MAX_SOUNDS];
+	t_floor			**fl;
+	t_props			*props;
+	t_mob			*mobs;
+	t_obj			*obj_list;
+	t_obj			**repulsed;
+	t_sprite		sprite[MAX_WEAPONS];
+	t_img			*texture;
+	t_img			*img;
+	t_img			*sprite_img;
 	int				jetpack;
 }					t_data;
 
@@ -116,12 +104,12 @@ typedef	struct		s_thread
 	float			start_angle;
 	float			step;
 	t_range			screen_x;
-	t_data			*d; //to free ?
+	t_data			*d;
 }					t_thread;
 
 typedef	struct		s_data_x
 {
-	t_data			*d; //to fre ?
+	t_data			*d;
 	int				x;
 }					t_data_x;
 

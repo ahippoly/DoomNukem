@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 21:50:48 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/05 21:50:49 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 15:38:50 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,6 @@ t_icon			*malloc_icon(int size)
 	return (ptr);
 }
 
-/*
-t_wall			*malloc_wall(int size)
-{
-	t_icon		*ptr;
-
-	if (!(ptr = (t_wall *)ft_memalloc(sizeof(t_wall) * (size + 1))))
-		return (NULL);
-	return (ptr);
-}
-*/
-
 t_img			*malloc_img(int size)
 {
 	t_img		*img;
@@ -67,4 +56,3 @@ t_img			*malloc_img(int size)
 		return (NULL);
 	return (img);
 }
-

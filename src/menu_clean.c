@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menu_clean.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/09 14:28:06 by robin             #+#    #+#             */
+/*   Updated: 2020/07/09 14:28:06 by robin            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "proto_global.h"
 
 static int	free_texture_menu(t_data *d)
@@ -37,13 +49,3 @@ int			free_menu(t_data *d)
 	free_texture_menu(d);
 	return (0);
 }
-
-// int			exit_menu(t_data *d)
-// {
-// 	free_menu(d);
-// 	free_gameover(d);
-// 	quit_ttf(d);
-// 	SDL_Quit();
-// 	ft_putendl("bye !");
-// 	exit(-1);
-// }

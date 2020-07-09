@@ -39,7 +39,7 @@ SRC_NAME =	$(sort \
 			malloc_env.c malloc_env1.c malloc_data.c \
 			sdl_init.c utils2.c utils3.c utils4.c utils5.c utils6.c sprite_init.c sprite_init_mob.c \
 			copy_frame.c tool_sdlpoint_arithmetic2.c \
-			render_wallpaper.c win_render.c )
+			render_wallpaper.c win_render.c parser_map5.c malloc_data2.c line_intersect2.c line_intersect3.c hud_init_weapons2.c)
 
 GAME_MAIN = render_main.c $(SRC_NAME)
 

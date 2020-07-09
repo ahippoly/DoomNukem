@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hud_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:31:16 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 19:31:24 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 14:26:48 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-//OK
 void	render_hud_icons(t_data *d)
 {
 	put_perso_icon(d, &d->hud, set_sdl_rect(10, 700, 50, 50));
@@ -44,4 +43,4 @@ void	render_hud(t_data *d)
 	update_hud_info(d);
 	render_hud_icons(d);
 	render_hud_info(d);
-}	
+}

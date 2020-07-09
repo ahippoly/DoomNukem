@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   hud_perso.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:31:08 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/06 19:31:12 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:13:01 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-//OK
 static int		update_perso(t_data *d, t_hud *hud)
 {
 	ft_bzero(&hud->perso, sizeof(hud->perso));
@@ -34,7 +33,8 @@ static int		update_perso(t_data *d, t_hud *hud)
 int				init_perso(t_data *d, t_hud *hud)
 {
 	update_perso(d, hud);
-	if (!(hud->perso.texture = SDL_CreateTextureFromSurface(d->rend, hud->perso.surface)))
+	if (!(hud->perso.texture = SDL_CreateTextureFromSurface(d->rend,
+			hud->perso.surface)))
 		exit_game(d, "error : failed to create texture");
 	SDL_FreeSurface(hud->perso.surface);
 	hud->perso.hp_max = 100;
@@ -42,7 +42,6 @@ int				init_perso(t_data *d, t_hud *hud)
 	return (0);
 }
 
-/* Affiche le perso à l'écran */
 int				put_perso_icon(t_data *d, t_hud *hud, SDL_Rect pos)
 {
 	if ((SDL_RenderCopy(d->rend, hud->perso.texture, NULL, &pos)) < 0)
