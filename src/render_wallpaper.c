@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_wallpaper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:47:31 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/08 17:01:20 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/09 10:47:32 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
-
-//OK
 
 int				init_backgroundd(t_data *d, SDL_Texture **texture, char *path)
 {
