@@ -18,11 +18,11 @@ static int		malloc_tab_weapons(t_data *d, t_hud *hud)
 	
 	i = 0;
 	hud->perso_weapon = NULL;
-	if (!(hud->perso_weapon = (t_weapon**)ft_memalloc(sizeof(t_weapon *) * WEAPON_NB)))
+	if (!(hud->perso_weapon = (t_weapon**)ft_memalloc(sizeof(t_weapon*) * WEAPON_NB)))
 		exit_game(d, "error : failed to malloc perso weapon");
 	while (i < WEAPON_NB)
 	{
-		if (!(hud->perso_weapon[i] = (t_weapon *)ft_memalloc(sizeof(t_weapon))))
+		if (!(hud->perso_weapon[i] = (t_weapon*)ft_memalloc(sizeof(t_weapon))))
 			exit_game(d, "error : failed to malloc perso weapon");
 		ft_bzero(hud->perso_weapon[i], sizeof(t_weapon));
 		i++;

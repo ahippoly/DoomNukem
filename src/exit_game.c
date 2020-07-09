@@ -23,7 +23,10 @@ void	free_obj_tab(t_obj **tab, int size)
 	i = 0;
 	while (i < size)
 	{
-		free(tab[i]);
+		if (tab[i]->pixels)
+			free(tab[i]->pixels);
+		if (tab[i]);
+			free(tab[i]);
 		i++;
 	}
 	free(tab);
@@ -32,7 +35,7 @@ void	free_obj_tab(t_obj **tab, int size)
 void	free_data_tab(t_data *d)
 {
 	free_floor(d);
-	free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
+	//free_obj_tab(d->repulsed, NB_MAX_MOBS + NB_MAX_PROPS);
 }
 
 void	free_data_ptr(t_data *d)
@@ -55,8 +58,8 @@ void	free_data_ptr(t_data *d)
 		free(d->obj_list);
 	// if (d->sprite)
 	// 	free(d->sprite);
-	if (d->repulsed)
-		free(d->repulsed);
+	// if (d->repulsed)
+	// 	free(d->repulsed);
 	if (d->texture)
 		free(d->texture);
 	if (d->img)

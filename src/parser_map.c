@@ -28,6 +28,7 @@ static int read_wall_list(int fd, t_map_data *map)
 		ft_putendl("error while reading map");
 		return (-1);
 	}
+	free(line);
     // printf("WALL COUNT READED, value = %i\n", map->wall_count);
     if (!(map->wall_list = (t_wall*)malloc(sizeof(t_wall) * map->wall_count)))
     {
@@ -39,8 +40,10 @@ static int read_wall_list(int fd, t_map_data *map)
 	{
         if ((read_wall(line, &map->wall_list[i++])) < 0)
 			return (-1);
+		free(line);
 	}
-	free(line);
+	if (line)
+		free(line);
 	return (0);
 }
 
@@ -52,7 +55,6 @@ static int read_room_list(int fd, t_map_data *map)
     if (get_next_line(fd, &line) == 1)
 	{
         read_param(line, "ROOM_COUNT", &map->room_count);
-		free(line);
 	}
 	else
 	{
@@ -65,12 +67,15 @@ static int read_room_list(int fd, t_map_data *map)
 		return (-1);
 	}
     i = 0;
+	free(line);
     while (get_next_line(fd, &line) == 1 && *line != '\0' && i < map->room_count)
 	{
 		if ((read_room(line, &map->room_list[i++])) < 0)
 			return (-1);
 		free(line);
 	}
+	if (line)
+		free(line);
 	return (0);
 }
 
@@ -80,8 +85,11 @@ static int	read_icon_list(int fd, t_map_data *map)
     int		i;
 
     if (get_next_line(fd, &line) == 1)
+	{
         read_param(line, "ICON_COUNT", &map->icon_count);
-    else
+		free(line);
+	}
+	else
 	{
         ft_putendl("error while reading map");
 		return (-1);
@@ -96,11 +104,11 @@ static int	read_icon_list(int fd, t_map_data *map)
 	{
 		if ((read_icon(line, &map->icon_list[i++])) < 0)
 			return (-1);
+		free(line);
 	}
 	i = 0;
 	while (i < map->icon_count)
 		i++;
-	free(line);
 	return (0);
 }
 
@@ -147,9 +155,10 @@ t_map_data		read_map(char *path_file)
 	{
 		if ((read_head(fd, line, &map)) < 0)
 			map.is_valid = -1;
+		free(line);
 	}
+	free(line);
     map.is_valid = 1;
     close(fd);
-	free(line);
     return (map);
 }

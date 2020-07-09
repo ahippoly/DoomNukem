@@ -108,6 +108,7 @@ int read_wall_ref_list(int fd, t_map_data *map)
         ft_putendl("error while reading map");
 		return (-1);
 	}
+	free(line);
     if (get_next_line(fd, &line) == 1)
 	{
 		if ((read_param(line, "PLAYER_SPAWN", &map->player_spawn.x)))
