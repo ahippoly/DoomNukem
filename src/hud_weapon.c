@@ -6,12 +6,12 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 19:31:54 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/09 05:15:35 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 14:14:04 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
-//OK
+
 static int		malloc_tab_weapons(t_data *d, t_hud *hud)
 {
 	int			i;

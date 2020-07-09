@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:08:23 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 13:36:32 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/09 13:59:11 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,8 @@ void	free_data_ptr(t_data *d)
 
 void	free_sdl_ptr_data(t_data *d)
 {
-	if (d->win)
-		SDL_DestroyWindow(d->win);
 	if (d->screen)
 		SDL_DestroyTexture(d->screen);
-	if (d->rend)
-		SDL_DestroyRenderer(d->rend);
 	if (d->mini_map)
 		SDL_DestroyTexture(d->mini_map);
 	if (d->hud_texture)
@@ -81,6 +77,10 @@ void	free_sdl_ptr_data(t_data *d)
 		SDL_DestroyTexture(d->gameover_texture);
 	if (d->win_texture)
 		SDL_DestroyTexture(d->win_texture);
+	if (d->rend)
+		SDL_DestroyRenderer(d->rend);
+	if (d->win)
+		SDL_DestroyWindow(d->win);
 }
 
 void	exit_game(t_data *d, char *msg)
