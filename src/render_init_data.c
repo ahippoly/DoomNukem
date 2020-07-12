@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 00:52:48 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/12 19:35:31 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		init_data_var(t_data *d)
 
 void		init_data(t_data *d, int ac, char **av)
 {
-	ft_putendl("init data...");
 	ft_bzero(d, sizeof(t_data));
 	init_sdl_ressources_rend(d);
 	init_sprite(d);
