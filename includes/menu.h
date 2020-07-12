@@ -6,7 +6,7 @@
 /*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:12:15 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 00:56:05 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/12 19:37:30 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 
 # define GAMEOVER_PATH "asset/img/menu/jail_gameover.bmp"
 # define MENU_BG_PATH "asset/img/menu/jail_bg1.bmp"
-# define WIN_BG_PATH "asset/img/menu/vaisseau.bmp"
+# define WIN_BG_PATH "asset/img/menu/balka4.bmp"
+// # define WIN_BG_PATH "asset/img/menu/balk2.bmp"
+// # define WIN_BG_PATH "asset/img/menu/balka1.bmp"
+// # define WIN_BG_PATH "asset/img/menu/vaisseau.bmp"
 
 typedef struct		s_menu
 {
