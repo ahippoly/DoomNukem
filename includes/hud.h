@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:05:27 by robin             #+#    #+#             */
-/*   Updated: 2020/07/05 23:06:21 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/11 18:48:16 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@
 ** perso
 */
 
-# define PERSO_NAME_0 "Loni"
+# define PERSO_NAME_0 "BALKA"
 # define PERSO_NAME_1 "Ray"
 
 # define PERSO_F 0
 # define PERSO_M 1
 
-# define PERSO_PATH_0 "asset/img/hud/perso_w.bmp"
+# define PERSO_PATH_0 "asset/img/hud/balka.bmp"
 # define PERSO_PATH_1 "asset/img/hud/perso_m.bmp"
 
 /*
