@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 22:55:31 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/12 19:35:54 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/12 20:13:47 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int			main(int argc, char **argv)
 	ft_bzero(&env, sizeof(t_env));
 	init_env(&env);
 	load_map(&env, argc, argv);
-	printf("null\n");
 	while (!env.quit)
 	{
 		reset_textures(&env);

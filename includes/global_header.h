@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global_header.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:03:48 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 01:02:11 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/13 02:42:07 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define WIN_SIZE_X 800
 # define WINSIZEX 800
 # define WIN_SIZE_Y 800
+# define TOTAL_PIX 640000
 # define HALF_WIN_SIZE_X 400
 # define HALF_WIN_SIZE_Y 400
 # define MINI_MAP_X 650

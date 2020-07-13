@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 04:25:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 05:09:40 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/13 02:52:20 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	adapt_ty_and_range(t_draw *range, float *ty, float ty_step)
 		*ty += ty_step * -range->start_y;
 		range->start_y = 0;
 	}
-	range->start_y *= WIN_SIZE_X;
-	range->end_y *= WIN_SIZE_X;
-	range->end_y = ft_min(range->end_y, WIN_SIZE_Y * WIN_SIZE_X);
+	range->start_y = ft_max(range->start_y * WIN_SIZE_X, 0);
+	range->end_y = ft_min(range->end_y * WIN_SIZE_X, TOTAL_PIX);
 }
 
 void	draw_text_slice(unsigned int *pixels, t_draw range, t_obj obj,

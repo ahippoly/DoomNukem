@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_draw_floor.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 16:10:29 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/06 02:25:00 by alebui           ###   ########.fr       */
+/*   Updated: 2020/07/13 02:44:37 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_draw	calc_floor_draw_range(t_data *d, t_ray ray1, float dist2, int x)
 	t_room	*room;
 
 	room = get_room_by_id(d, ray1.room_id);
-	draw.start_y = ft_max(d->screen_height
-	+ ((d->player_height - room->z_ground) * WIN_SIZE_Y) / ray1.dist, 0);
-	draw.end_y = ft_min(d->screen_height
-	+ ((d->player_height - room->z_ground) * WIN_SIZE_Y) / dist2, WIN_SIZE_Y);
+	draw.start_y = d->screen_height
+	+ ((d->player_height - room->z_ground) * WIN_SIZE_Y) / ray1.dist;
+	draw.end_y = d->screen_height
+	+ ((d->player_height - room->z_ground) * WIN_SIZE_Y) / dist2;
 	draw.start_x = x;
 	return (draw);
 }
@@ -97,11 +97,10 @@ void	print_floor_slice(t_data *d, t_floor *fl, t_draw draw, int text_id)
 	text = &d->texture[text_id];
 	t_max.w = text->w - 1;
 	t_max.h = text->h - 1;
-	y.start = draw.start_y;
-	y.end = draw.end_y;
-	draw.start_y *= WIN_SIZE_X;
-	draw.end_y *= WIN_SIZE_X;
 	pixels = (unsigned int*)text->pixels;
+	y.start = ft_range(draw.start_y, 0, WIN_SIZE_Y - 1);
+	draw.end_y = ft_min(draw.end_y * WIN_SIZE_X, TOTAL_PIX);
+	draw.start_y = y.start * WIN_SIZE_X;
 	while (draw.start_y < draw.end_y)
 	{
 		current = fl[y.start];

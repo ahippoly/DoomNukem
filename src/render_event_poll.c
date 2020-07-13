@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 05:06:15 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 17:36:39 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/12 21:05:05 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	handle_poll_keydown(t_data *d, SDL_Event *event)
 		create_mini_map(d, &d->map);
 	if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 		d->z_force = JUMP_FORCE;
+	if (event->key.keysym.scancode == SDL_SCANCODE_LALT && d->jetpack > 0)
+		d->z_force = 0.02;
 	if (event->key.keysym.scancode == SDL_SCANCODE_J && d->fov < 1)
 		inc_fov(d, 0.05);
 	if (event->key.keysym.scancode == SDL_SCANCODE_K && d->fov > 0.20)

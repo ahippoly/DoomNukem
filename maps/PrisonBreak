@@ -165,7 +165,7 @@ id : 7 ; nb_wall : 4 ; wall_ref_range : 144,148 ; height : 20,20 ; floor_text : 
 
 ICON LIST
 ICON_COUNT 11
-id : 1 ; pos : 60,10 ; 
+id : 1 ; pos : 65,15 ; 
 id : 1 ; pos : 244,37 ; 
 id : 1 ; pos : 242,94 ; 
 id : 2 ; pos : 79,201 ; 
