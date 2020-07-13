@@ -153,19 +153,19 @@ id : 149 ; p1 : 21.10021,23.00023 ; p2 : 22.10022,23.00023 ; p1_height : 30,40 ;
 
 ROOM LIST
 ROOM_COUNT 8
-id : 0 ; nb_wall : 8 ; wall_ref_range : 64,72 ; height : 22,22 ; floor_text : 2 ; 
-id : 1 ; nb_wall : 7 ; wall_ref_range : 73,80 ; height : 24,24 ; floor_text : 2 ; 
-id : 2 ; nb_wall : 7 ; wall_ref_range : 81,88 ; height : 26,26 ; floor_text : 22 ; 
-id : 3 ; nb_wall : 8 ; wall_ref_range : 114,122 ; height : 20,20 ; floor_text : 20 ; 
+id : 0 ; nb_wall : 1 ; wall_ref_range : 71,72 ; height : 22,22 ; floor_text : 2 ; 
+id : 1 ; nb_wall : 1 ; wall_ref_range : 79,80 ; height : 24,24 ; floor_text : 2 ; 
+id : 2 ; nb_wall : 1 ; wall_ref_range : 87,88 ; height : 26,26 ; floor_text : 22 ; 
+id : 3 ; nb_wall : 1 ; wall_ref_range : 121,122 ; height : 20,20 ; floor_text : 20 ; 
 id : 4 ; nb_wall : 1 ; wall_ref_range : 134,135 ; height : 20,0 ; floor_text : 0 ; 
-id : 5 ; nb_wall : 3 ; wall_ref_range : 136,139 ; height : 160,160 ; floor_text : 18 ; 
-id : 6 ; nb_wall : 3 ; wall_ref_range : 140,143 ; height : 20,20 ; floor_text : 23 ; 
-id : 7 ; nb_wall : 4 ; wall_ref_range : 144,148 ; height : 20,20 ; floor_text : 7 ; 
+id : 5 ; nb_wall : 1 ; wall_ref_range : 138,139 ; height : 160,160 ; floor_text : 18 ; 
+id : 6 ; nb_wall : 1 ; wall_ref_range : 142,143 ; height : 20,20 ; floor_text : 23 ; 
+id : 7 ; nb_wall : 1 ; wall_ref_range : 147,148 ; height : 20,20 ; floor_text : 7 ; 
 
 
 ICON LIST
 ICON_COUNT 11
-id : 1 ; pos : 65,15 ; 
+id : 1 ; pos : 95,21 ; 
 id : 1 ; pos : 244,37 ; 
 id : 1 ; pos : 242,94 ; 
 id : 2 ; pos : 79,201 ; 
@@ -180,5 +180,5 @@ id : 1 ; pos : 110,249 ;
 
 WALL_REF MAP
 MAP_SIZE 30,30
-PLAYER_SPAWN 2,7
+PLAYER_SPAWN 3,7
 
