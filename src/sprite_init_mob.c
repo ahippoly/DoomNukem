@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_init_mob.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 14:03:18 by robin             #+#    #+#             */
-/*   Updated: 2020/07/06 15:42:03 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/14 01:46:56 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		init_anim_afrit(t_ssprite *afrit)
 	afrit->frame_disp_size.h = afrit->frame_size.h / 1.8;
 	init_anim_range_x(afrit, &afrit->anim[ANIM_MOB_IDLE],
 			(SDL_Point){2, 1}, 4);
-	afrit->anim[ANIM_MOB_MELEE].nb_frame = 3;
+	afrit->anim[ANIM_MOB_MELEE].nb_frame = 2;
 	afrit->anim[ANIM_MOB_MELEE].offset.x = 0;
 	afrit->anim[ANIM_MOB_MELEE].offset.y = 0;
 	afrit->anim[ANIM_MOB_MELEE].speed = 200;
@@ -88,7 +88,7 @@ static void		init_anim_pyro(t_ssprite *pyro)
 	pyro->frame_disp_size.w = pyro->frame_size.w / 1.3;
 	pyro->frame_disp_size.h = pyro->frame_size.h / 1.3;
 	init_anim_range_x(pyro, &pyro->anim[ANIM_MOB_IDLE], (SDL_Point){7, 1}, 4);
-	pyro->anim[ANIM_MOB_MELEE].nb_frame = 8;
+	pyro->anim[ANIM_MOB_MELEE].nb_frame = 7;
 	pyro->anim[ANIM_MOB_MELEE].offset.x = 0;
 	pyro->anim[ANIM_MOB_MELEE].offset.y = 0;
 	pyro->anim[ANIM_MOB_MELEE].speed = 150;

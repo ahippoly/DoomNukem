@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 05:08:14 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 16:18:33 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/14 02:38:39 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,16 @@ void	mob_placing_mode(t_env *env)
 {
 	t_icon new;
 
-	env->mouse_icon = create_icon(create_t_point(0, 0),
-			create_t_size(30, 30), env->selected_mob);
-	new = create_icon(create_t_point(-1, -1),
-			create_t_size(30, 30), env->selected_mob);
-	add_icon(env, new);
-	env->being_placed = &env->icon_list[env->icon_count - 1].pos;
-	env->selected_mouse_mode = MOUSE_MODE_PLACING;
+	if (env->icon_count < NB_MAX_MOBS)
+	{
+		env->mouse_icon = create_icon(create_t_point(0, 0),
+				create_t_size(30, 30), env->selected_mob);
+		new = create_icon(create_t_point(-1, -1),
+				create_t_size(30, 30), env->selected_mob);
+		add_icon(env, new);
+		env->being_placed = &env->icon_list[env->icon_count - 1].pos;
+		env->selected_mouse_mode = MOUSE_MODE_PLACING;
+	}
 }
 
 void	del_selected_wall(t_env *env)
