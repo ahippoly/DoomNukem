@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/14 02:21:25 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/14 02:56:13 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void		init_data_var(t_data *d)
 
 void		init_data(t_data *d, int ac, char **av)
 {
-	ft_putendl("init data...");
 	ft_bzero(d, sizeof(t_data));
 	init_sdl_ressources_rend(d);
 	init_sprite(d);

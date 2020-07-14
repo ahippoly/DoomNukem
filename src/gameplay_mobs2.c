@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay_mobs2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:26:26 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 16:55:26 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/12 19:32:01 by alebui           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	change_player_life(t_data *d, int *hp, int damage)
 	*hp -= damage;
 	if (*hp < 1)
 	{
-		ft_putendl("je meurs");
 		d->run_game = GAMEOVER;
 	}
 }
