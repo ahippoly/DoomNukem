@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 23:12:03 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 23:13:21 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/08/01 07:03:16 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,15 @@ static void		process_hovered_corner(t_env *env)
 void			create_room_mode(t_env *env)
 {
 	t_point		hov_corner;
-	t_point		selec_corner;
+	t_point		select_corner;
 
 	hov_corner = convert_sdlpoint2tpoint(env->hovered_corner);
-	selec_corner = convert_sdlpoint2tpoint(env->selected_corner);
+	select_corner = convert_sdlpoint2tpoint(env->selected_corner);
 	if (env->hovered_corner.x != -1)
 	{
-		process_hovered_corner(env);
 		if (env->selected_corner.x == -1)
 			env->selected_corner = env->hovered_corner;
-		else if (!add_wall(selec_corner, hov_corner, env))
+		else if (!add_wall(select_corner, hov_corner, env))
 			return ;
 		if (env->start_room_point.x < 0)
 		{
