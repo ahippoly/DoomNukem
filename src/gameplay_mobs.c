@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:47:08 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/16 23:09:30 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/08/01 05:49:49 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ void	shoot_gun(t_data *d, t_weapon *weapon)
 {
 	t_ray sorted[NB_MAX_OBJ];
 	t_mob *origin;
+	int i;
 
 	sort_ray_by_dist_player(d, d->player_pos, d->rot_calc, sorted);
-	if (sorted[0].dist < weapon->range && sorted[0].room_id == TYPE_MOB)
+	i = 0;
+	while (sorted[i].room_id == TYPE_MOB && ((t_mob*)sorted[i].obj_ref->origin)->life <= -9999)
+		i++;
+	if (sorted[i].dist < weapon->range && sorted[i].room_id == TYPE_MOB)
 	{
-		origin = (t_mob*)sorted[0].obj_ref->origin;
+		origin = (t_mob*)sorted[i].obj_ref->origin;
 		if (origin->life > -9999)
 		{
-			repulse_obj(sorted[0].obj_ref, weapon->z_force);
+			repulse_obj(sorted[i].obj_ref, weapon->z_force);
 			change_mob_life(d, origin, weapon->dammage);
 		}
 	}

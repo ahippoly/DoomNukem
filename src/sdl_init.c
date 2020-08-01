@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 14:41:23 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/12 22:25:48 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/08/01 06:39:56 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	init_sdl_ressources_rend(t_data *d)
 	d->win = NULL;
 	if (0 != SDL_Init(SDL_INIT_VIDEO))
 		exit_game(d, "error : failed to init SDL");
-	if (!(d->win = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED,
+	if (!(d->win = SDL_CreateWindow("DooM Nukem", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WIN_SIZE_X, WIN_SIZE_Y, SDL_WINDOW_SHOWN)))
 		exit_game(d, "error : failed to create window");
 	if (!(d->rend = SDL_CreateRenderer(d->win, -1, SDL_RENDERER_ACCELERATED)))

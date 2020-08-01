@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ssprite.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebui <alebui@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/25 21:20:41 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 15:21:10 by alebui           ###   ########.fr       */
+/*   Updated: 2020/08/01 06:13:24 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void			load_anim(t_ssprite *sprite, int time, int anim_id)
 
 void			process_anim_frame(t_anim *anim, t_ssprite *sprite, int time)
 {
+	SDL_Point	curr_anim_pos;
+	t_size		curr_anim_size;
+
 	if (anim->current_frame >= anim->nb_frame)
 	{
 		if (sprite->callback != NULL)
@@ -47,13 +50,17 @@ void			process_anim_frame(t_anim *anim, t_ssprite *sprite, int time)
 			sprite->current_anim = -1;
 		return ;
 	}
+	else
+	{
+		curr_anim_pos = anim->pos[anim->current_frame];
+		curr_anim_size = anim->size[anim->current_frame];
+		copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);
+	}
 }
 
 void			process_anim(t_ssprite *sprite, int time)
 {
 	t_anim		*anim;
-	SDL_Point	curr_anim_pos;
-	t_size		curr_anim_size;
 
 	if (sprite->current_anim < 0)
 		return ;
@@ -63,9 +70,6 @@ void			process_anim(t_ssprite *sprite, int time)
 		sprite->time = time;
 		anim->current_frame += 1;
 		process_anim_frame(anim, sprite, time);
-		curr_anim_pos = anim->pos[anim->current_frame];
-		curr_anim_size = anim->size[anim->current_frame];
-		copy_frame_ssprite(sprite, curr_anim_pos, curr_anim_size);
 	}
 }
 
