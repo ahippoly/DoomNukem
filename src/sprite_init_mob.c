@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 14:03:18 by robin             #+#    #+#             */
-/*   Updated: 2020/07/14 01:46:56 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/17 03:57:21 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void		init_anim_pyro(t_ssprite *pyro)
 	pyro->anim[ANIM_MOB_MELEE].offset.y = 0;
 	pyro->anim[ANIM_MOB_MELEE].speed = 150;
 	init_anim_range_x(pyro, &pyro->anim[ANIM_MOB_MELEE], (SDL_Point){0, 0}, 8);
-	pyro->anim[ANIM_MOB_DEATH].nb_frame = 9;
+	pyro->anim[ANIM_MOB_DEATH].nb_frame = 8;
 	pyro->anim[ANIM_MOB_DEATH].offset.x = 0;
 	pyro->anim[ANIM_MOB_DEATH].offset.y = 0;
 	pyro->anim[ANIM_MOB_DEATH].speed = 150;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:35 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/09 15:41:30 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/18 06:24:10 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int				read_param_wall(char *line, t_wall *wall)
 {
-	if ((read_param(line, "id", &wall->id)) == 1)
-		return (-1);
 	if ((read_param(line, "id", &wall->id)) == 1)
 		return (-1);
 	if ((read_paramf(line, "p1", &wall->p1.x)) == 1)

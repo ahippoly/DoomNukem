@@ -162,7 +162,6 @@ id : 5 ; nb_wall : 1 ; wall_ref_range : 138,139 ; height : 160,160 ; floor_text 
 id : 6 ; nb_wall : 1 ; wall_ref_range : 142,143 ; height : 20,20 ; floor_text : 23 ; 
 id : 7 ; nb_wall : 1 ; wall_ref_range : 147,148 ; height : 20,20 ; floor_text : 7 ; 
 
-
 ICON LIST
 ICON_COUNT 11
 id : 1 ; pos : 95,21 ; 
@@ -177,8 +176,6 @@ id : 2 ; pos : 199,107 ;
 id : 1 ; pos : 106,170 ; 
 id : 1 ; pos : 110,249 ; 
 
-
 WALL_REF MAP
 MAP_SIZE 30,30
 PLAYER_SPAWN 3,7
-

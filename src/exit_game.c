@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:08:23 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 13:59:11 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/17 14:23:57 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	free_data2(t_data *d)
 		free(d->mobs);
 	if (d->obj_list)
 		free(d->obj_list);
-	if (d->repulsed)
-		free(d->repulsed);
 	if (d->texture)
 		free(d->texture);
 	if (d->img)
@@ -50,10 +48,21 @@ void	free_data2(t_data *d)
 
 void	free_data_ptr(t_data *d)
 {
+	free_img_list(d);
+	if (d->p_win)
+		free(d->p_win);
+	if (d->skybox.pixels)
+		free(d->skybox.pixels);
+	if (d->map.room_list)
+		free(d->map.room_list);
+	if (d->map.wall_list)
+		free(d->map.wall_list);
 	if (d->map.icon_list)
 		free(d->map.icon_list);
 	if (d->p_screen)
 		free(d->p_screen);
+	if (d->mini_map)
+		free(d->p_mini_map);
 	if (d->p_mini_map_bg)
 		free(d->p_mini_map_bg);
 	if (d->p_player_pos)
@@ -89,6 +98,7 @@ void	exit_game(t_data *d, char *msg)
 	free_menu(d);
 	free_gameover(d);
 	free_hud(&d->hud);
+	free_mobs_sprite(d);
 	free_data_ptr(d);
 	clean_sounds(d);
 	free_sdl_ptr_data(d);

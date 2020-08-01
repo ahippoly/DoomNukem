@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:58:42 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 16:36:11 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/17 03:52:23 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct		s_data
 	int				nb_props;
 	int				nb_mob;
 	int				nb_obj;
-	int				nb_repulsed;
 	t_weapon		*actual_weapon;
 	int				bullet;
 	char			shoot_repeat;
@@ -91,7 +90,6 @@ typedef struct		s_data
 	t_props			*props;
 	t_mob			*mobs;
 	t_obj			*obj_list;
-	t_obj			**repulsed;
 	t_sprite		sprite[MAX_WEAPONS];
 	t_img			*texture;
 	t_img			*img;

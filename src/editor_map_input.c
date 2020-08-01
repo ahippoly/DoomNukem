@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 22:30:07 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 22:59:36 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/18 05:42:59 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static void	map2env_room(t_env *e, t_map_data *map)
 
 static void	map2env(t_env *e, t_map_data *map)
 {
-	if (map->is_valid != 1)
-		exit_editor(e, "error : failed to read map, initializing new map");
+	if (map->is_valid < 1)
+		ft_putendl("error : failed to read map, initializing new map");
 	e->wall_count = map->wall_count;
 	ft_memcpy2(e->wall_list, map->wall_list, sizeof(t_wall) * map->wall_count);
 	free(map->wall_list);

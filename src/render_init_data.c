@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 22:14:12 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/14 02:56:13 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/18 04:17:32 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void		malloc_data_init(t_data *d)
 		exit_game(d, "error : failed to malloc mobs");
 	if (!(d->obj_list = malloc_obj(NB_MAX_OBJ)))
 		exit_game(d, "error : failed to malloc objects");
-	if (!(d->repulsed = malloc_obj_tab(NB_MAX_MOBS + NB_MAX_PROPS)))
-		exit_game(d, "error : failed to malloc objects tab");
 	if (!(d->texture = malloc_img(NB_TEXTURE)))
 		exit_game(d, "error : failed to malloc image");
 	if (!(d->img = malloc_img(NB_IMG)))
@@ -64,7 +62,6 @@ void		init_data_var(t_data *d)
 	d->framerate = 0;
 	d->time = 0;
 	d->grabbed_wall = NULL;
-	d->nb_repulsed = 0;
 	d->bullet = 0;
 	d->shoot_repeat = 0;
 	d->player_pos = create_t_point(0.500148 + d->map.player_spawn.x,
@@ -78,6 +75,12 @@ void		init_data_var(t_data *d)
 void		init_data(t_data *d, int ac, char **av)
 {
 	ft_bzero(d, sizeof(t_data));
+	if (ac > 1)
+		d->map = read_map(av[1]);
+	else
+		d->map = read_map("maps/editor_map_0");
+	if (d->map.is_valid < 1)
+		exit_with_msg("error : wrong map file\n");
 	init_sdl_ressources_rend(d);
 	init_sprite(d);
 	init_hud(d);
@@ -85,12 +88,6 @@ void		init_data(t_data *d, int ac, char **av)
 	init_gameover(d);
 	init_winscreen(d);
 	init_ttf(d);
-	if (ac > 1)
-		d->map = read_map(av[1]);
-	else
-		d->map = read_map("maps/editor_map_0");
-	if (d->map.is_valid == 0)
-		exit_with_msg("error : wrong map file\n");
 	init_data_var(d);
 	init_mini_map(d, &d->map);
 	ft_bzero(d->p_screen, sizeof(int) * MAPSIZEY * MAPSIZEX);

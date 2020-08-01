@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 20:24:31 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/09 15:34:25 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/18 06:08:33 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,29 @@ static int		read_icon_list(int fd, t_map_data *map)
 
 static int		read_head(int fd, char *line, t_map_data *map)
 {
-	if (ft_strequ(line, "WALL LIST"))
+	int found;
+
+	found = 0;
+	if (ft_strnequ(line, "WALL LIST", 15))
+		if (++found && (read_wall_list(fd, map)) < 0)
+			return (-1);
+	if (ft_strnequ(line, "ROOM LIST", 15))
 	{
-		if ((read_wall_list(fd, map)) < 0)
+		if (++found && (read_room_list(fd, map)) < 0)
 			return (-1);
 	}
-	if (ft_strequ(line, "ROOM LIST"))
-		if ((read_room_list(fd, map)) < 0)
+	if (ft_strnequ(line, "ICON LIST", 15))
+	{
+		if (++found && (read_icon_list(fd, map)) < 0)
 			return (-1);
-	if (ft_strequ(line, "ICON LIST"))
-		if ((read_icon_list(fd, map)) < 0)
+	}
+	if (ft_strnequ(line, "WALL_REF MAP", 15))
+	{
+		if (++found && (read_wall_ref_list(fd, map)) < 0)
 			return (-1);
-	if (ft_strequ(line, "WALL_REF MAP"))
-		if ((read_wall_ref_list(fd, map)) < 0)
-			return (-1);
+	}
+	if (found == 0)
+		return (-1);
 	return (0);
 }
 
@@ -89,6 +98,9 @@ static void		map_init(t_map_data *map)
 	map->room_list = NULL;
 	map->player_spawn.x = 1;
 	map->player_spawn.y = 1;
+	map->icon_count = 0;
+	map->wall_count = 0;
+	map->room_count = 0;
 }
 
 t_map_data		read_map(char *path_file)
@@ -103,9 +115,7 @@ t_map_data		read_map(char *path_file)
 		return (map);
 	if (read(fd, line, 0) == -1)
 		return (map);
-	map.icon_count = 0;
-	map.wall_count = 0;
-	map.room_count = 0;
+	map.is_valid = 1;
 	while (get_next_line(fd, &line) == 1)
 	{
 		if ((read_head(fd, line, &map)) < 0)
@@ -113,7 +123,6 @@ t_map_data		read_map(char *path_file)
 		free(line);
 	}
 	free(line);
-	map.is_valid = 1;
 	close(fd);
 	return (map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_rend.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:39:51 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 16:36:43 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/16 23:09:37 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,9 +229,8 @@ void			load_icons(t_data *d, t_map_data *map);
 
 void			move_mobs_in_range(t_data *d, t_mob *mobs, int nb_mob);
 void			gravity_obj(t_data *d, t_obj *objs, int nb_obj);
-void			repulse_obj(t_data *d, t_obj *obj, float z_force);
-void			load_repulsed_obj(t_data *d, t_obj **repulsed,
-					int nb_pulse);
+void			repulse_obj(t_obj *obj, float z_force);
+void			load_repulsed_obj(t_data *d);
 void			shoot_gun(t_data *d, t_weapon *weapon);
 void			process_mobs_gameplay(t_data *d);
 

@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 23:18:23 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/08 05:22:06 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/17 03:13:47 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_obj			convert_wall_to_obj(t_data *d, t_wall *wall)
 	obj.rotation = calc_sin_cos_rot(wall->rotation);
 	obj.z_ground = -1;
 	obj.origin = wall;
+	obj.repulsed = 0;
 	return (obj);
 }
 
@@ -60,6 +61,7 @@ static t_obj	convert_mob_to_obj(t_mob *mob)
 	obj.z_force = 0;
 	obj.air_time = 0;
 	obj.origin = mob;
+	obj.repulsed = 0;
 	return (obj);
 }
 
@@ -85,6 +87,7 @@ static t_obj	convert_prop_to_obj(t_props *props)
 	obj.z_force = 0;
 	obj.air_time = 0;
 	obj.origin = props;
+	obj.repulsed = 0;
 	return (obj);
 }
 

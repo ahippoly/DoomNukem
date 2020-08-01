@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 23:04:40 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 17:38:12 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/18 06:28:30 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	write_rooms(int fd, t_room *room, int room_count)
 		ft_putchar_fd('\n', fd);
 		i++;
 	}
-	ft_putstr_fd("\n\n", fd);
+	ft_putstr_fd("\n", fd);
 }
 
 static void	write_wall_ref(int fd, t_env *env)
@@ -71,7 +71,6 @@ static void	write_wall_ref(int fd, t_env *env)
 		",", env->map_size.h));
 	write_head_param(fd, "PLAYER_SPAWN", join_int_value(
 		(int)env->player_spawn.x, ",", (int)env->player_spawn.y));
-	ft_putchar_fd('\n', fd);
 }
 
 static void	write_icon_list(int fd, t_icon *icon_list, int nb_icon)
@@ -91,7 +90,7 @@ static void	write_icon_list(int fd, t_icon *icon_list, int nb_icon)
 		ft_putchar_fd('\n', fd);
 		i++;
 	}
-	ft_putstr_fd("\n\n", fd);
+	ft_putstr_fd("\n", fd);
 }
 
 void		map_output(t_env *env)

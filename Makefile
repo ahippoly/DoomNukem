@@ -33,9 +33,8 @@ SRC_NAME =	$(sort \
 			sprite_init_gun2.c sprite_init_gun3.c sprite_init_gun4.c sprite_main.c \
 			menu_clean.c menu_button.c menu_render.c menu_exec.c hud_clean.c exit_game.c exit_game2.c \
 			gameover_button.c gameover_render.c \
-			game_render.c \
-			render_game.c frame.c render_icon2obj_type.c \
-			exit_editor.c \
+			game_render.c exit_editor2.c \
+			render_game.c frame.c render_icon2obj_type.c exit_editor.c \
 			malloc_env.c malloc_env1.c malloc_data.c \
 			sdl_init.c utils2.c utils3.c utils4.c utils5.c utils6.c sprite_init.c sprite_init_mob.c \
 			copy_frame.c tool_sdlpoint_arithmetic2.c \
@@ -141,9 +140,9 @@ $(ASSETS) :
 	"https://docs.google.com/uc?export=download&confirm=$$(wget --quiet $\
 	--save-cookies /tmp/cookies.txt --keep-session-cookies $\
 	--no-check-certificate 'https://docs.google.com/uc?export=download&id=$\
-	1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp' -O- | $(SED) -rn $\
+	1gnNXSr4tLpndGFcDdqNOSZSqsJQIZ7M0' -O- | $(SED) -rn $\
 	's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')\
-	&id=1sHmOhbsu_q6ltr4AYTg8bkOsn2hoGeGp" -O asset.tar.gz \
+	&id=1gnNXSr4tLpndGFcDdqNOSZSqsJQIZ7M0" -O asset.tar.gz \
 	&& rm -rf /tmp/cookies.txt
 	@printf "\e[1;32m[Extracting assets]\e[0m\n"
 	@tar xf asset.tar.gz

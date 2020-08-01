@@ -6,39 +6,31 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 16:47:08 by alebui            #+#    #+#             */
-/*   Updated: 2020/07/09 11:44:40 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/16 23:09:30 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "proto_global.h"
 
-void	repulse_obj(t_data *d, t_obj *obj, float z_force)
+void	repulse_obj(t_obj *obj, float z_force)
 {
-	int i;
-
-	i = 0;
 	obj->z_force += z_force;
-	while (i < d->nb_repulsed)
-	{
-		if (d->repulsed[i++] == obj)
-			return ;
-	}
-	d->repulsed[d->nb_repulsed++] = obj;
+	obj->repulsed = 1;
 }
 
-void	load_repulsed_obj(t_data *d, t_obj **repulsed, int nb_pulse)
+void	load_repulsed_obj(t_data *d)
 {
 	int		i;
 	t_obj	*obj;
 
 	i = 0;
-	while (i < nb_pulse)
+	while (i < d->nb_obj)
 	{
-		obj = repulsed[i];
-		if (obj->air_time > 0)
+		obj = &d->obj_list[i];
+		if (obj->air_time > 0 && obj->repulsed == 1)
 			move_with_collide(d, obj, get_angle(d->player_pos, obj->pos), 3);
 		else
-			del_from_array(*repulsed, &d->nb_repulsed, obj, sizeof(t_obj*));
+			obj->repulsed = 0;
 		i++;
 	}
 }
@@ -54,7 +46,7 @@ void	shoot_gun(t_data *d, t_weapon *weapon)
 		origin = (t_mob*)sorted[0].obj_ref->origin;
 		if (origin->life > -9999)
 		{
-			repulse_obj(d, sorted[0].obj_ref, weapon->z_force);
+			repulse_obj(sorted[0].obj_ref, weapon->z_force);
 			change_mob_life(d, origin, weapon->dammage);
 		}
 	}
@@ -62,7 +54,7 @@ void	shoot_gun(t_data *d, t_weapon *weapon)
 
 void	process_mobs_gameplay(t_data *d)
 {
-	load_repulsed_obj(d, d->repulsed, d->nb_repulsed);
+	load_repulsed_obj(d);
 	move_mobs_in_range(d, d->mobs, d->nb_mob);
 	process_mobs_anim(d);
 }

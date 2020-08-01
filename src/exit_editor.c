@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_editor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 11:04:45 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/09 11:07:40 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/17 14:15:58 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			free_sdl_ptr_env(t_env *e)
 int				exit_editor(t_env *e, char *msg)
 {
 	ft_putendl(msg);
+	free_sprites_edit(e);
 	free_env_ptr(e);
 	if (e->map_name)
 		free(e->map_name);

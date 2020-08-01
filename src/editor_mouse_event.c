@@ -6,7 +6,7 @@
 /*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 23:10:16 by ahippoly          #+#    #+#             */
-/*   Updated: 2020/07/07 23:11:39 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:57:30 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void			handle_mouse_event(t_env *env)
 {
 	while (SDL_PollEvent(&env->ev))
 	{
+		if (env->ev.type == SDL_WINDOWEVENT
+			&& env->ev.window.event == SDL_WINDOWEVENT_CLOSE)
+			env->quit = 0;
 		if (env->ev.type == SDL_KEYUP)
 			handle_input_mode(env, env->ev.key.keysym.scancode);
 		check_click(env);

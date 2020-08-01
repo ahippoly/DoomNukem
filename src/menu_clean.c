@@ -35,6 +35,7 @@ int			free_gameover(t_data *d)
 {
 	if (!d)
 		return (0);
+	free(d->p_gameover);
 	if (d->menu.gameover_t)
 		SDL_DestroyTexture(d->menu.gameover_t);
 	if (d->menu.over_continue_t)

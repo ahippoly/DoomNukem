@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   proto_global.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 23:17:31 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 17:26:08 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/17 14:20:26 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ void			swap_point(SDL_Point *p1, SDL_Point *p2);
 */
 
 void			exit_game(t_data *d, char *msg);
+void			free_mobs_sprite(t_data *d);
+void			free_img(t_img *img, int size);
+void			free_img_list(t_data *d);
 
 /*
 ** bmp_reader.c
@@ -139,7 +142,7 @@ int				read_words(char ***charts,
 					char *str, int size, t_txt_img txt);
 t_txt_img		set_pos_txt(t_txt_img txt, int x, int y);
 void			charts2pixels(char **letter, int size,
-		t_txt_img txt);
+					t_txt_img txt);
 void			fill_pixels(int x, int y, t_txt_img *txt, t_size size);
 
 #endif

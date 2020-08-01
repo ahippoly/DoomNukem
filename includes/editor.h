@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
+/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 22:54:52 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 17:28:24 by ahippoly         ###   ########.fr       */
+/*   Updated: 2020/07/17 14:15:19 by robin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -549,5 +549,6 @@ void					print_img_portion(unsigned int *p_tab,
 
 void					select_previous_mob(t_env *env);
 void					select_next_mob(t_env *env);
+void					free_sprites_edit(t_env *e);
 
 #endif

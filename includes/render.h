@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: robin <robin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ahippoly <ahippoly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/06 00:00:55 by robin             #+#    #+#             */
-/*   Updated: 2020/07/09 16:36:59 by robin            ###   ########.fr       */
+/*   Updated: 2020/07/16 17:24:04 by ahippoly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef	struct			s_obj
 	char				can_collide;
 	float				z_force;
 	float				air_time;
+	int					repulsed;
 	void				*origin;
 }						t_obj;
 
