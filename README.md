@@ -59,5 +59,6 @@ if no map is provided, the editor will create a new map and output it on "maps/e
 
 ```LeftAlt``` Use Jetpack if in inventory
 
+# In-Game Image
 ![GameImg2](https://i.imgur.com/39BD3eM.png)
 ![GameImg3](https://i.imgur.com/nl6Avag.png)
